@@ -1,0 +1,102 @@
+{
+  "ok": true,
+  "totalFrames": 64,
+  "atlases": [
+    {
+      "clip": "idle",
+      "frames": 4,
+      "size": [
+        1254,
+        1254
+      ],
+      "transparentPercent": 67.3,
+      "minimumOpaqueGutterPx": 7,
+      "standingBodyHeightPixels": 594,
+      "sha256": "55489ae0edcc0dcd31318987b56757603e73867f42327865419e76991758cbac"
+    },
+    {
+      "clip": "run",
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "transparentPercent": 69.44,
+      "minimumOpaqueGutterPx": 14,
+      "standingBodyHeightPixels": 400,
+      "sha256": "8b1c6c9421bfcaab3a6a28aa0dd3ce3a4533210da77ff6dde0bf931038ad60cf"
+    },
+    {
+      "clip": "jump",
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "transparentPercent": 69.53,
+      "minimumOpaqueGutterPx": 7,
+      "standingBodyHeightPixels": 400,
+      "sha256": "98d281e5d9531f1e41fd8ff97856b463332d9ad5ad2234a8a4ae2e4582af5359"
+    },
+    {
+      "clip": "dodge",
+      "frames": 4,
+      "size": [
+        1254,
+        1254
+      ],
+      "transparentPercent": 71.26,
+      "minimumOpaqueGutterPx": 19,
+      "standingBodyHeightPixels": 594,
+      "sha256": "768ac4dfc8791912dac535a2409d52d60c991084dcff1e3fb5448a81afd9cd3b"
+    },
+    {
+      "clip": "jab",
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "transparentPercent": 79.68,
+      "minimumOpaqueGutterPx": 14,
+      "standingBodyHeightPixels": 260,
+      "sha256": "892b763c16ed703d8e787642e1a5b0c3879d4ff3ac92fa5e9eecdc99e2464880"
+    },
+    {
+      "clip": "smash",
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "transparentPercent": 80.07,
+      "minimumOpaqueGutterPx": 14,
+      "standingBodyHeightPixels": 255,
+      "sha256": "3a7f6b1c8e98a38ddd8f745e9351381fb4770c7887650e18a492394f9e8ae35a"
+    },
+    {
+      "clip": "special",
+      "frames": 12,
+      "size": [
+        1448,
+        1086
+      ],
+      "transparentPercent": 73.53,
+      "minimumOpaqueGutterPx": 14,
+      "standingBodyHeightPixels": 235,
+      "sha256": "2c89f7ca4ba9e0a89daad29b52df34770d7f4d64d568bd757ac5909bda9dbc3b"
+    },
+    {
+      "clip": "secondary",
+      "frames": 12,
+      "size": [
+        1448,
+        1086
+      ],
+      "transparentPercent": 75.21,
+      "minimumOpaqueGutterPx": 14,
+      "standingBodyHeightPixels": 228,
+      "sha256": "33fcce1a52e083ec7ef7aea890ab76310338aba5c6d01a93a2a1f54f41759316"
+    }
+  ]
+}

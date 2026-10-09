@@ -1,0 +1,161 @@
+{
+  "image": "basic-variants.png",
+  "width": 1254,
+  "height": 1254,
+  "standingBodyHeightPixels": 215,
+  "frames": [
+    {
+      "name": "jab-thrust-01",
+      "sourceRect": {
+        "x": 43,
+        "y": 79,
+        "width": 228,
+        "height": 234
+      },
+      "footAnchor": {
+        "x": 0.482456,
+        "y": 0.952991
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 214,
+        "y": 218
+      },
+      "phase": "windup"
+    },
+    {
+      "name": "jab-thrust-02",
+      "sourceRect": {
+        "x": 352,
+        "y": 77,
+        "width": 244,
+        "height": 236
+      },
+      "footAnchor": {
+        "x": 0.434426,
+        "y": 0.95339
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 229,
+        "y": 133
+      },
+      "phase": "windup"
+    },
+    {
+      "name": "jab-thrust-03",
+      "sourceRect": {
+        "x": 657,
+        "y": 81,
+        "width": 287,
+        "height": 232
+      },
+      "footAnchor": {
+        "x": 0.372822,
+        "y": 0.952586
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 273,
+        "y": 97
+      },
+      "phase": "contact"
+    },
+    {
+      "name": "jab-thrust-04",
+      "sourceRect": {
+        "x": 984,
+        "y": 93,
+        "width": 270,
+        "height": 217
+      },
+      "footAnchor": {
+        "x": 0.411111,
+        "y": 0.963134
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 256,
+        "y": 75
+      },
+      "phase": "contact"
+    },
+    {
+      "name": "jab-thrust-05",
+      "sourceRect": {
+        "x": 38,
+        "y": 369,
+        "width": 244,
+        "height": 247
+      },
+      "footAnchor": {
+        "x": 0.463115,
+        "y": 0.955466
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 230,
+        "y": 133
+      },
+      "phase": "followthrough"
+    },
+    {
+      "name": "jab-thrust-06",
+      "sourceRect": {
+        "x": 356,
+        "y": 370,
+        "width": 239,
+        "height": 245
+      },
+      "footAnchor": {
+        "x": 0.439331,
+        "y": 0.959184
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 224,
+        "y": 129
+      },
+      "phase": "followthrough"
+    },
+    {
+      "name": "jab-thrust-07",
+      "sourceRect": {
+        "x": 672,
+        "y": 369,
+        "width": 243,
+        "height": 247
+      },
+      "footAnchor": {
+        "x": 0.45679,
+        "y": 0.955466
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 228,
+        "y": 217
+      },
+      "phase": "recover"
+    },
+    {
+      "name": "jab-thrust-08",
+      "sourceRect": {
+        "x": 993,
+        "y": 369,
+        "width": 230,
+        "height": 248
+      },
+      "footAnchor": {
+        "x": 0.495652,
+        "y": 0.951613
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 216,
+        "y": 231
+      },
+      "phase": "recover"
+    }
+  ],
+  "trail": "thrust"
+}

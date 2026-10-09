@@ -1,0 +1,237 @@
+{
+  "image": "secondary.png",
+  "width": 1448,
+  "height": 1086,
+  "standingBodyHeightPixels": 190,
+  "trail": "thrust",
+  "frames": [
+    {
+      "name": "wind-dash-01",
+      "sourceRect": {
+        "x": 97,
+        "y": 196,
+        "width": 253,
+        "height": 187
+      },
+      "footAnchor": {
+        "x": 0.458498,
+        "y": 0.935829
+      },
+      "duration": 3,
+      "phase": "windup",
+      "weaponTip": {
+        "x": 241,
+        "y": 86
+      }
+    },
+    {
+      "name": "wind-dash-02",
+      "sourceRect": {
+        "x": 446,
+        "y": 211,
+        "width": 257,
+        "height": 171
+      },
+      "footAnchor": {
+        "x": 0.478599,
+        "y": 0.935673
+      },
+      "duration": 3,
+      "phase": "windup",
+      "weaponTip": {
+        "x": 245,
+        "y": 86
+      }
+    },
+    {
+      "name": "wind-dash-03",
+      "sourceRect": {
+        "x": 781,
+        "y": 209,
+        "width": 247,
+        "height": 171
+      },
+      "footAnchor": {
+        "x": 0.40081,
+        "y": 0.929825
+      },
+      "duration": 3,
+      "phase": "windup",
+      "weaponTip": {
+        "x": 235,
+        "y": 101
+      }
+    },
+    {
+      "name": "wind-dash-04",
+      "sourceRect": {
+        "x": 1128,
+        "y": 207,
+        "width": 260,
+        "height": 172
+      },
+      "footAnchor": {
+        "x": 0.5,
+        "y": 0.930233
+      },
+      "duration": 2,
+      "phase": "windup",
+      "weaponTip": {
+        "x": 248,
+        "y": 91
+      }
+    },
+    {
+      "name": "wind-dash-05",
+      "sourceRect": {
+        "x": 79,
+        "y": 492,
+        "width": 281,
+        "height": 168
+      },
+      "footAnchor": {
+        "x": 0.409253,
+        "y": 0.928571
+      },
+      "duration": 3,
+      "phase": "contact",
+      "weaponTip": {
+        "x": 268,
+        "y": 77
+      }
+    },
+    {
+      "name": "wind-dash-06",
+      "sourceRect": {
+        "x": 443,
+        "y": 491,
+        "width": 277,
+        "height": 168
+      },
+      "footAnchor": {
+        "x": 0.418773,
+        "y": 0.928571
+      },
+      "duration": 4,
+      "phase": "contact",
+      "weaponTip": {
+        "x": 265,
+        "y": 78
+      }
+    },
+    {
+      "name": "wind-dash-07",
+      "sourceRect": {
+        "x": 772,
+        "y": 496,
+        "width": 281,
+        "height": 161
+      },
+      "footAnchor": {
+        "x": 0.41637,
+        "y": 0.925466
+      },
+      "duration": 4,
+      "phase": "followthrough",
+      "weaponTip": {
+        "x": 269,
+        "y": 78
+      }
+    },
+    {
+      "name": "wind-dash-08",
+      "sourceRect": {
+        "x": 1134,
+        "y": 496,
+        "width": 281,
+        "height": 162
+      },
+      "footAnchor": {
+        "x": 0.409253,
+        "y": 0.932099
+      },
+      "duration": 4,
+      "phase": "followthrough",
+      "weaponTip": {
+        "x": 268,
+        "y": 78
+      }
+    },
+    {
+      "name": "wind-dash-09",
+      "sourceRect": {
+        "x": 102,
+        "y": 799,
+        "width": 253,
+        "height": 167
+      },
+      "footAnchor": {
+        "x": 0.426877,
+        "y": 0.928144
+      },
+      "duration": 5,
+      "phase": "followthrough",
+      "weaponTip": {
+        "x": 240,
+        "y": 71
+      }
+    },
+    {
+      "name": "wind-dash-10",
+      "sourceRect": {
+        "x": 454,
+        "y": 799,
+        "width": 263,
+        "height": 166
+      },
+      "footAnchor": {
+        "x": 0.406844,
+        "y": 0.933735
+      },
+      "duration": 3,
+      "phase": "recover",
+      "weaponTip": {
+        "x": 251,
+        "y": 71
+      }
+    },
+    {
+      "name": "wind-dash-11",
+      "sourceRect": {
+        "x": 784,
+        "y": 775,
+        "width": 257,
+        "height": 195
+      },
+      "footAnchor": {
+        "x": 0.463035,
+        "y": 0.938462
+      },
+      "duration": 3,
+      "phase": "recover",
+      "weaponTip": {
+        "x": 245,
+        "y": 85
+      }
+    },
+    {
+      "name": "wind-dash-12",
+      "sourceRect": {
+        "x": 1134,
+        "y": 773,
+        "width": 250,
+        "height": 198
+      },
+      "footAnchor": {
+        "x": 0.504,
+        "y": 0.939394
+      },
+      "duration": 3,
+      "phase": "recover",
+      "weaponTip": {
+        "x": 238,
+        "y": 89
+      }
+    }
+  ]
+}

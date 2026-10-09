@@ -1,0 +1,161 @@
+{
+  "image": "basic-variants.png",
+  "width": 1448,
+  "height": 1086,
+  "standingBodyHeightPixels": 158,
+  "frames": [
+    {
+      "name": "jab-backhand-01",
+      "sourceRect": {
+        "x": 61,
+        "y": 101,
+        "width": 228,
+        "height": 155
+      },
+      "footAnchor": {
+        "x": 0.609649,
+        "y": 0.922581
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 15,
+        "y": 115
+      },
+      "phase": "windup"
+    },
+    {
+      "name": "jab-backhand-02",
+      "sourceRect": {
+        "x": 444,
+        "y": 76,
+        "width": 171,
+        "height": 180
+      },
+      "footAnchor": {
+        "x": 0.614035,
+        "y": 0.933333
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 157,
+        "y": 130
+      },
+      "phase": "windup"
+    },
+    {
+      "name": "jab-backhand-03",
+      "sourceRect": {
+        "x": 794,
+        "y": 88,
+        "width": 209,
+        "height": 168
+      },
+      "footAnchor": {
+        "x": 0.598086,
+        "y": 0.928571
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 15,
+        "y": 48
+      },
+      "phase": "contact"
+    },
+    {
+      "name": "jab-backhand-04",
+      "sourceRect": {
+        "x": 1139,
+        "y": 78,
+        "width": 267,
+        "height": 178
+      },
+      "footAnchor": {
+        "x": 0.363296,
+        "y": 0.932584
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 252,
+        "y": 47
+      },
+      "phase": "contact"
+    },
+    {
+      "name": "jab-backhand-05",
+      "sourceRect": {
+        "x": 81,
+        "y": 340,
+        "width": 228,
+        "height": 177
+      },
+      "footAnchor": {
+        "x": 0.45614,
+        "y": 0.954802
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 214,
+        "y": 150
+      },
+      "phase": "followthrough"
+    },
+    {
+      "name": "jab-backhand-06",
+      "sourceRect": {
+        "x": 448,
+        "y": 344,
+        "width": 198,
+        "height": 173
+      },
+      "footAnchor": {
+        "x": 0.515152,
+        "y": 0.953757
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 101,
+        "y": 141
+      },
+      "phase": "followthrough"
+    },
+    {
+      "name": "jab-backhand-07",
+      "sourceRect": {
+        "x": 795,
+        "y": 360,
+        "width": 249,
+        "height": 161
+      },
+      "footAnchor": {
+        "x": 0.497992,
+        "y": 0.925466
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 235,
+        "y": 147
+      },
+      "phase": "recover"
+    },
+    {
+      "name": "jab-backhand-08",
+      "sourceRect": {
+        "x": 1162,
+        "y": 359,
+        "width": 223,
+        "height": 159
+      },
+      "footAnchor": {
+        "x": 0.493274,
+        "y": 0.943396
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 208,
+        "y": 142
+      },
+      "phase": "recover"
+    }
+  ],
+  "trail": "arc"
+}

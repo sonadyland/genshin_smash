@@ -1,0 +1,121 @@
+{
+  "image": "locomotion.png",
+  "width": 1448,
+  "height": 1086,
+  "standingBodyHeightPixels": 245,
+  "trail": "none",
+  "frames": [
+    {
+      "name": "right-contact",
+      "sourceRect": {
+        "x": 103,
+        "y": 479,
+        "width": 229,
+        "height": 217
+      },
+      "footAnchor": {
+        "x": 0.676856,
+        "y": 0.940092
+      },
+      "duration": 6
+    },
+    {
+      "name": "right-compress",
+      "sourceRect": {
+        "x": 452,
+        "y": 479,
+        "width": 233,
+        "height": 216
+      },
+      "footAnchor": {
+        "x": 0.592275,
+        "y": 0.939815
+      },
+      "duration": 5
+    },
+    {
+      "name": "right-push",
+      "sourceRect": {
+        "x": 788,
+        "y": 480,
+        "width": 236,
+        "height": 216
+      },
+      "footAnchor": {
+        "x": 0.597458,
+        "y": 0.939815
+      },
+      "duration": 5
+    },
+    {
+      "name": "left-flight",
+      "sourceRect": {
+        "x": 1120,
+        "y": 475,
+        "width": 224,
+        "height": 226
+      },
+      "footAnchor": {
+        "x": 0.647321,
+        "y": 0.942478
+      },
+      "duration": 5
+    },
+    {
+      "name": "left-contact",
+      "sourceRect": {
+        "x": 109,
+        "y": 776,
+        "width": 241,
+        "height": 219
+      },
+      "footAnchor": {
+        "x": 0.626556,
+        "y": 0.936073
+      },
+      "duration": 6
+    },
+    {
+      "name": "left-compress",
+      "sourceRect": {
+        "x": 452,
+        "y": 776,
+        "width": 229,
+        "height": 217
+      },
+      "footAnchor": {
+        "x": 0.633188,
+        "y": 0.940092
+      },
+      "duration": 5
+    },
+    {
+      "name": "left-push",
+      "sourceRect": {
+        "x": 789,
+        "y": 775,
+        "width": 247,
+        "height": 217
+      },
+      "footAnchor": {
+        "x": 0.59919,
+        "y": 0.935484
+      },
+      "duration": 5
+    },
+    {
+      "name": "right-flight",
+      "sourceRect": {
+        "x": 1121,
+        "y": 772,
+        "width": 237,
+        "height": 219
+      },
+      "footAnchor": {
+        "x": 0.654008,
+        "y": 0.940639
+      },
+      "duration": 5
+    }
+  ]
+}

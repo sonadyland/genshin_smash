@@ -8,9 +8,11 @@ import { CHARACTERS, ITEMS, STAGE, WORLD } from './data';
 import { SPRITES, SPRITE_W, SPRITE_H, ITEM_SPRITES, ITEM_SPRITE_SIZE } from './sprites';
 import type { SpriteFrame } from './sprites';
 import type { CharDef, ItemDef, MoveDef } from './data';
-import { loadGameArt, drawArenaBackground, drawCharacterArt, drawFighterArt, drawElementEffect, drawXiaoPlungeEffect, drawSecondaryEffect } from './art';
+import { loadGameArt, drawArenaBackground, drawCharacterArt, drawFighterArt, drawElementEffect, drawXiaoPlungeEffect, drawSecondaryEffect, hasRegisteredMeleeTrail } from './art';
 import { attackPhase } from './animation';
 import type { FighterAnimation, PlungeAnimation } from './animation';
+import { advanceMotion, newMotionState, newAttackVariants, takeAttackVariant } from './clip-animation';
+import type { AttackVariantState, AttackVisualVariant, MotionState } from './clip-animation';
 import { BattleAudio } from './audio';
 
 const GRAV = 0.52;
@@ -45,6 +47,7 @@ interface ActiveAttack {
   def: MoveDef;
   t: number;
   hasHit: Set<number>;
+  visualVariant?: AttackVisualVariant;
   plunge?: PlungeAnimation & { previousFeet: number };
 }
 
@@ -91,6 +94,8 @@ interface Fighter {
   lastHitBy: number | null;
   fastFalling: boolean;
   animationFrame: number;
+  motion: MotionState;
+  nextAttackVariants: AttackVariantState;
 }
 
 interface ItemEnt {
@@ -339,6 +344,7 @@ export class Game {
     this.keys.clear();
     this.pressed.clear();
     this.fighters = [0, 1].map(i => this.makeFighter(i, CHARACTERS[this.selCursor[i]], i === 1 && this.mode === 'cpu'));
+    void loadGameArt(this.fighters.map(fighter => fighter.char.id));
     this.countdown = 150;
     this.state = 'countdown';
     this.sfx.restart(); this.sfx.setScene('playing');
@@ -363,6 +369,8 @@ export class Game {
       jumpBuffer: 0, coyote: COYOTE_FRAMES, dodgeTimer: 0, dodgeCooldown: 0,
       airDodgeUsed: false, specialCooldown: 0, secondaryCooldown: 0, combo: 0, comboTimer: 0,
       damageDealt: 0, lastHitBy: null, fastFalling: false, animationFrame: 0,
+      motion: newMotionState(idx === 0 ? 1 : -1),
+      nextAttackVariants: newAttackVariants(),
     };
   }
 
@@ -583,6 +591,7 @@ export class Game {
   // ---------------- 单个角色物理 + 行为 ----------------
   private updateFighter(f: Fighter, ctrl: Input) {
     const c = f.char;
+    const previousX = f.x;
     f.animationFrame++;
     if (f.invuln > 0) f.invuln--;
     if (f.dropTimer > 0) f.dropTimer--;
@@ -763,6 +772,8 @@ export class Game {
     if (f.onGround && Math.abs(f.vx) > 3 && this.frame % 8 === 0) {
       this.burst(f.x - f.facing * 12, f.y + f.h, 1, 'rgba(255,255,255,0.5)', 1.5);
     }
+    advanceMotion(f.motion, { dx: f.x - previousX, onGround: f.onGround, facing: f.facing,
+      walking: f.state === 'free' && !f.attack && !dodging && ((ctrl.left !== ctrl.right) || (f.motion.moving && Math.abs(f.vx) > 0.08)) });
   }
 
   private onSoftPlatform(f: Fighter): boolean {
@@ -821,7 +832,7 @@ export class Game {
       }
       return;
     }
-    f.attack = { def, t: 0, hasHit: new Set() };
+    f.attack = { def, t: 0, hasHit: new Set(), visualVariant: takeAttackVariant(f.nextAttackVariants, def.kind) };
     f.state = 'attack';
     if (def.kind === 'jab' || def.kind === 'smash') this.sfx.play('attack', { charId: f.char.id, kind: def.kind });
     if (def.effect === 'plunge') {
@@ -1140,6 +1151,7 @@ export class Game {
     f.respawnTimer = f.stocks > 0 ? 70 : 0;
     f.vx = 0; f.vy = 0;
     f.attack = null; f.state = 'free';
+    f.nextAttackVariants = newAttackVariants();
     f.secondaryCooldown = 0;
     this.projectiles = this.projectiles.filter(projectile => projectile.owner !== f.idx);
     f.hitstun = 0; f.hitlag = 0; f.dodgeTimer = 0;
@@ -1167,6 +1179,8 @@ export class Game {
     f.secondaryCooldown = 0;
     f.fastFalling = false;
     f.animationFrame = 0;
+    f.motion = newMotionState(f.facing);
+    f.nextAttackVariants = newAttackVariants();
     f.onGround = false;
     f.lastHitBy = null;
     f.combo = 0;
@@ -1438,8 +1452,10 @@ export class Game {
   // ---------------- 角色绘制 ----------------
   private fighterAnimation(f: Fighter): FighterAnimation {
     return {
-      state: f.state, attack: f.attack ? { def: f.attack.def, t: f.attack.t, plunge: f.attack.plunge ? { phase: f.attack.plunge.phase, elapsed: f.attack.plunge.elapsed } : undefined } : null,
+      state: f.state, attack: f.attack ? { def: f.attack.def, t: f.attack.t, visualVariant: f.attack.visualVariant, plunge: f.attack.plunge ? { phase: f.attack.plunge.phase, elapsed: f.attack.plunge.elapsed, recoveryDuration: Math.max(1, f.attack.def.endlag - f.attack.def.active) } : undefined } : null,
       onGround: f.onGround, vx: f.vx, vy: f.vy, dodgeTimer: f.dodgeTimer, time: f.animationFrame,
+      dodgeDuration: DODGE_FRAMES,
+      motion: { ...f.motion },
     };
   }
 
@@ -1558,6 +1574,10 @@ export class Game {
       g.beginPath(); g.arc(6, 24, radius, 0, Math.PI * 2); g.fill();
       g.restore(); return;
     }
+    // The new ordinary attack already paints its registered sword/spear path.
+    // Keep charge, impact and actual skill effects, but avoid a second generic
+    // crescent whose direction does not match a thrust or alternate swing.
+    if (hasRegisteredMeleeTrail(c.id, def.kind, f.attack.visualVariant)) { g.restore(); return; }
     if (phase !== 'contact' && !(phase === 'followthrough' && progress < 0.45)) { g.restore(); return; }
     const fade = phase === 'contact' ? 1 : 1 - progress / 0.45;
     const heavy = def.kind !== 'jab';

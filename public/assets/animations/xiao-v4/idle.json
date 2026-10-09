@@ -1,0 +1,65 @@
+{
+  "image": "locomotion.png",
+  "width": 1448,
+  "height": 1086,
+  "standingBodyHeightPixels": 245,
+  "trail": "none",
+  "frames": [
+    {
+      "name": "exhale",
+      "sourceRect": {
+        "x": 113,
+        "y": 117,
+        "width": 242,
+        "height": 279
+      },
+      "footAnchor": {
+        "x": 0.504132,
+        "y": 0.956989
+      },
+      "duration": 13
+    },
+    {
+      "name": "inhale",
+      "sourceRect": {
+        "x": 458,
+        "y": 115,
+        "width": 241,
+        "height": 280
+      },
+      "footAnchor": {
+        "x": 0.497925,
+        "y": 0.957143
+      },
+      "duration": 11
+    },
+    {
+      "name": "breath-peak",
+      "sourceRect": {
+        "x": 776,
+        "y": 115,
+        "width": 253,
+        "height": 280
+      },
+      "footAnchor": {
+        "x": 0.494071,
+        "y": 0.960714
+      },
+      "duration": 10
+    },
+    {
+      "name": "settle",
+      "sourceRect": {
+        "x": 1117,
+        "y": 115,
+        "width": 242,
+        "height": 278
+      },
+      "footAnchor": {
+        "x": 0.508264,
+        "y": 0.956835
+      },
+      "duration": 14
+    }
+  ]
+}

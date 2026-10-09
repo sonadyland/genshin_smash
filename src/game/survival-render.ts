@@ -1,4 +1,4 @@
-import { drawArenaBackground, drawFighterArt, drawElementEffect, drawXiaoPlungeEffect, drawSecondaryEffect } from './art';
+import { drawArenaBackground, drawFighterArt, drawElementEffect, drawXiaoPlungeEffect, drawSecondaryEffect, hasRegisteredMeleeTrail } from './art';
 import { SURVIVAL_WORLD, groundHeightAt } from './survival-data';
 import type { SurvivalGame, SurvivalEnemy, SurvivalField } from './survival-engine';
 
@@ -59,6 +59,7 @@ export function renderSurvival(game: SurvivalGame) {
     c.restore();
   }
   for (const effect of game.effects) if (visible(game, effect.x, effect.size)) {
+    if (effect.kind === 'slash' && effect.melee && hasRegisteredMeleeTrail(game.char.id, effect.melee.kind, effect.melee.variant)) continue;
     const t = effect.age / effect.life;
     c.save(); c.globalAlpha = 1 - t;
     if (effect.kind === 'chain') {
@@ -81,11 +82,11 @@ export function renderSurvival(game: SurvivalGame) {
   c.fillStyle = `rgba(9,25,31,${Math.max(0.06, 0.23 - (shadowY - p.y) / 1600)})`; c.beginPath(); c.ellipse(p.x, shadowY + 3, 35, 8, 0, 0, Math.PI * 2); c.fill();
   if (p.dodge > 0) {
     c.globalAlpha = 0.2;
-    drawFighterArt(c, game.char.id, p.x - p.facing * 35, p.y, 112, { state: 'free', attack: null, onGround: p.onGround, vx: p.vx, vy: p.vy, dodgeTimer: p.dodge, time: game.frame }, { facing: p.facing });
+    drawFighterArt(c, game.char.id, p.x - p.facing * 35, p.y, 112, { state: 'free', attack: null, onGround: p.onGround, vx: p.vx, vy: p.vy, dodgeTimer: p.dodge, dodgeDuration: 16, time: game.frame, motion: p.motion }, { facing: p.facing });
   }
   const hurtFlash = game.hitstop > 0;
   c.globalAlpha = !hurtFlash && p.invuln > 0 && Math.floor(game.frame / 4) % 2 ? 0.58 : 1;
-  const rendered = drawFighterArt(c, game.char.id, p.x, p.y, 112, { state: p.attack ? 'attack' : 'free', attack: p.attack, onGround: p.onGround, vx: p.vx, vy: p.vy, dodgeTimer: p.dodge, time: game.frame }, { facing: p.facing, flash: hurtFlash });
+  const rendered = drawFighterArt(c, game.char.id, p.x, p.y, 112, { state: p.attack ? 'attack' : 'free', attack: p.attack, onGround: p.onGround, vx: p.vx, vy: p.vy, dodgeTimer: p.dodge, dodgeDuration: 16, time: game.frame, motion: p.motion }, { facing: p.facing, flash: hurtFlash });
   if (!rendered) {
     c.fillStyle = hurtFlash ? '#fff7ef' : game.char.color; c.fillRect(p.x - 16, p.y - 80, 32, 68); c.beginPath(); c.arc(p.x, p.y - 91, 13, 0, Math.PI * 2); c.fill();
     if (game.char.id === 'xiao') {

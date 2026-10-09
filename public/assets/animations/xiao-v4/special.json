@@ -1,0 +1,238 @@
+{
+  "image": "special.png",
+  "width": 1448,
+  "height": 1086,
+  "standingBodyHeightPixels": 340,
+  "trail": "none",
+  "registrationNotes": "All plunge frames use the downward jade spear tip as a virtual physical-foot registration point. Impact tips sit at the simulation groundY, with the crouched body above. The same point is maintained through recovery so the spear never extends below the floor and the actor does not jump vertically at phase transitions.",
+  "frames": [
+    {
+      "name": "windup",
+      "sourceRect": {
+        "x": 56,
+        "y": 24,
+        "width": 235,
+        "height": 363
+      },
+      "footAnchor": {
+        "x": 0.851064,
+        "y": 0.966942
+      },
+      "phase": "windup",
+      "duration": 3,
+      "weaponTip": {
+        "x": 200,
+        "y": 351
+      }
+    },
+    {
+      "name": "windup",
+      "sourceRect": {
+        "x": 450,
+        "y": 55,
+        "width": 190,
+        "height": 334
+      },
+      "footAnchor": {
+        "x": 0.815789,
+        "y": 0.961078
+      },
+      "phase": "windup",
+      "duration": 3,
+      "weaponTip": {
+        "x": 155,
+        "y": 321
+      }
+    },
+    {
+      "name": "windup",
+      "sourceRect": {
+        "x": 782,
+        "y": 62,
+        "width": 211,
+        "height": 327
+      },
+      "footAnchor": {
+        "x": 0.853081,
+        "y": 0.963303
+      },
+      "phase": "windup",
+      "duration": 4,
+      "weaponTip": {
+        "x": 180,
+        "y": 315
+      }
+    },
+    {
+      "name": "dive",
+      "sourceRect": {
+        "x": 1131,
+        "y": 42,
+        "width": 228,
+        "height": 348
+      },
+      "footAnchor": {
+        "x": 0.77193,
+        "y": 0.965517
+      },
+      "phase": "contact",
+      "duration": 3,
+      "weaponTip": {
+        "x": 176,
+        "y": 336
+      }
+    },
+    {
+      "name": "dive",
+      "sourceRect": {
+        "x": 109,
+        "y": 403,
+        "width": 183,
+        "height": 351
+      },
+      "footAnchor": {
+        "x": 0.699454,
+        "y": 0.962963
+      },
+      "phase": "contact",
+      "duration": 3,
+      "weaponTip": {
+        "x": 128,
+        "y": 338
+      }
+    },
+    {
+      "name": "dive",
+      "sourceRect": {
+        "x": 464,
+        "y": 390,
+        "width": 174,
+        "height": 367
+      },
+      "footAnchor": {
+        "x": 0.66092,
+        "y": 0.970028
+      },
+      "phase": "contact",
+      "duration": 3,
+      "weaponTip": {
+        "x": 115,
+        "y": 356
+      }
+    },
+    {
+      "name": "impact",
+      "sourceRect": {
+        "x": 781,
+        "y": 391,
+        "width": 227,
+        "height": 365
+      },
+      "footAnchor": {
+        "x": 0.740088,
+        "y": 0.967123
+      },
+      "phase": "followthrough",
+      "duration": 2,
+      "weaponTip": {
+        "x": 168,
+        "y": 353
+      }
+    },
+    {
+      "name": "impact",
+      "sourceRect": {
+        "x": 1150,
+        "y": 408,
+        "width": 199,
+        "height": 348
+      },
+      "footAnchor": {
+        "x": 0.688442,
+        "y": 0.965517
+      },
+      "phase": "followthrough",
+      "duration": 3,
+      "weaponTip": {
+        "x": 137,
+        "y": 336
+      }
+    },
+    {
+      "name": "impact",
+      "sourceRect": {
+        "x": 65,
+        "y": 757,
+        "width": 224,
+        "height": 306
+      },
+      "footAnchor": {
+        "x": 0.816964,
+        "y": 0.960784
+      },
+      "phase": "followthrough",
+      "duration": 4,
+      "weaponTip": {
+        "x": 183,
+        "y": 294
+      }
+    },
+    {
+      "name": "recover",
+      "sourceRect": {
+        "x": 392,
+        "y": 757,
+        "width": 242,
+        "height": 306
+      },
+      "footAnchor": {
+        "x": 0.842975,
+        "y": 0.960784
+      },
+      "phase": "recover",
+      "duration": 3,
+      "weaponTip": {
+        "x": 204,
+        "y": 294
+      }
+    },
+    {
+      "name": "recover",
+      "sourceRect": {
+        "x": 751,
+        "y": 757,
+        "width": 238,
+        "height": 306
+      },
+      "footAnchor": {
+        "x": 0.894958,
+        "y": 0.960784
+      },
+      "phase": "recover",
+      "duration": 4,
+      "weaponTip": {
+        "x": 213,
+        "y": 294
+      }
+    },
+    {
+      "name": "recover",
+      "sourceRect": {
+        "x": 1111,
+        "y": 757,
+        "width": 229,
+        "height": 304
+      },
+      "footAnchor": {
+        "x": 0.868996,
+        "y": 0.957237
+      },
+      "phase": "recover",
+      "duration": 5,
+      "weaponTip": {
+        "x": 199,
+        "y": 291
+      }
+    }
+  ]
+}

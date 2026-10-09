@@ -1,0 +1,64 @@
+{
+  "image": "dodge.png",
+  "width": 1254,
+  "height": 1254,
+  "standingBodyHeightPixels": 594,
+  "frames": [
+    {
+      "name": "gather",
+      "sourceRect": {
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "footAnchor": {
+        "x": 0.623604,
+        "y": 0.947368
+      },
+      "duration": 3
+    },
+    {
+      "name": "push",
+      "sourceRect": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "footAnchor": {
+        "x": 0.706539,
+        "y": 0.940989
+      },
+      "duration": 4
+    },
+    {
+      "name": "travel",
+      "sourceRect": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "footAnchor": {
+        "x": 0.682616,
+        "y": 0.864434
+      },
+      "duration": 5
+    },
+    {
+      "name": "plant",
+      "sourceRect": {
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "footAnchor": {
+        "x": 0.741627,
+        "y": 0.862839
+      },
+      "duration": 4
+    }
+  ]
+}

@@ -1,5 +1,9 @@
 import { selectActionFrame } from './animation';
 import type { FighterAnimation } from './animation';
+import { CHARACTER_CLIPS, CHARACTER_CLIP_IDS, VARIANT_ATTACKS, selectClipFrame, selectedClip, validClipManifest, validVariantClip } from './clip-animation';
+import type { ClipManifest, ClipSelection, ClipCharacterId } from './clip-animation';
+import type { AttackKind, AttackVisualVariant } from './clip-animation';
+import { CHARACTERS } from './data';
 
 /** Shared, locally hosted artwork for the lobby and the canvas arena. */
 const asset = (path: string) => `${import.meta.env.BASE_URL}assets/${path}`;
@@ -18,6 +22,8 @@ export const SECONDARY_ACTION_ART: Record<string, string> = Object.fromEntries(
   Object.keys(CHARACTER_ART).map(id => [id, asset(`animations/${id}-secondary-v1.png`)]),
 );
 export const SECONDARY_EFFECT_ART = asset('effects/secondary-effects-v1.png');
+export const EULA_CLIP_MANIFEST = asset('animations/eula-v4/manifest.json');
+export const CHARACTER_CLIP_MANIFESTS = Object.fromEntries(CHARACTER_CLIP_IDS.map(id => [id, asset(`animations/${id}-v4/manifest.json`)])) as Record<ClipCharacterId, string>;
 interface SourceRect { x: number; y: number; width: number; height: number }
 interface PlungeRegistration {
   width: number; height: number;
@@ -45,6 +51,68 @@ const secondarySheets = new Map<string, ActionSheet>();
 let effects: HTMLImageElement | undefined;
 let plungeEffects: { image: HTMLImageElement; registration: PlungeRegistration } | undefined;
 let secondaryEffects: { image: HTMLImageElement; registration: SecondaryEffectRegistration } | undefined;
+type ClipSheet = { image: HTMLImageElement; flash: HTMLCanvasElement | null };
+type CharacterPack = { manifest: ClipManifest; sheets: Map<string, ClipSheet> };
+const characterPacks = new Map<string, CharacterPack>();
+const packLoads = new Map<ClipCharacterId, Promise<void>>();
+const packStatuses = new Map<string, 'loading' | 'ready' | 'fallback'>();
+// A shared atlas can back several clips. Decode and white-flash only once per URL.
+const clipSheetsByUrl = new Map<string, Promise<ClipSheet>>();
+async function loadClipSheet(url: string): Promise<ClipSheet> {
+  let pending = clipSheetsByUrl.get(url);
+  if (!pending) {
+    pending = (async () => {
+      const image = new Image(); image.decoding = 'async'; image.src = url; await image.decode();
+      return { image, flash: null };
+    })();
+    clipSheetsByUrl.set(url, pending);
+    void pending.catch(() => { clipSheetsByUrl.delete(url); });
+  }
+  return pending;
+}
+export function getCharacterAnimationStatus(id: string) {
+  const pack = characterPacks.get(id), variantKinds = Object.keys(pack?.manifest.variants ?? {});
+  return { status: packStatuses.get(id) ?? 'loading', variants: variantKinds.length > 0, variantKinds,
+    frames: pack ? [...Object.values(pack.manifest.clips), ...Object.values(pack.manifest.variants ?? {})].reduce((sum, clip) => sum + clip.frames.length, 0) : 0 };
+}
+export function getEulaAnimationStatus() { return getCharacterAnimationStatus('eula'); }
+/** Read-only capability query: effects from a completed attack retain its form. */
+export function hasRegisteredMeleeTrail(id: string, kind: AttackKind, variant?: AttackVisualVariant): boolean {
+  if (kind !== 'jab' && kind !== 'smash') return false;
+  const pack = characterPacks.get(id);
+  if (!pack) return false;
+  const clip = selectedClip(pack.manifest, { clip: kind, variant });
+  return (clip.trail === 'arc' || clip.trail === 'thrust') && clip.frames.some(frame => frame.phase === 'contact' && !!frame.weaponTip);
+}
+async function loadCharacterPack(id: ClipCharacterId) {
+  packStatuses.set(id, 'loading');
+  try {
+    const manifestUrl = CHARACTER_CLIP_MANIFESTS[id], response = await fetch(manifestUrl);
+    if (!response.ok) throw new Error(`Missing ${id} clip manifest`);
+    const manifest: unknown = await response.json();
+    if (!validClipManifest(manifest) || manifest.character !== id) throw new Error(`Invalid ${id} clip manifest`);
+    const sheets = new Map<string, ClipSheet>();
+    await Promise.all(CHARACTER_CLIPS.map(async name => {
+      const clip = manifest.clips[name];
+      const sheet = await loadClipSheet(manifestUrl.replace('manifest.json', clip.image));
+      if (sheet.image.naturalWidth !== clip.width || sheet.image.naturalHeight !== clip.height) throw new Error(`Invalid ${id} clip dimensions: ${name}`);
+      sheets.set(name, sheet);
+    }));
+    const loadedManifest: ClipManifest = { version: 1, character: id, clips: manifest.clips };
+    // Only J/K have alternative forms. Invalid optional clips fall back on their
+    // own base move; the other validated variants and base pack remain usable.
+    await Promise.all(VARIANT_ATTACKS.map(async kind => {
+      if (!validVariantClip(manifest, kind)) return;
+      try {
+        const clip = manifest.variants![kind]!, sheet = await loadClipSheet(manifestUrl.replace('manifest.json', clip.image));
+        if (sheet.image.naturalWidth !== clip.width || sheet.image.naturalHeight !== clip.height) throw new Error(`Invalid alternate dimensions: ${kind}`);
+        sheets.set(`${kind}:alternate`, sheet);
+        loadedManifest.variants ??= {}; loadedManifest.variants[kind] = clip;
+      } catch { /* This move retains its validated base clip. */ }
+    }));
+    characterPacks.set(id, { manifest: loadedManifest, sheets }); packStatuses.set(id, 'ready');
+  } catch { packStatuses.set(id, 'fallback'); }
+}
 function validSourceRect(rect: SourceRect | undefined, image: HTMLImageElement): boolean {
   return !!rect && [rect.x, rect.y, rect.width, rect.height].every(Number.isFinite) && rect.width > 2 && rect.height > 2 &&
     rect.x >= 0 && rect.y >= 0 && rect.x + rect.width <= image.naturalWidth && rect.y + rect.height <= image.naturalHeight;
@@ -156,7 +224,7 @@ async function loadImage(key: string, url: string, trim: boolean) {
   }
   loaded.set(key, { image, bounds, flash });
 }
-export function loadGameArt(): Promise<void> {
+export function loadGameArt(characterIds: readonly string[] = []): Promise<void> {
   loading ??= Promise.allSettled([
     ...Object.entries(CHARACTER_ART).filter(([id]) => !loaded.has(id)).map(([id, url]) => loadImage(id, url, true)),
     ...(!loaded.has('arena') ? [loadImage('arena', BACKGROUND_ART, false)] : []),
@@ -166,10 +234,23 @@ export function loadGameArt(): Promise<void> {
     ...(!plungeEffects ? [loadPlungeEffects()] : []),
     ...(!secondaryEffects ? [loadSecondaryEffects()] : []),
   ]).then(() => { loading = undefined; });
-  return loading;
+  const requested = CHARACTER_CLIP_IDS.filter(id => characterIds.includes(id) && !characterPacks.has(id));
+  const packs = requested.map(id => {
+    let pending = packLoads.get(id);
+    if (!pending) {
+      pending = loadCharacterPack(id).finally(() => { packLoads.delete(id); }); packLoads.set(id, pending);
+    }
+    return pending;
+  });
+  return Promise.all([loading, ...packs]).then(() => undefined);
 }
 /** Battle-only artwork. HUD and lobby retain the full-resolution portrait. */
-export function drawFighterArt(context: CanvasRenderingContext2D, id: string, x: number, feetY: number, height: number, animation: FighterAnimation, options: Pick<CharacterArtOptions, 'facing' | 'flash' | 'alpha'> = {}): boolean {
+export function drawFighterArt(context: CanvasRenderingContext2D, id: string, x: number, feetY: number, height: number, animation: FighterAnimation, options: Pick<CharacterArtOptions, 'facing' | 'flash' | 'alpha'> & { legacy?: boolean } = {}): boolean {
+  const pack = characterPacks.get(id);
+  if (!options.legacy && pack) {
+    const selection = selectClipFrame(pack.manifest, animation);
+    if (selection) return drawCharacterClip(context, pack, selection, x, feetY, height, animation, options);
+  }
   const frame = selectActionFrame(animation);
   const secondary = frame.pose === 'secondary';
   const sheet = (secondary ? secondarySheets : actionSheets).get(id);
@@ -203,6 +284,66 @@ export function drawFighterArt(context: CanvasRenderingContext2D, id: string, x:
   }
   context.restore();
   return true;
+}
+
+function drawCharacterClip(context: CanvasRenderingContext2D, pack: CharacterPack, selection: ClipSelection, x: number, feetY: number, height: number, animation: FighterAnimation, options: Pick<CharacterArtOptions, 'facing' | 'flash' | 'alpha'>): boolean {
+  const clip = selectedClip(pack.manifest, selection), sheet = pack.sheets.get(selection.variant === 'alternate' ? `${selection.clip}:alternate` : selection.clip);
+  if (!sheet) return false;
+  const frame = clip.frames[selection.frame], source = frame.sourceRect;
+  const scale = height / clip.standingBodyHeightPixels;
+  const dx = (1 - source.width * frame.footAnchor.x) * scale, dy = (1 - source.height * frame.footAnchor.y) * scale;
+  context.save(); context.globalAlpha *= options.alpha ?? 1;
+  context.translate(x, feetY); context.scale(options.facing ?? 1, 1);
+  if (animation.state === 'hitstun') { context.rotate(-0.22); context.scale(0.94, 1.03); }
+  // One registered support point follows the resolved terrain height. A small
+  // body lean suggests the slope; this is not a two-foot IK solution.
+  if (animation.state !== 'hitstun' && !animation.attack && animation.onGround && animation.motion) {
+    context.rotate(animation.motion.slope * (options.facing ?? 1) * 0.12);
+  }
+  const id = pack.manifest.character;
+  const trail = clip.trail ?? (id === 'raiden' && selection.clip === 'secondary' ? 'none'
+    : (id === 'xiao' && (selection.clip === 'secondary' || selection.clip === 'jab' && selection.variant !== 'alternate'))
+      || (id === 'jean' && selection.clip === 'special') || (id === 'raiden' && selection.clip === 'jab' && selection.variant !== 'alternate') ? 'thrust' : 'arc');
+  if (trail !== 'none' && animation.attack && !animation.attack.plunge && selection.phase === 'contact') {
+    const points = clip.frames.slice(Math.max(0, selection.frame - 2), selection.frame + 1).filter(f => f.weaponTip).map(f => ({
+      x: (f.weaponTip!.x - f.sourceRect.width * f.footAnchor.x) * scale,
+      y: (f.weaponTip!.y - f.sourceRect.height * f.footAnchor.y) * scale,
+    }));
+    if (points.length > 1) {
+      const first = points[0], tip = points[points.length - 1];
+      const control = points.length > 2 ? points[1] : {
+        x: (first.x + tip.x) / 2 - (tip.y - first.y) * 0.12,
+        y: (first.y + tip.y) / 2 + (tip.x - first.x) * 0.12,
+      };
+      // Retain the recent 75% of one smooth quadratic arc. The middle measured
+      // tip shapes the curve, rather than becoming a visible sharp corner.
+      const tail = 0.25, inverse = 1 - tail;
+      const start = { x: inverse * inverse * first.x + 2 * inverse * tail * control.x + tail * tail * tip.x,
+        y: inverse * inverse * first.y + 2 * inverse * tail * control.y + tail * tail * tip.y };
+      const shortenedControl = { x: inverse * control.x + tail * tip.x, y: inverse * control.y + tail * tip.y };
+      const glow = context.createLinearGradient(start.x, start.y, tip.x, tip.y);
+      const color = CHARACTERS.find(character => character.id === id)!.color;
+      const rgb = [1, 3, 5].map(offset => parseInt(color.slice(offset, offset + 2), 16)).join(',');
+      glow.addColorStop(0, `rgba(${rgb},0)`); glow.addColorStop(0.5, `rgba(${rgb},0.65)`); glow.addColorStop(1, color);
+      context.save(); context.globalAlpha *= 0.62; context.lineCap = 'round'; context.lineJoin = 'round';
+      context.strokeStyle = glow; context.lineWidth = (selection.clip === 'smash' ? 7 : 5) * height / 112;
+      context.beginPath(); context.moveTo(start.x, start.y);
+      if (trail === 'thrust') context.lineTo(tip.x, tip.y);
+      else context.quadraticCurveTo(shortenedControl.x, shortenedControl.y, tip.x, tip.y);
+      context.stroke(); context.globalAlpha *= 0.7; context.lineWidth = 1.5 * height / 112; context.stroke(); context.restore();
+    }
+  }
+  context.imageSmoothingEnabled = true; context.imageSmoothingQuality = 'high';
+  context.drawImage(sheet.image, source.x + 1, source.y + 1, source.width - 2, source.height - 2, dx, dy, (source.width - 2) * scale, (source.height - 2) * scale);
+  if (options.flash) {
+    if (!sheet.flash) {
+      const flash = document.createElement('canvas'); flash.width = clip.width; flash.height = clip.height;
+      const g = flash.getContext('2d');
+      if (g) { g.drawImage(sheet.image, 0, 0); g.globalCompositeOperation = 'source-in'; g.fillStyle = '#fff9ed'; g.fillRect(0, 0, clip.width, clip.height); sheet.flash = flash; }
+    }
+    if (sheet.flash) { context.globalAlpha *= 0.85; context.drawImage(sheet.flash, source.x + 1, source.y + 1, source.width - 2, source.height - 2, dx, dy, (source.width - 2) * scale, (source.height - 2) * scale); }
+  }
+  context.restore(); return true;
 }
 
 /** Independent centre-anchored skill artwork; false lets combat draw its geometric fallback. */

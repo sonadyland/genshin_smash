@@ -1,10 +1,13 @@
 import type { MoveDef } from './data';
+import type { AttackVisualVariant, MotionState } from './clip-animation';
 
 export interface PlungeAnimation {
   phase: 'windup' | 'dive' | 'impact' | 'recover';
   elapsed: number;
+  /** The two existing modes have different landing recovery lengths. */
+  recoveryDuration?: number;
 }
-export type AttackTimeline = { def: Pick<MoveDef, 'kind' | 'startup' | 'active' | 'endlag'>; t: number; plunge?: PlungeAnimation };
+export type AttackTimeline = { def: Pick<MoveDef, 'kind' | 'startup' | 'active' | 'endlag'>; t: number; plunge?: PlungeAnimation; visualVariant?: AttackVisualVariant };
 export type AttackPhase = 'windup' | 'contact' | 'followthrough' | 'recover';
 export interface FighterAnimation {
   state: 'free' | 'attack' | 'hitstun';
@@ -13,8 +16,11 @@ export interface FighterAnimation {
   vx: number;
   vy: number;
   dodgeTimer: number;
+  dodgeDuration?: number;
   /** Simulation clock owned by this fighter; neither hitstop nor pause advances it. */
   time: number;
+  /** Simulation-owned locomotion for the character animation packs. */
+  motion?: MotionState;
 }
 export interface ActionFrame {
   row: number;
@@ -38,7 +44,7 @@ export function attackPhase(attack: AttackTimeline): { phase: AttackPhase; colum
     if (phase === 'windup') return { phase: 'windup', column: 0, progress: unit(elapsed / Math.max(1, def.startup)) };
     if (phase === 'dive') return { phase: 'contact', column: 1, progress: unit(elapsed / 12) };
     if (phase === 'impact') return { phase: 'followthrough', column: 2, progress: unit(elapsed / Math.max(1, def.active)) };
-    return { phase: 'recover', column: 3, progress: unit(elapsed / Math.max(1, def.endlag - def.active)) };
+    return { phase: 'recover', column: 3, progress: unit(elapsed / Math.max(1, attack.plunge.recoveryDuration ?? def.endlag - def.active)) };
   }
   if (t < def.startup) return { phase: 'windup', column: 0, progress: unit(t / Math.max(1, def.startup)) };
   if (t < def.startup + def.active) return { phase: 'contact', column: 1, progress: unit((t - def.startup) / Math.max(1, def.active)) };

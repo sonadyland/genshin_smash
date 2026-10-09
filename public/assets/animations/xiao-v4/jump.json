@@ -1,0 +1,121 @@
+{
+  "image": "aerial.png",
+  "width": 1448,
+  "height": 1086,
+  "standingBodyHeightPixels": 220,
+  "trail": "none",
+  "frames": [
+    {
+      "name": "takeoff",
+      "sourceRect": {
+        "x": 100,
+        "y": 184,
+        "width": 249,
+        "height": 180
+      },
+      "footAnchor": {
+        "x": 0.562249,
+        "y": 0.933333
+      },
+      "duration": 3
+    },
+    {
+      "name": "rise",
+      "sourceRect": {
+        "x": 452,
+        "y": 153,
+        "width": 241,
+        "height": 224
+      },
+      "footAnchor": {
+        "x": 0.406639,
+        "y": 0.946429
+      },
+      "duration": 4
+    },
+    {
+      "name": "rise",
+      "sourceRect": {
+        "x": 789,
+        "y": 147,
+        "width": 237,
+        "height": 210
+      },
+      "footAnchor": {
+        "x": 0.527426,
+        "y": 0.942857
+      },
+      "duration": 5
+    },
+    {
+      "name": "apex",
+      "sourceRect": {
+        "x": 1138,
+        "y": 150,
+        "width": 236,
+        "height": 228
+      },
+      "footAnchor": {
+        "x": 0.567797,
+        "y": 0.947368
+      },
+      "duration": 6
+    },
+    {
+      "name": "fall",
+      "sourceRect": {
+        "x": 111,
+        "y": 469,
+        "width": 251,
+        "height": 220
+      },
+      "footAnchor": {
+        "x": 0.609562,
+        "y": 0.945455
+      },
+      "duration": 5
+    },
+    {
+      "name": "fall",
+      "sourceRect": {
+        "x": 442,
+        "y": 478,
+        "width": 256,
+        "height": 211
+      },
+      "footAnchor": {
+        "x": 0.4375,
+        "y": 0.947867
+      },
+      "duration": 5
+    },
+    {
+      "name": "land",
+      "sourceRect": {
+        "x": 790,
+        "y": 510,
+        "width": 253,
+        "height": 179
+      },
+      "footAnchor": {
+        "x": 0.55336,
+        "y": 0.932961
+      },
+      "duration": 3
+    },
+    {
+      "name": "land",
+      "sourceRect": {
+        "x": 1147,
+        "y": 469,
+        "width": 220,
+        "height": 227
+      },
+      "footAnchor": {
+        "x": 0.513636,
+        "y": 0.951542
+      },
+      "duration": 4
+    }
+  ]
+}

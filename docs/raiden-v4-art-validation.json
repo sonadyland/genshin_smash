@@ -1,0 +1,165 @@
+{
+  "ok": true,
+  "character": "raiden",
+  "generator": "built-in image_gen",
+  "totalFrames": 80,
+  "baseFrames": 64,
+  "variantFrames": 16,
+  "atlases": [
+    {
+      "image": "aerial.png",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "zeroAlphaFraction": 0.726489,
+      "sha256": "31e4a5c5a38e95b84c0a163beb358ed8043e8a4575bfbe0f8a7f35afb6e05ed8"
+    },
+    {
+      "image": "basic-variants.png",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "zeroAlphaFraction": 0.633985,
+      "sha256": "cf5d7b1edb252e7279ef9320603c362a4ec45182395558bd2f11272f1189c641"
+    },
+    {
+      "image": "basic.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "zeroAlphaFraction": 0.727979,
+      "sha256": "08f0574e13c92252423956b0981bf1e874997495f8de28670cc04ecb9e3e492d"
+    },
+    {
+      "image": "locomotion.png",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "zeroAlphaFraction": 0.724274,
+      "sha256": "cab63896b4bdd62fb40d6c63715d4b89b170ea8c11902b5cc9d79f49a2a520fd"
+    },
+    {
+      "image": "secondary.png",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "zeroAlphaFraction": 0.556947,
+      "sha256": "51ee0f0393b75a092d799fa2d660742224afd34742f1bd47ebb25a1d019a4a23"
+    },
+    {
+      "image": "special.png",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "zeroAlphaFraction": 0.685653,
+      "sha256": "c1861c91c515e72cfdb4a9ec8f630273d6451a169eb27ce0fcf262e6f58e0f6b"
+    }
+  ],
+  "clips": [
+    {
+      "clip": "idle",
+      "variant": false,
+      "frames": 4,
+      "image": "locomotion.png",
+      "minimumOpaqueGutterPx": 12,
+      "uniqueFrames": 4,
+      "standingBodyHeightPixels": 264
+    },
+    {
+      "clip": "run",
+      "variant": false,
+      "frames": 8,
+      "image": "locomotion.png",
+      "minimumOpaqueGutterPx": 12,
+      "uniqueFrames": 8,
+      "standingBodyHeightPixels": 264
+    },
+    {
+      "clip": "jump",
+      "variant": false,
+      "frames": 8,
+      "image": "aerial.png",
+      "minimumOpaqueGutterPx": 12,
+      "uniqueFrames": 8,
+      "standingBodyHeightPixels": 282
+    },
+    {
+      "clip": "dodge",
+      "variant": false,
+      "frames": 4,
+      "image": "aerial.png",
+      "minimumOpaqueGutterPx": 2,
+      "uniqueFrames": 4,
+      "standingBodyHeightPixels": 282
+    },
+    {
+      "clip": "jab",
+      "variant": false,
+      "frames": 8,
+      "image": "basic.png",
+      "minimumOpaqueGutterPx": 12,
+      "uniqueFrames": 8,
+      "standingBodyHeightPixels": 194
+    },
+    {
+      "clip": "smash",
+      "variant": false,
+      "frames": 8,
+      "image": "basic.png",
+      "minimumOpaqueGutterPx": 12,
+      "uniqueFrames": 8,
+      "standingBodyHeightPixels": 194
+    },
+    {
+      "clip": "jab",
+      "variant": true,
+      "frames": 8,
+      "image": "basic-variants.png",
+      "minimumOpaqueGutterPx": 5,
+      "uniqueFrames": 8,
+      "standingBodyHeightPixels": 222
+    },
+    {
+      "clip": "smash",
+      "variant": true,
+      "frames": 8,
+      "image": "basic-variants.png",
+      "minimumOpaqueGutterPx": 4,
+      "uniqueFrames": 8,
+      "standingBodyHeightPixels": 222
+    },
+    {
+      "clip": "special",
+      "variant": false,
+      "frames": 12,
+      "image": "special.png",
+      "minimumOpaqueGutterPx": 12,
+      "uniqueFrames": 12,
+      "standingBodyHeightPixels": 244
+    },
+    {
+      "clip": "secondary",
+      "variant": false,
+      "frames": 12,
+      "image": "secondary.png",
+      "minimumOpaqueGutterPx": 9,
+      "uniqueFrames": 12,
+      "standingBodyHeightPixels": 244
+    }
+  ],
+  "visualReview": "Viewed all six final PNGs; identity, complete swords, actual action distinctions and transparent silhouettes checked. Custom per-frame source rectangles avoid nominal-grid cutoffs. Renders use fixed per-clip body height, not per-frame bounding box normalization. Secondary is planted sword raising and command gesture; no horizontal dash. Special is forward horizontal release.",
+  "alphaNote": "Very faint violet fringe pixels from native generator are retained; no pixel editing. Registration is checked against alpha>=128 core silhouettes.",
+  "integrationTimingNote": "Integration review: J base/alternate recovery frame weights changed from [3,2] to [2,2], keeping both drawings reachable during the existing 2-tick recovery at survival speed level 3. Gameplay timing unchanged."
+}

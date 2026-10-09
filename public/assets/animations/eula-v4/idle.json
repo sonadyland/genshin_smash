@@ -1,0 +1,64 @@
+{
+  "image": "idle.png",
+  "width": 1254,
+  "height": 1254,
+  "standingBodyHeightPixels": 594,
+  "frames": [
+    {
+      "name": "exhale",
+      "sourceRect": {
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "footAnchor": {
+        "x": 0.532695,
+        "y": 0.980861
+      },
+      "duration": 13
+    },
+    {
+      "name": "inhale",
+      "sourceRect": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "footAnchor": {
+        "x": 0.535885,
+        "y": 0.980861
+      },
+      "duration": 11
+    },
+    {
+      "name": "breath-peak",
+      "sourceRect": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "footAnchor": {
+        "x": 0.539075,
+        "y": 0.979266
+      },
+      "duration": 10
+    },
+    {
+      "name": "settle",
+      "sourceRect": {
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "footAnchor": {
+        "x": 0.535885,
+        "y": 0.979266
+      },
+      "duration": 14
+    }
+  ]
+}

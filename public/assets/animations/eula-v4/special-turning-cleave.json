@@ -1,0 +1,236 @@
+{
+  "image": "special-turning-cleave.png",
+  "width": 1448,
+  "height": 1086,
+  "standingBodyHeightPixels": 165,
+  "frames": [
+    {
+      "name": "special-turning-cleave-01",
+      "sourceRect": {
+        "x": 83,
+        "y": 154,
+        "width": 225,
+        "height": 191
+      },
+      "footAnchor": {
+        "x": 0.417778,
+        "y": 0.921466
+      },
+      "phase": "windup",
+      "duration": 5,
+      "weaponTip": {
+        "x": 208,
+        "y": 161
+      }
+    },
+    {
+      "name": "special-turning-cleave-02",
+      "sourceRect": {
+        "x": 471,
+        "y": 146,
+        "width": 181,
+        "height": 199
+      },
+      "footAnchor": {
+        "x": 0.640884,
+        "y": 0.924623
+      },
+      "phase": "windup",
+      "duration": 6,
+      "weaponTip": {
+        "x": 16,
+        "y": 17
+      }
+    },
+    {
+      "name": "special-turning-cleave-03",
+      "sourceRect": {
+        "x": 835,
+        "y": 110,
+        "width": 178,
+        "height": 236
+      },
+      "footAnchor": {
+        "x": 0.634831,
+        "y": 0.936441
+      },
+      "phase": "windup",
+      "duration": 6,
+      "weaponTip": {
+        "x": 14,
+        "y": 15
+      }
+    },
+    {
+      "name": "special-turning-cleave-04",
+      "sourceRect": {
+        "x": 1168,
+        "y": 104,
+        "width": 200,
+        "height": 242
+      },
+      "footAnchor": {
+        "x": 0.6425,
+        "y": 0.938017
+      },
+      "phase": "windup",
+      "duration": 3,
+      "weaponTip": {
+        "x": 15,
+        "y": 64
+      }
+    },
+    {
+      "name": "special-turning-cleave-05",
+      "sourceRect": {
+        "x": 84,
+        "y": 468,
+        "width": 225,
+        "height": 195
+      },
+      "footAnchor": {
+        "x": 0.453333,
+        "y": 0.923077
+      },
+      "phase": "contact",
+      "duration": 6,
+      "weaponTip": {
+        "x": 210,
+        "y": 114
+      }
+    },
+    {
+      "name": "special-turning-cleave-06",
+      "sourceRect": {
+        "x": 469,
+        "y": 494,
+        "width": 233,
+        "height": 173
+      },
+      "footAnchor": {
+        "x": 0.405579,
+        "y": 0.895954
+      },
+      "phase": "contact",
+      "duration": 6,
+      "weaponTip": {
+        "x": 214,
+        "y": 155
+      }
+    },
+    {
+      "name": "special-turning-cleave-07",
+      "sourceRect": {
+        "x": 819,
+        "y": 507,
+        "width": 255,
+        "height": 158
+      },
+      "footAnchor": {
+        "x": 0.317647,
+        "y": 0.905063
+      },
+      "phase": "followthrough",
+      "duration": 5,
+      "weaponTip": {
+        "x": 236,
+        "y": 139
+      }
+    },
+    {
+      "name": "special-turning-cleave-08",
+      "sourceRect": {
+        "x": 1190,
+        "y": 504,
+        "width": 210,
+        "height": 159
+      },
+      "footAnchor": {
+        "x": 0.55,
+        "y": 0.90566
+      },
+      "phase": "followthrough",
+      "duration": 5,
+      "weaponTip": {
+        "x": 191,
+        "y": 118
+      }
+    },
+    {
+      "name": "special-turning-cleave-09",
+      "sourceRect": {
+        "x": 88,
+        "y": 806,
+        "width": 226,
+        "height": 186
+      },
+      "footAnchor": {
+        "x": 0.462389,
+        "y": 0.919355
+      },
+      "phase": "followthrough",
+      "duration": 4,
+      "weaponTip": {
+        "x": 209,
+        "y": 161
+      }
+    },
+    {
+      "name": "special-turning-cleave-10",
+      "sourceRect": {
+        "x": 454,
+        "y": 803,
+        "width": 223,
+        "height": 187
+      },
+      "footAnchor": {
+        "x": 0.5,
+        "y": 0.919786
+      },
+      "phase": "recover",
+      "duration": 4,
+      "weaponTip": {
+        "x": 206,
+        "y": 156
+      }
+    },
+    {
+      "name": "special-turning-cleave-11",
+      "sourceRect": {
+        "x": 813,
+        "y": 802,
+        "width": 228,
+        "height": 189
+      },
+      "footAnchor": {
+        "x": 0.471491,
+        "y": 0.920635
+      },
+      "phase": "recover",
+      "duration": 3,
+      "weaponTip": {
+        "x": 210,
+        "y": 155
+      }
+    },
+    {
+      "name": "special-turning-cleave-12",
+      "sourceRect": {
+        "x": 1171,
+        "y": 803,
+        "width": 233,
+        "height": 188
+      },
+      "footAnchor": {
+        "x": 0.476395,
+        "y": 0.920213
+      },
+      "phase": "recover",
+      "duration": 3,
+      "weaponTip": {
+        "x": 216,
+        "y": 160
+      }
+    }
+  ]
+}

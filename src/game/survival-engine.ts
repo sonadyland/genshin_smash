@@ -1,6 +1,8 @@
 import { CHARACTERS } from './data';
 import type { CharDef, MoveDef } from './data';
 import type { PlungeAnimation } from './animation';
+import { advanceMotion, newMotionState, newAttackVariants, takeAttackVariant } from './clip-animation';
+import type { AttackVariantState, AttackVisualVariant, MotionState } from './clip-animation';
 import { loadGameArt } from './art';
 import {
   SURVIVAL_WORLD, SURVIVAL_DURATION, SURVIVAL_BASE_HP, SURVIVAL_BRANCHES, groundHeightAt,
@@ -13,12 +15,15 @@ import { BattleAudio } from './audio';
 export type SurvivalPhase = 'playing' | 'paused' | 'upgrade' | 'victory' | 'defeat';
 export interface SurvivalAttack {
   def: MoveDef; t: number; hit: Set<number>; emitted: boolean;
+  visualVariant?: AttackVisualVariant;
   plunge?: PlungeAnimation & { previousFeet: number };
 }
 export interface Survivor {
   x: number; y: number; vx: number; vy: number; facing: 1 | -1;
   onGround: boolean; jumps: number; drop: number; hp: number; invuln: number;
   dodge: number; dodgeCooldown: number; skillCooldown: number; secondaryCooldown: number; attack: SurvivalAttack | null;
+  motion: MotionState;
+  nextAttackVariants: AttackVariantState;
 }
 export interface SurvivalEnemy {
   id: number; kind: 'slime' | 'flyer' | 'ranged'; elite: boolean; boss: boolean;
@@ -39,7 +44,7 @@ export interface SurvivalField {
   kind: 'vortex' | 'sanctuary' | 'flame' | 'orbit' | 'pillar' | 'thunder' | 'updraft'; tick: number;
   height?: number; hit?: Set<number>;
 }
-export interface SurvivalEffect { x: number; y: number; age: number; life: number; size: number; kind: 'slash' | 'impact' | 'plunge' | 'ring' | 'chain' | 'secondary'; color: string; x2?: number; y2?: number; facing?: 1 | -1 }
+export interface SurvivalEffect { x: number; y: number; age: number; life: number; size: number; kind: 'slash' | 'impact' | 'plunge' | 'ring' | 'chain' | 'secondary'; color: string; x2?: number; y2?: number; facing?: 1 | -1; melee?: { kind: 'jab' | 'smash'; variant?: AttackVisualVariant } }
 export interface SurvivalText { x: number; y: number; age: number; text: string; color: string; big: boolean }
 
 const STEP = 1000 / 60;
@@ -109,12 +114,13 @@ export class SurvivalGame {
   private newPlayer(): Survivor {
     return { x: SURVIVAL_WORLD.width / 2, y: groundHeightAt(SURVIVAL_WORLD.width / 2), vx: 0, vy: 0, facing: 1,
       onGround: true, jumps: 2, drop: 0, hp: SURVIVAL_BASE_HP, invuln: 0,
-      dodge: 0, dodgeCooldown: 0, skillCooldown: 0, secondaryCooldown: 0, attack: null };
+      dodge: 0, dodgeCooldown: 0, skillCooldown: 0, secondaryCooldown: 0, attack: null, motion: newMotionState(), nextAttackVariants: newAttackVariants() };
   }
 
   start(options: { player: number }) {
     this.selectedPlayer = clamp(Math.floor(options.player), 0, CHARACTERS.length - 1);
     this.char = CHARACTERS[this.selectedPlayer];
+    void loadGameArt([this.char.id]);
     this.progress = makeInitialProgress(this.char.id);
     this.player = this.newPlayer();
     this.enemies = []; this.orbs = []; this.shots = []; this.fields = []; this.effects = []; this.texts = [];
@@ -238,7 +244,7 @@ export class SurvivalGame {
     this.enemies = this.enemies.filter(enemy => enemy.hp > 0);
     this.camera.x += (clamp(this.player.x - VIEW_W / 2, 0, SURVIVAL_WORLD.width - VIEW_W) - this.camera.x) * 0.12;
     this.camera.y += (clamp(this.player.y - 510, 0, SURVIVAL_WORLD.height - VIEW_H) - this.camera.y) * 0.10;
-    if (this.player.hp <= 0) { this.player.hp = 0; this.phase = 'defeat'; this.player.attack = null; this.clearInput(); this.audio.setScene('result'); }
+    if (this.player.hp <= 0) { this.player.hp = 0; this.phase = 'defeat'; this.player.attack = null; this.player.nextAttackVariants = newAttackVariants(); this.clearInput(); this.audio.setScene('result'); }
     else this.checkLevelUp();
     this.pressed.clear();
   }
@@ -296,6 +302,9 @@ export class SurvivalGame {
     // Diluc's active L moves after the ordinary movement step.
     if (p.onGround && Math.abs(previousFeet - groundHeightAt(previousX)) < 1) p.y = groundHeightAt(p.x);
     else if (p.y > groundHeightAt(p.x)) { p.y = groundHeightAt(p.x); p.vy = 0; p.onGround = true; p.jumps = 2; }
+    advanceMotion(p.motion, { dx: p.x - previousX, onGround: p.onGround, facing: p.facing,
+      walking: !p.attack && !p.dodge && direction !== 0,
+      slope: Math.abs(p.y - groundHeightAt(p.x)) < 1 ? (groundHeightAt(p.x + 12) - groundHeightAt(p.x - 12)) / 24 : 0 });
   }
 
   private findLanding(x: number, previous: number, next: number, drop = false, previousX = x): number | null {
@@ -318,11 +327,11 @@ export class SurvivalGame {
     const base = this.char[kind];
     const speed = 1 + (this.progress.upgrades.speed ?? 0) * 0.035;
     const def: MoveDef = { ...base, startup: Math.max(3, Math.round(base.startup / speed)), endlag: Math.round(base.endlag * 0.7 / speed) };
-    p.attack = { def, t: 0, hit: new Set(), emitted: false };
+    p.attack = { def, t: 0, hit: new Set(), emitted: false, visualVariant: takeAttackVariant(p.nextAttackVariants, kind) };
     if (kind === 'secondary') p.secondaryCooldown = this.char.secondaryCooldown * 60 * getSecondaryProfile(this.char.id, this.progress.secondaryLevel).cooldownMultiplier;
     if (kind === 'special') {
       p.skillCooldown = this.skillCooldownMax * 60 * (1 - (this.progress.skillLevel - 1) * 0.075);
-      if (this.char.id === 'xiao') p.attack.plunge = { phase: 'windup', elapsed: 0, previousFeet: p.y };
+      if (this.char.id === 'xiao') p.attack.plunge = { phase: 'windup', elapsed: 0, previousFeet: p.y, recoveryDuration: def.endlag };
     }
     if (kind === 'jab' || kind === 'smash') this.audio.play('attack', { charId: this.char.id, kind });
   }
@@ -356,7 +365,7 @@ export class SurvivalGame {
         const stats = getSurvivalStats(this.progress);
         const reach = (attack.def.reach + 38) * stats.rangeMultiplier;
         this.melee(reach, 108, this.attackDamage(attack.def.kind), attack.hit, false);
-        this.effect('slash', p.x + p.facing * reach * 0.57, p.y - 51, reach * 1.7, this.char.color, 19);
+        this.effect('slash', p.x + p.facing * reach * 0.57, p.y - 51, reach * 1.7, this.char.color, 19).melee = { kind: attack.def.kind, variant: attack.visualVariant };
       }
       this.triggerAuxiliary();
       if (this.progress.branch === 'eula-orbit' && !this.fields.some(field => field.kind === 'orbit')) this.field('orbit', p.x, p.y - 45, 155 * this.specialRange(), 175, this.attackDamage('jab') * 0.5);
@@ -538,7 +547,8 @@ export class SurvivalGame {
   }
   private effect(kind: SurvivalEffect['kind'], x: number, y: number, size: number, color: string, life: number, x2?: number, y2?: number) {
     if (this.effects.length >= 75) this.effects.shift();
-    this.effects.push({ kind, x, y, size, color, life, age: 0, x2, y2, facing: this.player.facing });
+    const effect: SurvivalEffect = { kind, x, y, size, color, life, age: 0, x2, y2, facing: this.player.facing };
+    this.effects.push(effect); return effect;
   }
   private addText(x: number, y: number, text: string, color: string, big = false) {
     if (this.texts.length >= 45) this.texts.shift();
@@ -610,7 +620,7 @@ export class SurvivalGame {
     this.addText(p.x, p.y - 110, `−${Math.ceil(taken)}`, '#ffb0a1', true);
     this.audio.play('hurt', { power: taken });
     if (p.hp <= 0) {
-      this.phase = 'defeat'; this.hitstop = 0; p.attack = null; this.clearInput();
+      this.phase = 'defeat'; this.hitstop = 0; p.attack = null; p.nextAttackVariants = newAttackVariants(); this.clearInput();
       this.audio.setScene('result');
       return;
     }

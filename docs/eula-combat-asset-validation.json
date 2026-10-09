@@ -1,0 +1,618 @@
+{
+  "jab": {
+    "width": 1774,
+    "height": 887,
+    "frames": 8,
+    "phases": {
+      "windup": 2,
+      "contact": 2,
+      "followthrough": 2,
+      "recover": 2
+    },
+    "standingBodyHeightPixels": 260,
+    "diagnostics": [
+      {
+        "frame": 1,
+        "bodyBounds": [
+          114,
+          155,
+          350,
+          399
+        ],
+        "footGlobal": [
+          226,
+          398
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 2,
+        "bodyBounds": [
+          542,
+          155,
+          777,
+          399
+        ],
+        "footGlobal": [
+          685.5,
+          398
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 3,
+        "bodyBounds": [
+          957,
+          166,
+          1276,
+          399
+        ],
+        "footGlobal": [
+          1091.5,
+          398
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 4,
+        "bodyBounds": [
+          1403,
+          169,
+          1719,
+          399
+        ],
+        "footGlobal": [
+          1541.5,
+          398
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 5,
+        "bodyBounds": [
+          87,
+          579,
+          372,
+          810
+        ],
+        "footGlobal": [
+          226.5,
+          809
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 6,
+        "bodyBounds": [
+          531,
+          603,
+          841,
+          810
+        ],
+        "footGlobal": [
+          686,
+          809
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 7,
+        "bodyBounds": [
+          994,
+          556,
+          1240,
+          811
+        ],
+        "footGlobal": [
+          1114,
+          810
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 8,
+        "bodyBounds": [
+          1441,
+          551,
+          1683,
+          811
+        ],
+        "footGlobal": [
+          1555.5,
+          810
+        ],
+        "alpha128Gutter": 14
+      }
+    ]
+  },
+  "smash": {
+    "width": 1774,
+    "height": 887,
+    "frames": 8,
+    "phases": {
+      "windup": 2,
+      "contact": 2,
+      "followthrough": 2,
+      "recover": 2
+    },
+    "standingBodyHeightPixels": 255,
+    "diagnostics": [
+      {
+        "frame": 1,
+        "bodyBounds": [
+          86,
+          158,
+          357,
+          410
+        ],
+        "footGlobal": [
+          252,
+          409
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 2,
+        "bodyBounds": [
+          501,
+          166,
+          796,
+          408
+        ],
+        "footGlobal": [
+          679.5,
+          407
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 3,
+        "bodyBounds": [
+          937,
+          194,
+          1256,
+          410
+        ],
+        "footGlobal": [
+          1109,
+          409
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 4,
+        "bodyBounds": [
+          1384,
+          180,
+          1731,
+          410
+        ],
+        "footGlobal": [
+          1540.5,
+          409
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 5,
+        "bodyBounds": [
+          84,
+          564,
+          424,
+          799
+        ],
+        "footGlobal": [
+          265,
+          798
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 6,
+        "bodyBounds": [
+          542,
+          582,
+          884,
+          796
+        ],
+        "footGlobal": [
+          715,
+          795
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 7,
+        "bodyBounds": [
+          977,
+          548,
+          1249,
+          798
+        ],
+        "footGlobal": [
+          1112.5,
+          797
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 8,
+        "bodyBounds": [
+          1426,
+          544,
+          1686,
+          799
+        ],
+        "footGlobal": [
+          1550.5,
+          798
+        ],
+        "alpha128Gutter": 14
+      }
+    ]
+  },
+  "special": {
+    "width": 1448,
+    "height": 1086,
+    "frames": 12,
+    "phases": {
+      "windup": 4,
+      "contact": 2,
+      "followthrough": 3,
+      "recover": 3
+    },
+    "standingBodyHeightPixels": 235,
+    "diagnostics": [
+      {
+        "frame": 1,
+        "bodyBounds": [
+          76,
+          113,
+          321,
+          355
+        ],
+        "footGlobal": [
+          201,
+          354
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 2,
+        "bodyBounds": [
+          435,
+          115,
+          651,
+          355
+        ],
+        "footGlobal": [
+          588.5,
+          354
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 3,
+        "bodyBounds": [
+          774,
+          122,
+          983,
+          356
+        ],
+        "footGlobal": [
+          926.5,
+          355
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 4,
+        "bodyBounds": [
+          1151,
+          127,
+          1404,
+          356
+        ],
+        "footGlobal": [
+          1290,
+          355
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 5,
+        "bodyBounds": [
+          58,
+          461,
+          372,
+          685
+        ],
+        "footGlobal": [
+          217,
+          684
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 6,
+        "bodyBounds": [
+          472,
+          467,
+          702,
+          688
+        ],
+        "footGlobal": [
+          548.5,
+          687
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 7,
+        "bodyBounds": [
+          772,
+          471,
+          1044,
+          691
+        ],
+        "footGlobal": [
+          928,
+          690
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 8,
+        "bodyBounds": [
+          1123,
+          473,
+          1361,
+          690
+        ],
+        "footGlobal": [
+          1336.5,
+          689
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 9,
+        "bodyBounds": [
+          71,
+          784,
+          334,
+          1014
+        ],
+        "footGlobal": [
+          214.5,
+          1013
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 10,
+        "bodyBounds": [
+          455,
+          784,
+          697,
+          1014
+        ],
+        "footGlobal": [
+          578,
+          1013
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 11,
+        "bodyBounds": [
+          801,
+          784,
+          1038,
+          1014
+        ],
+        "footGlobal": [
+          918,
+          1013
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 12,
+        "bodyBounds": [
+          1169,
+          784,
+          1411,
+          1014
+        ],
+        "footGlobal": [
+          1290,
+          1013
+        ],
+        "alpha128Gutter": 14
+      }
+    ]
+  },
+  "secondary": {
+    "width": 1448,
+    "height": 1086,
+    "frames": 12,
+    "phases": {
+      "windup": 4,
+      "contact": 2,
+      "followthrough": 3,
+      "recover": 3
+    },
+    "standingBodyHeightPixels": 228,
+    "diagnostics": [
+      {
+        "frame": 1,
+        "bodyBounds": [
+          73,
+          135,
+          306,
+          366
+        ],
+        "footGlobal": [
+          180.5,
+          365
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 2,
+        "bodyBounds": [
+          455,
+          154,
+          646,
+          366
+        ],
+        "footGlobal": [
+          568.5,
+          365
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 3,
+        "bodyBounds": [
+          767,
+          178,
+          993,
+          366
+        ],
+        "footGlobal": [
+          918,
+          365
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 4,
+        "bodyBounds": [
+          1155,
+          175,
+          1382,
+          366
+        ],
+        "footGlobal": [
+          1286,
+          365
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 5,
+        "bodyBounds": [
+          73,
+          538,
+          377,
+          699
+        ],
+        "footGlobal": [
+          170,
+          698
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 6,
+        "bodyBounds": [
+          456,
+          535,
+          744,
+          699
+        ],
+        "footGlobal": [
+          541,
+          698
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 7,
+        "bodyBounds": [
+          814,
+          495,
+          1037,
+          700
+        ],
+        "footGlobal": [
+          921,
+          699
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 8,
+        "bodyBounds": [
+          1165,
+          486,
+          1400,
+          699
+        ],
+        "footGlobal": [
+          1277.5,
+          698
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 9,
+        "bodyBounds": [
+          79,
+          810,
+          307,
+          1029
+        ],
+        "footGlobal": [
+          189,
+          1028
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 10,
+        "bodyBounds": [
+          455,
+          805,
+          676,
+          1029
+        ],
+        "footGlobal": [
+          559,
+          1028
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 11,
+        "bodyBounds": [
+          802,
+          805,
+          1028,
+          1030
+        ],
+        "footGlobal": [
+          910,
+          1029
+        ],
+        "alpha128Gutter": 14
+      },
+      {
+        "frame": 12,
+        "bodyBounds": [
+          1168,
+          805,
+          1391,
+          1030
+        ],
+        "footGlobal": [
+          1270.5,
+          1029
+        ],
+        "alpha128Gutter": 14
+      }
+    ]
+  }
+}

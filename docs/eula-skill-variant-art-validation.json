@@ -1,0 +1,549 @@
+{
+  "ok": true,
+  "totalNewFrames": 24,
+  "tool": "built-in image_gen",
+  "rasterMutationByScripts": false,
+  "visualReview": "All 24 poses reviewed: full adult Eula, complete blue claymore and cape, raised-to-lowered descending cuts. L cross-step turning cleave, I planted overhead frost release. No source bitmap was cropped, recolored or resized by code. Source rectangles only register crops for renderer.",
+  "atlases": [
+    {
+      "clip": "special-turning-cleave",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "frameCount": 12,
+      "distinctFrameCount": 12,
+      "transparentPercent": 81.89,
+      "minimumOpaqueGutterPx": 14,
+      "standingBodyHeightPixels": 165,
+      "durationSum": 56,
+      "contactBladeDirection": "descending, measured against registered foot anchor",
+      "sha256": "e9174060c8b29b4704b2889bbef039e089d7b55f479d52b0e03be516d607858d",
+      "frames": [
+        {
+          "frame": 1,
+          "phase": "windup",
+          "alpha128BoundsGlobal": [
+            97,
+            168,
+            294,
+            331
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            177.0,
+            330.0
+          ],
+          "weaponTipGlobal": [
+            291,
+            315
+          ],
+          "tipRelativeToFootY": -15.0,
+          "sha256": "23da9e3bf925f2599d57079155707a6b3c1a37245932a3f344be3652f6621427"
+        },
+        {
+          "frame": 2,
+          "phase": "windup",
+          "alpha128BoundsGlobal": [
+            485,
+            160,
+            638,
+            331
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            587.0,
+            330.0
+          ],
+          "weaponTipGlobal": [
+            487,
+            163
+          ],
+          "tipRelativeToFootY": -167.0,
+          "sha256": "9bf830d74f274c6aa8b90486b1f5bab3fa9c2610b8349d97f9a84b10d7e40abc"
+        },
+        {
+          "frame": 3,
+          "phase": "windup",
+          "alpha128BoundsGlobal": [
+            849,
+            124,
+            999,
+            332
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            948.0,
+            331.0
+          ],
+          "weaponTipGlobal": [
+            849,
+            125
+          ],
+          "tipRelativeToFootY": -206.0,
+          "sha256": "5c45787dce3372734ca6173c9ff37e0d2353114759f22238d45a83eabd395208"
+        },
+        {
+          "frame": 4,
+          "phase": "windup",
+          "alpha128BoundsGlobal": [
+            1182,
+            118,
+            1354,
+            332
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            1296.5,
+            331.0
+          ],
+          "weaponTipGlobal": [
+            1183,
+            168
+          ],
+          "tipRelativeToFootY": -163.0,
+          "sha256": "9b4674ca60e303d1dd7ea7bce88b293fdd927a36bdc04ea92fc6ea88cf1ffe68"
+        },
+        {
+          "frame": 5,
+          "phase": "contact",
+          "alpha128BoundsGlobal": [
+            98,
+            482,
+            295,
+            649
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            186.0,
+            648.0
+          ],
+          "weaponTipGlobal": [
+            294,
+            582
+          ],
+          "tipRelativeToFootY": -66.0,
+          "sha256": "6ed66eb1bab8d7fd142ada484504823e1a3a0e2586b9c3698ac5a9f45f1106fb"
+        },
+        {
+          "frame": 6,
+          "phase": "contact",
+          "alpha128BoundsGlobal": [
+            483,
+            508,
+            688,
+            653
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            563.5,
+            649.0
+          ],
+          "weaponTipGlobal": [
+            683,
+            649
+          ],
+          "tipRelativeToFootY": -0.0,
+          "sha256": "828c5e21b06af97c075aed6641dd654ddb7caa0bf29ffcaecd7c46af1005de4b"
+        },
+        {
+          "frame": 7,
+          "phase": "followthrough",
+          "alpha128BoundsGlobal": [
+            833,
+            521,
+            1060,
+            651
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            900.0,
+            650.0
+          ],
+          "weaponTipGlobal": [
+            1055,
+            646
+          ],
+          "tipRelativeToFootY": -4.0,
+          "sha256": "888695bcc74911f63b9aaa664b2ace86273d428abb18db5056fe6a8c1a9091d9"
+        },
+        {
+          "frame": 8,
+          "phase": "followthrough",
+          "alpha128BoundsGlobal": [
+            1204,
+            518,
+            1386,
+            649
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            1305.5,
+            648.0
+          ],
+          "weaponTipGlobal": [
+            1381,
+            622
+          ],
+          "tipRelativeToFootY": -26.0,
+          "sha256": "71790e4455ff8ac246a5d9fb1acd4652368de08e6bf6f44c095b3a25239859e8"
+        },
+        {
+          "frame": 9,
+          "phase": "followthrough",
+          "alpha128BoundsGlobal": [
+            102,
+            820,
+            300,
+            978
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            192.5,
+            977.0
+          ],
+          "weaponTipGlobal": [
+            297,
+            967
+          ],
+          "tipRelativeToFootY": -10.0,
+          "sha256": "3382937ca7be0c069260a27dee7131f8e4917bf2e22012544c0b6a45ff3ee7a6"
+        },
+        {
+          "frame": 10,
+          "phase": "recover",
+          "alpha128BoundsGlobal": [
+            468,
+            817,
+            663,
+            976
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            565.5,
+            975.0
+          ],
+          "weaponTipGlobal": [
+            660,
+            959
+          ],
+          "tipRelativeToFootY": -16.0,
+          "sha256": "60198e02350f781c704aaa7917703ddb3df83ca463a5ddacbb5c2efc54dbb6dc"
+        },
+        {
+          "frame": 11,
+          "phase": "recover",
+          "alpha128BoundsGlobal": [
+            827,
+            816,
+            1027,
+            977
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            920.5,
+            976.0
+          ],
+          "weaponTipGlobal": [
+            1023,
+            957
+          ],
+          "tipRelativeToFootY": -19.0,
+          "sha256": "f9b444336010623a3315c9352aec048ff64eb2222c222c67c80dd4c67885723d"
+        },
+        {
+          "frame": 12,
+          "phase": "recover",
+          "alpha128BoundsGlobal": [
+            1185,
+            817,
+            1390,
+            977
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            1282.0,
+            976.0
+          ],
+          "weaponTipGlobal": [
+            1387,
+            963
+          ],
+          "tipRelativeToFootY": -13.0,
+          "sha256": "2f71085353db33da4fed2e9976ac289a7f20f15afbd60b511af8f8fb70b3cbd8"
+        }
+      ]
+    },
+    {
+      "clip": "secondary-frost-cleave",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "frameCount": 12,
+      "distinctFrameCount": 12,
+      "transparentPercent": 69.91,
+      "minimumOpaqueGutterPx": 14,
+      "standingBodyHeightPixels": 217,
+      "durationSum": 44,
+      "contactBladeDirection": "descending, measured against registered foot anchor",
+      "sha256": "d139b8e71972b00391bf7c5cbb3fb729193d062fcb1046b8a58b16ca5d0d8f85",
+      "frames": [
+        {
+          "frame": 1,
+          "phase": "windup",
+          "alpha128BoundsGlobal": [
+            74,
+            184,
+            344,
+            401
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            184.0,
+            400.0
+          ],
+          "weaponTipGlobal": [
+            340,
+            382
+          ],
+          "tipRelativeToFootY": -18.0,
+          "sha256": "038a3229ffb96a60a68f66f59d3b1c26286e218c793227590cae758ee3b3a502"
+        },
+        {
+          "frame": 2,
+          "phase": "windup",
+          "alpha128BoundsGlobal": [
+            427,
+            156,
+            692,
+            400
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            597.5,
+            399.0
+          ],
+          "weaponTipGlobal": [
+            430,
+            158
+          ],
+          "tipRelativeToFootY": -241.0,
+          "sha256": "368aa799cd7b9315c195a3b20ce54da22183bcf8a01c851f553209269d62f296"
+        },
+        {
+          "frame": 3,
+          "phase": "windup",
+          "alpha128BoundsGlobal": [
+            792,
+            132,
+            1043,
+            400
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            957.5,
+            399.0
+          ],
+          "weaponTipGlobal": [
+            795,
+            139
+          ],
+          "tipRelativeToFootY": -260.0,
+          "sha256": "cbaa2c3dbae11224e9e90bda092a958d2a7fb85111b492d015861386c8f15a22"
+        },
+        {
+          "frame": 4,
+          "phase": "windup",
+          "alpha128BoundsGlobal": [
+            1188,
+            33,
+            1399,
+            401
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            1317.5,
+            400.0
+          ],
+          "weaponTipGlobal": [
+            1215,
+            39
+          ],
+          "tipRelativeToFootY": -361.0,
+          "sha256": "74c5489ffb3ef69d96a1078df3303eb662f65462d2097a6b029173d9345e5327"
+        },
+        {
+          "frame": 5,
+          "phase": "contact",
+          "alpha128BoundsGlobal": [
+            61,
+            484,
+            344,
+            717
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            176.0,
+            716.0
+          ],
+          "weaponTipGlobal": [
+            338,
+            609
+          ],
+          "tipRelativeToFootY": -107.0,
+          "sha256": "77d60268754b641531a80a4f51a3cc7bcdbb9078c3489549c1e6100efa0f5ce5"
+        },
+        {
+          "frame": 6,
+          "phase": "contact",
+          "alpha128BoundsGlobal": [
+            434,
+            536,
+            746,
+            719
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            542.0,
+            718.0
+          ],
+          "weaponTipGlobal": [
+            706,
+            709
+          ],
+          "tipRelativeToFootY": -9.0,
+          "sha256": "0c5875a5ba1e7c5835b4a6b7db3ecfea9c5bde58b2897ba2c1c9cd82a620880c"
+        },
+        {
+          "frame": 7,
+          "phase": "followthrough",
+          "alpha128BoundsGlobal": [
+            795,
+            555,
+            1063,
+            719
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            876.0,
+            718.0
+          ],
+          "weaponTipGlobal": [
+            1053,
+            708
+          ],
+          "tipRelativeToFootY": -10.0,
+          "sha256": "93d129a65aa3b91da6b3531e3455bc2f32f3f79321e56f3e6ffe954cf7f44fbc"
+        },
+        {
+          "frame": 8,
+          "phase": "followthrough",
+          "alpha128BoundsGlobal": [
+            1154,
+            552,
+            1417,
+            718
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            1278.0,
+            717.0
+          ],
+          "weaponTipGlobal": [
+            1409,
+            707
+          ],
+          "tipRelativeToFootY": -10.0,
+          "sha256": "c0128a0cc890c3ee72a6eb1791dea7d70bb6a26b13b372f26beb96b2cc9a4a50"
+        },
+        {
+          "frame": 9,
+          "phase": "followthrough",
+          "alpha128BoundsGlobal": [
+            70,
+            847,
+            319,
+            1033
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            177.5,
+            1032.0
+          ],
+          "weaponTipGlobal": [
+            312,
+            1004
+          ],
+          "tipRelativeToFootY": -28.0,
+          "sha256": "b9edf092134327b97d88800cfd3615e1d21b5df1ceac870af76334f5355cae35"
+        },
+        {
+          "frame": 10,
+          "phase": "recover",
+          "alpha128BoundsGlobal": [
+            466,
+            830,
+            708,
+            1033
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            560.0,
+            1032.0
+          ],
+          "weaponTipGlobal": [
+            700,
+            1007
+          ],
+          "tipRelativeToFootY": -25.0,
+          "sha256": "a79d88cf2d6c3451ab4cc615b5121f09b1d3058917f45d4c76a51c83534e5cc8"
+        },
+        {
+          "frame": 11,
+          "phase": "recover",
+          "alpha128BoundsGlobal": [
+            797,
+            817,
+            1067,
+            1033
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            928.5,
+            1032.0
+          ],
+          "weaponTipGlobal": [
+            1060,
+            1005
+          ],
+          "tipRelativeToFootY": -27.0,
+          "sha256": "a9d15d13e06001b0d24c17b9bccb2cc9b322fb30a3c55b2aac10da25f580edbb"
+        },
+        {
+          "frame": 12,
+          "phase": "recover",
+          "alpha128BoundsGlobal": [
+            1161,
+            830,
+            1418,
+            1034
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footGlobal": [
+            1276.0,
+            1033.0
+          ],
+          "weaponTipGlobal": [
+            1410,
+            1008
+          ],
+          "tipRelativeToFootY": -25.0,
+          "sha256": "ca9c42f3ba95c40748d9aaf8c3396e5735844fd0e6552d76b1b6ce686b4aed6e"
+        }
+      ]
+    }
+  ]
+}

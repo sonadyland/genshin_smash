@@ -97,7 +97,7 @@ export const CHARACTERS: CharDef[] = [
     smash:   { name: '浪沫旋斩', dmg: 17, kb: 6.2, kbs: 0.108, angle: 44, startup: 26, active: 7, endlag: 30, reach: 86, height: 56, kind: 'smash' },
     special: { name: '冰潮旋舞', dmg: 14, kb: 5.6, kbs: 0.082, angle: 62, startup: 20, active: 12, endlag: 24, reach: 128, height: 120, kind: 'special', effect: 'spin' },
     secondary: { name: '霜华·断浪', dmg: 5, kb: 2.8, kbs: 0.045, angle: 25, startup: 15, active: 7, endlag: 22, reach: 210, height: 100, kind: 'secondary', effect: 'frost' },
-    secondaryDesc: '低位横扫释放三枚扇形冰晶，命中后减速。', secondaryCooldown: 4,
+    secondaryDesc: '挥动大剑释放三枚扇形冰晶，命中后减速。', secondaryCooldown: 4,
     desc: '沉重强悍的冰之大剑，旋转斩击可命中两侧敌人。',
   },
   {

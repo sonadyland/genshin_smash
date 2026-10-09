@@ -1,0 +1,13 @@
+.animation-preview { min-height: 100vh; color: #e8f2f5; background: #0c1c28; padding: clamp(16px, 3vw, 40px); font-family: system-ui, sans-serif; }
+.animation-preview header { display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: 1200px; margin: 0 auto 24px; }
+.animation-preview h1 { margin: 4px 0 8px; font-size: clamp(24px, 3vw, 36px); }
+.animation-preview header p { color: #9edce9; margin: 0; letter-spacing: 3px; font-size: 13px; }
+.animation-preview header span { font-size: 14px; color: #bdd6dc; }
+.animation-preview a { color: #bde8f2; text-decoration: underline; text-underline-offset: 4px; white-space: nowrap; }
+.animation-preview-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; max-width: 1200px; margin: 0 auto 20px; }
+.animation-preview-controls label { display: grid; gap: 6px; font-size: 13px; color: #bad0d8; }
+.animation-preview select, .animation-preview button { min-height: 40px; border: 1px solid #517987; border-radius: 8px; background: #193847; color: #eaf8fd; padding: 8px 12px; font: inherit; cursor: pointer; }
+.animation-preview button:disabled { opacity: .45; cursor: default; }
+.animation-preview canvas { display: block; width: 100%; max-width: 1200px; height: auto; margin: auto; border: 1px solid #406775; border-radius: 14px; }
+.animation-preview > p { max-width: 1200px; margin: 12px auto 0; font-size: 14px; line-height: 1.7; color: #9fbcc7; }
+.animation-preview .animation-preview-clock { font-variant-numeric: tabular-nums; color: #d9f2f6; }

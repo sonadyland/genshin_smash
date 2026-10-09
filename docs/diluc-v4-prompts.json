@@ -1,0 +1,88 @@
+{
+  "character": "diluc",
+  "generator": "built-in image_gen",
+  "date": "2026-10-09",
+  "entries": [
+    {
+      "asset": "locomotion.png",
+      "prompt": "Use case: stylized-concept. Production true-transparent character sprite atlas, exactly12 distinct fullbody drawings in regular4columns x3rows,4:3canvas. Adult Diluc from Genshin Impact: tall mature lean man with long RED hair tied in low ponytail, black long coat with red lining and silver/gold trim, white shirt, black trousers/gloves/boots, large broad BLACK/RED CLAYMORE as reference1 identity. Reference2 is earlier game sprite poses; improve into refined Japanese fantasy colored-line art, adult proportions, NEVER chibi. All face/action RIGHT, three-quarter side camera, consistent character design/body/sword size in all cells. Row1 FOUR subtle idle breathing frames: upright collected stance, large sword diagonally low forward, breathe, hair/coat secondary motion. Rows2+3 EIGHT real chronological run-cycle drawings: right foot strike, compression, push, left-flight, left strike, compression, push, right-flight. Alternate arms/legs visibly, long coat flowing, sword carried diagonally trailing. Weight and momentum of greatsword. Each COMPLETE character with all hair/coat/weapon tip must occupy ONLY central65%of cell width and70%height. HUGE transparent padding on all sides. Never cut long blade or coat tails; small drawings are intentional for clean sprite extraction. Exactly12 complete drawings, no text/grid/shadow/ground/effects/extra people/duplicate poses.",
+      "refs": [
+        "public/assets/characters/diluc-v2.png",
+        "public/assets/animations/diluc-actions-v3.png"
+      ]
+    },
+    {
+      "asset": "aerial.png",
+      "prompt": "Use case: stylized-concept. Production true-transparent side-scroller sprite atlas. Adult tall Diluc, mature lean proportion, RED long low ponytail, black long coat with red inner lining and silver/gold trim, white shirt, black trousers/gloves/boots, BLACK and RED large broad CLAYMORE. Reference1 identity, reference2 exact finished refined Japanese fantasy colored-line sprite style, physical scale, outfit and sword. All face/action RIGHT in consistent threequarter side view, one distinct COMPLETE figure per evenly spaced cell, all figures same physical scale and identity, chronological genuine drawings. HUGE alpha blank gutters around full silhouette, maximum65% cell width and70%height INCLUDING THE ENTIRE WEAPON, feet, hair and coat. Long blades must NEVER touch boundaries or other characters; shrink all artwork if needed. Do not enlarge sprites to fill empty cell. True native transparent background including all gaps. No scenery, ground, shadows, grid, text, numbers, afterimages, blur, duplicate poses or extra limbs. Readable112px ingame silhouette, normal adult head size. Exactly12 drawings4columns x3rows4:3canvas. First8jump:1crouch takeoff;2extend legs pushing upward;3rising tucked knee;4apex legs relaxed airborne;5descending legs reach;6prepare descent;7soft knee-bent landing;8straighten ready. Carry claymore close diagonally down/back with greatsword weight; coat follows. Final4dodge:9low gather;10strong forward push;11low shoulder-led sliding dash sword trailing close;12plant foot and recover. Clear athletic legs. Poses may crouch, but same body scale. Each figure fits FULLY inside itscellwithatleast30px margin.",
+      "refs": [
+        "D:/Program/ai/genshin-smash/public/assets/characters/diluc-v2.png",
+        "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/locomotion.png"
+      ]
+    },
+    {
+      "asset": "basic.png",
+      "prompt": "Use case: stylized-concept. Production true-transparent side-scroller sprite atlas. Adult tall Diluc, mature lean proportion, RED long low ponytail, black long coat with red inner lining and silver/gold trim, white shirt, black trousers/gloves/boots, BLACK and RED large broad CLAYMORE. Reference1 identity, reference2 exact finished refined Japanese fantasy colored-line sprite style, physical scale, outfit and sword. All face/action RIGHT in consistent threequarter side view, one distinct COMPLETE figure per evenly spaced cell, all figures same physical scale and identity, chronological genuine drawings. HUGE alpha blank gutters around full silhouette, maximum65% cell width and70%height INCLUDING THE ENTIRE WEAPON, feet, hair and coat. Long blades must NEVER touch boundaries or other characters; shrink all artwork if needed. Do not enlarge sprites to fill empty cell. True native transparent background including all gaps. No scenery, ground, shadows, grid, text, numbers, afterimages, blur, duplicate poses or extra limbs. Readable112px ingame silhouette, normal adult head size. Exactly16drawings4x4square. First8Jlight forward horizontal sweep:1low guard;2pull claymore behind torso to left hip;3turn hips and sweep blade across front at chest;4blade extended mostly horizontally right at release;5followthrough sword moving diagonally low/right;6wrist deceleration;7return low;8ready. Second8Kheavy diagonal cleave:9wide guard;10draw claymore above rear shoulder, twohand grip;11turn hips driving strong diagonal high-left to low-right cut;12deep forward weight transfer blade low ahead RIGHT;13followthrough low extended;14lift wrists recovering;15retrieve sword;16ready. First2windup,next2contact,next2followthrough,last2recover for each. Avoid identical attacks: Jquick waist/chest sweep, Kstrong torso-twisting diagonal cut. No fireVFX.",
+      "refs": [
+        "D:/Program/ai/genshin-smash/public/assets/characters/diluc-v2.png",
+        "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/locomotion.png"
+      ]
+    },
+    {
+      "asset": "basic-variants.png",
+      "prompt": "Use case: stylized-concept. Production true-transparent side-scroller sprite atlas. Adult tall Diluc, mature lean proportion, RED long low ponytail, black long coat with red inner lining and silver/gold trim, white shirt, black trousers/gloves/boots, BLACK and RED large broad CLAYMORE. Reference1 identity, reference2 exact finished refined Japanese fantasy colored-line sprite style, physical scale, outfit and sword. All face/action RIGHT in consistent threequarter side view, one distinct COMPLETE figure per evenly spaced cell, all figures same physical scale and identity, chronological genuine drawings. HUGE alpha blank gutters around full silhouette, maximum65% cell width and70%height INCLUDING THE ENTIRE WEAPON, feet, hair and coat. Long blades must NEVER touch boundaries or other characters; shrink all artwork if needed. Do not enlarge sprites to fill empty cell. True native transparent background including all gaps. No scenery, ground, shadows, grid, text, numbers, afterimages, blur, duplicate poses or extra limbs. Readable112px ingame silhouette, normal adult head size. Exactly16distinctdrawings4columns4rows. First8Jalternate short BACKHAND DIAGONAL CUT:1low forward guard;2coil wrists drawing blade beside left hip;3short quick backhand blade diagonal across forward torso, broadside visible;4release diagonal toward front-right at chest level;5followthrough blade crosses and tips down;6uncurl shoulders;7retrieve low;8ready. Second8KOVERHEAD heavy DOWNWARD CLEAVE:9wide bent-knee stance sword in front;10bothhands lift blade HIGH vertically abovehead;11start powerful downward arc with elbows driving forward;12full downward impact pose blade low in front-right by shin, knees flex, torso leans forward;13heavy low followthrough;14slow lift of sword point;15retrieve sword;16ready. K must be unmistakably top-to-bottom, not upward uppercut or thrust. Keep EVERY tall raised sword whole within its cell, make bodies small enough for huge weapon. Exactly2windup2contact2followthrough2recover each. No flames.",
+      "refs": [
+        "D:/Program/ai/genshin-smash/public/assets/characters/diluc-v2.png",
+        "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/locomotion.png"
+      ]
+    },
+    {
+      "asset": "special.png",
+      "prompt": "Use case: stylized-concept. Production true-transparent side-scroller sprite atlas. Adult tall Diluc, mature lean proportion, RED long low ponytail, black long coat with red inner lining and silver/gold trim, white shirt, black trousers/gloves/boots, BLACK and RED large broad CLAYMORE. Reference1 identity, reference2 exact finished refined Japanese fantasy colored-line sprite style, physical scale, outfit and sword. All face/action RIGHT in consistent threequarter side view, one distinct COMPLETE figure per evenly spaced cell, all figures same physical scale and identity, chronological genuine drawings. HUGE alpha blank gutters around full silhouette, maximum65% cell width and70%height INCLUDING THE ENTIRE WEAPON, feet, hair and coat. Long blades must NEVER touch boundaries or other characters; shrink all artwork if needed. Do not enlarge sprites to fill empty cell. True native transparent background including all gaps. No scenery, ground, shadows, grid, text, numbers, afterimages, blur, duplicate poses or extra limbs. Readable112px ingame silhouette, normal adult head size. Exactly12distinctdrawings4columns3rows. One game's FIRE DASH skill adapted for side-scroller: first4anticipation:1ready;2lower center of gravity;3strong forward lean holding greatsword low and trailing behind;4front foot pushes and shoulders lead right. Frames5+6contact:5fast LOW forward lunge with claymore beginning strong horizontal sweep across front,6wide forward step with sword extended HORIZONTALLY RIGHT at waist/chest level. Frames7+8+9followthrough:7blade passes through low right diagonal,8body brakes with forward foot and sword still ahead,9rises out of lunge. Frames10+11+12recover:10retrieves blade low,11settles coat,12ready. Only small sparse orange glow on blade at frames4-8, no giant effects, no firebird, no upward cut, no ground slam. It is LOW DASH then FORWARD SWEEP, not projectile cast. Keep blades/feet/coat complete with HUGE transparent spacing.",
+      "refs": [
+        "D:/Program/ai/genshin-smash/public/assets/characters/diluc-v2.png",
+        "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/locomotion.png"
+      ]
+    },
+    {
+      "asset": "secondary.png",
+      "prompt": "Use case: stylized-concept. Production true-transparent side-scroller sprite atlas. Adult tall Diluc, mature lean proportion, RED long low ponytail, black long coat with red inner lining and silver/gold trim, white shirt, black trousers/gloves/boots, BLACK and RED large broad CLAYMORE. Reference1 identity, reference2 exact finished refined Japanese fantasy colored-line sprite style, physical scale, outfit and sword. All face/action RIGHT in consistent threequarter side view, one distinct COMPLETE figure per evenly spaced cell, all figures same physical scale and identity, chronological genuine drawings. HUGE alpha blank gutters around full silhouette, maximum65% cell width and70%height INCLUDING THE ENTIRE WEAPON, feet, hair and coat. Long blades must NEVER touch boundaries or other characters; shrink all artwork if needed. Do not enlarge sprites to fill empty cell. True native transparent background including all gaps. No scenery, ground, shadows, grid, text, numbers, afterimages, blur, duplicate poses or extra limbs. Readable112px ingame silhouette, normal adult head size. Exactly12distinctdrawings4columns3rows. One RISING FIREBIRD sword skill, different from dash. Frames1-4anticipation:1low guard;2bendknees drawing blade back toward rear hip;3greatsword tip veryLOW beside rear ankle, ready to sweep UP;4weight begins to rise but blade stillLOW below knee. Frames5+6contact:5strong rising UPPERCUT from below hip to front-UP RIGHT diagonal,6blade finishes HIGH up-right above head and lifted hands. Frames7+8+9followthrough:7brief tiny orange flame/feather silhouette released from raised sword tip traveling RIGHT;8holds blade high as flames leave,9wrist relaxes. Frames10+11+12recover:10lowers sword passively after finished release;11retrieves guard;12ready. Core direction MUST clearly be LOW→HIGH in frames4→5→6. No overhead downstroke, no ground impact, no continued dash. Only small sparse orange sparks beside blade; game renders actual large firebird separately. Entire raised greatsword stays inside cell with ample transparent top margin. All twelve bodies and full blade tips are separated by wide empty gutters.",
+      "refs": [
+        "D:/Program/ai/genshin-smash/public/assets/characters/diluc-v2.png",
+        "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/locomotion.png"
+      ]
+    },
+    {
+      "asset": "special.png",
+      "prompt": "Use case: precise-object-edit. Repair this12frame4x3true-transparent sprite atlas, keeping Diluc's exact identity/outfit/body proportions and each existing pose in order. Current second-row long swords and fire overlap neighboring frames. Shrink EACH COMPLETE character and sword to65%of its current size and recenter inside its own cell. All12drawings required, NO overlapping items. Reduce orange fire VFX to very small sparse blade-edge sparks so sword and body remain unobstructed. Allhair/coattails/feet/swordtips enclosed inside cell with at least35px blank TRANSPARENT gutter all around. Never zoom back to refill space, allow small figures. Keep exact original lowdash→forward horizontal sweep skill gestures. Native transparent background, no text/grid/shadows.",
+      "refs": [
+        "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/special.png"
+      ],
+      "repair": true
+    },
+    {
+      "asset": "basic.png",
+      "prompt": "Use case: precise-object-edit. Edit this sixteen-frame 4-column by 4-row true-transparent sprite atlas. Preserve all16exactactionposes in order, Diluc identity, redhair/blackredlongcoat, adult anatomy and broad blackredgreatsword. CRITICALtechnicalfix: some swordtips and feet enter neighboring rows. Reduce EACH WHOLE DRAWING to75%its current size, independently center full silhouette in its OWN cell, maintaining exact4x4grid. Complete any missing/cropped blade. Each figure INCLUDING fully raised sword and feet must fit within itscellwith at least25px fully transparent space on EVERYside. The image should have broad empty gutters. Do not zoom back or enlarge to fill margins; small figures are necessary. Keep all sword gestures and chronological animation intact. No background/grid/text/newVFX. Native alpha.",
+      "refs": [
+        "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/basic.png"
+      ],
+      "repair": true
+    },
+    {
+      "asset": "basic-variants.png",
+      "prompt": "Use case: precise-object-edit. Edit this sixteen-frame 4-column by 4-row true-transparent sprite atlas. Preserve all16exactactionposes in order, Diluc identity, redhair/blackredlongcoat, adult anatomy and broad blackredgreatsword. CRITICALtechnicalfix: some swordtips and feet enter neighboring rows. Reduce EACH WHOLE DRAWING to75%its current size, independently center full silhouette in its OWN cell, maintaining exact4x4grid. Complete any missing/cropped blade. Each figure INCLUDING fully raised sword and feet must fit within itscellwith at least25px fully transparent space on EVERYside. The image should have broad empty gutters. Do not zoom back or enlarge to fill margins; small figures are necessary. Keep all sword gestures and chronological animation intact. No background/grid/text/newVFX. Native alpha.",
+      "refs": [
+        "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/basic-variants.png"
+      ],
+      "repair": true
+    }
+  ],
+  "sourceDirectory": "C:/Users/46637/.codex/generated_images/01a1202f-33f7-7730-bfb5-0fb14118f554",
+  "finalSources": {
+    "locomotion.png": "exec-2970ae71-1ef2-4742-aea2-c387b094fb97.png",
+    "aerial.png": "exec-024c27a2-7cda-4570-9d26-3a1c546881cc.png",
+    "basic.png": "exec-77daaaf7-efbf-4ed5-8bca-137a07feb14e.png",
+    "basic-variants.png": "exec-34900f3d-b542-46b6-a9d7-42bf81fd765d.png",
+    "special.png": "exec-bd5c11ea-b04c-46de-9279-006d4736aee0.png",
+    "secondary.png": "exec-b1deb3d1-e2e6-40a7-9222-bbde7f71134c.png"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "image": "aerial.png",
+  "width": 1448,
+  "height": 1086,
+  "standingBodyHeightPixels": 283,
+  "frames": [
+    {
+      "name": "gather",
+      "sourceRect": {
+        "x": 60,
+        "y": 828,
+        "width": 225,
+        "height": 207
+      },
+      "footAnchor": {
+        "x": 0.635556,
+        "y": 0.961353
+      },
+      "duration": 3
+    },
+    {
+      "name": "push",
+      "sourceRect": {
+        "x": 395,
+        "y": 834,
+        "width": 328,
+        "height": 201
+      },
+      "footAnchor": {
+        "x": 0.533537,
+        "y": 0.960199
+      },
+      "duration": 4
+    },
+    {
+      "name": "travel",
+      "sourceRect": {
+        "x": 777,
+        "y": 819,
+        "width": 342,
+        "height": 216
+      },
+      "footAnchor": {
+        "x": 0.497076,
+        "y": 0.962963
+      },
+      "duration": 5
+    },
+    {
+      "name": "plant",
+      "sourceRect": {
+        "x": 1156,
+        "y": 821,
+        "width": 264,
+        "height": 218
+      },
+      "footAnchor": {
+        "x": 0.545455,
+        "y": 0.944954
+      },
+      "duration": 4
+    }
+  ]
+}

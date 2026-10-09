@@ -1,0 +1,236 @@
+{
+  "image": "secondary-frost-cleave.png",
+  "width": 1448,
+  "height": 1086,
+  "standingBodyHeightPixels": 217,
+  "frames": [
+    {
+      "name": "secondary-frost-cleave-01",
+      "sourceRect": {
+        "x": 60,
+        "y": 170,
+        "width": 298,
+        "height": 245
+      },
+      "footAnchor": {
+        "x": 0.416107,
+        "y": 0.938776
+      },
+      "phase": "windup",
+      "duration": 3,
+      "weaponTip": {
+        "x": 280,
+        "y": 212
+      }
+    },
+    {
+      "name": "secondary-frost-cleave-02",
+      "sourceRect": {
+        "x": 413,
+        "y": 142,
+        "width": 293,
+        "height": 272
+      },
+      "footAnchor": {
+        "x": 0.629693,
+        "y": 0.944853
+      },
+      "phase": "windup",
+      "duration": 3,
+      "weaponTip": {
+        "x": 17,
+        "y": 16
+      }
+    },
+    {
+      "name": "secondary-frost-cleave-03",
+      "sourceRect": {
+        "x": 778,
+        "y": 118,
+        "width": 279,
+        "height": 296
+      },
+      "footAnchor": {
+        "x": 0.643369,
+        "y": 0.949324
+      },
+      "phase": "windup",
+      "duration": 4,
+      "weaponTip": {
+        "x": 17,
+        "y": 21
+      }
+    },
+    {
+      "name": "secondary-frost-cleave-04",
+      "sourceRect": {
+        "x": 1174,
+        "y": 19,
+        "width": 239,
+        "height": 396
+      },
+      "footAnchor": {
+        "x": 0.600418,
+        "y": 0.962121
+      },
+      "phase": "windup",
+      "duration": 4,
+      "weaponTip": {
+        "x": 41,
+        "y": 20
+      }
+    },
+    {
+      "name": "secondary-frost-cleave-05",
+      "sourceRect": {
+        "x": 47,
+        "y": 470,
+        "width": 311,
+        "height": 261
+      },
+      "footAnchor": {
+        "x": 0.414791,
+        "y": 0.942529
+      },
+      "phase": "contact",
+      "duration": 5,
+      "weaponTip": {
+        "x": 291,
+        "y": 139
+      }
+    },
+    {
+      "name": "secondary-frost-cleave-06",
+      "sourceRect": {
+        "x": 420,
+        "y": 522,
+        "width": 340,
+        "height": 211
+      },
+      "footAnchor": {
+        "x": 0.358824,
+        "y": 0.92891
+      },
+      "phase": "contact",
+      "duration": 5,
+      "weaponTip": {
+        "x": 286,
+        "y": 187
+      }
+    },
+    {
+      "name": "secondary-frost-cleave-07",
+      "sourceRect": {
+        "x": 781,
+        "y": 541,
+        "width": 296,
+        "height": 192
+      },
+      "footAnchor": {
+        "x": 0.320946,
+        "y": 0.921875
+      },
+      "phase": "followthrough",
+      "duration": 4,
+      "weaponTip": {
+        "x": 272,
+        "y": 167
+      }
+    },
+    {
+      "name": "secondary-frost-cleave-08",
+      "sourceRect": {
+        "x": 1140,
+        "y": 538,
+        "width": 291,
+        "height": 194
+      },
+      "footAnchor": {
+        "x": 0.474227,
+        "y": 0.92268
+      },
+      "phase": "followthrough",
+      "duration": 4,
+      "weaponTip": {
+        "x": 269,
+        "y": 169
+      }
+    },
+    {
+      "name": "secondary-frost-cleave-09",
+      "sourceRect": {
+        "x": 56,
+        "y": 833,
+        "width": 277,
+        "height": 214
+      },
+      "footAnchor": {
+        "x": 0.438628,
+        "y": 0.929907
+      },
+      "phase": "followthrough",
+      "duration": 3,
+      "weaponTip": {
+        "x": 256,
+        "y": 171
+      }
+    },
+    {
+      "name": "secondary-frost-cleave-10",
+      "sourceRect": {
+        "x": 452,
+        "y": 816,
+        "width": 270,
+        "height": 231
+      },
+      "footAnchor": {
+        "x": 0.4,
+        "y": 0.935065
+      },
+      "phase": "recover",
+      "duration": 3,
+      "weaponTip": {
+        "x": 248,
+        "y": 191
+      }
+    },
+    {
+      "name": "secondary-frost-cleave-11",
+      "sourceRect": {
+        "x": 783,
+        "y": 803,
+        "width": 298,
+        "height": 244
+      },
+      "footAnchor": {
+        "x": 0.488255,
+        "y": 0.938525
+      },
+      "phase": "recover",
+      "duration": 3,
+      "weaponTip": {
+        "x": 277,
+        "y": 202
+      }
+    },
+    {
+      "name": "secondary-frost-cleave-12",
+      "sourceRect": {
+        "x": 1147,
+        "y": 816,
+        "width": 285,
+        "height": 232
+      },
+      "footAnchor": {
+        "x": 0.452632,
+        "y": 0.935345
+      },
+      "phase": "recover",
+      "duration": 3,
+      "weaponTip": {
+        "x": 263,
+        "y": 192
+      }
+    }
+  ]
+}

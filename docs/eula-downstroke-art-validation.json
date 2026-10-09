@@ -1,0 +1,362 @@
+{
+  "ok": true,
+  "totalNewFrames": 16,
+  "rasterModifiedByCode": false,
+  "inspection": "Visual check of all poses plus read-only Pillow alpha and crop validation. Custom rects preserve entire overhead sword and do not overlap adjacent main figures. Fixed per-clip standing-body scale; never fit each pose height separately. Gutter measured using alpha>=128. Sword-tip coordinates registered from visible sword endpoint; coordinate system uses Y increasing downward.",
+  "atlases": [
+    {
+      "clip": "jab-downstroke",
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "transparentPercent": 81.13,
+      "standingBodyHeightPixels": 240,
+      "minimumOpaqueGutterPx": 14,
+      "distinctFrames": 8,
+      "sha256": "42088a1b98fc9d5780fd090d2d2935c91652f3ac44f3e5ade3a79dcd2e37c5e1",
+      "contactSwordTipDescentPixels": 72,
+      "framesValidation": [
+        {
+          "frame": 1,
+          "opaqueBoundsAbsolute": [
+            130,
+            195,
+            427,
+            427
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            249,
+            427
+          ],
+          "weaponTipAbsolute": [
+            426,
+            396
+          ],
+          "weaponTipHeightRelativeToFoot": -31,
+          "pixelSha256": "89fa3952e49bfbfe7a34d96954045eb0b6236d6f9b1bc344112f77bf796e22ec"
+        },
+        {
+          "frame": 2,
+          "opaqueBoundsAbsolute": [
+            565,
+            117,
+            810,
+            427
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            711,
+            427
+          ],
+          "weaponTipAbsolute": [
+            566,
+            117
+          ],
+          "weaponTipHeightRelativeToFoot": -310,
+          "pixelSha256": "1865efbbf9b27cbda6fb88dbba162ec81bf538ab93b6c269e7cd4aa663f0e311"
+        },
+        {
+          "frame": 3,
+          "opaqueBoundsAbsolute": [
+            978,
+            197,
+            1260,
+            427
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            1115,
+            427
+          ],
+          "weaponTipAbsolute": [
+            1258,
+            351
+          ],
+          "weaponTipHeightRelativeToFoot": -76,
+          "pixelSha256": "df2ef3938bfd5d9623e7959d4b0ec445263b430a73f5ec92de7a7961b92fac5d"
+        },
+        {
+          "frame": 4,
+          "opaqueBoundsAbsolute": [
+            1424,
+            217,
+            1688,
+            427
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            1555,
+            427
+          ],
+          "weaponTipAbsolute": [
+            1686,
+            423
+          ],
+          "weaponTipHeightRelativeToFoot": -4,
+          "pixelSha256": "6d17e460b8ccca9b91c8927aebca65a08de68d2084a74420e36bc6bc71d9b85f"
+        },
+        {
+          "frame": 5,
+          "opaqueBoundsAbsolute": [
+            107,
+            597,
+            411,
+            805
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            247,
+            805
+          ],
+          "weaponTipAbsolute": [
+            409,
+            800
+          ],
+          "weaponTipHeightRelativeToFoot": -5,
+          "pixelSha256": "8d0a29e00e1b31bb8af7e5dac67711028885678356aef9e31dc39835794f2a25"
+        },
+        {
+          "frame": 6,
+          "opaqueBoundsAbsolute": [
+            568,
+            604,
+            862,
+            805
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            704,
+            805
+          ],
+          "weaponTipAbsolute": [
+            860,
+            799
+          ],
+          "weaponTipHeightRelativeToFoot": -6,
+          "pixelSha256": "0ee24a9d854417018ef201d2329bdd3ecd8b395b5fa7e09bddf066f189564d66"
+        },
+        {
+          "frame": 7,
+          "opaqueBoundsAbsolute": [
+            1000,
+            566,
+            1269,
+            805
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            1115,
+            805
+          ],
+          "weaponTipAbsolute": [
+            1267,
+            785
+          ],
+          "weaponTipHeightRelativeToFoot": -20,
+          "pixelSha256": "3d11ccec549c90b9dbfe5b04068697ef70307ef943897ff5a5d294c631ab822e"
+        },
+        {
+          "frame": 8,
+          "opaqueBoundsAbsolute": [
+            1450,
+            556,
+            1695,
+            805
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            1564,
+            805
+          ],
+          "weaponTipAbsolute": [
+            1692,
+            785
+          ],
+          "weaponTipHeightRelativeToFoot": -20,
+          "pixelSha256": "b946096a94aa4aa02070b5181273a00e8e389b18c1a32fcd29435ee5a18106bc"
+        }
+      ]
+    },
+    {
+      "clip": "smash-overhead",
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "transparentPercent": 80.36,
+      "standingBodyHeightPixels": 260,
+      "minimumOpaqueGutterPx": 14,
+      "distinctFrames": 8,
+      "sha256": "894b4eac06bdeec51887be775ac8cbdc230e0592582183d17a0ee57252638fdd",
+      "contactSwordTipDescentPixels": 303,
+      "framesValidation": [
+        {
+          "frame": 1,
+          "opaqueBoundsAbsolute": [
+            109,
+            154,
+            337,
+            453
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            240,
+            453
+          ],
+          "weaponTipAbsolute": [
+            128,
+            155
+          ],
+          "weaponTipHeightRelativeToFoot": -298,
+          "pixelSha256": "5f2511b7e2013da5574651dbda9ef710d795ab8c026828001a7bbde0cdb37e44"
+        },
+        {
+          "frame": 2,
+          "opaqueBoundsAbsolute": [
+            574,
+            39,
+            806,
+            453
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            708,
+            453
+          ],
+          "weaponTipAbsolute": [
+            583,
+            40
+          ],
+          "weaponTipHeightRelativeToFoot": -413,
+          "pixelSha256": "ca9dcaef5756f4faadc99e8e770ef28d6b6c6b8ba3bbde58a76601838579ab9a"
+        },
+        {
+          "frame": 3,
+          "opaqueBoundsAbsolute": [
+            945,
+            151,
+            1242,
+            455
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            1087,
+            455
+          ],
+          "weaponTipAbsolute": [
+            1241,
+            151
+          ],
+          "weaponTipHeightRelativeToFoot": -304,
+          "pixelSha256": "e43d966d831d6da0dbf99000c9812316bc067da7f1f29e707354a5754429569c"
+        },
+        {
+          "frame": 4,
+          "opaqueBoundsAbsolute": [
+            1443,
+            249,
+            1671,
+            455
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            1566,
+            455
+          ],
+          "weaponTipAbsolute": [
+            1591,
+            454
+          ],
+          "weaponTipHeightRelativeToFoot": -1,
+          "pixelSha256": "9a7f47645d8645145c86997a828c38a64970fedd06e38be43f893301090ad2ad"
+        },
+        {
+          "frame": 5,
+          "opaqueBoundsAbsolute": [
+            99,
+            583,
+            407,
+            822
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            234,
+            822
+          ],
+          "weaponTipAbsolute": [
+            405,
+            812
+          ],
+          "weaponTipHeightRelativeToFoot": -10,
+          "pixelSha256": "d39be943e35270385954ced5b6a01ff7a4b5a171f92401028baec9036c5e06ba"
+        },
+        {
+          "frame": 6,
+          "opaqueBoundsAbsolute": [
+            552,
+            589,
+            877,
+            822
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            697,
+            822
+          ],
+          "weaponTipAbsolute": [
+            874,
+            809
+          ],
+          "weaponTipHeightRelativeToFoot": -13,
+          "pixelSha256": "ef48a982b7be0101a124948ad402dd6ff544056bf804c619c89d10613da575a2"
+        },
+        {
+          "frame": 7,
+          "opaqueBoundsAbsolute": [
+            977,
+            563,
+            1253,
+            822
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            1102,
+            822
+          ],
+          "weaponTipAbsolute": [
+            1251,
+            811
+          ],
+          "weaponTipHeightRelativeToFoot": -11,
+          "pixelSha256": "9712205e71ec4d4096aca53fd1cb0f499890de2779fd7c3d0ab2531d19ca66f5"
+        },
+        {
+          "frame": 8,
+          "opaqueBoundsAbsolute": [
+            1440,
+            558,
+            1703,
+            822
+          ],
+          "minimumOpaqueGutterPx": 14,
+          "footAnchorAbsolute": [
+            1560,
+            822
+          ],
+          "weaponTipAbsolute": [
+            1702,
+            810
+          ],
+          "weaponTipHeightRelativeToFoot": -12,
+          "pixelSha256": "54561305142a0517911fbc5c44832e608253590f0bc83eb71c858572d475ced8"
+        }
+      ]
+    }
+  ]
+}

@@ -41,7 +41,7 @@ const modules = new Map();
 const artDrawCalls = [];
 function loadModule(file) {
   if (file.endsWith('/art.ts')) return {
-    loadGameArt: () => Promise.resolve(), drawCharacterArt: () => false,
+    hasRegisteredMeleeTrail: () => false, loadGameArt: () => Promise.resolve(), drawCharacterArt: () => false,
     drawFighterArt: (...args) => { artDrawCalls.push({ kind: 'fighter', args }); return false; },
     drawElementEffect: () => false, drawSecondaryEffect: () => false,
     drawXiaoPlungeEffect: (...args) => { artDrawCalls.push({ kind: 'plunge', args }); return false; },
@@ -867,6 +867,76 @@ test('each character emits one elemental cast sound at actual secondary release,
     step(game, f.char.secondary.startup + 2);
     const casts = events.filter(event => event.event === 'cast');
     assert.equal(casts.length, 1, f.char.id); assert.equal(casts[0].options.charId, f.char.id); assert.equal(casts[0].options.kind, 'secondary');
+  }
+});
+
+test('Eula gait is resolved movement, excludes attack/dodge/knockback, and freezes with fighter hitlag', () => {
+  const game = fighting({ player: 2 }), f = game.fighters[0];
+  f.x = 640;
+  const beforeX = f.x;
+  game.updateFighter(f, { ...noInput, right: true });
+  assert.equal(f.motion.distance, f.x - beforeX); assert.equal(f.motion.moving, true);
+  for (let i = 0; i < 4; i++) game.updateFighter(f, { ...noInput, right: true });
+  for (let i = 0; i < 5; i++) {
+    const distance = f.motion.distance, x = f.x;
+    game.updateFighter(f, noInput);
+    assert.equal(f.motion.distance, distance + f.x - x, 'releasing direction keeps gait through natural friction');
+    assert.equal(f.motion.moving, true);
+  }
+  const distance = f.motion.distance;
+  game.startAttack(f, f.char.jab); game.updateFighter(f, { ...noInput, right: true });
+  assert.equal(f.motion.distance, distance);
+  f.attack = null; f.state = 'hitstun'; f.hitstun = 30; f.vx = 8;
+  game.updateFighter(f, noInput); assert.equal(f.motion.distance, distance);
+  f.hitstun = 1; game.updateFighter(f, noInput); assert.equal(f.motion.distance, distance, 'residual knockback must not become a walk when hitstun expires');
+  const frozen = JSON.stringify(f.motion); f.hitlag = 4;
+  step(game, 4); assert.equal(JSON.stringify(f.motion), frozen);
+  game.respawn(f); assert.equal(f.motion.distance, 0); assert.equal(f.motion.airAge, 0);
+});
+
+test('Eula attack forms alternate independently per successful move and fighter, and lock through rendering and hitlag', () => {
+  const game = fighting({ player: 2, opponent: 2 }), [f, other] = game.fighters;
+  for (const kind of ['jab', 'smash']) {
+    for (const expected of ['alternate', 'base', 'alternate']) {
+      game.startAttack(f, f.char[kind]); const attack = f.attack;
+      assert.equal(attack.visualVariant, expected); assert.equal(game.fighterAnimation(f).attack.visualVariant, expected);
+      const next = JSON.stringify(f.nextAttackVariants), t = attack.t; f.hitlag = 3;
+      for (let i = 0; i < 3; i++) { step(game); game.fighterAnimation(f); }
+      assert.equal(f.attack, attack); assert.equal(f.attack.t, t); assert.equal(f.attack.visualVariant, expected); assert.equal(JSON.stringify(f.nextAttackVariants), next);
+      f.attack = null; f.state = 'free';
+    }
+    assert.equal(other.nextAttackVariants[kind], 'alternate');
+  }
+  game.ko(f); assert.deepEqual(JSON.parse(JSON.stringify(f.nextAttackVariants)), { jab: 'alternate', smash: 'alternate', special: 'base', secondary: 'base' });
+  game.respawn(f); game.startAttack(f, f.char.jab); assert.equal(f.attack.visualVariant, 'alternate');
+  game.start({ ...defaults, player: 2 }); step(game, 150); game.startAttack(game.fighters[0], game.fighters[0].char.jab);
+  assert.equal(game.fighters[0].attack.visualVariant, 'alternate');
+  game.startAttack(game.fighters[1], game.fighters[1].char.jab); assert.equal(game.fighters[1].attack.visualVariant, 'alternate');
+});
+
+test('Eula PVP busy and cooldown-rejected input does not consume an attack form', () => {
+  const game = fighting({ player: 2 }), f = game.fighters[0];
+  f.specialCooldown = 50; f.secondaryCooldown = 50;
+  const before = JSON.stringify(f.nextAttackVariants);
+  game.updateFighter(f, { ...noInput, special: true }); game.updateFighter(f, { ...noInput, secondary: true });
+  assert.equal(f.attack, null); assert.equal(JSON.stringify(f.nextAttackVariants), before);
+  game.startAttack(f, f.char.smash); const attack = f.attack, after = JSON.stringify(f.nextAttackVariants);
+  game.updateFighter(f, { ...noInput, jab: true }); assert.equal(f.attack, attack); assert.equal(JSON.stringify(f.nextAttackVariants), after);
+  f.attack = null; f.state = 'free'; f.specialCooldown = 0;
+  game.updateFighter(f, { ...noInput, special: true }); assert.equal(f.attack.visualVariant, 'base');
+});
+
+test('every fighter alternates J/K only while skills retain mechanic-matched poses', () => {
+  for (let player = 0; player < CHARACTERS.length; player++) {
+    const game = fighting({ player }), f = game.fighters[0];
+    for (const kind of ['jab', 'smash', 'special', 'secondary']) {
+      for (let repeat = 0; repeat < 3; repeat++) {
+        f.attack = null; f.state = 'free'; f.onGround = kind !== 'special' || f.char.id !== 'xiao';
+        game.startAttack(f, f.char[kind]);
+        const expected = ['jab', 'smash'].includes(kind) && repeat % 2 === 0 ? 'alternate' : 'base';
+        assert.equal(f.attack.visualVariant, expected, `${f.char.id}/${kind}/${repeat}`);
+      }
+    }
   }
 });
 

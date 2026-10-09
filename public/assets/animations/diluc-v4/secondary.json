@@ -1,0 +1,237 @@
+{
+  "image": "secondary.png",
+  "width": 1448,
+  "height": 1086,
+  "standingBodyHeightPixels": 267,
+  "frames": [
+    {
+      "name": "secondary-01",
+      "sourceRect": {
+        "x": 28,
+        "y": 81,
+        "width": 319,
+        "height": 291
+      },
+      "footAnchor": {
+        "x": 0.45768,
+        "y": 0.962199
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 305,
+        "y": 268
+      },
+      "phase": "windup"
+    },
+    {
+      "name": "secondary-02",
+      "sourceRect": {
+        "x": 405,
+        "y": 114,
+        "width": 227,
+        "height": 258
+      },
+      "footAnchor": {
+        "x": 0.603524,
+        "y": 0.957364
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 178,
+        "y": 169
+      },
+      "phase": "windup"
+    },
+    {
+      "name": "secondary-03",
+      "sourceRect": {
+        "x": 753,
+        "y": 156,
+        "width": 282,
+        "height": 216
+      },
+      "footAnchor": {
+        "x": 0.652482,
+        "y": 0.949074
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 14,
+        "y": 185
+      },
+      "phase": "windup"
+    },
+    {
+      "name": "secondary-04",
+      "sourceRect": {
+        "x": 1139,
+        "y": 112,
+        "width": 252,
+        "height": 260
+      },
+      "footAnchor": {
+        "x": 0.638889,
+        "y": 0.957692
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 14,
+        "y": 231
+      },
+      "phase": "windup"
+    },
+    {
+      "name": "secondary-05",
+      "sourceRect": {
+        "x": 24,
+        "y": 398,
+        "width": 330,
+        "height": 341
+      },
+      "footAnchor": {
+        "x": 0.472727,
+        "y": 0.970674
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 290,
+        "y": 27
+      },
+      "phase": "contact"
+    },
+    {
+      "name": "secondary-06",
+      "sourceRect": {
+        "x": 383,
+        "y": 372,
+        "width": 317,
+        "height": 367
+      },
+      "footAnchor": {
+        "x": 0.504732,
+        "y": 0.972752
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 290,
+        "y": 16
+      },
+      "phase": "contact"
+    },
+    {
+      "name": "secondary-07",
+      "sourceRect": {
+        "x": 738,
+        "y": 384,
+        "width": 385,
+        "height": 355
+      },
+      "footAnchor": {
+        "x": 0.405195,
+        "y": 0.971831
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 268,
+        "y": 14
+      },
+      "phase": "followthrough"
+    },
+    {
+      "name": "secondary-08",
+      "sourceRect": {
+        "x": 1130,
+        "y": 380,
+        "width": 311,
+        "height": 359
+      },
+      "footAnchor": {
+        "x": 0.495177,
+        "y": 0.972145
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 262,
+        "y": 16
+      },
+      "phase": "followthrough"
+    },
+    {
+      "name": "secondary-09",
+      "sourceRect": {
+        "x": 27,
+        "y": 739,
+        "width": 290,
+        "height": 326
+      },
+      "footAnchor": {
+        "x": 0.489655,
+        "y": 0.966258
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 255,
+        "y": 11
+      },
+      "phase": "followthrough"
+    },
+    {
+      "name": "secondary-10",
+      "sourceRect": {
+        "x": 398,
+        "y": 795,
+        "width": 329,
+        "height": 271
+      },
+      "footAnchor": {
+        "x": 0.50152,
+        "y": 0.95572
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 315,
+        "y": 236
+      },
+      "phase": "recover"
+    },
+    {
+      "name": "secondary-11",
+      "sourceRect": {
+        "x": 777,
+        "y": 806,
+        "width": 301,
+        "height": 258
+      },
+      "footAnchor": {
+        "x": 0.498339,
+        "y": 0.96124
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 287,
+        "y": 233
+      },
+      "phase": "recover"
+    },
+    {
+      "name": "secondary-12",
+      "sourceRect": {
+        "x": 1130,
+        "y": 793,
+        "width": 293,
+        "height": 272
+      },
+      "footAnchor": {
+        "x": 0.546075,
+        "y": 0.959559
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 279,
+        "y": 256
+      },
+      "phase": "recover"
+    }
+  ],
+  "trail": "arc"
+}

@@ -897,6 +897,89 @@ test('Eula wider L reaches both sides and taller targets, while enlarged I cryst
   step(ice, 65); assert.ok(far.hp < 10000); assert.ok(far.slow > 0);
 });
 
+test('Eula locomotion follows actual slope travel, stops at world walls, and freezes through noninterrupting damage', () => {
+  const game = makeGame(2), p = game.player;
+  Object.assign(p, { x: 2780, y: data.groundHeightAt(2780) });
+  game.keys.add('KeyD'); const x = p.x; step(game);
+  assert.equal(p.motion.distance, p.x - x); assert.equal(p.motion.moving, true); assert.notEqual(p.motion.slope, 0);
+  Object.assign(p, { x: data.SURVIVAL_WORLD.width - 38, y: data.groundHeightAt(data.SURVIVAL_WORLD.width - 38) });
+  const distance = p.motion.distance; step(game, 5);
+  assert.equal(p.motion.distance, distance); assert.equal(p.motion.moving, false);
+  game.keys.clear(); tap(game, 'KeyI');
+  const attack = p.attack; assert.ok(attack);
+  const frozen = JSON.stringify(p.motion); p.invuln = 0; game.hurtPlayer(5); step(game, 4);
+  assert.equal(JSON.stringify(p.motion), frozen); assert.equal(p.attack, attack);
+  game.pause(); step(game, 20); assert.equal(JSON.stringify(p.motion), frozen);
+  game.resume(); step(game); assert.equal(p.attack, attack); assert.equal(p.motion.distance, distance);
+});
+
+test('Eula survival forms alternate by successful attack kind while rejected cooldown and buffered input preserve the next form', () => {
+  const game = makeGame(2), p = game.player;
+  for (const kind of ['jab', 'smash']) {
+    for (const expected of ['alternate', 'base', 'alternate']) {
+      p.skillCooldown = 0; p.secondaryCooldown = 0; game.beginAttack(kind);
+      assert.equal(p.attack.visualVariant, expected); p.attack = null;
+    }
+  }
+  game.start({ player: 2 }); const fresh = game.player;
+  fresh.skillCooldown = 40; fresh.secondaryCooldown = 40;
+  const before = JSON.stringify(fresh.nextAttackVariants);
+  tap(game, 'KeyL'); tap(game, 'KeyI');
+  assert.equal(fresh.attack, null); assert.equal(JSON.stringify(fresh.nextAttackVariants), before);
+  tap(game, 'KeyK'); const attack = fresh.attack, after = JSON.stringify(fresh.nextAttackVariants);
+  tap(game, 'KeyJ'); step(game, 8);
+  assert.equal(fresh.attack, attack); assert.equal(JSON.stringify(fresh.nextAttackVariants), after, 'expired busy buffer must not consume a form');
+  fresh.attack.t = fresh.attack.def.startup + fresh.attack.def.active + fresh.attack.def.endlag - 3;
+  tap(game, 'KeyJ'); assert.equal(fresh.attack, attack); step(game, 4);
+  assert.equal(fresh.attack.def.kind, 'jab'); assert.equal(fresh.attack.visualVariant, 'alternate'); assert.equal(fresh.nextAttackVariants.jab, 'base');
+  assert.equal(fresh.nextAttackVariants.special, 'base');
+});
+
+test('Eula survival instances preserve visual form through attack-speed upgrades, noninterrupting damage, pause and death resets', () => {
+  const game = makeGame(2), p = game.player; game.progress.upgrades.speed = 3;
+  tap(game, 'KeyI'); const attack = p.attack, next = JSON.stringify(p.nextAttackVariants);
+  assert.equal(attack.visualVariant, 'base'); assert.equal(attack.def.startup, Math.max(3, Math.round(game.char.secondary.startup / 1.105)));
+  const t = attack.t; p.invuln = 0; game.hurtPlayer(5); step(game, 4);
+  assert.equal(p.attack, attack); assert.equal(attack.t, t); assert.equal(attack.visualVariant, 'base'); assert.equal(JSON.stringify(p.nextAttackVariants), next);
+  game.pause(); step(game, 15); assert.equal(attack.t, t); assert.equal(JSON.stringify(p.nextAttackVariants), next);
+  game.resume(); step(game); assert.equal(p.attack, attack);
+  p.invuln = 0; game.hurtPlayer(10000); assert.equal(game.phase, 'defeat'); assert.equal(p.attack, null); assert.deepEqual(JSON.parse(JSON.stringify(p.nextAttackVariants)), { jab: 'alternate', smash: 'alternate', special: 'base', secondary: 'base' });
+  game.start({ player: 2 }); game.beginAttack('secondary'); assert.equal(game.player.attack.visualVariant, 'base');
+  const other = makeGame(3); other.beginAttack('jab'); assert.equal(other.player.attack.visualVariant, 'alternate');
+});
+
+test('every survivor alternates J/K while fixed skill poses survive speed upgrades and noninterrupting hitstop', () => {
+  for (let player = 0; player < CHARACTERS.length; player++) {
+    const game = makeGame(player), p = game.player; game.progress.upgrades.speed = 3;
+    for (const kind of ['jab', 'smash', 'special', 'secondary']) {
+      for (let repeat = 0; repeat < 3; repeat++) {
+        p.attack = null; p.skillCooldown = 0; p.secondaryCooldown = 0;
+        if (game.char.id === 'xiao' && kind === 'special') airborne(game, p.x, p.y - 120);
+        game.beginAttack(kind);
+        const expected = ['jab', 'smash'].includes(kind) && repeat % 2 === 0 ? 'alternate' : 'base';
+        assert.equal(p.attack.visualVariant, expected, `${game.char.id}/${kind}/${repeat}`);
+      }
+    }
+  }
+});
+
+test('ordinary slash visuals retain their successful attack form while skill and impact effects stay untagged', () => {
+  for (let player = 0; player < CHARACTERS.length; player++) for (const kind of ['jab', 'smash']) {
+    const game = makeGame(player);
+    for (const variant of ['alternate', 'base']) {
+      game.player.attack = null; game.effects = []; game.beginAttack(kind); const attack = game.player.attack;
+      step(game, attack.def.startup + 1);
+      const slash = game.effects.find(effect => effect.kind === 'slash');
+      assert.deepEqual(plain(slash.melee), { kind, variant });
+    }
+  }
+  for (const player of [1, 3]) {
+    const game = makeGame(player); game.beginAttack('special'); step(game, game.player.attack.def.startup + 1);
+    assert.ok(game.effects.some(effect => effect.kind === 'slash'));
+    assert.ok(game.effects.every(effect => !effect.melee));
+  }
+});
+
 let failures = 0;
 const selectedCases = process.argv[2] ? cases.filter(({ name }) => new RegExp(process.argv[2]).test(name)) : cases;
 assert.ok(selectedCases.length, 'the requested regression filter must select at least one check');

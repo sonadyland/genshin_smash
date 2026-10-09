@@ -1,0 +1,97 @@
+{
+  "character": "raiden",
+  "date": "2026-10-09",
+  "generator": "built-in image_gen",
+  "intendedUse": "80 frame game animation upgrade: 64 base frames plus 16 basic-attack variant frames",
+  "identityReference": "public/assets/characters/raiden-v2.png",
+  "sourcePolicy": "PNG files are direct copies of native RGBA image_gen outputs. Margin repairs use image_gen, never Python pixel editing.",
+  "prompts": [
+    {
+      "asset": "locomotion.png",
+      "prompt": "Use case: stylized-concept. Asset type: finished transparent 2D side-scrolling anime game sprite atlas, Raiden Shogun locomotion. Reference 1 is canonical identity, costume and sword reference; reference 2 is old game art for outfit only. Improve to refined polished adult anime figure, NOT chibi. One consistent woman: long dark violet braid, small gold/purple flower hair ornament, pale lavender kimono top, purple patterned split skirt/tails, red obi knot, dark thigh-high stockings, heeled shoes. Same elegant slim purple glowing single-edged katana with gold guard every frame, no polearm. Full body in every frame, facing screen RIGHT in 3/4 side view. Actual transparent alpha background.\nDeliver precisely FOUR columns and THREE rows, twelve equal square cells, high resolution 1536x1152 or larger landscape 4:3. No grid lines, no labels, no captions, no floor or contact shadows. Each figure completely INSIDE its own cell including hair, toes, sword tip and sleeves, at least 24 pixels of empty gutter on ALL sides. Anatomy height consistent within every frame, about 235px if cells384px. Clear crisp game silhouettes, clean anti-aliased alpha, restrained small sword glow.\nRow1=4 subtly distinct standing idle breathing frames, blade lowered diagonally right, breathing chest and braid sway, exhale/inhale/peak/settle.\nRows2 and3 form ONE consecutive eight-frame running loop RIGHT, read left-to-right then next row: right-foot contact, compression, push-off, flight, left-foot contact, compression, push-off, flight. Legs MUST alternate clearly, planted foot takes weight, knees articulate, torso leans forward slightly, braid and cloth trail left. Running happens in place in each cell. Sword held safely low to right, balanced motion. No duplicated static poses. Keep head size and body proportions exactly consistent throughout. Strong character recognition and clear thin sword silhouette for downscaling to112px game size.",
+      "references": [
+        "public/assets/characters/raiden-v2.png",
+        "public/assets/animations/raiden-actions-v3.png"
+      ]
+    },
+    {
+      "asset": "locomotion.png",
+      "prompt": "Edit the supplied Raiden twelve-frame 4x3 sprite sheet. Preserve every pose, anatomy, costume, color and frame order EXACTLY. Main repair ONLY: each entire frame figure including all long sword tips and trailing braid must be about 72% of its current size, centered within its own cell on transparent alpha. Restore any cut-off sword tips/toes/cloth. Leave wide completely empty gutters on all four sides of every cell, no overlap with any neighbor, no content on outer image border. Keep 4 columns3 rows and exactly12 figures. Keep transparent alpha, do not add background or grid lines.",
+      "references": [
+        "public/assets/animations/raiden-v4/locomotion.png"
+      ]
+    },
+    {
+      "asset": "aerial.png",
+      "prompt": "Use case: stylized-concept. Final transparent 2D game sprite atlas for Raiden Shogun, sophisticated adult anime woman in reference purple kimono, red obi, long violet braid, dark stockings, gold flower hairpiece, purple katana with gold guard. SAME face, adult proportions, costume and single sword across all frames. No spear. Full body facing RIGHT, fixed camera side-three-quarter view. Native transparent alpha. No text, grid lines, shadows or background. CRITICAL leave huge empty gutters: all visible anatomy, braid, cloth and full sword must be enclosed within central 75% of its cell, at least 32px clean margin on each side. At 4 columns by3 rows, each figure head-to-heel should occupy only 65% cell height, not stretch to fill, use high res landscape4:3. Deliver exactly12 figures in4 columns3 rows. Reading order first8 frames are one jump: row1col1 low takeoff crouch, row1col2 toes push and one knee rising, row1col3 legs folded in rising arc, row1col4 suspended apex knees bent; row2col1 beginning fall legs extend, row2col2 falling feet downward, row2col3 deep landing crouch absorbing impact, row2col4 standing recovery. Braid/sleeves follow inertia. Last row4 frames are ground dodge: gather low, push hard right foot back, compact rightwards travel with near horizontal forward lean, plant right foot and rise to ready. Purple katana held safely along body, never clipped. Dynamic silhouettes visibly different for jump vs dodge. Everything in place centered per cell.",
+      "references": [
+        "public/assets/animations/raiden-v4/locomotion.png"
+      ]
+    },
+    {
+      "asset": "aerial.png",
+      "prompt": "Edit this 12-frame 4columns3rows Raiden sprite atlas. Keep all exact poses, actions, costume, character and sword. ONLY repair cell spacing: reduce EVERY WHOLE FIGURE including sword/hair to70% of its current size, centered inside its original grid cell. Restore cut off toes/edges. Every swordtip, braid and toe must end well before cell edge. Clear empty margin at least40px all sides per cell. Native transparent alpha; no text/grid/ground shadows. Preserve all12 exact poses in sameorder.",
+      "references": [
+        "public/assets/animations/raiden-v4/aerial.png"
+      ]
+    },
+    {
+      "asset": "basic.png",
+      "prompt": "Use case: stylized-concept. Final transparent 2D game sprite atlas for Raiden Shogun, sophisticated adult anime woman in reference purple kimono, red obi, long violet braid, dark stockings, gold flower hairpiece, purple katana with gold guard. SAME face, adult proportions, costume and single sword across all frames. No spear. Full body facing RIGHT, fixed camera side-three-quarter view. Native transparent alpha. No text, grid lines, shadows or background. CRITICAL leave huge empty gutters: all visible anatomy, braid, cloth and full sword must be enclosed within central 75% of its cell, at least 32px clean margin on each side. At 4 columns by4 rows, each figure head-to-heel should occupy only 65% cell height, not stretch to fill, use high res square1:1. Exactly16 small full-body figures with HUGE EMPTY SPACE between them. This atlas contains two eight-frame attack clips. All swordtips inside cell, human height50% of cell, effects minimal. Rows1+2: eight consecutive frames of QUICK STRAIGHT STAB RIGHT: 1 ready sword angled low, 2 draw hand back by hip blade horizontal forward, 3 front foot weight forward sword arm extending directly right at chestheight, 4 full straight forward thrust long blade to right (contact), 5 stopextension, 6 pull back bent elbow, 7 step settle,8 ready lowguard. Rows3+4: eight consecutive frames of POWERFUL HORIZONTAL IAIDO SLASH:1 wide stance sword atleft hip,2 coiled torso/hilt draw preparation,3 explosive waistheight horizontal slash to RIGHT,4 extended rightwards blade torso turn,5 blade follows semicircle to rightlow,6 sleeve/long braid catches up,7 settle sword downright,8 ready. Every frame is unique, coherent action. Anatomical standing body size fixed, never crop sword. Four columns four rows square atlas.",
+      "references": [
+        "public/assets/animations/raiden-v4/locomotion.png"
+      ]
+    },
+    {
+      "asset": "basic.png",
+      "prompt": "Edit this16frame Raiden combat sprite sheet,4columns4rows. Keep poses and appearance unchanged. Repair only spacing: make all16 full figures including hair/sword about75percent their current sizes centered in their cells, restore clipped swordtips at rightmostcolumn frames. Wide empty gutter40px min on all sides. Preserve transparent alpha, exact attacks and roworder, no new decorations/background/text.",
+      "references": [
+        "public/assets/animations/raiden-v4/basic.png"
+      ]
+    },
+    {
+      "asset": "basic-variants.png",
+      "prompt": "Use case: stylized-concept. Final transparent 2D game sprite atlas for Raiden Shogun, sophisticated adult anime woman in reference purple kimono, red obi, long violet braid, dark stockings, gold flower hairpiece, purple katana with gold guard. SAME face, adult proportions, costume and single sword across all frames. No spear. Full body facing RIGHT, fixed camera side-three-quarter view. Native transparent alpha. No text, grid lines, shadows or background. CRITICAL leave huge empty gutters: all visible anatomy, braid, cloth and full sword must be enclosed within central 75% of its cell, at least 32px clean margin on each side. At 4 columns by3 rows, each figure head-to-heel should occupy only 65% cell height, not stretch to fill, use high res landscape4:3. Change layout to FOURcolumns FOURrows square atlas16figures. All figures small in central65% of each cell, wide empty gutters for full weapons. Rows1+2 are8 consecutive frames of quick SHORT DIAGONAL SWORD CUT to right:1 lowguard,2 pull sword diagonally back above shoulder,3 shoulderrotates to swing blade diagonal forward-right at chestheight,4 blade cuts to lower-right with extended wrist,5 small followthrough,6 retractblade,7 settlefeet,8 ready. Rows3+4 are8 consecutive frames of LARGE HIGH-TO-LOW OBLIQUE DRAW-CUT:1 wide calmguard,2 rotate torso sword pulled across leftshoulder,3 extended katana blade to upperright,4 strong diagonal slice through front chest area into lower right,5 long braid whips left as blade reaches lowright,6 blade arrests forward,7 torso straightens,8 ready. Never a straight vertical groundstab. Clearly different elbow/shoulder rotation from stabbing. Fourphases each2frames. All facingright, adult anatomy consistent, fullthin sword visible ineverycell.",
+      "references": [
+        "public/assets/animations/raiden-v4/locomotion.png"
+      ]
+    },
+    {
+      "asset": "special.png",
+      "prompt": "Use case: stylized-concept. Final transparent 2D game sprite atlas for Raiden Shogun, sophisticated adult anime woman in reference purple kimono, red obi, long violet braid, dark stockings, gold flower hairpiece, purple katana with gold guard. SAME face, adult proportions, costume and single sword across all frames. No spear. Full body facing RIGHT, fixed camera side-three-quarter view. Native transparent alpha. No text, grid lines, shadows or background. CRITICAL leave huge empty gutters: all visible anatomy, braid, cloth and full sword must be enclosed within central 75% of its cell, at least 32px clean margin on each side. At 4 columns by3 rows, each figure head-to-heel should occupy only 65% cell height, not stretch to fill, use high res landscape4:3. Exactly12frames4columns3rows. Single skill: charge lightning then draw a razor HORIZONTAL RIGHTWARDS SLASH releasing lightning projectile; character stays rooted without dashing. Frames1-4 firstrow startup:1 calm wide stance sword besidehip,2 left shoulder twists drawing hilt inward,3 right handgrips hilt and coil torso,4 loaded sword nearleftwaist at chestheight purple energy close toguard. Frames5-6 contact row2col1/2: explosive torso uncoil, sweeping katana through waist/chestheight horizontally to right, one frame knife edge extending front-right, second extended pose palmright; small violet bladecrescent only, no huge projectile covering body. Frames7-9 followthrough: sword completes lateral arc, braid and flowing sleeves trail, feetplanted; swordtip lowering slight only. Frames10-12 recovery relax arms and return lowguard. Must be horizontal slash, NOT overhead vertical chop, NOT upward thrust, NOT dash. Massive empty margins fullsword andbraid inside eachcell.",
+      "references": [
+        "public/assets/animations/raiden-v4/locomotion.png"
+      ]
+    },
+    {
+      "asset": "secondary.png",
+      "prompt": "Use case: stylized-concept. Final transparent 2D game sprite atlas for Raiden Shogun, sophisticated adult anime woman in reference purple kimono, red obi, long violet braid, dark stockings, gold flower hairpiece, purple katana with gold guard. SAME face, adult proportions, costume and single sword across all frames. No spear. Full body facing RIGHT, fixed camera side-three-quarter view. Native transparent alpha. No text, grid lines, shadows or background. CRITICAL leave huge empty gutters: all visible anatomy, braid, cloth and full sword must be enclosed within central 75% of its cell, at least 32px clean margin on each side. At 4 columns by3 rows, each figure head-to-heel should occupy only 65% cell height, not stretch to fill, use high res landscape4:3. Exactly12frames4columns3rows. One spell animation: summoning a vertical thunder pillar AHEAD of her. No dash and nohorizontal projectile. Frames1-4 startup:1 calm lowguard,2 draw purple sword close to chest,3 raise blade diagonally upward-right,4 sword above shoulder pointed up into sky small controlled violet sparks. Frames5-6contact: leftpalm points toward ground ahead while right hand holds sword high, then lower commanding palm as thunder is called down, planted stance (the actual vertical lightningpillar is separate in game; don't put huge beam on this sheet). Frames7-9 followthrough: raised blade arcs toward shoulderlevel then lower right, braid/sleeves swayandsettle. Frames10-12 recover: bring swordto lowguard, relaxbody, idle ready. Adult anatomy fixed, small figures only60percent cellwidth. Absolutely full sword incl tip and feet framed with generous empty margins. No polearm.",
+      "references": [
+        "public/assets/animations/raiden-v4/locomotion.png"
+      ]
+    },
+    {
+      "asset": "secondary.png",
+      "prompt": "Edit this Raiden 12frame 4columns3rows sprite atlas. All poses and character details and positions in sequence stay same. Repair only margins and excessive glow: uniformly scale each COMPLETE character+weapon to70percent of current size and center in originalcell. Reconstruct full raised swordtip in row1col4, keep ample empty space ABOVE sword. Remove broad purple ovalglow, keep tiny sparks only onblade and lefthand; no large ovals. Entire character+sword+hair inside its cell with at least35px emptyborder in all directions. Native transparent alpha background. All12 distinct frames retained. No text, lines, floor.",
+      "references": [
+        "public/assets/animations/raiden-v4/secondary.png"
+      ]
+    },
+    {
+      "asset": "special.png",
+      "prompt": "Edit this Raiden 12frame 4columns3rows horizontal lightningcut sprite atlas. Preserve poses, facial appearance, exact actionorder and costume. ONLY reduce each entire subject including sword and tiny bladearc to75percent current size and center in original gridcell. Leave empty transparent gutter40px eachside, no overlapneighbors. Make little lightning arc at contact blade sleek thin and short rather than huge shield. Keep native transparent alpha. Restore any cut swordtips, fullfeet, no text, lines, shadow or background.",
+      "references": [
+        "public/assets/animations/raiden-v4/special.png"
+      ]
+    }
+  ],
+  "selectedOutputs": {
+    "locomotion.png": "exec-7d4bd2cd-707d-4273-bb0a-550b31bdd213.png",
+    "aerial.png": "exec-6fd186ef-d83f-4690-ac5b-f15fe233e740.png",
+    "basic.png": "exec-352d13e3-9a42-4cb1-9975-ff10f91a168f.png",
+    "basic-variants.png": "exec-363946b5-fdab-4aa1-bab5-fa3136d98352.png",
+    "special.png": "exec-17206127-8560-4130-8d09-ad0b3127cda5.png",
+    "secondary.png": "exec-d54c2e5b-9db7-41c8-a382-1a16fff533e5.png"
+  },
+  "sourceDirectory": "C:/Users/46637/.codex/generated_images/01a1202e-d246-7b70-85a3-9f657cf4992b"
+}
