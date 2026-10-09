@@ -1,0 +1,226 @@
+{
+  "version": 3,
+  "asset": "/assets/effects/elemental-bursts-v3.png",
+  "generator": "built-in image_gen",
+  "date": "2026-10-08",
+  "width": 1774,
+  "height": 887,
+  "grid": {
+    "columns": 4,
+    "rows": 2,
+    "cellWidth": 443.5,
+    "cellHeight": 443.5
+  },
+  "frames": [
+    {
+      "index": 0,
+      "row": 0,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 0,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "alphaBoundsPixels": {
+        "x": 96,
+        "y": 121,
+        "width": 269,
+        "height": 254
+      },
+      "element": "electro",
+      "kind": "slash",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "index": 1,
+      "row": 0,
+      "column": 1,
+      "sourceRect": {
+        "x": 443.5,
+        "y": 0,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "alphaBoundsPixels": {
+        "x": 534,
+        "y": 133,
+        "width": 242,
+        "height": 232
+      },
+      "element": "anemo",
+      "kind": "slash",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "index": 2,
+      "row": 0,
+      "column": 2,
+      "sourceRect": {
+        "x": 887,
+        "y": 0,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "alphaBoundsPixels": {
+        "x": 954,
+        "y": 123,
+        "width": 247,
+        "height": 247
+      },
+      "element": "cryo",
+      "kind": "slash",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "index": 3,
+      "row": 0,
+      "column": 3,
+      "sourceRect": {
+        "x": 1330.5,
+        "y": 0,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "alphaBoundsPixels": {
+        "x": 1395,
+        "y": 108,
+        "width": 245,
+        "height": 266
+      },
+      "element": "pyro",
+      "kind": "slash",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "index": 4,
+      "row": 1,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 443.5,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "alphaBoundsPixels": {
+        "x": 108,
+        "y": 525,
+        "width": 261,
+        "height": 261
+      },
+      "element": "electro",
+      "kind": "hitburst",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "index": 5,
+      "row": 1,
+      "column": 1,
+      "sourceRect": {
+        "x": 443.5,
+        "y": 443.5,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "alphaBoundsPixels": {
+        "x": 547,
+        "y": 534,
+        "width": 244,
+        "height": 248
+      },
+      "element": "anemo",
+      "kind": "hitburst",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "index": 6,
+      "row": 1,
+      "column": 2,
+      "sourceRect": {
+        "x": 887,
+        "y": 443.5,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "alphaBoundsPixels": {
+        "x": 975,
+        "y": 523,
+        "width": 242,
+        "height": 258
+      },
+      "element": "cryo",
+      "kind": "hitburst",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "index": 7,
+      "row": 1,
+      "column": 3,
+      "sourceRect": {
+        "x": 1330.5,
+        "y": 443.5,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "alphaBoundsPixels": {
+        "x": 1410,
+        "y": 529,
+        "width": 254,
+        "height": 257
+      },
+      "element": "pyro",
+      "kind": "hitburst",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  ],
+  "validation": {
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelFraction": 0.758,
+    "visiblePixelsAtThreePixelCellEdges": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "notes": [
+    "Column order electro, anemo, cryo, pyro. Upper row slash, lower row hitburst.",
+    "Effects occupy approximately 60% of the cell width. All frame edges contain zero visible alpha > 32.",
+    "Preserve alpha and use sourceRect cropping at runtime; center anchor is normalized within each cell."
+  ],
+  "prompts": {
+    "initial": "Use case: stylized-concept. Asset type: production 2D fantasy fighting game VFX sprite atlas. A wide 2048x1024 genuinely alpha-transparent RGBA image with EXACTLY 4 columns and 2 rows, eight equal 512x512 invisible cells. No characters, no objects, no text, no gridlines, no boxes, no backgrounds, no floor, no painted checkerboard. Each cell contains one independent gorgeous hand-painted Japanese anime elemental effect, centered in its own cell with at least 12% completely transparent margin on every side, no particle or glow touching a neighboring cell. Upper row, left to right: 1 a thin luminous violet lightning crescent sword slash with branching electrical filaments; 2 a translucent emerald teal wind crescent with two elegant flowing spiral trails; 3 an icy pale blue silver crescent sword slash with sparkling angular ice shards; 4 an orange and scarlet flame crescent sword slash with feather-like licks. Each upper crescent curves from lower left toward upper right, clean dramatic tapered shape, semitransparent glowing edges around a crisp bright colored center. Lower row, same elemental order left to right: 1 a compact violet electrical hit burst, star-shaped lightning sparks; 2 a compact teal wind pressure impact burst; 3 a compact pale blue ice crystal shatter impact burst; 4 a compact orange-red flame impact burst. Hit effects radiate from exact cell center x50 y50, extent radius 35% of cell. Same scale and visual polish across elements, game readable silhouettes, sparkling contrast, no full circular black/colored disc or opaque glow backdrop. True transparent pixels outside the effects, clean alpha.",
+    "spacingCorrection": "Use case: precise-object-edit. Preserve all eight elemental effects and their exact order and artistic identity. Change ONLY layout spacing: shrink EACH effect including its entire glow uniformly to 65% of its current size, and center it in its own cell on the same 4-column 2-row wide transparent sprite atlas. There are eight effects: upper row violet electricity crescent, teal wind crescent, blue ice crescent, orange fire crescent; lower row matching four impact bursts. Each effect now occupies only the central 60 percent of its equal cell width and height, with at least 20 percent of a cell completely transparent padding on each of its four sides. All eight effects must be fully isolated, no overlap or close touching, no trails crossing any cell edge. In particular the first purple effect must not touch left or top edge, and the purple burst must not touch upper slash. Leave wider empty transparent gutters between all effects, and wide transparent border around the whole atlas. Strict 4 columns by 2 rows with each image centered on its cell center. Same shape, colors, polished anime painterly rendering, internal effects, and alpha glow. True alpha-transparent background, never a checkerboard, no text/captions/lines/boxes. Output wide 2:1 aspect ratio."
+  }
+}

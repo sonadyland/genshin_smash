@@ -1,0 +1,414 @@
+{
+  "version": 3,
+  "character": "xiao",
+  "asset": "/assets/animations/xiao-actions-v3.png",
+  "generator": "built-in image_gen",
+  "date": "2026-10-08",
+  "width": 1254,
+  "height": 1254,
+  "grid": {
+    "columns": 4,
+    "rows": 4,
+    "cellWidth": 313.5,
+    "cellHeight": 313.5
+  },
+  "facing": "right",
+  "referenceAsset": "/assets/characters/xiao-v3.png",
+  "standingBodyHeightPixels": 116,
+  "notes": [
+    "True generated RGBA alpha preserved without procedural image editing. Two built-in generations: initial atlas and sparse layout correction.",
+    "Source rectangles floor each grid boundary to cover the actual 1254px sheet without overlaps.",
+    "Use one global body-height scale; never fit each pose to its alpha bounds because long spears and crouches intentionally vary.",
+    "The skill row depicts masked airborne windup, vertical spear-first plunge, low landing stab, and guard recovery.",
+    "Every cell passed a 3px border check with zero pixels at alpha > 32.",
+    "Foot anchors are manually registered to supporting feet or the lower collision-body extent, excluding trailing cloth and spear tips.",
+    "2026-10-08 spear direction correction: skill windup/dive/impact use one large jade spearhead at the bottom pointing straight down and a plain blunt gold upper cap. Other thirteen frame poses and grid placement retained; generated brush detail has minor variation."
+  ],
+  "validation": {
+    "width": 1254,
+    "height": 1254,
+    "pixelFormat": "Format32bppArgb",
+    "transparentPixels": 1359528,
+    "semiTransparentPixels": 212795,
+    "opaquePixels": 193
+  },
+  "frames": [
+    {
+      "index": 0,
+      "row": 0,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 0,
+        "width": 313,
+        "height": 313
+      },
+      "alphaBoundsPixels": {
+        "width": 122,
+        "x": 95,
+        "height": 134,
+        "y": 113
+      },
+      "borderPixelsAbove32": 0,
+      "name": "idle",
+      "footAnchor": {
+        "x": 0.4952,
+        "y": 0.7859
+      }
+    },
+    {
+      "index": 1,
+      "row": 0,
+      "column": 1,
+      "sourceRect": {
+        "x": 313,
+        "y": 0,
+        "width": 314,
+        "height": 313
+      },
+      "alphaBoundsPixels": {
+        "width": 141,
+        "x": 411,
+        "height": 106,
+        "y": 140
+      },
+      "borderPixelsAbove32": 0,
+      "name": "run-contact",
+      "footAnchor": {
+        "x": 0.5287,
+        "y": 0.7827
+      }
+    },
+    {
+      "index": 2,
+      "row": 0,
+      "column": 2,
+      "sourceRect": {
+        "x": 627,
+        "y": 0,
+        "width": 313,
+        "height": 313
+      },
+      "alphaBoundsPixels": {
+        "width": 124,
+        "x": 725,
+        "height": 100,
+        "y": 142
+      },
+      "borderPixelsAbove32": 0,
+      "name": "run-passing",
+      "footAnchor": {
+        "x": 0.5367,
+        "y": 0.7764
+      }
+    },
+    {
+      "index": 3,
+      "row": 0,
+      "column": 3,
+      "sourceRect": {
+        "x": 940,
+        "y": 0,
+        "width": 314,
+        "height": 313
+      },
+      "alphaBoundsPixels": {
+        "width": 127,
+        "x": 1034,
+        "height": 120,
+        "y": 118
+      },
+      "borderPixelsAbove32": 0,
+      "name": "airborne",
+      "footAnchor": {
+        "x": 0.5764,
+        "y": 0.6869
+      },
+      "anchorNote": "Lowest boot/leg body registration; trailing sash below this line does not change body scale."
+    },
+    {
+      "index": 4,
+      "row": 1,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 313,
+        "width": 313,
+        "height": 314
+      },
+      "alphaBoundsPixels": {
+        "width": 137,
+        "x": 87,
+        "height": 110,
+        "y": 436
+      },
+      "borderPixelsAbove32": 0,
+      "name": "attack-windup",
+      "footAnchor": {
+        "x": 0.5144,
+        "y": 0.7389
+      }
+    },
+    {
+      "index": 5,
+      "row": 1,
+      "column": 1,
+      "sourceRect": {
+        "x": 313,
+        "y": 313,
+        "width": 314,
+        "height": 314
+      },
+      "alphaBoundsPixels": {
+        "width": 186,
+        "x": 391,
+        "height": 100,
+        "y": 444
+      },
+      "borderPixelsAbove32": 0,
+      "name": "attack-contact",
+      "footAnchor": {
+        "x": 0.465,
+        "y": 0.7293
+      }
+    },
+    {
+      "index": 6,
+      "row": 1,
+      "column": 2,
+      "sourceRect": {
+        "x": 627,
+        "y": 313,
+        "width": 313,
+        "height": 314
+      },
+      "alphaBoundsPixels": {
+        "width": 150,
+        "x": 735,
+        "height": 109,
+        "y": 437
+      },
+      "borderPixelsAbove32": 0,
+      "name": "attack-followthrough",
+      "footAnchor": {
+        "x": 0.5623,
+        "y": 0.7357
+      }
+    },
+    {
+      "index": 7,
+      "row": 1,
+      "column": 3,
+      "sourceRect": {
+        "x": 940,
+        "y": 313,
+        "width": 314,
+        "height": 314
+      },
+      "alphaBoundsPixels": {
+        "width": 137,
+        "x": 1039,
+        "height": 140,
+        "y": 406
+      },
+      "borderPixelsAbove32": 0,
+      "name": "attack-recovery",
+      "footAnchor": {
+        "x": 0.5191,
+        "y": 0.7357
+      }
+    },
+    {
+      "index": 8,
+      "row": 2,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 627,
+        "width": 313,
+        "height": 313
+      },
+      "alphaBoundsPixels": {
+        "width": 128,
+        "x": 95,
+        "height": 135,
+        "y": 721
+      },
+      "borderPixelsAbove32": 0,
+      "name": "heavy-windup",
+      "footAnchor": {
+        "x": 0.5048,
+        "y": 0.7284
+      }
+    },
+    {
+      "index": 9,
+      "row": 2,
+      "column": 1,
+      "sourceRect": {
+        "x": 313,
+        "y": 627,
+        "width": 314,
+        "height": 313
+      },
+      "alphaBoundsPixels": {
+        "width": 159,
+        "x": 410,
+        "height": 120,
+        "y": 735
+      },
+      "borderPixelsAbove32": 0,
+      "name": "heavy-contact",
+      "footAnchor": {
+        "x": 0.5096,
+        "y": 0.722
+      }
+    },
+    {
+      "index": 10,
+      "row": 2,
+      "column": 2,
+      "sourceRect": {
+        "x": 627,
+        "y": 627,
+        "width": 313,
+        "height": 313
+      },
+      "alphaBoundsPixels": {
+        "width": 159,
+        "x": 725,
+        "height": 88,
+        "y": 768
+      },
+      "borderPixelsAbove32": 0,
+      "name": "heavy-followthrough",
+      "footAnchor": {
+        "x": 0.5495,
+        "y": 0.7284
+      }
+    },
+    {
+      "index": 11,
+      "row": 2,
+      "column": 3,
+      "sourceRect": {
+        "x": 940,
+        "y": 627,
+        "width": 314,
+        "height": 313
+      },
+      "alphaBoundsPixels": {
+        "width": 125,
+        "x": 1048,
+        "height": 124,
+        "y": 732
+      },
+      "borderPixelsAbove32": 0,
+      "name": "heavy-recovery",
+      "footAnchor": {
+        "x": 0.535,
+        "y": 0.7284
+      }
+    },
+    {
+      "index": 12,
+      "row": 3,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 940,
+        "width": 313,
+        "height": 314
+      },
+      "alphaBoundsPixels": {
+        "width": 103,
+        "x": 98,
+        "height": 179,
+        "y": 999
+      },
+      "borderPixelsAbove32": 0,
+      "name": "skill-windup",
+      "footAnchor": {
+        "x": 0.4856,
+        "y": 0.6338
+      },
+      "anchorNote": "Airborne boot/body registration. The single jade spearhead is below the body, pointing vertically down; the upper end is a blunt gold cap."
+    },
+    {
+      "index": 13,
+      "row": 3,
+      "column": 1,
+      "sourceRect": {
+        "x": 313,
+        "y": 940,
+        "width": 314,
+        "height": 314
+      },
+      "alphaBoundsPixels": {
+        "width": 70,
+        "x": 443,
+        "height": 150,
+        "y": 1014
+      },
+      "borderPixelsAbove32": 0,
+      "name": "skill-contact",
+      "footAnchor": {
+        "x": 0.5159,
+        "y": 0.5732
+      },
+      "anchorNote": "Lower hands/torso registration, excluding folded boots above the head and the single downward jade spearhead. The upper shaft has a blunt gold cap."
+    },
+    {
+      "index": 14,
+      "row": 3,
+      "column": 2,
+      "sourceRect": {
+        "x": 627,
+        "y": 940,
+        "width": 313,
+        "height": 314
+      },
+      "alphaBoundsPixels": {
+        "width": 112,
+        "x": 740,
+        "height": 149,
+        "y": 1029
+      },
+      "borderPixelsAbove32": 0,
+      "name": "skill-followthrough",
+      "footAnchor": {
+        "x": 0.5463,
+        "y": 0.6656
+      },
+      "anchorNote": "Support-foot landing line. The single jade spearhead points down below the hands; the upper shaft is a plain blunt gold cap."
+    },
+    {
+      "index": 15,
+      "row": 3,
+      "column": 3,
+      "sourceRect": {
+        "x": 940,
+        "y": 940,
+        "width": 314,
+        "height": 314
+      },
+      "alphaBoundsPixels": {
+        "width": 127,
+        "x": 1044,
+        "height": 125,
+        "y": 1027
+      },
+      "borderPixelsAbove32": 0,
+      "name": "skill-recovery",
+      "footAnchor": {
+        "x": 0.5255,
+        "y": 0.6688
+      }
+    }
+  ],
+  "prompts": {
+    "initial": "Use case: stylized-concept. Asset type: transparent 2D fighting-game animation atlas. INPUT 1 is Xiao character identity, INPUT 2 shows mandatory sparse 4x4 layout and painting style. Create Xiao matching INPUT 1 precisely, same teal-black hair, golden eyes, forehead purple diamond, white sleeveless top, right arm green tattoo, purple trousers, teal sashes, waist yaksha mask and jade-bladed long spear.\nEXACTLY FOUR COLUMNS AND FOUR ROWS: sixteen distinct poses in row-major order. Square canvas. Each invisible equal cell contains one COMPLETE tiny Xiao full-body sprite with his entire polearm. Match sparse second reference: about 80% of canvas is transparent empty space. Each sprite's standing BODY height only 42% of its cell height; complete silhouette INCLUDING ENTIRE SPEAR must fit within central 65% of cell width and 65% of cell height. Wide fully transparent gutters surround EACH individual sprite. Fixed same body size, fixed side-on three-quarter camera, normally facing RIGHT. Character's anatomy and clothes consistent in all sixteen poses. No ground, no background, no panels, no grid, no text, no labels, no shadows, no glow clouds. No crossing cell boundaries or clipped tips. True RGBA transparency.\nRow 1 four movement keyframes: idle ready stance holding polearm diagonally; run contact right foot forward with spear trailing; run passing left foot forward; upward jump, both knees visibly off ground, spear diagonally behind.\nRow 2 four normal spear attack keyframes: windup draw spear back by hip; deep lunge thrust pointed spear horizontally RIGHT; followthrough twisting shoulders retract spear; recovery guard.\nRow 3 four heavy attack keyframes: windup raise spear overhead with two hands; strong forward sweeping spear slash; followthrough lowered wide stance spear finishing diagonal sweep; recovery straighten torso.\nRow 4 is Xiao's special aerial plunging attack, MUST differ dramatically from horizontal attack. Cell 13: in mid-air, masked Xiao tucks one knee and grips spear ready to aim vertically downward. Cell 14: HIGH SPEED VERTICAL DOWNWARD PLUNGE, Xiao body upright slightly tilted toward screen, both hands grip spear shaft in front of him, jade spear TIP POINTS STRAIGHT DOWN below his feet, torso above spear tip, legs trailing/folded upward, NOT a horizontal lunge. Cell 15: LANDING low crouch with spear stabbed straight VERTICALLY into ground under him, hands above tip, knees folded, wearing glowing teal yaksha mask. Cell 16: recover standing with spear pulled out into guard, mask back at hip.\nRefined Japanese fantasy anime hand-painted keyframes, crisp silhouettes and clean subtle details readable at small game size. Every pose must actually change limbs and torso. Spear should be shorter in atlas to safely fit gutters, but recognizable single jade polearm. Tiny subtle teal light on blade, NO effects beyond body silhouette, effects will be added by game. Mask is dark horned yaksha mask covering face only in row4 first three frames. Preserve same anatomical body size across all sixteen frames; do not enlarge crouches. Huge clear transparent bands at every row and column boundary. Return a SQUARE 4x4 atlas.",
+    "sparseLayoutFix": "Use case: precise-object-edit. Edit ONLY the technical layout of this 4x4 transparent Xiao sprite atlas. Preserve all sixteen different poses, costume, weapons, identity, colors and paint style exactly. In particular preserve row4 cell2 vertical spear-tip-down airborne plunge and row4 cell3 low landing downward stab. Do not change anatomy or their poses. REQUIRED: REDUCE EACH INDIVIDUAL COMPLETE SPRITE including its entire spear to 60 PERCENT of its CURRENT width and height. Do NOT shrink the entire sheet with sprites in same place: instead uniformly scale each of sixteen sprites down independently and CENTER its whole silhouette inside its corresponding equal square cell. All 16 BODY SIZES shrink by the SAME factor. The output must be very sparse: tiny characters separated by HUGE completely transparent gutters. Each figure including spear should now occupy at most 60% of its cell's width and height. Each sprite fully fits inside its own cell with 20% blank transparent padding on all four edges. Empty bands between columns and rows must be completely clear without any weapon or stray pixels. Do not enlarge characters to fill canvas. Keep EXACT four columns, four rows and original reading order. No grid lines, text, panels, background or effects. Genuine transparent RGBA. Square output.",
+    "downwardSpearCorrection": "Use case: precise-object-edit. Edit target: this existing 4x4 transparent Xiao animation sprite sheet. Correct ONLY the weapon direction and associated hand grip in the LAST ROW first THREE cells (row4 columns1,2,3, indices12,13,14). Keep all first twelve sprites (rows1-3) and row4 col4 EXACTLY unchanged, same positions, scale, colors, costumes, faces and transparent gutters. Preserve the square four-by-four grid. The image currently makes Xiao's spear double-ended, or puts the large green jade spearhead above his head. THIS MUST BE CORRECTED in those three skill frames. In each of those three frames draw ONE clear vertical straight spear in front of his body, with a SINGLE large emerald/jade LEAF-SHAPED SHARP SPEARHEAD at the BOTTOM pointing precisely DOWN at six o'clock. The spear shaft extends straight UP from the lower spearhead through his hands; its top end is a PLAIN SMALL BLUNT DARK-GOLD CAP with NO blade, NO green tip, NO point, NO ornament resembling a second spearhead. Remove all existing upward jade spearheads in those three cells. Do not use a green flare in place of the physical spearhead. Only the physical lower head is sharp and jade green. Row4 col1: midair preparation, masked Xiao grips a vertical spear with both hands, knees tucked, SINGLE BIG GREEN SHARP TIP BELOW HIS FEET POINTING DOWN. Row4 col2: vertical downward dive, preserve compact airborne body pose, shaft is vertical, upper end is plainly blunt, single lower BIG GREEN SPEARHEAD below body pointing DOWN. Row4 col3: crouching landing stab, spear planted VERTICALLY DOWN into ground, single large green blade at very bottom BELOW BOTH HANDS and just below knees, plain blunt upper shaft rises above head, no upper jade blade. These are tiny isolated sprites inside the exact same cells and their full silhouettes must stay within the same sparse central areas. Keep right-facing Xiao identity and refined anime painting. Keep the full spear visible in each cell. TRUE RGBA TRANSPARENT background, with huge empty transparent gutters. No text, no labels, no grid lines, no scenery, no floor, no shadow, no effects. All cell-edge transparent bands must stay empty. Surgical edit: other thirteen frames stay unchanged."
+  }
+}

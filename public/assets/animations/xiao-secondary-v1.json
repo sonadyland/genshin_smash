@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "character": "xiao",
+  "asset": "/assets/animations/xiao-secondary-v1.png",
+  "generator": "built-in image_gen",
+  "date": "2026-10-08",
+  "width": 1254,
+  "height": 1254,
+  "grid": {
+    "columns": 2,
+    "rows": 2,
+    "cellWidth": 627,
+    "cellHeight": 627
+  },
+  "facing": "right",
+  "standingBodyHeightPixels": 284,
+  "notes": [
+    "Secondary skill 风轮两立. Row-major windup/contact/followthrough/recover.",
+    "Each physical spear has one jade sharp head pointing right; the left end is a blunt cap. Existing downward-plunge atlas is unchanged.",
+    "Original generated RGBA retained without pixel editing. Shared standing body height based on recovery head-to-feet, excluding weapon.",
+    "Foot anchors register support-foot center, rather than the long weapon silhouette center."
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "name": "secondary-windup",
+      "row": 0,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 134,
+        "y": 198,
+        "width": 391,
+        "height": 319
+      },
+      "footAnchor": {
+        "x": 0.51994,
+        "y": 0.82456
+      }
+    },
+    {
+      "index": 1,
+      "name": "secondary-contact",
+      "row": 0,
+      "column": 1,
+      "sourceRect": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 722,
+        "y": 222,
+        "width": 455,
+        "height": 295
+      },
+      "footAnchor": {
+        "x": 0.41308,
+        "y": 0.82456
+      }
+    },
+    {
+      "index": 2,
+      "name": "secondary-followthrough",
+      "row": 1,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 112,
+        "y": 873,
+        "width": 470,
+        "height": 227
+      },
+      "footAnchor": {
+        "x": 0.43541,
+        "y": 0.75439
+      }
+    },
+    {
+      "index": 3,
+      "name": "secondary-recover",
+      "row": 1,
+      "column": 1,
+      "sourceRect": {
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 783,
+        "y": 825,
+        "width": 351,
+        "height": 284
+      },
+      "footAnchor": {
+        "x": 0.5311,
+        "y": 0.76874
+      }
+    }
+  ],
+  "alphaValidation": {
+    "minimum": 0,
+    "maximum": 255,
+    "fullyTransparentFraction": 0.84354
+  }
+}

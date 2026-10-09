@@ -1,0 +1,384 @@
+{
+  "version": 3,
+  "character": "raiden",
+  "asset": "/assets/animations/raiden-actions-v3.png",
+  "generator": "built-in image_gen",
+  "date": "2026-10-08",
+  "width": 1254,
+  "height": 1254,
+  "grid": {
+    "columns": 4,
+    "rows": 4,
+    "cellWidth": 313.5,
+    "cellHeight": 313.5
+  },
+  "facing": "right",
+  "referenceAsset": "/assets/characters/raiden-v2.png",
+  "notes": [
+    "Runtime source rectangles may use fractional 313.5 cell size, or floor each grid boundary.",
+    "Do not scale individual frames to their own alpha bounds: poses intentionally crouch and extend.",
+    "Frame footAnchor positions normalize against each cell. Anchor x is visually estimated ground-stance center, y measured at alpha > 32 bottom. Recommended standing body height in source: raiden 145px, jean 157px.",
+    "Wide empty gutters protect every weapon tip; no visible alpha > 32 occurs within 3px of any cell edge.",
+    "Final sprites preserve genuine generated alpha. Three built-in generations total: initial atlas, effects reduction, sparse layout correction."
+  ],
+  "standingBodyHeightPixels": 145,
+  "frames": [
+    {
+      "index": 0,
+      "name": "idle",
+      "row": 0,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 0,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 86,
+        "y": 114,
+        "width": 161,
+        "height": 145
+      },
+      "footAnchor": {
+        "x": 0.4944,
+        "y": 0.8262
+      }
+    },
+    {
+      "index": 1,
+      "name": "run-contact",
+      "row": 0,
+      "column": 1,
+      "sourceRect": {
+        "x": 313.5,
+        "y": 0,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 397,
+        "y": 119,
+        "width": 135,
+        "height": 140
+      },
+      "footAnchor": {
+        "x": 0.4992,
+        "y": 0.8262
+      }
+    },
+    {
+      "index": 2,
+      "name": "run-passing",
+      "row": 0,
+      "column": 2,
+      "sourceRect": {
+        "x": 627,
+        "y": 0,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 708,
+        "y": 119,
+        "width": 141,
+        "height": 140
+      },
+      "footAnchor": {
+        "x": 0.4976,
+        "y": 0.8262
+      }
+    },
+    {
+      "index": 3,
+      "name": "airborne",
+      "row": 0,
+      "column": 3,
+      "sourceRect": {
+        "x": 940.5,
+        "y": 0,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 1020,
+        "y": 111,
+        "width": 137,
+        "height": 134
+      },
+      "footAnchor": {
+        "x": 0.4769,
+        "y": 0.7815
+      }
+    },
+    {
+      "index": 4,
+      "name": "attack-windup",
+      "row": 1,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 313.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 80,
+        "y": 407,
+        "width": 147,
+        "height": 153
+      },
+      "footAnchor": {
+        "x": 0.4785,
+        "y": 0.7863
+      }
+    },
+    {
+      "index": 5,
+      "name": "attack-contact",
+      "row": 1,
+      "column": 1,
+      "sourceRect": {
+        "x": 313.5,
+        "y": 313.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 382,
+        "y": 422,
+        "width": 212,
+        "height": 135
+      },
+      "footAnchor": {
+        "x": 0.4928,
+        "y": 0.7767
+      }
+    },
+    {
+      "index": 6,
+      "name": "attack-followthrough",
+      "row": 1,
+      "column": 2,
+      "sourceRect": {
+        "x": 627,
+        "y": 313.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 711,
+        "y": 434,
+        "width": 163,
+        "height": 123
+      },
+      "footAnchor": {
+        "x": 0.5199,
+        "y": 0.7767
+      }
+    },
+    {
+      "index": 7,
+      "name": "attack-recovery",
+      "row": 1,
+      "column": 3,
+      "sourceRect": {
+        "x": 940.5,
+        "y": 313.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 1025,
+        "y": 404,
+        "width": 164,
+        "height": 155
+      },
+      "footAnchor": {
+        "x": 0.5247,
+        "y": 0.7831
+      }
+    },
+    {
+      "index": 8,
+      "name": "heavy-windup",
+      "row": 2,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 627,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 79,
+        "y": 711,
+        "width": 138,
+        "height": 157
+      },
+      "footAnchor": {
+        "x": 0.4657,
+        "y": 0.7687
+      }
+    },
+    {
+      "index": 9,
+      "name": "heavy-contact",
+      "row": 2,
+      "column": 1,
+      "sourceRect": {
+        "x": 313.5,
+        "y": 627,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 400,
+        "y": 742,
+        "width": 159,
+        "height": 117
+      },
+      "footAnchor": {
+        "x": 0.5215,
+        "y": 0.74
+      }
+    },
+    {
+      "index": 10,
+      "name": "heavy-followthrough",
+      "row": 2,
+      "column": 2,
+      "sourceRect": {
+        "x": 627,
+        "y": 627,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 708,
+        "y": 748,
+        "width": 209,
+        "height": 112
+      },
+      "footAnchor": {
+        "x": 0.5008,
+        "y": 0.7432
+      }
+    },
+    {
+      "index": 11,
+      "name": "heavy-recovery",
+      "row": 2,
+      "column": 3,
+      "sourceRect": {
+        "x": 940.5,
+        "y": 627,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 1040,
+        "y": 729,
+        "width": 150,
+        "height": 136
+      },
+      "footAnchor": {
+        "x": 0.5375,
+        "y": 0.7592
+      }
+    },
+    {
+      "index": 12,
+      "name": "skill-windup",
+      "row": 3,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 940.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 83,
+        "y": 997,
+        "width": 126,
+        "height": 163
+      },
+      "footAnchor": {
+        "x": 0.4657,
+        "y": 0.7002
+      }
+    },
+    {
+      "index": 13,
+      "name": "skill-contact",
+      "row": 3,
+      "column": 1,
+      "sourceRect": {
+        "x": 313.5,
+        "y": 940.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 386,
+        "y": 1025,
+        "width": 195,
+        "height": 122
+      },
+      "footAnchor": {
+        "x": 0.5247,
+        "y": 0.6587
+      }
+    },
+    {
+      "index": 14,
+      "name": "skill-followthrough",
+      "row": 3,
+      "column": 2,
+      "sourceRect": {
+        "x": 627,
+        "y": 940.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 705,
+        "y": 1036,
+        "width": 212,
+        "height": 110
+      },
+      "footAnchor": {
+        "x": 0.5167,
+        "y": 0.6555
+      }
+    },
+    {
+      "index": 15,
+      "name": "skill-recovery",
+      "row": 3,
+      "column": 3,
+      "sourceRect": {
+        "x": 940.5,
+        "y": 940.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 1041,
+        "y": 1001,
+        "width": 138,
+        "height": 157
+      },
+      "footAnchor": {
+        "x": 0.5088,
+        "y": 0.6938
+      }
+    }
+  ],
+  "prompts": {
+    "initial": "Use case: stylized-concept. Asset type: production 2D fighting-game animation sprite atlas, exactly 4 columns by 4 rows, 16 distinct poses. Canvas 2048x2048, each invisible cell exactly 512x512. Genuinely transparent RGBA background throughout, no black, no checkerboard, no panels, no floor, no labels, no text. Fully painted refined Japanese fantasy anime, crisp silhouette and clean controlled detail at small game scale. Reference image is only identity, outfit, hair and paint-style reference; create an entirely new sprite atlas with true pose changes.\nEvery cell contains exactly one complete full-body character facing RIGHT in side-on three-quarter game view. Keep SAME character scale: standing body 72% of cell height, feet baseline 90% down cell, body centered at 46% across each cell. Even gutters, 6% minimum transparent padding from ALL cell edges. Every entire sword, hair braid/cape, hand and effect must fit inside its own cell with no crossing of invisible cell edges. Keep character large and recognizable, do not overlap adjacent sprites. Row-major reading order:\nRow 1: guarded idle with bent knees and weapon ready; running contact pose right leg forward; running passing pose left leg forward; airborne leap tucked knee and weapon drawn back.\nRow 2 normal attack four distinct successive animation poses: windup twisting shoulders weapon back; forward horizontal strike full extension contact; wide followthrough lowered stance arm across body; retract weapon recover to guard.\nRow 3 heavy attack four distinct successive poses: strong overhead windup both arms raised and knees bent; powerful downward sword strike contact; deep forward followthrough sword low and braid/cape flowing; recover from low stance.\nRow 4 unique elemental skill four distinct successive poses: deliberate skill charge; explosive skill release; flowing sustained followthrough; calm recovery.\nArms, legs and torso must visibly change in every action frame. No duplicates or mere glow changes. Aim for high quality animation keyframes and anatomically consistent body proportions. Weapon arcs should be small accents near blade, NO giant surrounding aura that hides pose. Preserve elegant adult proportions, detailed same costume and face throughout. All sixteen characters face right.\nSubject: Raiden Shogun matching the provided purple-haired reference: long violet braid, purple eyes, lavender short kimono with violet sleeves, gold ornaments, dark thigh-high stockings, purple shoes, red obi ribbon. Katana swordswoman. Row 4 skill is Musou lightning sword draw: charge with sword held vertically near chest; draw the glowing violet katana outward into a forward lightning slash; extended side lunge with small purple lightning ribbon following sword; recover blade lowered. Purple and lavender electricity accents only, expressive powerful martial stances.",
+    "layoutAndEffectsFix": "Use case: precise-object-edit. Edit the supplied sprite sheet for production game use. Preserve all sixteen character action poses, detailed costume and anime painting style, but FIX the atlas layout. REQUIRED EXACT 4 columns by 4 rows of equal square cells. Each complete character with weapon must fit inside its individual cell with a large clear fully transparent gutter on all four sides. Shrink EACH sprite independently to 70 percent of its present size, without shrinking the entire sheet; then center the complete sprite silhouette including its sword in the corresponding cell. Standing figure body should occupy only 58 percent of cell height; feet at 85 percent down cell, all knees/limbs have identical anatomical lengths frame to frame. Lowered poses naturally shorter. Make sword physically shorter if needed so even horizontal thrust fits inside a cell. REMOVE ALL elemental effects, colored aura, wind spirals, thunder trails, smoke, particles and cast shadows everywhere. Keep just solid character and solid weapon with subtle blade light. This is a clean RGBA sprite sheet with exactly 16 individually separated character images in a fixed regular 4x4 grid. Very obvious wide transparent bands between EVERY row and EVERY column. No sprite or sword may touch or enter any neighboring cell. No text, no grid lines, no background. Do not rearrange, drop or duplicate poses. Keep every character facing right. Genuinely transparent background, not black or checkerboard. Return square atlas.",
+    "finalSparseLayout": "Re-layout this image into a strict four by four sprite sheet. Sixteen tiny sprites, huge transparent gaps. This is a technical layout edit, don't change character design or pose. EACH OF THE SIXTEEN FULL FIGURES INCLUDING WEAPON must be SMALL: maximum silhouette width just 55% of its equal square cell. Uniformly REDUCE all sixteen sprites to approximately HALF the CURRENT width and half height. Center each whole sprite INCLUDING SWORD exactly in its cell, rather than aligning their body centers. Make the gap between adjacent sprites greater than HALF of a sprite's width. A LARGE empty transparent margin wraps every single sprite independently. Four equal rows and four equal columns with huge empty transparent bands on all row and column boundaries. Maintain proportional limbs and same pose scale everywhere. Keep all sixteen different poses exactly in their current reading order. No text, no lines, no panels. Remove all colored stray particles and colored aura near edges. Solid character sprites on clean true alpha transparent background. Absolutely no opacity in the wide gaps between cells. Output a square image. The atlas should visually look sparse: most of the canvas area must be empty transparency. Do not enlarge characters to fill canvas."
+  }
+}

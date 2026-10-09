@@ -1,0 +1,54 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local credentials and environment configuration
+.env
+.env.*
+!.env.example
+!.env.sample
+.npmrc
+*.pem
+*.key
+*.p12
+*.pfx
+.aws/
+
+# Local tool state, browser artifacts and generated previews
+.codex/
+.omc/
+.playwright-cli/
+.cache/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+/pixel-sprites-preview.png
+
+# Keep the reproducible art prompts, but not screenshots or draft renders
+/output/*
+!/output/imagegen/
+/output/imagegen/*
+!/output/imagegen/secondary-art-a-prompts.json
+!/output/imagegen/secondary-art-b-prompts.json

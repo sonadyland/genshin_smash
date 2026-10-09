@@ -1,0 +1,409 @@
+{
+  "version": 3,
+  "asset": "/assets/animations/eula-actions-v3.png",
+  "generator": "built-in image_gen",
+  "date": "2026-10-08",
+  "width": 1254,
+  "height": 1254,
+  "grid": {
+    "columns": 4,
+    "rows": 4,
+    "cellWidth": 313.5,
+    "cellHeight": 313.5
+  },
+  "frames": [
+    {
+      "index": 0,
+      "row": 0,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 0,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 88,
+        "y": 129,
+        "width": 155,
+        "height": 155
+      },
+      "name": "idle",
+      "footAnchor": {
+        "x": 0.49,
+        "y": 0.9059
+      }
+    },
+    {
+      "index": 1,
+      "row": 0,
+      "column": 1,
+      "sourceRect": {
+        "x": 313.5,
+        "y": 0,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 388,
+        "y": 146,
+        "width": 127,
+        "height": 139
+      },
+      "name": "run-contact",
+      "footAnchor": {
+        "x": 0.47,
+        "y": 0.9091
+      }
+    },
+    {
+      "index": 2,
+      "row": 0,
+      "column": 2,
+      "sourceRect": {
+        "x": 627,
+        "y": 0,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 695,
+        "y": 157,
+        "width": 159,
+        "height": 128
+      },
+      "name": "run-passing",
+      "footAnchor": {
+        "x": 0.49,
+        "y": 0.9091
+      }
+    },
+    {
+      "index": 3,
+      "row": 0,
+      "column": 3,
+      "sourceRect": {
+        "x": 940.5,
+        "y": 0,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 1015,
+        "y": 125,
+        "width": 147,
+        "height": 161
+      },
+      "name": "airborne",
+      "footAnchor": {
+        "x": 0.5,
+        "y": 0.9123
+      }
+    },
+    {
+      "index": 4,
+      "row": 1,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 313.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 83,
+        "y": 426,
+        "width": 160,
+        "height": 159
+      },
+      "name": "attack-windup",
+      "footAnchor": {
+        "x": 0.54,
+        "y": 0.866
+      }
+    },
+    {
+      "index": 5,
+      "row": 1,
+      "column": 1,
+      "sourceRect": {
+        "x": 313.5,
+        "y": 313.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 388,
+        "y": 450,
+        "width": 181,
+        "height": 135
+      },
+      "name": "attack-contact",
+      "footAnchor": {
+        "x": 0.5,
+        "y": 0.866
+      }
+    },
+    {
+      "index": 6,
+      "row": 1,
+      "column": 2,
+      "sourceRect": {
+        "x": 627,
+        "y": 313.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 701,
+        "y": 460,
+        "width": 223,
+        "height": 123
+      },
+      "name": "attack-followthrough",
+      "footAnchor": {
+        "x": 0.49,
+        "y": 0.8596
+      }
+    },
+    {
+      "index": 7,
+      "row": 1,
+      "column": 3,
+      "sourceRect": {
+        "x": 940.5,
+        "y": 313.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 1058,
+        "y": 426,
+        "width": 125,
+        "height": 162
+      },
+      "name": "attack-recovery",
+      "footAnchor": {
+        "x": 0.6,
+        "y": 0.8756
+      }
+    },
+    {
+      "index": 8,
+      "row": 2,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 627,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 79,
+        "y": 722,
+        "width": 139,
+        "height": 161
+      },
+      "name": "heavy-windup",
+      "footAnchor": {
+        "x": 0.52,
+        "y": 0.8166
+      }
+    },
+    {
+      "index": 9,
+      "row": 2,
+      "column": 1,
+      "sourceRect": {
+        "x": 313.5,
+        "y": 627,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 392,
+        "y": 751,
+        "width": 181,
+        "height": 128
+      },
+      "name": "heavy-contact",
+      "footAnchor": {
+        "x": 0.49,
+        "y": 0.8038
+      }
+    },
+    {
+      "index": 10,
+      "row": 2,
+      "column": 2,
+      "sourceRect": {
+        "x": 627,
+        "y": 627,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 702,
+        "y": 772,
+        "width": 218,
+        "height": 107
+      },
+      "name": "heavy-followthrough",
+      "footAnchor": {
+        "x": 0.49,
+        "y": 0.8038
+      }
+    },
+    {
+      "index": 11,
+      "row": 2,
+      "column": 3,
+      "sourceRect": {
+        "x": 940.5,
+        "y": 627,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 1045,
+        "y": 716,
+        "width": 129,
+        "height": 166
+      },
+      "name": "heavy-recovery",
+      "footAnchor": {
+        "x": 0.6,
+        "y": 0.8134
+      }
+    },
+    {
+      "index": 12,
+      "row": 3,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 940.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 81,
+        "y": 1024,
+        "width": 153,
+        "height": 143
+      },
+      "name": "skill-windup",
+      "footAnchor": {
+        "x": 0.5,
+        "y": 0.7225
+      }
+    },
+    {
+      "index": 13,
+      "row": 3,
+      "column": 1,
+      "sourceRect": {
+        "x": 313.5,
+        "y": 940.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 382,
+        "y": 1038,
+        "width": 198,
+        "height": 127
+      },
+      "name": "skill-contact",
+      "footAnchor": {
+        "x": 0.5,
+        "y": 0.7161
+      }
+    },
+    {
+      "index": 14,
+      "row": 3,
+      "column": 2,
+      "sourceRect": {
+        "x": 627,
+        "y": 940.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 704,
+        "y": 1038,
+        "width": 214,
+        "height": 128
+      },
+      "name": "skill-followthrough",
+      "footAnchor": {
+        "x": 0.5,
+        "y": 0.7193
+      }
+    },
+    {
+      "index": 15,
+      "row": 3,
+      "column": 3,
+      "sourceRect": {
+        "x": 940.5,
+        "y": 940.5,
+        "width": 313.5,
+        "height": 313.5
+      },
+      "alphaBoundsPixels": {
+        "x": 1030,
+        "y": 1019,
+        "width": 148,
+        "height": 150
+      },
+      "name": "skill-recovery",
+      "footAnchor": {
+        "x": 0.56,
+        "y": 0.7289
+      }
+    }
+  ],
+  "validation": {
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelFraction": 0.7492,
+    "visiblePixelsAtThreePixelCellEdges": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "character": "eula",
+  "facing": "right",
+  "referenceAsset": "/assets/characters/eula-v2.png",
+  "standingBodyHeightPixels": 155,
+  "notes": [
+    "Use fixed standingBodyHeightPixels across every frame. Do not scale frames individually to alpha bounds.",
+    "Fractional sourceRect dimensions exactly divide the atlas into sixteen equal cells.",
+    "Foot anchor x is a visually estimated ground stance center; y is measured at visible alpha > 32 bottom.",
+    "All frames have zero alpha > 32 pixels in the 3-pixel strip around every cell edge. Full weapons remain isolated.",
+    "Generated alpha was preserved unchanged; no image cropping or postprocessing was used."
+  ],
+  "prompts": {
+    "initial": "Use case: stylized-concept. Asset type: production 2D fighting game animation sprite sheet. Make exactly sixteen DISTINCT full-body hand-painted anime sprites in a rigid four-column by four-row layout on a square 2048x2048 transparent RGBA canvas, equal 512x512 invisible cells. No text, captions, borders or drawn grid. Image 1 is ONLY a character identity, costume and rendering-style reference. Do not reproduce the background or standing portrait. Create new fully articulated dynamic poses with visibly different arms, torso, hips, knees and sword angles; no duplicates and no merely translated portrait. Same adult character identity, same costume, same camera, same body scale in all sixteen cells, polished Japanese fantasy illustration with crisp readable silhouette and refined highlights. Each pose faces RIGHT at three-quarter side view suitable for a side-view platform fighter, with the face tending toward the right. Within each cell keep the body centered near x=46%, feet baseline at y=88%, head normally y=19%, a character approximately 70% of cell height. Allow room for weapons: contain each figure, every sword tip, cape, and light effect fully inside its own cell with at least 5% transparent padding on every side. Weapon length may use perspective foreshortening to stay inside cell. Background must be genuinely fully alpha transparent, no painted checkerboard, floor, fog, glow backdrop or cast shadow. Visible magic strokes can have translucent alpha and may accompany attack contact poses only. Anatomy must remain consistent and elegant, feet fully visible. Reading order left to right, top to bottom: row 1: combat idle guard, running stride left leg forward, running stride right leg forward, airborne jump with knees lifted. Row 2: light attack anticipation drawing greatsword back, light attack decisive forward slash contact with hips twisted and front knee bent, light attack extended follow-through with sword out ahead, light attack recovery pulling weapon toward guard. Row 3: heavy attack deep crouched overhead wind-up, heavy attack powerful descending contact arc, heavy attack low forward extended follow-through with legs widely braced, heavy attack rising recovery to guard. Row 4: unique elemental skill anticipation, elemental skill release/contact, elemental skill continued full-body follow-through, elemental skill recovery. All four poses of attack/skill rows form real sequential motion. Subject: Eula, the same adult pale blue-haired ice greatsword swordswoman in the reference, retaining pale blue asymmetric bob, blue feather hair ornament, black and white royal blue and silver ornate outfit, short cape panels, long dark boots, large icy blue silver greatsword. Skill row: graceful cryo spinning greatsword sweep; anticipation gathers an ice blade beside shoulder with knees bent, release turns torso and sweeps a clean icy crescent toward right, follow-through uses a dancer's extended step and flowing cape with several blue ice shards around the blade, recovery settles upright. Attack magic is ice blue. Face/costume visual fidelity to supplied reference.",
+    "layoutAndEffectsFix": "Use case: precise-object-edit. Correct ONLY the atlas layout of this 16-pose sprite sheet for production runtime cropping. Keep all sixteen poses, their reading order, adult character identity, detailed costume, Japanese anime rendering, body anatomy, right-facing direction, and greatsword physical proportions. Output a square 2048x2048 RGBA image, exactly 4 columns x 4 rows of equal invisible 512x512 cells. CRITICAL CORRECTION: each complete figure with its full greatsword and cape must fit strictly inside its own cell with 12% completely transparent empty border on ALL FOUR SIDES. Current source weapons/magic cross cell boundaries; fix this by shrinking the COMPLETE sprite (person AND weapon together proportionally) inside each 512x512 cell, re-centering each pose. Never shorten the sword or crop its tip. Target body height is about 60% of cell, around 310 pixels on a 2048 image, not 80–90%. The whole silhouette INCLUDING cape and full-length weapon must fit within the central 76% (x=12%..88%, y=12%..88%) of each cell. Baseline for both boots at each cell y=85% for ground poses; keep airborne pose's boots higher. BODY centered near x=44–48%. Each sprite must be separated from neighbors by a clearly visible wide empty transparent gutter. REMOVE broad circular magic ribbons and large flame/ice arcs in every frame, because the engine renders those separately; keep only a very thin elemental blade glow and tiny localized particles right beside the sword. In particular the horizontally thrust sword in row 2 col 3 must be fully contained in col 3, never enter col 4. The skill poses in row 4 must also be independent with transparent gaps between them. Do not add grid lines, visible boxes, divider marks, captions, text, floors, backgrounds, shadows, or checkerboard. Genuine alpha transparency. Preserve sixteen different articulated poses and the same sequence as input; do not merge cells.",
+    "finalSparseLayout": "Use case: precise-object-edit. Image 1 is the character and all 16 poses to preserve. Image 2 is ONLY the correct spacious sprite-sheet layout to match. Create a fresh transparent sprite sheet of Image 1's character with all the same 16 poses, but use Image 2's MUCH SMALLER CHARACTER SIZE and extremely wide empty margins. Four columns and four rows on a square transparent RGBA canvas. EXACTLY sixteen small isolated character thumbnails. Each full sprite, including its entire sword, cape, hair and feet, must be only 50 percent of a cell's height and no more than 60 percent of a cell's width. Each sprite is centered at x=50% y=58% within its cell. This means around 80% of the whole image must be blank transparent space. The first image's sprites are FAR TOO LARGE: shrink each complete figure and sword together by 50 percent to achieve the second image's layout. Keep sword body ratios and full sword tip; do not shorten the sword. Do not make any character larger than any sprite in image 2. Every pose has at least 20 percent of a cell of fully empty transparent padding left, right, above and below. Keep all sixteen distinct poses and the same order from Image 1, right facing, detailed adult identity and costume unchanged; don't copy the purple woman from Image 2. Remove every light plume and glow cloud from Image 1. Only keep an extremely fine colored line on the sword edge. No element effect outside sword. Precise transparent gutters at each one-quarter image line both vertically and horizontally; all quarter lines plus 15% of cell width around them are completely transparent. Polished Japanese fantasy rendering. Do not fill the image with large portraits! This is a small-sprite atlas with most space empty, for technical cropping into 16 frames. No text, no grids or visible borders, no floor/shadows/background/checkerboard. Transparent background."
+  }
+}

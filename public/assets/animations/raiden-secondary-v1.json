@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "character": "raiden",
+  "asset": "/assets/animations/raiden-secondary-v1.png",
+  "generator": "built-in image_gen",
+  "date": "2026-10-08",
+  "width": 1254,
+  "height": 1254,
+  "grid": {
+    "columns": 2,
+    "rows": 2,
+    "cellWidth": 627,
+    "cellHeight": 627
+  },
+  "facing": "right",
+  "standingBodyHeightPixels": 260,
+  "notes": [
+    "Secondary skill 雷罚·天光. Four distinct poses ordered windup/contact/followthrough/recover.",
+    "Original generated RGBA retained without pixel editing. Standing body reference excludes overhead sword.",
+    "Foot anchors are visually registered between support feet, never centered on weapon-inclusive alpha bounds."
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "name": "secondary-windup",
+      "row": 0,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 175,
+        "y": 280,
+        "width": 278,
+        "height": 320
+      },
+      "footAnchor": {
+        "x": 0.55821,
+        "y": 0.95694
+      }
+    },
+    {
+      "index": 1,
+      "name": "secondary-contact",
+      "row": 0,
+      "column": 1,
+      "sourceRect": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 838,
+        "y": 182,
+        "width": 236,
+        "height": 420
+      },
+      "footAnchor": {
+        "x": 0.54386,
+        "y": 0.96013
+      }
+    },
+    {
+      "index": 2,
+      "name": "secondary-followthrough",
+      "row": 1,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 170,
+        "y": 904,
+        "width": 346,
+        "height": 245
+      },
+      "footAnchor": {
+        "x": 0.55024,
+        "y": 0.83254
+      }
+    },
+    {
+      "index": 3,
+      "name": "secondary-recover",
+      "row": 1,
+      "column": 1,
+      "sourceRect": {
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 833,
+        "y": 893,
+        "width": 281,
+        "height": 256
+      },
+      "footAnchor": {
+        "x": 0.53907,
+        "y": 0.83254
+      }
+    }
+  ],
+  "alphaValidation": {
+    "minimum": 0,
+    "maximum": 255,
+    "fullyTransparentFraction": 0.88732
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "asset": "/assets/effects/secondary-effects-v1.png",
+  "generator": "built-in image_gen",
+  "date": "2026-10-08",
+  "width": 1536,
+  "height": 1024,
+  "grid": {
+    "columns": 3,
+    "rows": 2,
+    "cellWidth": 512,
+    "cellHeight": 512
+  },
+  "frames": [
+    {
+      "id": "raiden",
+      "index": 0,
+      "row": 0,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alphaBoundsPixels": {
+        "x": 129,
+        "y": 93,
+        "width": 269,
+        "height": 380
+      }
+    },
+    {
+      "id": "jean",
+      "index": 1,
+      "row": 0,
+      "column": 1,
+      "sourceRect": {
+        "x": 512,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alphaBoundsPixels": {
+        "x": 647,
+        "y": 85,
+        "width": 260,
+        "height": 387
+      }
+    },
+    {
+      "id": "eula",
+      "index": 2,
+      "row": 0,
+      "column": 2,
+      "sourceRect": {
+        "x": 1024,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alphaBoundsPixels": {
+        "x": 1118,
+        "y": 116,
+        "width": 338,
+        "height": 338
+      }
+    },
+    {
+      "id": "diluc",
+      "index": 3,
+      "row": 1,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alphaBoundsPixels": {
+        "x": 81,
+        "y": 597,
+        "width": 366,
+        "height": 329
+      }
+    },
+    {
+      "id": "xiao",
+      "index": 4,
+      "row": 1,
+      "column": 1,
+      "sourceRect": {
+        "x": 512,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alphaBoundsPixels": {
+        "x": 580,
+        "y": 704,
+        "width": 376,
+        "height": 153
+      }
+    },
+    {
+      "id": "impact",
+      "index": 5,
+      "row": 1,
+      "column": 2,
+      "sourceRect": {
+        "x": 1024,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alphaBoundsPixels": {
+        "x": 1123,
+        "y": 618,
+        "width": 311,
+        "height": 308
+      }
+    }
+  ],
+  "validation": {
+    "alphaRange": [
+      0,
+      254
+    ],
+    "transparentPixelFraction": 0.726094,
+    "visiblePixelsAtThreePixelCellEdges": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "notes": [
+    "Original generated RGBA preserved unchanged; no postprocessing or pixel edits.",
+    "Six independent effects in row-major order: lightning column, updraft, ice fan, firebird, wind spear, impact.",
+    "Background alpha is zero outside sprites. Some invisible RGB pixels retain generator glow colors; use original RGBA alpha for compositing.",
+    "All three-pixel cell border strips contain zero alpha > 32 pixels.",
+    "Prompt history: output/imagegen/secondary-art-b-prompts.json"
+  ]
+}

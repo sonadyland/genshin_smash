@@ -1,0 +1,29 @@
+# Only send build inputs. This excludes node_modules, dist, output, .git,
+# editor files, local screenshots, test artifacts and development tools.
+**
+!Dockerfile
+!.dockerignore
+!package.json
+!package-lock.json
+!index.html
+!tsconfig*.json
+!vite.config.ts
+!postcss.config.js
+!tailwind.config.js
+!src/
+!src/**
+!public/
+!public/**
+!docker/
+!docker/nginx.conf
+
+# Never include local credentials, even if they are inside a source directory.
+**/.env
+**/.env.*
+**/.npmrc
+**/.git
+**/.git/**
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx

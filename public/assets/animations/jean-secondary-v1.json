@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "character": "jean",
+  "asset": "/assets/animations/jean-secondary-v1.png",
+  "generator": "built-in image_gen",
+  "date": "2026-10-08",
+  "width": 1254,
+  "height": 1254,
+  "grid": {
+    "columns": 2,
+    "rows": 2,
+    "cellWidth": 627,
+    "cellHeight": 627
+  },
+  "facing": "right",
+  "standingBodyHeightPixels": 387,
+  "notes": [
+    "Secondary skill 风起·升流. Row-major windup/contact/followthrough/recover.",
+    "Original generated RGBA retained without pixel editing. Standing body height measured from recovery hair top to boot soles, excluding sword.",
+    "Foot anchors register support-foot center; crouching windup intentionally has a shorter silhouette."
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "name": "secondary-windup",
+      "row": 0,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 115,
+        "y": 233,
+        "width": 493,
+        "height": 340
+      },
+      "footAnchor": {
+        "x": 0.51196,
+        "y": 0.91388
+      }
+    },
+    {
+      "index": 1,
+      "name": "secondary-contact",
+      "row": 0,
+      "column": 1,
+      "sourceRect": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 746,
+        "y": 68,
+        "width": 451,
+        "height": 514
+      },
+      "footAnchor": {
+        "x": 0.47528,
+        "y": 0.92823
+      }
+    },
+    {
+      "index": 2,
+      "name": "secondary-followthrough",
+      "row": 1,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 139,
+        "y": 681,
+        "width": 377,
+        "height": 518
+      },
+      "footAnchor": {
+        "x": 0.5949,
+        "y": 0.91228
+      }
+    },
+    {
+      "index": 3,
+      "name": "secondary-recover",
+      "row": 1,
+      "column": 1,
+      "sourceRect": {
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 735,
+        "y": 805,
+        "width": 416,
+        "height": 387
+      },
+      "footAnchor": {
+        "x": 0.47687,
+        "y": 0.90112
+      }
+    }
+  ],
+  "alphaValidation": {
+    "minimum": 0,
+    "maximum": 255,
+    "fullyTransparentFraction": 0.80688
+  }
+}

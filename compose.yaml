@@ -1,0 +1,17 @@
+services:
+  game:
+    image: genshin-smash:local
+    build:
+      context: .
+    ports:
+      - "18021:8080"
+    restart: unless-stopped
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

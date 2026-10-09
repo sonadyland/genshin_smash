@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "asset": "/assets/animations/eula-secondary-v1.png",
+  "generator": "built-in image_gen",
+  "date": "2026-10-08",
+  "width": 1254,
+  "height": 1254,
+  "grid": {
+    "columns": 2,
+    "rows": 2,
+    "cellWidth": 627,
+    "cellHeight": 627
+  },
+  "character": "eula",
+  "facing": "right",
+  "referenceAsset": "/assets/characters/eula-v2.png",
+  "standingBodyHeightPixels": 334,
+  "frames": [
+    {
+      "index": 0,
+      "name": "windup",
+      "row": 0,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 151,
+        "y": 281,
+        "width": 358,
+        "height": 276
+      },
+      "footAnchor": {
+        "x": 0.562,
+        "y": 0.888357
+      }
+    },
+    {
+      "index": 1,
+      "name": "contact",
+      "row": 0,
+      "column": 1,
+      "sourceRect": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 762,
+        "y": 273,
+        "width": 357,
+        "height": 293
+      },
+      "footAnchor": {
+        "x": 0.498,
+        "y": 0.902711
+      }
+    },
+    {
+      "index": 2,
+      "name": "followthrough",
+      "row": 1,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 148,
+        "y": 896,
+        "width": 471,
+        "height": 219
+      },
+      "footAnchor": {
+        "x": 0.495,
+        "y": 0.778309
+      }
+    },
+    {
+      "index": 3,
+      "name": "recover",
+      "row": 1,
+      "column": 1,
+      "sourceRect": {
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "alphaBoundsPixels": {
+        "x": 808,
+        "y": 788,
+        "width": 269,
+        "height": 334
+      },
+      "footAnchor": {
+        "x": 0.506,
+        "y": 0.789474
+      }
+    }
+  ],
+  "validation": {
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelFraction": 0.872527,
+    "visiblePixelsAtThreePixelCellEdges": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "notes": [
+    "Original generated RGBA preserved unchanged. Image only inspected, never cropped or pixel-edited.",
+    "Use one fixed standingBodyHeightPixels for all frames; low stances stay low.",
+    "standingBodyHeightPixels measures recovery pose head to feet, excluding raised weapon.",
+    "Foot anchor x is visual center between supporting boots; y is alpha > 32 boot baseline.",
+    "Prompt history: output/imagegen/secondary-art-b-prompts.json"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "version": 3,
+  "character": "xiao",
+  "asset": "/assets/effects/xiao-plunge-v3.png",
+  "generator": "built-in image_gen",
+  "date": "2026-10-08",
+  "width": 1774,
+  "height": 887,
+  "grid": {
+    "columns": 2,
+    "rows": 1,
+    "cellWidth": 887,
+    "cellHeight": 887
+  },
+  "transparentBackground": true,
+  "frames": [
+    {
+      "index": 0,
+      "row": 0,
+      "column": 0,
+      "sourceRect": {
+        "x": 0,
+        "y": 0,
+        "width": 887,
+        "height": 887
+      },
+      "alphaBoundsPixels": {
+        "x": 292,
+        "y": 51,
+        "width": 319,
+        "height": 792
+      },
+      "borderPixelsAbove32": 0,
+      "kind": "descent",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "index": 1,
+      "row": 0,
+      "column": 1,
+      "sourceRect": {
+        "x": 887,
+        "y": 0,
+        "width": 887,
+        "height": 887
+      },
+      "alphaBoundsPixels": {
+        "x": 940,
+        "y": 190,
+        "width": 770,
+        "height": 579
+      },
+      "borderPixelsAbove32": 0,
+      "kind": "impact",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  ],
+  "validation": {
+    "width": 1774,
+    "height": 887,
+    "pixelFormat": "Format32bppArgb",
+    "transparentPixels": 1121570,
+    "semiTransparentPixels": 451966,
+    "opaquePixels": 2
+  },
+  "notes": [
+    "Left cell is the spear-first descending jade wind/yaksha trail; right cell is the landing ring and upward wind lances.",
+    "Both source cells are centre anchored. Runtime may flatten the impact to suit the side-view arena.",
+    "Zero pixels at alpha > 32 in each source cell's 3px border. Genuine generated alpha is preserved."
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: transparent 2D combat effects atlas for Xiao's aerial plunge attack. Canvas LANDSCAPE 2:1 aspect ratio. EXACTLY TWO columns and ONE row, two invisible equal square cells side by side, no grid or labels. Each cell contains one complete isolated special effect, centered with 20% pure transparent empty margin on ALL sides. Left cell: a vertical downward Anemo jade energy spear trail, narrow bright turquoise spear-shaped core, sharp POINT AT BOTTOM, wispy dark teal and jade-green ghostly tendrils rising upward, small stylized horned yaksha mask apparition near upper center. Fast dramatic descending wind lance, no character, no solid physical spear. Right cell: low horizontal ground-impact shockwave, bright luminous thin elliptical jade ring expanding outward, eight short sharp turquoise anemo lances emerging vertically/diagonally upward from ground at center, tiny jade light fragments and a few small gray debris stones, supernatural Xiao plunge impact. No background platform or floor, clean alpha inside and around effect. Refined hand-painted Japanese anime game VFX, elegant crisp jade shapes, pale cyan bright cores, dark teal edges, subtle controlled glow. All effects and faint glows must be completely contained within their own cell with wide fully transparent gaps. Never touch edges, never cross middle divider. No text, no labels, no numbers, no watermarks, no border. Actual transparent RGBA background, not black, no checkerboard. Not a full scene."
+}

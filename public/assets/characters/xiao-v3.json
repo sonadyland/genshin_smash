@@ -1,0 +1,40 @@
+{
+  "version": 3,
+  "character": "xiao",
+  "asset": "/assets/characters/xiao-v3.png",
+  "generator": "built-in image_gen",
+  "date": "2026-10-08",
+  "width": 1024,
+  "height": 1536,
+  "referenceAsset": "/assets/characters/raiden-v2.png",
+  "transparentBackground": true,
+  "validation": {
+    "width": 1024,
+    "height": 1536,
+    "pixelFormat": "Format32bppArgb",
+    "transparentPixels": 905904,
+    "semiTransparentPixels": 666960,
+    "opaquePixels": 0,
+    "frames": [
+      {
+        "index": 0,
+        "row": 0,
+        "column": 0,
+        "sourceRect": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 1536
+        },
+        "alphaBoundsPixels": {
+          "x": 5,
+          "y": 13,
+          "width": 995,
+          "height": 1493
+        },
+        "borderPixelsAbove32": 0
+      }
+    ]
+  },
+  "prompt": "Use case: stylized-concept. Asset type: polished full-body transparent character portrait for a Japanese fantasy anime fighting game. Create Xiao (魈), the adult adeptus yaksha from Genshin Impact, instantly recognizable with short dark teal hair with jade streaks, sharp golden eyes, purple forehead diamond, white sleeveless ornate top with turquoise patterns, green tattoo on his exposed right arm, dark purple trousers, jade and gold waist ornaments, and dark yaksha mask hanging at his hip. He holds his green jade-bladed polearm Primordial Jade Winged-Spear. Beautiful refined anime illustration with clean fine linework and painterly cel shading matching the supplied Raiden style reference, elegant adult athletic proportions and detailed costume, not chibi. Full body including hair, both shoes and entire spear tip. Three-quarter side view facing RIGHT, balanced battle-ready standing pose, stern focused expression. All of Xiao, accessories and weapon sit inside the image with at least 8% empty transparent padding. Canvas portrait composition. Jade, teal, white, dark purple and gold. Actual transparent RGBA background; no environment, no floor, no dark background, no cast shadow, no large glowing aura. Subtle jade light on spear blade only. No text, no labels, no logos, no watermarks. Input is style reference only; do not copy Raiden's identity, costume or weapon."
+}

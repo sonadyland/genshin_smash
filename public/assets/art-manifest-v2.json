@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2026-10-08",
+  "source": "Built-in image_gen.imagegen tool (image_gen__imagegen). Not an external CLI/API script.",
+  "direction": "精致日系幻想风 / polished Japanese fantasy anime illustration",
+  "generationMode": "One transparent full-body image per character; one opaque environment background.",
+  "assets": [
+    {
+      "id": "raiden",
+      "path": "characters/raiden-v2.png",
+      "width": 1024,
+      "height": 1536,
+      "transparent": true,
+      "alphaZeroSampleRatio": 0.5743509928385416,
+      "alpha128SampleBounds": [
+        40,
+        64,
+        1008,
+        1468
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: transparent full-body 2D action game character sprite, ONE character only. Subject: Raiden Shogun from Genshin Impact, adult woman with very long braided deep-violet hair, ornate lavender and white kimono-inspired fantasy battle dress with dark purple underskirt, red obi cord, delicate gold and purple accessories, violet eyes; holding one elegant glowing violet lightning katana. Art direction: exquisite polished Japanese fantasy anime game illustration, beautiful expressive face, sharp confident eyes, clean detailed linework, refined cel shading with soft painted highlights, elegant believable anatomy, coherent fabric folds, crisp readable silhouette, premium character art. Composition: full body from complete hair to complete shoes, centered in a portrait 2:3 canvas, almost side-on three-quarter view facing RIGHT, calm ready stance with slight bend in knees, sword held toward right and fully inside canvas. Feet level at 92% canvas height, head top around 8%, leave transparent padding on all edges. Character designed to remain readable at small platform fighting game size. Actual transparent background with alpha, no background and no ground and no shadow disc. No scene, no duplicate figure, no other poses, no panels, no borders, no text, no labels, no watermark. Avoid chibi, pixel art, thick cartoon outlines, simplified geometric shapes, blurred details, cut-off feet or cut-off weapon."
+    },
+    {
+      "id": "jean",
+      "path": "characters/jean-v2.png",
+      "width": 1024,
+      "height": 1536,
+      "transparent": true,
+      "alphaZeroSampleRatio": 0.6807454427083334,
+      "alpha128SampleBounds": [
+        44,
+        16,
+        972,
+        1484
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: transparent full-body 2D action game character sprite, ONE character only. Subject: Jean Gunnhildr from Genshin Impact, adult woman with golden blonde high ponytail tied with a dark ribbon, clear blue-gray eyes, elegant fitted white and navy-blue Knights of Favonius uniform, gold filigree trim, white pants, dark tall boots, white-blue half cape, modest dignified fantasy knight styling; holding one slender silver longsword with ornate gold-blue crossguard. Art direction: exquisite polished Japanese fantasy anime game illustration, beautiful expressive face, sharp confident eyes, clean detailed linework, refined cel shading with soft painted highlights, elegant believable anatomy, coherent fabric folds, crisp readable silhouette, premium character art. Composition: full body from complete hair to complete boots, centered in a portrait 2:3 canvas, three-quarter almost side-on view facing RIGHT, alert ready stance with slight bend in knees; sword diagonally down toward right and fully inside canvas, realistic one-handed grip. Feet level at 94% canvas height, head top at 5%, transparent padding on all sides. Must remain readable at small platform fighting game size. Actual transparent background with alpha, isolated cutout, no background, no ground, no drop shadow, NO AURA OR GLOW BEHIND CHARACTER. No scene, no duplicate figure, no other poses, no panels, no borders, no text, no labels, no watermark. Avoid chibi, pixel art, thick cartoon outlines, simplified geometric shapes, blurred details, cropped feet or cropped weapon."
+    },
+    {
+      "id": "eula",
+      "path": "characters/eula-v2.png",
+      "width": 1024,
+      "height": 1536,
+      "transparent": true,
+      "alphaZeroSampleRatio": 0.65185546875,
+      "alpha128SampleBounds": [
+        52,
+        56,
+        1008,
+        1492
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: transparent full-body 2D action game character sprite, ONE character only. Subject: Eula Lawrence from Genshin Impact, adult woman with short softly wavy ice-blue hair, amber violet eyes, elegant blue-and-black aristocratic knight battle outfit with asymmetric pale-blue cape, intricate white lace and silver filigree, navy fitted bodice, thigh-high dark boots and a blue hair ornament; carrying one long elegant icy-blue and silver CLAYMORE sword with ornate pale blue crossguard. Art direction: exquisite polished Japanese fantasy anime game illustration, beautiful expressive face, clear confident eyes, clean detailed linework, refined cel shading with soft painted highlights, elegant believable anatomy, coherent fabric folds, crisp readable silhouette, premium character art. Composition: full body including all hair and both boots, centered in portrait 2:3 canvas, three-quarter almost side-on view facing RIGHT, graceful but grounded ready stance with knees slightly bent, claymore angled down across body toward lower right and completely inside canvas. Feet level around 94% canvas height, top of hair around 5%, transparent padding on all edges. Match premium anime fighting game character standing sprites, readable at small display sizes. Actual transparent background with alpha, clean isolated cutout, no background, no ground, no drop shadow, NO AURA OR MIST BEHIND CHARACTER. No duplicate figure, no other poses, no panels, no borders, no text, no label, no watermark. Avoid chibi, pixel art, thick cartoon outlines, simplified geometric shapes, blurred details, cropped feet, cropped weapon, implausible anatomy."
+    },
+    {
+      "id": "diluc",
+      "path": "characters/diluc-v2.png",
+      "width": 1024,
+      "height": 1536,
+      "transparent": true,
+      "alphaZeroSampleRatio": 0.6728108723958334,
+      "alpha128SampleBounds": [
+        48,
+        56,
+        1012,
+        1476
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: transparent full-body 2D action game character sprite, ONE character only. Subject: Diluc Ragnvindr from Genshin Impact, adult tall athletic man with long crimson-red hair tied into a loose low ponytail and red eyes, a handsome serious face, aristocratic black long coat with rich dark red inner lining, intricate gold-silver fastenings and black gloves, white shirt, fitted charcoal trousers, tall black boots; holding a large elegant dark steel and red fantasy claymore with ornate silver crossguard and a subtle ember-red edge. Art direction: exquisite polished Japanese fantasy anime game illustration, sharp detailed face, confident eyes, clean detailed linework, refined cel shading with soft painted highlights, believable athletic masculine anatomy, coherent fabric folds, crisp readable silhouette, premium character art. Composition: full body with complete hair and both boots, centered on portrait 2:3 canvas, three-quarter almost side-on view facing RIGHT, grounded swordfighter ready stance with slight knee bend, claymore angled down across body toward lower right and fully inside canvas. Feet level around 94% canvas height, head top around 5%, leave transparent padding on every edge. Designed to remain readable at small platform fighter game size. Actual transparent background with alpha, isolated clean cutout, no background, no ground, no drop shadow, NO AURA OR FIRE CLOUD BEHIND CHARACTER. No duplicate figure, no other poses, no panels, no borders, no text, no labels, no watermark. Avoid chibi, pixel art, thick cartoon outlines, simplified geometric shapes, blurred details, cropped feet or cropped weapon, implausible anatomy."
+    },
+    {
+      "id": "liyue-dawn",
+      "path": "backgrounds/liyue-dawn-v2.png",
+      "width": 1672,
+      "height": 941,
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: production background illustration for a side-view anime platform fighting game. Primary request: an exquisite luminous Liyue fantasy mountain landscape, wide 16:9 cinematic composition at dawn, teal blue layered karst peaks rising through soft clouds and a calm broad sea of mist. Distant floating ancient Chinese stone ruins and classical Chinese pavilion rooftops on mountain summits frame the extreme left and right. A tall elegant mountain spire toward the right, a small pavilion far left, delicate warm gold sunlight skimming cliffs, pale jade and blue atmospheric perspective. Polished Japanese fantasy anime game environment concept art with intricate tasteful detail and painterly atmospheric lighting, luminous clouds, subtle warm peach horizon contrasting with cool cyan and deep blue mountains. Frame to serve a 2D fighting arena: the central 70 percent and lower half must remain visually quiet, open mist and distant scenery, broad low-contrast negative space for character silhouettes and platforms supplied separately by the game. Horizon in the upper third. Foreground only tiny wisps of cloud; absolutely NO playable platforms, NO foreground terrain ledge, NO ground surface stretching across image, NO people, NO characters, NO weapons, NO text, NO UI, NO logos, NO watermark, NO frame. Beautiful restrained fantastical atmosphere, strong depth, no photorealism, no neon colors. Wide 16:9 landscape."
+    }
+  ],
+  "validation": "All five files opened with view_image. Character alpha verified via System.Drawing bitmap pixel inspection on a four-pixel grid (98,304 samples each). Background opacity verified on a four-pixel grid (98,648 samples). Alpha bbox is approximate sampled guidance; production code can calculate exact bounds."
+}
