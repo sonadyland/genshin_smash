@@ -1,0 +1,608 @@
+{
+  "version": 1,
+  "date": "2026-10-09",
+  "skill": "C:/Users/46637/.codex/skills/.system/imagegen/SKILL.md",
+  "mode": "built-in image_gen",
+  "transparentBackground": true,
+  "character": "jean",
+  "scope": "New versioned special-v5 and secondary-v5 artwork/metadata only; runtime integration performed separately. Preserve original 12-frame phase sequence and durations.",
+  "generations": [
+    {
+      "id": "L-initial",
+      "prompt": "Use case: stylized-concept.\nAsset type: production transparent game sprite animation sheet, Jean elemental skill Gale Blade, a FORWARD WIND-PRESSURE CAST combined with a short centered sword thrust.\nCreate exactly 12 DISTINCT full-body poses in a strict 4-column 3-row layout, read left-to-right then top-to-bottom, on a 4:3 canvas. Genuine RGBA transparent background. Reference image is Jean basic.png for exact identity, clothing and sword construction, NOT its attack poses. Same adult woman with blonde high ponytail, blue ribbon, white fitted knight uniform, dark navy-blue split coat and gold trim, long dark boots, black gloves. Exquisite detailed Japanese anime painting matching reference; same mature proportions, same slender straight silver one-handed sword with ornate gold guard and blue center accent. Facing RIGHT in mild three-quarter side view.\n\nCHOREOGRAPHY: She gathers wind inward by retracting her sword close to the RIGHT ribs and pressing her LEFT open palm inward; then steps half a pace to deliver one SHORT FORWARD CENTERLINE THRUST and a quick open empty left-palm push. This is not a rotational slash, not repeated jabs and not a permanent deep wide lunge. Wind-pressure generation is indicated by her concentrated closed body then clear release in frame05; avoid large painted magical FX because the game renders wind separately.\n\n01: collected upright knight ready pose, feet in comfortable compact stagger, sword diagonally down toward right, empty left hand near waist, coat hangs quietly.\n02: draw sword hand upward and backward toward right ribs, elbow closes to body, blade rotates toward horizontal forward, left palm moves inward in front of abdomen.\n03: blade horizontal pointing right, sword hilt tucked at ribs and elbow behind torso, chest gently coils inward; empty left palm near centerline cupping gathered wind.\n04: maximum compressed anticipation, sword held close at right ribs and aimed forward, left palm nearly closed toward chest, a tiny bend in knees; feet still compact. Sword tip is clearly retracted compared with frame05.\n05: FIRST RELEASE AND CONTACT: short step to right, front knee only mildly bends, sword ALREADY driven out on straight chest-high centerline, left EMPTY palm also pushes outward beside the blade with fingers open. Confident clear forward wind-pressure release; torso advances only a little.\n06: brief fullest arm extension, controlled weight over planted forward foot, blade horizontal right, empty palm reaches its brief push stop; coat/ponytail follow the single release motion.\n07: both wrists brake, sword elbow begins softening, left palm recoil starts, no second swing and no renewed thrust.\n08: sword arm retracts halfway from release to guard, left hand retracts close to chest, torso rising upright.\n09: sword blade dips diagonally down right, weight shifts back toward center and legs draw closer.\n10: recover sword wrist toward low guard and empty left arm relaxes, coat motion subsides.\n11: comfortable upright compact stagger, sword down-forward and left hand nearly resting.\n12: calm settled upright low guard like frame01, relaxed small shoulder motion, quiet hanging coat and ponytail.\n\nScale and framing are critical: one same fixed physical person, head size, body proportions, and sword length in every frame; never stretch or resize poses to fill cells. Target standing body height about240px on a1536x1152 sheet so the ENTIRE sword, every hair tip, fingers and both boots fit easily in each cell. Ground baseline stable per row. EVERY silhouette including sword is separated from every other pose by AT LEAST 32px completely transparent space horizontally AND vertically. Keep all pixels inside their own cells with at least16px empty margins. Do not let sword extend into next cell. Full character no cropping. No text, numbers, borders, grid lines, shadow blobs or floor. No motion streaks, arcs, auras, giant wind spheres or baked background. At most tiny pale teal blade-edge accent in frames03–06, do not obscure anatomy. Distinct inward preparation, outward release and settled recovery must be readable from the real poses.",
+      "references": [
+        {
+          "path": "D:/Program/ai/genshin-smash/public/assets/animations/jean-v4/basic.png",
+          "sha256": "d85973dc32151590a12028864899a53bb3c5eff68633743f84cb34a653a90033"
+        }
+      ],
+      "source": "C:/Users/46637/.codex/generated_images/01a12149-0491-7843-9518-5f2b35f07316/exec-42c60850-bcda-472f-a180-9d8946f788c6.png",
+      "sourceSha256": "9d51f24314be2e4204c07c523a99d5138a41656d88dbe76ecc3a30d6098f6117",
+      "destination": "public/assets/animations/jean-v4/special-v5.png",
+      "selected": false,
+      "review": "Forward-pressure choreography passed except frame04's sword was excessively foreshortened."
+    },
+    {
+      "id": "L-frame04-side-view-sword",
+      "prompt": "Use case: precise-object-edit.\nEdit ONLY FRAME04, the TOP ROW RIGHTMOST pose, in this transparent4-column3-row Jean sprite sheet. All other ELEVEN poses must remain unchanged. Preserve native RGBA transparency, canvas dimensions, arrangement, adult character identity, detailed clothing, anatomy, lighting and colors.\n\nProblem in frame04: the sword becomes almost invisible and extremely foreshortened toward viewer. Fix by matching frame03's CLEAR SIDE-VIEW HORIZONTAL SILVER SWORD, with the exact same visible blade length, thickness and ornate guard. The sword is pointed to screen RIGHT at chest level, not at camera. Its hand and ornate gold hilt tuck tightly into her right ribs and its elbow is inward for final wind-pressure anticipation. The whole blade should be FULL LENGTH about the same as frame03, with visible sharp tip extending to right but still wholly within the top-right cell. Keep frame04's empty left hand near chest gathering energy, both feet planted, slight body compression. This is a stored short thrust ready to release on frame05.\nDo not alter frame01,02,03 or frames05–12. Do not alter sword scale in the other frames. Do not add any aura, wind blob, slash arc, shadow or background. Do not crop the rightmost sword tip. Keep at least16px transparent margin to the right edge. No text.",
+      "references": [
+        {
+          "path": "C:/Users/46637/.codex/generated_images/01a12149-0491-7843-9518-5f2b35f07316/exec-42c60850-bcda-472f-a180-9d8946f788c6.png",
+          "sha256": "9d51f24314be2e4204c07c523a99d5138a41656d88dbe76ecc3a30d6098f6117"
+        }
+      ],
+      "source": "C:/Users/46637/.codex/generated_images/01a12149-0491-7843-9518-5f2b35f07316/exec-56367c31-7e09-43c3-9034-c91d24236cce.png",
+      "sourceSha256": "7835322a6fe26802e72b4226f17eb179f1e22d1849d32b9b97443061379cffce",
+      "destination": "public/assets/animations/jean-v4/special-v5.png",
+      "selected": false,
+      "review": "Frame04 gained the complete side-view blade; regenerated sheet grew too close to right and bottom edges."
+    },
+    {
+      "id": "L-complete-figure-spacing",
+      "prompt": "Use case: precise-object-edit.\nEdit the referenced transparent 4-column3-row Jean twelve-pose animation sprite sheet ONLY to FIX SPACING, CROPPING AND WHOLE-FIGURE SCALE. Preserve all12 actual poses and exact sequence, Jean identity, adult proportions, costume, detailed painted anime style and sword construction.\nThe current sheet is overcrowded near right/bottom borders. Uniformly REDUCE EACH OF THE12 COMPLETE FIGURES INCLUDING ITS WEAPON to 83% of its current size, leave the overall canvas dimensions unchanged, and RE-CENTER each smaller whole figure inside its own grid cell. Every complete head, ponytail, coat tip, finger, boot and FULL-LENGTH sword must be contained in its own cell. Do NOT shorten the sword separately. Do NOT squash anatomy. Same uniform person/weapon scale for all12 poses.\nRestore the whole sword tip wherever it currently reaches the right canvas edge in top-row col4 and middle-row col4; move/recenter those entire figures leftward within their cells enough to show the complete sharp blade tip. The blade length must match top-row col3 and remain a long straight side-view silver sword. Keep top-row col4 sword clearly horizontal pointing RIGHT, never foreshortened at viewer.\nLeave at least32px completely transparent empty gutters between every pair of adjacent complete silhouettes horizontally AND vertically, and at least20px empty margins between figures and the canvas edges. Bottom-row boots must have transparent margin underneath, fully uncropped.\nMaintain exact4x3 ordering, exactly12 different full-body frames, forward wind-pressure centerline thrust frames05–07 and low-guard recovery09–12. All choreography, hands and stance unchanged. No text, labels, grid, backdrop, floor shadow, aura or FX. Preserve native RGBA alpha.",
+      "references": [
+        {
+          "path": "C:/Users/46637/.codex/generated_images/01a12149-0491-7843-9518-5f2b35f07316/exec-56367c31-7e09-43c3-9034-c91d24236cce.png",
+          "sha256": "7835322a6fe26802e72b4226f17eb179f1e22d1849d32b9b97443061379cffce"
+        }
+      ],
+      "source": "C:/Users/46637/.codex/generated_images/01a12149-0491-7843-9518-5f2b35f07316/exec-6efee4ba-09f6-460a-a33b-7a277ba69c6a.png",
+      "sourceSha256": "02616e4f75f9e55114f38751a15c3768ade70ea46e3895dc87e4fecbde57f9db",
+      "destination": "public/assets/animations/jean-v4/special-v5.png",
+      "selected": true,
+      "review": "Parent independently viewed final image: frame04 side-view sword restored, frames05–07 clearly forward pressure/thrust, complete recovery. All real alpha>8 image pixels covered by disjoint source rectangles."
+    },
+    {
+      "id": "I-upright-sword-upward-palm",
+      "prompt": "Use case: stylized-concept.\nAsset type: production transparent game sprite animation sheet, Jean elemental skill I, the ascending wind field.\nCreate exactly12 separate ordered full-body poses in a strict4-column3-row sheet, reading left-to-right then top-to-bottom. True RGBA transparency, 4:3 canvas. Image1 basic.png is exact character identity and costume/sword reference. Image2 special-v5.png is same adult body proportions, detailed Japanese anime painted style and anatomical scale. Preserve Jean's blonde high ponytail, navy ribbon, white knight uniform and fitted torso, blue and gold long split coat, black gloves, long dark boots. One slender straight silver sword with ornate gold guard and blue blade inset. Mild three-quarter side view facing RIGHT. Match the mature knight identity precisely.\n\nThis entire move is ritual ASCENDING WIND GUIDANCE: the RIGHT hand holds the sword near the body and calmly pivots it into an upright conductor beside the chest/shoulder; the EMPTY LEFT hand scoops upward from waist to shoulder to summon and guide a front updraft. CLEAR EMPTY PALM-UP hand readable to the RIGHT of torso. No thrust, no broad uppercut slash, no lunge, no forward shove and no downward palm decree. Sword and empty hand jointly guide UPWARD. The vertical blade is a still wind conductor after frame05, not a weapon swinging over her head. Feet stay naturally shoulder-width in a relaxed knight stagger, subtle bend and rise but not legs pressed together.\n\n12 sequential poses:\n01: quiet standing low guard, sword diagonally down-right, empty left hand beside waist.\n02: gather breath and lightly bend knees, right hand draws hilt near lower ribs, blade tips up gently; left empty palm turns upward at low abdomen.\n03: right hilt rises toward chest so sword is steeply angled upward in front of body; left palm cups low near waist, fingers softly open.\n04: compressed gathered wind pause, sword now nearly upright beside chest, elbow close; empty palm low and fully upward, focus aimed at point on RIGHT.\n05 FIRST RELEASE: sword is upright beside RIGHT shoulder with hilt close chest and tip above head, and EMPTY LEFT hand ALREADY LIFTED from low waist to chest-height forward-right with palm upward and fingers lifting an invisible column. Torso starts to straighten. This is the first clear summon release.\n06: complete upright extension, empty left palm rises to shoulder height with fingers upward, forearm elegantly tilted up; right sword remains upright and still beside body, hilt near chest, elbow bent. Feet stable.\n07: sustain ascending guide, empty palm held upward and slightly forward above shoulder level, calm focused eyes, blade upright, no overarm strike.\n08: sustain with slightly softer raised wrist and fingers, sword unchanged as vertical conductor; slight delayed lifting of coat tail and ponytail only.\n09: slowly lower empty palm to shoulder height, maintaining palm-up while easing the summon, sword remains upright, shoulder begins to relax.\n10: draw empty hand back toward chest and close fingers gently, sword hilt lowers and blade rotates forward-down in a compact controlled guard transition.\n11: empty hand lowers beside body, sword diagonally down-right low guard, natural knight stance, cloth settling.\n12: calm upright ready low guard, quiet ponytail and coat, same proportions as first pose.\n\nBody scale and sword length fixed through all12 poses; sword blade never changes shape, disappears or becomes a rod. Clearly show anatomically correct empty left hand, five fingers, separate from weapon grip. Exactly12 distinct in-between poses. Full hair, sword tips, fingers and boots must be visible. Consistent local ground baseline within each row. Leave at least32px fully transparent gap between entire adjacent silhouettes including tall sword tips, and generous empty margins on all four sides of EACH equal grid cell. Reduce entire sheet's character scale if needed, uniformly, so upright sword and boots fit each cell without overlap; target standing-body height around240px on1536x1152 canvas. Do not clip or overlap cell boundaries.\nNo text, numbering, grid, background, floor, shadow blob, giant wind columns, circles, auras, glow, or sword motion trails. The game supplies the updraft FX. A tiny pale teal glint near the palm in frames04–07 is allowed but not necessary. Clothes must hang quietly during anticipation/recovery and only lift slightly during upward guidance. Do not borrow thrust poses from image2.",
+      "references": [
+        {
+          "path": "D:/Program/ai/genshin-smash/public/assets/animations/jean-v4/basic.png",
+          "sha256": "d85973dc32151590a12028864899a53bb3c5eff68633743f84cb34a653a90033"
+        },
+        {
+          "path": "C:/Users/46637/.codex/generated_images/01a12149-0491-7843-9518-5f2b35f07316/exec-42c60850-bcda-472f-a180-9d8946f788c6.png",
+          "sha256": "9d51f24314be2e4204c07c523a99d5138a41656d88dbe76ecc3a30d6098f6117"
+        }
+      ],
+      "source": "C:/Users/46637/.codex/generated_images/01a12149-0491-7843-9518-5f2b35f07316/exec-3a048b7b-5790-4730-a111-2ba51eb3eb29.png",
+      "sourceSha256": "e6bb0838f50ab26aa251eb969a462cfc789385b3f42de60c97d56b6a292d4e84",
+      "destination": "public/assets/animations/jean-v4/secondary-v5.png",
+      "selected": false,
+      "review": "Choreography passed, but upper-row boots and following-row sword tips had intersecting rectangular bounds."
+    },
+    {
+      "id": "I-complete-figure-spacing",
+      "prompt": "Use case: precise-object-edit.\nEdit the referenced Jean transparent 4x3 twelve-frame sprite animation sheet to FIX ONLY ITS FRAME SPACING. Preserve the exact12 full-body poses, animation choreography, character identity, adult anatomy, detailed costume, slender straight sword, shading, facing-right orientation, order, and genuine alpha background. DO NOT change gestures or stance.\n\nThe current artwork is TOO TALL inside its rows: second-row upright sword tips almost touch first-row boots; third-row sword tip almost touches second-row boots. This makes impossible to take independent rectangular crops.\nREQUIRED CORRECTION: make EACH OF THE 12 COMPLETE CHARACTER+WEAPON figures uniformly 15% SMALLER relative to the canvas while leaving the same overall canvas dimensions and exact4-column3-row grid. Reduce ALL12 figures by the SAME scale factor, preserving their full anatomy and sword lengths. Re-center each smaller figure within its own cell. Top and middle and bottom rows should have generous clearly EMPTY HORIZONTAL TRANSPARENT BANDS separating them, each at least40 pixels tall, including above the highest sword tips. There should also be at least32px transparent gap between adjacent column silhouettes.\nDo not reduce the sword alone. Do not shorten legs or head, do not trim boots, do not crop. This is purely layout/whitespace: SAME12 poses now comfortably isolated for game animation cutting. The whole of every sword tip, ponytail, finger, sleeve, boot belongs inside its own cell with at least20px transparent padding. Equal fixed anatomy scale all frames. Keep the full sheet4:3. No labels, no text, no lines, no backdrop, no floor shadows, no FX. Preserve native alpha transparency.",
+      "references": [
+        {
+          "path": "C:/Users/46637/.codex/generated_images/01a12149-0491-7843-9518-5f2b35f07316/exec-3a048b7b-5790-4730-a111-2ba51eb3eb29.png",
+          "sha256": "e6bb0838f50ab26aa251eb969a462cfc789385b3f42de60c97d56b6a292d4e84"
+        }
+      ],
+      "source": "C:/Users/46637/.codex/generated_images/01a12149-0491-7843-9518-5f2b35f07316/exec-76b094d3-cdff-4ec6-aaa5-af4bb68ca3c8.png",
+      "sourceSha256": "bb6e15490b6459c8bf73d20c13ce60e295e018f9521c31f6f3f7e86f3256fc2e",
+      "destination": "public/assets/animations/jean-v4/secondary-v5.png",
+      "selected": true,
+      "review": "Parent independently viewed final image: upright sword plus ascending empty-palm guidance, no uppercut; full transparent row separation restored."
+    }
+  ],
+  "registration": {
+    "source": "Read-only alpha measurement. Connected components alpha>8 define complete opaque silhouette bounds; sourceRect includes 12px transparent padding. Foot anchors measured at planted soles, sword tips visually registered at actual blade endpoints. No PNG cropping, compositing, rescaling, re-encoding, alpha cleanup or pixel changes outside built-in image_gen.",
+    "phases": {
+      "windup": 4,
+      "contact": 2,
+      "followthrough": 3,
+      "recover": 3
+    },
+    "durationPerFrame": 4,
+    "fixedStandingBodyHeightPixels": {
+      "special": 259,
+      "secondary": 250
+    },
+    "bodyHeightBasis": {
+      "special": "First pose actual head crown around source y88 to planted sole y346 inclusive; exclude high ponytail, sword and low-alpha fringe.",
+      "secondary": "First pose actual head crown around source y95 to planted sole y344 inclusive; exclude ponytail, sword and low-alpha fringe."
+    },
+    "trails": {
+      "special": "thrust",
+      "secondary": "none"
+    }
+  },
+  "validation": [
+    {
+      "image": "public/assets/animations/jean-v4/special-v5.png",
+      "metadata": "public/assets/animations/jean-v4/special-v5.json",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "sha256": "02616e4f75f9e55114f38751a15c3768ade70ea46e3895dc87e4fecbde57f9db",
+      "metadataSha256": "1b8959a95fdc326ae4b25510806d5bf697ba3bc6d3917414d9753fb43c1d6a07",
+      "transparentPercent": 68.7809,
+      "standingBodyHeightPixels": 259,
+      "readOnlyRasterAnalysis": true,
+      "sourceRectanglesDisjoint": true,
+      "uniqueFrames": 12,
+      "pixelsAbove8OutsideRects": 0,
+      "frames": [
+        {
+          "name": "special-01",
+          "opaqueBoundsAlphaAbove8": [
+            82,
+            68,
+            290,
+            347
+          ],
+          "footAnchorSourcePixels": {
+            "x": 181,
+            "y": 346
+          },
+          "weaponTipSourcePixels": {
+            "x": 288,
+            "y": 330
+          },
+          "rgbaSha256": "84b8302847d398f46779c9581f70d4259c869b2a5b09812c8496048eb1cf88a6",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "special-02",
+          "opaqueBoundsAlphaAbove8": [
+            468,
+            81,
+            687,
+            347
+          ],
+          "footAnchorSourcePixels": {
+            "x": 577,
+            "y": 346
+          },
+          "weaponTipSourcePixels": {
+            "x": 687,
+            "y": 204
+          },
+          "rgbaSha256": "0013adc0492a7e64c152f9b696bbed769083a8b8729000b5ecfd817a98795e7f",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "special-03",
+          "opaqueBoundsAlphaAbove8": [
+            829,
+            92,
+            1065,
+            347
+          ],
+          "footAnchorSourcePixels": {
+            "x": 946,
+            "y": 346
+          },
+          "weaponTipSourcePixels": {
+            "x": 1063,
+            "y": 185
+          },
+          "rgbaSha256": "5ba094c4473964059b519c94d676ec04c7ac41a706137b2f454f199be8f006d6",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "special-04",
+          "opaqueBoundsAlphaAbove8": [
+            1179,
+            99,
+            1424,
+            347
+          ],
+          "footAnchorSourcePixels": {
+            "x": 1287,
+            "y": 346
+          },
+          "weaponTipSourcePixels": {
+            "x": 1422,
+            "y": 186
+          },
+          "rgbaSha256": "a499c28c83807561e8848495fe6352997b4389d9a0a54a6466ab455e52981b3b",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "special-05",
+          "opaqueBoundsAlphaAbove8": [
+            68,
+            444,
+            375,
+            695
+          ],
+          "footAnchorSourcePixels": {
+            "x": 189.5,
+            "y": 694
+          },
+          "weaponTipSourcePixels": {
+            "x": 373,
+            "y": 518
+          },
+          "rgbaSha256": "4933e917d50ee99990360a6ab4361913bc20bfe50a19e3f867e3cf14a2be25c4",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "special-06",
+          "opaqueBoundsAlphaAbove8": [
+            439,
+            445,
+            762,
+            692
+          ],
+          "footAnchorSourcePixels": {
+            "x": 559.5,
+            "y": 691
+          },
+          "weaponTipSourcePixels": {
+            "x": 759,
+            "y": 519
+          },
+          "rgbaSha256": "f1ec117a15ea10406f11cb02a0a24e9e8ced77ff076cb7712fe597021fa07832",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "special-07",
+          "opaqueBoundsAlphaAbove8": [
+            820,
+            455,
+            1115,
+            695
+          ],
+          "footAnchorSourcePixels": {
+            "x": 938,
+            "y": 694
+          },
+          "weaponTipSourcePixels": {
+            "x": 1113,
+            "y": 528
+          },
+          "rgbaSha256": "00ec34b2257d6c03297204885e0fdc6f90d5a0780261b2134f1a48b4b8fb631a",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "special-08",
+          "opaqueBoundsAlphaAbove8": [
+            1185,
+            444,
+            1402,
+            696
+          ],
+          "footAnchorSourcePixels": {
+            "x": 1294,
+            "y": 695
+          },
+          "weaponTipSourcePixels": {
+            "x": 1400,
+            "y": 559
+          },
+          "rgbaSha256": "b79df045ea423daba7046d702c4bd49d9b8495b0e551b4eecdd951787fe194c2",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "special-09",
+          "opaqueBoundsAlphaAbove8": [
+            90,
+            779,
+            309,
+            1040
+          ],
+          "footAnchorSourcePixels": {
+            "x": 199.5,
+            "y": 1039
+          },
+          "weaponTipSourcePixels": {
+            "x": 307,
+            "y": 1006
+          },
+          "rgbaSha256": "a1dcf67589c175ddc70558c0ee3646f224b555f4d67c3d85cdb622551bc95bef",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "special-10",
+          "opaqueBoundsAlphaAbove8": [
+            473,
+            766,
+            683,
+            1040
+          ],
+          "footAnchorSourcePixels": {
+            "x": 575.5,
+            "y": 1039
+          },
+          "weaponTipSourcePixels": {
+            "x": 680,
+            "y": 1008
+          },
+          "rgbaSha256": "958e2b6103a578670ec18d2f2084c91b19f4a320880dec1a917b6f61e6ec8c25",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "special-11",
+          "opaqueBoundsAlphaAbove8": [
+            832,
+            770,
+            1035,
+            1040
+          ],
+          "footAnchorSourcePixels": {
+            "x": 932,
+            "y": 1039
+          },
+          "weaponTipSourcePixels": {
+            "x": 1032,
+            "y": 1023
+          },
+          "rgbaSha256": "17c0ca6bbac5c4ec384d8c40bde2adddb2454b2c1c9b843541771bb030cd26e5",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "special-12",
+          "opaqueBoundsAlphaAbove8": [
+            1194,
+            769,
+            1396,
+            1040
+          ],
+          "footAnchorSourcePixels": {
+            "x": 1293.5,
+            "y": 1039
+          },
+          "weaponTipSourcePixels": {
+            "x": 1393,
+            "y": 1022
+          },
+          "rgbaSha256": "70d731155f4b9d97177e8668b2320d55389aefd0b2c0c20e15354975bbc04297",
+          "minimumOpaqueGutterPx": 12
+        }
+      ]
+    },
+    {
+      "image": "public/assets/animations/jean-v4/secondary-v5.png",
+      "metadata": "public/assets/animations/jean-v4/secondary-v5.json",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "sha256": "bb6e15490b6459c8bf73d20c13ce60e295e018f9521c31f6f3f7e86f3256fc2e",
+      "metadataSha256": "e867485b6aa6e10ae20638eb129413ce20d01c5d3c1b60abfdea1e9d1c279f33",
+      "transparentPercent": 69.594,
+      "standingBodyHeightPixels": 250,
+      "readOnlyRasterAnalysis": true,
+      "sourceRectanglesDisjoint": true,
+      "uniqueFrames": 12,
+      "pixelsAbove8OutsideRects": 0,
+      "frames": [
+        {
+          "name": "secondary-01",
+          "opaqueBoundsAlphaAbove8": [
+            100,
+            86,
+            317,
+            345
+          ],
+          "footAnchorSourcePixels": {
+            "x": 213,
+            "y": 344
+          },
+          "weaponTipSourcePixels": {
+            "x": 315,
+            "y": 331
+          },
+          "rgbaSha256": "ea18fa7e81acb3676a577cffab5517878a22b655eaf786a8a46c02bdaf777584",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-02",
+          "opaqueBoundsAlphaAbove8": [
+            450,
+            87,
+            663,
+            346
+          ],
+          "footAnchorSourcePixels": {
+            "x": 569.5,
+            "y": 345
+          },
+          "weaponTipSourcePixels": {
+            "x": 643,
+            "y": 118
+          },
+          "rgbaSha256": "70af28b7a8969b591416c84ebd9fe4d913b98abd8d8e952adc4ed6460caf0cdf",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-03",
+          "opaqueBoundsAlphaAbove8": [
+            807,
+            81,
+            1018,
+            345
+          ],
+          "footAnchorSourcePixels": {
+            "x": 925.5,
+            "y": 344
+          },
+          "weaponTipSourcePixels": {
+            "x": 987,
+            "y": 82
+          },
+          "rgbaSha256": "dedd6c7f8e2837ad5d3d80ad9d83f0e15f7b5dd787a8ade668a0d32dc83e2fdb",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-04",
+          "opaqueBoundsAlphaAbove8": [
+            1168,
+            60,
+            1373,
+            345
+          ],
+          "footAnchorSourcePixels": {
+            "x": 1280.5,
+            "y": 344
+          },
+          "weaponTipSourcePixels": {
+            "x": 1296,
+            "y": 62
+          },
+          "rgbaSha256": "29d60233a6daebc43550319e72b121374aaa300b2686f002d5005420e121686d",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-05",
+          "opaqueBoundsAlphaAbove8": [
+            87,
+            401,
+            306,
+            706
+          ],
+          "footAnchorSourcePixels": {
+            "x": 211.5,
+            "y": 705
+          },
+          "weaponTipSourcePixels": {
+            "x": 183,
+            "y": 402
+          },
+          "rgbaSha256": "2b592e2ee90aba14c1ff22ce6c1bf78f018202b324fbbf2caa2c7aac14a675d2",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-06",
+          "opaqueBoundsAlphaAbove8": [
+            445,
+            401,
+            665,
+            706
+          ],
+          "footAnchorSourcePixels": {
+            "x": 570,
+            "y": 705
+          },
+          "weaponTipSourcePixels": {
+            "x": 538,
+            "y": 403
+          },
+          "rgbaSha256": "708085ef01f4b9ad4aaeea7ba94e1c4c2e30fe28fee02e4b9383f2730ebafc41",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-07",
+          "opaqueBoundsAlphaAbove8": [
+            802,
+            409,
+            1019,
+            706
+          ],
+          "footAnchorSourcePixels": {
+            "x": 925,
+            "y": 705
+          },
+          "weaponTipSourcePixels": {
+            "x": 892,
+            "y": 409
+          },
+          "rgbaSha256": "f464c1b087328eced15d66a5f771ade3f94caaa4064e1b9dc9e4802a01474ced",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-08",
+          "opaqueBoundsAlphaAbove8": [
+            1161,
+            407,
+            1379,
+            705
+          ],
+          "footAnchorSourcePixels": {
+            "x": 1281.5,
+            "y": 704
+          },
+          "weaponTipSourcePixels": {
+            "x": 1250,
+            "y": 409
+          },
+          "rgbaSha256": "7fc5b680ef00a561999e0678e801aad3f4f366723a1ea29b812649056ed1b530",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-09",
+          "opaqueBoundsAlphaAbove8": [
+            88,
+            760,
+            306,
+            1041
+          ],
+          "footAnchorSourcePixels": {
+            "x": 211,
+            "y": 1040
+          },
+          "weaponTipSourcePixels": {
+            "x": 184,
+            "y": 761
+          },
+          "rgbaSha256": "658a1529b648510c2636c9e0a4dd7488f81a73fe2eb3e1b36d99acd4e38bf67f",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-10",
+          "opaqueBoundsAlphaAbove8": [
+            454,
+            778,
+            679,
+            1040
+          ],
+          "footAnchorSourcePixels": {
+            "x": 572,
+            "y": 1039
+          },
+          "weaponTipSourcePixels": {
+            "x": 677,
+            "y": 1016
+          },
+          "rgbaSha256": "f46d21f5dc82e5bc4964cc3b85ef18ca8bfa0848766486c09ae33a20267cc124",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-11",
+          "opaqueBoundsAlphaAbove8": [
+            809,
+            781,
+            1029,
+            1040
+          ],
+          "footAnchorSourcePixels": {
+            "x": 922.5,
+            "y": 1039
+          },
+          "weaponTipSourcePixels": {
+            "x": 1027,
+            "y": 1028
+          },
+          "rgbaSha256": "d92ead2674bdd984c02cc72d38ec95cff08304c9003cac2c611c9d9278f2685c",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-12",
+          "opaqueBoundsAlphaAbove8": [
+            1169,
+            772,
+            1389,
+            1040
+          ],
+          "footAnchorSourcePixels": {
+            "x": 1282,
+            "y": 1039
+          },
+          "weaponTipSourcePixels": {
+            "x": 1385,
+            "y": 1029
+          },
+          "rgbaSha256": "d0125b34ffaa9bd243fc7e9ea5e831937e3be8c108d8ab863ff45f270a5d1bf8",
+          "minimumOpaqueGutterPx": 12
+        }
+      ]
+    }
+  ]
+}

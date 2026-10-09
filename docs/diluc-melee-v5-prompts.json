@@ -1,0 +1,1031 @@
+{
+  "schemaVersion": 1,
+  "task": "Diluc melee v5 first-contact pose redraw",
+  "date": "2026-10-09",
+  "generationMode": "built-in image_gen only",
+  "pixelEditing": "None. All PNGs are unmodified byte copies of built-in image_gen outputs; Python used only to read alpha, measure and write metadata.",
+  "scope": {
+    "newFiles": [
+      "public/assets/animations/diluc-v4/jab-v5.png",
+      "public/assets/animations/diluc-v4/jab-v5.json",
+      "public/assets/animations/diluc-v4/jab-variant-v5.png",
+      "public/assets/animations/diluc-v4/jab-variant-v5.json",
+      "public/assets/animations/diluc-v4/smash-variant-v5.png",
+      "public/assets/animations/diluc-v4/smash-variant-v5.json"
+    ],
+    "canonicalMappings": {
+      "jab-v5.json": "jab.json",
+      "jab-variant-v5.json": "jab-backhand.json",
+      "smash-variant-v5.json": "smash-overhead.json"
+    },
+    "canonicalOrManifestEdited": false,
+    "preservedKBase": true
+  },
+  "validation": {
+    "firstContactIndexZeroBased": 2,
+    "phasePattern": [
+      "windup",
+      "windup",
+      "contact",
+      "contact",
+      "followthrough",
+      "followthrough",
+      "recover",
+      "recover"
+    ],
+    "frameDurationsPreserved": true,
+    "trail": "arc",
+    "visibleAlphaThreshold": 16,
+    "sourceRectPadding": 12,
+    "metadataHasNormalizedFootAnchors": true,
+    "metadataWeaponTipsInLocalPixels": true,
+    "perFrameResizing": false,
+    "notes": "All visible alpha >=16 pixels are inside 24 nonoverlapping integer sourceRects. Faint alpha<16 generator speckles outside visible silhouettes are not treated as character pixels. Fixed standingBodyHeightPixels per clip; natural crouches remain natural."
+  },
+  "runs": [
+    {
+      "id": "jab-initial",
+      "prompt": "Use case: stylized-concept.\nAsset type: production 2D fighting game animation sprite sheet, exactly EIGHT full-body frames in a strict 4 columns by 2 rows layout, read left to right then top to bottom. Landscape image, preferably 2048x1024. TRUE TRANSPARENT BACKGROUND, NO labels, NO grid lines.\nInput images: basic.png and basic-variants.png are visual identity, rendering style and single-sword references only; diluc-v2.png locks face, adult body proportions, costume and sword. Draw new poses rather than copying their incorrect contact timing.\nSubject: Diluc, adult tall red-haired swordsman in refined Japanese fantasy anime paint, long red ponytail, black long coat with gold trim and red lining, white shirt, black pants and boots. EXACTLY one identical broad black-and-red claymore with silver ornate guard and red gem in every frame. Consistent head/body size and blade length, no chibi, no extra arms or swords.\nFraming: every equal-size cell has its own COMPLETE figure, weapon, hair and coat tails safely inside it. Character head-to-ground body height about 280 pixels per 512-pixel cell, occupying 60-65% of the cell; sword can extend sideways within the remaining space. At least 32 pixels fully empty transparent margin on EACH side of every cell, including sword tips. Do not enlarge the characters. Fixed right-facing three-quarter side view and fixed camera. Feet share a ground baseline near 85% cell height; no drawn floor, cast shadows, particles, flame, magic effects, or motion blur.\nAnimation: compact, quick, waist-level claymore horizontal normal attack to the RIGHT, distinct from a heavy overhead attack. This is a SHORT strike using a small shoulder dip and hip twist, step with front foot and limited torso rotation. Two windup, two actual contact, two followthrough, two recovery frames. ALL eight drawings must differ meaningfully in body, feet, arms and sword angles.\nFRAME 1 top-left: small shoulder dip; knees slightly flex; draw sword close across the rear hip leftward, compact low preparation, head looking right.\nFRAME 2 top-second: weight moves onto rear leg, torso winds a little, sword close to left hip ready to cut, short restrained windup.\nFRAME 3 top-third FIRST CONTACT, CRITICAL: front foot steps RIGHT, hips rotate right and arms drive the blade across the FRONT of the body. The entire blade projects to the RIGHT beyond the body front edge at waist height, visibly striking an opponent on the right. The sword tip is well right of the front knee and face. NOT behind the head, NOT left-pointing, NOT a preparation pose. Show a slight diagonal blade angle only, the hit already happens NOW.\nFRAME 4 top-right SECOND CONTACT: complete the short horizontal cut at waist height to the RIGHT; both arms remain forward and sword extended to the right, front knee carrying weight. Blade a little lower than frame 3. Do not turn this into an upward or overhead strike.\nFRAME 5 bottom-left: small followthrough past the right-front hip, blade angled 20 degrees down-right; torso and coat tails show restrained residual momentum.\nFRAME 6 bottom-second: brake the cut, draw wrists a little inward and rotate tip down-right; body begins straightening.\nFRAME 7 bottom-third: retract to low forward guard with sword diagonally down-right, feet close slightly.\nFRAME 8 bottom-right: settled balanced right-facing low guard, sword down-right, relaxed but ready; this completes recovery.\nPreserve the reference's elegant adult anatomy and detailed black/red/silver sword. No cropped extremities, no shared or overlapping cells, no debris, no text. Most important: frame 3 and frame 4 already hit to the RIGHT.",
+      "references": [
+        {
+          "path": "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/basic.png",
+          "role": "visual identity/style/sword",
+          "sha256": "bbd994d4dd99f5156bb2a73390295816a58ea359cad86db41769626550403989"
+        },
+        {
+          "path": "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/basic-variants.png",
+          "role": "visual identity/style/sword",
+          "sha256": "67840189169d80e976ed158334428ed377838718fb0866783281c3138a7c6afc"
+        },
+        {
+          "path": "D:/Program/ai/genshin-smash/public/assets/characters/diluc-v2.png",
+          "role": "adult proportions/costume/sword",
+          "sha256": "a67d0eb3e4f7ff21b73b8a26163c54be12cff7fa31131e82e889b0ecf54d70f1"
+        }
+      ],
+      "outputPath": "C:/Users/46637/.codex/generated_images/01a12152-3abe-71c0-85ca-9270cf5280d6/exec-be905e95-756b-4353-a7cf-418705c452c0.png",
+      "sha256": "62967817857a50312c724bd3b5be2b914a0fea32be7581421dfcf053a0fca0b8",
+      "selected": false,
+      "review": "Third/fourth frames already in front; rejected tight layout and clipped edge risk.",
+      "tool": "image_gen.imagegen",
+      "transparent_background": true
+    },
+    {
+      "id": "jab-layout-repair",
+      "prompt": "Use case: precise-object-edit. Edit only layout/scale of this transparent eight-frame 4x2 sprite sheet, preserving all eight exact poses, character rendering, sword shape, attack timing and transparent background. The full composite character AND complete sword in EVERY cell must be uniformly 25% SMALLER than the reference. Center each resulting full sword-plus-body silhouette in its own equal-sized cell. This is a layout repair to prevent sword clipping. Top row frame 3's sword must end before its own third cell's right edge, and top row frame 4's complete sword tip must be fully visible with substantial blank margin before the whole image's right edge. Keep at least 40 pixels of fully empty alpha margin surrounding every sprite inside its cell; this margin includes all weapon tips, coat tails and hair. Exactly four columns and two rows, no other changes. Characters remain same anatomy and same relative body scale in all eight frames. Keep frame 3 and 4 swords pointing horizontally RIGHT in front of the body. Do not add text, gridlines, duplicates, shadows or backgrounds. TRUE TRANSPARENT alpha. Whole character-and-sword silhouette occupies only 70% of each cell width.",
+      "references": [
+        {
+          "path": "C:/Users/46637/.codex/generated_images/01a12152-3abe-71c0-85ca-9270cf5280d6/exec-be905e95-756b-4353-a7cf-418705c452c0.png",
+          "role": "edit target",
+          "sha256": "62967817857a50312c724bd3b5be2b914a0fea32be7581421dfcf053a0fca0b8"
+        }
+      ],
+      "outputPath": "C:/Users/46637/.codex/generated_images/01a12152-3abe-71c0-85ca-9270cf5280d6/exec-5bafaddc-fc04-4f34-bf70-57adfe5e51da.png",
+      "sha256": "3db3514a4a4f03504b71c0326be7bbba201f12cf79915e773e581f2220ceaa25",
+      "selected": false,
+      "review": "Layout fixed; root pose review requested bent-elbow rotational slash rather than straight-arm thrust.",
+      "tool": "image_gen.imagegen",
+      "transparent_background": true
+    },
+    {
+      "id": "jab-slash-pose-repair",
+      "prompt": "Use case: precise-object-edit.\nEdit this transparent 4x2 eight-frame Diluc sprite sheet. ONLY change FRAME 3 (top row third), FRAME 4 (top row fourth), and FRAME 5 (bottom row first). Keep other frames exactly unchanged. Keep transparent background, body scale, positions/cell separation, full sword/coat/feet within cell, fixed adult proportions and identical broad black/red sword.\nCorrect the action from an apparent THRUST to a compact waist-level HORIZONTAL SLASH. The contact poses must have bent elbows and a rotated torso/shoulder/hip relationship, never two straight arms lined up behind the blade. Keep right-facing gaze.\nFRAME 3 top-third: already FIRST CONTACT. Shift pelvis a little right, visibly rotate shoulders across the hips into the cut. Front knee flexes; rear heel rotates. Both elbows visibly BENT; hands remain CLOSE to the right side of the torso at waist height, not reaching straight ahead. Sword guard is near right-front waist; blade points right and slightly upward (10–15 degrees), extends beyond front body edge to the RIGHT. Blade and both forearms must NOT form a straight line. Clearly show the blade sweeping laterally around the waist, NOT stabbing. The upper body twists, not leaning forward to lunge.\nFRAME 4 top-fourth: same short slash now turns the upper body further. One forearm crosses the front of the waist and the other elbow stays bent. Hands cross toward the left-front hip as torso/shoulders rotate through, while the sword pivots down-right 25–30 degrees across the front. Front shoulder and coat lapel silhouette noticeably differ from frame 3; hips and planted feet pivot. Blade is still on the right side, tip forward and lower. No fully extended arms, no forward poke.\nFRAME 5 bottom-first: SHORT low followthrough with both elbows drawing back toward ribs, hands held in front of low abdomen, blade to right down 35 degrees, knees only softly flexed. Torso begins returning and coat tails continue the small rotational motion. No deep lunge.\nDo not modify frame 1, 2, 6, 7, 8. Do not just rotate sword tip: change shoulder, elbow, torso and hip pose together in 3 and 4. Keep the restrained normal-attack scale, a different gesture from a straight rush thrust or a heavy overhead strike. Transparent pixels, no effects, no blur, no labels, no layout expansion.",
+      "references": [
+        {
+          "path": "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/jab-v5.png",
+          "role": "edit target at generation time",
+          "sha256": "3db3514a4a4f03504b71c0326be7bbba201f12cf79915e773e581f2220ceaa25",
+          "archiveOfExactReference": "C:/Users/46637/.codex/generated_images/01a12152-3abe-71c0-85ca-9270cf5280d6/exec-5bafaddc-fc04-4f34-bf70-57adfe5e51da.png"
+        }
+      ],
+      "outputPath": "C:/Users/46637/.codex/generated_images/01a12152-3abe-71c0-85ca-9270cf5280d6/exec-cc2cba81-6dd0-4721-9632-3ab6f3f5756c.png",
+      "sha256": "a64bffb5e6bfa5423a1a3279ed4e37c72fcc0801444a2f311921d96c05609a07",
+      "selected": true,
+      "workspaceOutputPath": "public/assets/animations/diluc-v4/jab-v5.png",
+      "review": "Root inspected actual PNG and accepted frame 3 bent elbows near waist, rotational frame 4 and short low frame 5.",
+      "tool": "image_gen.imagegen",
+      "transparent_background": true
+    },
+    {
+      "id": "jab-backhand-variant",
+      "prompt": "Use case: stylized-concept.\nAsset type: refined anime fighting-game sprite animation, exactly EIGHT full-body frames, strict 4 columns by 2 rows; read left to right then top to bottom. Wide landscape sprite sheet on TRUE TRANSPARENT alpha background.\nInput images: jab-v5.png locks SAME anatomy, scale, face, costume, single weapon and polished rendering style. basic-variants.png and diluc-v2.png are supporting identity references only. Create DIFFERENT action poses for a compact BACKHAND DIAGONAL NORMAL CUT. Do not copy the old incorrect timing.\nIdentity: adult Diluc, tall adult male proportions, red ponytail, black coat with red lining and gold trim, white shirt, black boots. One identical black-and-red broad claymore, silver ornate guard and red jewel, same blade length all frames. NOT a thin rapier, no multiple blades or arms.\nLAYOUT SAFETY, high priority: leave very generous true transparent gaps. Each full character PLUS whole sword silhouette must occupy no more than 70% of its equal-sized cell width and 65% of cell height. Keep at least 40 pixels clear margin inside all four edges of every cell. Match the body size of jab-v5.png. Entire sword, ponytail, coat tails and boots inside its own cell. Do not fill cells with oversized characters. Stable camera right-facing three-quarter side view. No shadows, effects, sparks, grid lines or text.\nAction is a short reversed DIAGONAL CUT down toward the right, small controlled movement, NOT heavy smash. Small step and compact hip rotation. Frames 1–2 windup, 3–4 actual damaging contact, 5–6 short followthrough, 7–8 recovery.\nFRAME 1 top-left: low balanced guard, begin short draw of sword toward rear/left side while shoulders turn only slightly.\nFRAME 2 top-second: small raised side windup, elbows bent near ribs and sword behind the left shoulder at a modest diagonal, NOT high over the head. Knees slightly loaded.\nFRAME 3 top-third, FIRST CONTACT — most important: the hands are already FORWARD at lower chest level; the sword blade has ALREADY crossed the front edge of torso and points RIGHT and slightly upward, about 20 degrees above horizontal, reaching rightward into the opponent's body. Sword tip well to the right of face/front knee. Hip unwinds with a small forward step. There is NO blade remaining behind the head or pointing backward. This is the middle of a diagonal cutting stroke, NOT a preparation.\nFRAME 4 top-right, SECOND CONTACT: finish the short reverse diagonal cut with blade now pointing DOWN-RIGHT about 40 degrees, tip reaches forward near shin height. Hands at right-front hip, front knee carries modest weight. Torso stays upright enough for a normal attack.\nFRAME 5 bottom-left: compact down-right residual cut, wrists braking near front hip; small knee bend and coat movement.\nFRAME 6 bottom-second: turn wrists inward, draw sword slightly closer, rise from the small step while keeping tip down-right.\nFRAME 7 bottom-third: bring feet back into balanced stance, low forward guard.\nFRAME 8 bottom-right: settled ready right-facing stance, sword diagonally down-right.\nKeep all eight poses progressive and different. Short controlled swordwork, no giant overhead arc and no deep heavy lunge. Clear rightward diagonal hit in frames 3 and 4. Preserve fine fantasy details and same adult body size throughout.",
+      "references": [
+        {
+          "path": "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/jab-v5.png",
+          "role": "style, anatomy and sword at generation time",
+          "sha256": "3db3514a4a4f03504b71c0326be7bbba201f12cf79915e773e581f2220ceaa25",
+          "archiveOfExactReference": "C:/Users/46637/.codex/generated_images/01a12152-3abe-71c0-85ca-9270cf5280d6/exec-5bafaddc-fc04-4f34-bf70-57adfe5e51da.png"
+        },
+        {
+          "path": "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/basic-variants.png",
+          "role": "visual identity supporting reference",
+          "sha256": "67840189169d80e976ed158334428ed377838718fb0866783281c3138a7c6afc"
+        },
+        {
+          "path": "D:/Program/ai/genshin-smash/public/assets/characters/diluc-v2.png",
+          "role": "adult proportions/costume/sword",
+          "sha256": "a67d0eb3e4f7ff21b73b8a26163c54be12cff7fa31131e82e889b0ecf54d70f1"
+        }
+      ],
+      "outputPath": "C:/Users/46637/.codex/generated_images/01a12152-3abe-71c0-85ca-9270cf5280d6/exec-fac8c81e-f32e-4b2a-ac76-7c8bd0aca388.png",
+      "sha256": "561cbdd4282c492f2be21fe99d99a5487a10bc435cae38837fdea7f58cd1343a",
+      "selected": true,
+      "workspaceOutputPath": "public/assets/animations/diluc-v4/jab-variant-v5.png",
+      "review": "Root inspected actual PNG and accepted shoulder-side preparation, right-front upper contact in frame 3 and downward finish frame 4.",
+      "tool": "image_gen.imagegen",
+      "transparent_background": true
+    },
+    {
+      "id": "smash-overhead-variant",
+      "prompt": "Use case: stylized-concept.\nAsset type: refined Japanese anime fighting game animation sprite sheet. EXACTLY EIGHT full-body Diluc frames in four columns and two rows, read left-to-right then top-to-bottom. Wide landscape image with TRUE TRANSPARENT alpha background.\nInputs: jab-v5.png is adult anatomy, costume, body size and sword style reference ONLY. basic-variants.png and diluc-v2.png support the identity. Do not copy their contact timing. This is a new HEAVY TWO-HANDED OVERHEAD CLEAVE down into the right-front ground, with strong whole-body weight, distinct from a compact normal slash.\nIdentity: adult Diluc, red long ponytail, ornate black coat gold trim red lining, white shirt, black trousers/boots, one broad black/red claymore with silver ornate guard and red gem. Same head size, body proportions and blade length every frame. Exactly two arms and one sword. No chibi.\nLayout: each equal-sized cell has full character, sword, hair, coat, hands and boots with 40 pixels empty margin inside each cell boundary. Figure head-to-ground height only about 50% of cell height, to reserve upper space for raised sword. Full sword+body silhouette stays inside 75% cell width/85% cell height; NO clipping or touching cell boundaries. Stable right-facing three-quarter camera; no floor, shadows, sparks, fire, blur, swooshes, labels or gridlines.\nEight distinct progressive drawings:\nFRAME 1 top-left WINDUP: both hands lift the heavy sword from chest height toward above head. Feet wide and planted, knees loaded, chest rises slightly, sword already upward with blade diagonally up-left. Full sword visible.\nFRAME 2 top-second WINDUP: maximum two-hand OVERHEAD weight. Hands above head, blade raised almost vertical but leaning back-left, elbows bent under its weight. Rear knee deeply loaded, front foot begins driving into ground. Full raised sword inside cell.\nFRAME 3 top-third FIRST CONTACT CRITICAL: the overhead strike has ALREADY swung DOWN IN FRONT to the RIGHT. Hands descend to front of lower chest, torso pitches forward, front knee bends strongly under weight, rear leg extends. Blade points diagonally DOWN-RIGHT around 40 degrees with its tip in front of the right knee near lower shin level. The whole blade is forward of the torso's right edge, visibly contacting an opponent NOW. Sword is NOT above or behind head and NOT horizontal thrust; clear heavy downstroke. Shoulders and forearms press DOWN and hands are below face.\nFRAME 4 top-right SECOND CONTACT: sword completes overhead cleave, blade low down-right around 55 degrees, tip reaches ground just beyond front boot. Torso compresses strongly over bent front knee, rear heel lifts, hands low in front of thigh. Visible heavy downward body force, one sword only.\nFRAME 5 bottom-left FOLLOWTHROUGH: deepest body compression after cleave. Chest leans toward front knee, hands low, heavy blade near right-front ground, coat/ponytail lag overhead/back from the drop. Front foot planted. Not another swing.\nFRAME 6 bottom-second FOLLOWTHROUGH/BRAKE: stop blade at low position, both hands start pulling it inward, knees absorb weight; chest just beginning to rise.\nFRAME 7 bottom-third RECOVER: laboriously drag the heavy blade back toward low forward guard using both hands, restore front knee/hips toward balance, tip remains down-right.\nFRAME 8 bottom-right RECOVER: stable low two-handed guard, body straighter and shoulders relaxed, sword held diagonally down-right near front leg, ready again.\nImportant: striking action starts in FRAME 3, not FRAME 4. No contact pose may hold sword behind head. Frames 3–6 are strong leg/hip/torso weight with clearly deeper compression than the normal attacks. Keep constant character scale; posture bends are natural, do not resize individual frames.",
+      "references": [
+        {
+          "path": "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/jab-v5.png",
+          "role": "style, anatomy and sword",
+          "sha256": "a64bffb5e6bfa5423a1a3279ed4e37c72fcc0801444a2f311921d96c05609a07",
+          "archiveOfExactReference": "C:/Users/46637/.codex/generated_images/01a12152-3abe-71c0-85ca-9270cf5280d6/exec-cc2cba81-6dd0-4721-9632-3ab6f3f5756c.png"
+        },
+        {
+          "path": "D:/Program/ai/genshin-smash/public/assets/animations/diluc-v4/basic-variants.png",
+          "role": "visual identity supporting reference",
+          "sha256": "67840189169d80e976ed158334428ed377838718fb0866783281c3138a7c6afc"
+        },
+        {
+          "path": "D:/Program/ai/genshin-smash/public/assets/characters/diluc-v2.png",
+          "role": "adult proportions/costume/sword",
+          "sha256": "a67d0eb3e4f7ff21b73b8a26163c54be12cff7fa31131e82e889b0ecf54d70f1"
+        }
+      ],
+      "outputPath": "C:/Users/46637/.codex/generated_images/01a12152-3abe-71c0-85ca-9270cf5280d6/exec-4f863eaa-6838-456a-93b9-77a13a3312ed.png",
+      "sha256": "bb297596862083da079fcc1698d90d5c9f2d8b824606458a0212dfa7bfe0cdf0",
+      "selected": true,
+      "workspaceOutputPath": "public/assets/animations/diluc-v4/smash-variant-v5.png",
+      "review": "Root inspected actual PNG and accepted loaded overhead lift, front-down contact frame 3 and knee compression frames 4/5. Exact 12-pixel visible-alpha padding fits without overlap; no resizing needed.",
+      "tool": "image_gen.imagegen",
+      "transparent_background": true
+    }
+  ],
+  "assets": [
+    {
+      "clip": "jab-v5",
+      "canonicalMapping": "jab.json",
+      "outputPath": "public/assets/animations/diluc-v4/jab-v5.png",
+      "metadataPath": "public/assets/animations/diluc-v4/jab-v5.json",
+      "sha256": "a64bffb5e6bfa5423a1a3279ed4e37c72fcc0801444a2f311921d96c05609a07",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGBA",
+      "zeroAlphaFraction": 0.797743,
+      "visibleAlpha16PixelCount": 262267,
+      "visiblePixelsCovered": 262267,
+      "rectanglesDisjoint": true,
+      "standingBodyHeightPixels": 244,
+      "standingBodyHeightMethod": "Fixed per-clip head-to-sole standing/ready reference; natural crouch changes do not rescale frames.",
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "phases": [
+        "windup",
+        "windup",
+        "contact",
+        "contact",
+        "followthrough",
+        "followthrough",
+        "recover",
+        "recover"
+      ],
+      "measurements": [
+        {
+          "frame": 1,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            66,
+            141,
+            365,
+            370
+          ],
+          "sourceRect": {
+            "x": 54,
+            "y": 129,
+            "width": 323,
+            "height": 253
+          },
+          "footGlobalPixels": [
+            246,
+            369
+          ],
+          "weaponTipGlobalPixels": [
+            70,
+            277
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 204
+        },
+        {
+          "frame": 2,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            494,
+            132,
+            788,
+            370
+          ],
+          "sourceRect": {
+            "x": 482,
+            "y": 120,
+            "width": 318,
+            "height": 262
+          },
+          "footGlobalPixels": [
+            672,
+            369
+          ],
+          "weaponTipGlobalPixels": [
+            499,
+            284
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 211
+        },
+        {
+          "frame": 3,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            940,
+            142,
+            1298,
+            374
+          ],
+          "sourceRect": {
+            "x": 928,
+            "y": 130,
+            "width": 382,
+            "height": 256
+          },
+          "footGlobalPixels": [
+            1085,
+            373
+          ],
+          "weaponTipGlobalPixels": [
+            1291,
+            230
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 224
+        },
+        {
+          "frame": 4,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            1387,
+            145,
+            1695,
+            373
+          ],
+          "sourceRect": {
+            "x": 1375,
+            "y": 133,
+            "width": 332,
+            "height": 252
+          },
+          "footGlobalPixels": [
+            1537,
+            372
+          ],
+          "weaponTipGlobalPixels": [
+            1690,
+            353
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 211
+        },
+        {
+          "frame": 5,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            75,
+            526,
+            375,
+            760
+          ],
+          "sourceRect": {
+            "x": 63,
+            "y": 514,
+            "width": 324,
+            "height": 258
+          },
+          "footGlobalPixels": [
+            230,
+            759
+          ],
+          "weaponTipGlobalPixels": [
+            370,
+            739
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 238
+        },
+        {
+          "frame": 6,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            539,
+            518,
+            825,
+            761
+          ],
+          "sourceRect": {
+            "x": 527,
+            "y": 506,
+            "width": 310,
+            "height": 267
+          },
+          "footGlobalPixels": [
+            677,
+            760
+          ],
+          "weaponTipGlobalPixels": [
+            821,
+            728
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 203
+        },
+        {
+          "frame": 7,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            962,
+            514,
+            1267,
+            761
+          ],
+          "sourceRect": {
+            "x": 950,
+            "y": 502,
+            "width": 329,
+            "height": 271
+          },
+          "footGlobalPixels": [
+            1111,
+            760
+          ],
+          "weaponTipGlobalPixels": [
+            1261,
+            735
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 213
+        },
+        {
+          "frame": 8,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            1404,
+            518,
+            1703,
+            762
+          ],
+          "sourceRect": {
+            "x": 1392,
+            "y": 506,
+            "width": 323,
+            "height": 268
+          },
+          "footGlobalPixels": [
+            1543,
+            761
+          ],
+          "weaponTipGlobalPixels": [
+            1698,
+            735
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 207
+        }
+      ],
+      "weaponTipMethod": "Visual blade-tip annotation snapped within 8 pixels to nearest solid alpha >= 200 sword pixel."
+    },
+    {
+      "clip": "jab-variant-v5",
+      "canonicalMapping": "jab-backhand.json",
+      "outputPath": "public/assets/animations/diluc-v4/jab-variant-v5.png",
+      "metadataPath": "public/assets/animations/diluc-v4/jab-variant-v5.json",
+      "sha256": "561cbdd4282c492f2be21fe99d99a5487a10bc435cae38837fdea7f58cd1343a",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGBA",
+      "zeroAlphaFraction": 0.760984,
+      "visibleAlpha16PixelCount": 319474,
+      "visiblePixelsCovered": 319474,
+      "rectanglesDisjoint": true,
+      "standingBodyHeightPixels": 281,
+      "standingBodyHeightMethod": "Fixed per-clip head-to-sole standing/ready reference; natural crouch changes do not rescale frames.",
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "phases": [
+        "windup",
+        "windup",
+        "contact",
+        "contact",
+        "followthrough",
+        "followthrough",
+        "recover",
+        "recover"
+      ],
+      "measurements": [
+        {
+          "frame": 1,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            31,
+            141,
+            389,
+            412
+          ],
+          "sourceRect": {
+            "x": 19,
+            "y": 129,
+            "width": 382,
+            "height": 295
+          },
+          "footGlobalPixels": [
+            241,
+            411
+          ],
+          "weaponTipGlobalPixels": [
+            34,
+            308
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 227
+        },
+        {
+          "frame": 2,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            510,
+            90,
+            812,
+            413
+          ],
+          "sourceRect": {
+            "x": 498,
+            "y": 78,
+            "width": 326,
+            "height": 347
+          },
+          "footGlobalPixels": [
+            677,
+            412
+          ],
+          "weaponTipGlobalPixels": [
+            524,
+            92
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 238
+        },
+        {
+          "frame": 3,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            914,
+            130,
+            1325,
+            413
+          ],
+          "sourceRect": {
+            "x": 902,
+            "y": 118,
+            "width": 435,
+            "height": 307
+          },
+          "footGlobalPixels": [
+            1095,
+            412
+          ],
+          "weaponTipGlobalPixels": [
+            1320,
+            180
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 234
+        },
+        {
+          "frame": 4,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            1380,
+            149,
+            1744,
+            413
+          ],
+          "sourceRect": {
+            "x": 1368,
+            "y": 137,
+            "width": 388,
+            "height": 288
+          },
+          "footGlobalPixels": [
+            1549,
+            412
+          ],
+          "weaponTipGlobalPixels": [
+            1741,
+            398
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 234
+        },
+        {
+          "frame": 5,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            66,
+            536,
+            417,
+            800
+          ],
+          "sourceRect": {
+            "x": 54,
+            "y": 524,
+            "width": 375,
+            "height": 288
+          },
+          "footGlobalPixels": [
+            225,
+            799
+          ],
+          "weaponTipGlobalPixels": [
+            414,
+            779
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 200
+        },
+        {
+          "frame": 6,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            530,
+            519,
+            842,
+            800
+          ],
+          "sourceRect": {
+            "x": 518,
+            "y": 507,
+            "width": 336,
+            "height": 305
+          },
+          "footGlobalPixels": [
+            674,
+            799
+          ],
+          "weaponTipGlobalPixels": [
+            838,
+            781
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 240
+        },
+        {
+          "frame": 7,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            929,
+            541,
+            1278,
+            800
+          ],
+          "sourceRect": {
+            "x": 917,
+            "y": 529,
+            "width": 373,
+            "height": 283
+          },
+          "footGlobalPixels": [
+            1099,
+            799
+          ],
+          "weaponTipGlobalPixels": [
+            1275,
+            770
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 231
+        },
+        {
+          "frame": 8,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            1392,
+            519,
+            1729,
+            800
+          ],
+          "sourceRect": {
+            "x": 1380,
+            "y": 507,
+            "width": 361,
+            "height": 305
+          },
+          "footGlobalPixels": [
+            1541,
+            799
+          ],
+          "weaponTipGlobalPixels": [
+            1726,
+            775
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 228
+        }
+      ],
+      "weaponTipMethod": "Visual blade-tip annotation snapped within 8 pixels to nearest solid alpha >= 200 sword pixel."
+    },
+    {
+      "clip": "smash-variant-v5",
+      "canonicalMapping": "smash-overhead.json",
+      "outputPath": "public/assets/animations/diluc-v4/smash-variant-v5.png",
+      "metadataPath": "public/assets/animations/diluc-v4/smash-variant-v5.json",
+      "sha256": "bb297596862083da079fcc1698d90d5c9f2d8b824606458a0212dfa7bfe0cdf0",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGBA",
+      "zeroAlphaFraction": 0.731525,
+      "visibleAlpha16PixelCount": 350489,
+      "visiblePixelsCovered": 350489,
+      "rectanglesDisjoint": true,
+      "standingBodyHeightPixels": 310,
+      "standingBodyHeightMethod": "Fixed per-clip head-to-sole standing/ready reference; natural crouch changes do not rescale frames.",
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "phases": [
+        "windup",
+        "windup",
+        "contact",
+        "contact",
+        "followthrough",
+        "followthrough",
+        "recover",
+        "recover"
+      ],
+      "measurements": [
+        {
+          "frame": 1,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            53,
+            54,
+            381,
+            493
+          ],
+          "sourceRect": {
+            "x": 41,
+            "y": 42,
+            "width": 352,
+            "height": 463
+          },
+          "footGlobalPixels": [
+            231,
+            492
+          ],
+          "weaponTipGlobalPixels": [
+            84,
+            57
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 241
+        },
+        {
+          "frame": 2,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            463,
+            35,
+            808,
+            494
+          ],
+          "sourceRect": {
+            "x": 451,
+            "y": 23,
+            "width": 369,
+            "height": 483
+          },
+          "footGlobalPixels": [
+            666,
+            493
+          ],
+          "weaponTipGlobalPixels": [
+            466,
+            38
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 205
+        },
+        {
+          "frame": 3,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            886,
+            204,
+            1300,
+            494
+          ],
+          "sourceRect": {
+            "x": 874,
+            "y": 192,
+            "width": 438,
+            "height": 314
+          },
+          "footGlobalPixels": [
+            1068,
+            493
+          ],
+          "weaponTipGlobalPixels": [
+            1296,
+            456
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 220
+        },
+        {
+          "frame": 4,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            1354,
+            247,
+            1733,
+            505
+          ],
+          "sourceRect": {
+            "x": 1342,
+            "y": 235,
+            "width": 403,
+            "height": 282
+          },
+          "footGlobalPixels": [
+            1520,
+            493
+          ],
+          "weaponTipGlobalPixels": [
+            1730,
+            502
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 211
+        },
+        {
+          "frame": 5,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            66,
+            611,
+            445,
+            852
+          ],
+          "sourceRect": {
+            "x": 54,
+            "y": 599,
+            "width": 403,
+            "height": 265
+          },
+          "footGlobalPixels": [
+            212,
+            842
+          ],
+          "weaponTipGlobalPixels": [
+            441,
+            849
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 232
+        },
+        {
+          "frame": 6,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            486,
+            596,
+            859,
+            843
+          ],
+          "sourceRect": {
+            "x": 474,
+            "y": 584,
+            "width": 397,
+            "height": 271
+          },
+          "footGlobalPixels": [
+            648,
+            842
+          ],
+          "weaponTipGlobalPixels": [
+            855,
+            827
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 239
+        },
+        {
+          "frame": 7,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            918,
+            559,
+            1294,
+            845
+          ],
+          "sourceRect": {
+            "x": 906,
+            "y": 547,
+            "width": 400,
+            "height": 310
+          },
+          "footGlobalPixels": [
+            1063,
+            844
+          ],
+          "weaponTipGlobalPixels": [
+            1290,
+            828
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 216
+        },
+        {
+          "frame": 8,
+          "visibleAlphaThreshold": 16,
+          "visibleBounds": [
+            1366,
+            534,
+            1724,
+            845
+          ],
+          "sourceRect": {
+            "x": 1354,
+            "y": 522,
+            "width": 382,
+            "height": 335
+          },
+          "footGlobalPixels": [
+            1515,
+            844
+          ],
+          "weaponTipGlobalPixels": [
+            1720,
+            823
+          ],
+          "alpha16Margins": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "weaponTipAlpha": 241
+        }
+      ],
+      "weaponTipMethod": "Visual blade-tip annotation snapped within 8 pixels to nearest solid alpha >= 200 sword pixel."
+    }
+  ]
+}

@@ -1,0 +1,761 @@
+{
+  "version": 1,
+  "date": "2026-10-09",
+  "character": "diluc",
+  "skill": "C:/Users/46637/.codex/skills/.system/imagegen/SKILL.md",
+  "mode": "built-in image_gen",
+  "transparentBackground": true,
+  "scope": "Replace L/special and I/secondary, 24 frames. Existing PNGs, other clips, canonical metadata, manifests and runtime unchanged by this executor.",
+  "generations": [
+    {
+      "id": "L-initial",
+      "prompt": "Use case: stylized-concept. Asset type: production transparent 12-frame full-body sprite animation sheet for Diluc's L elemental forward claymore rush.\nUse the two reference images ONLY for the exact adult red-haired male character identity, black/red embroidered coat, long red ponytail, white shirt, black boots/gloves, handsome face, detailed polished Japanese anime fantasy painted style and black crimson-edged broad claymore design. Redraw a NEW choreography. Preserve precise proportions and mature slender athletic anatomy, and the SAME physical claymore length across all twelve frames. Right-facing mild three-quarter side view in all cells.\nEXACT layout: FOUR columns by THREE rows, 12 distinct poses in reading order, overall landscape 4:3 canvas ideally 1448x1086. Each full body including hair, coat, both shoes, entire hilt AND sword tip completely inside its own equal cell. Leave genuine transparent gutters at least 24 pixels between neighboring silhouettes and generous margins around sheet. Character standing body height about 225px at this canvas size, so long horizontal sword fits. No labels, letters, frame numbers, grids, scenery, floor, ground shadows or border. Native RGBA alpha TRANSPARENT background, not a drawn checkerboard.\nThis is a HEAVY GROUNDED FORWARD RUSH. The first four poses clearly gather weight; the middle four commit the whole torso and legs to a forward thrust/rush; last four brake and recover. Never a stationary upright magic cast. Do not copy poses from reference sheet.\n01: begin in compact staggered low guard, front foot right, shoulders just lowering, blade diagonally down-forward.\n02: draw BOTH hands and claymore toward rear left hip, torso rotates back, front knee flexes. Blade trails backward and low.\n03: deepen weight onto rear bent leg, front shoulder dropped, arms chamber the heavy sword behind hip; ponytail still mostly hanging.\n04: deepest compressed anticipation, rear heel loaded to push, hips wound, head focused right, sword still chambered back.\n05 FIRST CONTACT: sword ALREADY driven forward to the right, point slightly below shoulder level, blade nearly horizontal with only 5 degrees upward. Hands in front of belly/chest, torso pitched forward about30 degrees, rear leg powerfully pushes; front foot extending forward. A committed rush silhouette, not a sword waiting behind.\n06: continue the same rush line, same nearly-horizontal rightward blade angle, rear leg extends back and front leg catches the advancing body, shoulders and hips travel together, hair and coat trail left.\n07: next running/pushing step during the rush, torso still forward, blade stays in the SAME near-horizontal forward line, hands do not swing sword downward or overhead; vary legs and trailing cloth distinctly from06.\n08: final advancing rush step, forward knee starts loading to brake while back foot follows, sword remains the SAME forward nearly horizontal guard; slightly less torso lean.\n09: broad braking stance, front foot planted forward and knee bent, rear foot planted behind, chest begins rising, sword still reaches forward but tip only starts lowering a little.\n10: hips and shoulders square back to ready, elbow bends and draws heavy hilt toward waist, sword lowers to down-forward diagonal.\n11: recover closer staggered feet, drag the heavy blade into controlled low guard at right side, coat and ponytail settle.\n12: stable composed low guard, knees softly bent, sword diagonally down-forward, same scale and character as01.\nCritical continuity: frames05–08 claymore points to the RIGHT along one stable NEAR-HORIZONTAL line, NO repeated low-high-low angle flicker. Each frame must show distinct anatomical posture and leg progression. All sword tips and both boots remain complete, uncut, visibly separate from neighbors. Minimal warm red glint along blade edge only; NO large flame, firebird, fire trails, aura, smoke, slash arcs, ground effect, wind streak, motion blur, or ghost copies. This sheet depicts the fighter and his weapon only.",
+      "references": [
+        "public/assets/animations/diluc-v4/basic.png",
+        "public/assets/animations/diluc-v4/special.png"
+      ],
+      "source": "C:\\Users\\46637\\.codex\\generated_images\\01a1214d-d164-7bf1-a29e-59acf30678ed\\exec-7b1e14fa-1ffe-4e3d-9197-e5ed34696f64.png",
+      "selected": false,
+      "review": "Stable forward blade and distinct rush steps, but figure layout too large and frame08 blade tip touches/crops canvas. Rejected.",
+      "sourceSha256": "f0141d18faeae9c03c4dc89d32e884b142e7598b05ba85ed4d0f994f3ba02e2e"
+    },
+    {
+      "id": "L-spacing-correction",
+      "prompt": "Use case: precise-object-edit. Correct ONLY the spatial layout of this transparent 12-frame Diluc sprite animation sheet. Keep the exact 12 current sequential poses, clothing, mature adult body proportions, detailed Japanese fantasy anime painted style, weapon design, physical weapon length relative to body, face, and stable near-horizontal sword line in middle row unchanged. Native alpha transparency must stay transparent. Do NOT add or remove poses.\nThe problem to fix: the figures are too large for the four columns and the RIGHTMOST MIDDLE ROW SWORD TIP is CUT OFF by the outer canvas edge. Redraw all twelve complete figures at exactly 72 percent of their present total scale, and place each one at the center of its own 4-column by3-row cell. This is one consistent uniform size reduction of the FULL fighter AND weapon together, preserving relative body/weapon proportions and the original poses. Do not shrink weapons separately. Keep the same 4:3 canvas. The 12 figures must appear much smaller with visibly abundant empty transparent space around every pose.\nRestore a COMPLETE sharp pointed claymore tip in row2 column4 identical in length/design to other middle-row swords. Every shoe, coat tail, hair tip, sword pommel, and blade point must be wholly present. Leave at least32px empty transparent space at all four outside canvas edges and at least40px between neighboring complete opaque silhouettes. No silhouettes or weapon tips may overlap horizontally. All 12 per-pose bounding rectangles must be completely disjoint.\nMaintain the 4x3 order: top row low guard and three progressively coiled rear-sword anticipation poses; middle row four distinct forward rush stepping poses with sword level to right; bottom row braking and lowering heavy sword into settled low guard. No backdrop, floor, shadow, text, numbers, borders, magic FX, slash trails or motion blur.",
+      "references": [
+        "C:\\Users\\46637\\.codex\\generated_images\\01a1214d-d164-7bf1-a29e-59acf30678ed\\exec-7b1e14fa-1ffe-4e3d-9197-e5ed34696f64.png"
+      ],
+      "source": "C:\\Users\\46637\\.codex\\generated_images\\01a1214d-d164-7bf1-a29e-59acf30678ed\\exec-f5daa3a3-c151-4335-9ab6-2b7525cc326a.png",
+      "destination": "public/assets/animations/diluc-v4/special-v5.png",
+      "selected": true,
+      "review": "Parent independent visual review passed: frames05–08 stable forward blade with continuous rush footwork;09 brakes;10–12 controlled low guard. Complete silhouettes and tips.",
+      "sourceSha256": "5cbc66c64c12b10d4536d6a1ec22dfd255f41447b4f810dfd497a0b7a2a92e5a"
+    },
+    {
+      "id": "I-invocation",
+      "prompt": "Use case: stylized-concept. Asset type: production transparent game sprite animation sheet of Diluc's I elemental FIREBIRD RELEASE using his heavy claymore.\nCreate EXACTLY twelve distinct FULL-BODY poses arranged FOUR columns by THREE rows, reading left to right then top to bottom on landscape4:3 canvas ideally1448x1086. Reference1 basic.png is character identity/style/weapon design ONLY. Reference2 special.png is also identity ONLY, NOT choreography. Preserve this same mature adult red-haired man: long flowing red ponytail, tailored black long coat with delicate gold embroidery and red lining, white shirt, fitted dark pants and boots, black gloves, refined detailed Japanese anime fantasy painted rendering. SAME black crimson-edged broad heavy claymore and physical body/weapon lengths in all cells. Facing RIGHT in mild3/4 side view.\nThe story is ELEMENTAL FIREBIRD INVOCATION with the claymore, distinct from a generic uppercut: first a clearly visible empty LEFT hand drawing a little fire along the spine of the lowered rear-held sword, then both hands gripping the hilt, then a weighty lifting release forwards-upwards, a short high hold/recoil, and deliberate recovery. The game draws the released firebird separately, so DO NOT DRAW ANY BIRD on this sheet.\nTop row is four windup poses:\n01: staggered stance, torso modestly upright, right hand grips hilt low beside rear hip; claymore extends diagonally BACK-LEFT and low. Empty left fingertips visibly reach toward blade spine beside the hilt, gathering a tiny ember.\n02: left palm/fingers slide farther along blade spine toward the rear, head and gaze briefly lowered toward the tiny orange ember, right hand keeps sword low behind; front knee bends slightly.\n03: left hand reaches end of the small ignition gesture then starts returning to hilt, hips coil and knees compress, one narrow small orange tongue hugs the steel close to hilt only.\n04: BOTH hands now firmly on hilt at rear hip, body compressed with loaded rear leg and front shoulder turned in, full blade still low behind, clearly poised to unleash.\nMiddle row release and follow-through:\n05 FIRST CONTACT/RELEASE: both hands swing the hilt through in front of the abdomen, blade has ALREADY reached diagonally UP and FORWARD to the RIGHT at about35 degrees. Front foot planted in wider stance, chest and hips open, arms extending forward, tiny attached flame along blade edge. This is already the release point, NOT another backswing.\n06: complete the lifting release at about50 degrees up-right, hands reach around upper-chest height IN FRONT of body, elbows not locked, torso fully expanded, hair and coat react late. Full blade always in front of him; do not place it vertically over head or cover his face.\n07: brief weighty high-position hold at50 degrees up-right, arms bend subtly as chest/shoulders recoil from the release, knees remain flexed.\n08: high hold ends, shoulders ease and hilt begins to sink toward chest, blade40 degrees up-right, no repeated attack stroke.\nBottom row:\n09: lower blade to about20 degrees up-right while bringing weight back to center, elbows gather, front knee starts straightening, cloth still drifts.\n10: sword lowered diagonally down-forward in BOTH hands, arms descending slowly due weight, stance narrows slightly.\n11: deeper settled low guard, shoulders relaxed, ponytail and coat almost quiet.\n12: composed ready low guard, staggered feet modestly apart, blade down-forward, both hands near waist, entire body relaxed but ready.\nLayout is critical: show smaller figures with generous blank space, standing body height about210px so even high blade fits. All twelve full silhouettes including head/hair, feet, coat tails, hilt and exact blade tips must fit with at least30px empty alpha between any adjacent silhouettes and at least25px to outer canvas edges. No overlap, no cropped tips, no shared or connected effects. Character body scale must remain constant despite crouching. Anatomically sound hands, one complete heavy claymore per figure. NO bird, NO independent projectile, NO giant fire, NO flame arc, NO rings, NO ground, NO shadow blob, NO wind/speed lines, NO text/numbers/grid. True transparent RGBA background.",
+      "references": [
+        "public/assets/animations/diluc-v4/basic.png",
+        "public/assets/animations/diluc-v4/special.png"
+      ],
+      "source": "C:\\Users\\46637\\.codex\\generated_images\\01a1214d-d164-7bf1-a29e-59acf30678ed\\exec-1397870e-1836-4f4b-9480-684a1a003042.png",
+      "destination": "public/assets/animations/diluc-v4/secondary-v5.png",
+      "selected": true,
+      "review": "Parent independent visual review passed: actual output frames01–02 gather tiny flame in free palm in front of body;03 brings it onto rear sword;04 two-hand charge;05 sword already releases forward-up;06–08 held high/recoil without blade over head;09 lowers;10–12 low guard. No detached firebird. Actual choreography slightly differs from requested hand-along-spine preparation and is recorded faithfully.",
+      "sourceSha256": "3adb04f0bc1ffa03a3edc04d749fb91cb77766980d2adabd2d2d1a609f03dd31"
+    }
+  ],
+  "registration": {
+    "source": "Read-only native RGBA inspection. Adaptive per-pose search regions; measure alpha>8 bounds then add12px crop padding. No raster modification, resizing, recoloring, compositing, re-encoding or PNG overwrite. Low-alpha generator fringe remains intact in source PNG.",
+    "phases": {
+      "windup": 4,
+      "contact": 2,
+      "followthrough": 3,
+      "recover": 3
+    },
+    "standingBodyHeightMethod": "Anatomical standing-equivalent estimate from skull/chin, shoulder/hip and bent leg segment lengths, compared with existing locomotion identity. Excludes sword, lifted hands, ponytail and long cloth extrema; never derived directly from alpha bounding-box height.",
+    "standingBodyHeightPixels": {
+      "special": 225,
+      "secondary": 260
+    },
+    "footAnchorMethod": "Manual anatomical support reference between visible soles in planted frames, independent of blade/cloth bounding-box midpoint. Xiao airborne dash05-08 uses pelvis-projected reference x and common virtual sole plane y674 so tucked legs stay above the origin; bottom crops include transparent space for this anchor.",
+    "trails": {
+      "special": "thrust",
+      "secondary": "arc"
+    }
+  },
+  "validation": [
+    {
+      "image": "public/assets/animations/diluc-v4/special-v5.png",
+      "metadata": "public/assets/animations/diluc-v4/special-v5.json",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "sha256": "5cbc66c64c12b10d4536d6a1ec22dfd255f41447b4f810dfd497a0b7a2a92e5a",
+      "metadataSha256": "a4a2926e26c43bc00afae5fd5ca48ce573cace6206f77649d5837344dd556509",
+      "transparentPercent": 79.4917,
+      "standingBodyHeightPixels": 225,
+      "readOnlyRasterAnalysis": true,
+      "sourceRectanglesDisjoint": true,
+      "uniqueFrames": 12,
+      "durationWeightsPreserved": true,
+      "durationWeights": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "minimumVisibleGutterPx": 12,
+      "frames": [
+        {
+          "name": "special-01",
+          "visibleAlphaBounds": [
+            87,
+            152,
+            319,
+            344
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 75,
+            "y": 140,
+            "width": 256,
+            "height": 217
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 187,
+            "y": 345
+          },
+          "weaponTipSourcePixels": {
+            "x": 317,
+            "y": 335
+          },
+          "rgbaSha256": "754d33cd84c0a9665edfb1df1d081b797f6e757df7812fbb4b8fe3445e386b76"
+        },
+        {
+          "name": "special-02",
+          "visibleAlphaBounds": [
+            445,
+            161,
+            676,
+            345
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 433,
+            "y": 149,
+            "width": 255,
+            "height": 208
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 576,
+            "y": 345
+          },
+          "weaponTipSourcePixels": {
+            "x": 446,
+            "y": 267
+          },
+          "rgbaSha256": "32eaaf21126478a580e9c87fd34246b605aca27d8caf4c307f60f9429596fd07"
+        },
+        {
+          "name": "special-03",
+          "visibleAlphaBounds": [
+            784,
+            170,
+            978,
+            345
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 772,
+            "y": 158,
+            "width": 218,
+            "height": 199
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 884,
+            "y": 345
+          },
+          "weaponTipSourcePixels": {
+            "x": 785,
+            "y": 277
+          },
+          "rgbaSha256": "cf941e69dc024802366e24d56137459ee5b0c2c4a2323bbe71dabb61b5fb9283"
+        },
+        {
+          "name": "special-04",
+          "visibleAlphaBounds": [
+            1127,
+            180,
+            1371,
+            345
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 1115,
+            "y": 168,
+            "width": 268,
+            "height": 189
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 1264,
+            "y": 345
+          },
+          "weaponTipSourcePixels": {
+            "x": 1129,
+            "y": 291
+          },
+          "rgbaSha256": "442e112390ea580c306e319afd3ef38ba45e858fd3173847342a85a113e6b0c0"
+        },
+        {
+          "name": "special-05",
+          "visibleAlphaBounds": [
+            84,
+            473,
+            392,
+            647
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 72,
+            "y": 461,
+            "width": 332,
+            "height": 201
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 185,
+            "y": 650
+          },
+          "weaponTipSourcePixels": {
+            "x": 391,
+            "y": 536
+          },
+          "rgbaSha256": "19b90bdbb1115d54acd44893bfd048495ed369e0f6f6e3aa1e3be28b98ffb9ce"
+        },
+        {
+          "name": "special-06",
+          "visibleAlphaBounds": [
+            444,
+            477,
+            743,
+            648
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 432,
+            "y": 465,
+            "width": 323,
+            "height": 197
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 552,
+            "y": 650
+          },
+          "weaponTipSourcePixels": {
+            "x": 741,
+            "y": 536
+          },
+          "rgbaSha256": "7effc45c4fc4f1a50dd46a2fd883dda450972a9ad27631d33d08a5df9cbf87fd"
+        },
+        {
+          "name": "special-07",
+          "visibleAlphaBounds": [
+            789,
+            484,
+            1087,
+            651
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 777,
+            "y": 472,
+            "width": 322,
+            "height": 192
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 907,
+            "y": 652
+          },
+          "weaponTipSourcePixels": {
+            "x": 1086,
+            "y": 543
+          },
+          "rgbaSha256": "a2f51c5aab2bbcc13476d5476dbad474edc775b389ebf323bd5afaa181a6def2"
+        },
+        {
+          "name": "special-08",
+          "visibleAlphaBounds": [
+            1149,
+            471,
+            1411,
+            652
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 1137,
+            "y": 459,
+            "width": 286,
+            "height": 205
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 1260,
+            "y": 652
+          },
+          "weaponTipSourcePixels": {
+            "x": 1409,
+            "y": 535
+          },
+          "rgbaSha256": "31973f066d92fd1a88dfabda13f0ec2e9df6efcf539d74f8981e638a65073cd0"
+        },
+        {
+          "name": "special-09",
+          "visibleAlphaBounds": [
+            86,
+            780,
+            352,
+            954
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 74,
+            "y": 768,
+            "width": 290,
+            "height": 200
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 191,
+            "y": 956
+          },
+          "weaponTipSourcePixels": {
+            "x": 351,
+            "y": 900
+          },
+          "rgbaSha256": "58bf88f175efe943e237d8d9db8455829e7bc352f811b1ba568fee7a5aa12546"
+        },
+        {
+          "name": "special-10",
+          "visibleAlphaBounds": [
+            456,
+            768,
+            688,
+            956
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 444,
+            "y": 756,
+            "width": 256,
+            "height": 212
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 563,
+            "y": 956
+          },
+          "weaponTipSourcePixels": {
+            "x": 687,
+            "y": 935
+          },
+          "rgbaSha256": "c422418d40db087b1334c5681452aa9484f4c00c24c54ece84e1e072cfbcdd27"
+        },
+        {
+          "name": "special-11",
+          "visibleAlphaBounds": [
+            802,
+            767,
+            1039,
+            956
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 790,
+            "y": 755,
+            "width": 261,
+            "height": 213
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 908,
+            "y": 956
+          },
+          "weaponTipSourcePixels": {
+            "x": 1037,
+            "y": 944
+          },
+          "rgbaSha256": "95d8c4a6f2ba09a984010bbc218bbec13713b7f3d71c13b07309a78cddaea0c5"
+        },
+        {
+          "name": "special-12",
+          "visibleAlphaBounds": [
+            1154,
+            766,
+            1383,
+            956
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 1142,
+            "y": 754,
+            "width": 253,
+            "height": 214
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 1252,
+            "y": 956
+          },
+          "weaponTipSourcePixels": {
+            "x": 1381,
+            "y": 950
+          },
+          "rgbaSha256": "f4c91cba0cd5a1621b79b4dd5f45326ff642c05da950bd2f9e55571f792a072d"
+        }
+      ]
+    },
+    {
+      "image": "public/assets/animations/diluc-v4/secondary-v5.png",
+      "metadata": "public/assets/animations/diluc-v4/secondary-v5.json",
+      "size": [
+        1447,
+        1087
+      ],
+      "mode": "RGBA",
+      "sha256": "3adb04f0bc1ffa03a3edc04d749fb91cb77766980d2adabd2d2d1a609f03dd31",
+      "metadataSha256": "7eb0c1d8352a0a761cf6953b836d31356b231d2135e731f43241a601213e0888",
+      "transparentPercent": 73.5627,
+      "standingBodyHeightPixels": 260,
+      "readOnlyRasterAnalysis": true,
+      "sourceRectanglesDisjoint": true,
+      "uniqueFrames": 12,
+      "durationWeightsPreserved": true,
+      "durationWeights": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "minimumVisibleGutterPx": 12,
+      "frames": [
+        {
+          "name": "secondary-01",
+          "visibleAlphaBounds": [
+            23,
+            121,
+            318,
+            362
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 11,
+            "y": 109,
+            "width": 319,
+            "height": 266
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 211,
+            "y": 363
+          },
+          "weaponTipSourcePixels": {
+            "x": 24,
+            "y": 296
+          },
+          "rgbaSha256": "dfbb108dac929a3d969490a4331d11b8fa59f42223feef9f07337e965cafb5bb"
+        },
+        {
+          "name": "secondary-02",
+          "visibleAlphaBounds": [
+            435,
+            148,
+            692,
+            362
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 423,
+            "y": 136,
+            "width": 281,
+            "height": 239
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 589,
+            "y": 363
+          },
+          "weaponTipSourcePixels": {
+            "x": 436,
+            "y": 290
+          },
+          "rgbaSha256": "044b48588fccb2995bea8c56887857c9a8285418726c6253510a1aee47548661"
+        },
+        {
+          "name": "secondary-03",
+          "visibleAlphaBounds": [
+            796,
+            160,
+            1063,
+            362
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 784,
+            "y": 148,
+            "width": 291,
+            "height": 227
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 943,
+            "y": 363
+          },
+          "weaponTipSourcePixels": {
+            "x": 797,
+            "y": 301
+          },
+          "rgbaSha256": "0566812c60e36e2c56c3be1e6283fdc7f825800f2b80551682bd9747155ec896"
+        },
+        {
+          "name": "secondary-04",
+          "visibleAlphaBounds": [
+            1164,
+            152,
+            1421,
+            363
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 1152,
+            "y": 140,
+            "width": 281,
+            "height": 235
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 1293,
+            "y": 363
+          },
+          "weaponTipSourcePixels": {
+            "x": 1165,
+            "y": 309
+          },
+          "rgbaSha256": "91c0a426fb0f3ef5af593b1f179d94201b11b02a1accc25e8631e86896281250"
+        },
+        {
+          "name": "secondary-05",
+          "visibleAlphaBounds": [
+            43,
+            473,
+            369,
+            713
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 31,
+            "y": 461,
+            "width": 350,
+            "height": 267
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 199,
+            "y": 716
+          },
+          "weaponTipSourcePixels": {
+            "x": 368,
+            "y": 473
+          },
+          "rgbaSha256": "e291775e956e83fa5a9aea1a1d169941a23f6cf01116a24316dc4e2a9ab6afaa"
+        },
+        {
+          "name": "secondary-06",
+          "visibleAlphaBounds": [
+            413,
+            417,
+            731,
+            713
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 401,
+            "y": 405,
+            "width": 342,
+            "height": 323
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 558,
+            "y": 716
+          },
+          "weaponTipSourcePixels": {
+            "x": 730,
+            "y": 418
+          },
+          "rgbaSha256": "c3aa762ec84376dc7b89b5401482986e7eec6649949fc7856726807df83e2ff3"
+        },
+        {
+          "name": "secondary-07",
+          "visibleAlphaBounds": [
+            777,
+            429,
+            1075,
+            714
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 765,
+            "y": 417,
+            "width": 322,
+            "height": 311
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 916,
+            "y": 716
+          },
+          "weaponTipSourcePixels": {
+            "x": 1074,
+            "y": 429
+          },
+          "rgbaSha256": "8dbb02a8eb3dfc6921dba19f8bf26e475d284613efac33d0979453da3245678c"
+        },
+        {
+          "name": "secondary-08",
+          "visibleAlphaBounds": [
+            1134,
+            462,
+            1405,
+            716
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 1122,
+            "y": 450,
+            "width": 295,
+            "height": 278
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 1279,
+            "y": 716
+          },
+          "weaponTipSourcePixels": {
+            "x": 1403,
+            "y": 463
+          },
+          "rgbaSha256": "2d13ff3598c8d05e2147614a37794cdaec3ee311d408a40a2b29a46d7093d095"
+        },
+        {
+          "name": "secondary-09",
+          "visibleAlphaBounds": [
+            58,
+            805,
+            364,
+            1034
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 46,
+            "y": 793,
+            "width": 330,
+            "height": 254
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 180,
+            "y": 1035
+          },
+          "weaponTipSourcePixels": {
+            "x": 363,
+            "y": 855
+          },
+          "rgbaSha256": "9eb30dfd6c84712c11f5f4bf53d50cf9c44a9dd79c22d9dd5fa11ce11eaf281b"
+        },
+        {
+          "name": "secondary-10",
+          "visibleAlphaBounds": [
+            442,
+            805,
+            708,
+            1035
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 430,
+            "y": 793,
+            "width": 290,
+            "height": 254
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 558,
+            "y": 1035
+          },
+          "weaponTipSourcePixels": {
+            "x": 707,
+            "y": 996
+          },
+          "rgbaSha256": "45f1f71910671603b1eaf376ca53472992344ec5b5e6c4cddd5f8e5ae0a7a17b"
+        },
+        {
+          "name": "secondary-11",
+          "visibleAlphaBounds": [
+            799,
+            814,
+            1062,
+            1034
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 787,
+            "y": 802,
+            "width": 287,
+            "height": 245
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 918,
+            "y": 1035
+          },
+          "weaponTipSourcePixels": {
+            "x": 1061,
+            "y": 1000
+          },
+          "rgbaSha256": "531e16d2046220f898af109b64e40fb8465b25b77de51ee5542f5b492b0e6f7c"
+        },
+        {
+          "name": "secondary-12",
+          "visibleAlphaBounds": [
+            1159,
+            792,
+            1417,
+            1035
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 1147,
+            "y": 780,
+            "width": 282,
+            "height": 267
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 1280,
+            "y": 1035
+          },
+          "weaponTipSourcePixels": {
+            "x": 1415,
+            "y": 1004
+          },
+          "rgbaSha256": "d88ded527e4eba794117cbeb606f523b771b3e25717041e0ff9cbb9f1d0f3d99"
+        }
+      ]
+    }
+  ]
+}

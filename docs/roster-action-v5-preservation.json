@@ -1,0 +1,878 @@
+{
+  "ok": true,
+  "date": "2026-10-09",
+  "baselineCommit": "33a3ecaae09e311cf44c6d8eec18e65e32bd608a",
+  "activePackMapPreserved": true,
+  "runtimeAndDependencyFilesPreserved": true,
+  "totalFrames": 400,
+  "redrawnFrames": 96,
+  "preservedFrames": 304,
+  "redrawnClips": [
+    {
+      "character": "jean",
+      "section": "clips",
+      "clip": "special",
+      "frames": 12,
+      "image": "special-v5.png",
+      "canonical": "public/assets/animations/jean-v4/special.json",
+      "versionedMetadata": "public/assets/animations/jean-v4/special-v5.json",
+      "standingBodyHeightPixels": 259,
+      "sha256": "02616e4f75f9e55114f38751a15c3768ade70ea46e3895dc87e4fecbde57f9db",
+      "phaseAndDurationWeightsPreserved": true
+    },
+    {
+      "character": "jean",
+      "section": "clips",
+      "clip": "secondary",
+      "frames": 12,
+      "image": "secondary-v5.png",
+      "canonical": "public/assets/animations/jean-v4/secondary.json",
+      "versionedMetadata": "public/assets/animations/jean-v4/secondary-v5.json",
+      "standingBodyHeightPixels": 250,
+      "sha256": "bb6e15490b6459c8bf73d20c13ce60e295e018f9521c31f6f3f7e86f3256fc2e",
+      "phaseAndDurationWeightsPreserved": true
+    },
+    {
+      "character": "eula",
+      "section": "clips",
+      "clip": "secondary",
+      "frames": 12,
+      "image": "secondary-v5.png",
+      "canonical": "public/assets/animations/eula-v4/secondary.json",
+      "versionedMetadata": "public/assets/animations/eula-v4/secondary-v5.json",
+      "standingBodyHeightPixels": 288,
+      "sha256": "63dbd0fba001efc22e4e07ed3840ce30dddd3c4dd518f4b490582f4e4ea58da2",
+      "phaseAndDurationWeightsPreserved": true
+    },
+    {
+      "character": "diluc",
+      "section": "clips",
+      "clip": "jab",
+      "frames": 8,
+      "image": "jab-v5.png",
+      "canonical": "public/assets/animations/diluc-v4/jab.json",
+      "versionedMetadata": "public/assets/animations/diluc-v4/jab-v5.json",
+      "standingBodyHeightPixels": 244,
+      "sha256": "a64bffb5e6bfa5423a1a3279ed4e37c72fcc0801444a2f311921d96c05609a07",
+      "phaseAndDurationWeightsPreserved": true
+    },
+    {
+      "character": "diluc",
+      "section": "clips",
+      "clip": "special",
+      "frames": 12,
+      "image": "special-v5.png",
+      "canonical": "public/assets/animations/diluc-v4/special.json",
+      "versionedMetadata": "public/assets/animations/diluc-v4/special-v5.json",
+      "standingBodyHeightPixels": 225,
+      "sha256": "5cbc66c64c12b10d4536d6a1ec22dfd255f41447b4f810dfd497a0b7a2a92e5a",
+      "phaseAndDurationWeightsPreserved": true
+    },
+    {
+      "character": "diluc",
+      "section": "clips",
+      "clip": "secondary",
+      "frames": 12,
+      "image": "secondary-v5.png",
+      "canonical": "public/assets/animations/diluc-v4/secondary.json",
+      "versionedMetadata": "public/assets/animations/diluc-v4/secondary-v5.json",
+      "standingBodyHeightPixels": 260,
+      "sha256": "3adb04f0bc1ffa03a3edc04d749fb91cb77766980d2adabd2d2d1a609f03dd31",
+      "phaseAndDurationWeightsPreserved": true
+    },
+    {
+      "character": "diluc",
+      "section": "variants",
+      "clip": "jab",
+      "frames": 8,
+      "image": "jab-variant-v5.png",
+      "canonical": "public/assets/animations/diluc-v4/jab-backhand.json",
+      "versionedMetadata": "public/assets/animations/diluc-v4/jab-variant-v5.json",
+      "standingBodyHeightPixels": 281,
+      "sha256": "561cbdd4282c492f2be21fe99d99a5487a10bc435cae38837fdea7f58cd1343a",
+      "phaseAndDurationWeightsPreserved": true
+    },
+    {
+      "character": "diluc",
+      "section": "variants",
+      "clip": "smash",
+      "frames": 8,
+      "image": "smash-variant-v5.png",
+      "canonical": "public/assets/animations/diluc-v4/smash-overhead.json",
+      "versionedMetadata": "public/assets/animations/diluc-v4/smash-variant-v5.json",
+      "standingBodyHeightPixels": 310,
+      "sha256": "bb297596862083da079fcc1698d90d5c9f2d8b824606458a0212dfa7bfe0cdf0",
+      "phaseAndDurationWeightsPreserved": true
+    },
+    {
+      "character": "xiao",
+      "section": "clips",
+      "clip": "secondary",
+      "frames": 12,
+      "image": "secondary-v5.png",
+      "canonical": "public/assets/animations/xiao-v4/secondary.json",
+      "versionedMetadata": "public/assets/animations/xiao-v4/secondary-v5.json",
+      "standingBodyHeightPixels": 230,
+      "sha256": "91fd6e13cd5f985a5254da5cd1c60ef0551382c5df6f04afbe9ad764b924fc31",
+      "phaseAndDurationWeightsPreserved": true
+    }
+  ],
+  "preservedClips": [
+    {
+      "character": "raiden",
+      "section": "clips",
+      "clip": "idle",
+      "frames": 4,
+      "image": "locomotion.png",
+      "metadataSemanticSha256": "e925e7905a6f5598076d34d12b5a98162fd6e94daaed8aa5e38b4a2696476114",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "raiden",
+      "section": "clips",
+      "clip": "run",
+      "frames": 8,
+      "image": "locomotion.png",
+      "metadataSemanticSha256": "7dd0fc45b5cad3595b36f8481b0c9d6c8200b214b91b1c2b9df40c67010fbcb1",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "raiden",
+      "section": "clips",
+      "clip": "jump",
+      "frames": 8,
+      "image": "aerial.png",
+      "metadataSemanticSha256": "d188180d347b740ce16dc6df8eeb7582ac8b555e8b4409705f67814743f131ba",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "raiden",
+      "section": "clips",
+      "clip": "dodge",
+      "frames": 4,
+      "image": "aerial.png",
+      "metadataSemanticSha256": "24d9298a0721be92aef89b61df1a59c9e8c47aa0450392098d8e30865bf23c81",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "raiden",
+      "section": "clips",
+      "clip": "jab",
+      "frames": 8,
+      "image": "basic.png",
+      "metadataSemanticSha256": "ff894d832a805d0f1843095633c18d147c208b9ec8d9bc09864763ff7b076c6f",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "raiden",
+      "section": "clips",
+      "clip": "smash",
+      "frames": 8,
+      "image": "basic.png",
+      "metadataSemanticSha256": "f31355a0341b0d4f61c6c9c5ccd6dacc5428cbec3339f543fae71cc7a6467e54",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "raiden",
+      "section": "clips",
+      "clip": "special",
+      "frames": 12,
+      "image": "special-v6.png",
+      "metadataSemanticSha256": "448403abe4dc128c8afc645110129773d20904a9470dc984f9abca2a5291e4b9",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "raiden",
+      "section": "clips",
+      "clip": "secondary",
+      "frames": 12,
+      "image": "secondary-v6.png",
+      "metadataSemanticSha256": "cb6337670909acd7b00f724610446bd2565c28b7c92a5d0ec63f8b4778c82c50",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "raiden",
+      "section": "variants",
+      "clip": "jab",
+      "frames": 8,
+      "image": "basic-variants.png",
+      "metadataSemanticSha256": "e74847977ee6f04663e1c8cdf9a0880923aa623d77adc040ad1f54742e082a17",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "raiden",
+      "section": "variants",
+      "clip": "smash",
+      "frames": 8,
+      "image": "basic-variants.png",
+      "metadataSemanticSha256": "09f54cde98b7777051c4259f7e3bac0492f0acc67d6a1ecb0e5021636e1fc77d",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "jean",
+      "section": "clips",
+      "clip": "idle",
+      "frames": 4,
+      "image": "locomotion.png",
+      "metadataSemanticSha256": "3ddeb1899f652679bb5775056dd5cd66f1c2b4d7bbc92b847dafdc7898710067",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "jean",
+      "section": "clips",
+      "clip": "run",
+      "frames": 8,
+      "image": "locomotion.png",
+      "metadataSemanticSha256": "3b0887ff9f4b1235286746b5b2e690a8213b9d6d93572bc216df2849dc3b3db5",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "jean",
+      "section": "clips",
+      "clip": "jump",
+      "frames": 8,
+      "image": "aerial.png",
+      "metadataSemanticSha256": "3faf6332a42686bcb8bc45e70c43d0e76516fda9f440888ae5a2190654ccbbaf",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "jean",
+      "section": "clips",
+      "clip": "dodge",
+      "frames": 4,
+      "image": "aerial.png",
+      "metadataSemanticSha256": "17ed414380fe567a69ff3567e435dd39abeb4c6573ed5d06334d0b02bfe9c9f4",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "jean",
+      "section": "clips",
+      "clip": "jab",
+      "frames": 8,
+      "image": "basic.png",
+      "metadataSemanticSha256": "fb36ff8e58ef65139255cb28b182c01bd860a6dcfcb98b58b90a5e5c646a72fd",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "jean",
+      "section": "clips",
+      "clip": "smash",
+      "frames": 8,
+      "image": "basic.png",
+      "metadataSemanticSha256": "48d0c8fce2e6a3f028b5fb5f5c4fdc70a91b5cbf4b294591baad8a75604235f9",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "jean",
+      "section": "variants",
+      "clip": "jab",
+      "frames": 8,
+      "image": "basic-variants.png",
+      "metadataSemanticSha256": "df7298c1398a2856dc3c20a8a36f256cbe488db966913ad872fe82e9a558bde7",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "jean",
+      "section": "variants",
+      "clip": "smash",
+      "frames": 8,
+      "image": "basic-variants.png",
+      "metadataSemanticSha256": "6bcdc10d9aec172ae11532bb1ff65dcfdea75bacd17a54fbd77848d80314fbee",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "eula",
+      "section": "clips",
+      "clip": "idle",
+      "frames": 4,
+      "image": "idle.png",
+      "metadataSemanticSha256": "fe3db21a6a4a52ea0c3fab595c8a5a726d04b9a1ab8ebf441a61dc2955a6f7c6",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "eula",
+      "section": "clips",
+      "clip": "run",
+      "frames": 8,
+      "image": "run.png",
+      "metadataSemanticSha256": "c2e0b03e57b4cca53cda75003a39765e60c1b4cea99a8bf6d54239d961b350f7",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "eula",
+      "section": "clips",
+      "clip": "jump",
+      "frames": 8,
+      "image": "jump.png",
+      "metadataSemanticSha256": "1ebb441c4a458aa1e854834e5a1a53a72a668b3ee4eac6008c9e8dfff6174cda",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "eula",
+      "section": "clips",
+      "clip": "dodge",
+      "frames": 4,
+      "image": "dodge.png",
+      "metadataSemanticSha256": "802a716dc20bea046f64afc4ed02fcf8924f65da90b706639cea0026650c02c9",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "eula",
+      "section": "clips",
+      "clip": "jab",
+      "frames": 8,
+      "image": "jab.png",
+      "metadataSemanticSha256": "5f439545e30ad745022ca2f69362f23d3d8d362a7296e08b703093dcbb74663b",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "eula",
+      "section": "clips",
+      "clip": "smash",
+      "frames": 8,
+      "image": "smash.png",
+      "metadataSemanticSha256": "cb0ac457dba8c353fd1d655b449c401cf1674b1a59dc77a81e6229cb3f890cfa",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "eula",
+      "section": "clips",
+      "clip": "special",
+      "frames": 12,
+      "image": "special.png",
+      "metadataSemanticSha256": "df73afc2143a5d704e51566b0d7adbb5cfa24c5c8df1d4c188f98bd716d2895c",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "eula",
+      "section": "variants",
+      "clip": "jab",
+      "frames": 8,
+      "image": "jab-downstroke.png",
+      "metadataSemanticSha256": "0692891434bc2759247c10cfc441d50e8734fd737be632bf11bec4545d54723f",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "eula",
+      "section": "variants",
+      "clip": "smash",
+      "frames": 8,
+      "image": "smash-overhead.png",
+      "metadataSemanticSha256": "47c82870f5dfa047eb7c5d38570620021c47bf0e93569d05595f4256ab3935cf",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "diluc",
+      "section": "clips",
+      "clip": "idle",
+      "frames": 4,
+      "image": "locomotion.png",
+      "metadataSemanticSha256": "91a9a4953cce379426bc4a0014be8ee5dc88f49143d6d1d9cd255623d62123d5",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "diluc",
+      "section": "clips",
+      "clip": "run",
+      "frames": 8,
+      "image": "locomotion.png",
+      "metadataSemanticSha256": "d23dfb3d83ff73dd822855f62b1c174a4116dd91e5d111e5b974d11206b852aa",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "diluc",
+      "section": "clips",
+      "clip": "jump",
+      "frames": 8,
+      "image": "aerial.png",
+      "metadataSemanticSha256": "d442e80d43a44e374ace4be18774f4e52c435d5d6e3b1ab4b3ab3c319170ed90",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "diluc",
+      "section": "clips",
+      "clip": "dodge",
+      "frames": 4,
+      "image": "aerial.png",
+      "metadataSemanticSha256": "af4b4c4450fd32fabd01c557b9a547ccd3aaf4d41744642d2f8e6643e45fd5dc",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "diluc",
+      "section": "clips",
+      "clip": "smash",
+      "frames": 8,
+      "image": "basic.png",
+      "metadataSemanticSha256": "9178670426738f9acc1fc5319b56f7eb61b1bfdbce66ad7110b830c8b20c594d",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "xiao",
+      "section": "clips",
+      "clip": "idle",
+      "frames": 4,
+      "image": "locomotion.png",
+      "metadataSemanticSha256": "031afba37f4eab3843b851c9df109810c662fc99d32804ce08caae3017917c21",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "xiao",
+      "section": "clips",
+      "clip": "run",
+      "frames": 8,
+      "image": "locomotion.png",
+      "metadataSemanticSha256": "0e7caae146304f25e21f07536962347da5e48be8ac56278138771fd6d2ce3e37",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "xiao",
+      "section": "clips",
+      "clip": "jump",
+      "frames": 8,
+      "image": "aerial.png",
+      "metadataSemanticSha256": "52a65e3d829101d660763275e4a5325bce73d7c322e98982bf34dfbca40419fb",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "xiao",
+      "section": "clips",
+      "clip": "dodge",
+      "frames": 4,
+      "image": "aerial.png",
+      "metadataSemanticSha256": "8e79375f2e6acf3e779ef22fc809d024a4f165990c97693907e7c758e4d9802d",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "xiao",
+      "section": "clips",
+      "clip": "jab",
+      "frames": 8,
+      "image": "basic.png",
+      "metadataSemanticSha256": "eba9c656c075610a7ecfb11de23532e7c156269a3080d114e986c0eaa1811936",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "xiao",
+      "section": "clips",
+      "clip": "smash",
+      "frames": 8,
+      "image": "basic.png",
+      "metadataSemanticSha256": "44a05245502603dcdfbf9086d8721d8a75e0eed05d7ce8a1c9c393e09466b864",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "xiao",
+      "section": "clips",
+      "clip": "special",
+      "frames": 12,
+      "image": "special.png",
+      "metadataSemanticSha256": "9d50d435484f4babffeee6fd13fcf46c0cd65ed2bd7c2f01a7cb371b60f83e2a",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "xiao",
+      "section": "variants",
+      "clip": "jab",
+      "frames": 8,
+      "image": "basic-variants.png",
+      "metadataSemanticSha256": "77ff5688fa3a6d69c21863ee2f2b499d2b29c835db82496c552c36ac8beedb28",
+      "baselineMetadataIdentical": true
+    },
+    {
+      "character": "xiao",
+      "section": "variants",
+      "clip": "smash",
+      "frames": 8,
+      "image": "basic-variants.png",
+      "metadataSemanticSha256": "1d3550b54738e97a917463183ee97af8f7e920af154830ece0fe93fd15f392c3",
+      "baselineMetadataIdentical": true
+    }
+  ],
+  "existingPngFilesPreserved": 63,
+  "existingPngFiles": [
+    {
+      "path": "public/assets/animations/diluc-actions-v3.png",
+      "baselineSha256": "ef7b7cc3db1ce83268961212f09335e843f3ef6e95c022ab27c5175824024758",
+      "currentSha256": "ef7b7cc3db1ce83268961212f09335e843f3ef6e95c022ab27c5175824024758",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/diluc-secondary-v1.png",
+      "baselineSha256": "9ce2c676d16a37dd2feb2a5fc15c7549b90bd36c70ea5c533362d0c562916a67",
+      "currentSha256": "9ce2c676d16a37dd2feb2a5fc15c7549b90bd36c70ea5c533362d0c562916a67",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/diluc-v4/aerial.png",
+      "baselineSha256": "b87f835bc2ab8d595e14b42f35879b83bee0a80567dc0956aa2d6888c58fb052",
+      "currentSha256": "b87f835bc2ab8d595e14b42f35879b83bee0a80567dc0956aa2d6888c58fb052",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/diluc-v4/basic-variants.png",
+      "baselineSha256": "67840189169d80e976ed158334428ed377838718fb0866783281c3138a7c6afc",
+      "currentSha256": "67840189169d80e976ed158334428ed377838718fb0866783281c3138a7c6afc",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/diluc-v4/basic.png",
+      "baselineSha256": "bbd994d4dd99f5156bb2a73390295816a58ea359cad86db41769626550403989",
+      "currentSha256": "bbd994d4dd99f5156bb2a73390295816a58ea359cad86db41769626550403989",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/diluc-v4/locomotion.png",
+      "baselineSha256": "54ef1a1aeb8f007ce03f42e04233e9c819af5870c7967a6f521494aa85fb835f",
+      "currentSha256": "54ef1a1aeb8f007ce03f42e04233e9c819af5870c7967a6f521494aa85fb835f",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/diluc-v4/secondary.png",
+      "baselineSha256": "874b096b2c647d7b6b78e525e47e3fb4958a94148adebdc4f120240083d58de5",
+      "currentSha256": "874b096b2c647d7b6b78e525e47e3fb4958a94148adebdc4f120240083d58de5",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/diluc-v4/special.png",
+      "baselineSha256": "a6fecb045a90d214def670a144496571542f4d7c431b72b17e7d434ad3d53e35",
+      "currentSha256": "a6fecb045a90d214def670a144496571542f4d7c431b72b17e7d434ad3d53e35",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/eula-actions-v3.png",
+      "baselineSha256": "3971512863d566503664472b1ff5ba6cab9c69c83ab9cf5254ddf140f7e515db",
+      "currentSha256": "3971512863d566503664472b1ff5ba6cab9c69c83ab9cf5254ddf140f7e515db",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/eula-secondary-v1.png",
+      "baselineSha256": "903904fb6b31bb7ba5e3e50045afdb38c0a5bc63b5d8ff7b43880ae3f569e58b",
+      "currentSha256": "903904fb6b31bb7ba5e3e50045afdb38c0a5bc63b5d8ff7b43880ae3f569e58b",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/eula-v4/dodge.png",
+      "baselineSha256": "768ac4dfc8791912dac535a2409d52d60c991084dcff1e3fb5448a81afd9cd3b",
+      "currentSha256": "768ac4dfc8791912dac535a2409d52d60c991084dcff1e3fb5448a81afd9cd3b",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/eula-v4/idle.png",
+      "baselineSha256": "55489ae0edcc0dcd31318987b56757603e73867f42327865419e76991758cbac",
+      "currentSha256": "55489ae0edcc0dcd31318987b56757603e73867f42327865419e76991758cbac",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/eula-v4/jab-downstroke.png",
+      "baselineSha256": "42088a1b98fc9d5780fd090d2d2935c91652f3ac44f3e5ade3a79dcd2e37c5e1",
+      "currentSha256": "42088a1b98fc9d5780fd090d2d2935c91652f3ac44f3e5ade3a79dcd2e37c5e1",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/eula-v4/jab.png",
+      "baselineSha256": "892b763c16ed703d8e787642e1a5b0c3879d4ff3ac92fa5e9eecdc99e2464880",
+      "currentSha256": "892b763c16ed703d8e787642e1a5b0c3879d4ff3ac92fa5e9eecdc99e2464880",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/eula-v4/jump.png",
+      "baselineSha256": "98d281e5d9531f1e41fd8ff97856b463332d9ad5ad2234a8a4ae2e4582af5359",
+      "currentSha256": "98d281e5d9531f1e41fd8ff97856b463332d9ad5ad2234a8a4ae2e4582af5359",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/eula-v4/run.png",
+      "baselineSha256": "8b1c6c9421bfcaab3a6a28aa0dd3ce3a4533210da77ff6dde0bf931038ad60cf",
+      "currentSha256": "8b1c6c9421bfcaab3a6a28aa0dd3ce3a4533210da77ff6dde0bf931038ad60cf",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/eula-v4/secondary-frost-cleave.png",
+      "baselineSha256": "d139b8e71972b00391bf7c5cbb3fb729193d062fcb1046b8a58b16ca5d0d8f85",
+      "currentSha256": "d139b8e71972b00391bf7c5cbb3fb729193d062fcb1046b8a58b16ca5d0d8f85",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/eula-v4/secondary.png",
+      "baselineSha256": "33fcce1a52e083ec7ef7aea890ab76310338aba5c6d01a93a2a1f54f41759316",
+      "currentSha256": "33fcce1a52e083ec7ef7aea890ab76310338aba5c6d01a93a2a1f54f41759316",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/eula-v4/smash-overhead.png",
+      "baselineSha256": "894b4eac06bdeec51887be775ac8cbdc230e0592582183d17a0ee57252638fdd",
+      "currentSha256": "894b4eac06bdeec51887be775ac8cbdc230e0592582183d17a0ee57252638fdd",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/eula-v4/smash.png",
+      "baselineSha256": "3a7f6b1c8e98a38ddd8f745e9351381fb4770c7887650e18a492394f9e8ae35a",
+      "currentSha256": "3a7f6b1c8e98a38ddd8f745e9351381fb4770c7887650e18a492394f9e8ae35a",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/eula-v4/special-turning-cleave.png",
+      "baselineSha256": "e9174060c8b29b4704b2889bbef039e089d7b55f479d52b0e03be516d607858d",
+      "currentSha256": "e9174060c8b29b4704b2889bbef039e089d7b55f479d52b0e03be516d607858d",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/eula-v4/special.png",
+      "baselineSha256": "2c89f7ca4ba9e0a89daad29b52df34770d7f4d64d568bd757ac5909bda9dbc3b",
+      "currentSha256": "2c89f7ca4ba9e0a89daad29b52df34770d7f4d64d568bd757ac5909bda9dbc3b",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/jean-actions-v3.png",
+      "baselineSha256": "83414ae02d5a84251e5651492bae8bb16b6bb0d1ce47b2776e9a94f1614d15db",
+      "currentSha256": "83414ae02d5a84251e5651492bae8bb16b6bb0d1ce47b2776e9a94f1614d15db",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/jean-secondary-v1.png",
+      "baselineSha256": "0a4c6fab63a90ab32e5023f03aec28b2c9cc1a3f4156857a3cefa5027f5aae02",
+      "currentSha256": "0a4c6fab63a90ab32e5023f03aec28b2c9cc1a3f4156857a3cefa5027f5aae02",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/jean-v4/aerial.png",
+      "baselineSha256": "9fff25ae5f574e2aabdef5b05dc7651bb39cb19965a1452c70957e32da952259",
+      "currentSha256": "9fff25ae5f574e2aabdef5b05dc7651bb39cb19965a1452c70957e32da952259",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/jean-v4/basic-variants.png",
+      "baselineSha256": "10e8468828879f7ef8a907285603cc5566175d3da17762fab840cc606036147a",
+      "currentSha256": "10e8468828879f7ef8a907285603cc5566175d3da17762fab840cc606036147a",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/jean-v4/basic.png",
+      "baselineSha256": "d85973dc32151590a12028864899a53bb3c5eff68633743f84cb34a653a90033",
+      "currentSha256": "d85973dc32151590a12028864899a53bb3c5eff68633743f84cb34a653a90033",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/jean-v4/locomotion.png",
+      "baselineSha256": "befe228629980fa779a1365dafab39a75d5d8fa7e6810a959bb6defc24393f36",
+      "currentSha256": "befe228629980fa779a1365dafab39a75d5d8fa7e6810a959bb6defc24393f36",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/jean-v4/secondary.png",
+      "baselineSha256": "6e81ec4f46ad2f39c1c38bc5e0e053b5c7c4db9f50940aa7f5a78b8ff9e90e85",
+      "currentSha256": "6e81ec4f46ad2f39c1c38bc5e0e053b5c7c4db9f50940aa7f5a78b8ff9e90e85",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/jean-v4/special.png",
+      "baselineSha256": "3d3ddef302f3c6bed5ec05739e6cc091566141d81a069622993900ae4a32747e",
+      "currentSha256": "3d3ddef302f3c6bed5ec05739e6cc091566141d81a069622993900ae4a32747e",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-actions-v3.png",
+      "baselineSha256": "c36607b9d2298115b279a046e66b6c28e45e0c7af4e9444596916b793ffc88a4",
+      "currentSha256": "c36607b9d2298115b279a046e66b6c28e45e0c7af4e9444596916b793ffc88a4",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-secondary-v1.png",
+      "baselineSha256": "7e7f86f72f80e66b3ecfec594f0f8782a2f94fb68abc0e99986ead14bc8998bc",
+      "currentSha256": "7e7f86f72f80e66b3ecfec594f0f8782a2f94fb68abc0e99986ead14bc8998bc",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-v4/aerial.png",
+      "baselineSha256": "31e4a5c5a38e95b84c0a163beb358ed8043e8a4575bfbe0f8a7f35afb6e05ed8",
+      "currentSha256": "31e4a5c5a38e95b84c0a163beb358ed8043e8a4575bfbe0f8a7f35afb6e05ed8",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-v4/basic-variants.png",
+      "baselineSha256": "cf5d7b1edb252e7279ef9320603c362a4ec45182395558bd2f11272f1189c641",
+      "currentSha256": "cf5d7b1edb252e7279ef9320603c362a4ec45182395558bd2f11272f1189c641",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-v4/basic.png",
+      "baselineSha256": "08f0574e13c92252423956b0981bf1e874997495f8de28670cc04ecb9e3e492d",
+      "currentSha256": "08f0574e13c92252423956b0981bf1e874997495f8de28670cc04ecb9e3e492d",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-v4/locomotion.png",
+      "baselineSha256": "cab63896b4bdd62fb40d6c63715d4b89b170ea8c11902b5cc9d79f49a2a520fd",
+      "currentSha256": "cab63896b4bdd62fb40d6c63715d4b89b170ea8c11902b5cc9d79f49a2a520fd",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-v4/secondary.png",
+      "baselineSha256": "51ee0f0393b75a092d799fa2d660742224afd34742f1bd47ebb25a1d019a4a23",
+      "currentSha256": "51ee0f0393b75a092d799fa2d660742224afd34742f1bd47ebb25a1d019a4a23",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-v4/special.png",
+      "baselineSha256": "c1861c91c515e72cfdb4a9ec8f630273d6451a169eb27ce0fcf262e6f58e0f6b",
+      "currentSha256": "c1861c91c515e72cfdb4a9ec8f630273d6451a169eb27ce0fcf262e6f58e0f6b",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/aerial.png",
+      "baselineSha256": "da83e325cf1c155737f2acbc28b90f749296af597a112e9a8bc0171c69d65cdc",
+      "currentSha256": "da83e325cf1c155737f2acbc28b90f749296af597a112e9a8bc0171c69d65cdc",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/basic-variants.png",
+      "baselineSha256": "e301a3f662070df1acf159075ad32444f5765cf181aa2d3e849a605cff7a069d",
+      "currentSha256": "e301a3f662070df1acf159075ad32444f5765cf181aa2d3e849a605cff7a069d",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/basic.png",
+      "baselineSha256": "abd9e4d1558d495d624bcdffbd2ad6bc618b9937a11812440e70f3ffc8d3227d",
+      "currentSha256": "abd9e4d1558d495d624bcdffbd2ad6bc618b9937a11812440e70f3ffc8d3227d",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/locomotion.png",
+      "baselineSha256": "95f99ca089981a76b43a722acff42c3c83b8b56e1583e4c68015517a67cc0e3b",
+      "currentSha256": "95f99ca089981a76b43a722acff42c3c83b8b56e1583e4c68015517a67cc0e3b",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/secondary-v6.png",
+      "baselineSha256": "dbd80707c95d838fd5ea5849b9743a68c616e42dbfd0552ed6d0ef68032d3fc1",
+      "currentSha256": "dbd80707c95d838fd5ea5849b9743a68c616e42dbfd0552ed6d0ef68032d3fc1",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/secondary.png",
+      "baselineSha256": "44b8ed90071d08668cb6da6c662a14adc8ea9f4d475ed611e09bdaff67cad6f3",
+      "currentSha256": "44b8ed90071d08668cb6da6c662a14adc8ea9f4d475ed611e09bdaff67cad6f3",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/special-v6.png",
+      "baselineSha256": "149c6a2a0eacd655286c1aa2a4e6aad8dbd1bc72e4d5dab285fb0185201fcb14",
+      "currentSha256": "149c6a2a0eacd655286c1aa2a4e6aad8dbd1bc72e4d5dab285fb0185201fcb14",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/special.png",
+      "baselineSha256": "867696fbd385220da59c19869ff6be28606e7320b4550b1cbebb7fb7b82d81bb",
+      "currentSha256": "867696fbd385220da59c19869ff6be28606e7320b4550b1cbebb7fb7b82d81bb",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/xiao-actions-v3.png",
+      "baselineSha256": "eea808e82f34dbfa134c870a3da80f0f52edbc5196300858de00520e69cdbab6",
+      "currentSha256": "eea808e82f34dbfa134c870a3da80f0f52edbc5196300858de00520e69cdbab6",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/xiao-secondary-v1.png",
+      "baselineSha256": "5dd810b2a68e73c73684248e66a96cce6cbf90c9633f62e85651e9d32dc16d24",
+      "currentSha256": "5dd810b2a68e73c73684248e66a96cce6cbf90c9633f62e85651e9d32dc16d24",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/xiao-v4/aerial.png",
+      "baselineSha256": "f92bddb5f90ee1e51c14a0d25600ae476731b534a8bce6030e97e74d63bfa25e",
+      "currentSha256": "f92bddb5f90ee1e51c14a0d25600ae476731b534a8bce6030e97e74d63bfa25e",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/xiao-v4/basic-variants.png",
+      "baselineSha256": "20ce1f29826430e9f00e5d6947419f6d28451b05c63ecb3ee5709dfd5e95c4d8",
+      "currentSha256": "20ce1f29826430e9f00e5d6947419f6d28451b05c63ecb3ee5709dfd5e95c4d8",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/xiao-v4/basic.png",
+      "baselineSha256": "14dc802873ce0db41eb0ae43d591ee934639d28a9da55d367262a2c13b41e1e3",
+      "currentSha256": "14dc802873ce0db41eb0ae43d591ee934639d28a9da55d367262a2c13b41e1e3",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/xiao-v4/locomotion.png",
+      "baselineSha256": "ffca2995e90c64901368cb637747f807ef9bbec65ac0498fd3d75c858f9bd033",
+      "currentSha256": "ffca2995e90c64901368cb637747f807ef9bbec65ac0498fd3d75c858f9bd033",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/xiao-v4/secondary.png",
+      "baselineSha256": "1ce402b83de21cddeff09dbfb047712f5c61aa967dec69803c8441aaa77d9722",
+      "currentSha256": "1ce402b83de21cddeff09dbfb047712f5c61aa967dec69803c8441aaa77d9722",
+      "identical": true
+    },
+    {
+      "path": "public/assets/animations/xiao-v4/special.png",
+      "baselineSha256": "30a6de38499e578f71666bf45c3aded53b04c83156efebd2a55121f4b3b9a04b",
+      "currentSha256": "30a6de38499e578f71666bf45c3aded53b04c83156efebd2a55121f4b3b9a04b",
+      "identical": true
+    },
+    {
+      "path": "public/assets/backgrounds/liyue-dawn-v2.png",
+      "baselineSha256": "eb54556f1c2338f362c921f2976eca4381bcbcc414be8fdd0e4f5bfad431cd9e",
+      "currentSha256": "eb54556f1c2338f362c921f2976eca4381bcbcc414be8fdd0e4f5bfad431cd9e",
+      "identical": true
+    },
+    {
+      "path": "public/assets/characters/diluc-v2.png",
+      "baselineSha256": "a67d0eb3e4f7ff21b73b8a26163c54be12cff7fa31131e82e889b0ecf54d70f1",
+      "currentSha256": "a67d0eb3e4f7ff21b73b8a26163c54be12cff7fa31131e82e889b0ecf54d70f1",
+      "identical": true
+    },
+    {
+      "path": "public/assets/characters/eula-v2.png",
+      "baselineSha256": "f3df041de55a22676256c96ab4e6ddee24310693eda2de77af5649764794fc5a",
+      "currentSha256": "f3df041de55a22676256c96ab4e6ddee24310693eda2de77af5649764794fc5a",
+      "identical": true
+    },
+    {
+      "path": "public/assets/characters/jean-v2.png",
+      "baselineSha256": "d8383446efa80d92160b2e060dc5143eca8bceb5099c36ee6b88b19482450ace",
+      "currentSha256": "d8383446efa80d92160b2e060dc5143eca8bceb5099c36ee6b88b19482450ace",
+      "identical": true
+    },
+    {
+      "path": "public/assets/characters/raiden-v2.png",
+      "baselineSha256": "1e15467c7bccff9df5dbf9b5afaccadfd9eebc38bfde6e2c5911451b9734ad46",
+      "currentSha256": "1e15467c7bccff9df5dbf9b5afaccadfd9eebc38bfde6e2c5911451b9734ad46",
+      "identical": true
+    },
+    {
+      "path": "public/assets/characters/xiao-v3.png",
+      "baselineSha256": "605fe7040ea675146e30e06e0af7aeec3749cbf448ede8c0549568b7fa658b4c",
+      "currentSha256": "605fe7040ea675146e30e06e0af7aeec3749cbf448ede8c0549568b7fa658b4c",
+      "identical": true
+    },
+    {
+      "path": "public/assets/effects/elemental-bursts-v3.png",
+      "baselineSha256": "324b3a73417b1f828bc9581c3dad478aebfa0fc7d56aa4dd992fa97a966ce245",
+      "currentSha256": "324b3a73417b1f828bc9581c3dad478aebfa0fc7d56aa4dd992fa97a966ce245",
+      "identical": true
+    },
+    {
+      "path": "public/assets/effects/secondary-effects-v1.png",
+      "baselineSha256": "3b8bdae088848084a71bf51276c12cab33952e3042f6d91f8eab402511c354dd",
+      "currentSha256": "3b8bdae088848084a71bf51276c12cab33952e3042f6d91f8eab402511c354dd",
+      "identical": true
+    },
+    {
+      "path": "public/assets/effects/xiao-plunge-v3.png",
+      "baselineSha256": "157f8a08cacec70f32e0b893556055d17a97d610fbe0cd59d944c9e9500fa872",
+      "currentSha256": "157f8a08cacec70f32e0b893556055d17a97d610fbe0cd59d944c9e9500fa872",
+      "identical": true
+    }
+  ],
+  "criticalPreservation": [
+    "All 80 Raiden frames and metadata unchanged.",
+    "Eula special horizontal spin: original image, metadata, phases and duration weights unchanged.",
+    "Xiao special downward plunge: original image, spear-tip registration, phases and duration weights unchanged.",
+    "Every clip retains its original phase sequence and per-frame duration weights."
+  ]
+}

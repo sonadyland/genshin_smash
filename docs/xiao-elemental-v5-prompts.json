@@ -1,0 +1,400 @@
+{
+  "version": 1,
+  "date": "2026-10-09",
+  "character": "xiao",
+  "skill": "C:/Users/46637/.codex/skills/.system/imagegen/SKILL.md",
+  "mode": "built-in image_gen",
+  "transparentBackground": true,
+  "scope": "Replace I/secondary only,12 frames. Existing L/special downward airborne plunge and all durations preserved.",
+  "generations": [
+    {
+      "id": "I-initial",
+      "prompt": "Use case: stylized-concept. Asset type: production transparent twelve-frame full-body game sprite animation sheet, Xiao I / Lemniscatic horizontal spear dash, usable on ground OR in air.\nCreate a NEW exact 4 columns by3 rows sheet,12 consecutive distinct poses in reading order. Same young adult male Xiao identity, adult slim-athletic proportions, pale sleeveless torso outfit, dark teal tousled hair, teal tattoo, purple loose pants, black/gold boots, flowing teal/lavender cloth and ornate GREEN jade spear with thin dark shaft and gold end cap as reference images. Match the exquisite detailed Japanese fantasy anime painted sprite rendering. Use references for exact character/clothing/weapon identity only. DO NOT copy the old almost-identical crouching poses. Right-facing mild3/4 side view throughout. Same physical character scale and SAME full spear length through all frames.\nThe animation MUST visibly change from upright small-footwork anticipation to wound-up compression, to an explosive airborne horizontal spear-led dash, to lowering knees/feet and retracting the spear. It must not be twelve crouching figures merely aiming a spear.\nTOP ROW,4 anticipation frames:\n01: fairly upright ready posture, small staggered step, knees only softly bent, long spear held horizontally close across lower abdomen, elbows compact.\n02: rotate torso slightly backward and draw the rear hand toward BACK HIP, slide entire spear backward; front elbow bends clearly, spear point still faces right but has retracted toward body. Weight begins loading rear leg.\n03: deepest compact knee compression, rear hand pulled beside rear hip, elbows tucked in, chest winding, spear nearly parallel to abdomen, front foot light.\n04: start forward lean from wound body, rear heel preparing push, both hands poised along shaft, head fixes target right; spear still visibly chambered compared to release.\nMIDDLE ROW,2 contact and2 follow-through:\n05 FIRST CONTACT: rear hand forcefully pushes shaft and front hand guides, spear tip ALREADY extended far to RIGHT at chest height, body bursts forward, BOTH feet leave the ground, torso angled forward, one knee forward and rear leg kicking back. Readable horizontal attack commitment immediately.\n06: longest horizontal dash silhouette, chest extended forward and face tracking spear, rear leg stretches behind and front leg bends, full weapon almost horizontal to right, hands extend farther than windup, cloth streams left.\n07: gather legs into a more compact AIRBORNE dash, front knee slightly under belly, back knee bends, weapon forward line stays stable; arms soften subtly, not same pose as06.\n08: continue compact horizontal flight, swap the leg balance subtly, shoulders begin easing, spear still points straight forward; torso rises slightly compared to07.\nBOTTOM ROW:\n09: begin braking/recovery, BOTH legs lower below hips, torso rises visibly toward upright, knees preparing to absorb, spear still extended but elbows start bending.\n10: front leg bends strongly downward as if about to land or settling in mid-air; rear knee comes under body, pelvis and chest re-center. A clear transition from long horizontal dash to compact upright recovery. NO actual ground or landing effect.\n11: retract shaft to chest/abdomen by pulling hands BACK, elbows visibly bent near ribs, spearhead noticeably closer to body than05–09. Torso nearly upright, feet settling into modest stagger.\n12: relaxed ready guard, body upright, small staggered feet, spear across abdomen with tip slightly up-right, flowing cloth settled. Similar ready height to01.\nOnly12 complete fighters, no additional effects or objects. No wind blade, NO circular aura, NO wind streaks, NO motion blur, NO duplicates/ghosts, NO ground plane or ground shadow, no floor dust. Wind projectile upgrades are rendered separately by engine so none here. Do not depict Xiao's plunge/downward spear skill; all action points right.\nLAYOUT: landscape4:3 ideally1448x1086. Use modest figure size, standing body height about210px to leave room for the full spear. All head, shoes, cloth, gold rear cap, entire shaft and exact jade spear tip must fit inside separate disjoint silhouettes, generous at least30px transparent space between any neighboring fighter+weapon and24px at outer sheet edges. Preserve full adult body proportions. No text, labels, grid, frame numbers, border or watermark. Native RGBA true transparent alpha background.",
+      "references": [
+        "public/assets/animations/xiao-v4/basic.png",
+        "public/assets/animations/xiao-v4/secondary.png"
+      ],
+      "source": "C:\\Users\\46637\\.codex\\generated_images\\01a1214d-d164-7bf1-a29e-59acf30678ed\\exec-e6b94e1a-9a7f-4a2e-98e9-ffbcd6d1a39e.png",
+      "selected": false,
+      "review": "Improved sequence, but neighboring middle-row bounding boxes too close. Rejected for spacing.",
+      "sourceSha256": "e3eac82df50618d889e4fb0f191e09c663e4a9cadd61b1ed910d3ad767175f55"
+    },
+    {
+      "id": "I-spacing-correction",
+      "prompt": "Use case: precise-object-edit. Correct ONLY the layout/spacing of this transparent 4x3 twelve-frame Xiao animation sheet. Preserve all twelve existing sequential poses and their distinct upright anticipation, chambered compression, airborne horizontal spear dash, foot-lowering and bent-elbow retraction. Preserve detailed Japanese fantasy anime painting, face, adult body proportions, clothes, spear design and its length relative to the body. Preserve true alpha transparency.\nThe fighter+spear silhouettes are TOO LARGE and too close together in the middle row. Redraw EACH of all12 complete fighter+weapon poses at exactly75 percent of its current scale, same uniform reduction for every figure and its weapon together. Do not shorten just the weapon. Center each complete pose within its four-column by3-row cell on the same4:3 landscape canvas. There must be abundant blank transparent space around them, at least40px between all adjacent opaque bounding boxes and32px margins at the outer canvas. All 12 bounding rectangles must be disjoint. Restore every full pointed jade spear tip and rear gold cap. All shoes, hands, hair, cloth edges and entire spear must be complete and uncropped. Do not connect or overlap any fighters.\nKeep EXACT choreography:01 upright small step,02 twisting and pulling spear back,03 low loaded knees,04 forward-leaning start;05–08 distinct airborne horizontal dash poses with spear thrust to right and different legs;09 legs lower/body rises,10 front knee bends to settle,11 retract shaft to abdomen with bent elbows,12 upright recovered guard. Same number and order of frames. No new effects, no wind slash, no rings, no ground/shadows, no text, no borders, no labels, no grid.",
+      "references": [
+        "C:\\Users\\46637\\.codex\\generated_images\\01a1214d-d164-7bf1-a29e-59acf30678ed\\exec-e6b94e1a-9a7f-4a2e-98e9-ffbcd6d1a39e.png"
+      ],
+      "source": "C:\\Users\\46637\\.codex\\generated_images\\01a1214d-d164-7bf1-a29e-59acf30678ed\\exec-8bbcb6eb-d8ae-4387-bf3b-dd4e6eeb03c4.png",
+      "destination": "public/assets/animations/xiao-v4/secondary-v5.png",
+      "selected": true,
+      "review": "Parent independent visual review passed: upright ready/chambered compression transitions to genuinely extended arms on forward thrust, airborne dash, lowered legs and bent-elbow retraction. No baked wind blades, ground, or circular FX.",
+      "sourceSha256": "91fd6e13cd5f985a5254da5cd1c60ef0551382c5df6f04afbe9ad764b924fc31"
+    }
+  ],
+  "registration": {
+    "source": "Read-only native RGBA inspection. Adaptive per-pose search regions; measure alpha>8 bounds then add12px crop padding. No raster modification, resizing, recoloring, compositing, re-encoding or PNG overwrite. Low-alpha generator fringe remains intact in source PNG.",
+    "phases": {
+      "windup": 4,
+      "contact": 2,
+      "followthrough": 3,
+      "recover": 3
+    },
+    "standingBodyHeightMethod": "Anatomical standing-equivalent estimate from skull/chin, shoulder/hip and bent leg segment lengths, compared with existing locomotion identity. Excludes sword, lifted hands, ponytail and long cloth extrema; never derived directly from alpha bounding-box height.",
+    "standingBodyHeightPixels": {
+      "secondary": 230
+    },
+    "footAnchorMethod": "Manual anatomical support reference between visible soles in planted frames, independent of blade/cloth bounding-box midpoint. Xiao airborne dash05-08 uses pelvis-projected reference x and common virtual sole plane y674 so tucked legs stay above the origin; bottom crops include transparent space for this anchor.",
+    "trails": {
+      "secondary": "thrust"
+    }
+  },
+  "validation": [
+    {
+      "image": "public/assets/animations/xiao-v4/secondary-v5.png",
+      "metadata": "public/assets/animations/xiao-v4/secondary-v5.json",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "sha256": "91fd6e13cd5f985a5254da5cd1c60ef0551382c5df6f04afbe9ad764b924fc31",
+      "metadataSha256": "470d63cb70ceffcd64066a21065d829095770216787deedfb824a8499cc96fb5",
+      "transparentPercent": 80.7069,
+      "standingBodyHeightPixels": 230,
+      "readOnlyRasterAnalysis": true,
+      "sourceRectanglesDisjoint": true,
+      "uniqueFrames": 12,
+      "durationWeightsPreserved": true,
+      "durationWeights": [
+        3,
+        3,
+        3,
+        2,
+        3,
+        4,
+        4,
+        4,
+        5,
+        3,
+        3,
+        3
+      ],
+      "minimumVisibleGutterPx": 12,
+      "frames": [
+        {
+          "name": "wind-dash-01",
+          "visibleAlphaBounds": [
+            93,
+            165,
+            333,
+            375
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 81,
+            "y": 153,
+            "width": 264,
+            "height": 234
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 201,
+            "y": 375
+          },
+          "weaponTipSourcePixels": {
+            "x": 331,
+            "y": 261
+          },
+          "rgbaSha256": "36b062c14fe4a276a95834c37ffedf80d230281c592c6ba36d11f14b33d3572c"
+        },
+        {
+          "name": "wind-dash-02",
+          "visibleAlphaBounds": [
+            443,
+            179,
+            671,
+            374
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 431,
+            "y": 167,
+            "width": 252,
+            "height": 220
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 563,
+            "y": 375
+          },
+          "weaponTipSourcePixels": {
+            "x": 670,
+            "y": 274
+          },
+          "rgbaSha256": "c2ab49c5867b9eea2937035ddafa9a400aedd83dee2499867f4fd1124abc3277"
+        },
+        {
+          "name": "wind-dash-03",
+          "visibleAlphaBounds": [
+            798,
+            206,
+            1038,
+            374
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 786,
+            "y": 194,
+            "width": 264,
+            "height": 193
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 886,
+            "y": 375
+          },
+          "weaponTipSourcePixels": {
+            "x": 1036,
+            "y": 288
+          },
+          "rgbaSha256": "5a30dc49119ffd8eb0cf2ea5f49866f911f6a878407b931d8bc0a3bbf01c410c"
+        },
+        {
+          "name": "wind-dash-04",
+          "visibleAlphaBounds": [
+            1144,
+            199,
+            1392,
+            373
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 1132,
+            "y": 187,
+            "width": 272,
+            "height": 200
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 1231,
+            "y": 375
+          },
+          "weaponTipSourcePixels": {
+            "x": 1390,
+            "y": 256
+          },
+          "rgbaSha256": "308888f8287013a82232cb35be11cf4e88668f3369a547775f450dd739495d25"
+        },
+        {
+          "name": "wind-dash-05",
+          "visibleAlphaBounds": [
+            75,
+            494,
+            368,
+            661
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 63,
+            "y": 482,
+            "width": 317,
+            "height": 204
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 185,
+            "y": 674
+          },
+          "weaponTipSourcePixels": {
+            "x": 366,
+            "y": 537
+          },
+          "rgbaSha256": "fea83f7bc71e02f92703c8af2bf4f4cf36bfdc6f636883f3d144f7b04a0b1948"
+        },
+        {
+          "name": "wind-dash-06",
+          "visibleAlphaBounds": [
+            425,
+            511,
+            736,
+            644
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 413,
+            "y": 499,
+            "width": 335,
+            "height": 187
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 540,
+            "y": 674
+          },
+          "weaponTipSourcePixels": {
+            "x": 735,
+            "y": 545
+          },
+          "rgbaSha256": "564ccd9c0c03b28daa0a2d980c7e69eeadafdd204c1b8eb2c9fab40a13a95734"
+        },
+        {
+          "name": "wind-dash-07",
+          "visibleAlphaBounds": [
+            796,
+            512,
+            1092,
+            650
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 784,
+            "y": 500,
+            "width": 320,
+            "height": 186
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 900,
+            "y": 674
+          },
+          "weaponTipSourcePixels": {
+            "x": 1091,
+            "y": 550
+          },
+          "rgbaSha256": "462298413ea6f6eaf9c51a88073eca5428a95094ae693b17fbfe681d1569fff4"
+        },
+        {
+          "name": "wind-dash-08",
+          "visibleAlphaBounds": [
+            1163,
+            502,
+            1412,
+            659
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 1151,
+            "y": 490,
+            "width": 273,
+            "height": 196
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 1257,
+            "y": 674
+          },
+          "weaponTipSourcePixels": {
+            "x": 1410,
+            "y": 546
+          },
+          "rgbaSha256": "b6e82703082310ccdfe0530a3120b2b9e0979ee06597d8b4de29482c7811c694"
+        },
+        {
+          "name": "wind-dash-09",
+          "visibleAlphaBounds": [
+            91,
+            779,
+            350,
+            974
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 79,
+            "y": 767,
+            "width": 283,
+            "height": 221
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 205,
+            "y": 976
+          },
+          "weaponTipSourcePixels": {
+            "x": 348,
+            "y": 831
+          },
+          "rgbaSha256": "2925ee9ac9fa8ac5dbc71943895b1b902f3f86459122e45584bb1b7f736a33e8"
+        },
+        {
+          "name": "wind-dash-10",
+          "visibleAlphaBounds": [
+            450,
+            780,
+            696,
+            976
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 438,
+            "y": 768,
+            "width": 270,
+            "height": 220
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 546,
+            "y": 976
+          },
+          "weaponTipSourcePixels": {
+            "x": 695,
+            "y": 839
+          },
+          "rgbaSha256": "b3529e941f6e2febbdb688b1d8515264cf3fc49cc1d29ce4a9bf83da55694c5d"
+        },
+        {
+          "name": "wind-dash-11",
+          "visibleAlphaBounds": [
+            805,
+            780,
+            1030,
+            975
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 793,
+            "y": 768,
+            "width": 249,
+            "height": 220
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 915,
+            "y": 976
+          },
+          "weaponTipSourcePixels": {
+            "x": 1029,
+            "y": 858
+          },
+          "rgbaSha256": "4a3ae003236fa7cc005a41778e72d31ecbd604ae5590cc44b3b1c4879a3a6c08"
+        },
+        {
+          "name": "wind-dash-12",
+          "visibleAlphaBounds": [
+            1160,
+            774,
+            1392,
+            975
+          ],
+          "visibleAlphaThreshold": 8,
+          "sourceRect": {
+            "x": 1148,
+            "y": 762,
+            "width": 256,
+            "height": 226
+          },
+          "minimumVisibleGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 1261,
+            "y": 976
+          },
+          "weaponTipSourcePixels": {
+            "x": 1391,
+            "y": 841
+          },
+          "rgbaSha256": "9683ba818e2da3524bdab4aadfc9fabed12aebb9470897432ad3b0255090d4ca"
+        }
+      ]
+    }
+  ]
+}

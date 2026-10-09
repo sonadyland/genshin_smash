@@ -1,0 +1,316 @@
+{
+  "version": 1,
+  "date": "2026-10-09",
+  "skill": "C:/Users/46637/.codex/skills/.system/imagegen/SKILL.md",
+  "mode": "built-in image_gen",
+  "transparentBackground": true,
+  "character": "eula",
+  "scope": "New secondary-v5 artwork and metadata only. Keep special/L artwork and metadata unchanged.",
+  "generations": [
+    {
+      "id": "I-low-claymore-lateral-hand-fan",
+      "prompt": "Use case: stylized-concept.\nAsset type: production transparent game sprite animation sheet, Eula elemental skill I, a FAN OF FROST CRYSTALS released by a lateral empty-hand casting gesture while keeping heavy claymore low.\nCreate a NEW exact12-frame animation sheet,4columns3rows left-to-right top-to-bottom,4:3 canvas, genuine native RGBA transparency. Reference image idle.png is Eula's precise adult character identity, costume, rendering and weapon proportions ONLY. Preserve light icy-blue short layered hair with decorative blue feather/ribbon, blue-white asymmetric cape with pale snowflake pattern, black fitted bodysuit, gold filigree, white-and-blue detached sleeves, black gloves, long dark thigh-high boots with elegant heels. Mature elegant adult anatomy and exquisite detailed Japanese anime painted art. Same broad heavy blue-silver greatsword with ornate gold star/snowflake crossguard, rigid straight blade; do not turn it into a thin rapier. Facing RIGHT in mild three-quarter side view.\n\nTHIS IS FROST ELEMENTAL CASTING, NOT A SWORD ATTACK. The sword stays at LOW DIAGONAL GUARD below waist throughout ALL12 frames, heavy blade pointing diagonally down RIGHT near the ground, right hilt held close to hip. No thrust, no overhead raise, no uppercut or rotational cleave. It stays supported by firm body stance while her EMPTY LEFT hand gathers frost above the blade then opens SIDEWAYS toward front-right to release a fan. The casting left palm ends facing outward/right with thumb uppermost, a horizontal wrist turn and lateral opening; not an upward scoop and not a downward pressing decree. No actual ice projectiles painted on sheet because the game renders them.\n\nEula moves with poised dance-like weight transfer and elegant shoulders while respecting greatsword weight. Feet modestly staggered, not both together, no deep crouch or aggressive lunge. Subtle turn of hip/torso toward target during release, then return.\n\n01: composed low claymore guard angled down-right, weight on rear leg, forward toe lightly poised; left hand rests near grip.\n02: release empty left hand from grip and move it just ABOVE low blade, fingers softly curved, elbow inward, slight torso gather; right sword hand remains near hip.\n03: left palm hovers over lower blade near waist gathering frost, elbow close, wrist inward, head focused right; sword unchanged low.\n04: turn empty left wrist toward front-right with palm edge now nearly vertical ready to open a fan, forearm still collected; right claymore stays low.\n05 FIRST CONTACT AND RELEASE: make one small poised forward step and clearly OPEN empty left arm outward toward screen-right at lower-chest height; palm faces outward/right, fingers spread like an opening fan, thumb uppermost. Spell has ALREADY launched in this pose. Claymore stays down-right beside hips with only a tiny guiding pivot, not forward stabbing.\n06: maximum lateral empty-arm opening and horizontal wrist turn, graceful square shoulder opening, stable heel planted; right greatsword remains heavy low diagonal guard, no raised blade.\n07: sustain outward fan-casting palm briefly, soften left elbow slightly as recoil arrives, cape shows small delayed sideways motion.\n08: hold a calmer extended hand with fingers starting to close, shoulders begin to relax, sword still low.\n09: empty left hand draws back halfway toward chest, torso turns gently toward neutral, weight gathers.\n10: left hand close at chest then toward greatsword grip, claymore remains low and stable.\n11: both hands return near the low hilt, compact poised weight balance, cape settling.\n12: fully settled elegant low-claymore ready stance, same quiet pose family as01.\n\nExactly12 distinct sequential poses, consistent physical character scale, head size, limb lengths and broad greatsword length. Uniform full-body scale throughout. Use a comfortable body height about245px on1536x1152 canvas so full weapon and cape fit. Every complete head, hair, finger, heel, cape and weapon tip must be contained in its OWN cell with a minimum of24px fully transparent margin. Leave at least40px empty alpha gaps between neighboring silhouettes horizontally and vertically; never overlap cells. Keep whole blade and boots uncropped and visible. Stable local ground baseline in each row. No text, numbers, grid, border, backdrop, floor shadow, giant ice array, projectile sprites, sword trails or blue aura. At most faint tiny frost glint on the empty fingertips frames03–06; anatomy and gesture must read clearly without FX.",
+      "references": [
+        {
+          "path": "D:/Program/ai/genshin-smash/public/assets/animations/eula-v4/idle.png",
+          "sha256": "55489ae0edcc0dcd31318987b56757603e73867f42327865419e76991758cbac"
+        }
+      ],
+      "source": "C:/Users/46637/.codex/generated_images/01a12149-0491-7843-9518-5f2b35f07316/exec-cb3385b9-4cab-42b3-918e-272613402907.png",
+      "sourceSha256": "622e63168691456ab5c97cee58aee4f66f17643bf925b0ca9a3f0ef2c3f9fd05",
+      "destination": "public/assets/animations/eula-v4/secondary-v5.png",
+      "selected": false,
+      "review": "Correct low-claymore/empty-hand lateral choreography, but baked hand orbs were alpha25–71 and spacing was insufficient."
+    },
+    {
+      "id": "I-remove-orbs-and-space",
+      "prompt": "Use case: precise-object-edit.\nEdit this transparent4-column3-row Eula12-frame animation sheet. Preserve exact12 poses and choreography, adult character identity, mature proportions, elegant blue/white/black/gold costume, facing-right orientation, fingers, low-guard heavy greatsword, cape, detailed Japanese anime painting and native RGBA transparency.\nMake TWO production corrections:\n1. REMOVE EVERY ROUND BLUE/GREY FROST ORB, HALO AND GLOW from in front of the EMPTY CASTING HAND. In top-row col3,col4 and every middle-row pose, leave the left hand visibly EMPTY with NOTHING in the air around fingers. Remove the entire blue/grey disc cleanly to transparent air. Remove excess cyan blade-edge aura too; the greatsword itself remains solid blue-silver decorated metal with sharp edges. No light effects, no magic balls, no fog circles, no ice particles anywhere. The game adds them later.\n2. Uniformly SHRINK ALL12 complete character+weapon figures to80% of current size RELATIVE TO THE CANVAS, same fixed anatomy/weapon scale factor for all frames, and RECENTER EACH in its own equal cell. Keep overall canvas size4:3. The current sheet is crowded and almost touching edges. Ensure at least40px fully transparent gaps between every neighboring silhouette, horizontally AND vertically, and at least24px alpha margin to outer canvas edges. Whole boots, full cape and complete long sword tip must be contained and uncropped within each cell. Do not shorten sword alone or distort anatomy.\nKeep the exact body and arm poses and sequence: row1 gathers empty hand over low blade; middle row extends empty palm laterally toward right with thumb uppermost and fingers open; bottom row retracts empty hand to chest and returns to quiet low sword guard. Sword remains low diagonally down-right throughout, never swinging or stabbing. Give quiet low-guard frames natural settling cloth; no new pose, no additional weapon or hand. No text, grid, floor shadow or backdrop.",
+      "references": [
+        {
+          "path": "C:/Users/46637/.codex/generated_images/01a12149-0491-7843-9518-5f2b35f07316/exec-cb3385b9-4cab-42b3-918e-272613402907.png",
+          "sha256": "622e63168691456ab5c97cee58aee4f66f17643bf925b0ca9a3f0ef2c3f9fd05"
+        }
+      ],
+      "source": "C:/Users/46637/.codex/generated_images/01a12149-0491-7843-9518-5f2b35f07316/exec-1ca33908-fe06-4f95-ab22-c8d73b4f9a14.png",
+      "sourceSha256": "63dbd0fba001efc22e4e07ed3840ce30dddd3c4dd518f4b490582f4e4ea58da2",
+      "destination": "public/assets/animations/eula-v4/secondary-v5.png",
+      "selected": true,
+      "review": "All large hand orbs removed by image_gen. Low sword throughout, lateral empty-hand fan release in first contact frame, retraction to chest then grip. Every alpha>8 pixel covered by disjoint source rectangles."
+    }
+  ],
+  "registration": {
+    "source": "Read-only alpha measurement. Components alpha>8 define complete silhouette bounds; sourceRect includes 12px transparent padding. Foot anchors measured at planted soles and weapon tips registered on visible blade ends. No PNG modification or alpha cleanup outside built-in image_gen.",
+    "phases": {
+      "windup": 4,
+      "contact": 2,
+      "followthrough": 3,
+      "recover": 3
+    },
+    "durations": [
+      4,
+      5,
+      4,
+      2,
+      3,
+      4,
+      4,
+      4,
+      5,
+      3,
+      3,
+      3
+    ],
+    "standingBodyHeightPixels": 288,
+    "bodyHeightBasis": "First pose head crown around y83 to planted sole y370 inclusive, excluding any disconnected low-alpha noise.",
+    "trail": "none"
+  },
+  "validation": [
+    {
+      "image": "public/assets/animations/eula-v4/secondary-v5.png",
+      "metadata": "public/assets/animations/eula-v4/secondary-v5.json",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "sha256": "63dbd0fba001efc22e4e07ed3840ce30dddd3c4dd518f4b490582f4e4ea58da2",
+      "metadataSha256": "afc2eb4ffc316713f05256ab29daacc8872a0b8f1beea5855d83ce3542df7485",
+      "transparentPercent": 61.7593,
+      "standingBodyHeightPixels": 288,
+      "readOnlyRasterAnalysis": true,
+      "sourceRectanglesDisjoint": true,
+      "uniqueFrames": 12,
+      "pixelsAbove8OutsideRects": 0,
+      "frames": [
+        {
+          "name": "secondary-01",
+          "opaqueBoundsAlphaAbove8": [
+            70,
+            82,
+            359,
+            371
+          ],
+          "footAnchorSourcePixels": {
+            "x": 201,
+            "y": 370
+          },
+          "weaponTipSourcePixels": {
+            "x": 357,
+            "y": 351
+          },
+          "rgbaSha256": "e089c91e6bce0c2cb4a291b9c73e40bc19925675972659a82d9e12b27dcaa8f7",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-02",
+          "opaqueBoundsAlphaAbove8": [
+            437,
+            80,
+            723,
+            371
+          ],
+          "footAnchorSourcePixels": {
+            "x": 564,
+            "y": 370
+          },
+          "weaponTipSourcePixels": {
+            "x": 721,
+            "y": 350
+          },
+          "rgbaSha256": "1aba892b199bf930f3ed1f7bdf5bbe3df3c62b6acf06cc2118d6817a088fb1a4",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-03",
+          "opaqueBoundsAlphaAbove8": [
+            764,
+            77,
+            1050,
+            371
+          ],
+          "footAnchorSourcePixels": {
+            "x": 892,
+            "y": 370
+          },
+          "weaponTipSourcePixels": {
+            "x": 1048,
+            "y": 350
+          },
+          "rgbaSha256": "763de2e43795031090d7d1861e34ad37de7e936a30eafca42af6e6bc879793b5",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-04",
+          "opaqueBoundsAlphaAbove8": [
+            1118,
+            78,
+            1403,
+            371
+          ],
+          "footAnchorSourcePixels": {
+            "x": 1248,
+            "y": 370
+          },
+          "weaponTipSourcePixels": {
+            "x": 1401,
+            "y": 348
+          },
+          "rgbaSha256": "5c61a2e77a2fc6b081807ff2d2132ad185ecbebb41903cf369789f15eb2c0a1a",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-05",
+          "opaqueBoundsAlphaAbove8": [
+            65,
+            411,
+            360,
+            701
+          ],
+          "footAnchorSourcePixels": {
+            "x": 198.5,
+            "y": 700
+          },
+          "weaponTipSourcePixels": {
+            "x": 359,
+            "y": 683
+          },
+          "rgbaSha256": "7460cdc21cc021b4f937258c348ea7aa649c61a8f013032d47f29ed6b93a3fdf",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-06",
+          "opaqueBoundsAlphaAbove8": [
+            429,
+            412,
+            724,
+            702
+          ],
+          "footAnchorSourcePixels": {
+            "x": 562.5,
+            "y": 701
+          },
+          "weaponTipSourcePixels": {
+            "x": 722,
+            "y": 684
+          },
+          "rgbaSha256": "1f7965dae547c7bdbf0c11e547e18fffd2d9e1a1c63a6f98324451113e5872ec",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-07",
+          "opaqueBoundsAlphaAbove8": [
+            757,
+            409,
+            1056,
+            702
+          ],
+          "footAnchorSourcePixels": {
+            "x": 893.5,
+            "y": 701
+          },
+          "weaponTipSourcePixels": {
+            "x": 1053,
+            "y": 684
+          },
+          "rgbaSha256": "5d1923bb171f54e856fddd4555d32ce87a76d58f5baf0214c6f6b123d26d29a8",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-08",
+          "opaqueBoundsAlphaAbove8": [
+            1123,
+            409,
+            1413,
+            702
+          ],
+          "footAnchorSourcePixels": {
+            "x": 1253.5,
+            "y": 701
+          },
+          "weaponTipSourcePixels": {
+            "x": 1410,
+            "y": 682
+          },
+          "rgbaSha256": "b2bf022373963679e069b32e6d2cd79a48e5944a9f72a5479a2374ec38b702d8",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-09",
+          "opaqueBoundsAlphaAbove8": [
+            73,
+            742,
+            361,
+            1035
+          ],
+          "footAnchorSourcePixels": {
+            "x": 201.5,
+            "y": 1034
+          },
+          "weaponTipSourcePixels": {
+            "x": 359,
+            "y": 1016
+          },
+          "rgbaSha256": "89387350dc3d8a32e17c75bcb4db365456cba99d11fe56a9ec27d551aa44a742",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-10",
+          "opaqueBoundsAlphaAbove8": [
+            442,
+            741,
+            723,
+            1035
+          ],
+          "footAnchorSourcePixels": {
+            "x": 563.5,
+            "y": 1034
+          },
+          "weaponTipSourcePixels": {
+            "x": 721,
+            "y": 1018
+          },
+          "rgbaSha256": "a4d035493b684ba52f5a5470f4074dcbdd626cb4a0a72efd88dc634fef8f437c",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-11",
+          "opaqueBoundsAlphaAbove8": [
+            765,
+            741,
+            1056,
+            1035
+          ],
+          "footAnchorSourcePixels": {
+            "x": 895,
+            "y": 1034
+          },
+          "weaponTipSourcePixels": {
+            "x": 1053,
+            "y": 1017
+          },
+          "rgbaSha256": "fff96b3c0e901ea2e8604726136e46c29f8fe026dc2087632dc2cc8025f2f9d2",
+          "minimumOpaqueGutterPx": 12
+        },
+        {
+          "name": "secondary-12",
+          "opaqueBoundsAlphaAbove8": [
+            1123,
+            741,
+            1413,
+            1035
+          ],
+          "footAnchorSourcePixels": {
+            "x": 1253,
+            "y": 1034
+          },
+          "weaponTipSourcePixels": {
+            "x": 1410,
+            "y": 1017
+          },
+          "rgbaSha256": "c1599ae333d66f40cbe5e053d297e2ed149afecd08f2cf846b6112690ebd508e",
+          "minimumOpaqueGutterPx": 12
+        }
+      ]
+    }
+  ]
+}

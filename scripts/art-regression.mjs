@@ -531,6 +531,8 @@ function syntheticPack(id) {
   }
   if (id === 'xiao') pack.clips.special.frames.forEach(frame => { frame.name = { windup: 'windup', contact: 'dive', followthrough: 'impact', recover: 'recover' }[frame.phase]; });
   if (id === 'raiden' || id === 'xiao') pack.clips.jab.trail = 'thrust';
+  // These synthetic roster clips exercise character defaults, not Eula's explicit palm-cast trail override.
+  delete pack.clips.secondary.trail;
   return pack;
 }
 const packFixtures = ids => Object.fromEntries(ids.flatMap(id => [[packUrl(id), syntheticPack(id)], [packUrl(id, 'shared.png'), { width: 2048, height: 2048 }]]));
@@ -643,7 +645,9 @@ test('all 400 delivered frames render their registered source in both facings wi
         if (facing === 1) count++;
       }
     }
-    assert.equal(h.decodes.filter(url => url.startsWith(packUrl(id, ''))).length, id === 'eula' ? 10 : 6);
+    const expectedAtlases = [...new Set([...Object.values(manifest.clips), ...Object.values(manifest.variants)].map(clip => packUrl(id, clip.image)))].sort();
+    const decodedAtlases = h.decodes.filter(url => url.startsWith(packUrl(id, ''))).sort();
+    assert.deepEqual(decodedAtlases, expectedAtlases, `${id}: decode every referenced atlas exactly once and no unreferenced atlas`);
   }
   assert.equal(count, 400);
 });

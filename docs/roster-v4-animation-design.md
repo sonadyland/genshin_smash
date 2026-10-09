@@ -2,7 +2,7 @@
 
 本轮以实际技能的攻击方向、位移和效果为动作依据；手动输入、伤害、范围、攻速升级、冷却和幸存者受伤不中断操作的规则保持不变。
 
-后续雷电将军按旧版关键姿势重构为 [v5 动作包](raiden-v5-animation-design.md)。在用包由 `src/game/animation-packs.json` 指定；其余四名角色仍为 v4。本页末尾的 v4 验证结果保留为当时记录。
+后续雷电将军按旧版关键姿势重构为 [v5 动作包](raiden-v5-animation-design.md)。其余四人继续使用 v4 包目录，并在[四角色动作剧本 v5](roster-action-choreography-v5.md)中重绘部分动作、以带 `-v5` 后缀的图集接入。在用包由 `src/game/animation-packs.json` 指定，具体图集由各包 manifest 指定。本页的动作描述与末尾验证结果保留为 v4 阶段记录，当前动作与验收以 v5 文档为准。
 
 ## 动作与技能对应
 

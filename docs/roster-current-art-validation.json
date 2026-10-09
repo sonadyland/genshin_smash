@@ -111,7 +111,7 @@
           "sha256": "2c89f7ca4ba9e0a89daad29b52df34770d7f4d64d568bd757ac5909bda9dbc3b"
         },
         {
-          "image": "secondary.png",
+          "image": "secondary-v5.png",
           "clip": "secondary",
           "variant": false,
           "frames": 12,
@@ -119,10 +119,10 @@
             1448,
             1086
           ],
-          "transparentPercent": 75.21,
-          "minimumOpaqueGutterPx": 14,
-          "standingBodyHeightPixels": 228,
-          "sha256": "33fcce1a52e083ec7ef7aea890ab76310338aba5c6d01a93a2a1f54f41759316"
+          "transparentPercent": 61.76,
+          "minimumOpaqueGutterPx": 12,
+          "standingBodyHeightPixels": 288,
+          "sha256": "63dbd0fba001efc22e4e07ed3840ce30dddd3c4dd518f4b490582f4e4ea58da2"
         },
         {
           "image": "jab-downstroke.png",
@@ -401,7 +401,7 @@
           "sha256": "d85973dc32151590a12028864899a53bb3c5eff68633743f84cb34a653a90033"
         },
         {
-          "image": "special.png",
+          "image": "special-v5.png",
           "clip": "special",
           "variant": false,
           "frames": 12,
@@ -409,13 +409,13 @@
             1448,
             1086
           ],
-          "transparentPercent": 66.69,
-          "minimumOpaqueGutterPx": 12,
-          "standingBodyHeightPixels": 263,
-          "sha256": "3d3ddef302f3c6bed5ec05739e6cc091566141d81a069622993900ae4a32747e"
+          "transparentPercent": 68.78,
+          "minimumOpaqueGutterPx": 13,
+          "standingBodyHeightPixels": 259,
+          "sha256": "02616e4f75f9e55114f38751a15c3768ade70ea46e3895dc87e4fecbde57f9db"
         },
         {
-          "image": "secondary.png",
+          "image": "secondary-v5.png",
           "clip": "secondary",
           "variant": false,
           "frames": 12,
@@ -423,10 +423,10 @@
             1448,
             1086
           ],
-          "transparentPercent": 74.06,
+          "transparentPercent": 69.59,
           "minimumOpaqueGutterPx": 12,
-          "standingBodyHeightPixels": 245,
-          "sha256": "6e81ec4f46ad2f39c1c38bc5e0e053b5c7c4db9f50940aa7f5a78b8ff9e90e85"
+          "standingBodyHeightPixels": 250,
+          "sha256": "bb6e15490b6459c8bf73d20c13ce60e295e018f9521c31f6f3f7e86f3256fc2e"
         },
         {
           "image": "basic-variants.png",
@@ -465,8 +465,8 @@
       "baseFrames": 64,
       "variantFrames": 16,
       "totalFrames": 80,
-      "uniqueAtlases": 6,
-      "decodedRgbaMiB": 35.99,
+      "uniqueAtlases": 8,
+      "decodedRgbaMiB": 48.0,
       "atlases": [
         {
           "image": "locomotion.png",
@@ -525,18 +525,18 @@
           "sha256": "b87f835bc2ab8d595e14b42f35879b83bee0a80567dc0956aa2d6888c58fb052"
         },
         {
-          "image": "basic.png",
+          "image": "jab-v5.png",
           "clip": "jab",
           "variant": false,
           "frames": 8,
           "size": [
-            1448,
-            1086
+            1774,
+            887
           ],
-          "transparentPercent": 79.58,
+          "transparentPercent": 79.77,
           "minimumOpaqueGutterPx": 12,
-          "standingBodyHeightPixels": 170,
-          "sha256": "bbd994d4dd99f5156bb2a73390295816a58ea359cad86db41769626550403989"
+          "standingBodyHeightPixels": 244,
+          "sha256": "a64bffb5e6bfa5423a1a3279ed4e37c72fcc0801444a2f311921d96c05609a07"
         },
         {
           "image": "basic.png",
@@ -553,7 +553,7 @@
           "sha256": "bbd994d4dd99f5156bb2a73390295816a58ea359cad86db41769626550403989"
         },
         {
-          "image": "special.png",
+          "image": "special-v5.png",
           "clip": "special",
           "variant": false,
           "frames": 12,
@@ -561,52 +561,52 @@
             1448,
             1086
           ],
-          "transparentPercent": 79.98,
-          "minimumOpaqueGutterPx": 12,
-          "standingBodyHeightPixels": 241,
-          "sha256": "a6fecb045a90d214def670a144496571542f4d7c431b72b17e7d434ad3d53e35"
+          "transparentPercent": 79.49,
+          "minimumOpaqueGutterPx": 13,
+          "standingBodyHeightPixels": 225,
+          "sha256": "5cbc66c64c12b10d4536d6a1ec22dfd255f41447b4f810dfd497a0b7a2a92e5a"
         },
         {
-          "image": "secondary.png",
+          "image": "secondary-v5.png",
           "clip": "secondary",
           "variant": false,
           "frames": 12,
           "size": [
-            1448,
-            1086
+            1447,
+            1087
           ],
-          "transparentPercent": 71.05,
-          "minimumOpaqueGutterPx": 8,
-          "standingBodyHeightPixels": 267,
-          "sha256": "874b096b2c647d7b6b78e525e47e3fb4958a94148adebdc4f120240083d58de5"
+          "transparentPercent": 73.56,
+          "minimumOpaqueGutterPx": 13,
+          "standingBodyHeightPixels": 260,
+          "sha256": "3adb04f0bc1ffa03a3edc04d749fb91cb77766980d2adabd2d2d1a609f03dd31"
         },
         {
-          "image": "basic-variants.png",
+          "image": "jab-variant-v5.png",
           "clip": "jab",
           "variant": true,
           "frames": 8,
           "size": [
-            1448,
-            1086
+            1774,
+            887
           ],
-          "transparentPercent": 84.41,
+          "transparentPercent": 76.1,
           "minimumOpaqueGutterPx": 12,
-          "standingBodyHeightPixels": 158,
-          "sha256": "67840189169d80e976ed158334428ed377838718fb0866783281c3138a7c6afc"
+          "standingBodyHeightPixels": 281,
+          "sha256": "561cbdd4282c492f2be21fe99d99a5487a10bc435cae38837fdea7f58cd1343a"
         },
         {
-          "image": "basic-variants.png",
+          "image": "smash-variant-v5.png",
           "clip": "smash",
           "variant": true,
           "frames": 8,
           "size": [
-            1448,
-            1086
+            1774,
+            887
           ],
-          "transparentPercent": 84.41,
+          "transparentPercent": 73.15,
           "minimumOpaqueGutterPx": 12,
-          "standingBodyHeightPixels": 158,
-          "sha256": "67840189169d80e976ed158334428ed377838718fb0866783281c3138a7c6afc"
+          "standingBodyHeightPixels": 310,
+          "sha256": "bb297596862083da079fcc1698d90d5c9f2d8b824606458a0212dfa7bfe0cdf0"
         }
       ]
     },
@@ -719,7 +719,7 @@
           "sha256": "30a6de38499e578f71666bf45c3aded53b04c83156efebd2a55121f4b3b9a04b"
         },
         {
-          "image": "secondary.png",
+          "image": "secondary-v5.png",
           "clip": "secondary",
           "variant": false,
           "frames": 12,
@@ -727,10 +727,10 @@
             1448,
             1086
           ],
-          "transparentPercent": 80.76,
-          "minimumOpaqueGutterPx": 10,
-          "standingBodyHeightPixels": 190,
-          "sha256": "1ce402b83de21cddeff09dbfb047712f5c61aa967dec69803c8441aaa77d9722"
+          "transparentPercent": 80.71,
+          "minimumOpaqueGutterPx": 12,
+          "standingBodyHeightPixels": 230,
+          "sha256": "91fd6e13cd5f985a5254da5cd1c60ef0551382c5df6f04afbe9ad764b924fc31"
         },
         {
           "image": "basic-variants.png",

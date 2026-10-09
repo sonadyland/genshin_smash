@@ -229,7 +229,7 @@ test('every character maps attacks to live timings while L/I remain fixed even w
   }
   const shipped = JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations/eula-v4/manifest.json'), 'utf8'));
   assert.deepEqual(Object.keys(shipped.variants).sort(), ['jab', 'smash']);
-  assert.equal(shipped.clips.special.image, 'special.png'); assert.equal(shipped.clips.secondary.image, 'secondary.png');
+  assert.equal(shipped.clips.special.image, 'special.png'); assert.equal(shipped.clips.secondary.image, 'secondary-v5.png');
 });
 
 test('Xiao plunge uses distinct named poses and keeps only spear-down dive frames until real impact', () => {
