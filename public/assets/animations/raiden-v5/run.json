@@ -1,0 +1,120 @@
+{
+  "image": "locomotion.png",
+  "width": 1448,
+  "height": 1086,
+  "standingBodyHeightPixels": 232,
+  "frames": [
+    {
+      "name": "right-contact",
+      "sourceRect": {
+        "x": 74,
+        "y": 447,
+        "width": 280,
+        "height": 247
+      },
+      "footAnchor": {
+        "x": 0.521429,
+        "y": 0.939271
+      },
+      "duration": 4
+    },
+    {
+      "name": "right-down",
+      "sourceRect": {
+        "x": 445,
+        "y": 446,
+        "width": 270,
+        "height": 244
+      },
+      "footAnchor": {
+        "x": 0.5,
+        "y": 0.938525
+      },
+      "duration": 4
+    },
+    {
+      "name": "right-pass",
+      "sourceRect": {
+        "x": 801,
+        "y": 454,
+        "width": 268,
+        "height": 240
+      },
+      "footAnchor": {
+        "x": 0.548507,
+        "y": 0.9375
+      },
+      "duration": 4
+    },
+    {
+      "name": "right-push",
+      "sourceRect": {
+        "x": 1141,
+        "y": 442,
+        "width": 272,
+        "height": 253
+      },
+      "footAnchor": {
+        "x": 0.540441,
+        "y": 0.940711
+      },
+      "duration": 4
+    },
+    {
+      "name": "left-contact",
+      "sourceRect": {
+        "x": 73,
+        "y": 767,
+        "width": 271,
+        "height": 237
+      },
+      "footAnchor": {
+        "x": 0.542435,
+        "y": 0.936709
+      },
+      "duration": 4
+    },
+    {
+      "name": "left-down",
+      "sourceRect": {
+        "x": 441,
+        "y": 759,
+        "width": 272,
+        "height": 247
+      },
+      "footAnchor": {
+        "x": 0.511029,
+        "y": 0.939271
+      },
+      "duration": 4
+    },
+    {
+      "name": "left-pass",
+      "sourceRect": {
+        "x": 790,
+        "y": 759,
+        "width": 282,
+        "height": 249
+      },
+      "footAnchor": {
+        "x": 0.560284,
+        "y": 0.939759
+      },
+      "duration": 4
+    },
+    {
+      "name": "left-push",
+      "sourceRect": {
+        "x": 1135,
+        "y": 757,
+        "width": 269,
+        "height": 251
+      },
+      "footAnchor": {
+        "x": 0.568773,
+        "y": 0.940239
+      },
+      "duration": 4
+    }
+  ]
+}

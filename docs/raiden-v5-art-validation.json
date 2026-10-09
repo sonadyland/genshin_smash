@@ -1,0 +1,158 @@
+{
+  "ok": true,
+  "totalFrames": 80,
+  "characters": [
+    {
+      "character": "raiden",
+      "pack": "raiden-v5",
+      "ok": true,
+      "baseFrames": 64,
+      "variantFrames": 16,
+      "totalFrames": 80,
+      "uniqueAtlases": 6,
+      "decodedRgbaMiB": 35.99,
+      "atlases": [
+        {
+          "image": "locomotion.png",
+          "clip": "idle",
+          "variant": false,
+          "frames": 4,
+          "size": [
+            1448,
+            1086
+          ],
+          "transparentPercent": 77.53,
+          "minimumOpaqueGutterPx": 14,
+          "standingBodyHeightPixels": 232,
+          "sha256": "95f99ca089981a76b43a722acff42c3c83b8b56e1583e4c68015517a67cc0e3b"
+        },
+        {
+          "image": "locomotion.png",
+          "clip": "run",
+          "variant": false,
+          "frames": 8,
+          "size": [
+            1448,
+            1086
+          ],
+          "transparentPercent": 77.53,
+          "minimumOpaqueGutterPx": 14,
+          "standingBodyHeightPixels": 232,
+          "sha256": "95f99ca089981a76b43a722acff42c3c83b8b56e1583e4c68015517a67cc0e3b"
+        },
+        {
+          "image": "aerial.png",
+          "clip": "jump",
+          "variant": false,
+          "frames": 8,
+          "size": [
+            1448,
+            1086
+          ],
+          "transparentPercent": 77.44,
+          "minimumOpaqueGutterPx": 14,
+          "standingBodyHeightPixels": 175,
+          "sha256": "da83e325cf1c155737f2acbc28b90f749296af597a112e9a8bc0171c69d65cdc"
+        },
+        {
+          "image": "aerial.png",
+          "clip": "dodge",
+          "variant": false,
+          "frames": 4,
+          "size": [
+            1448,
+            1086
+          ],
+          "transparentPercent": 77.44,
+          "minimumOpaqueGutterPx": 14,
+          "standingBodyHeightPixels": 175,
+          "sha256": "da83e325cf1c155737f2acbc28b90f749296af597a112e9a8bc0171c69d65cdc"
+        },
+        {
+          "image": "basic.png",
+          "clip": "jab",
+          "variant": false,
+          "frames": 8,
+          "size": [
+            1254,
+            1254
+          ],
+          "transparentPercent": 54.23,
+          "minimumOpaqueGutterPx": 14,
+          "standingBodyHeightPixels": 192,
+          "sha256": "abd9e4d1558d495d624bcdffbd2ad6bc618b9937a11812440e70f3ffc8d3227d"
+        },
+        {
+          "image": "basic.png",
+          "clip": "smash",
+          "variant": false,
+          "frames": 8,
+          "size": [
+            1254,
+            1254
+          ],
+          "transparentPercent": 54.23,
+          "minimumOpaqueGutterPx": 14,
+          "standingBodyHeightPixels": 192,
+          "sha256": "abd9e4d1558d495d624bcdffbd2ad6bc618b9937a11812440e70f3ffc8d3227d"
+        },
+        {
+          "image": "special.png",
+          "clip": "special",
+          "variant": false,
+          "frames": 12,
+          "size": [
+            1448,
+            1086
+          ],
+          "transparentPercent": 78.98,
+          "minimumOpaqueGutterPx": 12,
+          "standingBodyHeightPixels": 180,
+          "sha256": "867696fbd385220da59c19869ff6be28606e7320b4550b1cbebb7fb7b82d81bb"
+        },
+        {
+          "image": "secondary.png",
+          "clip": "secondary",
+          "variant": false,
+          "frames": 12,
+          "size": [
+            1448,
+            1086
+          ],
+          "transparentPercent": 73.77,
+          "minimumOpaqueGutterPx": 12,
+          "standingBodyHeightPixels": 206,
+          "sha256": "44b8ed90071d08668cb6da6c662a14adc8ea9f4d475ed611e09bdaff67cad6f3"
+        },
+        {
+          "image": "basic-variants.png",
+          "clip": "jab",
+          "variant": true,
+          "frames": 8,
+          "size": [
+            1254,
+            1254
+          ],
+          "transparentPercent": 78.57,
+          "minimumOpaqueGutterPx": 13,
+          "standingBodyHeightPixels": 172,
+          "sha256": "e301a3f662070df1acf159075ad32444f5765cf181aa2d3e849a605cff7a069d"
+        },
+        {
+          "image": "basic-variants.png",
+          "clip": "smash",
+          "variant": true,
+          "frames": 8,
+          "size": [
+            1254,
+            1254
+          ],
+          "transparentPercent": 78.57,
+          "minimumOpaqueGutterPx": 14,
+          "standingBodyHeightPixels": 172,
+          "sha256": "e301a3f662070df1acf159075ad32444f5765cf181aa2d3e849a605cff7a069d"
+        }
+      ]
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import { CHARACTER_CLIPS, CHARACTER_CLIP_IDS, VARIANT_ATTACKS, selectClipFrame, 
 import type { ClipManifest, ClipSelection, ClipCharacterId } from './clip-animation';
 import type { AttackKind, AttackVisualVariant } from './clip-animation';
 import { CHARACTERS } from './data';
+import animationPacks from './animation-packs.json';
 
 /** Shared, locally hosted artwork for the lobby and the canvas arena. */
 const asset = (path: string) => `${import.meta.env.BASE_URL}assets/${path}`;
@@ -22,8 +23,8 @@ export const SECONDARY_ACTION_ART: Record<string, string> = Object.fromEntries(
   Object.keys(CHARACTER_ART).map(id => [id, asset(`animations/${id}-secondary-v1.png`)]),
 );
 export const SECONDARY_EFFECT_ART = asset('effects/secondary-effects-v1.png');
-export const EULA_CLIP_MANIFEST = asset('animations/eula-v4/manifest.json');
-export const CHARACTER_CLIP_MANIFESTS = Object.fromEntries(CHARACTER_CLIP_IDS.map(id => [id, asset(`animations/${id}-v4/manifest.json`)])) as Record<ClipCharacterId, string>;
+export const CHARACTER_CLIP_MANIFESTS = Object.fromEntries(CHARACTER_CLIP_IDS.map(id => [id, asset(`animations/${animationPacks[id]}/manifest.json`)])) as Record<ClipCharacterId, string>;
+export const EULA_CLIP_MANIFEST = CHARACTER_CLIP_MANIFESTS.eula;
 interface SourceRect { x: number; y: number; width: number; height: number }
 interface PlungeRegistration {
   width: number; height: number;

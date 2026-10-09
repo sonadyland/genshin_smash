@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const activePacks = JSON.parse(fs.readFileSync(path.join(root, 'src/game/animation-packs.json'), 'utf8'));
 const modules = new Map();
 function load(relative) {
   const file = path.resolve(root, relative);
@@ -267,7 +268,7 @@ test('Xiao preview manually-equivalent jump precedes L and landing alone advance
 test('shipped five-character clips reach every combat drawing at all current PVP and survival attack speeds', () => {
   const missing = [];
   for (const character of CHARACTERS) {
-    const pack = JSON.parse(fs.readFileSync(path.join(root, `public/assets/animations/${character.id}-v4/manifest.json`), 'utf8'));
+    const pack = JSON.parse(fs.readFileSync(path.join(root, `public/assets/animations/${activePacks[character.id]}/manifest.json`), 'utf8'));
     assert.equal(validClipManifest(pack), true); assert.equal(validVariantClips(pack), true);
     for (const kind of EULA_ATTACKS) for (const visualVariant of ['base', 'alternate']) for (const level of [-1, 0, 1, 2, 3]) {
       const speed = 1 + Math.max(0, level) * 0.035, survival = level >= 0;
@@ -283,7 +284,8 @@ test('shipped five-character clips reach every combat drawing at all current PVP
           }
         }
       } else {
-        for (let t = 0; t < def.startup + def.active + def.endlag; t++) {
+        // Both live engines increment an accepted attack before its first draw.
+        for (let t = 1; t < def.startup + def.active + def.endlag; t++) {
           input.attack.t = t; const selected = selectClipFrame(pack, input); visited.add(selected.frame);
           assert.equal(selectedClip(pack, selected).frames[selected.frame].phase, attackPhase(input.attack).phase);
         }

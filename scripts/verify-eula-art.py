@@ -1,4 +1,4 @@
-"""Read-only validation for generated character v4 atlases and their registration metadata.
+"""Read-only validation for active character atlases and their registration metadata.
 
 Requires Pillow. Never rewrites, resizes, crops to disk, or otherwise changes art.
 Run: python scripts/verify-eula-art.py [eula raiden jean diluc xiao]
@@ -14,6 +14,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSET_ROOT = ROOT / "public/assets/animations"
+ACTIVE_PACKS = json.loads((ROOT / "src/game/animation-packs.json").read_text(encoding="utf-8"))
 CHARACTERS = ("eula", "raiden", "jean", "diluc", "xiao")
 EXPECTED = {"idle": 4, "run": 8, "jump": 8, "dodge": 4, "jab": 8, "smash": 8, "special": 12, "secondary": 12}
 VARIANTS = {"jab": 8, "smash": 8}
@@ -21,7 +22,7 @@ PHASES = ("windup", "contact", "followthrough", "recover")
 
 
 def verify(character: str) -> dict:
-    assets = ASSET_ROOT / f"{character}-v4"
+    assets = ASSET_ROOT / ACTIVE_PACKS[character]
     manifest_path = assets / "manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     assert manifest["character"] == character
@@ -79,7 +80,7 @@ def verify(character: str) -> dict:
                             "standingBodyHeightPixels": clip["standingBodyHeightPixels"],
                             "sha256": hashlib.sha256(image_path.read_bytes()).hexdigest()})
     unique_atlases = {report["image"]: report["size"] for report in reports}
-    return {"character": character, "ok": True, "baseFrames": sum(EXPECTED.values()), "variantFrames": sum(VARIANTS.values()),
+    return {"character": character, "pack": ACTIVE_PACKS[character], "ok": True, "baseFrames": sum(EXPECTED.values()), "variantFrames": sum(VARIANTS.values()),
             "totalFrames": sum(EXPECTED.values()) + sum(VARIANTS.values()), "uniqueAtlases": len(unique_atlases),
             "decodedRgbaMiB": round(sum(w * h * 4 for w, h in unique_atlases.values()) / 1048576, 2), "atlases": reports}
 

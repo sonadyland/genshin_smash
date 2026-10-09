@@ -1,0 +1,671 @@
+{
+  "version": 1,
+  "character": "raiden",
+  "assetVersion": "v5",
+  "generator": "Built-in image_gen__imagegen; native transparent RGBA",
+  "references": [
+    "D:/Program/ai/genshin-smash/public/assets/animations/raiden-actions-v3.png",
+    "D:/Program/ai/genshin-smash/public/assets/animations/raiden-secondary-v1.png",
+    "D:/Program/ai/genshin-smash/public/assets/characters/raiden-v2.png"
+  ],
+  "intent": "Reconstruct the old L and I animation skeleton, expand each four-pose source to twelve independent poses; no v4 pose reference.",
+  "images": {
+    "special": {
+      "path": "public/assets/animations/raiden-v5/special.png",
+      "source": "C:/Users/46637/.codex/generated_images/01a120fc-10b7-79e0-beac-88a0c92a04d6/exec-038c23c5-67a4-46d8-8f24-2f3bc8e5167e.png",
+      "initialPrompt": "Use case: stylized-concept.\nCreate a production 2D side-scrolling game animation sprite sheet of Raiden Shogun. This is a RECONSTRUCTION OF THE OLD ANIMATION, not a redesign. References: image1 is the old actions sheet; strictly use its LAST ROW of four poses as the animation skeleton. Image2 is old skill art, identity/style support only. Image3 is character portrait, costume/face/weapon detail reference only.\nDeliver ONE native transparent RGBA sheet, 4 columns by 3 rows, exactly 12 separate full-body frames read left-to-right then top-to-bottom. Landscape 4:3 canvas, preferably 1536x1152. No grid, no text, no numbers, no floor, no background, no additional separate effect figures. Every cell has generous transparent margins of at least 16 pixels around every hair tip, sleeve and sword tip. Never let neighboring frames overlap.\nSame adult woman in each frame, same consistent proportions and grounded elegant anime painterly style as OLD SHEET, same white/lavender long kimono sleeves with gold patterns, deep purple thigh-high stockings and shoes, dark violet very long thick braid, red obi bow, purple floral hair ornament. Same long curved purple katana with round elaborate guard throughout, not a straight short baton. Right-facing three-quarter SIDE VIEW exactly like old first reference, never turn into front-facing portrait. Consistent body size, about 245 source pixels crown-to-sole when standing in a 384x384 cell.\nAction L: IN-PLACE CHARGED HORIZONTAL LIGHTNING WAVE SLASH. Feet grounded around a stable pivot; no running, no leap or forward dash. Restore old last-row readable shapes: vertical blade gathered in front of face/chest, then powerful waist-turn horizontal slash forward, followthrough leaning slightly forward, low guard recovery. Do NOT make all frames a straight stiff extended arm pushing sword. Shoulder, elbow and wrist anatomy naturally follows curved blade sweep, no broken wrist. Do not summon an energy sphere. Do not make an upward attack or overhead downward chop.\nFRAME 1: low ready, elbow bent, starts lifting curved blade inward in front of torso.\nFRAME 2: erect narrow stance, curved blade vertical in front of face, elbow relaxed bent.\nFRAME 3: gathered poised stance, blade vertical above face, faint purple charge along blade only.\nFRAME 4: final tense windup, hips turning, vertical blade slightly drawn beside head, arm bent.\nFRAME 5: initiating big horizontal cut from body rotation, blade diagonal forward transitioning through shoulder height, wide planted stance.\nFRAME 6: decisive forward horizontal slash at chest height, natural bent shoulder/elbow extension, blade fully across front, slight purple thin edge trail; matches old last-row second frame silhouette.\nFRAME 7: torso leans slightly forward, blade reaches ahead at near-horizontal, rear sleeve/braid lag behind; matches old last-row third frame silhouette.\nFRAME 8: arm and blade continue slightly downward-forward along cut arc, front knee flexed.\nFRAME 9: blade smoothly lowers to forward hip height, hips start relaxing.\nFRAME 10: torso returns upright, sword diagonally low forward, braid settling.\nFRAME 11: low blade guard returning planted feet toward normal width.\nFRAME 12: calm old last-row fourth frame ending stance, long curved blade low forward, same identity/scale. Add minimal blade violet gleam only: the game draws lightning projectile separately.\nPriority: authentic old attack silhouette and elegant natural body mechanics; unique meaningful sequential poses; stable torso/legs size and planted feet; entire long curved blade within each cell; true alpha background.",
+      "layoutRepairPrompt": "Edit this 12-frame transparent Raiden sprite sheet ONLY to correct the framing and sword silhouette. Preserve exact character costume/identity, face, painterly old sprite style, all twelve action poses and their order, native alpha background. Keep 4 columns and 3 rows, equal cells. Every complete full-body sprite INCLUDING ENTIRE LONG SWORD AND BRAID must fit comfortably INSIDE its own cell with at least 24px transparent safety space on all sides. Place feet on same baseline within each row. Currently top-row third sword touches top and second-row last sword is cropped at right. Correct by uniformly reducing all 12 entire character-plus-weapons drawings to about 80% of their current size and recentering them into their individual cells. All 12 sprites retain ONE consistent physical body scale; no independent stretched figure or shorter weapon to fit. Give the weapon a slender LONG GENTLY CURVED JAPANESE KATANA blade, around 70% of the woman's standing height in blade length, consistent with original reference, NOT a wide short flat dagger/paddle. Only a delicate violet blade-edge gleam, remove fat purple glowing blobs and clouds. Animation remains stationary: frames1-4 upright vertical sword gathered close in front of face; frames5-8 a rotating waist-led forward horizontal sword slash and followthrough; frames9-12 lower sword into original ready. Do not change the poses to upward or downward chops. Transparent RGBA only, no grid/background/text, no overlapping neighboring frames. This is a production atlas and safe margins are mandatory.",
+      "referenceRole": "raiden-actions-v3 last row; other images only style/identity",
+      "standingBodyHeightPixels": 180,
+      "poseNotes": "Chest/front vertical gathering → waist-driven forward horizontal slash → slightly forward followthrough → low guard. Planted position; runtime projectile separate.",
+      "bladeRepairPrompt": "Precise object edit. Image1 is the EDIT TARGET: retain its EXACT twelve full-body Raiden poses, sequence, anatomy, costume, layout, foot positions, transparent alpha, frame spacing, and painted old game-sprite art. Image2 is a SUPPORTING WEAPON REFERENCE showing the desired slender, longer gently curved katana blade. Change ONLY the katana BLADE shape in all twelve target frames to match image2's narrow steel geometry and subtle violet edge. Currently image1's sword blades especially in forward-slash poses are fat purple paddles/short broad cleavers, which is wrong. Keep hands, hilts, all arms/body poses completely fixed. Make blade thickness ONE-THIRD current width, a fine elegant taper from guard to sharp tip, gentle continuous curved katana spine; retain its existing overall blade length and keep it fully inside its cell. A slender violet metal blade, not glowing balloon. Remove the thick purple glow cloud around blade: glow just a fine single edge light, no fat aura or broad smear. Do not add a second blade or duplicate edge. Vertical-blade poses must use the SAME slim long sword identity as horizontal-cut poses. This is a surgical weapon-only art edit: no changes to sprite body, action, faces, pose, frame order, crop or scale. Keep transparent background and all original blank gutters. No text/grid/background.",
+      "finalLayoutPrompt": "Production sprite atlas spacing correction ONLY. This image has the correct narrow curved katana, correct twelve old Raiden action poses, correct costume, proportions and restrained blade light. Preserve every one of these invariants; do NOT change or thicken sword. Fix clipping: the rightmost column swords in row2 and row3 hit the right image border, and last-row shoes are too close to bottom. Rebuild same four-column three-row layout with every WHOLE character-plus-sword scaled uniformly to 75% current size, leaving abundant empty alpha around ALL 12 figures. Equal common body scale, no per-frame stretching. Entire long curved katana tips MUST be visible and at least24px from all cell and canvas borders. Entire shoes/braid/sleeves too. All figures include full blades, centered in their own cells, same foot-baseline relative each row. Make three rows visibly separated with large empty transparent corridors and wide gaps between columns. Keep exact 12 poses/order, do not alter body/action/style or weapon shape. No crop, no grid, no text, no background. Native transparent RGBA. This is ONLY a uniform layout shrink/padding pass; extremely important not to enlarge characters or fill empty space.",
+      "bladeEditReferences": [
+        "public/assets/animations/raiden-v5/special.png candidate before narrow-blade pass",
+        "public/assets/animations/raiden-v5/secondary.png"
+      ],
+      "intermediateBladeRepairSource": "C:/Users/46637/.codex/generated_images/01a120fc-10b7-79e0-beac-88a0c92a04d6/exec-6f879500-b685-4b2c-9466-1832611a86c0.png"
+    },
+    "secondary": {
+      "path": "public/assets/animations/raiden-v5/secondary.png",
+      "source": "C:/Users/46637/.codex/generated_images/01a120fc-10b7-79e0-beac-88a0c92a04d6/exec-fd746a48-5381-4fb8-bdbf-70e2d3c6140a.png",
+      "initialPrompt": "Use case: stylized-concept. Create a production 2D side-scrolling game sprite animation sheet, native transparent RGBA, no background/grid/text.\nPrimary request: reconstruct and expand the OLD Raiden Shogun thunder-calling skill from reference image1, using those exact FOUR key poses as animation skeleton. Image2 old action sheet reinforces matching identity/proportions/style. Image3 portrait is costume/long curved sword detail reference. Do not invent a new summon stance.\nDeliver ONE sheet 4 columns by3rows, exactly12 separate full-body frames left to right top to bottom, landscape4:3 preferably1536x1152. Each frame complete and contains the whole long sword and braid with at least24px transparent safety gutter around it. In each cell, SAME adult body scale approximately200pixels head-to-sole at a384x384cell. Raised long sword can extend well above head and MUST fit fully with blank space. Feet align along stable ground line in all rows.\nSame Raiden old painterly anime sprite style: white/lavender kimono flowing sleeves, subtle gold ornamental pattern, red obi bow, deep purple thigh high stockings and shoes, dark violet thick long braid, gold purple floral hair ornament. Same adult proportions as old sheet, graceful strong grounded shape. Right-facing three-quarter SIDE VIEW as original old four poses, not frontal presentation. Sword consistently LONG SLENDER GENTLY CURVED purple JAPANESE KATANA around70% body-height blade, round ornate hilt, no short chunky dagger or straight stick. Hands, elbows and shoulders natural, blade rigid from hilt to tip in every frame.\nI action = COMMAND A THUNDER COLUMN in front, standing in place. Original key poses: diagonal-raised sword ready → one hand raises blade VERTICALLY overhead, free arm naturally extended to side → guide lightning by lowering sword FORWARD around chest and waist, NOT strike the earth → low guard finish.\nFrames:\n1 old reference first pose: ready with bent elbow and long curved sword diagonally forward/up.\n2 raise forearm and sword to steeper diagonal, natural planted weight shift.\n3 sword near vertical beside front of head, elbow almost extending upward, free arm spreading.\n4 old second pose beginning: sword-arm fully raised, wrist aligned, blade vertical skyward, wide sleeves hang elegantly.\n5 old second pose at thunder-call peak: arm straight up, whole long curved blade pointing UP well above crown, free arm relaxed sideways, only thin edge purple gleam.\n6 hold high call for short beat, small torso/sleeve followthrough, NO energy cloud obscuring body.\n7 rotate shoulder to guide sword FORWARD and down from high position, blade diagonal-up in front of face, free arm naturally balances.\n8 old third pose: forward reach with gently bent elbow, blade nearly horizontal chest-height and curved tip a little lower, directing column in front.\n9 continue forward-down guide to waist height, calm controlled torso rotation, do NOT slam sword to ground or crouch.\n10 old fourth pose beginning: draw hand slightly back, sword low diagonally forward.\n11 low guard settling shoulders, braid settles behind.\n12 exact old fourth resting silhouette, low curved sword held diagonally forward and grounded relaxed legs.\nNo external lightning pillar or large effect in the atlas; runtime renders it. Minimal faint violet blade edge only, NO glowing ball/cloud on chest or feet. Same body mass and scale in allframes, no crop, extra limbs, duplicated blade, foot sliding, leap or dash. Priority: unmistakable classic old pose sequence with naturally articulated transitions.",
+      "layoutRepairPrompt": "This is a transparent 12-frame game sprite atlas edit. Keep EXACT SAME old Raiden costume, face, natural adult proportions, LONG CURVED katana, exact 12 action poses, sequence, painterly style, subtle edge gleam and true alpha. Fix ONLY atlas spacing: current sprites overlap across row boundaries and some long blades nearly touch neighbors. Re-layout all twelve sprites into a strict 4-column by 3-row equal-cell grid. Make every entire figure INCLUDING raised sword 70% as big as it is now, same common scale for all twelve; recenter individually within its cell with plenty of surrounding empty alpha. The result MUST visibly have large empty corridors between all rows and columns. Need at least 25px blank margin around ENTIRE sword, braid, sleeves and shoes inside each cell. No sprite may exceed 85% of cell height INCLUDING sword. Keep long blade length proportional, do NOT shorten the katana to solve spacing. Same character body scale in all cells. Grounded feet near 85% height in each cell, including first-row sprites. Skyward raised-sword poses fit above without touching top. Row3 shoes not near image bottom. Do not crop anything. No grid lines, text, numbers, backdrop, or change to actual action poses. Output native transparent RGBA.",
+      "referenceRole": "raiden-secondary-v1 all four poses",
+      "standingBodyHeightPixels": 206,
+      "poseNotes": "Diagonal sword ready → one-hand vertical skyward call → forward guide down to waist → low guard. No ground chop; runtime thunder column separate."
+    }
+  },
+  "registration": {
+    "method": "Read-only Pillow alpha inspection plus visual registration; PNG files copied verbatim from native generation output. No code image modification.",
+    "bodyScale": "One fixed measured standingBodyHeightPixels per clip, reflecting source atlas scale; runtime targets same body height. No per-frame stretch.",
+    "sourceRect": "Alpha >20 content bounding box plus 12px padding, measured separately per frame.",
+    "footAnchor": "Normalized crop-local midpoint between the planted shoe contact extents; y from the lowest alpha>128 sole pixel plus one.",
+    "weaponTip": "Visually registered actual katana tip in crop-local source pixels.",
+    "phaseOrder": [
+      "windup",
+      "contact",
+      "followthrough",
+      "recover"
+    ],
+    "phaseCounts": [
+      4,
+      2,
+      3,
+      3
+    ],
+    "phaseWeights": "Equal weights within every phase so fast attack timing preserves reachability."
+  },
+  "readOnlyPixelValidation": {
+    "special": {
+      "mode": "RGBA",
+      "size": [
+        1448,
+        1086
+      ],
+      "alphaLevels": 256,
+      "transparentPixels": 1241941,
+      "opaquePixels": 635,
+      "atlasSha256": "867696fbd385220da59c19869ff6be28606e7320b4550b1cbebb7fb7b82d81bb",
+      "frameCount": 12,
+      "uniqueFrameHashes": 12,
+      "minMainAlphaGutter": 12,
+      "overlappingSourceRects": false,
+      "frames": [
+        {
+          "frame": 1,
+          "sourceRect": [
+            87,
+            167,
+            243,
+            200
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            197.0,
+            354
+          ],
+          "sourceWeaponTipPixels": [
+            315,
+            316
+          ],
+          "sha256": "d7469af47dbdeef733d728341e2a4f592ddcfa65c847e35e8440ef725b7e73ec"
+        },
+        {
+          "frame": 2,
+          "sourceRect": [
+            464,
+            110,
+            179,
+            256
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            567.0,
+            354
+          ],
+          "sourceWeaponTipPixels": [
+            569,
+            124
+          ],
+          "sha256": "74c5f3ad79e94d53003d65ab89f8aae54012296bed225a1f0ccb694d9d1aaf9b"
+        },
+        {
+          "frame": 3,
+          "sourceRect": [
+            827,
+            93,
+            183,
+            273
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            933.5,
+            354
+          ],
+          "sourceWeaponTipPixels": [
+            929,
+            107
+          ],
+          "sha256": "aa20e8c3214940b2d2ff75bffa9735cd6a3a135a60edae86f4c48fd14fc8b34d"
+        },
+        {
+          "frame": 4,
+          "sourceRect": [
+            1188,
+            108,
+            185,
+            259
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            1291.5,
+            354
+          ],
+          "sourceWeaponTipPixels": [
+            1292,
+            122
+          ],
+          "sha256": "65042817780738d60788ff920a8b736110f34485cf932a45db42af36765dd09c"
+        },
+        {
+          "frame": 5,
+          "sourceRect": [
+            74,
+            500,
+            250,
+            196
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            184.0,
+            683
+          ],
+          "sourceWeaponTipPixels": [
+            310,
+            609
+          ],
+          "sha256": "665e341164d3ed346e15046fdeae25114cfde19824d103cf53d6537301b3fd85"
+        },
+        {
+          "frame": 6,
+          "sourceRect": [
+            432,
+            508,
+            283,
+            187
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            551.0,
+            682
+          ],
+          "sourceWeaponTipPixels": [
+            701,
+            560
+          ],
+          "sha256": "f5bea8da115b5ed8c705fa84560c637a58c6973d14080ed077de80ffb32199a5"
+        },
+        {
+          "frame": 7,
+          "sourceRect": [
+            817,
+            521,
+            280,
+            176
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            927.5,
+            684
+          ],
+          "sourceWeaponTipPixels": [
+            1083,
+            571
+          ],
+          "sha256": "1b8d758e5a11a50458f0d1f6eb42218a3e7637c7431c80f240f8783f44560bf7"
+        },
+        {
+          "frame": 8,
+          "sourceRect": [
+            1175,
+            530,
+            243,
+            169
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            1288.0,
+            687
+          ],
+          "sourceWeaponTipPixels": [
+            1403,
+            648
+          ],
+          "sha256": "d3304127b35a585a757f01ee60c0559cc8193a0a30808907677a5cfc2185f51d"
+        },
+        {
+          "frame": 9,
+          "sourceRect": [
+            73,
+            828,
+            257,
+            193
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            189.0,
+            1008
+          ],
+          "sourceWeaponTipPixels": [
+            316,
+            958
+          ],
+          "sha256": "90c5b66389faf430a77bd3cfa95cd13a4343bee1ba3aa9c1d3071dd0600128d7"
+        },
+        {
+          "frame": 10,
+          "sourceRect": [
+            441,
+            816,
+            261,
+            204
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            564.5,
+            1007
+          ],
+          "sourceWeaponTipPixels": [
+            687,
+            960
+          ],
+          "sha256": "76fc44e9fc9d281b57fea9e850877cf950bff8978b141afa5a2e250dd95ae7a9"
+        },
+        {
+          "frame": 11,
+          "sourceRect": [
+            818,
+            815,
+            244,
+            206
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            933.5,
+            1009
+          ],
+          "sourceWeaponTipPixels": [
+            1047,
+            969
+          ],
+          "sha256": "4e6f2d4dbe053b1cc7b7ca1f5e79d1569830aa4eed8f92520ef2fefd4af7972a"
+        },
+        {
+          "frame": 12,
+          "sourceRect": [
+            1186,
+            816,
+            230,
+            205
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            1297.0,
+            1009
+          ],
+          "sourceWeaponTipPixels": [
+            1401,
+            966
+          ],
+          "sha256": "e4c832d49e6aa4d2e86bc518ba638bb373e1e25495ad463bfb344929532161a5"
+        }
+      ]
+    },
+    "secondary": {
+      "mode": "RGBA",
+      "size": [
+        1448,
+        1086
+      ],
+      "alphaLevels": 256,
+      "transparentPixels": 1160122,
+      "opaquePixels": 1148,
+      "atlasSha256": "44b8ed90071d08668cb6da6c662a14adc8ea9f4d475ed611e09bdaff67cad6f3",
+      "frameCount": 12,
+      "uniqueFrameHashes": 12,
+      "minMainAlphaGutter": 12,
+      "overlappingSourceRects": false,
+      "frames": [
+        {
+          "frame": 1,
+          "sourceRect": [
+            73,
+            138,
+            252,
+            259
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            218.0,
+            384
+          ],
+          "sourceWeaponTipPixels": [
+            310,
+            152
+          ],
+          "sha256": "8d15faee1be939ae76ff59720a0bc5e319400bffd2d9115ca092a635ebe1e9c2"
+        },
+        {
+          "frame": 2,
+          "sourceRect": [
+            426,
+            121,
+            238,
+            276
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            572.5,
+            384
+          ],
+          "sourceWeaponTipPixels": [
+            650,
+            134
+          ],
+          "sha256": "c019dd6874b8b79f3d0a622481146df3aa30d442649dbe6f7b21fd621b93f21e"
+        },
+        {
+          "frame": 3,
+          "sourceRect": [
+            809,
+            66,
+            246,
+            331
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            958.5,
+            384
+          ],
+          "sourceWeaponTipPixels": [
+            946,
+            80
+          ],
+          "sha256": "a5b17378ebc1a74c91b136f31df4f736a44a5fcf114f49e2213267eed6045442"
+        },
+        {
+          "frame": 4,
+          "sourceRect": [
+            1165,
+            49,
+            232,
+            348
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            1306.0,
+            385
+          ],
+          "sourceWeaponTipPixels": [
+            1284,
+            63
+          ],
+          "sha256": "f9b4fe5c95192a22cd6be93f2b13e75f3b933d00ba60a4caba0b37f57d9398e8"
+        },
+        {
+          "frame": 5,
+          "sourceRect": [
+            73,
+            431,
+            242,
+            328
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            222.0,
+            746
+          ],
+          "sourceWeaponTipPixels": [
+            199,
+            445
+          ],
+          "sha256": "309cfed78a4a9969beaf3f74e77c165c79d2e7d93823406e3f9ad8dff0fc9826"
+        },
+        {
+          "frame": 6,
+          "sourceRect": [
+            433,
+            430,
+            242,
+            328
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            583.0,
+            746
+          ],
+          "sourceWeaponTipPixels": [
+            558,
+            444
+          ],
+          "sha256": "c42db9092c4797f8a03ba6abd2282103cd3d9d632bf49155e60afbb5af6fa3cf"
+        },
+        {
+          "frame": 7,
+          "sourceRect": [
+            783,
+            461,
+            237,
+            298
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            928.0,
+            746
+          ],
+          "sourceWeaponTipPixels": [
+            899,
+            475
+          ],
+          "sha256": "2335d1b00cf0f61c369e4d2ef8e4133cc9699dedd1dd7aff369b40a406fa316a"
+        },
+        {
+          "frame": 8,
+          "sourceRect": [
+            1123,
+            535,
+            308,
+            224
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            1272.0,
+            746
+          ],
+          "sourceWeaponTipPixels": [
+            1417,
+            600
+          ],
+          "sha256": "65a9e76b7f6d029452bc06f01d71159c3d06d4f3a0fbea0105db9535cde29120"
+        },
+        {
+          "frame": 9,
+          "sourceRect": [
+            53,
+            812,
+            309,
+            221
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            194.0,
+            1021
+          ],
+          "sourceWeaponTipPixels": [
+            348,
+            925
+          ],
+          "sha256": "2556cb4b259fcee068f3478d66ebfe29466f907fb8c85ffc60306a352a565121"
+        },
+        {
+          "frame": 10,
+          "sourceRect": [
+            425,
+            813,
+            308,
+            220
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            569.5,
+            1021
+          ],
+          "sourceWeaponTipPixels": [
+            719,
+            927
+          ],
+          "sha256": "1a957ecaaf546214c22a4140e2e418e8d9f3d289cdd8efe3fec025b1b06f05eb"
+        },
+        {
+          "frame": 11,
+          "sourceRect": [
+            788,
+            811,
+            311,
+            222
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            930.5,
+            1021
+          ],
+          "sourceWeaponTipPixels": [
+            1084,
+            940
+          ],
+          "sha256": "294cc46d744becffc436681be98bc567564ade3c807d89f6f7ac02bff075ddf6"
+        },
+        {
+          "frame": 12,
+          "sourceRect": [
+            1139,
+            811,
+            289,
+            223
+          ],
+          "mainAlphaGutters": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "sourceFootPixels": [
+            1277.0,
+            1021
+          ],
+          "sourceWeaponTipPixels": [
+            1413,
+            941
+          ],
+          "sha256": "48eea2a89ff69192b762d41e8293aefa35140c3d3b41260c84c3184ded9b78a4"
+        }
+      ]
+    }
+  }
+}

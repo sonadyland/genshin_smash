@@ -2,12 +2,14 @@
 
 本轮以实际技能的攻击方向、位移和效果为动作依据；手动输入、伤害、范围、攻速升级、冷却和幸存者受伤不中断操作的规则保持不变。
 
+后续雷电将军按旧版关键姿势重构为 [v5 动作包](raiden-v5-animation-design.md)。在用包由 `src/game/animation-packs.json` 指定；其余四名角色仍为 v4。本页末尾的 v4 验证结果保留为当时记录。
+
 ## 动作与技能对应
 
 |角色|J 轻击与变化形态|K 重击与变化形态|L 主技能|I 战技|
 |---|---|---|---|---|
 |优菈|短挥斩／斜下斩|旋身重挥／过顶重劈|原有旋转横斩，两侧冰环；固定原 special|原低位挥剑向前送出扇形冰晶；固定原 secondary|
-|雷电将军|前刺／短横切|居合重斩／反手斜切|原地前向挥刀，放出雷光波|举刀引雷，召前方竖直雷柱|
+|雷电将军（v5）|短横斩／变化斩击|过顶重斩／变化重斩|胸前竖刀蓄势，前向拔刀横斩并放出雷光波|单臂举刀引雷，召前方竖直雷柱|
 |琴|短横斩／踏步直刺|踏步重刺／重挥压制|收剑聚风、前推剑锋，对前方强推风压|低位上挑剑锋，召升流风场|
 |迪卢克|大剑横挥／斜砍|重斜劈／过顶劈砍|持剑前压烈焰突进，保留实际 dash 行为|低位上挑火剑，放出向前火鸟|
 |魈|水平枪刺／短横扫|枪舞横扫／斜上挑|空中蓄势、枪尖向下直坠、落地两侧风浪、收枪|水平持枪突进，枪尖朝前，地面和空中均可使用|
@@ -24,7 +26,7 @@
 - 刀枪余光按角色主题色及 `trail: arc/thrust/none` 选择弧线、直线或不绘制。魈下坠继续使用专门的纵向风枪效果，召雷不添加无关刀弧。
 - 新包 J/K 已登记实际剑尖余光时，两模式停止重复绘制旧的通用月牙斩；幸存者效果记录出招当时的动作形态，因此收招后也不会误套下一招。命中火花、L/I 实际技能效果与旧包回退保持原样。
 - `?animation=eula|raiden|jean|diluc|xiao` 打开旧新对照。支持角色、动作、有效形态、速度、方向、坡面、模式、大小及单步；魈 L 预览先跳跃再下坠。
-- 四个新角色目录为 `public/assets/animations/<id>-v4/`，每人 6 张图集：`locomotion`、`aerial`、`basic`、`basic-variants`、`special`、`secondary`。图片由内置 image_gen 生成；登记数据仅裁切显示，不修改生成图。
+- 雷电目录为 `public/assets/animations/raiden-v5/`；琴、迪卢克、魈目录为 `public/assets/animations/<id>-v4/`。每人 6 张图集：`locomotion`、`aerial`、`basic`、`basic-variants`、`special`、`secondary`。图片由内置 image_gen 生成；登记数据仅裁切显示，不修改生成图。
 - 坡面仍为单个支撑点及轻微姿态补偿，没有双脚骨骼 IK。
 
 ## 原设定参考与生成记录
@@ -42,12 +44,12 @@
 
 |角色|提示词与原生图记录|美术登记检查|
 |---|---|---|
-|雷电将军|[raiden-v4-prompts.json](raiden-v4-prompts.json)|[raiden-v4-art-validation.json](raiden-v4-art-validation.json)|
+|雷电将军（v5）|[身体与普通攻击](raiden-v5-body-prompts.json)、[技能](raiden-v5-skills-prompts.json)|[raiden-v5-art-validation.json](raiden-v5-art-validation.json)|
 |琴|[jean-v4-prompts.json](jean-v4-prompts.json)|[jean-v4-art-validation.json](jean-v4-art-validation.json)|
 |迪卢克|[diluc-v4-prompts.json](diluc-v4-prompts.json)|[diluc-v4-art-validation.json](diluc-v4-art-validation.json)|
 |魈|[xiao-v4-prompts.json](xiao-v4-prompts.json)|[xiao-v4-art-validation.json](xiao-v4-art-validation.json)|
 
-[全部在用 400 帧只读像素报告](roster-v4-art-validation.json)记录每张 PNG 的 SHA-256、透明比例、最小主体边距及解码规模。四个新角色各为 6 个图集、约 35.99 MiB RGBA；优菈沿用分片图集，为 10 个图集、约 60.01 MiB。运行时只按需要加载角色，并复用已经加载的图像。
+[v4 阶段 400 帧只读像素报告](roster-v4-art-validation.json)记录当时每张 PNG 的 SHA-256、透明比例、最小主体边距及解码规模。四个新角色各为 6 个图集、约 35.99 MiB RGBA；优菈沿用分片图集，为 10 个图集、约 60.01 MiB。运行时只按需要加载角色，并复用已经加载的图像。雷电 v5 的实际图集尺寸及检查另见其更新说明。
 
 ## 验证
 

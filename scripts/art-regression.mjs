@@ -7,6 +7,9 @@ import ts from 'typescript';
 import { inflateSync } from 'node:zlib';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const activePacks = JSON.parse(fs.readFileSync(path.join(root, 'src/game/animation-packs.json'), 'utf8'));
+const packUrl = (id, file = 'manifest.json') => `/assets/animations/${activePacks[id]}/${file}`;
+const isPackUrl = url => Object.values(activePacks).some(directory => url.includes(`/animations/${directory}/`));
 function harness(rejected = () => false, metadataTransform = value => value, enhanced = false, fixtures = {}) {
   const calls = [];
   const decodes = [], fetched = [];
@@ -25,7 +28,7 @@ function harness(rejected = () => false, metadataTransform = value => value, enh
     async decode() {
       decodes.push(this.src);
       if (rejected(this.src)) throw new Error('fixture: unavailable image');
-      if (/-v4\//.test(this.src)) {
+      if (isPackUrl(this.src)) {
         if (!enhanced) throw new Error('fixture: legacy regression pack');
         if (fixtures[this.src]) { this.naturalWidth = fixtures[this.src].width; this.naturalHeight = fixtures[this.src].height; return; }
         const png = fs.readFileSync(path.join(root, 'public', this.src));
@@ -43,10 +46,11 @@ function harness(rejected = () => false, metadataTransform = value => value, enh
   const modules = new Map();
   function load(file) {
     if (modules.has(file)) return modules.get(file).exports;
+    if (file.endsWith('.json')) return { default: JSON.parse(fs.readFileSync(file, 'utf8')) };
     const source = fs.readFileSync(file, 'utf8').replaceAll('import.meta.env.BASE_URL', "'/'");
     const output = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS } }).outputText;
     const mod = { exports: {} }; modules.set(file, mod);
-    vm.runInContext(`(function(exports, require, module) { ${output}\n})`, context, { filename: file })(mod.exports, specifier => load(path.resolve(path.dirname(file), `${specifier}.ts`)), mod);
+    vm.runInContext(`(function(exports, require, module) { ${output}\n})`, context, { filename: file })(mod.exports, specifier => load(path.resolve(path.dirname(file), specifier.endsWith('.json') ? specifier : `${specifier}.ts`)), mod);
     return mod.exports;
   }
   const art = load(path.join(root, 'src/game/art.ts'));
@@ -529,19 +533,19 @@ function syntheticPack(id) {
   if (id === 'raiden' || id === 'xiao') pack.clips.jab.trail = 'thrust';
   return pack;
 }
-const packFixtures = ids => Object.fromEntries(ids.flatMap(id => [[`/assets/animations/${id}-v4/manifest.json`, syntheticPack(id)], [`/assets/animations/${id}-v4/shared.png`, { width: 2048, height: 2048 }]]));
+const packFixtures = ids => Object.fromEntries(ids.flatMap(id => [[packUrl(id), syntheticPack(id)], [packUrl(id, 'shared.png'), { width: 2048, height: 2048 }]]));
 
 test('packs load only requested characters, preserve concurrent requests, and decode a shared atlas once', async () => {
   const h = harness(() => false, value => value, true, packFixtures(['raiden', 'jean']));
-  await h.art.loadGameArt([]); assert.equal(h.decodes.some(url => url.includes('-v4/')), false);
+  await h.art.loadGameArt([]); assert.equal(h.decodes.some(isPackUrl), false);
   const raiden = h.art.loadGameArt(['raiden']), jean = h.art.loadGameArt(['jean']);
   await Promise.all([raiden, jean, h.art.loadGameArt(['raiden', 'jean'])]);
   for (const id of ['raiden', 'jean']) {
     assert.equal(h.art.getCharacterAnimationStatus(id).status, 'ready'); assert.equal(h.art.getCharacterAnimationStatus(id).frames, 80);
-    assert.equal(h.decodes.filter(url => url.endsWith(`/${id}-v4/shared.png`)).length, 1);
-    assert.equal(h.fetched.filter(url => url.endsWith(`/${id}-v4/manifest.json`)).length, 1);
+    assert.equal(h.decodes.filter(url => url === packUrl(id, 'shared.png')).length, 1);
+    assert.equal(h.fetched.filter(url => url === packUrl(id)).length, 1);
     h.reset(); h.art.drawFighterArt(h.draw, id, 0, 112, 112, animation);
-    assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith(`/${id}-v4/shared.png`));
+    assert.equal(h.calls.find(call => call.kind === 'drawImage').args[0].src, packUrl(id, 'shared.png'));
   }
   assert.equal(h.art.getCharacterAnimationStatus('xiao').status, 'loading');
 });
@@ -549,8 +553,8 @@ test('packs load only requested characters, preserve concurrent requests, and de
 test('a bad roster manifest or shared atlas falls back atomically for only that character', async () => {
   const fixtures = packFixtures(['raiden', 'jean']);
   for (const wrongCharacter of [false, true]) {
-    const h = harness(url => !wrongCharacter && url.endsWith('/raiden-v4/shared.png'), (value, url) => {
-      if (wrongCharacter && url.endsWith('/raiden-v4/manifest.json')) value.character = 'jean'; return value;
+    const h = harness(url => !wrongCharacter && url === packUrl('raiden', 'shared.png'), (value, url) => {
+      if (wrongCharacter && url === packUrl('raiden')) value.character = 'jean'; return value;
     }, true, fixtures);
     await h.art.loadGameArt(['raiden', 'jean']);
     assert.equal(h.art.getCharacterAnimationStatus('raiden').status, 'fallback'); assert.equal(h.art.getCharacterAnimationStatus('jean').status, 'ready');
@@ -569,7 +573,7 @@ test('blade trails follow each character color and move shape while plunge and l
   for (const [id, attack] of [['raiden', { def: { ...animation.attack.def, kind: 'secondary' }, t: 23 }], ['xiao', { def: { ...animation.attack.def, kind: 'special' }, t: 23, plunge: { phase: 'dive', elapsed: 40 } }]]) {
     h.reset(); h.art.drawFighterArt(h.draw, id, 0, 112, 112, { ...animation, attack });
     assert.ok(!h.calls.some(call => call.kind === 'quadraticCurveTo' || call.kind === 'lineTo'));
-    assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith(`/${id}-v4/shared.png`));
+    assert.equal(h.calls.find(call => call.kind === 'drawImage').args[0].src, packUrl(id, 'shared.png'));
   }
 });
 
@@ -614,7 +618,7 @@ test('all 400 delivered frames render their registered source in both facings wi
   const ids = ['eula', 'raiden', 'jean', 'diluc', 'xiao'], h = harness(() => false, value => value, true); await h.art.loadGameArt(ids);
   let count = 0;
   for (const id of ids) {
-    const manifest = JSON.parse(fs.readFileSync(path.join(root, `public/assets/animations/${id}-v4/manifest.json`), 'utf8'));
+    const manifest = JSON.parse(fs.readFileSync(path.join(root, 'public', packUrl(id)), 'utf8'));
     const status = h.art.getCharacterAnimationStatus(id); assert.equal(status.status, 'ready'); assert.equal(status.frames, 80);
     for (const [kind, clip, variant] of [...Object.entries(manifest.clips).map(([kind, clip]) => [kind, clip, 'base']), ...Object.entries(manifest.variants).map(([kind, clip]) => [kind, clip, 'alternate'])]) {
       for (const frame of clip.frames) for (const facing of [-1, 1]) {
@@ -634,14 +638,35 @@ test('all 400 delivered frames render their registered source in both facings wi
         }
         h.reset(); assert.equal(h.art.drawFighterArt(h.draw, id, 0, 112, 112, sample, { facing }), true);
         const drawn = h.calls.find(call => call.kind === 'drawImage').args;
-        assert.ok(drawn[0].src.endsWith(`/${id}-v4/${clip.image}`));
+        assert.equal(drawn[0].src, packUrl(id, clip.image));
         assert.deepEqual(drawn.slice(1, 5), [frame.sourceRect.x + 1, frame.sourceRect.y + 1, frame.sourceRect.width - 2, frame.sourceRect.height - 2]);
         if (facing === 1) count++;
       }
     }
-    assert.equal(h.decodes.filter(url => url.includes(`/${id}-v4/`)).length, id === 'eula' ? 10 : 6);
+    assert.equal(h.decodes.filter(url => url.startsWith(packUrl(id, ''))).length, id === 'eula' ? 10 : 6);
   }
   assert.equal(count, 400);
+});
+
+test('rebuilt Raiden cuts use measured arcs while the raised-sword thunder summon has no slash trail', async () => {
+  const h = harness(() => false, value => value, true); await h.art.loadGameArt(['raiden']);
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'public', packUrl('raiden')), 'utf8'));
+  const { CHARACTERS } = h.load(path.join(root, 'src/game/data.ts'));
+  const character = CHARACTERS.find(entry => entry.id === 'raiden');
+  for (const kind of ['jab', 'smash', 'special', 'secondary']) for (const visualVariant of ['base', 'alternate']) {
+    const clip = visualVariant === 'alternate' && manifest.variants[kind] ? manifest.variants[kind] : manifest.clips[kind];
+    const summon = kind === 'secondary'; assert.equal(clip.trail, summon ? 'none' : 'arc');
+    const frame = clip.frames.find(entry => entry.phase === 'contact'), scale = 112 / clip.standingBodyHeightPixels;
+    h.reset(); h.art.drawFighterArt(h.draw, 'raiden', 0, 112, 112, { ...animation, attack: { def: character[kind], t: character[kind].startup, visualVariant } });
+    const curves = h.calls.filter(call => call.kind === 'quadraticCurveTo');
+    if (summon) assert.equal(curves.length, 0);
+    else {
+      assert.equal(curves.length, 1);
+      assert.deepEqual(curves[0].args.slice(-2), [(frame.weaponTip.x - frame.sourceRect.width * frame.footAnchor.x) * scale,
+        (frame.weaponTip.y - frame.sourceRect.height * frame.footAnchor.y) * scale]);
+    }
+    assert.equal(h.calls.find(call => call.kind === 'drawImage').args[0].src, packUrl('raiden', clip.image));
+  }
 });
 
 test('real Xiao dive and impact spear tips share the physical ground registration without penetrating below it', async () => {

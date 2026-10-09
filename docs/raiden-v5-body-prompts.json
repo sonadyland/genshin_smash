@@ -1,0 +1,451 @@
+{
+  "version": 1,
+  "character": "raiden",
+  "pack": "raiden-v5",
+  "generatedWith": "built-in image_gen__imagegen",
+  "transparentBackground": true,
+  "referencePolicy": "Old raiden-actions-v3 primary pose/style, raiden-secondary-v1 and raiden-v2 supporting identity; no v4 pose reference.",
+  "references": [
+    "assets/animations/raiden-actions-v3.png",
+    "assets/animations/raiden-secondary-v1.png",
+    "assets/characters/raiden-v2.png"
+  ],
+  "sources": [
+    {
+      "atlas": "basic.png",
+      "prompt": "Use case: stylized-concept. Production sprite atlas for a 2D side-scrolling action game, genuinely transparent RGBA background. EXACTLY sixteen separate full-body Raiden Shogun sprites in a strict 4 columns by 4 rows grid, square canvas approximately 2048x2048. Each cell has generous transparent margins, entire curved katana, boots, braid, kimono cloth visible within its own cell with no overlap. No gridlines, text, labels, ground, shadows or environment.\nReferences: image1 OLD raiden-actions-v3 sprite sheet is the PRIMARY pose and character reference. Image2 secondary attack and image3 portrait support costume/identity only. Faithfully reconstruct image1's row2 light attack four key poses and row3 heavy attack four key poses, expanding each to eight coherent in-between poses. Do not reinvent the attacks as straight thrusts.\nCharacter: adult Raiden Shogun, long thick purple braid, small purple/gold flower ornament, white lilac asymmetric kimono sleeves, red obi ribbon, dark purple stockings and heels, same detailed elegant anime game art as old sprite sheet. Long curved violet katana with gold circular guard, blade length nearly torso plus thigh, never dagger or straight short sword. Anatomically natural hands grip hilt and bent elbows, each hand connected to arm; torso hips and knees rotate with sword swing. Consistent head size and anatomical scale all16, adult elegant strong silhouette. Orthographic right-facing three-quarter SIDE view exactly as old reference, eye gaze right at enemy, never frontal poster.\nReading order top row left-to-right then next row:\nFrames1-8 light attack follow OLD row2: (1) left/rear hip loaded, right foot toward right, sword hand lifts hilt above forehead, blade runs overhead pointing rear-left; (2) shoulders rotate forward beginning short cut, bent elbow, blade diagonal upper-right; (3) blade sweeps across forward chest-height moving rightward, grounded slight lunge, elbow not locked; (4) blade angles DOWN-RIGHT past front waist at contact, hips follow, not a thrust; (5) blade LOW across front knees to right, crouched weight settling as OLD row2 col3; (6) elbow folds and blade returns low across body, braid follows motion; (7) straighten slightly from low crosscut into low guard; (8) old row2 col4 quiet ready stance sword low-right.\nFrames9-16 heavy attack follow OLD row3: (9) wider planted stance and BOTH hands raise hilt over crown, curved blade trailing upper-left as OLD row3 col1; (10) two-handed overhead maximum loaded pose, torso coiled and hips back; (11) decisive DIAGONAL DOWN-RIGHT sword cut crossing chest toward enemy, front knee compresses; (12) sword finishes down-right toward floor, low leaning body identical to OLD row3 col2; (13) deeper forward body follow-through sword low-right identical OLD row3 col3, stable grounded feet; (14) shoulder unwinds from low cut; (15) recover legs and low hilt; (16) old row3 col4 ready pose sword low diagonal right.\nImportant distinct silhouettes: high-to-low ARC through light sequence; deeper bigger high-to-low ARC heavy sequence; never eight repetitions of horizontal outstretched arm. Energy only a restrained thin purple blade rim, NO broad painted effect arcs obscuring blade. Preserve pose progression and full safe margins. Real transparent background.",
+      "repairs": [
+        "Edit this exact 16-sprite transparent atlas. Change ONLY spacing and framing: the image must remain exactly 4 columns x 4 rows, same sixteen characters, poses, costume, face, blade orientation and weapon design, same ordering. Uniformly scale EACH complete character including all cloth and complete curved sword to 78% of its current size, and center it horizontally in its own cell with its standing feet baseline at 88% of cell height. Preserve the SAME scaling factor for ALL sixteen sprites. This makes a generous transparent gutter around every sprite, especially long rightward sword tips in rows1-4 and overhead blade in row3. Each character and blade must stay inside its own cell, at least 20 pixels clear of each cell boundary. No clipped blades, no changes to poses, no shortening swords to fit, no text or grid lines or backgrounds. Preserve true alpha transparency."
+      ],
+      "finalGeneratedFile": "exec-5f223452-632b-4c36-9de2-c855cb8db03e.png"
+    },
+    {
+      "atlas": "basic-variants.png",
+      "prompt": "Use case: stylized-concept. Transparent RGBA production animation sprite atlas. Exactly16 Raiden Shogun full-body sprites in strict4columns4rows squarecanvas approximately2048x2048. Huge clear gutters; each complete character including sword must fit inside central72% of cell. Actual anatomy scale SAME across all16, adult detailed proportions as attached OLD sprite sheet. No text/lines/background/groundshadow.\nPrimary pose/style reference is image1 OLD raiden-actions-v3. Identity image2 old secondary and image3 portrait. Reconstruct variations on the old row2 light-cut and old row3 heavy-cut, not any forward stabs. Beautiful curved LONG violet katana (not dagger) goldguard, long purple braid, white/lilac sleeves, redobi, darkpurple stockings. Orthographic right facing three-quarter sideview, gaze right, no frontal pinup. Bent elbows, hands naturally grip hilt, shoulders waist hips and knees follow angular sword movement. Thin purple glow only, NO large opaque slash effects. Entire long blade and all cloth inside cell with at least25pixel transparent margins, do not shorten sword for layout.\nFirst8 poses (rows1+2) ALTERNATE LIGHT: a compact reverse diagonal crosscut after a windup, using old sheet poses as body language. Pose1 ready stance curved blade pointing down-right, hips load backward. Pose2 draws hilt close to left hip with katana diagonal low-left, torso coiled. Pose3 snaps a compact backhand cut across chest, blade points up-right at45degrees, bent elbow and forward leading foot. Pose4 finishes short diagonal cut upper-right with shoulder rotation, not a linear stab. Pose5 blade curves from upper-right to side-right across chest in crossbody followthrough. Pose6 hilt draws back down-right, weight returns. Pose7 steady low guard settle, Pose8 old ready stance sword down-right.\nLast8 poses(rows3+4) ALTERNATE HEAVY: broad grounded rotating horizontal cleave, visibly DIFFERENT from overhead base heavy. Pose9 two-handed blade drawn back behind left shoulder horizontally, weight back. Pose10 deep coil shoulders/hilt left and front leg planted. Pose11 release across front at chest height, arms remain bent enough to guide blade with waist turning. Pose12 blade tip right at waist height in big full-body horizontal sweeping strike, not a thrust. Pose13 lower wide sweeping followthrough toward right knee, braid/hem carried by rotation. Pose14 settle low sword while rotation slows. Pose15 bent elbows recover hilt, replant feet. Pose16 old ready stance low-right blade.\nKeep isolated poses crisp with distinct shoulder and knee positions. Consistent adult body size and steady camera, no foreshortened camera flips, no new armor. No cropped katana.",
+      "repairs": [
+        "Precise sprite atlas edit. Image1 is the sixteen-pose edit target. Image2 is OLD sprite sword design reference. Preserve all16 existing anatomy, poses, order, outfits, hands. Fix only sword design and safe transparent gutters.\nEVERY sword currently looks far too WIDE like a paddle. Replace every blade with image2's gracefully curved SLENDER Japanese violet katana, sharp pointed tip and edge, long blade, ordinary width only one-fifth of its current width. Blade maximum width must be less than half the character's wrist width. Keep hilt/guard in existing hand position and preserve overall blade direction of each pose. Reduce purple aura to a very thin fine violet luminous outline so it does not make blade look broad, no large bloom. Make blade physically slender and long with a continuous curved arc.\nUniformly scale all sixteen complete subjects INCLUDING their weapon to 75% of current content size. Same size multiplier across all16. Center each whole pose in its own cell of exact4columns4rows, standing foot baseline88% cellheight, clear transparent gutters minimum25pixel every side. No clipped sword tips or braid, no overlaps or shortened blades. No labels/lines/shadows/background. True transparent RGBA. Identity and right facing three-quarter sideview stay unchanged.",
+        "Spacing-only edit of this exact transparent sprite sheet. Keep the exact sixteen sprite illustrations and all their poses and sword shapes. Make every complete sprite including sword much SMALLER by uniformly reducing all16 to65percent of current size. Put them centered in their own equal cells of the same4columns4rows grid on the same canvas. Each entire silhouette including sword must fit in central70percent of its cell. Large clean transparent space all around every sprite, especially rightmost column sword tips must be fully visible with wide transparent margin. No sword ends touch image edges. Do not change swords/costumes/pose, do not cut off anything. Same anatomy scale reduction for every sprite. True transparent background, no checkerboard painting, no text, no gridlines."
+      ],
+      "finalGeneratedFile": "exec-ff43dc6f-e376-40e8-844e-6bfc9e095d8d.png"
+    },
+    {
+      "atlas": "locomotion.png",
+      "prompt": "Use case: stylized-concept. Genuine transparent RGBA 2D sidescroller game sprite sheet, exact4columns3rows,12 separate full body adult Raiden Shogun poses. Canvas landscape1536x1152. PRIMARY reference image1 OLD raiden-actions-v3 firstrow identity and movement; image2/3 only outfit. Preserve OLD elegant detailed anime rendering, adult proportions, right-facing three-quarter SIDE VIEW, eye gaze right, face never front portrait. Long thick purple braid, white/lilac flowing patterned sleeves, redobi, darkpurple stockings and heels. Slender long gracefully curved violet Japanese katana as OLD reference, blade width slender, fine purple edge only, no broad energy shape.\nCritical layout: EVERY whole figure including full sword occupies only middle65percent WIDTH and70percent HEIGHT of its equal cell. Same head/limb/body scale ALL12. At least30pixel transparent border around all body parts/blade/braid. Do NOT shorten swords to fit. No background, gridline, text, ground shadows.\nRow1 four IDLE breathing poses same OLD firstrow firstpose: feet planted in guarded stance, torso tall yet knees slightly bent, hilt close to front hip, blade diagonally low-right. (1) exhale lowered shoulders (2) small inhale chest rise and sleeve sway (3) breath peak subtle knee adjustment (4) relax back ready. Feet fixed, head size same, natural folded elbows.\nRows2+3 eight RUN cycle poses from OLD firstrow secondpose. Keep slight forward chest lean with dynamic braid/sleeves trailing left, low bent arms and sword low-right/back but no dragging. Eight natural alternating stride phases: right contact left back; right down left knee swings; right passing left leg forward; right push left high; left contact right back; left down right knee swings; left passing right forward; left push right high. Leg and foot positions genuinely different, run not squat-hop. Consistent sideview facing right, no turning back. The body remains normal adult size in each, no exaggerated full split, torso tilt moderate. Sword remains continuous curved slender katana without giant glow. Full figure entire sprite inside each cell, huge clear transparent gutters.",
+      "repairs": [
+        "Spacing-only edit of this exact transparent sprite sheet. Keep these exact twelve sprite illustrations, anatomy, poses, curved slim katana shapes. Make EVERY complete sprite including sword much SMALLER by uniformly reducing all12 to65percent of current size. Put them centered in their own equal cells of same4columns3rows on same canvas. Each entire silhouette including sword must fit in central70percent of its cell. Large clean transparent gutters around every sprite; rightmost sword tips must be complete with wide transparent margin, blade edges must never touch image border. No limbs/cloth/braid cut. Do not change sword design or poses, do not shorten blade. Same anatomy scale multiplier every sprite. True transparent background, no grid lines, text or shadows."
+      ],
+      "finalGeneratedFile": "exec-60e3355e-e364-4633-b2f9-6972df3eeed9.png"
+    },
+    {
+      "atlas": "aerial.png",
+      "prompt": "Use case: stylized-concept. Transparent RGBA sprite atlas exact4columns3rows,12 full body adult Raiden Shogun poses, landscape1536x1152. Primary image1 OLD raiden-actions-v3, row1 third/fourth are jumping and overhead dodge keyposes. Follow exactly that old pose silhouette and character design. Image2secondary+image3portrait additional identity/costume reference. Beautiful detailed anime illustration same original art, long purple braid, white lilac long sleeves, redobi, darkpurple stockings heels, thin long curved violet katana with goldguard. Right facing3/4sideview, gaze right, camera never changes. Same adult head size/leglength/anatomical scale all12.\nALL12 whole sprites including extended blade must fit central65percent WIDTH and75percent HEIGHT of cells, generous transparent gutters at least30pixels. Do NOT shorten sword or compress body to fit. No gridlines/words/background/groundshadows. No huge aura ribbons; thin fine purple blade edge only.\nFirst8 frames = jump coherent old-style leap:\n1 grounded dip before takeoff, hilt begins lifting overhead, knees bent feet planted.\n2 rising, ONE foot pushing off, BOTH HANDS carry blade OVERHEAD pointing rear-left, front knee lifts.\n3 rising, both knees tuck toward chest, blade still horizontal OVERHEAD, same folded knee silhouette as old row1col4, looking forward.\n4 apex, both knees tucked and torso forward slightly, overhead blade safe behind head, floating cloth/braid, compact old row1col4 silhouette.\n5 falling, forward knee begins extending down but blade stays overhead guard, other knee folded.\n6 falling, both feet extend below body preparing ground, elbows lower blade toward shoulder.\n7 landing deep bent knees BOTH feet plant, torso absorbs impact, sword forward-low.\n8 stand to old low guard ready, same original body size.\nLast4 = short forward evasive dodge, follow old row1col4 overhead blade+folded leg pose:\n9 braced crouch, hilt above crown both elbows bent, blade pointing rear-left.\n10 forward burst, forward lean moderate, one knee tucked, blade ABOVE HEAD remains rear-left, cloak and braid stream behind, feet close not extreme split.\n11 finish burst plant leading foot, knees compressed and overhead sword starts lowering to shoulder.\n12 rise into old ready low-right guard.\nPhysically natural grip/wrists/elbows, no disconnected hand, no camera perspective distortions, feet not chopped. Each pose exactly one body and one complete long slender curved katana.",
+      "repairs": [
+        "Precise transparent sprite atlas repair. Preserve these EXACT12 poses, jump overhead sword tuck silhouette, adult anatomy, clothes, identity, ordering4columns3rows.\nFix weapon: currently blade glow too thick. Render a VERY SLENDER gracefully curved purple katana with goldguard, sharp tip, blade width ONLY one third current, keeping SAME hilt and curved tip locations. Fine thin violet edge line, no broad pink aura/bloom, no huge luminous streak. Long steel blade not glowing paddle.\nFix framing: every complete character together with long sword must be uniformly scaled to65percent current size, same multiplier all12, and centered in its own cell. LARGE transparent gutters all around every pose, each whole silhouette within central70percent cell width. Fully reveal rightmost swords rather than clipping or shortening. No edges within25pixels of cell borders. Feet and braid also entirely inside. No grid/text/background. True transparent RGBA with no colored opaque fringe.",
+        "Spacing-only edit of this exact transparent sprite sheet. Keep these exact twelve sprite illustrations, anatomy, poses, curved SLIM katana shapes. Make EVERY complete sprite including sword much SMALLER by uniformly reducing all12 to60percent of current size. Put them centered in their own equal cells of same4columns3rows on same canvas. Each entire silhouette including sword must fit in central65percent of its cell. Large clean transparent gutters around every sprite; rightmost sword tips must be complete with wide transparent margin, blade edges must never touch image border or the neighboring cell. No limbs/cloth/braid cut. Do not change sword design or poses, do not shorten blade. Same anatomy scale multiplier every sprite. True transparent background, no grid lines, text or shadows."
+      ],
+      "finalGeneratedFile": "exec-c2baa23b-a756-4de8-afce-567a5e0daa12.png"
+    }
+  ],
+  "registration": "RGBA images are preserved byte-for-byte from image generation. Read-only Pillow/numpy inspection measures alpha bounds; metadata stores whole-clip standing height and individually registered foot roots. Crops do not rescale per frame. Jump tucked frames keep virtual standing root below boots so tucking does not snap the torso upward. Weapon tips are visually registered then snapped to nearby alpha-bearing blade pixels. All four attacks use arc trail and phase weights [4,4,2,2,3,3,2,2].",
+  "limitations": "Pixels with alpha 1-24 are retained in native image files and are not treated as main silhouette for source-rect bounds. No image postprocessing or pixel edits were applied.",
+  "validation": {
+    "frameCount": 56,
+    "uniqueFrames": 56,
+    "alphaThreshold": 24,
+    "minimumMainAlphaGutter": 12,
+    "clips": [
+      {
+        "clip": "idle",
+        "image": "locomotion.png",
+        "dimensions": [
+          1448,
+          1086
+        ],
+        "mode": "RGBA",
+        "standingBodyHeightPixels": 232,
+        "frames": [
+          {
+            "name": "exhale",
+            "sha256": "0ff15d958ee0eb77ce2a3c590158e2f765863345f90dc7eda6fe78bbe87afd57",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "inhale",
+            "sha256": "016593bdaf5474198da87d7613a48d9669d003075d29bef7a59879413af7c1c5",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "breath-peak",
+            "sha256": "72f8665e8c0ec16195963dedcd3ff5082ba8e7df52b90212473c6448378939fe",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "settle",
+            "sha256": "9a5862d93cd457dc6d90c98216113830f2b2ff49f6cf7be430234498a39389a2",
+            "mainAlphaGutter": 14
+          }
+        ],
+        "uniqueFrames": 4,
+        "minimumMainAlphaGutter": 14
+      },
+      {
+        "clip": "run",
+        "image": "locomotion.png",
+        "dimensions": [
+          1448,
+          1086
+        ],
+        "mode": "RGBA",
+        "standingBodyHeightPixels": 232,
+        "frames": [
+          {
+            "name": "right-contact",
+            "sha256": "6543d7345bc467ec5f5bec415e74dbb2bda08be35cd495b492fdabe3a2a038bc",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "right-down",
+            "sha256": "87d0a60c1a010fd97bdf82bde4f6e447b0842bc7c6ba224a4785d939e029f4a1",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "right-pass",
+            "sha256": "f138f574b4349965510a39c9c726816a97f24509e3b9647ff538c83b8e474d62",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "right-push",
+            "sha256": "f0b1bf2ae2918df632cd0cdd6c6e1cdfca5c54735006c5d547bf14d798709790",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "left-contact",
+            "sha256": "d0946a2b6422e4f107327ae499d4d0b6db317a340aeabe2212ac0e8603652f5e",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "left-down",
+            "sha256": "8e1c44349c3784381a7f7fa320b5437617f4edfb834d4f2e9c67141de4b4b12c",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "left-pass",
+            "sha256": "dab340895de89d8194f3c31ea6688b7ebae656cc707474162330010eedcef96f",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "left-push",
+            "sha256": "8733cc80278644777b545c7b30af3da30f141c4cb61a6e11efccfe0a2d0587c9",
+            "mainAlphaGutter": 14
+          }
+        ],
+        "uniqueFrames": 8,
+        "minimumMainAlphaGutter": 14
+      },
+      {
+        "clip": "jump",
+        "image": "aerial.png",
+        "dimensions": [
+          1448,
+          1086
+        ],
+        "mode": "RGBA",
+        "standingBodyHeightPixels": 175,
+        "frames": [
+          {
+            "name": "takeoff",
+            "sha256": "eefeffc19f364bc1a79839c19729dfe6154c30592126a8660b44e10a4cbeef36",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "rise",
+            "sha256": "a49b1365dc17f54cc2a3ea33ece0fe764563cea98213cbf042865a930a557270",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "rise",
+            "sha256": "eb11220778d442390cdf73f8d8414233d0bc0045762fac3d7e66d74ecae66422",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "apex",
+            "sha256": "88d22831b4f2011f7074f489f285b47f08bf21213818839b47e2bab791c62768",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "fall",
+            "sha256": "729d396cf9da02fbfbef30b7df56cd8568df53f64e3c076c10dda4748de263b3",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "fall",
+            "sha256": "88ad0b1f6f47125fea20872a4bac1c8da54d05604f926d315fa1907ca73a9736",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "land",
+            "sha256": "8fc88435d916ef5d48fdeae07d1a9f141f16315603008ab48b561a090b539855",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "land",
+            "sha256": "5454ed34634be47fad4f8db68f10a8f11fc77cc8cd96ff97ba0bb48f32bfdace",
+            "mainAlphaGutter": 14
+          }
+        ],
+        "uniqueFrames": 8,
+        "minimumMainAlphaGutter": 14
+      },
+      {
+        "clip": "dodge",
+        "image": "aerial.png",
+        "dimensions": [
+          1448,
+          1086
+        ],
+        "mode": "RGBA",
+        "standingBodyHeightPixels": 175,
+        "frames": [
+          {
+            "name": "anticipate",
+            "sha256": "02ac12fa2d5bd20eef4a8a667e0aa718d60a464da20f409bd20f90db46c5dffe",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "evade",
+            "sha256": "21fc761efb504802f15c25dad7e0cb67ebbb1113804d40a1c48646150ae4b8a2",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "brake",
+            "sha256": "0befdca46943b85cddb6e1c0b26ec1c93d9d9e3d8c03552309cfe96d44d0cca6",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "settle",
+            "sha256": "1cb200af641967e1b586733207a0378cb0163e517aa624fc49bb1fbd3c180f98",
+            "mainAlphaGutter": 14
+          }
+        ],
+        "uniqueFrames": 4,
+        "minimumMainAlphaGutter": 14
+      },
+      {
+        "clip": "jab",
+        "image": "basic.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "standingBodyHeightPixels": 192,
+        "frames": [
+          {
+            "name": "jab-01",
+            "sha256": "ea380bfd6f78627bae14266f802b249ea5774ccd731c108fbaad77429d9828d7",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "jab-02",
+            "sha256": "664376edd862d6a2c3265efb2759da57826258a02fbe256f14a1881e1e286348",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "jab-03",
+            "sha256": "3d8588745af297860a20f76b25483026c12c01757e8baefff7b05e77aec36f1f",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "jab-04",
+            "sha256": "3bab1dfe740f3368a4f094df772c85fe244ad340b238569130af6828ef1414b1",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "jab-05",
+            "sha256": "ef03f7b71bbf78e0a8c3b4d24a4b6141fe76486bd0ebdf82293dfcfaddfe9713",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "jab-06",
+            "sha256": "3670757e848a396c08c65a4e9715eea37a30f7eec36328fc4cd4debc0a7926dd",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "jab-07",
+            "sha256": "30bbd4e84c311cec19a9baa47474b4798a5f3b8a89c73234a395b9acf50d16aa",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "jab-08",
+            "sha256": "264595ce9e771c360a91df83b4a89fb75736d796f95995c75b8da4295554890d",
+            "mainAlphaGutter": 14
+          }
+        ],
+        "uniqueFrames": 8,
+        "minimumMainAlphaGutter": 14
+      },
+      {
+        "clip": "smash",
+        "image": "basic.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "standingBodyHeightPixels": 192,
+        "frames": [
+          {
+            "name": "smash-01",
+            "sha256": "34115087cb9d163264818d7da60d1bf833a2681cb8990717c3e8fccfdf15c338",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "smash-02",
+            "sha256": "3652a0b6d6442dccbe275fa6e7821ed4f13b6144ea3443e8cdd37ba909f19e7a",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "smash-03",
+            "sha256": "06eaee84b2b112d6a91b72bd89c4d5de87eedb2555b9e2118e31a4a99574c0a5",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "smash-04",
+            "sha256": "9edd209c7a606075deff11502fc662b03b28959babdba29fd4f4ef530113a85b",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "smash-05",
+            "sha256": "45c6a9159748aa04872de1f282c64c33388878f3f23718e6186a9060122e7c29",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "smash-06",
+            "sha256": "8510631ec3c7c25f12934734e3f3da713de23399b5bb427bae9070e67a4078ce",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "smash-07",
+            "sha256": "f766afe2146cce383488fa1185146815c12529ea2ccc20c7668e4ceb1fbb365c",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "smash-08",
+            "sha256": "07ce43e261075df5f451e9a25bbb11f5caa09ad05fc08229128735bc2d9ef7aa",
+            "mainAlphaGutter": 14
+          }
+        ],
+        "uniqueFrames": 8,
+        "minimumMainAlphaGutter": 14
+      },
+      {
+        "clip": "jab-variant",
+        "image": "basic-variants.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "standingBodyHeightPixels": 172,
+        "frames": [
+          {
+            "name": "jab-variant-01",
+            "sha256": "9092347a16a6487f6070dcdc6ece44b62b0b4ad28a1d10d6a8c8667a80f85786",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "jab-variant-02",
+            "sha256": "1c5f97a9976f6f483f377f19a4212c6baeef06d26f51f420bae9c28b421b8f3a",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "jab-variant-03",
+            "sha256": "4e7d205d8c8f1d52059d369c4ab01b65d676e8a23eb1fb073dc7a329d13d29bf",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "jab-variant-04",
+            "sha256": "7b1da2c6cc2b02db489c17bfa1b0536eea3da8abcaadcf0dd641d207ad301692",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "jab-variant-05",
+            "sha256": "f5da298489c8037a53ed2621839677404ba271a1f1c878d4edf834396f6ec91c",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "jab-variant-06",
+            "sha256": "367d225490826c95f1923ee1fb5d2bf7f5e20694ef61c00e381748f3d6d5265b",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "jab-variant-07",
+            "sha256": "32c679e319975c067735233e8102866f6d3b38e0225c82a3829990f239efcfa2",
+            "mainAlphaGutter": 12
+          },
+          {
+            "name": "jab-variant-08",
+            "sha256": "cb8567a2ae16200ec2a7633deafb1b273c5ecf0866759ff3beec6476455bdf73",
+            "mainAlphaGutter": 14
+          }
+        ],
+        "uniqueFrames": 8,
+        "minimumMainAlphaGutter": 12
+      },
+      {
+        "clip": "smash-variant",
+        "image": "basic-variants.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "standingBodyHeightPixels": 172,
+        "frames": [
+          {
+            "name": "smash-variant-01",
+            "sha256": "3bc7872abf4173e722dcf02345fb2a3c659113fa84c43b0911052d0b60adcfde",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "smash-variant-02",
+            "sha256": "cf0f05416d60a082b57ab06edf552b546eb4d82e307935aefc7c46b4cd2a8d3d",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "smash-variant-03",
+            "sha256": "c44eee84b3ab56cbe48b8431b94da1c5efc9fe89ae9b5b85020374058d391ad3",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "smash-variant-04",
+            "sha256": "2984a6ec85e390c825f1e2dc5926634e83a1b259cbc881bd2378077639d5eac3",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "smash-variant-05",
+            "sha256": "f59916d6781d2f72507376b5318881af9da0f4081867e0feda609927e8a57e36",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "smash-variant-06",
+            "sha256": "7931972860fe649eb229205c9c304503cb094618d8974891ce4cb24474f4431d",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "smash-variant-07",
+            "sha256": "176a3962c4ab3397daf013df9382a9810b3664b1f30b7f7d110d9e3ba64b0630",
+            "mainAlphaGutter": 14
+          },
+          {
+            "name": "smash-variant-08",
+            "sha256": "dfccc1451dba80eb28a8feca3f5e13a10357e5760eb62ac67f2a904a19f6d0ee",
+            "mainAlphaGutter": 14
+          }
+        ],
+        "uniqueFrames": 8,
+        "minimumMainAlphaGutter": 14
+      }
+    ]
+  }
+}
