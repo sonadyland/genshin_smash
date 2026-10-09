@@ -648,7 +648,7 @@ test('all 400 delivered frames render their registered source in both facings wi
   assert.equal(count, 400);
 });
 
-test('rebuilt Raiden cuts use measured arcs while the raised-sword thunder summon has no slash trail', async () => {
+test('rebuilt Raiden cuts use measured arcs while the elemental thunder command has no slash trail', async () => {
   const h = harness(() => false, value => value, true); await h.art.loadGameArt(['raiden']);
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'public', packUrl('raiden')), 'utf8'));
   const { CHARACTERS } = h.load(path.join(root, 'src/game/data.ts'));

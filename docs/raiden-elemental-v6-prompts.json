@@ -1,0 +1,428 @@
+{
+  "version": 1,
+  "date": "2026-10-09",
+  "character": "raiden",
+  "designDocument": "raiden-v5-animation-design.md",
+  "choreographyDocument": "raiden-action-choreography.md",
+  "skill": "C:/Users/46637/.codex/skills/.system/imagegen/SKILL.md",
+  "mode": "built-in image_gen",
+  "transparentBackground": true,
+  "scope": "Replace only L/special and I/secondary (24 frames); keep existing 56 movement/melee frames. Runtime timing and damage unchanged.",
+  "generations": [
+    {
+      "id": "L-initial",
+      "prompt": "Use case: stylized-concept. Asset type: production transparent game sprite animation sheet, Raiden Shogun elemental skill L.\nCreate a NEW 12-frame full-body animation sheet in EXACTLY 4 columns and 3 rows, left-to-right then top-to-bottom. It must depict a clearly sequenced ritual sword preparation, explosive horizontal release, then calm recovery. SAME adult woman design and detailed Japanese anime painted rendering as reference, white/purple kimono sleeves, red waist knot, dark-purple stockings, dark indigo thick braid, gold details. Side-view facing RIGHT, mild three-quarter angle. Same slender gently curved Japanese katana as reference, NEVER a broad slab.\nREFERENCE PRIORITIES: image 1 is old raiden-actions-v3.png. Specifically its BOTTOM ROW FIRST CELL shows the CORRECT NARROW LEGS-TOGETHER upright preparation; its bottom row last cell shows calm recovered stance. Preserve that narrow leg silhouette for first entire row of this new sheet. Image 2 is v5 basic.png used ONLY for identity, clothing detail and slender sword proportions, NOT for wide leg stance.\nALL FOUR FRAMES IN ROW 1 MUST HAVE KNEES AND ANKLES VERY CLOSE TOGETHER, gap between shoes no wider than ONE boot width. She is erect, composed, with quiet hanging sleeves/braid. NO wide feet or horse stance, NO crouch, NO windblown skirt in row1. This compact preparation is the most important requirement.\nFRAME 01: legs together, upright composed body, sword held vertically immediately in front of chest, elbows close.\n02: still legs together, raise vertical sword slightly in front of face, shoulders and elbows gathered.\n03: still legs together, sword hand at forehead, blade vertical above, calm chin slightly lowered.\n04: legs still together, narrowest silhouette and still pause, only front heel just lifting, no step open.\n05: FIRST RELEASE FRAME: step out and turn hips, chest opens, sword blade ALREADY reaches horizontal release plane to the RIGHT, starting broad strong stance.\n06: full body opens wide, planted forward lunge, extend sword arm through decisive horizontal cut toward RIGHT.\n07: maximum extension with trailing braid and kimono cloth arriving late; follow-through readable.\n08: sword settles down toward forward low side, body beginning to rise.\n09: transfer weight back and reduce leg gap.\n10: draw front foot inward half a step; sword low guard.\n11: legs almost together again, relax shoulder, quiet clothes.\n12: calm upright closed-foot low guard, both feet close, blade diagonally down forward.\nThe maximum release silhouette must be at least 1.5 times as wide as the first row because of genuine body pose change, NOT scaling. Keep the same physical character and sword lengths in all frames. Draw actual separate in-between poses, do not repeat copies. Keep every whole character, shoe, sword tip, sleeve, and braid completely within its own equal grid cell, generous clear transparent padding all around >= 20 pixels, never cross cell boundaries. Use roughly 220 pixel standing character body height per cell on 1536x1152 if possible (sheet aspect 4:3). Ground baseline stable within each cell. NO text, labels, grid lines, backdrop, floor/shadow blob, speed trails, big aura, giant glow, giant energy slash. Only very subtle purple thin blade edge allowed, body unobscured. Real RGBA transparency, native alpha. This is animation artwork, not a contact-sheet poster.",
+      "references": [
+        "public/assets/animations/raiden-actions-v3.png",
+        "public/assets/animations/raiden-v5/basic.png"
+      ],
+      "source": "C:\\Users\\46637\\.codex\\generated_images\\01a1212f-4f43-77f3-99d4-526b89fe0b38\\exec-c8835c4d-8b3d-47cc-9314-34eda46285a0.png",
+      "destination": "public/assets/animations/raiden-v5/special-v6.png",
+      "selected": false,
+      "review": "Closed-leg anticipation/recovery passed. Middle row initially read as repeated forward thrust, corrected in second generation."
+    },
+    {
+      "id": "L-middle-row-correction",
+      "prompt": "Use case: precise-object-edit. Edit ONLY the four poses in the MIDDLE ROW of this transparent 4x3 Raiden sprite sheet (frames05–08). Keep all eight poses in the TOP and BOTTOM rows unchanged: same face, body proportions, clothing, sword, closed-leg preparation and recovery, layout, native RGBA transparency. Maintain complete sharp uncut limbs, blade and braid.\nThe middle row currently reads as a horizontal STAB for 3 poses. Replace it with a visibly ROTATIONAL SHORT HORIZONTAL SLASH. Different sword angle and crossing arm/torso are critical, not an advancing poke:\nFrame05 middle row col1: start release, plant open step and turn pelvis/shoulders, sword-holding upper arm opens ACROSS THE BODY, elbow gently bent and blade points RIGHT-UP by20 degrees. Sword is beginning an arc, not pointing straight out from locked elbow. Body already expanded relative to top row.\nFrame06 middle row col2: horizontal release at maximal wide stance, forearm sweeps through waist/chest-height plane, arm moving sideways around torso. Blade horizontal to RIGHT, controlled planted body, no forward head/shoulder poke.\nFrame07 middle row col3: shoulders AND hips now rotated past the hit, sword arm carries ACROSS the torso down toward the forward hip, elbow softer. Blade points RIGHT-DOWN by30 degrees. Do not repeat frame06 extended horizontal arm. Braid/cloth show delayed rotation, no long sword-light effects.\nFrame08 middle row col4: complete follow-through, sword hand low near forward hip and blade diagonally down right by45 degrees. Body rises a little and starts gathering weight back; no continuing forward thrust.\nKeep the existing TOP ROW fully CLOSED LEGS and upright, and BOTTOM ROW recovery entirely unchanged. Same character scale and slender gently curved long katana in all cells. No broad weapons. Do not add auras, arcs, lightning, backdrop, shadows, text or grid. Each full pose must be separate with transparent gap>=24px between adjacent opaque silhouettes; never overlap across cells or crop sword tips. Do not reduce or stretch body scale to achieve that; use rotation and bent elbow as described. Keep overall 4:3 canvas size.",
+      "references": [
+        "L-initial generated image"
+      ],
+      "source": "C:\\Users\\46637\\.codex\\generated_images\\01a1212f-4f43-77f3-99d4-526b89fe0b38\\exec-fcbf7620-2c4d-4f5b-9846-952ba7caad64.png",
+      "destination": "public/assets/animations/raiden-v5/special-v6.png",
+      "selected": true,
+      "review": "Independent choreography review passed: four closed-leg anticipation poses, open-step short arc from right-up through horizontal to right-down, then low-guard recovery."
+    },
+    {
+      "id": "I-empty-hand-decree",
+      "prompt": "Use case: stylized-concept. Asset type: production transparent game sprite animation sheet, Raiden Shogun elemental skill I (summon a lightning pillar by hand gesture).\nCreate a NEW 12-frame full-body animation sheet in EXACTLY 4 columns and 3 rows, left-to-right then top-to-bottom. SAME adult woman identity and exquisite detailed Japanese anime painted rendering as reference: white/purple kimono sleeve coat, red waist knot, dark-purple stockings, indigo long thick braid, gold details. Facing RIGHT in mild three-quarter side view, grounded composed authoritative expression, stable feet. Reference image 1 (new special-v6.png) is identity and calm narrow stance consistency; image 2 basic.png is slender gently curved katana and clothing details ONLY. Do NOT use the wide lunge or sword swings in those references.\nTHIS ENTIRE ANIMATION IS NON-MELEE ELEMENTAL CASTING BY HER EMPTY FREE HAND. Her sword-holding hand is LOWERED beside her hip and her slender katana remains diagonally DOWN and FORWARD at low guard, tip lower than hand in ALL 12 FRAMES. The weapon MUST NOT rise or cut at any time. Her free LEFT hand performs the casting. Place the open empty palm clearly in front of her chest, visible outside the sleeve and without a sword, so the action reads even at small game scale.\nACTING: calm imperial command, stable upright torso and a narrow subtly staggered stance. Shoes never more than shoulder-width apart. No running, no lunge, no dash, no attack lean. Small deliberate changes to fingers, wrist, elbow, shoulder, gaze, breath and settling cloth are the animation.\n12 ordered frames:\n01: composed narrow staggered feet, free empty hand fingertips near chest, katana low in other hand.\n02: free palm rotates upward at chest and starts gathering power, relaxed spread fingers.\n03: lift the empty palm to just below shoulder level, fingers open, gaze toward target on RIGHT.\n04: elbow gently opens, palm upward supporting invisible gathered power, anticipation hold.\n05: FIRST RELEASE/CONTACT: turn the EMPTY palm downward and gently press it outward/downward toward target, eyes clearly focus to right; sword remains lowered.\n06: firm controlled downward decree gesture through palm heel, free arm forward at chest-to-waist height, fingers elegantly splayed, torso steady and upright, sword unchanged low.\n07: sustain the open downward command with clear posture hold and slight settling sleeve.\n08: fingers begin to curl lightly, shoulder relaxes slightly.\n09: free hand withdraws halfway toward chest.\n10: free hand lowers beside body, katana remains low guard.\n11: composed stable low guard, feet drawing a little closer.\n12: calm settled upright narrow-stance ready pose, free hand resting, sword still diagonally down.\nNo sword attack whatsoever, no raised sword, no horizontal extended sword, no last-frame slash. Hands/forearms anatomically correct and clearly readable. At most a pinprick of violet light near fingertips in frames02–07; NO lightning pillars/clouds/rings, NO giant magic orb, NO aura, NO blade trails: the game renders the lightning FX independently.\nSame body and sword proportions all 12 frames. Exactly12 actual distinct poses not duplicates. Keep every full character, shoe, sword tip, sleeve and braid complete inside its own equal grid cell, with at least20px genuine empty alpha padding to all cell edges, no overlap across cells. Prefer a 1536x1152 canvas and standing body height around250px per cell, consistent local ground baseline. Transparent RGBA native alpha, no background, no floor shadow, no text, no numbering, no grid lines, no watermark.",
+      "references": [
+        "L-initial generated image",
+        "public/assets/animations/raiden-v5/basic.png"
+      ],
+      "source": "C:\\Users\\46637\\.codex\\generated_images\\01a1212f-4f43-77f3-99d4-526b89fe0b38\\exec-618222c2-5928-448e-a6a2-60494bc3dbcc.png",
+      "destination": "public/assets/animations/raiden-v5/secondary-v6.png",
+      "selected": true,
+      "review": "Independent choreography review passed: narrow steady stance, sword always low, free hand gathers palm-up then turns/pushes palm-down and withdraws."
+    }
+  ],
+  "registration": {
+    "source": "Measured actual per-frame opaque bounds plus 12px transparent padding, not uniform-grid slicing. Foot anchors measured from planted soles; sword tips manually registered on visible blade ends. Crop analysis is read-only in memory; no PNG modification, rescaling, compositing or re-encoding was performed.",
+    "fixedStandingBodyHeightPixels": {
+      "special": 310,
+      "secondary": 320
+    },
+    "phases": {
+      "windup": 4,
+      "contact": 2,
+      "followthrough": 3,
+      "recover": 3
+    },
+    "durationPerFrame": 5,
+    "trails": {
+      "special": "arc",
+      "secondary": "none"
+    },
+    "note": "All registered source rectangles are disjoint. In secondary frames 11/12, trim one/two pixels of top transparent crop padding to satisfy the runtime non-overlap contract; world foot and weapon-tip positions remain unchanged. PNG files are unchanged."
+  },
+  "alphaInspection": {
+    "image": "secondary-v6.png",
+    "highSaturationBlueMagentaPixels": 61415,
+    "alphaEqual1": 61160,
+    "alphaAtMost3": 61234,
+    "alphaAtMost8": 61409,
+    "alphaAbove8": 6,
+    "interpretation": "Colored speckles shown by raw transparency viewer are almost entirely alpha1. Example source coordinate (263,279) has RGBA (0,0,255,1). Preserve native alpha; runtime Canvas compositing will be checked separately."
+  },
+  "validation": [
+    {
+      "image": "public/assets/animations/raiden-v5/special-v6.png",
+      "metadata": "public/assets/animations/raiden-v5/special-v6.json",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "sha256": "149c6a2a0eacd655286c1aa2a4e6aad8dbd1bc72e4d5dab285fb0185201fcb14",
+      "transparentPercent": 71.3075,
+      "standingBodyHeightPixels": 310,
+      "readOnlyRasterAnalysis": true,
+      "frames": [
+        {
+          "name": "special-01",
+          "rgbaSha256": "9cef7a3a338463270635afcf12102e7ea5299e9dd4f2293ebb20cdc07fb59b47",
+          "minimumOpaqueGutterPx": 13,
+          "footAnchorSourcePixels": {
+            "x": 202.0,
+            "y": 412.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 230,
+            "y": 58
+          }
+        },
+        {
+          "name": "special-02",
+          "rgbaSha256": "d5f004411c5fef14bdf60755fe9acbfac80d675df787438a4e7fbdbfe7481189",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 562.0,
+            "y": 408.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 597,
+            "y": 54
+          }
+        },
+        {
+          "name": "special-03",
+          "rgbaSha256": "bd447027865c0581644f6463cd71c0b06b407293f19f7cb5dcccb31568ebc98e",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 920.0,
+            "y": 409.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 941,
+            "y": 36
+          }
+        },
+        {
+          "name": "special-04",
+          "rgbaSha256": "8e9cc621ac1cd69bfae0d35e4e06982618e541c200b0e965cbd620db08b05dbb",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 1270.0,
+            "y": 407.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 1297,
+            "y": 21
+          }
+        },
+        {
+          "name": "special-05",
+          "rgbaSha256": "c4557803f88fbb77c011f909b04a1894b0d9940423c497d007bc907cb6514b5e",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 179.0,
+            "y": 709.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 355,
+            "y": 465
+          }
+        },
+        {
+          "name": "special-06",
+          "rgbaSha256": "3a5edb4979b23d76d87811618f9ab0ae72b60d264552d5826637e0aa6cadf5c1",
+          "minimumOpaqueGutterPx": 13,
+          "footAnchorSourcePixels": {
+            "x": 553.0,
+            "y": 708.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 749,
+            "y": 529
+          }
+        },
+        {
+          "name": "special-07",
+          "rgbaSha256": "caa8ccd85bdadb63811c4f3c80fecdddd976cb20a279f30f895def58699a9671",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 920.0,
+            "y": 708.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 1103,
+            "y": 648
+          }
+        },
+        {
+          "name": "special-08",
+          "rgbaSha256": "a0dfca1ca397b71857c25731e83ddd9897bda42b40d68da541c8adab6cb479a5",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 1275.0,
+            "y": 713.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 1417,
+            "y": 681
+          }
+        },
+        {
+          "name": "special-09",
+          "rgbaSha256": "8e13f5b8d1821b3b63d5c61be618df69f7dbe44bf313491583320970e9f82c7b",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 211.0,
+            "y": 1061.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 345,
+            "y": 969
+          }
+        },
+        {
+          "name": "special-10",
+          "rgbaSha256": "75841e33cd803865284b154924852f676f71f861115d0798b0ea966debfa514d",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 578.0,
+            "y": 1066.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 723,
+            "y": 994
+          }
+        },
+        {
+          "name": "special-11",
+          "rgbaSha256": "e30ef8d1f25f86f1f580cbd6b3a675e78ce04fafb4e2d4ec7fc584ef3045640b",
+          "minimumOpaqueGutterPx": 13,
+          "footAnchorSourcePixels": {
+            "x": 931.0,
+            "y": 1064.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 1069,
+            "y": 1000
+          }
+        },
+        {
+          "name": "special-12",
+          "rgbaSha256": "15d949f8b73113709d75c8771e9c3d23b0b902918c5f35204b8924110b5ceab6",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 1287.0,
+            "y": 1065.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 1412,
+            "y": 1010
+          }
+        }
+      ],
+      "uniqueFrames": 12,
+      "minimumOpaqueGutterPx": 12,
+      "metadataSha256": "05975de9c88b6f94f7c88db04e08712d6c4d8e0361e238d8b3c1ab138f04cb5a",
+      "sourceRectanglesDisjoint": true
+    },
+    {
+      "image": "public/assets/animations/raiden-v5/secondary-v6.png",
+      "metadata": "public/assets/animations/raiden-v5/secondary-v6.json",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "sha256": "dbd80707c95d838fd5ea5849b9743a68c616e42dbfd0552ed6d0ef68032d3fc1",
+      "transparentPercent": 32.4871,
+      "standingBodyHeightPixels": 320,
+      "readOnlyRasterAnalysis": true,
+      "frames": [
+        {
+          "name": "secondary-01",
+          "rgbaSha256": "fff48ce5378d4f2f9d643d25c4fe2535e0dcf50c2c511e176cd4b66ab019cab6",
+          "minimumOpaqueGutterPx": 13,
+          "footAnchorSourcePixels": {
+            "x": 151.0,
+            "y": 359.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 308,
+            "y": 316
+          }
+        },
+        {
+          "name": "secondary-02",
+          "rgbaSha256": "d3451d4c2cddf015817cb7430c453118ab71530f712eb12b1d0286f01b5aabe1",
+          "minimumOpaqueGutterPx": 13,
+          "footAnchorSourcePixels": {
+            "x": 513.0,
+            "y": 359.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 670,
+            "y": 316
+          }
+        },
+        {
+          "name": "secondary-03",
+          "rgbaSha256": "c9d56ba12126012001c557841c5e4ef8d9651274f4dfad974e167ce976fe1460",
+          "minimumOpaqueGutterPx": 13,
+          "footAnchorSourcePixels": {
+            "x": 874.0,
+            "y": 359.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 1031,
+            "y": 318
+          }
+        },
+        {
+          "name": "secondary-04",
+          "rgbaSha256": "d2163f2a87d14547d3be70f8fd05cbaef43f99a8c2e137706910733abea1604c",
+          "minimumOpaqueGutterPx": 13,
+          "footAnchorSourcePixels": {
+            "x": 1237.0,
+            "y": 359.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 1396,
+            "y": 318
+          }
+        },
+        {
+          "name": "secondary-05",
+          "rgbaSha256": "87dda23a42f4872fc826ce06562c2eceb3fff2d51cfea1c34c5770006fe545ea",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 151.0,
+            "y": 720.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 308,
+            "y": 679
+          }
+        },
+        {
+          "name": "secondary-06",
+          "rgbaSha256": "0309877a08d17acc82391318c61cf267036516694296acbe5a1c6b2b435957a9",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 513.0,
+            "y": 720.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 670,
+            "y": 681
+          }
+        },
+        {
+          "name": "secondary-07",
+          "rgbaSha256": "16fdb49a569ea44087ae19065f7d5ca02c7bcd1611e8a08d1487ca2d4382a392",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 874.0,
+            "y": 720.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 1031,
+            "y": 679
+          }
+        },
+        {
+          "name": "secondary-08",
+          "rgbaSha256": "5fdd1e113f710dbe8dfd14fa16ec893a13c6b4619fd9b9bfb854f52df24007d7",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 1237.0,
+            "y": 721.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 1395,
+            "y": 679
+          }
+        },
+        {
+          "name": "secondary-09",
+          "rgbaSha256": "28c209331e9a576b2ad30cb1b9a7803a4ac052e6b4b043ddfa4482b56f2b4b1e",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 151.0,
+            "y": 1060.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 309,
+            "y": 1017
+          }
+        },
+        {
+          "name": "secondary-10",
+          "rgbaSha256": "174ffea515c93d05c34e3fead830fb4ebe8a320f90547b181e485382dcf40423",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 513.0,
+            "y": 1060.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 670,
+            "y": 1018
+          }
+        },
+        {
+          "name": "secondary-11",
+          "rgbaSha256": "0c566b161d976c4fa4e19ad195758beaf5b2de1d4f461918f894d695aee67a8a",
+          "minimumOpaqueGutterPx": 12,
+          "footAnchorSourcePixels": {
+            "x": 876.0,
+            "y": 1059.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 1031,
+            "y": 1018
+          }
+        },
+        {
+          "name": "secondary-12",
+          "rgbaSha256": "747ef2c8fd318948b6978ebdd56874fe6c170db91aedf0247cb4983f613ad42d",
+          "minimumOpaqueGutterPx": 11,
+          "footAnchorSourcePixels": {
+            "x": 1239.0,
+            "y": 1058.0
+          },
+          "weaponTipSourcePixels": {
+            "x": 1396,
+            "y": 1016
+          }
+        }
+      ],
+      "uniqueFrames": 12,
+      "minimumOpaqueGutterPx": 11,
+      "metadataSha256": "e676a3e359aef6b9dbf2cedb0fc2e0b9f39bb0543b35cbd64ba498abb69782a2",
+      "sourceRectanglesDisjoint": true
+    }
+  ]
+}
