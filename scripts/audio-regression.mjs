@@ -107,16 +107,27 @@ test('live independent volume and all-mute apply to active nodes without restart
   e.setAudioSettings({ musicVolume: 99, sfxVolume: -2 }); assert.equal(media.volume, 1); assert.equal(session.sfxGain.gain.value, 0);
   session.destroy();
 });
-test('five elemental skills have distinct layered timbres and never consume game RNG', async () => {
+test('seven elemental skills have distinct layered timbres and never consume game RNG', async () => {
   const signatures = [];
-  for (const charId of ['raiden', 'jean', 'eula', 'diluc', 'xiao']) {
+  for (const charId of ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina']) {
     const e = environment(), session = e.active(); await flush();
     session.play('cast', { charId, kind: 'secondary' });
     assert.ok(e.sources.length >= 3, charId);
     signatures.push(JSON.stringify({ sources: e.sources.map(n => [n.kind, n.type, n.frequency.events]), filters: e.contexts[0].filters.map(n => [n.type, n.frequency.events]) }));
     session.destroy();
   }
-  assert.equal(new Set(signatures).size, 5);
+  assert.equal(new Set(signatures).size, 7);
+});
+test('salon pet layers share a rate limit, recover after the interval, and leave room for a cast', async () => {
+  const e = environment(), session = e.active(); await flush();
+  session.play('summon', { charId: 'furina', summonKind: 'bubble' }); const first = e.sources.length;
+  assert.ok(first >= 3);
+  for (const summonKind of ['water-pierce', 'crab-splash', 'bubble']) session.play('summon', { charId: 'furina', summonKind });
+  assert.equal(e.sources.length, first);
+  e.contexts[0].currentTime += .12;
+  session.play('summon', { charId: 'furina', summonKind: 'crab-splash' }); assert.ok(e.sources.length > first);
+  const beforeCast = e.sources.length; session.play('cast', { charId: 'furina', kind: 'secondary' }); assert.ok(e.sources.length > beforeCast);
+  session.play('shield', { charId: 'zhongli' }); assert.ok(session.voices.length <= 32); session.destroy();
 });
 test('crowd hits are rate-limited but a same-frame skill remains audible and voice budget is finite', async () => {
   const e = environment(), session = e.active(); await flush();

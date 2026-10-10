@@ -3,7 +3,7 @@ import { attackPhase } from '../game/animation';
 import type { ClipCharacterId, ClipName } from '../game/clip-animation';
 import { advancePreviewClock, createPreviewClock, previewFrame } from '../game/animation-preview-state';
 import type { PreviewSettings } from '../game/animation-preview-state';
-import { drawFighterArt, getCharacterAnimationStatus, loadGameArt } from '../game/art';
+import { acquireGameArt, drawFighterArt, getCharacterAnimationStatus } from '../game/art';
 import { CHARACTERS } from '../game/data';
 import './AnimationPreview.css';
 
@@ -11,6 +11,7 @@ const movementChoices: { id: ClipName; label: string }[] = [
   { id: 'idle', label: '待机' }, { id: 'run', label: '跑步' }, { id: 'jump', label: '跳跃与落地' }, { id: 'dodge', label: '闪避' },
 ];
 const attackChoices = [['jab', 'J'], ['smash', 'K'], ['special', 'L'], ['secondary', 'I']] as const;
+const isSummoner = (id: string) => id === 'zhongli' || id === 'furina';
 const choicesFor = (id: string) => {
   const character = CHARACTERS.find(character => character.id === id)!;
   return [...movementChoices, ...attackChoices.map(([kind, key]) => ({ id: kind, label: `${key} · ${character[kind].name}` }))];
@@ -38,13 +39,14 @@ export default function AnimationPreview({ initialCharacter = 'eula' }: { initia
   useEffect(() => { playback.current = { character: characterId, clip, form, survival, speed, paused, facing, slope, displayHeight }; }, [characterId, clip, form, survival, speed, paused, facing, slope, displayHeight]);
   useEffect(() => {
     let active = true;
-    void loadGameArt([characterId]).then(() => {
+    const art = acquireGameArt([characterId], { legacy: !isSummoner(characterId) });
+    void art.ready.then(() => {
       if (!active) return;
       const loaded = getCharacterAnimationStatus(characterId);
       setVariantKinds(loaded.variantKinds);
       setStatus(loaded.status === 'ready' ? `新动作已就绪 · ${loaded.frames} 帧${loaded.variants ? ' · 普攻变化形态' : ' · 使用基础形态'}` : '新资源未就绪 · 当前使用旧动作回退');
     });
-    return () => { active = false; };
+    return () => { active = false; art.release(); };
   }, [characterId]);
   useEffect(() => {
     const context = canvas.current?.getContext('2d');
@@ -69,9 +71,11 @@ export default function AnimationPreview({ initialCharacter = 'eula' }: { initia
         const x = 300 + i * 600, feetY = 440;
         context.strokeStyle = '#829da1'; context.lineWidth = 2; context.beginPath(); context.moveTo(x - 270, feetY - 270 * slope); context.lineTo(x + 270, feetY + 270 * slope); context.stroke();
         context.strokeStyle = '#4b6a75'; context.lineWidth = 1; context.beginPath(); context.moveTo(x, 120); context.lineTo(x, 480); context.stroke();
-        context.fillStyle = '#e9f6fa'; context.font = '600 24px system-ui'; context.textAlign = 'center'; context.fillText(legacy ? '旧动作 · 4 个攻击姿势' : `${selectedCharacter.name} · 连续动作序列`, x, 48);
+        const standingReference = legacy && isSummoner(selectedCharacter.id);
+        context.fillStyle = '#e9f6fa'; context.font = '600 24px system-ui'; context.textAlign = 'center'; context.fillText(legacy ? standingReference ? '批准站姿 · 同一人物尺寸' : '旧动作 · 4 个攻击姿势' : `${selectedCharacter.name} · 连续动作序列`, x, 48);
         context.fillStyle = '#b0cbd2'; context.font = '15px system-ui'; context.fillText(`${settings.displayHeight === 112 ? '游戏原尺寸 112px' : '放大至 224px'} · 相同物理时钟与攻击判定时刻`, x, 78);
-        drawFighterArt(context, selectedCharacter.id, x, feetY + y, settings.displayHeight, animation, { facing, legacy });
+        const comparedAnimation = standingReference ? { ...animation, state: 'free' as const, attack: null, onGround: true, vx: 0, vy: 0, dodgeTimer: 0, motion: undefined, time: 0 } : animation;
+        drawFighterArt(context, selectedCharacter.id, x, feetY + (standingReference ? 0 : y), settings.displayHeight, comparedAnimation, { facing, legacy: legacy && !standingReference });
       }
       const alternateReady = animation.attack?.visualVariant === 'alternate' && getCharacterAnimationStatus(selectedCharacter.id).variantKinds.includes(settings.clip);
       const label = `${choicesFor(selectedCharacter.id).find(choice => choice.id === settings.clip)!.label} · 第 ${t} / ${cycle - 1} tick${animation.attack ? ` · ${alternateReady ? '变化形态' : '基础形态'} · ${animation.attack.plunge?.phase ?? attackPhase(animation.attack).phase}` : settings.character === 'xiao' && settings.clip === 'special' && !animation.onGround ? ' · 先跳跃' : ''}`;
@@ -97,8 +101,8 @@ export default function AnimationPreview({ initialCharacter = 'eula' }: { initia
       <label>人物尺寸<select value={displayHeight} onChange={event => setDisplayHeight(Number(event.target.value) as 112 | 224)}><option value={224}>放大 224px</option><option value={112}>游戏 112px</option></select></label>
       <button onClick={() => setPaused(value => !value)}>{paused ? '继续播放' : '暂停播放'}</button><button disabled={!paused} onClick={() => { step.current++; }}>前进 1 tick</button>
     </section>
-    <canvas ref={canvas} width={1200} height={540} aria-label={`${character.name}新旧动作并排预览`} />
+    <canvas ref={canvas} width={1200} height={540} aria-label={`${character.name}${isSummoner(characterId) ? '站姿与连续动作' : '新旧动作'}并排预览`} />
     <p className="animation-preview-clock" aria-live="off">{clock}</p>
-    <p>左侧保留旧动作作对照。轻击与重击可选基础形态、变化形态或连续交替；技能使用符合其效果的固定动作。暂停时切换形态保留当前 tick。魈的 L 先跳跃，再展示悬停蓄势、枪尖朝下坠刺、落地和收招。伤害、范围、冷却与操作保持一致；坡面只做支撑点与轻微重心补偿。</p>
+    <p>{isSummoner(characterId) ? '左侧以批准的持武器站姿作同尺寸对照，右侧展示游戏实际动作。轻击与重击使用不同蓄力和冲击节奏的突刺；技能使用已批准的施法动作。' : '左侧保留旧动作作对照。轻击与重击可选基础形态、变化形态或连续交替；技能使用符合其效果的固定动作。'}暂停时切换形态保留当前 tick。魈的 L 先跳跃，再展示悬停蓄势、枪尖朝下坠刺、落地和收招。伤害、范围、冷却与操作保持一致；坡面只做支撑点与轻微重心补偿。</p>
   </main>;
 }

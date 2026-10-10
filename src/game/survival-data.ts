@@ -48,6 +48,11 @@ export interface SurvivalSnapshot {
   dodgeCooldownMax: number;
   notice: string;
   rerollsRemaining: number;
+  shieldHp: number;
+  shieldRemaining: number;
+  summonCount: number;
+  summonRemaining: number;
+  buffRemaining: number;
 }
 
 export const SURVIVAL_DURATION = 600;
@@ -123,7 +128,17 @@ export const SURVIVAL_BRANCHES: Record<string, [UpgradeChoice, UpgradeChoice]> =
     branch('xiao-pillars', '镇岳', '下坠落地后掀起扩散冲击，并留下持续伤敌的风柱。', '#6ce8ce'),
     branch('xiao-aerial', '凌空', '下坠命中后返还跳跃次数、缩短技能冷却；由你再次起跳。', '#6ce8ce'),
   ],
+  zhongli: [
+    branch('geo-twin', '双柱共鸣', '地心召唤两根岩柱，分别持续共鸣，扩大封锁范围。', '#e8bd63'),
+    branch('geo-shield', '磐岩守护', '地心强化护盾，并在护盾持续期间向自身周围释放岩震。', '#e8bd63'),
+  ],
+  furina: [
+    branch('hydro-ranged', '万众喝彩', '乌瑟勋爵加快发射泡泡，海薇玛夫人扩大水线射程。', '#8ccfff'),
+    branch('hydro-crab', '盛宴时刻', '谢贝蕾妲小姐扩大扑击水花的范围，强化近身清场。', '#8ccfff'),
+  ],
 };
+
+const SURVIVAL_SKILL_CAP = 5;
 
 const UPGRADE_DEFINITIONS: UpgradeChoice[] = [
   { id: 'core', name: '元素精修', description: '提升招牌技能的伤害与范围；达到 4 级后选择进化方向。', kind: 'core', level: 1, maxLevel: 5, color: '#e8cf92' },
@@ -153,9 +168,10 @@ function eligibleChoices(progress: SurvivalProgress): UpgradeChoice[] {
   const auxiliaryCount = Object.keys(progress.upgrades).filter(id => id.startsWith('aux-') && progress.upgrades[id] > 0).length;
   return UPGRADE_DEFINITIONS.flatMap(definition => {
     const current = definition.kind === 'core' ? progress.skillLevel : definition.kind === 'secondary' ? progress.secondaryLevel : (progress.upgrades[definition.id] || 0);
-    if (current >= definition.maxLevel) return [];
+    const maximum = definition.kind === 'core' || definition.kind === 'secondary' ? SURVIVAL_SKILL_CAP : definition.maxLevel;
+    if (current >= maximum) return [];
     if (definition.kind === 'auxiliary' && !current && auxiliaryCount >= 2) return [];
-    return [{ ...definition, level: current + 1, ...(definition.kind === 'secondary' ? { name: CHARACTERS.find(c => c.id === progress.charId)!.secondary.name, description: getSecondaryProfile(progress.charId, current + 1).description } : {}) }];
+    return [{ ...definition, maxLevel: maximum, level: current + 1, ...(definition.kind === 'secondary' ? { name: CHARACTERS.find(c => c.id === progress.charId)!.secondary.name, description: getSecondaryProfile(progress.charId, current + 1).description } : {}), ...(definition.kind === 'core' && progress.charId === 'zhongli' ? { description: '提升岩柱共鸣伤害、范围和护盾吸收量；4 级选择双柱或护盾岩震。' } : definition.kind === 'core' && progress.charId === 'furina' ? { description: '提升沙龙成员的伤害和蟹形水爆范围；4 级选择远程水弹或蟹形范围扑击。' } : {}) }];
   });
 }
 
@@ -237,7 +253,16 @@ export function getSurvivalStats(progress: SurvivalProgress) {
 
 /** One source for upgrade copy and actual secondary-skill form/scaling. */
 export function getSecondaryProfile(charId: string, rawLevel: number) {
-  const level = Math.max(1, Math.min(5, Math.floor(rawLevel)));
+  const level = Math.max(1, Math.min(SURVIVAL_SKILL_CAP, Math.floor(rawLevel)));
+  if (charId === 'zhongli' || charId === 'furina') {
+    const geo = charId === 'zhongli';
+    const damageMultiplier = geo ? (19 + level * 3) / 22 : (13 + level * 2.5) / 15.5;
+    const rangeMultiplier = geo ? (145 + level * 12) / 157 : (155 + level * 10) / 165;
+    const cooldownMultiplier = 1 - (level - 1) * .05;
+    return { level, count: 1, piercing: false, damageMultiplier, rangeMultiplier, cooldownMultiplier,
+      description: geo ? `天星半径 ${145 + level * 12}，石化普通敌人 ${((45 + level * 4) / 60).toFixed(1)} 秒（精英缩短，首领免疫）；伤害 +${Math.round((damageMultiplier - 1) * 100)}%，冷却缩短 ${Math.round((1 - cooldownMultiplier) * 100)}%。`
+        : `水幕半径 ${155 + level * 10}，自身与沙龙成员伤害提高 ${Math.round((.2 + level * .035) * 100)}%，持续 ${(6 + level * .4).toFixed(1)} 秒；未召宠也可造成开场伤害，冷却缩短 ${Math.round((1 - cooldownMultiplier) * 100)}%。` };
+  }
   const count = charId === 'raiden' ? (level >= 5 ? 3 : level >= 3 ? 2 : 1)
     : charId === 'jean' ? (level >= 3 ? 2 : 1)
     : charId === 'eula' ? (level >= 5 ? 7 : level >= 3 ? 5 : 3)

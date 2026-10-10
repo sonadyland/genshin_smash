@@ -75,3 +75,6 @@ button:disabled { opacity: .45; cursor: default; }
 @media (min-width: 851px) and (max-width: 1050px), (min-width: 521px) and (max-width: 700px) { .character-roster { grid-template-columns: repeat(3,minmax(0,1fr)); }.card-copy small { font-size: 9px; } }
 @media (max-width: 520px) { .character-roster { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }.character-card { height: 103px; }.card-copy { left: 12px; }.card-copy strong { font-size: 13px; }.card-copy small { font-size: 9px; letter-spacing: 0; }.card-selected { right: 10px; }.card-art img { width: 108%; height: 260px; right: -20px; top: -8px; }.plunge-tip { font-size: 8px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+/* Seven fighters keep readable cards instead of compressing into one row. */
+@media (min-width: 701px) { .character-roster { grid-template-columns: repeat(4,minmax(0,1fr)); } }
+@media (min-width: 521px) and (max-width: 700px) { .character-roster { grid-template-columns: repeat(3,minmax(0,1fr)); } }

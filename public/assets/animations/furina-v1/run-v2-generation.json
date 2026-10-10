@@ -1,0 +1,61 @@
+{
+  "version": 2,
+  "character": "furina",
+  "asset": "run-v2.png",
+  "generator": "built-in image_gen",
+  "date": "2026-10-10",
+  "intent": "Replace disjointed locomotion with an eight-frame Eula-referenced run cycle; preserve approved Furina slender proportions.",
+  "references": [
+    {
+      "path": "public/assets/animations/eula-v4/run.png",
+      "role": "Leg-cycle contact, compression, passing and short-flight continuity only"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/portrait.png",
+      "role": "Master identity and slender head/body proportions"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/jab-thrust-proportions.png",
+      "role": "Approved production render style, costume, asymmetric leg identity"
+    }
+  ],
+  "attempts": [
+    {
+      "source": "C:/Users/46637/.codex/generated_images/01a12535-3738-70b1-9e6d-7398e1202ed3/exec-7eed5a25-fd9b-4f8e-8a66-15ec0b57c54c.png",
+      "prompt": "Use case: stylized-concept.\nAsset type: production transparent RGBA sprite sheet for a side-scrolling action game.\nCreate a NEW Furina RUN CYCLE, exactly 8 consecutive animation frames, strict 2 rows by 4 columns, reading order left to right then second row. Large landscape canvas, each cell equal size, broad transparent padding. No text, labels, grid lines, ground lines, background, floor shadows or FX.\n\nREFERENCE ROLES:\nImage 1 (Eula run.png) is ONLY the leg-motion and animation continuity reference: study her smoothly coordinated hip, thigh, knee, ankle and foot transitions. Do not copy Eula's body, hair, costume, huge sword, or rigid sword-holding arms.\nImage 2 (Furina portrait.png) is the MASTER IDENTITY and slender anatomical proportion reference. Reproduce Furina's face, small head relative to body, silver/blue short hair, ornate blue hat, blue/black/white gold-trimmed tailcoat, shorts, gloves, asymmetrical stockings and boots exactly.\nImage 3 (Furina jab-thrust-proportions.png) locks the approved production sprite rendering style and lean body proportions. The sword is STOWED and NOT VISIBLE during this running cycle, so both arms move naturally.\n\nCAMERA AND MODEL: all eight frames show the exact same Furina, at exactly the same scale, with fixed side-view facing RIGHT, a slight 3/4 angle matching Eula's clear sideward locomotion. No turn toward viewer and no perspective rotation. Each frame's pelvis/hip center stays at precisely the same horizontal center within its cell. Head and hat remain the same size in every frame; proportions remain slender, not chibi or big-headed. Motion is mostly legs with very slight pelvis bob and small natural shoulder counter-rotation. Keep identical costume detailing, exactly two arms and two legs, believable consistent anatomy.\n\nCRUCIAL LEG IDENTITY: Furina's camera-near RIGHT leg is the BARE SKIN leg; her camera-far LEFT leg has the opaque BLACK THIGH-HIGH stocking. The bare leg and black leg MUST genuinely exchange front/back position halfway through the cycle. NEVER recolor the leading leg instead of moving the legs. Black stocking is always on anatomical LEFT leg, bare skin always on anatomical RIGHT leg.\n\nGAIT: a light, confident practical small-stride RUN, not dance, not catwalk, not march, not exaggerated high-knee skip. Feet travel smoothly forward then backward relative to the hips like Eula. Show distinct contact, compression, passing/recovery and short flight phases on BOTH legs. Comfortable slight forward body lean, moderate knee lift, controlled push-off, low bounce; no excessively wide split. Arms swing modestly opposite the legs with bent elbows, naturally alternate across the half-cycle, no hand stuck on hat or chest. Hat and hair remain secure; coat tails and ribbons follow a subtle consistent trailing wave and must not obscure knees, ankles or feet.\n\nEXACT PHASES:\n1. RIGHT CONTACT: bare near right leg reaches forward and boot touches the common imaginary ground; stocking far left leg extends behind starting recovery. Opposite arm forward.\n2. RIGHT COMPRESSION: bare right leg bends under the body accepting weight; stocking left heel folds up behind.\n3. RIGHT PASSING: bare right support leg passes underneath/back beneath pelvis; stocking left knee swings forward under the hips, feet pass each other without fusing.\n4. LEFT PRE-CONTACT / SHORT FLIGHT: stocking left leg is forward extending toward next contact, bare right leg is rear after push-off. Both feet just slightly above the ground, natural low flight.\n5. LEFT CONTACT: stocking far left leg now reaches forward to contact; bare near right leg extends behind. This must visibly be the OPPOSITE stride from frame 1.\n6. LEFT COMPRESSION: stocking left leg bends under the body accepting weight; bare right heel folds up behind.\n7. LEFT PASSING: stocking left support leg passes under/back beneath pelvis; bare right knee swings forward, feet pass without fusing.\n8. RIGHT PRE-CONTACT / SHORT FLIGHT: bare right leg is forward extending toward next contact, stocking left leg rear after push-off. Both feet slightly airborne. Frame 8 flows seamlessly to frame 1.\n\nLAYOUT: same imaginary ground baseline within each equal cell, around 93% down the cell. Contact boots touch this same baseline; flight boots rise a small natural amount ABOVE it, do not move the entire sprite down to fake contact. The pelvis x center remains fixed. Full hat, ribbons, tails and both boots entirely inside each cell, generous gap between frames; no neighboring overlap or cropped extremities. Clean polished Japanese fantasy game sprite art, sharp readable silhouettes and painted details matching the approved Furina art. Genuine transparent alpha background.",
+      "selected": false,
+      "review": "True alternating legs and stable hip/camera achieved, frame 6 rear folded right leg incorrectly black instead of bare."
+    },
+    {
+      "source": "C:/Users/46637/.codex/generated_images/01a12535-3738-70b1-9e6d-7398e1202ed3/exec-313bdb14-e13a-4f0a-9331-3df69bdf6ca1.png",
+      "prompt": "Use case: precise-object-edit.\nAsset type: a production Furina transparent running sprite sheet, 8 frames, 2 rows x 4 columns.\nEdit the attached sprite sheet with minimal localized changes. Keep the exact 1774x887 sheet, exact same frame placements, body/hip centers, head and hat sizes, fixed side-facing-right camera, complete costume, faces, rendering, transparent alpha, and all existing leg poses and foot positions. Do not redraw, rescale, move or redesign characters.\n\nHIGHEST PRIORITY CORRECTION: Frame 6, the SECOND cell in the BOTTOM ROW, currently incorrectly has TWO black stocking legs. It must show Furina's anatomical RIGHT camera-near leg (the leg folded back with its knee bent and heel raised behind) as BARE PALE SKIN from the shorts/garter down to the top of the short blue boot. Remove the accidental black stocking only on this rear-folded near right leg; preserve its exact thigh/knee/calf outline, knee bending, garter, and blue boot. Her anatomical LEFT camera-far supporting leg extending down to the ground must retain its black thigh-high stocking. Exactly one black-stocking leg, exactly one bare leg, in every frame. Frames 1–5, 7–8 already have correct bare/black legs; leave those legs pixel-style and pose unchanged.\n\nSECONDARY SMALL CORRECTION ONLY IF IT DOES NOT DISTURB THE BODY: make the forearms/hands perform a modest natural alternating counter-swing through the eight phases rather than freezing one hand forward and one back. When the bare near right leg leads (frames 1,2,8), the near right arm swings slightly BACK. When the black far left leg leads (frames 4,5,6), the near right arm swings slightly FORWARD across the chest at low rib level and far left arm shifts back; at passing phases3,7 the arms cross a neutral mid-swing position. Keep elbows comfortably bent, hands small and below chin, no hat-touch, exactly two hands/arms, and do not change shoulders' positions. Very small controlled wrist/elbow variation is enough; prioritize flawless bare-leg correction over dramatic arm variation.\n\nPreserve all hat, coat, hair, full-body slender proportions, leg silhouettes, boot positions, transparent empty gaps. No weapons, labels, lines, background, effects, added body parts, or camera change. This is localized sprite repair, not a new running sheet.",
+      "selected": false,
+      "review": "Rejected: frame 6 color not fixed and frame 7 turned to double-bare legs."
+    },
+    {
+      "source": "C:/Users/46637/.codex/generated_images/01a12535-3738-70b1-9e6d-7398e1202ed3/exec-793d7d0c-e1f6-486f-8247-d750527a50b2.png",
+      "prompt": "Edit the attached transparent 8-frame Furina sprite sheet. Make ONE localized correction only.\nIn the BOTTOM ROW, SECOND figure from the left (frame 6): the raised folded-back leg is wrongly covered in a black stocking. Repaint THAT RAISED BENT LEG to PALE BARE SKIN, including both its thigh and its sideways lower calf all the way to the top of its blue ankle boot. The raised bent knee is at the figure's RIGHT side; the raised blue boot is behind her, toward the LEFT. The thigh travels diagonally down-right from the shorts to the bent knee, and the calf folds back horizontally LEFT toward the raised boot. That entire thigh-and-calf skin area must be visibly pale skin. Keep its garter and blue boot.\nThe OTHER leg in this same frame is the long leg going DOWN to the ground, and must remain BLACK-STOCKING.\nThe corrected figure must have one pale BENT raised leg and one black STRAIGHT grounded leg, visibly distinct.\n\nPreserve everything else exactly: all other seven figures, all heads, hats, arms, faces, costumes, legs and boots, sprite positions, body proportions, canvas dimensions, colors, lighting, and transparent background. Do not change or regenerate any arms or the seventh figure. No added text, no backgrounds. This is a small recoloring repair of ONE leg on ONE figure only.",
+      "selected": true,
+      "review": "Localized frame 6 recoloring succeeded, one bare near right leg and one black-stocking far left leg in every frame. Original gait/camera/pelvis and eight poses preserved."
+    }
+  ],
+  "output": "public/assets/animations/furina-v1/run-v2.png",
+  "sheet": {
+    "width": 1774,
+    "height": 887,
+    "rows": 2,
+    "columns": 4,
+    "alpha": "RGBA; preserved byte-for-byte from generated output"
+  },
+  "frameOrder": [
+    "right-contact",
+    "right-compression",
+    "right-passing",
+    "left-precontact-flight",
+    "left-contact",
+    "left-compression",
+    "left-passing",
+    "right-precontact-flight"
+  ],
+  "integrationGuidance": "Use fixed pelvis-projection root with a common ground baseline for each row, not the moving toe/lowest opaque pixel. Suggested baseline ~435 px in each ~444px cell; flight frames intentionally place shoes about 10–15 px above it. Suggested neutral standingBodyHeightPixels ~365; calibrate against approved idle with uniform scale. Exact hip anchors require integration visual review. Sword is stowed; arms retain compact restrained counterbalance with small variation. No generated pixels edited or resampled."
+}

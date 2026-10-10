@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#10282c" />
+    <link rel="icon" href="data:," />
+    <title>钟离 · 岩之仪 | 美术与动作样板</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="atelier">
+      <header class="page-header">
+        <div class="wordmark"><span class="geo-mark" aria-hidden="true">◇</span><span>璃月 · 动作工坊<small>CHARACTER MOTION STUDY / 06</small></span></div>
+        <a class="back-link" href="/">返回游戏 <span aria-hidden="true">↗</span></a>
+      </header>
+      <section class="intro">
+        <div><p class="eyebrow">岩之仪 · 美术与动画样板</p><h1>钟离 <span>ZHONGLI</span></h1></div>
+        <p class="intro-note">举手之间，山岳成形。<br />以克制的动作，衬托岩元素的重量。</p>
+      </section>
+      <div class="workspace">
+        <aside class="character-panel">
+          <div class="portrait-wrap">
+            <div class="portrait-seal" aria-hidden="true">◇</div>
+            <img id="portrait" alt="钟离全身美术设定" hidden />
+            <span id="portrait-status">正在加载角色美术</span>
+            <div class="portrait-caption"><span>岩 · 长柄武器</span><strong>尘世闲游</strong></div>
+          </div>
+          <div class="character-notes"><p class="eyebrow">动作语汇</p><p>交叉蓄力 · 平展成盾 · 抱臂落星</p><p class="muted">人物逐帧演出，岩柱、护盾与陨星独立分层。当前为独立审片样板，尚未加入可选角色。</p></div>
+        </aside>
+        <section class="motion-panel" aria-label="钟离动作预览">
+          <div class="motion-heading">
+            <div class="skill-tabs" role="group" aria-label="技能动作"><button data-clip="l-skill" class="selected" aria-pressed="true"><kbd>L</kbd><span>地心<small>立柱 · 玉璋护盾</small></span></button><button data-clip="i-burst" aria-pressed="false"><kbd>I</kbd><span>天星<small>召天 · 陨星坠落</small></span></button><button data-clip="jab-thrust" aria-pressed="false"><kbd>J</kbd><span>贯虹枪术<small>前踏 · 长枪直刺</small></span></button></div>
+            <span class="study-badge">动作样板 01</span>
+          </div>
+          <div class="stage-wrap">
+            <canvas id="stage" width="1000" height="570" aria-label="钟离地心逐帧动画与元素效果">浏览器需支持 Canvas 才能显示动画。</canvas>
+            <div class="stage-topline"><span id="clip-caption">地心 / DOMINUS LAPIDIS</span><span id="phase-label">加载中</span></div>
+            <div id="asset-status" role="status" hidden></div>
+            <div class="stage-bottomline"><span id="effect-caption">人物 + 元素效果</span><span id="frame-label">00 / 16</span></div>
+          </div>
+          <div class="transport">
+            <button id="play-toggle" class="play-button" aria-label="暂停播放">Ⅱ</button>
+            <button id="step-back" title="上一帧" aria-label="上一帧">‹</button>
+            <button id="step-forward" title="下一帧" aria-label="下一帧">›</button>
+            <label class="scrubber"><span class="sr-only">动画进度</span><input id="timeline" type="range" min="0" max="1000" value="0" step="1" /><span id="time-label">0.00 / 0.00s</span></label>
+            <label class="speed-select"><span class="sr-only">播放速度</span><select id="speed"><option value="1">1× 速度</option><option value="0.5">0.5× 慢放</option></select></label>
+          </div>
+          <div class="view-options">
+            <label><span>显示</span><select id="effect-mode"><option value="complete">完整效果</option><option value="character">仅人物动作</option></select></label>
+            <label><span>朝向</span><select id="facing"><option value="1">向右</option><option value="-1">向左</option></select></label>
+            <label class="guide-check"><input id="guides" type="checkbox" /> 对齐参考线</label>
+            <button id="restart">重新播放 ↻</button>
+          </div>
+          <ol class="beats" id="beats"><li><span>01</span><strong>双手起势</strong></li><li><span>02</span><strong>交叉蓄力</strong></li><li><span>03</span><strong>平展成盾</strong></li><li><span>04</span><strong>沉稳收势</strong></li></ol>
+          <p id="motion-note" class="motion-note">双手抬起，交叉于胸前缓慢蓄力；双臂迅速平直展开，到位瞬间爆发护盾与岩柱。短暂停顿强调力量，再沉稳收势。</p>
+        </section>
+      </div>
+      <footer><span>原神同人游戏 · 钟离视觉开发</span><span>先审动作与美术，再接入战斗系统</span></footer>
+    </main>
+    <script type="module" src="./preview.js"></script>
+  </body>
+</html>

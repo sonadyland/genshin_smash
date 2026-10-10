@@ -14,7 +14,7 @@ export interface MoveDef {
   reach: number;    // 判定距离（像素）
   height: number;   // 判定高度
   kind: 'jab' | 'smash' | 'special' | 'secondary';
-  effect?: 'projectile' | 'dash' | 'spin' | 'gust' | 'plunge' | 'thunder' | 'updraft' | 'frost' | 'phoenix' | 'thrust';
+  effect?: 'projectile' | 'dash' | 'spin' | 'gust' | 'plunge' | 'thunder' | 'updraft' | 'frost' | 'phoenix' | 'thrust' | 'geo-pillar' | 'geo-meteor' | 'salon' | 'revelry';
 }
 
 export interface CharDef {
@@ -36,6 +36,7 @@ export interface CharDef {
   secondary: MoveDef;
   secondaryDesc: string;
   secondaryCooldown: number;
+  specialCooldown?: number;
   desc: string;
 }
 
@@ -139,6 +140,28 @@ export const CHARACTERS: CharDef[] = [
     secondary: { name: '风轮两立', dmg: 12, kb: 4.5, kbs: 0.075, angle: 28, startup: 7, active: 12, endlag: 16, reach: 82, height: 90, kind: 'secondary', effect: 'thrust' },
     secondaryDesc: '地面或空中向当前朝向水平持枪突进；不会自动起跳或转向。', secondaryCooldown: 3.5,
     desc: '仅在空中释放：短暂蓄势后持枪垂直下坠，刺穿下方敌人，落地掀起两侧风浪。',
+  },
+  {
+    id: 'zhongli', name: '钟离', title: '尘世闲游', color: '#e4b65b', dark: '#674421', hair: '#49382e',
+    weight: 116, speed: 3.8, jump: 12.0, airDrift: 0.32, gravMul: 1.02, weapon: 'polearm',
+    jab: { name: '岩雨·贯虹', dmg: 4.5, kb: 2.5, kbs: 0.055, angle: 30, startup: 10, active: 5, endlag: 15, reach: 81, height: 38, kind: 'jab' },
+    smash: { name: '贯虹重刺', dmg: 14, kb: 5.8, kbs: 0.096, angle: 38, startup: 22, active: 6, endlag: 24, reach: 105, height: 48, kind: 'smash' },
+    special: { name: '地心', dmg: 7, kb: 3.2, kbs: 0.04, angle: 60, startup: 48, active: 8, endlag: 22, reach: 160, height: 160, kind: 'special', effect: 'geo-pillar' },
+    secondary: { name: '天星', dmg: 19, kb: 5.5, kbs: 0.07, angle: 70, startup: 50, active: 8, endlag: 24, reach: 290, height: 205, kind: 'secondary', effect: 'geo-meteor' },
+    specialCooldown: 8, secondaryCooldown: 10,
+    secondaryDesc: '向前方降下天星，造成范围岩伤与短暂石化。',
+    desc: '交叉蓄力后展开玉璋护盾，立起持续共鸣的岩柱。护盾吸收伤害，岩柱不会阻挡移动。',
+  },
+  {
+    id: 'furina', name: '芙宁娜', title: '不休独舞', color: '#71c7f4', dark: '#234b83', hair: '#d8eafb',
+    weight: 87, speed: 4.2, jump: 12.8, airDrift: 0.41, gravMul: 0.94, weapon: 'sword',
+    jab: { name: '独舞·致意', dmg: 4, kb: 2.1, kbs: 0.052, angle: 28, startup: 9, active: 4, endlag: 13, reach: 68, height: 37, kind: 'jab' },
+    smash: { name: '水幕重刺', dmg: 12, kb: 5.1, kbs: 0.091, angle: 38, startup: 20, active: 6, endlag: 23, reach: 92, height: 48, kind: 'smash' },
+    special: { name: '孤心沙龙', dmg: 5, kb: 2.6, kbs: 0.035, angle: 42, startup: 46, active: 8, endlag: 28, reach: 100, height: 105, kind: 'special', effect: 'salon' },
+    secondary: { name: '万众狂欢', dmg: 13, kb: 4.3, kbs: 0.065, angle: 52, startup: 42, active: 8, endlag: 26, reach: 235, height: 175, kind: 'secondary', effect: 'revelry' },
+    specialCooldown: 8, secondaryCooldown: 10,
+    secondaryDesc: '展开水幕打击前方，并暂时强化自身与沙龙成员；没有宠物时同样有效。',
+    desc: '脱帽致意后请出三位沙龙成员，分别发射泡泡、穿刺水流与蟹钳水爆。重召会刷新成员。',
   },
 ];
 

@@ -39,9 +39,17 @@ const context = vm.createContext({
 });
 const modules = new Map();
 const artDrawCalls = [];
+const artLeases = [];
 function loadModule(file) {
+  if (file.endsWith('/summoner-art.ts')) return { drawSummonArt: () => false };
   if (file.endsWith('/art.ts')) return {
-    hasRegisteredMeleeTrail: () => false, loadGameArt: () => Promise.resolve(), drawCharacterArt: () => false,
+    hasRegisteredMeleeTrail: () => false,
+    acquireGameArt: ids => {
+      const lease = { ids: [...ids], released: false };
+      artLeases.push(lease);
+      return { ready: Promise.resolve(), release: () => { lease.released = true; } };
+    },
+    drawCharacterArt: () => false,
     drawFighterArt: (...args) => { artDrawCalls.push({ kind: 'fighter', args }); return false; },
     drawElementEffect: () => false, drawSecondaryEffect: () => false,
     drawXiaoPlungeEffect: (...args) => { artDrawCalls.push({ kind: 'plunge', args }); return false; },
@@ -73,7 +81,7 @@ function step(game, count = 1) {
   for (let i = 0; i < count; i++) {
     if (game.state !== 'paused') game.frame++;
     game.update();
-    game.pressed.clear();
+    game.input.pressed.clear();
   }
 }
 function fighting(options) {
@@ -194,8 +202,8 @@ test('pause/blur/hidden clear input, freeze the clock, and require explicit resu
   key(game, 'KeyD');
   game.onBlur();
   assert.equal(game.getSnapshot().phase, 'paused');
-  assert.equal(game.keys.size, 0);
-  assert.equal(game.pressed.size, 0);
+  assert.equal(game.input.keys.size, 0);
+  assert.equal(game.input.pressed.size, 0);
   const before = game.remainingFrames;
   step(game, 120);
   assert.equal(game.remainingFrames, before);
@@ -211,7 +219,7 @@ test('pause/blur/hidden clear input, freeze the clock, and require explicit resu
 test('mute ignores repeated keydown and the initial menu does not capture input', () => {
   const game = new Game(canvas()); games.push(game);
   key(game, 'KeyD');
-  assert.equal(game.keys.size, 0);
+  assert.equal(game.input.keys.size, 0);
   assert.equal(game.getSnapshot().phase, 'menu');
   game.start(defaults);
   game.setMuted(false);
@@ -747,6 +755,7 @@ test('primary and secondary cooldowns remain independent while either skill is u
   key(game, 'KeyL'); step(game); assert.equal(f.attack.def.kind, 'special');
   step(game, 50); f.secondaryCooldown = 0;
   assert.ok(f.specialCooldown > 0);
+  game.onKeyUp({ code: 'KeyI' });
   key(game, 'KeyI'); step(game); assert.equal(f.attack.def.kind, 'secondary');
 });
 
@@ -770,6 +779,8 @@ test('CPU can choose each secondary skill and refuses a dangerous outward Xiao t
     const game = fighting({ mode: 'cpu', opponent: index });
     const [target, cpu] = game.fighters;
     cpu.x = 580; target.x = 750;
+    // Summoners first establish their manually cast L; with it cooling down they use I.
+    if (cpu.char.id === 'zhongli' || cpu.char.id === 'furina') cpu.specialCooldown = 180;
     const input = game.cpuInput(cpu);
     assert.equal(input.secondary, true, cpu.char.id);
     game.updateFighter(cpu, input); assert.equal(cpu.attack.def.kind, 'secondary');
@@ -937,6 +948,144 @@ test('every fighter alternates J/K only while skills retain mechanic-matched pos
         assert.equal(f.attack.visualVariant, expected, `${f.char.id}/${kind}/${repeat}`);
       }
     }
+  }
+});
+
+test('blur discards held keyboard repeats but accepts the first fresh press after an unobserved keyup', () => {
+  const game = fighting();
+  key(game, 'KeyJ'); game.onBlur(); game.resume();
+  key(game, 'KeyJ', true); step(game); assert.equal(game.fighters[0].attack, null);
+  // Keyup occurred in another app; this page only sees the next physical keydown.
+  key(game, 'KeyJ'); step(game); assert.equal(game.fighters[0].attack.def.kind, 'jab');
+});
+
+test('match art ownership loads only participants and releases the old lease on rematch and destroy', () => {
+  const before = artLeases.length;
+  const game = new Game(canvas());
+  assert.equal(artLeases.length, before, 'construction must not preload all characters');
+  game.start({ ...defaults, player: 2, opponent: 4 });
+  const first = artLeases.at(-1); assert.deepEqual(first.ids, ['eula', 'xiao']);
+  game.rematch(); assert.equal(first.released, true);
+  const second = artLeases.at(-1); assert.equal(second.released, false);
+  game.destroy(); assert.equal(second.released, true);
+});
+
+test('touch commands drive the real P1 fighter without controlling P2 or repeating held attacks', () => {
+  const game = fighting(); const [player, rival] = game.fighters;
+  const rivalX = rival.x;
+  game.setTouchAction('right', 'move', true); step(game, 10);
+  assert.ok(player.vx > 0); assert.equal(rival.x, rivalX);
+  game.setTouchAction('right', 'move', false);
+  game.setTouchAction('secondary', 'skill', true); step(game);
+  assert.equal(player.attack.def.kind, 'secondary');
+  step(game, 400); assert.equal(player.attack, null); assert.equal(player.secondaryCooldown, 0);
+  game.setTouchAction('secondary', 'skill', true); step(game); assert.equal(player.attack, null);
+  game.setTouchAction('secondary', 'skill', false); game.setTouchAction('secondary', 'skill', true); step(game);
+  assert.equal(player.attack.def.kind, 'secondary');
+});
+
+test('two touch jump controls jump only once per tick and then allow an intentional air jump', () => {
+  const game = fighting(); const player = game.fighters[0];
+  game.setTouchAction('jump', 'dpad', true); game.setTouchAction('jump', 'button', true); step(game);
+  assert.equal(player.jumpsLeft, 1); assert.equal(player.onGround, false);
+  step(game, 3); assert.equal(player.jumpsLeft, 1);
+  game.setTouchAction('jump', 'button', false); game.setTouchAction('jump', 'button', true); step(game);
+  assert.equal(player.jumpsLeft, 0);
+});
+
+test('touch jump plus Xiao L on one tick jumps before starting the downward plunge', () => {
+  const game = fighting({ player: 4 }); const player = game.fighters[0];
+  assert.equal(game.getSnapshot().canSpecial, false);
+  game.setTouchAction('jump', 'jump', true); game.setTouchAction('special', 'skill', true); step(game);
+  assert.equal(player.onGround, false); assert.equal(player.attack.plunge.phase, 'windup');
+  assert.ok(game.getSnapshot().skillCooldown > 0);
+});
+
+test('touch pause and countdown cannot carry a held movement or attack into resumed combat', () => {
+  const game = makeGame();
+  game.setTouchAction('right', 'countdown-finger', true); step(game, 151);
+  assert.equal(game.fighters[0].vx, 0);
+  game.setTouchAction('right', 'countdown-finger', true); step(game); assert.equal(game.fighters[0].vx, 0);
+  game.setTouchAction('right', 'fresh', true); game.setTouchAction('jab', 'attack', true);
+  game.pause(); assert.equal(game.getSnapshot().phase, 'paused'); game.resume();
+  game.setTouchAction('right', 'fresh', true); game.setTouchAction('jab', 'attack', true); step(game);
+  assert.equal(game.fighters[0].attack, null); assert.equal(game.fighters[0].vx, 0);
+  game.setTouchAction('jab', 'attack', false); game.setTouchAction('jab', 'attack', true); step(game);
+  assert.equal(game.fighters[0].attack.def.kind, 'jab');
+});
+
+test('Zhongli and Furina are selectable, release L only at contact, and keep their manual facing', () => {
+  for (const id of ['zhongli', 'furina']) {
+    const game = fighting({ player: CHARACTERS.findIndex(char => char.id === id) }), f = game.fighters[0];
+    f.x = 510; f.facing = -1; f.vx = 0;
+    game.startAttack(f, f.char.special);
+    for (let i = 0; i < f.char.special.startup - 1; i++) game.updateFighter(f, noInput);
+    assert.equal(game.summons.entities.length, 0); assert.equal(game.summons.getShield(f.idx), undefined);
+    assert.equal(f.facing, -1); assert.equal(f.onGround, true);
+    game.updateFighter(f, noInput);
+    assert.equal(game.summons.entities.length, id === 'zhongli' ? 1 : 3);
+    assert.equal(f.facing, -1); assert.equal(game.getSnapshot().skillCooldownMax, 8);
+    assert.equal(game.attackHitbox(f), null, 'summoning gesture must not cause an extra melee hit');
+    game.drawSummons(drawingContext); game.drawFighter(drawingContext, f);
+  }
+});
+
+test('Zhongli shield consumes damage without cancelling action, breaks and expires', () => {
+  const game = fighting({ player: CHARACTERS.findIndex(char => char.id === 'zhongli') }), [f, rival] = game.fighters;
+  game.summons.castGeo(game.summonOwner(f), game.summonContext());
+  game.startAttack(f, f.char.jab); const attack = f.attack;
+  game.applyHit(rival, f, { ...rival.char.jab, dmg: 4 });
+  assert.equal(f.percent, 0); assert.equal(f.attack, attack); assert.equal(f.state, 'attack');
+  assert.equal(game.summons.getShield(f.idx).hp, 15);
+  game.applyHit(rival, f, { ...rival.char.smash, dmg: 30 });
+  assert.equal(f.percent, 15); assert.equal(game.summons.getShield(f.idx), undefined); assert.equal(f.attack, null);
+  game.summons.castGeo(game.summonOwner(f), game.summonContext());
+  for (let i = 0; i < 360; i++) game.summons.step({ ...game.summonContext(), targets: [] });
+  assert.equal(game.summons.getShield(f.idx), undefined);
+});
+
+test('Tianxing lands exactly on release and petrifies only briefly without freezing its owner', () => {
+  const game = fighting({ player: CHARACTERS.findIndex(char => char.id === 'zhongli') }), [f, target] = game.fighters;
+  f.x = 490; target.x = 700; f.facing = 1; target.invuln = 0;
+  game.startAttack(f, f.char.secondary);
+  for (let i = 0; i < f.char.secondary.startup - 1; i++) game.updateFighter(f, noInput);
+  game.updateSummons(); assert.equal(target.percent, 0); assert.equal(game.summons.effects.length, 0);
+  game.updateFighter(f, noInput); game.updateSummons();
+  assert.equal(target.percent, 19); assert.equal(target.petrified, 45); assert.equal(f.hitlag, 0);
+  const damage = target.percent; game.updateSummons(); assert.equal(target.percent, damage);
+  for (let i = 0; i < 70; i++) game.updateFighter(target, noInput);
+  assert.equal(target.petrified, 0); assert.equal(target.hitstun, 0);
+});
+
+test('Furina I works without pets and buffs a manual jab; pet hits never hitstop the owner', () => {
+  const game = fighting({ player: CHARACTERS.findIndex(char => char.id === 'furina') }), [f, target] = game.fighters;
+  f.x = 510; target.x = 600; f.facing = 1;
+  game.startAttack(f, f.char.secondary);
+  for (let i = 0; i < f.char.secondary.startup; i++) game.updateFighter(f, noInput);
+  game.updateSummons(); assert.equal(game.summons.entities.length, 0); assert.equal(target.percent, 13);
+  const before = target.percent;
+  game.applyHit(f, target, f.char.jab); assert.ok(Math.abs(target.percent - before - 4.8) < .001);
+  f.hitlag = 0; target.hitlag = 0; target.x = 660; target.y = 464; target.invuln = 0;
+  game.summons.castSalon(game.summonOwner(f), game.summonContext());
+  const startDamage = target.percent;
+  for (let i = 0; i < 180; i++) game.updateSummons();
+  assert.ok(target.percent > startDamage); assert.equal(f.hitlag, 0);
+});
+
+test('summoners respect cooldown input, CPU uses summons, and KO/rematch/destroy clean their ownership', () => {
+  for (const id of ['zhongli', 'furina']) {
+    const index = CHARACTERS.findIndex(char => char.id === id);
+    const game = fighting({ mode: 'cpu', opponent: index, player: index }), [f, cpu] = game.fighters;
+    f.x = 530; cpu.x = 730;
+    assert.equal(game.cpuInput(cpu).special, true);
+    game.summons[id === 'zhongli' ? 'castGeo' : 'castSalon'](game.summonOwner(f), game.summonContext());
+    game.summons[id === 'zhongli' ? 'castGeo' : 'castSalon'](game.summonOwner(cpu), game.summonContext());
+    f.specialCooldown = 100; game.updateFighter(f, { ...noInput, special: true }); assert.equal(f.attack, null);
+    game.ko(f); assert.ok(game.summons.entities.every(entity => entity.ownerId !== f.idx));
+    assert.ok(game.summons.entities.some(entity => entity.ownerId === cpu.idx));
+    game.rematch(); assert.equal(game.summons.entities.length, 0); assert.equal(game.summons.effects.length, 0);
+    const fresh = game.fighters[0]; game.summons.castSalon(game.summonOwner(fresh), game.summonContext());
+    game.destroy(); assert.equal(game.summons.entities.length, 0);
   }
 });
 

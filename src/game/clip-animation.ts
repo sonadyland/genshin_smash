@@ -1,7 +1,7 @@
 import { attackPhase } from './animation';
 import type { AttackPhase, FighterAnimation } from './animation';
 
-export const CHARACTER_CLIP_IDS = ['raiden', 'jean', 'eula', 'diluc', 'xiao'] as const;
+export const CHARACTER_CLIP_IDS = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina'] as const;
 export type ClipCharacterId = typeof CHARACTER_CLIP_IDS[number];
 export const CHARACTER_CLIPS = ['idle', 'run', 'jump', 'dodge', 'jab', 'smash', 'special', 'secondary'] as const;
 export type ClipName = typeof CHARACTER_CLIPS[number];
@@ -27,6 +27,12 @@ export function takeAttackVariant(next: AttackVariantState, kind: AttackKind): A
 }
 export interface ClipFrame {
   name?: string;
+  /** Optional additional atlas, in the same pack directory as the base image. */
+  image?: string;
+  width?: number;
+  height?: number;
+  /** Uniform source registration correction, never a per-axis body distortion. */
+  sourceScale?: number;
   sourceRect: { x: number; y: number; width: number; height: number };
   footAnchor: { x: number; y: number };
   weaponTip?: { x: number; y: number };
@@ -61,6 +67,7 @@ export function advanceMotion(motion: MotionState, input: { dx: number; onGround
   motion.slope = input.onGround ? Math.max(-0.4, Math.min(0.4, input.slope ?? 0)) : 0;
 }
 function finite(value: unknown): value is number { return typeof value === 'number' && Number.isFinite(value); }
+const atlasFilename = (value: unknown): value is string => typeof value === 'string' && /^[a-z][a-z0-9-]*\.png$/.test(value);
 /** Reject the entire optional pack: never silently mix damaged clips into one fighter. */
 export function validClipManifest(value: unknown): value is ClipManifest {
   if (!value || typeof value !== 'object') return false;
@@ -68,7 +75,7 @@ export function validClipManifest(value: unknown): value is ClipManifest {
   if (manifest.version !== 1 || !isClipCharacterId(manifest.character) || !manifest.clips) return false;
   return CHARACTER_CLIPS.every(name => {
     const clip = manifest.clips[name];
-    if (!clip || !/^[a-z][a-z0-9-]*\.png$/.test(clip.image) || !finite(clip.width) || !finite(clip.height) ||
+    if (!clip || !atlasFilename(clip.image) || !finite(clip.width) || !finite(clip.height) ||
       !Number.isInteger(clip.width) || !Number.isInteger(clip.height) || clip.width < 8 || clip.height < 8 ||
       !finite(clip.standingBodyHeightPixels) || clip.standingBodyHeightPixels <= 0 || !Array.isArray(clip.frames) || clip.frames.length < 2 || clip.frames.length > 32) return false;
     if (clip.trail !== undefined && !['arc', 'thrust', 'none'].includes(clip.trail)) return false;
@@ -81,9 +88,14 @@ export function validClipManifest(value: unknown): value is ClipManifest {
     const validFrames = clip.frames.every(frame => {
       if (!frame) return false;
       const r = frame.sourceRect, a = frame.footAnchor, tip = frame.weaponTip;
+      const width = frame.width ?? clip.width, height = frame.height ?? clip.height;
+      if (frame.image !== undefined && (!atlasFilename(frame.image) || !Number.isInteger(frame.width) || !Number.isInteger(frame.height))) return false;
+      if (frame.image === undefined && (frame.width !== undefined || frame.height !== undefined)) return false;
+      if (!finite(width) || !finite(height) || width < 8 || height < 8 ||
+        (frame.sourceScale !== undefined && (!finite(frame.sourceScale) || frame.sourceScale < 0.25 || frame.sourceScale > 4))) return false;
       if (!r || !a || ![r.x, r.y, r.width, r.height, a.x, a.y].every(finite) ||
         ![r.x, r.y, r.width, r.height].every(Number.isInteger) || r.x < 0 || r.y < 0 || r.width <= 4 || r.height <= 4 ||
-        r.x + r.width > clip.width || r.y + r.height > clip.height || a.x < 0 || a.x > 1 || a.y < 0 || a.y > 1 ||
+        r.x + r.width > width || r.y + r.height > height || a.x < 0 || a.x > 1 || a.y < 0 || a.y > 1 ||
         (frame.duration !== undefined && (!finite(frame.duration) || frame.duration <= 0 || frame.duration > 120)) ||
         (tip && (![tip.x, tip.y].every(finite) || tip.x < 0 || tip.y < 0 || tip.x > r.width || tip.y > r.height))) return false;
       if (attack) {
@@ -96,6 +108,10 @@ export function validClipManifest(value: unknown): value is ClipManifest {
     });
     return validFrames && clip.frames.every((frame, index) => clip.frames.slice(0, index).every(previous => {
       const a = frame.sourceRect, b = previous.sourceRect;
+      if ((frame.image ?? clip.image) !== (previous.image ?? clip.image)) return true;
+      // An authored return to the exact same drawing (Furina replacing her hat)
+      // is deliberate. Partially overlapping crops still indicate a broken atlas.
+      if (a.x === b.x && a.y === b.y && a.width === b.width && a.height === b.height) return true;
       return a.x + a.width <= b.x || b.x + b.width <= a.x || a.y + a.height <= b.y || b.y + b.height <= a.y;
     }));
   });

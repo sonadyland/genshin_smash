@@ -1,0 +1,1134 @@
+{
+  "version": 1,
+  "character": "zhongli",
+  "generator": "built-in image_gen",
+  "date": "2026-10-10",
+  "clips": {
+    "idle": {
+      "image": "jab-thrust.png",
+      "width": 1774,
+      "height": 887,
+      "standingBodyHeightPixels": 277.77777778,
+      "trail": "none",
+      "frames": [
+        {
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 443,
+            "height": 443
+          },
+          "footAnchor": {
+            "x": 0.43905192,
+            "y": 0.95936795
+          },
+          "name": "ready",
+          "duration": 36,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 1330,
+            "y": 443,
+            "width": 444,
+            "height": 444
+          },
+          "footAnchor": {
+            "x": 0.43243243,
+            "y": 0.88513514
+          },
+          "name": "settle",
+          "duration": 36,
+          "sourceScale": 1
+        }
+      ]
+    },
+    "run": {
+      "image": "run-v2.png",
+      "width": 1774,
+      "height": 887,
+      "standingBodyHeightPixels": 400,
+      "trail": "none",
+      "frames": [
+        {
+          "name": "right-contact",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 443,
+            "height": 460
+          },
+          "footAnchor": {
+            "x": 0.61851016,
+            "y": 0.95652174
+          },
+          "duration": 6
+        },
+        {
+          "name": "right-compress",
+          "sourceRect": {
+            "x": 443,
+            "y": 0,
+            "width": 444,
+            "height": 460
+          },
+          "footAnchor": {
+            "x": 0.61486486,
+            "y": 0.95652174
+          },
+          "duration": 5
+        },
+        {
+          "name": "right-push",
+          "sourceRect": {
+            "x": 887,
+            "y": 0,
+            "width": 443,
+            "height": 460
+          },
+          "footAnchor": {
+            "x": 0.62076749,
+            "y": 0.95652174
+          },
+          "duration": 5
+        },
+        {
+          "name": "left-flight",
+          "sourceRect": {
+            "x": 1330,
+            "y": 0,
+            "width": 444,
+            "height": 460
+          },
+          "footAnchor": {
+            "x": 0.62387387,
+            "y": 0.95652174
+          },
+          "duration": 5
+        },
+        {
+          "name": "left-contact",
+          "sourceRect": {
+            "x": 0,
+            "y": 460,
+            "width": 443,
+            "height": 427
+          },
+          "footAnchor": {
+            "x": 0.62528217,
+            "y": 0.95316159
+          },
+          "duration": 6
+        },
+        {
+          "name": "left-compress",
+          "sourceRect": {
+            "x": 443,
+            "y": 460,
+            "width": 444,
+            "height": 427
+          },
+          "footAnchor": {
+            "x": 0.62612613,
+            "y": 0.95316159
+          },
+          "duration": 5
+        },
+        {
+          "name": "left-push",
+          "sourceRect": {
+            "x": 887,
+            "y": 460,
+            "width": 443,
+            "height": 427
+          },
+          "footAnchor": {
+            "x": 0.63431151,
+            "y": 0.95316159
+          },
+          "duration": 5
+        },
+        {
+          "name": "right-flight",
+          "sourceRect": {
+            "x": 1330,
+            "y": 460,
+            "width": 444,
+            "height": 427
+          },
+          "footAnchor": {
+            "x": 0.6463964,
+            "y": 0.95316159
+          },
+          "duration": 5
+        }
+      ]
+    },
+    "jump": {
+      "image": "air.png",
+      "width": 1774,
+      "height": 887,
+      "standingBodyHeightPixels": 445,
+      "trail": "none",
+      "frames": [
+        {
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 443,
+            "height": 490
+          },
+          "footAnchor": {
+            "x": 0.52934537,
+            "y": 0.92244898
+          },
+          "duration": 6,
+          "name": "takeoff"
+        },
+        {
+          "sourceRect": {
+            "x": 443,
+            "y": 0,
+            "width": 444,
+            "height": 490
+          },
+          "footAnchor": {
+            "x": 0.33445946,
+            "y": 0.97142857
+          },
+          "duration": 6,
+          "name": "rise"
+        },
+        {
+          "sourceRect": {
+            "x": 887,
+            "y": 0,
+            "width": 443,
+            "height": 490
+          },
+          "footAnchor": {
+            "x": 0.43115124,
+            "y": 0.81428571
+          },
+          "duration": 6,
+          "name": "apex"
+        },
+        {
+          "sourceRect": {
+            "x": 1330,
+            "y": 0,
+            "width": 444,
+            "height": 490
+          },
+          "footAnchor": {
+            "x": 0.62162162,
+            "y": 0.98163265
+          },
+          "duration": 6,
+          "name": "fall"
+        },
+        {
+          "sourceRect": {
+            "x": 0,
+            "y": 490,
+            "width": 443,
+            "height": 397
+          },
+          "footAnchor": {
+            "x": 0.47742664,
+            "y": 0.93450882
+          },
+          "duration": 6,
+          "name": "land"
+        }
+      ]
+    },
+    "dodge": {
+      "image": "air.png",
+      "width": 1774,
+      "height": 887,
+      "standingBodyHeightPixels": 445,
+      "trail": "none",
+      "frames": [
+        {
+          "sourceRect": {
+            "x": 443,
+            "y": 490,
+            "width": 444,
+            "height": 397
+          },
+          "footAnchor": {
+            "x": 0.43468468,
+            "y": 0.93450882
+          },
+          "duration": 3,
+          "name": "anticipation"
+        },
+        {
+          "sourceRect": {
+            "x": 887,
+            "y": 490,
+            "width": 483,
+            "height": 397
+          },
+          "footAnchor": {
+            "x": 0.13561077,
+            "y": 0.93450882
+          },
+          "duration": 8,
+          "name": "travel"
+        },
+        {
+          "sourceRect": {
+            "x": 1370,
+            "y": 490,
+            "width": 404,
+            "height": 397
+          },
+          "footAnchor": {
+            "x": 0.54826733,
+            "y": 0.92947103
+          },
+          "duration": 5,
+          "name": "brake"
+        }
+      ]
+    },
+    "jab": {
+      "image": "jab-thrust.png",
+      "width": 1774,
+      "height": 887,
+      "standingBodyHeightPixels": 277.77777778,
+      "trail": "thrust",
+      "frames": [
+        {
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 443,
+            "height": 443
+          },
+          "footAnchor": {
+            "x": 0.43905192,
+            "y": 0.95936795
+          },
+          "name": "jab-thrust-1",
+          "phase": "windup",
+          "duration": 12,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 443,
+            "y": 0,
+            "width": 444,
+            "height": 443
+          },
+          "footAnchor": {
+            "x": 0.48986486,
+            "y": 0.94582393
+          },
+          "name": "jab-thrust-2",
+          "phase": "windup",
+          "duration": 6.6,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 887,
+            "y": 0,
+            "width": 443,
+            "height": 443
+          },
+          "footAnchor": {
+            "x": 0.50225734,
+            "y": 0.94356659
+          },
+          "name": "jab-thrust-3",
+          "phase": "windup",
+          "duration": 6,
+          "sourceScale": 1,
+          "weaponTip": {
+            "x": 398,
+            "y": 247
+          }
+        },
+        {
+          "sourceRect": {
+            "x": 1330,
+            "y": 0,
+            "width": 444,
+            "height": 443
+          },
+          "footAnchor": {
+            "x": 0.46846847,
+            "y": 0.94356659
+          },
+          "name": "jab-thrust-4",
+          "phase": "windup",
+          "duration": 5.4,
+          "sourceScale": 1,
+          "weaponTip": {
+            "x": 407,
+            "y": 237
+          }
+        },
+        {
+          "sourceRect": {
+            "x": 0,
+            "y": 443,
+            "width": 510,
+            "height": 444
+          },
+          "footAnchor": {
+            "x": 0.40686275,
+            "y": 0.88513514
+          },
+          "name": "jab-thrust-5",
+          "phase": "contact",
+          "duration": 10.8,
+          "sourceScale": 1,
+          "weaponTip": {
+            "x": 455,
+            "y": 223
+          }
+        },
+        {
+          "sourceRect": {
+            "x": 510,
+            "y": 443,
+            "width": 377,
+            "height": 444
+          },
+          "footAnchor": {
+            "x": 0.44827586,
+            "y": 0.88738739
+          },
+          "name": "jab-thrust-6",
+          "phase": "followthrough",
+          "duration": 6.6,
+          "sourceScale": 1,
+          "weaponTip": {
+            "x": 336,
+            "y": 214
+          }
+        },
+        {
+          "sourceRect": {
+            "x": 887,
+            "y": 443,
+            "width": 443,
+            "height": 444
+          },
+          "footAnchor": {
+            "x": 0.45823928,
+            "y": 0.88738739
+          },
+          "name": "jab-thrust-7",
+          "phase": "recover",
+          "duration": 7.8,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 1330,
+            "y": 443,
+            "width": 444,
+            "height": 444
+          },
+          "footAnchor": {
+            "x": 0.43243243,
+            "y": 0.88513514
+          },
+          "name": "jab-thrust-8",
+          "phase": "recover",
+          "duration": 16.8,
+          "sourceScale": 1
+        }
+      ]
+    },
+    "smash": {
+      "image": "jab-thrust.png",
+      "width": 1774,
+      "height": 887,
+      "standingBodyHeightPixels": 277.77777778,
+      "trail": "thrust",
+      "frames": [
+        {
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 443,
+            "height": 443
+          },
+          "footAnchor": {
+            "x": 0.43905192,
+            "y": 0.95936795
+          },
+          "name": "jab-thrust-1",
+          "phase": "windup",
+          "duration": 16.2,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 443,
+            "y": 0,
+            "width": 444,
+            "height": 443
+          },
+          "footAnchor": {
+            "x": 0.48986486,
+            "y": 0.94582393
+          },
+          "name": "jab-thrust-2",
+          "phase": "windup",
+          "duration": 8.91,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 887,
+            "y": 0,
+            "width": 443,
+            "height": 443
+          },
+          "footAnchor": {
+            "x": 0.50225734,
+            "y": 0.94356659
+          },
+          "name": "jab-thrust-3",
+          "phase": "windup",
+          "duration": 8.1,
+          "sourceScale": 1,
+          "weaponTip": {
+            "x": 398,
+            "y": 247
+          }
+        },
+        {
+          "sourceRect": {
+            "x": 1330,
+            "y": 0,
+            "width": 444,
+            "height": 443
+          },
+          "footAnchor": {
+            "x": 0.46846847,
+            "y": 0.94356659
+          },
+          "name": "jab-thrust-4",
+          "phase": "windup",
+          "duration": 7.29,
+          "sourceScale": 1,
+          "weaponTip": {
+            "x": 407,
+            "y": 237
+          }
+        },
+        {
+          "sourceRect": {
+            "x": 0,
+            "y": 443,
+            "width": 510,
+            "height": 444
+          },
+          "footAnchor": {
+            "x": 0.40686275,
+            "y": 0.88513514
+          },
+          "name": "jab-thrust-5",
+          "phase": "contact",
+          "duration": 15.12,
+          "sourceScale": 1,
+          "weaponTip": {
+            "x": 455,
+            "y": 223
+          }
+        },
+        {
+          "sourceRect": {
+            "x": 510,
+            "y": 443,
+            "width": 377,
+            "height": 444
+          },
+          "footAnchor": {
+            "x": 0.44827586,
+            "y": 0.88738739
+          },
+          "name": "jab-thrust-6",
+          "phase": "followthrough",
+          "duration": 6.6,
+          "sourceScale": 1,
+          "weaponTip": {
+            "x": 336,
+            "y": 214
+          }
+        },
+        {
+          "sourceRect": {
+            "x": 887,
+            "y": 443,
+            "width": 443,
+            "height": 444
+          },
+          "footAnchor": {
+            "x": 0.45823928,
+            "y": 0.88738739
+          },
+          "name": "jab-thrust-7",
+          "phase": "recover",
+          "duration": 7.8,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 1330,
+            "y": 443,
+            "width": 444,
+            "height": 444
+          },
+          "footAnchor": {
+            "x": 0.43243243,
+            "y": 0.88513514
+          },
+          "name": "jab-thrust-8",
+          "phase": "recover",
+          "duration": 16.8,
+          "sourceScale": 1
+        }
+      ]
+    },
+    "special": {
+      "image": "l-skill-cross-charge.png",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeightPixels": 304.34782609,
+      "trail": "none",
+      "frames": [
+        {
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 313,
+            "height": 319
+          },
+          "footAnchor": {
+            "x": 0.50958466,
+            "y": 0.98432602
+          },
+          "name": "l-skill-1",
+          "phase": "windup",
+          "duration": 6.6,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 313,
+            "y": 0,
+            "width": 314,
+            "height": 319
+          },
+          "footAnchor": {
+            "x": 0.49522293,
+            "y": 0.98432602
+          },
+          "name": "l-skill-2",
+          "phase": "windup",
+          "duration": 5.7,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 313,
+            "height": 319
+          },
+          "footAnchor": {
+            "x": 0.51277955,
+            "y": 0.98432602
+          },
+          "name": "l-skill-3",
+          "phase": "windup",
+          "duration": 6,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 940,
+            "y": 0,
+            "width": 314,
+            "height": 319
+          },
+          "footAnchor": {
+            "x": 0.52707006,
+            "y": 0.98432602
+          },
+          "name": "l-skill-4",
+          "phase": "windup",
+          "duration": 6.6,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 0,
+            "y": 319,
+            "width": 313,
+            "height": 311
+          },
+          "footAnchor": {
+            "x": 0.53035144,
+            "y": 0.98713826
+          },
+          "name": "l-skill-5",
+          "phase": "windup",
+          "duration": 7.8,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 313,
+            "y": 319,
+            "width": 314,
+            "height": 311
+          },
+          "footAnchor": {
+            "x": 0.52866242,
+            "y": 0.98713826
+          },
+          "name": "l-skill-6",
+          "phase": "windup",
+          "duration": 9,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 627,
+            "y": 319,
+            "width": 313,
+            "height": 311
+          },
+          "footAnchor": {
+            "x": 0.53194888,
+            "y": 0.98713826
+          },
+          "name": "l-skill-7",
+          "phase": "windup",
+          "duration": 10.2,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 940,
+            "y": 319,
+            "width": 314,
+            "height": 311
+          },
+          "footAnchor": {
+            "x": 0.54617834,
+            "y": 0.9903537
+          },
+          "name": "l-skill-8",
+          "phase": "windup",
+          "duration": 11.4,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 0,
+            "y": 630,
+            "width": 313,
+            "height": 311
+          },
+          "footAnchor": {
+            "x": 0.54153355,
+            "y": 0.98713826
+          },
+          "name": "l-skill-9",
+          "phase": "windup",
+          "duration": 6.6,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 313,
+            "y": 630,
+            "width": 314,
+            "height": 311
+          },
+          "footAnchor": {
+            "x": 0.54936306,
+            "y": 0.98392283
+          },
+          "name": "l-skill-10",
+          "phase": "contact",
+          "duration": 4.2,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 627,
+            "y": 630,
+            "width": 313,
+            "height": 311
+          },
+          "footAnchor": {
+            "x": 0.54313099,
+            "y": 0.98392283
+          },
+          "name": "l-skill-11",
+          "phase": "followthrough",
+          "duration": 6.6,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 940,
+            "y": 630,
+            "width": 314,
+            "height": 311
+          },
+          "footAnchor": {
+            "x": 0.53503185,
+            "y": 0.98392283
+          },
+          "name": "l-skill-12",
+          "phase": "followthrough",
+          "duration": 5.4,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 0,
+            "y": 941,
+            "width": 313,
+            "height": 313
+          },
+          "footAnchor": {
+            "x": 0.54153355,
+            "y": 0.99041534
+          },
+          "name": "l-skill-13",
+          "phase": "followthrough",
+          "duration": 4.8,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 313,
+            "y": 941,
+            "width": 314,
+            "height": 313
+          },
+          "footAnchor": {
+            "x": 0.52707006,
+            "y": 0.99041534
+          },
+          "name": "l-skill-14",
+          "phase": "recover",
+          "duration": 6.6,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 627,
+            "y": 941,
+            "width": 313,
+            "height": 313
+          },
+          "footAnchor": {
+            "x": 0.51597444,
+            "y": 0.99041534
+          },
+          "name": "l-skill-15",
+          "phase": "recover",
+          "duration": 7.5,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 940,
+            "y": 941,
+            "width": 314,
+            "height": 313
+          },
+          "footAnchor": {
+            "x": 0.51433121,
+            "y": 0.99041534
+          },
+          "name": "l-skill-16",
+          "phase": "recover",
+          "duration": 13.8,
+          "sourceScale": 1
+        }
+      ]
+    },
+    "secondary": {
+      "image": "i-burst.png",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeightPixels": 251.79856115,
+      "trail": "none",
+      "frames": [
+        {
+          "sourceRect": {
+            "x": 73,
+            "y": 75,
+            "width": 161,
+            "height": 258
+          },
+          "footAnchor": {
+            "x": 0.55279503,
+            "y": 0.98449612
+          },
+          "name": "i-burst-1",
+          "phase": "windup",
+          "duration": 9.6,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 386,
+            "y": 75,
+            "width": 167,
+            "height": 257
+          },
+          "footAnchor": {
+            "x": 0.52994012,
+            "y": 0.9844358
+          },
+          "name": "i-burst-2",
+          "phase": "windup",
+          "duration": 6,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 697,
+            "y": 76,
+            "width": 168,
+            "height": 255
+          },
+          "footAnchor": {
+            "x": 0.5327381,
+            "y": 0.98431373
+          },
+          "name": "i-burst-3",
+          "phase": "windup",
+          "duration": 5.7,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 1015,
+            "y": 61,
+            "width": 165,
+            "height": 270
+          },
+          "footAnchor": {
+            "x": 0.52121212,
+            "y": 0.98518519
+          },
+          "name": "i-burst-4",
+          "phase": "windup",
+          "duration": 6.6,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 69,
+            "y": 388,
+            "width": 178,
+            "height": 256
+          },
+          "footAnchor": {
+            "x": 0.50842697,
+            "y": 0.984375
+          },
+          "name": "i-burst-5",
+          "phase": "windup",
+          "duration": 6.6,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 382,
+            "y": 369,
+            "width": 173,
+            "height": 275
+          },
+          "footAnchor": {
+            "x": 0.51156069,
+            "y": 0.98545455
+          },
+          "name": "i-burst-6",
+          "phase": "windup",
+          "duration": 7.2,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 696,
+            "y": 383,
+            "width": 179,
+            "height": 261
+          },
+          "footAnchor": {
+            "x": 0.51396648,
+            "y": 0.98467433
+          },
+          "name": "i-burst-7",
+          "phase": "windup",
+          "duration": 6.6,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 1004,
+            "y": 388,
+            "width": 186,
+            "height": 256
+          },
+          "footAnchor": {
+            "x": 0.50268817,
+            "y": 0.984375
+          },
+          "name": "i-burst-8",
+          "phase": "windup",
+          "duration": 7.8,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 64,
+            "y": 702,
+            "width": 177,
+            "height": 257
+          },
+          "footAnchor": {
+            "x": 0.53954802,
+            "y": 0.9844358
+          },
+          "name": "i-burst-9",
+          "phase": "windup",
+          "duration": 11.4,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 382,
+            "y": 702,
+            "width": 173,
+            "height": 257
+          },
+          "footAnchor": {
+            "x": 0.52312139,
+            "y": 0.9844358
+          },
+          "name": "i-burst-10",
+          "phase": "windup",
+          "duration": 9,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 691,
+            "y": 701,
+            "width": 178,
+            "height": 258
+          },
+          "footAnchor": {
+            "x": 0.53651685,
+            "y": 0.98449612
+          },
+          "name": "i-burst-11",
+          "phase": "windup",
+          "duration": 8.4,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 978,
+            "y": 703,
+            "width": 205,
+            "height": 256
+          },
+          "footAnchor": {
+            "x": 0.62195122,
+            "y": 0.984375
+          },
+          "name": "i-burst-12",
+          "phase": "contact",
+          "duration": 15.6,
+          "sourceScale": 1
+        },
+        {
+          "sourceRect": {
+            "x": 67,
+            "y": 987,
+            "width": 183,
+            "height": 247
+          },
+          "footAnchor": {
+            "x": 0.50273224,
+            "y": 0.98380567
+          },
+          "name": "i-burst-13",
+          "phase": "followthrough",
+          "duration": 10.8,
+          "sourceScale": 1.04
+        },
+        {
+          "sourceRect": {
+            "x": 381,
+            "y": 987,
+            "width": 179,
+            "height": 247
+          },
+          "footAnchor": {
+            "x": 0.50558659,
+            "y": 0.98380567
+          },
+          "name": "i-burst-14",
+          "phase": "recover",
+          "duration": 6.6,
+          "sourceScale": 1.04
+        },
+        {
+          "sourceRect": {
+            "x": 697,
+            "y": 986,
+            "width": 173,
+            "height": 248
+          },
+          "footAnchor": {
+            "x": 0.52312139,
+            "y": 0.98387097
+          },
+          "name": "i-burst-15",
+          "phase": "recover",
+          "duration": 6.6,
+          "sourceScale": 1.04
+        },
+        {
+          "sourceRect": {
+            "x": 1010,
+            "y": 988,
+            "width": 167,
+            "height": 246
+          },
+          "footAnchor": {
+            "x": 0.53293413,
+            "y": 0.98373984
+          },
+          "name": "i-burst-16",
+          "phase": "recover",
+          "duration": 18,
+          "sourceScale": 1.04
+        }
+      ]
+    }
+  }
+}

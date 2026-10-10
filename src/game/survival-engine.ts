@@ -3,7 +3,8 @@ import type { CharDef, MoveDef } from './data';
 import type { PlungeAnimation } from './animation';
 import { advanceMotion, newMotionState, newAttackVariants, takeAttackVariant } from './clip-animation';
 import type { AttackVariantState, AttackVisualVariant, MotionState } from './clip-animation';
-import { loadGameArt } from './art';
+import { acquireGameArt } from './art';
+import type { GameArtLease } from './art';
 import {
   SURVIVAL_WORLD, SURVIVAL_DURATION, SURVIVAL_BASE_HP, SURVIVAL_BRANCHES, groundHeightAt,
   makeInitialProgress, xpForLevel, getUpgradeChoices, rerollUpgradeChoices, applyChoice, getUpgradeSummary, getSurvivalStats, getSecondaryProfile,
@@ -11,6 +12,11 @@ import {
 import type { SurvivalProgress, UpgradeChoice } from './survival-data';
 import { renderSurvival } from './survival-render';
 import { BattleAudio } from './audio';
+import { BattleInput } from './input';
+import type { BattleAction } from './input';
+import type { VisualQuality } from './visual-quality';
+import { SummonRuntime } from './summons';
+import type { SummonContext, SummonTuning } from './summons';
 
 export type SurvivalPhase = 'playing' | 'paused' | 'upgrade' | 'victory' | 'defeat';
 export interface SurvivalAttack {
@@ -31,6 +37,7 @@ export interface SurvivalEnemy {
   hp: number; maxHp: number; speed: number; damage: number; xp: number;
   age: number; flash: number; slow: number; cooldown: number; tell: number;
   aimX: number; aimY: number; stacks: number; grounded: boolean;
+  petrify?: number;
 }
 export interface SurvivalOrb { x: number; y: number; vy: number; value: number; heal: boolean; age: number }
 export interface SurvivalShot {
@@ -61,6 +68,7 @@ export class SurvivalGame {
   selectedPlayer = 0;
   phase: SurvivalPhase = 'playing';
   muted = false;
+  visualQuality: VisualQuality = 'standard';
   elapsed = 0;
   frame = 0;
   hitstop = 0;
@@ -80,9 +88,10 @@ export class SurvivalGame {
   fields: SurvivalField[] = [];
   effects: SurvivalEffect[] = [];
   texts: SurvivalText[] = [];
+  summons = new SummonRuntime();
   camera = { x: 0, y: 350 };
-  keys = new Set<string>();
-  pressed = new Set<string>();
+  private input = new BattleInput();
+  private artLease?: GameArtLease;
   notice = '';
   noticeTimer = 0;
   spawnTimer = 45;
@@ -107,7 +116,6 @@ export class SurvivalGame {
     window.addEventListener('keyup', this.onKeyUp);
     window.addEventListener('blur', this.onBlur);
     document.addEventListener('visibilitychange', this.onVisibility);
-    void loadGameArt();
     this.raf = requestAnimationFrame(this.loop);
   }
 
@@ -120,10 +128,14 @@ export class SurvivalGame {
   start(options: { player: number }) {
     this.selectedPlayer = clamp(Math.floor(options.player), 0, CHARACTERS.length - 1);
     this.char = CHARACTERS[this.selectedPlayer];
-    void loadGameArt([this.char.id]);
+    const previousArt = this.artLease;
+    this.artLease = acquireGameArt([this.char.id]);
+    previousArt?.release();
+    void this.artLease.ready;
     this.progress = makeInitialProgress(this.char.id);
     this.player = this.newPlayer();
     this.enemies = []; this.orbs = []; this.shots = []; this.fields = []; this.effects = []; this.texts = [];
+    this.summons.clear();
     this.elapsed = 0; this.frame = 0; this.hitstop = 0; this.level = 1; this.xp = 0;
     this.kills = 0; this.eliteKills = 0; this.bossKilled = false; this.damageDealt = 0;
     this.choices = []; this.rerollsRemaining = 2; this.nextId = 1; this.eliteMilestones.clear(); this.spawnTimer = 30;
@@ -131,23 +143,32 @@ export class SurvivalGame {
     this.phase = 'playing'; this.clearInput();
     this.audio.restart(); this.audio.setScene('playing');
     this.camera = { x: this.player.x - VIEW_W / 2, y: clamp(this.player.y - 565, 0, SURVIVAL_WORLD.height - VIEW_H) };
-    this.skillCooldownMax = this.char.id === 'xiao' ? 2.3 : 2.7;
+    this.skillCooldownMax = this.char.specialCooldown ?? (this.char.id === 'xiao' ? 2.3 : 2.7);
     this.accumulator = 0; this.lastTime = 0;
   }
 
   getSnapshot() {
     const stats = getSurvivalStats(this.progress);
     return {
-      phase: this.phase, muted: this.muted, charId: this.char.id,
+      phase: this.phase, muted: this.muted, charId: this.char.id, visualQuality: this.visualQuality,
       elapsed: this.elapsed, remaining: Math.max(0, SURVIVAL_DURATION - this.elapsed),
       hp: this.player.hp, maxHp: stats.maxHp, level: this.level, xp: this.xp, xpNeeded: xpForLevel(this.level),
       kills: this.kills, eliteKills: this.eliteKills, bossKilled: this.bossKilled,
       skillLevel: this.progress.skillLevel, secondaryLevel: this.progress.secondaryLevel, branch: this.progress.branch,
       branchName: SURVIVAL_BRANCHES[this.char.id]?.find(b => b.id === this.progress.branch)?.name ?? null,
       choices: this.choices, rerollsRemaining: this.rerollsRemaining, upgrades: getUpgradeSummary(this.progress), waveName: this.waveName(), damageDealt: this.damageDealt,
-      skillCooldown: this.player.skillCooldown / 60, skillCooldownMax: this.skillCooldownMax,
+      skillCooldown: this.player.skillCooldown / 60, skillCooldownMax: this.skillCooldownMax * (1 - (this.progress.skillLevel - 1) * .075),
       secondaryCooldown: this.player.secondaryCooldown / 60, secondaryCooldownMax: this.char.secondaryCooldown * getSecondaryProfile(this.char.id, this.progress.secondaryLevel).cooldownMultiplier,
       dodgeCooldown: this.player.dodgeCooldown / 60, dodgeCooldownMax: this.dodgeCooldownMax,
+      onGround: this.player.onGround,
+      canSpecial: this.phase === 'playing' && this.player.skillCooldown <= 0 && !(this.char.id === 'xiao' && this.player.onGround),
+      canSecondary: this.phase === 'playing' && this.player.secondaryCooldown <= 0,
+      canDodge: this.phase === 'playing' && this.player.dodgeCooldown <= 0 && !this.player.attack?.plunge,
+      shieldHp: this.summons.getShield(0)?.hp ?? 0,
+      shieldRemaining: (this.summons.getShield(0)?.life ?? 0) / 60,
+      summonCount: this.summons.entities.length,
+      summonRemaining: Math.max(0, ...this.summons.entities.map(entity => entity.life)) / 60,
+      buffRemaining: (this.summons.getBuff(0)?.life ?? 0) / 60,
       notice: this.notice, playerX: this.player.x, worldWidth: SURVIVAL_WORLD.width,
     };
   }
@@ -161,6 +182,12 @@ export class SurvivalGame {
   }
   rematch() { this.start({ player: this.selectedPlayer }); }
   setMuted(value: boolean) { this.muted = value; this.audio.setMuted(value); }
+  setVisualQuality(quality: VisualQuality) { this.visualQuality = quality === 'low' ? 'low' : 'standard'; }
+  setTouchAction(action: BattleAction, source: string, down: boolean) {
+    this.input.setTouchAction(action, source, down, !this.destroyed && this.phase === 'playing');
+    if (down && !this.destroyed && this.phase === 'playing') this.audio.unlock();
+  }
+  clearTouchInput() { this.input.clearTouch(); this.pendingAttack = null; }
   chooseUpgrade(id: string): boolean {
     if (this.phase !== 'upgrade') return false;
     const next = applyChoice(this.progress, id, this.choices);
@@ -168,6 +195,7 @@ export class SurvivalGame {
     const oldStats = getSurvivalStats(this.progress);
     const becameReady = this.progress.skillLevel < 4 && next.skillLevel >= 4 && !next.branch;
     this.progress = next;
+    this.summons.refreshOwnerTuning(0, this.summonTuning(), this.summonContext());
     const stats = getSurvivalStats(next);
     this.player.hp = Math.min(stats.maxHp, this.player.hp + Math.max(0, stats.maxHp - oldStats.maxHp) + 6);
     this.choices = []; this.clearInput(); this.phase = 'playing';
@@ -192,10 +220,12 @@ export class SurvivalGame {
     window.removeEventListener('blur', this.onBlur);
     document.removeEventListener('visibilitychange', this.onVisibility);
     this.clearInput();
+    this.summons.clear();
+    this.artLease?.release();
     this.audio.destroy();
   }
 
-  private clearInput() { this.keys.clear(); this.pressed.clear(); this.pendingAttack = null; }
+  private clearInput() { this.input.clear(); this.pendingAttack = null; }
   private onKeyDown = (event: KeyboardEvent) => {
     if (document.activeElement !== this.canvas || this.destroyed) return;
     const controls = ['KeyA', 'KeyD', 'KeyW', 'KeyS', 'KeyJ', 'KeyK', 'KeyL', 'KeyI', 'KeyH', 'Escape', 'KeyP', 'KeyM'];
@@ -205,10 +235,9 @@ export class SurvivalGame {
     this.audio.unlock();
     if (event.code === 'KeyM') { this.setMuted(!this.muted); return; }
     if (event.code === 'Escape' || event.code === 'KeyP') { this.pause(); return; }
-    if (this.phase !== 'playing') return;
-    this.keys.add(event.code); this.pressed.add(event.code);
+    this.input.setKey(event.code, true, this.phase === 'playing');
   };
-  private onKeyUp = (event: KeyboardEvent) => { this.keys.delete(event.code); };
+  private onKeyUp = (event: KeyboardEvent) => { this.input.setKey(event.code, false); };
   private onBlur = () => { if (this.phase === 'playing') this.pause(); this.clearInput(); };
   private onVisibility = () => { if (document.hidden) this.onBlur(); };
   private loop = (timestamp: number) => {
@@ -232,6 +261,7 @@ export class SurvivalGame {
     if (this.elapsed >= SURVIVAL_DURATION) { this.elapsed = SURVIVAL_DURATION; this.phase = 'victory'; this.clearInput(); this.audio.setScene('result'); return; }
     if (this.noticeTimer > 0 && --this.noticeTimer === 0) this.notice = '';
     this.updatePlayer();
+    this.updateSummons();
     this.updateSpawning();
     this.updateEnemies();
     if (this.phase !== 'playing') return;
@@ -244,9 +274,9 @@ export class SurvivalGame {
     this.enemies = this.enemies.filter(enemy => enemy.hp > 0);
     this.camera.x += (clamp(this.player.x - VIEW_W / 2, 0, SURVIVAL_WORLD.width - VIEW_W) - this.camera.x) * 0.12;
     this.camera.y += (clamp(this.player.y - 510, 0, SURVIVAL_WORLD.height - VIEW_H) - this.camera.y) * 0.10;
-    if (this.player.hp <= 0) { this.player.hp = 0; this.phase = 'defeat'; this.player.attack = null; this.player.nextAttackVariants = newAttackVariants(); this.clearInput(); this.audio.setScene('result'); }
+    if (this.player.hp <= 0) { this.player.hp = 0; this.phase = 'defeat'; this.player.attack = null; this.player.nextAttackVariants = newAttackVariants(); this.clearInput(); this.summons.clear(); this.audio.setScene('result'); }
     else this.checkLevelUp();
-    this.pressed.clear();
+    this.input.endTick();
   }
 
   private updatePlayer() {
@@ -257,23 +287,23 @@ export class SurvivalGame {
     p.invuln = Math.max(0, p.invuln - 1); p.drop = Math.max(0, p.drop - 1);
     p.secondaryCooldown = Math.max(0, p.secondaryCooldown - 1);
     p.skillCooldown = Math.max(0, p.skillCooldown - 1); p.dodgeCooldown = Math.max(0, p.dodgeCooldown - 1);
-    if (this.pressed.has('KeyH') && p.dodgeCooldown <= 0 && !p.attack?.plunge) {
+    if (this.input.justPressed('dodge') && p.dodgeCooldown <= 0 && !p.attack?.plunge) {
       p.dodge = 16; p.dodgeCooldown = this.dodgeCooldownMax * 60; p.invuln = Math.max(p.invuln, 20); p.attack = null;
       this.audio.play('dodge', { charId: this.char.id });
     }
-    const direction = (this.keys.has('KeyD') ? 1 : 0) - (this.keys.has('KeyA') ? 1 : 0);
+    const direction = this.input.horizontal();
     if (direction && !p.attack?.plunge && p.attack?.def.kind !== 'secondary') p.facing = direction as 1 | -1;
     if (p.dodge > 0) { p.dodge--; p.vx = p.facing * 10.5; }
     else p.vx = direction * this.char.speed * stats.speedMultiplier * (p.attack ? 0.6 : 1);
-    if (this.pressed.has('KeyW') && p.jumps > 0 && !p.attack?.plunge) {
+    if (this.input.justPressed('jump') && p.jumps > 0 && !p.attack?.plunge) {
       p.vy = -this.char.jump * 1.03; p.jumps--; p.onGround = false;
       this.effect('ring', p.x, p.y, 45, '#d0f8ee', 18);
       this.audio.play('jump', { charId: this.char.id });
     }
-    if (this.pressed.has('KeyS') && p.onGround && p.y < groundHeightAt(p.x) - 1 && !p.attack?.plunge) {
+    if (this.input.justPressed('down') && p.onGround && p.y < groundHeightAt(p.x) - 1 && !p.attack?.plunge) {
       p.drop = 16; p.onGround = false; p.y += 5; p.vy = 2;
     }
-    const request = this.pressed.has('KeyI') ? 'secondary' : this.pressed.has('KeyL') ? 'special' : this.pressed.has('KeyK') ? 'smash' : this.pressed.has('KeyJ') ? 'jab' : null;
+    const request = this.input.justPressed('secondary') ? 'secondary' : this.input.justPressed('special') ? 'special' : this.input.justPressed('smash') ? 'smash' : this.input.justPressed('jab') ? 'jab' : null;
     if (request) this.pendingAttack = { kind: request, frames: 8 };
     if (this.pendingAttack) {
       if (!p.attack && !p.dodge) { this.beginAttack(this.pendingAttack.kind); this.pendingAttack = null; }
@@ -284,7 +314,7 @@ export class SurvivalGame {
     if (plunge?.phase === 'windup') { p.vy = 0; p.vx = 0; }
     else if (plunge?.phase === 'dive') { p.vy = 30; p.vx = 0; }
     else if (p.attack?.def.effect === 'thrust' && p.attack.t >= p.attack.def.startup && p.attack.t < p.attack.def.startup + p.attack.def.active) { p.vx = p.facing * 12; p.vy = 0; }
-    else p.vy = Math.min(this.keys.has('KeyS') ? 17 : 12, p.vy + 0.53 * this.char.gravMul);
+    else p.vy = Math.min(this.input.held('down') ? 17 : 12, p.vy + 0.53 * this.char.gravMul);
     p.x = clamp(p.x + p.vx, 38, SURVIVAL_WORLD.width - 38);
     p.y += p.vy; p.onGround = false;
     // Continue across either slope direction without turning walking into tiny falls.
@@ -386,8 +416,9 @@ export class SurvivalGame {
 
   private attackDamage(kind: MoveDef['kind']) {
     const stats = getSurvivalStats(this.progress);
-    if (kind === 'secondary') return this.char.secondary.dmg * 4.8 * stats.damageMultiplier * getSecondaryProfile(this.char.id, this.progress.secondaryLevel).damageMultiplier;
-    return this.char[kind].dmg * (kind === 'jab' ? 6.4 : 4.8) * stats.damageMultiplier * (kind === 'special' ? 1 + (this.progress.skillLevel - 1) * 0.24 : 1);
+    const buff = this.summons.damageMultiplier(0);
+    if (kind === 'secondary') return this.char.secondary.dmg * 4.8 * stats.damageMultiplier * buff * getSecondaryProfile(this.char.id, this.progress.secondaryLevel).damageMultiplier;
+    return this.char[kind].dmg * (kind === 'jab' ? 6.4 : 4.8) * stats.damageMultiplier * buff * (kind === 'special' ? 1 + (this.progress.skillLevel - 1) * 0.24 : 1);
   }
   private secondaryRange() { return getSurvivalStats(this.progress).rangeMultiplier * getSecondaryProfile(this.char.id, this.progress.secondaryLevel).rangeMultiplier; }
   private specialRange() {
@@ -426,9 +457,15 @@ export class SurvivalGame {
       }
     } else if (this.char.id === 'diluc') {
       for (let i = 0; i < profile.count; i++) this.secondaryShot(p.x + p.facing * 38, p.y - 45 - i * 64, p.facing * (7.8 + i * 0.6), 0, damage, 'phoenix', 45 * range, profile.piercing);
-    } else {
+    } else if (this.char.id === 'xiao') {
       for (let i = 0; i < profile.count; i++) this.secondaryShot(p.x + p.facing * 45, p.y - 38 - i * 53, p.facing * (9.5 + i), 0, damage * 0.55, 'wind', 34 * range, true);
       this.effect('secondary', p.x + p.facing * 48, p.y - 45, 200 * range, this.char.color, 18);
+    } else if (this.char.id === 'zhongli') {
+      const context = this.summonContext();
+      this.summons.castMeteor(context.owners[0], context, this.summonTuning());
+    } else if (this.char.id === 'furina') {
+      const context = this.summonContext();
+      this.summons.castRevelry(context.owners[0], context, this.summonTuning());
     }
     this.audio.play('cast', { charId: this.char.id, kind: 'secondary' });
   }
@@ -466,7 +503,56 @@ export class SurvivalGame {
         this.projectile(p.x + p.facing * 60, p.y - 42, p.facing * 5.7, 0, this.attackDamage('special') * 0.85, 'fire');
         this.field('flame', p.x + p.facing * 140, p.y - 30, 115 * range, 85, this.attackDamage('special') * 0.5);
       }
+    } else if (this.char.id === 'zhongli') {
+      const context = this.summonContext();
+      this.summons.castGeo(context.owners[0], context, this.summonTuning());
+    } else if (this.char.id === 'furina') {
+      const context = this.summonContext();
+      this.summons.castSalon(context.owners[0], context, this.summonTuning());
     }
+  }
+
+  private summonContext(): SummonContext {
+    const p = this.player;
+    return {
+      owners: [{ id: 0, x: p.x, feetY: p.y, facing: p.facing, alive: p.hp > 0 }],
+      targets: this.enemies.map(enemy => ({ id: enemy.id, x: enemy.x, feetY: enemy.y, width: enemy.radius * 2, height: enemy.radius * 1.6, alive: enemy.hp > 0 })),
+      surfaceAt: (x, nearFeetY) => {
+        if (x < 20 || x > SURVIVAL_WORLD.width - 20) return null;
+        // The nearest surface below the caster supports columns and crab attacks;
+        // airborne pets can choose enemy feet on other terraces independently.
+        const platforms = SURVIVAL_WORLD.platforms.filter(platform => x >= platform.x && x <= platform.x + platform.w && platform.y >= nearFeetY - 12);
+        return Math.min(groundHeightAt(x), ...platforms.map(platform => platform.y));
+      },
+      projectileBlocked: (oldX, oldY, newX, newY) => {
+        // Sample a swept segment so fast piercing streams cannot tunnel into a
+        // slope; deliberately omit one-way platforms, like ordinary shots.
+        const samples = Math.max(1, Math.ceil(Math.hypot(newX - oldX, newY - oldY) / 8));
+        for (let sample = 0; sample <= samples; sample++) {
+          const t = sample / samples, x = oldX + (newX - oldX) * t, y = oldY + (newY - oldY) * t;
+          if (x < 0 || x > SURVIVAL_WORLD.width || y >= groundHeightAt(x)) return true;
+        }
+        return false;
+      },
+    };
+  }
+
+  private summonTuning(): SummonTuning {
+    return { mainLevel: this.progress.skillLevel, secondaryLevel: this.progress.secondaryLevel,
+      branch: this.progress.branch as SummonTuning['branch'], damageMultiplier: getSurvivalStats(this.progress).damageMultiplier,
+      rangeMultiplier: getSurvivalStats(this.progress).rangeMultiplier };
+  }
+
+  private updateSummons() {
+    if (!this.summons.entities.length && !this.summons.effects.length && !this.summons.getShield(0) && !this.summons.getBuff(0)) return;
+    const previousEffects = new Set(this.summons.effects.map(effect => effect.id));
+    for (const hit of this.summons.step(this.summonContext())) {
+      const enemy = this.enemies.find(candidate => candidate.id === hit.targetId && candidate.hp > 0);
+      if (!enemy) continue;
+      this.hurtEnemy(enemy, hit.amount * 4.8, Math.sign(enemy.x - hit.x), 'summon');
+      if (hit.controlFrames > 0 && !enemy.boss) enemy.petrify = Math.max(enemy.petrify ?? 0, Math.min(enemy.elite ? 36 : 150, hit.controlFrames * (enemy.elite ? 0.35 : 1)));
+    }
+    for (const effect of this.summons.effects) if (!previousEffects.has(effect.id)) this.audio.play('summon', { charId: this.char.id, summonKind: effect.kind });
   }
 
   private landPlunge() {
@@ -615,12 +701,15 @@ export class SurvivalGame {
   private hurtPlayer(damage: number) {
     const p = this.player;
     if (p.invuln > 0 || p.dodge > 0 || this.phase !== 'playing') return;
-    const taken = Math.max(1, damage * getSurvivalStats(this.progress).armorMultiplier);
+    const incoming = Math.max(1, damage * getSurvivalStats(this.progress).armorMultiplier);
+    const taken = this.summons.absorb(0, incoming);
     p.hp = Math.max(0, p.hp - taken);
-    this.addText(p.x, p.y - 110, `−${Math.ceil(taken)}`, '#ffb0a1', true);
-    this.audio.play('hurt', { power: taken });
+    this.addText(p.x, p.y - 110, taken ? `−${Math.ceil(taken)}` : '护盾', taken ? '#ffb0a1' : '#f2d895', true);
+    if (taken < incoming) this.audio.play('shield', { charId: this.char.id, power: incoming - taken });
+    if (taken > 0) this.audio.play('hurt', { power: taken });
     if (p.hp <= 0) {
       this.phase = 'defeat'; this.hitstop = 0; p.attack = null; p.nextAttackVariants = newAttackVariants(); this.clearInput();
+      this.summons.clear();
       this.audio.setScene('result');
       return;
     }
@@ -662,6 +751,7 @@ export class SurvivalGame {
     for (const enemy of this.enemies) {
       if (enemy.hp <= 0) continue;
       enemy.age++; enemy.flash = Math.max(0, enemy.flash - 1); enemy.slow = Math.max(0, enemy.slow - 1);
+      if ((enemy.petrify ?? 0) > 0) { enemy.petrify = Math.max(0, (enemy.petrify ?? 0) - 1); continue; }
       let dx = p.x - enemy.x;
       if (Math.abs(dx) > 1750) {
         const side = p.x < SURVIVAL_WORLD.width / 2 ? 1 : -1;

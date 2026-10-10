@@ -1,0 +1,62 @@
+{
+  "portrait": "./assets/master.png",
+  "effects": { "pillar": "./assets/pillar.png", "meteor": "./assets/meteor.png" },
+  "clips": {
+    "l-skill": {
+      "title": "地心 / DOMINUS LAPIDIS",
+      "sheet": "./assets/l-skill-cross-charge.png",
+      "columns": 4, "rows": 4, "frameCount": 16,
+      "displayCellHeight": 360, "rootX": 355, "floorY": 441,
+      "displayScale": 1.15, "anchorToFeet": true,
+      "frames": [
+        { "rect": [0,0,313,319] }, { "rect": [313,0,314,319] }, { "rect": [627,0,313,319] }, { "rect": [940,0,314,319] },
+        { "rect": [0,319,313,311] }, { "rect": [313,319,314,311] }, { "rect": [627,319,313,311] }, { "rect": [940,319,314,311] },
+        { "rect": [0,630,313,311] }, { "rect": [313,630,314,311] }, { "rect": [627,630,313,311] }, { "rect": [940,630,314,311] },
+        { "rect": [0,941,313,313] }, { "rect": [313,941,314,313] }, { "rect": [627,941,313,313] }, { "rect": [940,941,314,313] }
+      ],
+      "frameMs": [110, 95, 100, 110, 130, 150, 170, 190, 110, 70, 110, 90, 80, 110, 125, 230],
+      "restMs": 620,
+      "phases": ["双手起势", "交叉蓄力", "平展成盾", "沉稳收势"],
+      "phaseFrames": [0, 2, 8, 13],
+      "motionStyle": "cross-charge", "chargeStartFrame": 2,
+      "effectStartFrame": 9, "impactFrame": 9, "hitstopMs": 70,
+      "note": "双手抬起，交叉于胸前缓慢蓄力；双臂迅速平直展开，到位瞬间爆发护盾与岩柱。短暂停顿强调力量，再沉稳收势。"
+    },
+    "jab-thrust": {
+      "title": "贯虹枪术 / RAIN OF STONE",
+      "sheet": "./assets/jab-thrust.png",
+      "columns": 4, "rows": 2, "frameCount": 8,
+      "displayCellHeight": 360, "rootX": 355, "floorY": 441,
+      "displayScale": 1.26, "anchorToFeet": true,
+      "frames": [
+        { "rect": [0,0,443,443] }, { "rect": [443,0,444,443] }, { "rect": [887,0,443,443] }, { "rect": [1330,0,444,443] },
+        { "rect": [0,443,510,444] }, { "rect": [510,443,377,444] }, { "rect": [887,443,443,444] }, { "rect": [1330,443,444,444] }
+      ],
+      "frameMs": [200, 110, 100, 90, 180, 110, 130, 280],
+      "restMs": 650,
+      "phases": ["持枪蓄势", "前踏出枪", "枪尖贯虹", "收枪归位"],
+      "phaseFrames": [0, 2, 4, 6],
+      "effectStartFrame": 3, "impactFrame": 4,
+      "note": "以真实持枪姿态完成前踏直刺，枪尖沿前方攻击线送出；手、肩与重心共同推进，再收枪归位。"
+    },
+    "i-burst": {
+      "title": "天星 / PLANET BEFALL",
+      "sheet": "./assets/i-burst.png",
+      "columns": 4, "rows": 4, "frameCount": 16,
+      "displayCellHeight": 360, "rootX": 355, "floorY": 441,
+      "displayScale": 1.39, "anchorToFeet": true,
+      "frames": [
+        { "rect": [73,75,161,258] }, { "rect": [386,75,167,257] }, { "rect": [697,76,168,255] }, { "rect": [1015,61,165,270] },
+        { "rect": [69,388,178,256] }, { "rect": [382,369,173,275] }, { "rect": [696,383,179,261] }, { "rect": [1004,388,186,256] },
+        { "rect": [64,702,177,257] }, { "rect": [382,702,173,257] }, { "rect": [691,701,178,258] }, { "rect": [978,703,205,256] },
+        { "rect": [67,987,183,247], "scale": 1.04 }, { "rect": [381,987,179,247], "scale": 1.04 }, { "rect": [697,986,173,248], "scale": 1.04 }, { "rect": [1010,988,167,246], "scale": 1.04 }
+      ],
+      "frameMs": [160, 100, 95, 110, 110, 120, 110, 130, 190, 150, 140, 260, 180, 110, 110, 300],
+      "restMs": 700,
+      "phases": ["抬手召天", "抱臂定姿", "陨星震落", "从容收势"],
+      "phaseFrames": [0, 4, 11, 13],
+      "effectStartFrame": 5, "impactFrame": 11,
+      "note": "抬手引星，落定抱臂姿态；陨星落地时人物保持镇定，以短暂停顿强调冲击重量。"
+    }
+  }
+}

@@ -8,12 +8,20 @@ import { CHARACTERS, ITEMS, STAGE, WORLD } from './data';
 import { SPRITES, SPRITE_W, SPRITE_H, ITEM_SPRITES, ITEM_SPRITE_SIZE } from './sprites';
 import type { SpriteFrame } from './sprites';
 import type { CharDef, ItemDef, MoveDef } from './data';
-import { loadGameArt, drawArenaBackground, drawCharacterArt, drawFighterArt, drawElementEffect, drawXiaoPlungeEffect, drawSecondaryEffect, hasRegisteredMeleeTrail } from './art';
+import { acquireGameArt, drawArenaBackground, drawCharacterArt, drawFighterArt, drawElementEffect, drawXiaoPlungeEffect, drawSecondaryEffect, hasRegisteredMeleeTrail } from './art';
+import type { GameArtLease } from './art';
 import { attackPhase } from './animation';
 import type { FighterAnimation, PlungeAnimation } from './animation';
 import { advanceMotion, newMotionState, newAttackVariants, takeAttackVariant } from './clip-animation';
 import type { AttackVariantState, AttackVisualVariant, MotionState } from './clip-animation';
 import { BattleAudio } from './audio';
+import { BattleInput } from './input';
+import type { BattleAction } from './input';
+import { effectGlow } from './visual-quality';
+import type { VisualQuality } from './visual-quality';
+import { SummonRuntime } from './summons';
+import type { SummonContext, SummonOwner } from './summons';
+import { drawSummonArt } from './summoner-art';
 
 const GRAV = 0.52;
 const MAX_FALL = 9.5;
@@ -72,6 +80,7 @@ interface Fighter {
   attack: ActiveAttack | null;
   hitstun: number;
   hitlag: number;
+  petrified: number;
   invuln: number;
   dropTimer: number;    // 穿过软平台计时
   respawnTimer: number;
@@ -146,23 +155,6 @@ interface Afterimage {
   life: number;
 }
 
-interface ControlSet {
-  left: string[]; right: string[]; up: string[]; down: string[];
-  jab: string[]; smash: string[]; special: string[]; secondary: string[];
-  dodge: string[];
-}
-
-const P1_KEYS: ControlSet = {
-  left: ['KeyA'], right: ['KeyD'], up: ['KeyW'], down: ['KeyS'],
-  jab: ['KeyJ'], smash: ['KeyK'], special: ['KeyL'], secondary: ['KeyI'],
-  dodge: ['KeyH'],
-};
-const P2_KEYS: ControlSet = {
-  left: ['ArrowLeft'], right: ['ArrowRight'], up: ['ArrowUp'], down: ['ArrowDown'],
-  jab: ['Numpad1', 'Comma'], smash: ['Numpad2', 'Period'], special: ['Numpad3', 'Slash'], secondary: ['Numpad5', 'Quote'],
-  dodge: ['Numpad0', 'ShiftRight'],
-};
-
 // ---------------- 主游戏类 ----------------
 export class Game {
   private ctx: CanvasRenderingContext2D;
@@ -172,10 +164,12 @@ export class Game {
   private destroyed = false;
 
   frame = 0;
+  private visualQuality: VisualQuality = 'standard';
   private state: GameState = 'menu';
-  private keys = new Set<string>();
-  private pressed = new Set<string>();
+  private input = new BattleInput();
+  private artLease?: GameArtLease;
   private sfx = new BattleAudio();
+  private summons = new SummonRuntime();
 
   private mode: 'cpu' | 'pvp' = 'cpu';
   private selCursor = [0, 1];
@@ -184,6 +178,7 @@ export class Game {
   private options: MatchOptions = { mode: 'cpu', player: 0, opponent: 1, difficulty: 'normal', stocks: 3, duration: 180, items: true };
   private remainingFrames = 180 * 60;
   private isDraw = false;
+  private mobileHud = false;
 
   private fighters: Fighter[] = [];
   private items: ItemEnt[] = [];
@@ -207,7 +202,6 @@ export class Game {
     canvas.width = WORLD.w;
     canvas.height = WORLD.h;
     this.prerenderSprites();
-    void loadGameArt().catch(() => undefined);
     for (let i = 0; i < 8; i++) {
       this.clouds.push({ x: Math.random() * WORLD.w, y: 40 + Math.random() * 200, s: 40 + Math.random() * 70, v: 0.1 + Math.random() * 0.25 });
     }
@@ -226,8 +220,9 @@ export class Game {
     window.removeEventListener('keyup', this.onKeyUp);
     window.removeEventListener('blur', this.onBlur);
     document.removeEventListener('visibilitychange', this.onVisibilityChange);
-    this.keys.clear();
-    this.pressed.clear();
+    this.clearInput();
+    this.summons.clear();
+    this.artLease?.release();
     this.sfx.destroy();
   }
 
@@ -245,8 +240,7 @@ export class Game {
       this.pausedFrom = this.state;
       this.state = 'paused';
     } else return;
-    this.keys.clear();
-    this.pressed.clear();
+    this.clearInput();
     this.last = performance.now();
     this.acc = 0;
     this.sfx.setScene(this.state === 'paused' ? 'paused' : 'playing');
@@ -254,14 +248,42 @@ export class Game {
 
   rematch(): void { if (!this.destroyed) this.start(this.options); }
   setMuted(value: boolean): void { this.sfx.setMuted(value); }
+  setMobileHud(enabled: boolean): void { this.mobileHud = enabled; }
+  setVisualQuality(quality: VisualQuality): void { this.visualQuality = quality === 'low' ? 'low' : 'standard'; }
+  resume(): void { if (this.state === 'paused') this.pause(); }
 
-  getSnapshot(): { phase: GameState; timeLeft: number; winner: number | null; draw: boolean; muted: boolean } {
-    return { phase: this.state, timeLeft: Math.ceil(this.remainingFrames / 60), winner: this.winner?.idx ?? null, draw: this.isDraw, muted: this.sfx.muted };
+  setTouchAction(action: BattleAction, source: string, down: boolean): void {
+    this.input.setTouchAction(action, source, down, !this.destroyed && this.state === 'fight');
+    if (down && !this.destroyed && this.state === 'fight') this.sfx.unlock();
+  }
+
+  clearTouchInput(): void {
+    this.input.clearTouch();
+    if (this.fighters[0]) this.fighters[0].jumpBuffer = 0;
+  }
+
+  getSnapshot() {
+    const player = this.fighters[0];
+    const ready = this.state === 'fight' && !!player && !player.respawnTimer;
+    return {
+      phase: this.state, timeLeft: Math.ceil(this.remainingFrames / 60), winner: this.winner?.idx ?? null, draw: this.isDraw, muted: this.sfx.muted, visualQuality: this.visualQuality,
+      onGround: player?.onGround ?? true,
+      canSpecial: ready && player.specialCooldown <= 0 && !(player.char.id === 'xiao' && player.onGround),
+      canSecondary: ready && player.secondaryCooldown <= 0,
+      canDodge: ready && player.dodgeCooldown <= 0 && (player.onGround || !player.airDodgeUsed),
+      skillCooldown: (player?.specialCooldown ?? 0) / 60, skillCooldownMax: player?.char.specialCooldown ?? (player?.char.special.effect === 'plunge' ? 105 / 60 : 90 / 60),
+      secondaryCooldown: (player?.secondaryCooldown ?? 0) / 60, secondaryCooldownMax: player?.char.secondaryCooldown ?? 0,
+      dodgeCooldown: (player?.dodgeCooldown ?? 0) / 60, dodgeCooldownMax: DODGE_COOLDOWN / 60,
+    };
+  }
+
+  private clearInput() {
+    this.input.clear();
+    for (const fighter of this.fighters) fighter.jumpBuffer = 0;
   }
 
   private onBlur = () => {
-    this.keys.clear();
-    this.pressed.clear();
+    this.clearInput();
     if (this.state === 'fight' || this.state === 'countdown') this.pause();
   };
   private onVisibilityChange = () => { if (document.hidden) this.onBlur(); };
@@ -278,14 +300,10 @@ export class Game {
       if (e.code === 'Escape' || e.code === 'KeyP') { this.pause(); return; }
       if (this.state === 'paused' && e.code === 'Enter') { this.pause(); return; }
       if (this.state === 'result' && e.code === 'Enter') { this.rematch(); return; }
-      this.keys.add(e.code);
-      this.pressed.add(e.code);
+      this.input.setKey(e.code, true, this.state === 'fight');
     }
   };
-  private onKeyUp = (e: KeyboardEvent) => { this.keys.delete(e.code); };
-
-  private anyPressed(list: string[]) { return list.some(k => this.pressed.has(k)); }
-  private anyHeld(list: string[]) { return list.some(k => this.keys.has(k)); }
+  private onKeyUp = (e: KeyboardEvent) => { this.input.setKey(e.code, false); };
 
   private loop = (now: number) => {
     if (this.destroyed) return;
@@ -295,7 +313,6 @@ export class Game {
       this.acc -= STEP;
       if (this.state !== 'paused') this.frame++;
       this.update();
-      this.pressed.clear();
     }
     this.render();
     this.raf = requestAnimationFrame(this.loop);
@@ -325,9 +342,11 @@ export class Game {
       this.shakeOffset.x = Math.sin(this.frame * 2.399963) * this.shake * 0.5;
       this.shakeOffset.y = Math.sin(this.frame * 3.883222 + 1.1) * this.shake * 0.5;
     }
+    this.input.endTick();
   }
 
   private startMatch() {
+    this.summons.clear();
     this.items = [];
     this.projectiles = [];
     this.particles = [];
@@ -341,10 +360,12 @@ export class Game {
     this.shake = 0;
     this.shakeOffset = { x: 0, y: 0 };
     this.flash = 0;
-    this.keys.clear();
-    this.pressed.clear();
+    this.clearInput();
     this.fighters = [0, 1].map(i => this.makeFighter(i, CHARACTERS[this.selCursor[i]], i === 1 && this.mode === 'cpu'));
-    void loadGameArt(this.fighters.map(fighter => fighter.char.id));
+    const previousArt = this.artLease;
+    this.artLease = acquireGameArt(this.fighters.map(fighter => fighter.char.id));
+    previousArt?.release();
+    void this.artLease.ready;
     this.countdown = 150;
     this.state = 'countdown';
     this.sfx.restart(); this.sfx.setScene('playing');
@@ -362,7 +383,7 @@ export class Game {
       onGround: true, jumpsLeft: 2,
       percent: 0, stocks: this.options.stocks,
       state: 'free', attack: null,
-      hitstun: 0, hitlag: 0, invuln: 0, dropTimer: 0,
+      hitstun: 0, hitlag: 0, petrified: 0, invuln: 0, dropTimer: 0,
       respawnTimer: 0, held: null,
       buffs: { atkUntil: 0, spdUntil: 0, slowUntil: 0 },
       isCPU, aiThink: 0, aiJumpCd: 0, koFlash: 0,
@@ -445,7 +466,7 @@ export class Game {
         if (f.respawnTimer === 0) this.respawn(f);
         continue;
       }
-      const ctrl = f.isCPU ? this.cpuInput(f) : this.playerInput(f.idx === 0 ? P1_KEYS : P2_KEYS);
+      const ctrl = f.isCPU ? this.cpuInput(f) : this.playerInput(f.idx);
       if (ctrl.up) f.jumpBuffer = JUMP_BUFFER;
       if (f.hitlag > 0) { f.hitlag = Math.max(0, f.hitlag - 1); continue; }
       this.updateFighter(f, ctrl);
@@ -453,24 +474,26 @@ export class Game {
 
     this.resolveHits();
     this.updateProjectiles();
+    this.updateSummons();
     this.updateItems();
     this.updateParticles();
     this.checkBlast();
     if (this.state === 'fight' && this.remainingFrames === 0) this.finishByTime();
   }
 
-  private playerInput(c: ControlSet): Input {
+  private playerInput(player: number): Input {
+    const direction = this.input.horizontal(player);
     return {
-      left: this.anyHeld(c.left),
-      right: this.anyHeld(c.right),
-      up: this.anyPressed(c.up),
-      down: this.anyHeld(c.down),
-      jab: this.anyPressed(c.jab),
-      smash: this.anyPressed(c.smash),
-      special: this.anyPressed(c.special),
-      secondary: this.anyPressed(c.secondary),
-      downPressed: this.anyPressed(c.down),
-      dodge: this.anyPressed(c.dodge),
+      left: direction < 0,
+      right: direction > 0,
+      up: this.input.justPressed('jump', player),
+      down: this.input.held('down', player),
+      jab: this.input.justPressed('jab', player),
+      smash: this.input.justPressed('smash', player),
+      special: this.input.justPressed('special', player),
+      secondary: this.input.justPressed('secondary', player),
+      downPressed: this.input.justPressed('down', player),
+      dodge: this.input.justPressed('dodge', player),
     };
   }
 
@@ -508,6 +531,10 @@ export class Game {
     const dx = foe.x - f.x;
     const dy = foe.y - f.y;
     const plunge = f.char.special.effect === 'plunge';
+    const summoner = f.char.id === 'zhongli' || f.char.id === 'furina';
+    if (summoner && f.state === 'free' && f.onGround && f.aiThink === 0 && f.specialCooldown === 0 && Math.abs(dx) < 420 && Math.abs(dy) < 190) {
+      f.facing = dx >= 0 ? 1 : -1; out.special = true; f.aiThink = reaction * 2; return out;
+    }
     // 捡道具
     let target: number | null = null;
     for (const it of this.items) {
@@ -599,6 +626,7 @@ export class Game {
     if (f.dodgeCooldown > 0) f.dodgeCooldown--;
     if (f.specialCooldown > 0) f.specialCooldown--;
     if (f.secondaryCooldown > 0) f.secondaryCooldown--;
+    if (f.petrified > 0) f.petrified--;
     if (f.comboTimer > 0) f.comboTimer--;
     else f.combo = 0;
     if (f.onGround) f.coyote = COYOTE_FRAMES;
@@ -642,7 +670,7 @@ export class Game {
       if (ctrl.left) { f.vx = Math.max(f.vx - (f.onGround ? 0.7 : c.airDrift), -sp); f.facing = -1; }
       if (ctrl.right) { f.vx = Math.min(f.vx + (f.onGround ? 0.7 : c.airDrift), sp); f.facing = 1; }
       if (!ctrl.left && !ctrl.right && f.onGround) f.vx *= 0.75;
-    } else if (f.state === 'hitstun') {
+    } else if (f.state === 'hitstun' && f.petrified <= 0) {
       // 受击时略微可控（DI）
       if (ctrl.left) f.vx -= 0.06;
       if (ctrl.right) f.vx += 0.06;
@@ -723,6 +751,11 @@ export class Game {
         }
       } else a.t++;
       if (a.t === def.startup && (def.kind === 'special' || def.kind === 'secondary') && !a.plunge) this.sfx.play('cast', { charId: c.id, kind: def.kind });
+      if (a.t === def.startup && (def.effect === 'geo-pillar' || def.effect === 'salon')) {
+        const owner = this.summonOwner(f), context = this.summonContext();
+        if (def.effect === 'geo-pillar') this.summons.castGeo(owner, context);
+        else this.summons.castSalon(owner, context);
+      }
       if (def.kind === 'secondary' && a.t === def.startup) this.releaseSecondary(f, def);
       if (def.effect === 'thrust' && a.t >= def.startup && a.t < def.startup + def.active) { f.vx = f.facing * 11; f.vy = 0; }
       if (def.effect === 'thrust' && a.t >= def.startup + def.active) f.vx *= 0.55;
@@ -841,11 +874,17 @@ export class Game {
       f.fastFalling = false; f.dropTimer = 0; f.jumpBuffer = 0; f.coyote = 0;
     }
     if (def.kind === 'secondary') f.secondaryCooldown = f.char.secondaryCooldown * 60;
-    if (def.kind === 'special') f.specialCooldown = def.effect === 'plunge' ? 105 : 90;
+    if (def.kind === 'special') f.specialCooldown = f.char.specialCooldown !== undefined ? f.char.specialCooldown * 60 : def.effect === 'plunge' ? 105 : 90;
     if (f.onGround && def.effect !== 'dash') f.vx *= 0.3;
   }
 
   private releaseSecondary(f: Fighter, def: MoveDef) {
+    if (def.effect === 'geo-meteor' || def.effect === 'revelry') {
+      const owner = this.summonOwner(f), context = this.summonContext();
+      if (def.effect === 'geo-meteor') this.summons.castMeteor(owner, context);
+      else this.summons.castRevelry(owner, context);
+      return;
+    }
     if (def.effect === 'thrust') return;
     const add = (kind: Projectile['kind'], x: number, y: number, vx: number, vy: number, radius: number, height: number, life: number) => {
       if (this.projectiles.length >= 80) return;
@@ -873,7 +912,7 @@ export class Game {
       return null;
     }
     if (t < def.startup || t >= def.startup + def.active) return null;
-    if (def.effect === 'projectile' || (def.kind === 'secondary' && def.effect !== 'thrust')) return null;
+    if (def.effect === 'projectile' || def.effect === 'geo-pillar' || def.effect === 'salon' || (def.kind === 'secondary' && def.effect !== 'thrust')) return null;
     const reach = def.reach;
     if (def.effect === 'spin') {
       return { x: f.x - reach, y: f.y + f.h / 2 - def.height / 2, w: reach * 2, h: def.height };
@@ -907,9 +946,15 @@ export class Game {
     for (const { atk, vic, def } of hits) this.applyHit(atk, vic, def);
   }
 
-  private applyHit(atk: Fighter, vic: Fighter, def: MoveDef) {
+  private applyHit(atk: Fighter, vic: Fighter, def: MoveDef, summon = false, controlFrames = 0) {
     const atkUp = atk.buffs.atkUntil > this.frame ? 1.3 : 1;
-    const dmg = def.dmg * atkUp;
+    const rawDamage = def.dmg * (summon ? 1 : atkUp * this.summons.damageMultiplier(atk.idx));
+    const dmg = this.summons.absorb(vic.idx, rawDamage);
+    if (dmg < rawDamage) {
+      this.sfx.play('shield', { charId: vic.char.id, power: rawDamage });
+      this.burst(vic.x, vic.y + vic.h / 2, 5, '#eac879', 2);
+    }
+    if (dmg <= 0) { vic.hitlag = Math.max(vic.hitlag, 2); return; }
     const before = vic.percent;
     vic.percent += dmg;
     // 大乱斗经典公式：基础击飞 + 百分比成长，再按体重修正
@@ -921,6 +966,8 @@ export class Game {
     vic.onGround = false;
     vic.state = 'hitstun';
     vic.hitstun = Math.ceil(Math.max(8, Math.min(48, mag * 2.3)));
+    if (controlFrames > 0) { vic.petrified = Math.min(70, controlFrames); vic.hitstun = Math.max(vic.hitstun, vic.petrified); vic.vx = 0; vic.vy = 0; }
+    else if (vic.petrified > 0) vic.hitstun = Math.max(vic.hitstun, vic.petrified);
     vic.attack = null;
     vic.dropTimer = 0;
     vic.dodgeTimer = 0;
@@ -933,7 +980,7 @@ export class Game {
     // 打击停顿（双方冻结帧）
     const lag = Math.ceil(Math.max(3, Math.min(11, dmg * 0.5)));
     vic.hitlag = lag;
-    atk.hitlag = lag;
+    if (!summon) atk.hitlag = lag;
     this.shake = Math.min(14, this.shake + dmg * 0.7);
     this.sfx.play('impact', { charId: atk.char.id, kind: def.kind, power: dmg });
     // 火花粒子 + 伤害数字
@@ -946,6 +993,38 @@ export class Game {
 
   private overlap(a: { x: number; y: number; w: number; h: number }, b: { x: number; y: number; w: number; h: number }) {
     return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+  }
+
+  private summonOwner(f: Fighter): SummonOwner {
+    return { id: f.idx, x: f.x, feetY: f.y + f.h, facing: f.facing, alive: f.stocks > 0 && f.respawnTimer === 0 };
+  }
+
+  private summonSurface(x: number, nearFeetY: number): number | null {
+    const surfaces = [STAGE.main, ...STAGE.soft].filter(surface => x >= surface.x && x <= surface.x + surface.w && surface.y >= nearFeetY - 12);
+    return surfaces.length ? Math.min(...surfaces.map(surface => surface.y)) : null;
+  }
+
+  private summonContext(): SummonContext {
+    return {
+      owners: this.fighters.map(f => this.summonOwner(f)),
+      targets: this.fighters.map(f => ({ id: f.idx, ownerId: f.idx, x: f.x, feetY: f.y + f.h, width: f.w, height: f.h, alive: f.stocks > 0 && f.respawnTimer === 0 && f.invuln <= 0 })),
+      surfaceAt: (x, feet) => this.summonSurface(x, feet),
+    };
+  }
+
+  private updateSummons(): void {
+    const effectsBefore = new Set(this.summons.effects.map(effect => effect.id));
+    const hits = this.summons.step(this.summonContext());
+    for (const effect of this.summons.effects) if (!effectsBefore.has(effect.id)) {
+      this.sfx.play('summon', { charId: this.fighters[effect.ownerId]?.char.id, summonKind: effect.kind });
+    }
+    for (const hit of hits) {
+      const owner = this.fighters.find(f => f.idx === hit.ownerId), target = this.fighters.find(f => f.idx === hit.targetId);
+      if (!owner || !target || target.invuln > 0 || target.stocks <= 0 || target.respawnTimer > 0) continue;
+      const meteor = hit.kind === 'geo-meteor';
+      this.applyHit(owner, target, { name: hit.kind, dmg: hit.amount, kb: meteor ? 4 : 1.7, kbs: meteor ? 0.055 : 0.025,
+        angle: 55, startup: 0, active: 1, endlag: 0, reach: 0, height: 0, kind: meteor || hit.kind === 'hydro-wave' ? 'secondary' : 'special' }, true, hit.controlFrames);
+    }
   }
 
   // ---------------- 道具 ----------------
@@ -1111,7 +1190,7 @@ export class Game {
         this.isDraw = survivors.length === 0;
         this.state = 'result';
         this.sfx.setScene('result');
-        this.keys.clear();
+        this.clearInput();
       }
     }
   }
@@ -1124,10 +1203,11 @@ export class Game {
     this.isDraw = this.winner === null;
     this.state = 'result';
     this.sfx.setScene('result');
-    this.keys.clear();
+    this.clearInput();
   }
 
   private ko(f: Fighter) {
+    this.summons.clearOwner(f.idx);
     this.sfx.play('ko', { charId: f.char.id });
     this.shake = 16;
     this.flash = 0.7;
@@ -1154,12 +1234,13 @@ export class Game {
     f.nextAttackVariants = newAttackVariants();
     f.secondaryCooldown = 0;
     this.projectiles = this.projectiles.filter(projectile => projectile.owner !== f.idx);
-    f.hitstun = 0; f.hitlag = 0; f.dodgeTimer = 0;
+    f.hitstun = 0; f.hitlag = 0; f.petrified = 0; f.dodgeTimer = 0;
     f.fastFalling = false; f.jumpBuffer = 0;
     f.x = -9999; f.y = -9999;
   }
 
   private respawn(f: Fighter) {
+    this.summons.clearOwner(f.idx);
     f.x = WORLD.w / 2 + (f.idx === 0 ? -80 : 80);
     f.y = 60;
     f.vx = 0; f.vy = 0;
@@ -1169,6 +1250,7 @@ export class Game {
     f.state = 'free';
     f.hitstun = 0;
     f.hitlag = 0;
+    f.petrified = 0;
     f.attack = null;
     f.jumpBuffer = 0;
     f.coyote = 0;
@@ -1243,6 +1325,7 @@ export class Game {
       this.drawStage(g);
       this.drawItems(g);
       this.drawProjectiles(g);
+      this.drawSummons(g);
       for (const trail of this.afterimages) {
         drawFighterArt(g, trail.charId, trail.x, trail.feetY, 112, trail.animation, { facing: trail.facing, alpha: trail.life / 10 * 0.22 });
       }
@@ -1304,7 +1387,7 @@ export class Game {
     const m = STAGE.main;
     // 主浮空岛
     g.shadowColor = 'rgba(92,220,198,.3)';
-    g.shadowBlur = 18;
+    g.shadowBlur = effectGlow(this.visualQuality, 18);
     g.fillStyle = '#476c65';
     this.roundRect(g, m.x - 14, m.y, m.w + 28, 26, 8);
     g.fill();
@@ -1418,13 +1501,13 @@ export class Game {
       g.translate(p.x, p.y);
       if (p.kind === 'frost') {
         g.scale(p.vx < 0 ? -1 : 1, 1); g.rotate(Math.atan2(p.vy, Math.abs(p.vx)));
-        g.fillStyle = '#bbf5ff'; g.strokeStyle = '#f1fdff'; g.lineWidth = 1.5; g.shadowColor = '#8adbf1'; g.shadowBlur = 13;
+        g.fillStyle = '#bbf5ff'; g.strokeStyle = '#f1fdff'; g.lineWidth = 1.5; g.shadowColor = '#8adbf1'; g.shadowBlur = effectGlow(this.visualQuality, 13);
         g.beginPath(); g.moveTo(31, 0); g.lineTo(-12, -10); g.lineTo(-23, 0); g.lineTo(-12, 10); g.closePath(); g.fill(); g.stroke();
       } else if (p.def?.kind === 'secondary') {
         const tall = p.kind === 'thunder' || p.kind === 'updraft';
         const rotation = tall ? 0 : Math.atan2(p.vy, Math.abs(p.vx));
         if (!drawSecondaryEffect(g, p.charId!, 0, 0, (p.radius ?? 30) * 2.6, (p.height ?? 50) * 1.15, { facing: p.vx < 0 ? -1 : 1, rotation, alpha: Math.min(1, p.life / 10) })) {
-          g.strokeStyle = p.color; g.lineWidth = 5; g.shadowBlur = 16; g.shadowColor = p.color; g.beginPath(); g.ellipse(0, 0, p.radius ?? 30, (p.height ?? 50) / 2, 0, 0, Math.PI * 2); g.stroke();
+          g.strokeStyle = p.color; g.lineWidth = 5; g.shadowBlur = effectGlow(this.visualQuality, 16); g.shadowColor = p.color; g.beginPath(); g.ellipse(0, 0, p.radius ?? 30, (p.height ?? 50) / 2, 0, 0, Math.PI * 2); g.stroke();
         }
       } else if (p.kind === 'slash') {
         g.rotate(Math.atan2(p.vy, p.vx));
@@ -1433,7 +1516,7 @@ export class Game {
         g.strokeStyle = trail; g.lineWidth = 3;
         g.beginPath(); g.moveTo(-48, 1); g.lineTo(-22, -5); g.lineTo(-12, 3); g.lineTo(18, 0); g.stroke();
         if (!drawElementEffect(g, 'raiden', false, 1, 0, 82, 54, 0.95, -Math.PI / 2)) {
-          g.strokeStyle = '#e5d2ff'; g.lineWidth = 4; g.shadowColor = p.color; g.shadowBlur = 16;
+          g.strokeStyle = '#e5d2ff'; g.lineWidth = 4; g.shadowColor = p.color; g.shadowBlur = effectGlow(this.visualQuality, 16);
           g.beginPath(); g.ellipse(1, 0, 17, 26, 0, -1.15, 1.15); g.stroke();
         }
       } else if (p.kind === 'bomb') {
@@ -1444,6 +1527,63 @@ export class Game {
       } else {
         g.fillStyle = '#68c048';
         g.beginPath(); g.arc(0, 0, 7, 0, Math.PI * 2); g.fill();
+      }
+      g.restore();
+    }
+  }
+
+  private drawSummons(g: CanvasRenderingContext2D): void {
+    for (const f of this.fighters) {
+      const attack = f.attack;
+      if (!attack || attack.def.effect !== 'geo-meteor' || attack.t >= attack.def.startup || attack.t < attack.def.startup * .45) continue;
+      const progress = (attack.t / attack.def.startup - .45) / .55;
+      const x = f.x + f.facing * 145, feet = this.summonSurface(x, f.y + f.h) ?? f.y + f.h;
+      g.save(); g.globalAlpha = .2 + progress * .8; g.strokeStyle = '#ffe3a3'; g.lineWidth = 2;
+      g.beginPath(); g.ellipse(x, feet, 145, 20, 0, 0, Math.PI * 2); g.stroke();
+      const meteorX = x - f.facing * (1 - progress) * 85, meteorY = feet - (1 - progress) * 330;
+      if (!drawSummonArt(g, 'geo-meteor', meteorX, meteorY, 130, { age: attack.t, facing: f.facing })) {
+        g.fillStyle = '#d6a23f'; g.beginPath(); g.arc(meteorX, meteorY - 48, 48, 0, Math.PI * 2); g.fill();
+      }
+      g.restore();
+    }
+    for (const entity of this.summons.entities) {
+      g.save();
+      const alpha = Math.min(1, entity.age / 12, entity.life / 30);
+      if (!drawSummonArt(g, entity.kind, entity.x, entity.feetY, entity.height, { age: entity.age, attackProgress: entity.attackProgress, facing: entity.facing, alpha })) {
+        g.globalAlpha = alpha; g.fillStyle = entity.kind === 'geo-pillar' ? '#c59645' : '#8ad8f0';
+        if (entity.kind === 'geo-pillar') { g.fillRect(entity.x - 18, entity.feetY - entity.height, 36, entity.height); g.fillStyle = '#ffe4a0'; g.fillRect(entity.x - 3, entity.feetY - entity.height + 12, 6, entity.height - 24); }
+        else { g.beginPath(); g.ellipse(entity.x, entity.feetY - entity.height / 2, entity.height / 2, entity.height / 2, 0, 0, Math.PI * 2); g.fill(); }
+      }
+      g.font = '10px sans-serif'; g.textAlign = 'center'; g.fillStyle = entity.kind === 'geo-pillar' ? '#ffdda0' : '#b1edff';
+      g.fillText(`P${entity.ownerId + 1}`, entity.x, entity.feetY + 16);
+      g.restore();
+    }
+    for (const effect of this.summons.effects) {
+      const progress = effect.age / effect.maxLife, geo = effect.kind.startsWith('geo');
+      g.save(); g.globalAlpha = Math.min(1, effect.life / 12); g.strokeStyle = geo ? '#ffdc8b' : '#a2e9ff'; g.fillStyle = geo ? 'rgba(241,190,69,.18)' : 'rgba(64,172,241,.2)'; g.lineWidth = 3;
+      if (effect.kind === 'geo-meteor') {
+        // Release is already the impact tick. Retain the landed approved meteor
+        // briefly while it dissolves into fragments, rather than drawing spikes.
+        g.shadowColor = '#e3b45f'; g.shadowBlur = effectGlow(this.visualQuality, 12);
+        if (progress < .28) drawSummonArt(g, 'geo-meteor', effect.x, effect.feetY, 130 * (1 - progress), { age: effect.age, facing: effect.facing, alpha: 1 - progress * 3 });
+        g.beginPath(); g.ellipse(effect.x, effect.feetY - 5, effect.radius * (.45 + progress * .55), 18 + progress * 24, 0, 0, Math.PI * 2); g.fill(); g.stroke();
+        const fragments = this.visualQuality === 'low' ? 4 : 7;
+        for (let i = 0; i < fragments; i++) {
+          const angle = i * Math.PI * 2 / fragments, x = effect.x + Math.cos(angle) * effect.radius * (.2 + progress * .55);
+          g.fillRect(x - 4, effect.feetY - Math.sin(progress * Math.PI) * (32 + i % 3 * 18), 9, 12);
+        }
+      } else if (effect.kind === 'bubble') {
+        g.beginPath(); g.arc(effect.x, effect.feetY - effect.height / 2, effect.radius, 0, Math.PI * 2); g.fill(); g.stroke();
+        g.fillStyle = '#e4fcff'; g.beginPath(); g.arc(effect.x - 5, effect.feetY - effect.height / 2 - 5, 4, 0, Math.PI * 2); g.fill();
+      } else if (effect.kind === 'water-pierce') {
+        g.beginPath(); g.moveTo(effect.x - effect.vx * 4, effect.feetY - effect.vy * 4); g.lineTo(effect.x + effect.vx, effect.feetY + effect.vy); g.stroke();
+      } else {
+        const radius = effect.radius * (.5 + progress * .5);
+        g.beginPath(); g.ellipse(effect.x, effect.feetY - 5, radius, 16 + progress * 13, 0, 0, Math.PI * 2); g.fill(); g.stroke();
+        for (let i = 0; i < 6; i++) {
+          const x = effect.x + (i / 5 - .5) * radius * 1.7, h = effect.height * Math.sin(Math.PI * Math.min(1, progress * 1.7)) * (.55 + .35 * Math.sin(i * 2));
+          g.beginPath(); g.moveTo(x - 9, effect.feetY); g.lineTo(x, effect.feetY - h); g.lineTo(x + 9, effect.feetY); g.stroke();
+        }
       }
       g.restore();
     }
@@ -1490,6 +1630,15 @@ export class Game {
     // 增益光环
     if (f.buffs.atkUntil > this.frame) { g.strokeStyle = 'rgba(232,120,152,0.7)'; g.lineWidth = 2; g.beginPath(); g.arc(0, 28, 30 + Math.sin(this.frame * 0.15) * 4, 0, Math.PI * 2); g.stroke(); }
     if (f.buffs.spdUntil > this.frame) { g.strokeStyle = 'rgba(88,216,176,0.7)'; g.lineWidth = 2; g.beginPath(); g.arc(0, 28, 24 + Math.sin(this.frame * 0.2) * 3, 0, Math.PI * 2); g.stroke(); }
+    const shield = this.summons.getShield(f.idx), revelry = this.summons.getBuff(f.idx);
+    if (shield) {
+      g.strokeStyle = '#ffe3a3'; g.fillStyle = 'rgba(229,174,61,.1)'; g.lineWidth = 2.5;
+      g.globalAlpha *= Math.min(1, shield.life / 30);
+      g.beginPath(); g.ellipse(0, f.h - 44, 40, 62, 0, 0, Math.PI * 2); g.fill(); g.stroke();
+      g.fillStyle = '#efcc78'; g.fillRect(-27, f.h + 9, 54 * shield.hp / shield.maxHp, 3);
+    }
+    if (revelry) { g.strokeStyle = '#97e3ff'; g.lineWidth = 2; g.beginPath(); g.ellipse(0, f.h, 34 + Math.sin(this.frame * .08) * 3, 9, 0, 0, Math.PI * 2); g.stroke(); }
+    if (f.petrified > 0) { g.fillStyle = 'rgba(220,180,104,.35)'; g.fillRect(-23, f.h - 94, 46, 94); }
 
     // Put the descending wind behind Xiao so his hands and downward blade stay readable.
     if (f.attack?.plunge?.phase === 'dive') this.drawPlungeAttackFx(g, f);
@@ -1509,12 +1658,12 @@ export class Game {
       const bob = frame === 'idle' && f.onGround ? Math.sin(this.frame * 0.08 + f.idx * 2) * 1.5 : 0;
       g.drawImage(img, -SPRITE_W * scale / 2, f.h - 92 + bob, SPRITE_W * scale, 92);
       g.imageSmoothingEnabled = true;
-    } else if (!illustrated && c.id === 'xiao') {
-      // Keep the fifth fighter visible even when every generated asset fails.
-      g.strokeStyle = hitWhite ? '#fff8e8' : '#85f6d5'; g.fillStyle = hitWhite ? '#fff8e8' : '#e2dfd3';
+    } else if (!illustrated) {
+      // Keep every added fighter visible while an atlas is loading or unavailable.
+      g.strokeStyle = hitWhite ? '#fff8e8' : c.color; g.fillStyle = hitWhite ? '#fff8e8' : '#e2dfd3';
       g.lineWidth = 5; g.lineCap = 'round';
       g.beginPath(); g.arc(0, f.h - 75, 10, 0, Math.PI * 2); g.fill();
-      g.fillStyle = '#244f54'; g.beginPath(); g.moveTo(-11, f.h - 78); g.lineTo(0, f.h - 92); g.lineTo(12, f.h - 75); g.closePath(); g.fill();
+      g.fillStyle = c.hair; g.beginPath(); g.moveTo(-11, f.h - 78); g.lineTo(0, f.h - 92); g.lineTo(12, f.h - 75); g.closePath(); g.fill();
       g.beginPath(); g.moveTo(0, f.h - 62); g.lineTo(0, f.h - 32); g.moveTo(-14, f.h - 49); g.lineTo(15, f.h - 49);
       g.moveTo(0, f.h - 32); g.lineTo(-12, f.h); g.moveTo(0, f.h - 32); g.lineTo(12, f.h); g.stroke();
       g.lineWidth = 2.5; g.strokeStyle = '#c6fce6';
@@ -1543,7 +1692,7 @@ export class Game {
     g.textAlign = 'center';
     g.fillStyle = f.idx === 0 ? '#c5f6ee' : '#ffe0c5';
     g.shadowColor = '#061d23';
-    g.shadowBlur = 6;
+    g.shadowBlur = effectGlow(this.visualQuality, 6);
     g.fillText(f.isCPU ? 'CPU' : `P${f.idx + 1}`, f.x, f.y - 42);
     g.restore();
   }
@@ -1553,6 +1702,7 @@ export class Game {
     const c = f.char;
     if (!f.attack) return;
     const { def, t } = f.attack;
+    if (def.effect === 'geo-pillar' || def.effect === 'geo-meteor' || def.effect === 'salon' || def.effect === 'revelry') return;
     const { phase, progress } = attackPhase(f.attack);
     if (f.attack.plunge) {
       if (f.attack.plunge.phase !== 'dive') this.drawPlungeAttackFx(g, f);
@@ -1583,7 +1733,7 @@ export class Game {
     const heavy = def.kind !== 'jab';
     const radius = def.kind === 'smash' ? 76 : def.effect === 'gust' ? 118 : def.effect === 'spin' ? 116 : 55;
     g.globalAlpha = fade * 0.8;
-    g.shadowColor = c.color; g.shadowBlur = 9;
+    g.shadowColor = c.color; g.shadowBlur = effectGlow(this.visualQuality, 9);
     const angle = -0.9 + progress * 1.45;
     if (def.effect === 'gust') {
       for (let i = 0; i < 3; i++) {
@@ -1637,7 +1787,7 @@ export class Game {
     const plunge = f.attack?.plunge;
     if (!plunge || plunge.phase === 'impact' || plunge.phase === 'recover') return;
     g.save();
-    g.shadowColor = '#47e8c4'; g.shadowBlur = 14;
+    g.shadowColor = '#47e8c4'; g.shadowBlur = effectGlow(this.visualQuality, 14);
     if (plunge.phase === 'windup') {
       const progress = plunge.elapsed / Math.max(1, f.char.special.startup);
       g.globalAlpha = 0.4 + progress * 0.5;
@@ -1670,7 +1820,7 @@ export class Game {
       g.save(); g.translate(effect.x, effect.y);
       if (effect.plunge) {
         g.globalAlpha = 1 - progress;
-        g.shadowColor = effect.color; g.shadowBlur = 13;
+        g.shadowColor = effect.color; g.shadowBlur = effectGlow(this.visualQuality, 13);
         const width = effect.size * 2.4, height = 145 * (1 - progress * 0.35);
         drawXiaoPlungeEffect(g, 'impact', 0, -height / 2 + 10, width, height, 1 - progress);
         for (const side of [-1, 1]) {
@@ -1700,7 +1850,10 @@ export class Game {
   }
 
   private drawParticles(g: CanvasRenderingContext2D) {
-    for (const p of this.particles) {
+    // Keep every simulated particle; the light preset only samples its decorative drawing.
+    const stride = this.visualQuality === 'low' ? 3 : 1;
+    for (let index = 0; index < this.particles.length; index += stride) {
+      const p = this.particles[index];
       const a = p.life / p.maxLife;
       g.save();
       g.globalAlpha = a;
@@ -1740,7 +1893,7 @@ export class Game {
     g.textBaseline = 'alphabetic';
     for (const f of this.fighters) {
       const x = f.idx === 0 ? 34 : WORLD.w - 382;
-      const y = WORLD.h - 106;
+      const y = this.mobileHud ? 20 : WORLD.h - 106;
       g.fillStyle = 'rgba(8, 24, 30, .92)';
       this.roundRect(g, x, y, 348, 90, 10); g.fill();
       g.strokeStyle = 'rgba(197, 184, 134, .46)';
@@ -1778,13 +1931,20 @@ export class Game {
       g.fillStyle = f.secondaryCooldown > 0 ? '#83999a' : '#a9e9d7';
       const secondaryKey = f.idx === 0 ? 'I' : "5 / '";
       g.fillText(f.secondaryCooldown > 0 ? `${secondaryKey} ${(f.secondaryCooldown / 60).toFixed(1)}s` : `${secondaryKey} 新技就绪`, x + 238, y + 24);
+      const owned = this.summons.entities.filter(entity => entity.ownerId === f.idx), shield = this.summons.getShield(f.idx), revelry = this.summons.getBuff(f.idx);
+      if (owned.length || shield || revelry) {
+        g.font = '11px "Microsoft YaHei", sans-serif'; g.fillStyle = f.char.color;
+        const status = [owned.length ? `${f.char.id === 'zhongli' ? '岩柱' : '沙龙'} ${owned.length} · ${Math.ceil(Math.max(...owned.map(entity => entity.life)) / 60)}s` : '',
+          shield ? `盾 ${Math.ceil(shield.hp)}` : '', revelry ? `狂欢 ${Math.ceil(revelry.life / 60)}s` : ''].filter(Boolean).join('  ');
+        g.fillText(status, x + 8, this.mobileHud ? y + 105 : y - 10);
+      }
       if (f.held) {
         g.fillStyle = f.held.def.color;
-        g.fillText(`持有 · ${f.held.def.name}`, x + 88, y - 8);
+        g.fillText(`持有 · ${f.held.def.name}`, x + 88, this.mobileHud ? y + 108 : y - 8);
       } else if (f.combo >= 2 && f.comboTimer > 0) {
         g.fillStyle = '#ead29a';
         g.font = 'bold 17px sans-serif';
-        g.fillText(`${f.combo} HITS`, x + 88, y - 8);
+        g.fillText(`${f.combo} HITS`, x + 88, this.mobileHud ? y + 108 : y - 8);
       }
     }
     const seconds = Math.ceil(this.remainingFrames / 60);
@@ -1797,6 +1957,9 @@ export class Game {
     g.font = '600 29px "Microsoft YaHei", sans-serif';
     g.fillStyle = seconds <= 30 ? '#ffb799' : '#f1e2ba';
     g.fillText(time, WORLD.w / 2, 58);
+    // Touch controls occupy the lower corners; mobile status lives above play.
+    // The desktop legend and stage copy would overlap the upper mobile cards.
+    if (this.mobileHud) { g.restore(); return; }
     g.font = '12px "Microsoft YaHei", sans-serif';
     g.fillStyle = '#c0d0cb';
     g.fillText('H 闪避 · J 轻击 · K 重击 · L 技能 · I 新技', WORLD.w / 2, WORLD.h - 62);
@@ -1825,7 +1988,7 @@ export class Game {
     else txt = 'GO!';
     g.save();
     g.shadowColor = '#ffd76a';
-    g.shadowBlur = 40;
+    g.shadowBlur = effectGlow(this.visualQuality, 40);
     g.font = 'bold 110px "Microsoft YaHei", sans-serif';
     g.fillStyle = txt === 'GO!' ? '#7fe87f' : '#ffd76a';
     g.fillText(txt, WORLD.w / 2, 300);

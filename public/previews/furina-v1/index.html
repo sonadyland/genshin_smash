@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1630" />
+  <link rel="icon" href="data:," />
+  <title>芙宁娜 · 水之舞台 | 美术与动作样板</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="atelier">
+    <header class="page-header"><div class="wordmark"><span class="hydro-mark" aria-hidden="true">♧</span><span>枫丹 · 动作工坊<small>CHARACTER MOTION STUDY / 07</small></span></div><a class="back-link" href="/">返回游戏 <span aria-hidden="true">↗</span></a></header>
+    <section class="intro"><div><p class="eyebrow">水之舞台 · 美术与动画样板</p><h1>芙宁娜 <span>FURINA</span></h1></div><p class="intro-note">礼帽轻引，宾客登台。<br />让水的灵动，回应每一次落拍。</p></section>
+    <div class="workspace">
+      <aside class="character-panel">
+        <div class="portrait-wrap"><div class="portrait-seal" aria-hidden="true">♧</div><img id="portrait" alt="芙宁娜荒性形态全身美术设定" hidden /><span id="portrait-status">正在加载角色美术</span><div class="portrait-caption"><span>水 · 单手剑</span><strong>不休独舞</strong></div></div>
+        <div class="character-notes"><p class="eyebrow">动作语汇</p><p>脱帽邀宾 · 宣告开幕 · 轻巧剑术</p><p class="muted">人物与三位沙龙成员分别逐帧演出。当前为独立美术样板，尚未加入游戏可选角色。</p><a class="asset-link" href="./assets/master.png" target="_blank" rel="noopener">人物原画 ↗</a><a class="asset-link" href="./assets/pets-master.png" target="_blank" rel="noopener">沙龙成员设定 ↗</a></div>
+      </aside>
+      <section class="motion-panel" aria-label="芙宁娜动作预览">
+        <div class="motion-heading"><div class="skill-tabs" role="group" aria-label="技能动作"><button data-clip="l-skill" class="selected" aria-pressed="true"><kbd>L</kbd><span>孤心沙龙<small>脱帽 · 邀宾登台</small></span></button><button data-clip="i-burst" aria-pressed="false"><kbd>I</kbd><span>万众狂欢<small>开幕 · 水幕增幅</small></span></button><button data-clip="jab-thrust" aria-pressed="false"><kbd>J</kbd><span>独舞之邀<small>前踏 · 轻巧剑术</small></span></button></div><span class="study-badge">比例修订 02</span></div>
+        <div class="stage-wrap"><canvas id="stage" width="1000" height="570" aria-label="芙宁娜逐帧动画与沙龙成员效果">浏览器需支持 Canvas 才能显示动画。</canvas><div class="stage-topline"><span id="clip-caption">孤心沙龙 / SALON SOLITAIRE</span><span id="phase-label">加载中</span></div><div id="asset-status" role="status" hidden></div><div class="stage-bottomline"><span id="effect-caption">人物 + 沙龙成员 + 水元素</span><span id="frame-label">00 / 16</span></div></div>
+        <div class="transport"><button id="play-toggle" class="play-button" aria-label="暂停播放">Ⅱ</button><button id="step-back" title="上一帧" aria-label="上一帧">‹</button><button id="step-forward" title="下一帧" aria-label="下一帧">›</button><label class="scrubber"><span class="sr-only">动画进度</span><input id="timeline" type="range" min="0" max="1000" value="0" step="1" /><span id="time-label">0.00 / 0.00s</span></label><label class="speed-select"><span class="sr-only">播放速度</span><select id="speed"><option value="1">1× 速度</option><option value="0.5">0.5× 慢放</option><option value="0.25">0.25× 细看</option></select></label></div>
+        <div class="view-options"><label><span>显示</span><select id="effect-mode"><option value="complete">完整效果</option><option value="character">仅人物动作</option><option value="pets">仅三宠动作</option></select></label><label><span>朝向</span><select id="facing"><option value="1">向右</option><option value="-1">向左</option></select></label><label class="guide-check"><input id="guides" type="checkbox" /> 对齐参考线</label><label class="guide-check"><input id="proportion-compare" type="checkbox" /> 立绘比例对照</label><button id="restart">重新播放 ↻</button></div>
+        <p id="comparison-note" class="comparison-note" hidden>左右以中立站姿标定同一身高；横线取自母版的头顶、肩、胯、膝与脚底，不包含礼帽。欠身与前踏保留真实的高度变化。</p>
+        <ol class="beats" id="beats"></ol><p id="motion-note" class="motion-note"></p>
+      </section>
+    </div>
+    <section class="cast" aria-label="沙龙成员"><div class="cast-title"><p class="eyebrow">SALON SOLITAIRE</p><h2>三位宾客，各有节拍</h2><p>选择「仅三宠动作」，可独立逐帧查看待机、蓄势、出手与回收。</p></div><div class="cast-member"><span>01</span><strong>乌瑟勋爵</strong><p>球球章鱼 · 触手蓄势，推出泡泡。</p><small id="pet-usher">等待美术</small></div><div class="cast-member"><span>02</span><strong>海薇玛夫人</strong><p>泡泡海马 · 昂首聚水，轻快发射。</p><small id="pet-chevalmarin">等待美术</small></div><div class="cast-member"><span>03</span><strong>谢贝蕾妲小姐</strong><p>重甲蟹 · 压身抬钳，重击水花。</p><small id="pet-crabaletta">等待美术</small></div></section>
+    <footer><span>原神同人游戏 · 芙宁娜视觉开发</span><span>先审动作与美术，再接入战斗系统</span></footer>
+  </main>
+  <script type="module" src="./preview.js"></script>
+</body>
+</html>

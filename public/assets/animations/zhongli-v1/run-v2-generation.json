@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "character": "zhongli",
+  "clip": "run",
+  "revision": "run-v2",
+  "date": "2026-10-10",
+  "generator": "built-in image_gen",
+  "mode": "generate-with-references",
+  "transparent_background": true,
+  "input_images": [
+    {
+      "path": "public/assets/animations/eula-v4/run.png",
+      "role": "Primary eight-frame leg-cycle and animation-rhythm reference"
+    },
+    {
+      "path": "public/assets/animations/zhongli-v1/portrait.png",
+      "role": "Approved Zhongli identity, costume and body proportions"
+    },
+    {
+      "path": "public/assets/animations/zhongli-v1/jab-thrust.png",
+      "role": "Approved in-game character style and identity, not an attack-pose reference"
+    }
+  ],
+  "prompt": "Use case: stylized-concept\nAsset type: production transparent PNG 2D side-scrolling action-game running animation sprite sheet.\nPrimary request: Redraw Zhongli in a genuinely smooth 8-frame full running cycle. This is animation, not a selection of generic running illustrations. Use the eight leg poses and smooth grounded rhythm in the Eula run reference as the main gait guide, while preserving Zhongli's approved character design and proportions.\nInput images: Image 1 (eula-v4/run.png) is ONLY the gait/leg transition and game-art rendering reference; do not transfer her face, hair, clothing, weapon or gender. Image 2 (zhongli-v1/portrait.png) is Zhongli's approved identity, costume and proportion reference. Image 3 (zhongli-v1/jab-thrust.png) is his approved in-game rendering and character identity reference; do not copy its attack poses.\nLayout: exactly 8 complete isolated Zhongli figures in a strict 2 rows by 4 columns equal-cell sprite sheet, chronological reading order left to right then next row. Landscape 2:1 canvas. Transparent RGBA background. Every figure fits wholly inside its own cell with generous clear transparent gutters, with NO borders, labels, numbers, floor, ground marks or shadows. No overlap or cropping. Fixed orthographic near-side view facing RIGHT with a very slight three-quarter view identical in all eight frames.\nRegistration: every cell uses the same scale, same limb lengths, same head size and the same HIP horizontal center at 56% of the cell width. The imaginary floor is exactly 92% down EACH cell for all eight frames; never draw it. Keep the head top roughly 12% down the cell. Allow only the small natural vertical hip motion of an actual run. Contact feet land on that common floor; in flight both soles are visibly above it. The body does not translate left or right inside the cell. No zoom, no rotation of camera. Tall slender adult male anatomy and original head/body ratio, not chibi.\nCharacter: Zhongli from the approved references, dark brown black hair with warm amber tipped ponytail, amber eyes, elegant dark brown and black long coat with gold geometric trim, light silver geometric shoulder details, dark fitted trousers, black boots with the same gold details and black gloves. Preserve facial identity, costume shapes and repeated details from frame to frame. Weapon fully stowed / not visible while running. No spear, sword or glowing props. A composed, confident run: modest forward lean, stable shoulders; arms bent and swing naturally opposite the legs, low and restrained, hands below chest. Do not keep both hands fixed, do not punch forward.\nThe near/right leg and far/left leg must really alternate, with a subtly darker far leg for clear readable overlap. The last four frames are the opposite-leg half of the cycle, NOT repeated first-half poses and NOT camera-mirrored figures. All eight must be distinct continuous biomechanics:\n1. RIGHT CONTACT: nearer right foot lands slightly ahead of the hip, knee almost extended but soft. Left leg trails with bent knee and toe lifting. Opposite left arm forward.\n2. RIGHT DOWN / PASSING: right stance foot is almost under hip and right knee bends to absorb weight; body slightly lower. Left knee travels from behind past the stance leg with heel tucked upward, not already a high front kick.\n3. RIGHT PUSH: right foot is behind hip, heel up, toe pushes off the common ground; left bent knee advances forward. Body rising. Clearly different from frame 2.\n4. LEFT FLIGHT: brief flight, left shin unfolds moderately forward ready to land while right knee folds back with heel up. Both feet clear the floor. No giant split or long leap.\n5. LEFT CONTACT: farther left foot now lands slightly ahead of hip; nearer right leg trails, reversing leg roles from frame 1. Right arm forward.\n6. LEFT DOWN / PASSING: left stance knee flexes under hip, body slightly lower; right knee passes from behind with heel tucked. Genuine opposite-leg support.\n7. LEFT PUSH: left toes push off behind hip while nearer right bent knee advances forward, body rising. Distinct from 6.\n8. RIGHT FLIGHT: short flight with nearer right shin extending toward the next contact; left leg folds behind. This flows directly into frame 1.\nLegs are the priority: moderate stride lengths, clear knee flexion and unfolding, stable pelvis, continuous foot arcs, no wide split, no skating, no rigid marching, no duplicate leg poses. Secondary hair and split coat tails follow the motion with small delayed waves; tails flow mainly backward, not covering the knees or hiding leg transitions. Coat and body should not inflate or shrink between frames.\nStyle: polished detailed Japanese fantasy game illustration, clean precise silhouette, soft cel-painted shading, consistent light from upper front, same rendering quality as approved Zhongli and Eula assets.\nAbsolutely no elemental effects, particles, glows, environment, text, watermarks, ground contact shadows, duplicate limbs, extra fingers, cropped feet, frame-to-frame scale drift, or weapon. Preserve actual transparent alpha.",
+  "generated_source": "C:/Users/46637/.codex/generated_images/01a12535-010b-7cb0-aa47-464b13fd75e7/exec-be5ab9a0-3de5-40bf-a8ee-4fea93f5c030.png",
+  "production_file": "public/assets/animations/zhongli-v1/run-v2.png",
+  "pixel_processing": "None. Original generated PNG copied byte-for-byte; no resizing, pixel painting, background removal or compositing.",
+  "validation": {
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "cornerAlpha": 0,
+    "rootVisualReview": "Accepted 2026-10-10; no regeneration requested."
+  },
+  "frame_order": [
+    "right-contact",
+    "right-down-passing",
+    "right-push",
+    "left-flight",
+    "left-contact",
+    "left-down-passing",
+    "left-push",
+    "right-flight"
+  ],
+  "integration_guidance": {
+    "order": "Chronological row-major, never ping-pong or reuse the first half.",
+    "columns": [
+      0,
+      443,
+      887,
+      1330,
+      1774
+    ],
+    "rowBoundarySuggestion": 460,
+    "floorAbsoluteYSuggestion": [
+      440,
+      867
+    ],
+    "anchor": "Use the hip/pelvis ground projection for X; use the same floor Y for all four frames of each row, including flight. Do not independently register each lowest foot.",
+    "hipLocalXEstimates": [
+      275,
+      270,
+      267,
+      268,
+      277,
+      277,
+      281,
+      288
+    ],
+    "hipEstimateNote": "Rough visual starting points only; calibrate stable hip registration in the actual preview. Foreground coat decorations are not bone landmarks.",
+    "flightNote": "Frames 4 and 8 have the soles visibly above the common floor. Preserve flight, do not align their lowest visible foot to ground.",
+    "scaling": "One anatomically consistent scale per source sheet; avoid fitting every frame to independent visible bounds.",
+    "cropping": "Keep full final-column width 444 including last two source columns. Opaque shoe pixels reach x≈1764; do not truncate the canvas to 1772.",
+    "quality": "Distinct contact/compression/push/flight knees and foot arcs. Upper arms alternate across the two half cycles. Mild coat/hair follow-through, no weapon."
+  }
+}

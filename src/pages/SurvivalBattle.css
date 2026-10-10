@@ -51,3 +51,5 @@
   .survival-actionbar { flex-wrap: wrap; gap: 5px; }.survival-controls.compact { flex: 1; }.survival-controls.compact p { font-size: 8px; white-space: nowrap; }.survival-cooldown { width: 83px; padding: 4px 6px 6px; gap: 5px; }.survival-cooldown > span { font-size: 8px; }.survival-cooldown > kbd { font-size: 9px; padding: 2px 4px; }.survival-cooldowns .survival-cooldown:last-child { width: 62px; }.survival-cooldown em { font-size: 7px; }
   .survival-dialog { padding-top: 19px; padding-bottom: 18px; }.survival-dialog h2 { margin-block: 8px; font-size: 24px; }.survival-dialog-intro { margin-bottom: 13px; }.upgrade-cards { margin-block: 14px; }.upgrade-card { min-height: 250px; }.upgrade-sigil { height: 54px; font-size: 31px; }.survival-summary-sigil { display: none; }
 }
+.survival-summon-status { display: flex; flex-wrap: wrap; gap: 3px 12px; margin-top: 5px; color: #c1d9ca; font-size: 9px; line-height: 1.5; }
+.mobile-mode .survival-summon-status { gap: 3px 7px; font-size: 8px; margin-top: 3px; }

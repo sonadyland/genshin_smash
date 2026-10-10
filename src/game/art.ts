@@ -5,6 +5,7 @@ import type { ClipManifest, ClipSelection, ClipCharacterId } from './clip-animat
 import type { AttackKind, AttackVisualVariant } from './clip-animation';
 import { CHARACTERS } from './data';
 import animationPacks from './animation-packs.json';
+import { acquireSummonerArt } from './summoner-art';
 
 /** Shared, locally hosted artwork for the lobby and the canvas arena. */
 const asset = (path: string) => `${import.meta.env.BASE_URL}assets/${path}`;
@@ -12,15 +13,17 @@ export const CHARACTER_ART: Record<string, string> = {
   raiden: asset('characters/raiden-v2.png'), jean: asset('characters/jean-v2.png'),
   eula: asset('characters/eula-v2.png'), diluc: asset('characters/diluc-v2.png'),
   xiao: asset('characters/xiao-v3.png'),
+  zhongli: asset('animations/zhongli-v1/portrait.png'), furina: asset('animations/furina-v1/portrait.png'),
 };
 export const BACKGROUND_ART = asset('backgrounds/liyue-dawn-v2.png');
+const LEGACY_CHARACTER_IDS = ['raiden', 'jean', 'eula', 'diluc', 'xiao'];
 export const ACTION_ART: Record<string, string> = Object.fromEntries(
-  Object.keys(CHARACTER_ART).map(id => [id, asset(`animations/${id}-actions-v3.png`)]),
+  LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-actions-v3.png`)]),
 );
 export const ELEMENT_EFFECT_ART = asset('effects/elemental-bursts-v3.png');
 export const XIAO_PLUNGE_ART = asset('effects/xiao-plunge-v3.png');
 export const SECONDARY_ACTION_ART: Record<string, string> = Object.fromEntries(
-  Object.keys(CHARACTER_ART).map(id => [id, asset(`animations/${id}-secondary-v1.png`)]),
+  LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-secondary-v1.png`)]),
 );
 export const SECONDARY_EFFECT_ART = asset('effects/secondary-effects-v1.png');
 export const CHARACTER_CLIP_MANIFESTS = Object.fromEntries(CHARACTER_CLIP_IDS.map(id => [id, asset(`animations/${animationPacks[id]}/manifest.json`)])) as Record<ClipCharacterId, string>;
@@ -46,7 +49,6 @@ interface ArtImage {
   flash: HTMLCanvasElement | null;
 }
 const loaded = new Map<string, ArtImage>();
-let loading: Promise<void> | undefined;
 const actionSheets = new Map<string, ActionSheet>();
 const secondarySheets = new Map<string, ActionSheet>();
 let effects: HTMLImageElement | undefined;
@@ -55,19 +57,28 @@ let secondaryEffects: { image: HTMLImageElement; registration: SecondaryEffectRe
 type ClipSheet = { image: HTMLImageElement; flash: HTMLCanvasElement | null };
 type CharacterPack = { manifest: ClipManifest; sheets: Map<string, ClipSheet> };
 const characterPacks = new Map<string, CharacterPack>();
-const packLoads = new Map<ClipCharacterId, Promise<void>>();
 const packStatuses = new Map<string, 'loading' | 'ready' | 'fallback'>();
-// A shared atlas can back several clips. Decode and white-flash only once per URL.
-const clipSheetsByUrl = new Map<string, Promise<ClipSheet>>();
-async function loadClipSheet(url: string): Promise<ClipSheet> {
-  let pending = clipSheetsByUrl.get(url);
+export interface GameArtLease { ready: Promise<void>; release: () => void }
+interface CharacterResources {
+  references: number;
+  ready: Promise<void>;
+  legacyReady?: Promise<void>;
+  sheets: Map<string, Promise<ClipSheet>>;
+  summonLease?: { ready: Promise<void>; release: () => void };
+}
+const characterResources = new Map<ClipCharacterId, CharacterResources>();
+let sharedResources: { references: number; ready: Promise<void> } | undefined;
+// Atlases are shared by clips within one live character generation, never kept
+// in a process-wide decoded-image cache after its final consumer leaves.
+async function loadClipSheet(url: string, owner: CharacterResources): Promise<ClipSheet> {
+  let pending = owner.sheets.get(url);
   if (!pending) {
     pending = (async () => {
       const image = new Image(); image.decoding = 'async'; image.src = url; await image.decode();
       return { image, flash: null };
     })();
-    clipSheetsByUrl.set(url, pending);
-    void pending.catch(() => { clipSheetsByUrl.delete(url); });
+    owner.sheets.set(url, pending);
+    void pending.catch(() => { if (owner.sheets.get(url) === pending) owner.sheets.delete(url); });
   }
   return pending;
 }
@@ -85,34 +96,36 @@ export function hasRegisteredMeleeTrail(id: string, kind: AttackKind, variant?: 
   const clip = selectedClip(pack.manifest, { clip: kind, variant });
   return (clip.trail === 'arc' || clip.trail === 'thrust') && clip.frames.some(frame => frame.phase === 'contact' && !!frame.weaponTip);
 }
-async function loadCharacterPack(id: ClipCharacterId) {
-  packStatuses.set(id, 'loading');
-  try {
+async function loadCharacterPack(id: ClipCharacterId, owner: CharacterResources): Promise<CharacterPack> {
     const manifestUrl = CHARACTER_CLIP_MANIFESTS[id], response = await fetch(manifestUrl);
+    if (characterResources.get(id) !== owner) throw new Error('Released character art');
     if (!response.ok) throw new Error(`Missing ${id} clip manifest`);
     const manifest: unknown = await response.json();
+    if (characterResources.get(id) !== owner) throw new Error('Released character art');
     if (!validClipManifest(manifest) || manifest.character !== id) throw new Error(`Invalid ${id} clip manifest`);
     const sheets = new Map<string, ClipSheet>();
-    await Promise.all(CHARACTER_CLIPS.map(async name => {
-      const clip = manifest.clips[name];
-      const sheet = await loadClipSheet(manifestUrl.replace('manifest.json', clip.image));
-      if (sheet.image.naturalWidth !== clip.width || sheet.image.naturalHeight !== clip.height) throw new Error(`Invalid ${id} clip dimensions: ${name}`);
+    const loadAtlas = async (name: string, width: number, height: number) => {
+      const sheet = await loadClipSheet(manifestUrl.replace('manifest.json', name), owner);
+      if (sheet.image.naturalWidth !== width || sheet.image.naturalHeight !== height) throw new Error(`Invalid ${id} clip dimensions: ${name}`);
       sheets.set(name, sheet);
-    }));
+    };
+    const loadClip = async (clip: ClipManifest['clips']['idle']) => {
+      await Promise.all([loadAtlas(clip.image, clip.width, clip.height), ...clip.frames.filter(frame => frame.image).map(frame => loadAtlas(frame.image!, frame.width!, frame.height!))]);
+    };
+    await Promise.all(CHARACTER_CLIPS.map(name => loadClip(manifest.clips[name])));
+    if (characterResources.get(id) !== owner) throw new Error('Released character art');
     const loadedManifest: ClipManifest = { version: 1, character: id, clips: manifest.clips };
     // Only J/K have alternative forms. Invalid optional clips fall back on their
     // own base move; the other validated variants and base pack remain usable.
     await Promise.all(VARIANT_ATTACKS.map(async kind => {
       if (!validVariantClip(manifest, kind)) return;
       try {
-        const clip = manifest.variants![kind]!, sheet = await loadClipSheet(manifestUrl.replace('manifest.json', clip.image));
-        if (sheet.image.naturalWidth !== clip.width || sheet.image.naturalHeight !== clip.height) throw new Error(`Invalid alternate dimensions: ${kind}`);
-        sheets.set(`${kind}:alternate`, sheet);
+        const clip = manifest.variants![kind]!;
+        await loadClip(clip);
         loadedManifest.variants ??= {}; loadedManifest.variants[kind] = clip;
       } catch { /* This move retains its validated base clip. */ }
     }));
-    characterPacks.set(id, { manifest: loadedManifest, sheets }); packStatuses.set(id, 'ready');
-  } catch { packStatuses.set(id, 'fallback'); }
+    return { manifest: loadedManifest, sheets };
 }
 function validSourceRect(rect: SourceRect | undefined, image: HTMLImageElement): boolean {
   return !!rect && [rect.x, rect.y, rect.width, rect.height].every(Number.isFinite) && rect.width > 2 && rect.height > 2 &&
@@ -145,7 +158,7 @@ async function loadActionSheet(id: string, url: string, secondary = false) {
     g.globalCompositeOperation = 'source-in';
     g.fillStyle = '#fff9ed'; g.fillRect(0, 0, flash.width, flash.height);
   }
-  (secondary ? secondarySheets : actionSheets).set(id, { image, flash: g ? flash : null, registration });
+  return { image, flash: g ? flash : null, registration };
 }
 async function loadSecondaryEffects() {
   const image = new Image(); image.decoding = 'async'; image.src = SECONDARY_EFFECT_ART;
@@ -161,12 +174,12 @@ async function loadSecondaryEffects() {
         return frame.id === ids[index] && frame.row === Math.floor(index / 3) && frame.column === index % 3 && validSourceRect(r, image) &&
           r.x === frame.column * image.naturalWidth / 3 && r.y === frame.row * image.naturalHeight / 2 && r.width === image.naturalWidth / 3 && r.height === image.naturalHeight / 2;
       })) throw new Error('Invalid secondary effect registration');
-  secondaryEffects = { image, registration };
+  return { image, registration };
 }
 async function loadEffects() {
   const image = new Image(); image.decoding = 'async'; image.src = ELEMENT_EFFECT_ART;
   await image.decode();
-  if (image.naturalWidth >= 4 && image.naturalHeight >= 2) effects = image;
+  if (image.naturalWidth >= 4 && image.naturalHeight >= 2) return image;
 }
 async function loadPlungeEffects() {
   const image = new Image(); image.decoding = 'async'; image.src = XIAO_PLUNGE_ART;
@@ -180,9 +193,9 @@ async function loadPlungeEffects() {
         return frame.row === 0 && frame.column === index && r && [r.x, r.y, r.width, r.height].every(Number.isFinite) &&
           r.width > 2 && r.height > 2 && r.x >= 0 && r.y >= 0 && r.x + r.width <= image.naturalWidth && r.y + r.height <= image.naturalHeight;
       })) throw new Error('Invalid Xiao plunge registration');
-  plungeEffects = { image, registration };
+  return { image, registration };
 }
-async function loadImage(key: string, url: string, trim: boolean) {
+async function loadImage(url: string, trim: boolean) {
   const image = new Image();
   image.decoding = 'async'; image.src = url;
   await image.decode();
@@ -223,27 +236,80 @@ async function loadImage(key: string, url: string, trim: boolean) {
       probe.width = 1; probe.height = 1;
     }
   }
-  loaded.set(key, { image, bounds, flash });
+  return { image, bounds, flash };
 }
-export function loadGameArt(characterIds: readonly string[] = []): Promise<void> {
-  loading ??= Promise.allSettled([
-    ...Object.entries(CHARACTER_ART).filter(([id]) => !loaded.has(id)).map(([id, url]) => loadImage(id, url, true)),
-    ...(!loaded.has('arena') ? [loadImage('arena', BACKGROUND_ART, false)] : []),
-    ...Object.entries(ACTION_ART).filter(([id]) => !actionSheets.has(id)).map(([id, url]) => loadActionSheet(id, url)),
-    ...Object.entries(SECONDARY_ACTION_ART).filter(([id]) => !secondarySheets.has(id)).map(([id, url]) => loadActionSheet(id, url, true)),
-    ...(!effects ? [loadEffects()] : []),
-    ...(!plungeEffects ? [loadPlungeEffects()] : []),
-    ...(!secondaryEffects ? [loadSecondaryEffects()] : []),
-  ]).then(() => { loading = undefined; });
-  const requested = CHARACTER_CLIP_IDS.filter(id => characterIds.includes(id) && !characterPacks.has(id));
-  const packs = requested.map(id => {
-    let pending = packLoads.get(id);
-    if (!pending) {
-      pending = loadCharacterPack(id).finally(() => { packLoads.delete(id); }); packLoads.set(id, pending);
+function loadLegacyCharacter(id: ClipCharacterId, owner: CharacterResources): Promise<void> {
+  if (!LEGACY_CHARACTER_IDS.includes(id)) return Promise.resolve();
+  owner.legacyReady ??= Promise.allSettled([
+    loadActionSheet(id, ACTION_ART[id]).then(sheet => {
+      if (sheet && characterResources.get(id) === owner) actionSheets.set(id, sheet);
+    }),
+    loadActionSheet(id, SECONDARY_ACTION_ART[id], true).then(sheet => {
+      if (sheet && characterResources.get(id) === owner) secondarySheets.set(id, sheet);
+    }),
+  ]).then(() => undefined);
+  return owner.legacyReady;
+}
+
+/** Hold only this match's actors. A preview explicitly opts into old/new comparison. */
+export function acquireGameArt(characterIds: readonly string[], options: { legacy?: boolean } = {}): GameArtLease {
+  if (!sharedResources) {
+    const owner = { references: 0, ready: Promise.resolve() };
+    sharedResources = owner;
+    owner.ready = Promise.allSettled([
+      loadImage(BACKGROUND_ART, false).then(art => { if (art && sharedResources === owner) loaded.set('arena', art); }),
+      loadEffects().then(art => { if (sharedResources === owner) effects = art; }),
+      loadSecondaryEffects().then(art => { if (sharedResources === owner) secondaryEffects = art; }),
+    ]).then(() => undefined);
+  }
+  const shared = sharedResources;
+  shared.references++;
+  const retained = CHARACTER_CLIP_IDS.filter(id => characterIds.includes(id)).map(id => {
+    let owner = characterResources.get(id);
+    if (!owner) {
+      const entry: CharacterResources = { references: 0, ready: Promise.resolve(), sheets: new Map() };
+      entry.summonLease = acquireSummonerArt(id);
+      owner = entry;
+      characterResources.set(id, entry);
+      packStatuses.set(id, 'loading');
+      entry.ready = Promise.allSettled([
+        entry.summonLease.ready,
+        // Portraits remain necessary for the canvas HUD and the final fallback.
+        loadImage(CHARACTER_ART[id], true).then(art => { if (art && characterResources.get(id) === entry) loaded.set(id, art); }),
+        loadCharacterPack(id, entry).then(pack => {
+          if (characterResources.get(id) !== entry) return;
+          characterPacks.set(id, pack); packStatuses.set(id, 'ready');
+        }).catch(async () => {
+          if (characterResources.get(id) !== entry) return;
+          // A failed pack must not pin partially decoded atlases alongside fallback.
+          entry.sheets.clear(); packStatuses.set(id, 'fallback');
+          await loadLegacyCharacter(id, entry);
+        }),
+        ...(id === 'xiao' ? [loadPlungeEffects().then(art => { if (characterResources.get(id) === entry) plungeEffects = art; })] : []),
+      ]).then(() => undefined);
     }
-    return pending;
+    owner.references++;
+    return { id, owner, ready: options.legacy ? Promise.all([owner.ready, loadLegacyCharacter(id, owner)]) : owner.ready };
   });
-  return Promise.all([loading, ...packs]).then(() => undefined);
+  let released = false;
+  return {
+    ready: Promise.all([shared.ready, ...retained.map(resource => resource.ready)]).then(() => undefined),
+    release() {
+      if (released) return;
+      released = true;
+      for (const { id, owner } of retained) {
+        if (--owner.references || characterResources.get(id) !== owner) continue;
+        characterResources.delete(id); characterPacks.delete(id); packStatuses.delete(id);
+        loaded.delete(id); actionSheets.delete(id); secondarySheets.delete(id);
+        owner.sheets.clear();
+        owner.summonLease?.release();
+        if (id === 'xiao') plungeEffects = undefined;
+      }
+      if (!--shared.references && sharedResources === shared) {
+        sharedResources = undefined; loaded.delete('arena'); effects = undefined; secondaryEffects = undefined;
+      }
+    },
+  };
 }
 /** Battle-only artwork. HUD and lobby retain the full-resolution portrait. */
 export function drawFighterArt(context: CanvasRenderingContext2D, id: string, x: number, feetY: number, height: number, animation: FighterAnimation, options: Pick<CharacterArtOptions, 'facing' | 'flash' | 'alpha'> & { legacy?: boolean } = {}): boolean {
@@ -288,10 +354,11 @@ export function drawFighterArt(context: CanvasRenderingContext2D, id: string, x:
 }
 
 function drawCharacterClip(context: CanvasRenderingContext2D, pack: CharacterPack, selection: ClipSelection, x: number, feetY: number, height: number, animation: FighterAnimation, options: Pick<CharacterArtOptions, 'facing' | 'flash' | 'alpha'>): boolean {
-  const clip = selectedClip(pack.manifest, selection), sheet = pack.sheets.get(selection.variant === 'alternate' ? `${selection.clip}:alternate` : selection.clip);
+  const clip = selectedClip(pack.manifest, selection), frame = clip.frames[selection.frame];
+  const sheet = pack.sheets.get(frame.image ?? clip.image);
   if (!sheet) return false;
-  const frame = clip.frames[selection.frame], source = frame.sourceRect;
-  const scale = height / clip.standingBodyHeightPixels;
+  const source = frame.sourceRect;
+  const scale = height / clip.standingBodyHeightPixels * (frame.sourceScale ?? 1);
   const dx = (1 - source.width * frame.footAnchor.x) * scale, dy = (1 - source.height * frame.footAnchor.y) * scale;
   context.save(); context.globalAlpha *= options.alpha ?? 1;
   context.translate(x, feetY); context.scale(options.facing ?? 1, 1);
@@ -306,10 +373,11 @@ function drawCharacterClip(context: CanvasRenderingContext2D, pack: CharacterPac
     : (id === 'xiao' && (selection.clip === 'secondary' || selection.clip === 'jab' && selection.variant !== 'alternate'))
       || (id === 'jean' && selection.clip === 'special') || (id === 'raiden' && selection.clip === 'jab' && selection.variant !== 'alternate') ? 'thrust' : 'arc');
   if (trail !== 'none' && animation.attack && !animation.attack.plunge && selection.phase === 'contact') {
-    const points = clip.frames.slice(Math.max(0, selection.frame - 2), selection.frame + 1).filter(f => f.weaponTip).map(f => ({
-      x: (f.weaponTip!.x - f.sourceRect.width * f.footAnchor.x) * scale,
-      y: (f.weaponTip!.y - f.sourceRect.height * f.footAnchor.y) * scale,
-    }));
+    const points = clip.frames.slice(Math.max(0, selection.frame - 2), selection.frame + 1).filter(f => f.weaponTip).map(f => {
+      const registeredScale = height / clip.standingBodyHeightPixels * (f.sourceScale ?? 1);
+      return { x: (f.weaponTip!.x - f.sourceRect.width * f.footAnchor.x) * registeredScale,
+        y: (f.weaponTip!.y - f.sourceRect.height * f.footAnchor.y) * registeredScale };
+    });
     if (points.length > 1) {
       const first = points[0], tip = points[points.length - 1];
       const control = points.length > 2 ? points[1] : {
@@ -338,9 +406,9 @@ function drawCharacterClip(context: CanvasRenderingContext2D, pack: CharacterPac
   context.drawImage(sheet.image, source.x + 1, source.y + 1, source.width - 2, source.height - 2, dx, dy, (source.width - 2) * scale, (source.height - 2) * scale);
   if (options.flash) {
     if (!sheet.flash) {
-      const flash = document.createElement('canvas'); flash.width = clip.width; flash.height = clip.height;
+      const flash = document.createElement('canvas'); flash.width = sheet.image.naturalWidth; flash.height = sheet.image.naturalHeight;
       const g = flash.getContext('2d');
-      if (g) { g.drawImage(sheet.image, 0, 0); g.globalCompositeOperation = 'source-in'; g.fillStyle = '#fff9ed'; g.fillRect(0, 0, clip.width, clip.height); sheet.flash = flash; }
+      if (g) { g.drawImage(sheet.image, 0, 0); g.globalCompositeOperation = 'source-in'; g.fillStyle = '#fff9ed'; g.fillRect(0, 0, flash.width, flash.height); sheet.flash = flash; }
     }
     if (sheet.flash) { context.globalAlpha *= 0.85; context.drawImage(sheet.flash, source.x + 1, source.y + 1, source.width - 2, source.height - 2, dx, dy, (source.width - 2) * scale, (source.height - 2) * scale); }
   }

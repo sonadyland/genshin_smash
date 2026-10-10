@@ -42,10 +42,16 @@ const context = vm.createContext({
   HTMLElement,
 });
 const modules = new Map();
+const artLeases = [];
 function loadModule(file) {
   if (file.endsWith('/survival-render.ts')) return { renderSurvival: noop };
   if (file.endsWith('/art.ts')) return {
-    loadGameArt: () => Promise.resolve(), drawCharacterArt: () => false,
+    acquireGameArt: ids => {
+      const lease = { ids: [...ids], released: false };
+      artLeases.push(lease);
+      return { ready: Promise.resolve(), release: () => { lease.released = true; } };
+    },
+    drawCharacterArt: () => false,
     drawFighterArt: () => false, drawElementEffect: () => false,
     drawSecondaryEffect: () => false, drawXiaoPlungeEffect: () => false, drawArenaBackground: () => false,
   };
@@ -66,8 +72,8 @@ const cases = [];
 function test(name, run) { cases.push({ name, run }); }
 function plain(value) { return JSON.parse(JSON.stringify(value)); }
 
-test('all five characters have distinct, valid evolution pairs and reproducible starting progress', () => {
-  assert.equal(CHARACTERS.length, 5);
+test('all seven characters have distinct, valid evolution pairs and reproducible starting progress', () => {
+  assert.equal(CHARACTERS.length, 7);
   const ids = new Set();
   for (const character of CHARACTERS) {
     const progress = makeInitialProgress(character.id);
@@ -259,7 +265,7 @@ test('keyboard focus, key-repeat filtering and manual facing prevent unintended 
 test('a fresh press near recovery buffers one follow-up while held and repeated keys never auto-attack', () => {
   const game = makeGame(); enemy(game);
   key(game, 'KeyJ'); step(game, 50);
-  assert.equal(game.player.attack, null); assert.equal(game.keys.has('KeyJ'), true);
+  assert.equal(game.player.attack, null); assert.equal(game.input.keys.has('KeyJ'), true);
   const firstDamage = game.damageDealt;
   for (let i = 0; i < 10; i++) { key(game, 'KeyJ', true); step(game, 8); }
   assert.equal(game.damageDealt, firstDamage); assert.equal(game.player.attack, null);
@@ -283,7 +289,7 @@ test('pause, blur and upgrading discard buffered attacks before play resumes', (
     if (game.phase === 'upgrade') game.chooseUpgrade(game.choices[0].id);
     else game.resume();
     step(game, 100); assert.equal(game.player.attack, null);
-    assert.equal(game.pendingAttack, null); assert.equal(game.keys.size, 0);
+    assert.equal(game.pendingAttack, null); assert.equal(game.input.keys.size, 0);
   }
 });
 
@@ -294,12 +300,12 @@ test('pause, blur, hidden documents and upgrade selection freeze the simulation'
   for (const cause of ['pause', 'blur', 'hidden', 'upgrade']) {
     game.resume();
     if (cause === 'pause') game.pause();
-    if (cause === 'blur') { game.keys.add('KeyD'); game.onBlur(); }
+    if (cause === 'blur') { game.input.keys.add('KeyD'); game.onBlur(); }
     if (cause === 'hidden') { context.document.hidden = true; game.onVisibility(); context.document.hidden = false; }
     if (cause === 'upgrade') { game.xp = xpForLevel(game.level); game.checkLevelUp(); }
     const before = signature(); step(game, 100);
     assert.equal(signature(), before, cause);
-    assert.equal(game.keys.size, 0);
+    assert.equal(game.input.keys.size, 0);
   }
 });
 
@@ -309,7 +315,7 @@ test('Xiao refuses grounded L without cooldown and lands on the first crossed pl
   assert.equal(game.player.attack, null); assert.equal(game.player.skillCooldown, 0);
   assert.match(game.notice, /跳跃/);
   airborne(game, 2400, 470);
-  game.keys.add('KeyS'); game.player.drop = 20;
+  game.input.keys.add('KeyS'); game.player.drop = 20;
   tap(game, 'KeyL');
   let fastDive = false;
   for (let i = 0; i < 80 && !game.player.onGround; i++) {
@@ -394,7 +400,7 @@ test('damage preserves a moving jump and consumes no extra jump or forced facing
   game.player.invuln = 0; game.hurtPlayer(5);
   step(game, 4);
   for (const [name, value] of Object.entries(before)) assert.equal(game.player[name], value, name);
-  assert.equal(game.keys.has('KeyA'), true);
+  assert.equal(game.input.keys.has('KeyA'), true);
   step(game);
   assert.ok(game.player.x < before.x && game.player.y < before.y);
   assert.equal(game.player.jumps, before.jumps); assert.equal(game.player.facing, -1);
@@ -414,7 +420,7 @@ test('four hitstop ticks freeze the complete battle clock and scene, including p
   const signature = () => JSON.stringify({ frame: game.frame, elapsed: game.elapsed, player: game.player,
     enemies: game.enemies, shots: game.shots, fields: game.fields, orbs: game.orbs,
     effects: game.effects, texts: game.texts, camera: game.camera, spawnTimer: game.spawnTimer,
-    noticeTimer: game.noticeTimer, pending: game.pendingAttack, keys: [...game.keys], pressed: [...game.pressed] });
+    noticeTimer: game.noticeTimer, pending: game.pendingAttack, keys: [...game.input.keys], pressed: [...game.input.pressed] });
   const before = signature(), frame = game.frame;
   assert.equal(game.hitstop, 4);
   for (let remaining = 3; remaining >= 0; remaining--) {
@@ -433,11 +439,11 @@ test('fresh movement, jump and attack taps during hitstop execute once after tha
   key(game, 'KeyD'); key(game, 'KeyW'); release(game, 'KeyW'); key(game, 'KeyJ');
   step(game, 4);
   assert.equal(game.player.x, x); assert.equal(game.player.y, y); assert.equal(game.player.attack, null);
-  assert.equal(game.pressed.has('KeyW'), true); assert.equal(game.pressed.has('KeyJ'), true);
+  assert.equal(game.input.pressed.has('KeyW'), true); assert.equal(game.input.pressed.has('KeyJ'), true);
   step(game);
   assert.ok(game.player.x > x && game.player.y < y);
   assert.equal(game.player.jumps, 1); assert.equal(game.player.attack.def.kind, 'jab');
-  assert.equal(game.pressed.size, 0);
+  assert.equal(game.input.pressed.size, 0);
   release(game, 'KeyD'); step(game, 70);
   for (let i = 0; i < 8; i++) { key(game, 'KeyJ', true); step(game, 8); }
   assert.equal(game.player.attack, null); assert.equal(game.pendingAttack, null);
@@ -474,7 +480,7 @@ test('fatal contact and projectiles defeat immediately without same-tick healing
     step(game);
     assert.equal(game.phase, 'defeat', source); assert.equal(game.player.hp, 0);
     assert.equal(game.player.attack, null); assert.equal(game.hitstop, 0);
-    assert.equal(game.keys.size, 0); assert.equal(game.pressed.size, 0); assert.equal(game.pendingAttack, null);
+    assert.equal(game.input.keys.size, 0); assert.equal(game.input.pressed.size, 0); assert.equal(game.pendingAttack, null);
     assert.equal(game.fields[0].tick, 25); assert.ok(game.orbs.length > 0);
     const frame = game.frame; step(game, 30); assert.equal(game.frame, frame);
   }
@@ -634,18 +640,18 @@ test('rematch clears every run-owned collection and destroy removes its event su
   const game = makeGame(4);
   const before = Object.fromEntries([...listeners.window].map(([name, handlers]) => [name, handlers.size]));
   game.progress.branch = 'xiao-pillars'; game.level = 10; game.xp = 100; game.kills = 8;
-  game.bossKilled = true; game.frame = 2000; game.elapsed = 33; game.player.hp = 12; game.keys.add('KeyD'); enemy(game);
+  game.bossKilled = true; game.frame = 2000; game.elapsed = 33; game.player.hp = 12; game.input.keys.add('KeyD'); enemy(game);
   game.player.invuln = 0; game.hurtPlayer(5); assert.equal(game.hitstop, 4);
   game.addOrb(400, 700, 5, false); game.rematch();
   const snapshot = game.getSnapshot();
   assert.equal(snapshot.charId, 'xiao'); assert.equal(snapshot.elapsed, 0); assert.equal(snapshot.level, 1);
   assert.equal(snapshot.hp, 100); assert.equal(snapshot.branch, null); assert.equal(snapshot.kills, 0);
   assert.equal(game.enemies.length + game.orbs.length + game.shots.length + game.fields.length, 0);
-  assert.equal(game.keys.size, 0); assert.equal(game.hitstop, 0);
+  assert.equal(game.input.keys.size, 0); assert.equal(game.hitstop, 0);
   game.player.invuln = 0; game.hurtPlayer(5); assert.equal(game.hitstop, 4);
   game.destroy();
   for (const [name, count] of Object.entries(before)) assert.equal(listeners.window.get(name).size, count - 1);
-  key(game, 'KeyJ'); assert.equal(game.pressed.size, 0);
+  key(game, 'KeyJ'); assert.equal(game.input.pressed.size, 0);
 });
 
 
@@ -690,9 +696,12 @@ test('secondary levels three and five produce their advertised distinct numbers 
       if (index < 2) {
         assert.equal(game.fields.length, profile.count);
         assert.ok(game.fields.every(field => field.kind === (index === 0 ? 'thunder' : 'updraft')));
-      } else {
+      } else if (index < 5) {
         assert.equal(game.shots.length, profile.count);
         if (index === 3) assert.ok(game.shots.every(shot => shot.piercing === (level >= 3)));
+      } else {
+        assert.equal(game.shots.length, 0, 'summoner casts must never fall into Xiao wind blades');
+        assert.ok(game.summons.effects.some(effect => effect.kind === (game.char.id === 'zhongli' ? 'geo-meteor' : 'hydro-wave')));
       }
       assert.equal(game.getSnapshot().secondaryLevel, level);
       assert.equal(game.getSnapshot().secondaryCooldownMax, game.char.secondaryCooldown * profile.cooldownMultiplier);
@@ -900,12 +909,12 @@ test('Eula wider L reaches both sides and taller targets, while enlarged I cryst
 test('Eula locomotion follows actual slope travel, stops at world walls, and freezes through noninterrupting damage', () => {
   const game = makeGame(2), p = game.player;
   Object.assign(p, { x: 2780, y: data.groundHeightAt(2780) });
-  game.keys.add('KeyD'); const x = p.x; step(game);
+  game.input.keys.add('KeyD'); const x = p.x; step(game);
   assert.equal(p.motion.distance, p.x - x); assert.equal(p.motion.moving, true); assert.notEqual(p.motion.slope, 0);
   Object.assign(p, { x: data.SURVIVAL_WORLD.width - 38, y: data.groundHeightAt(data.SURVIVAL_WORLD.width - 38) });
   const distance = p.motion.distance; step(game, 5);
   assert.equal(p.motion.distance, distance); assert.equal(p.motion.moving, false);
-  game.keys.clear(); tap(game, 'KeyI');
+  game.input.keys.clear(); tap(game, 'KeyI');
   const attack = p.attack; assert.ok(attack);
   const frozen = JSON.stringify(p.motion); p.invuln = 0; game.hurtPlayer(5); step(game, 4);
   assert.equal(JSON.stringify(p.motion), frozen); assert.equal(p.attack, attack);
@@ -978,6 +987,202 @@ test('ordinary slash visuals retain their successful attack form while skill and
     assert.ok(game.effects.some(effect => effect.kind === 'slash'));
     assert.ok(game.effects.every(effect => !effect.melee));
   }
+});
+
+test('blur drops keyboard repeats but fresh keydown works when background keyup was never delivered', () => {
+  const game = makeGame();
+  key(game, 'KeyJ'); game.onBlur(); game.resume();
+  key(game, 'KeyJ', true); step(game); assert.equal(game.player.attack, null);
+  key(game, 'KeyJ'); step(game); assert.equal(game.player.attack.def.kind, 'jab');
+});
+
+test('survival art ownership loads only the selected fighter and releases on replacement and destroy', () => {
+  const before = artLeases.length;
+  const { SurvivalGame } = loadModule(path.join(root, 'src/game/survival-engine.ts').replaceAll('\\', '/'));
+  const game = new SurvivalGame(canvas());
+  assert.equal(artLeases.length, before, 'construction must not preload all characters');
+  game.start({ player: 1 }); const first = artLeases.at(-1); assert.deepEqual(first.ids, ['jean']);
+  game.start({ player: 4 }); assert.equal(first.released, true);
+  const second = artLeases.at(-1); assert.deepEqual(second.ids, ['xiao']);
+  game.destroy(); assert.equal(second.released, true);
+});
+
+test('touch movement, jump and attack combine and a held skill never fires again after cooldown', () => {
+  const game = makeGame(); const startX = game.player.x;
+  game.setTouchAction('right', 'move', true); game.setTouchAction('jump', 'jump', true); game.setTouchAction('secondary', 'skill', true); step(game);
+  assert.ok(game.player.x > startX); assert.equal(game.player.jumps, 1); assert.equal(game.player.attack.def.kind, 'secondary');
+  game.setTouchAction('right', 'move', false); step(game, 400);
+  assert.equal(game.player.attack, null); assert.equal(game.player.secondaryCooldown, 0);
+  game.setTouchAction('secondary', 'skill', true); step(game); assert.equal(game.player.attack, null);
+  game.setTouchAction('secondary', 'skill', false); game.setTouchAction('secondary', 'skill', true); step(game);
+  assert.equal(game.player.attack.def.kind, 'secondary');
+});
+
+test('touch jump sources coalesce per tick and Xiao can jump then plunge on the same tick', () => {
+  const game = makeGame(4);
+  assert.equal(game.getSnapshot().canSpecial, false);
+  game.setTouchAction('jump', 'up', true); game.setTouchAction('jump', 'jump', true); step(game);
+  assert.equal(game.player.jumps, 1); assert.equal(game.getSnapshot().canSpecial, true);
+  game.setTouchAction('jump', 'jump', false); game.setTouchAction('jump', 'jump', true); step(game);
+  assert.equal(game.player.jumps, 0);
+  const simultaneous = makeGame(4);
+  simultaneous.setTouchAction('jump', 'jump', true); simultaneous.setTouchAction('special', 'skill', true); step(simultaneous);
+  assert.equal(simultaneous.player.attack.plunge.phase, 'windup'); assert.ok(simultaneous.player.skillCooldown > 0);
+});
+
+test('touch hitstop preserves one new action edge, while upgrade and blur discard it', () => {
+  const game = makeGame(); game.hitstop = 4;
+  game.setTouchAction('jab', 'attack', true); game.setTouchAction('jab', 'attack', false);
+  step(game, 4); assert.equal(game.player.attack, null); step(game); assert.equal(game.player.attack.def.kind, 'jab');
+  for (const transition of ['upgrade', 'blur']) {
+    const run = makeGame();
+    run.setTouchAction('right', 'move', true); run.setTouchAction('jab', 'attack', true);
+    if (transition === 'blur') { run.onBlur(); run.resume(); }
+    else { run.xp = xpForLevel(run.level); run.checkLevelUp(); assert.equal(run.phase, 'upgrade'); run.chooseUpgrade(run.choices[0].id); }
+    run.setTouchAction('right', 'move', true); run.setTouchAction('jab', 'attack', true); step(run);
+    assert.equal(run.player.vx, 0); assert.equal(run.player.attack, null);
+    run.setTouchAction('jab', 'attack', false); run.setTouchAction('jab', 'attack', true); step(run);
+    assert.equal(run.player.attack.def.kind, 'jab');
+  }
+});
+
+test('summoner release frames create grounded summons exactly once and keep eight-second independent cooldowns', () => {
+  for (const id of ['zhongli', 'furina']) {
+    const game = makeGame(CHARACTERS.findIndex(char => char.id === id));
+    Object.assign(game.player, { x: 500, y: data.groundHeightAt(500) });
+    assert.equal(game.getSnapshot().skillCooldownMax, 8);
+    tap(game, 'KeyL'); step(game, game.player.attack.def.startup - 2);
+    assert.equal(game.summons.entities.length, 0, 'nothing appears during anticipation');
+    step(game); assert.equal(game.summons.entities.length, id === 'zhongli' ? 1 : 3);
+    assert.equal(game.player.secondaryCooldown, 0);
+    for (const entity of game.summons.entities) assert.ok(Math.abs(entity.feetY - data.groundHeightAt(entity.x)) < (entity.kind === 'geo-pillar' ? .001 : 2), 'column is exact and pets interpolate along the slope');
+    const initialIds = game.summons.entities.map(entity => entity.id).join(',');
+    step(game, 50); assert.equal(game.summons.entities.map(entity => entity.id).join(','), initialIds);
+    game.player.attack = null; game.player.skillCooldown = 0;
+    const platform = data.SURVIVAL_WORLD.platforms[4];
+    Object.assign(game.player, { x: platform.x + 150, y: platform.y, onGround: true });
+    tap(game, 'KeyL'); step(game, game.player.attack.def.startup);
+    for (const entity of game.summons.entities) assert.equal(entity.feetY, platform.y, 'summons use the occupied soft platform');
+  }
+});
+
+test('summoner entities stop for pause upgrades hitstop and clear on defeat restart and expiry', () => {
+  for (const id of ['zhongli', 'furina']) {
+    const game = makeGame(CHARACTERS.findIndex(char => char.id === id));
+    tap(game, 'KeyL'); step(game, game.player.attack.def.startup);
+    const frozen = JSON.stringify(game.summons.entities);
+    game.pause(); step(game, 90); assert.equal(JSON.stringify(game.summons.entities), frozen); game.resume();
+    game.phase = 'upgrade'; step(game, 90); assert.equal(JSON.stringify(game.summons.entities), frozen); game.phase = 'playing';
+    game.hitstop = 4; step(game, 4); assert.equal(JSON.stringify(game.summons.entities), frozen);
+    game.player.invuln = 0; game.hurtPlayer(100000); assert.equal(game.phase, 'defeat'); assert.equal(game.summons.entities.length, 0);
+    game.rematch(); assert.equal(game.summons.entities.length, 0); assert.equal(game.getSnapshot().shieldHp, 0); assert.equal(game.getSnapshot().buffRemaining, 0);
+    game.spawnTimer = 100000; game.player.invuln = 100000;
+    tap(game, 'KeyL'); step(game, 900); assert.equal(game.summons.entities.length, 0, 'held or expired cooldown cannot recast');
+  }
+});
+
+test('summoner four evolution routes alter actual columns shielding range or crab splash and support level five', () => {
+  for (const id of ['zhongli', 'furina']) {
+    const index = CHARACTERS.findIndex(char => char.id === id);
+    const choices = getUpgradeChoices({ ...makeInitialProgress(id), skillLevel: 4 });
+    assert.equal(choices.length, 2); assert.ok(choices.every(choice => !choice.id.startsWith('xiao')));
+    for (const choice of choices) {
+      const game = makeGame(index); setBranch(game, choice.id);
+      enemy(game, 80); tap(game, 'KeyL'); step(game, game.player.attack.def.startup);
+      assert.ok(game.summons.entities.every(entity => entity.tuning.branch === choice.id));
+      if (choice.id === 'geo-twin') assert.equal(game.summons.entities.length, 2);
+      if (choice.id === 'geo-shield') {
+        assert.ok(game.getSnapshot().shieldHp > 35);
+        let selfPulse = false;
+        for (let tick = 0; tick < 90; tick++) { step(game); selfPulse ||= game.summons.effects.some(effect => effect.kind === 'geo-pulse' && effect.x === game.player.x); }
+        assert.ok(selfPulse);
+      }
+      if (choice.id === 'hydro-ranged') {
+        game.enemies[0].x = game.player.x + 370;
+        let longProjectile = false;
+        for (let tick = 0; tick < 140; tick++) { step(game); longProjectile ||= game.summons.effects.some(effect => ['bubble', 'water-pierce'].includes(effect.kind) && effect.maxLife === 76); }
+        assert.ok(longProjectile, 'ranged route really extends projectile travel');
+      }
+      if (choice.id === 'hydro-crab') {
+        let wide = false;
+        for (let tick = 0; tick < 180; tick++) { step(game); wide ||= game.summons.effects.some(effect => effect.kind === 'crab-splash' && effect.radius >= 129); }
+        assert.ok(wide, 'crab branch really expands splash');
+      }
+      let progress = { ...game.progress };
+      progress = applyChoice(progress, 'core', getUpgradeChoices(progress)); assert.equal(progress.skillLevel, 5);
+      for (let level = 2; level <= 5; level++) { progress = applyChoice(progress, 'secondary', getUpgradeChoices(progress)); assert.equal(progress.secondaryLevel, level); }
+      assert.ok(getUpgradeChoices(progress).every(card => card.id !== 'core' && card.id !== 'secondary'));
+    }
+  }
+});
+
+test('summoner upgrades update existing formations and shields immediately without extending their lifetime', () => {
+  for (const id of ['zhongli', 'furina']) {
+    const game = makeGame(CHARACTERS.findIndex(char => char.id === id));
+    tap(game, 'KeyL'); step(game, 120);
+    const entity = game.summons.entities[0], age = entity.age, life = entity.life, cooldown = entity.cooldown;
+    const shieldLife = game.summons.getShield(0)?.life;
+    game.phase = 'upgrade'; game.choices = getUpgradeChoices(game.progress); assert.ok(game.chooseUpgrade('core'));
+    assert.equal(entity.tuning.mainLevel, 2); assert.equal(entity.age, age); assert.equal(entity.life, life); assert.equal(entity.cooldown, cooldown);
+    if (id === 'zhongli') { assert.equal(game.getSnapshot().shieldHp, 25); assert.equal(game.summons.getShield(0).life, shieldLife); }
+    game.progress.skillLevel = 4; game.phase = 'upgrade'; game.choices = getUpgradeChoices(game.progress);
+    assert.ok(game.chooseUpgrade(id === 'zhongli' ? 'geo-twin' : 'hydro-crab'));
+    assert.ok(game.summons.entities.every(summon => summon.tuning.branch === (id === 'zhongli' ? 'geo-twin' : 'hydro-crab')));
+    assert.ok(game.summons.entities.every(summon => summon.life === life));
+    if (id === 'zhongli') assert.equal(game.summons.entities.length, 2);
+  }
+});
+
+test('summoner persistent hits award kills damage and experience through the real survival pipeline', () => {
+  for (const id of ['zhongli', 'furina']) {
+    const game = makeGame(CHARACTERS.findIndex(char => char.id === id));
+    tap(game, 'KeyL'); step(game, 100); // initial manual shock has already finished
+    const target = enemy(game, 120, { hp: 1, xp: 13 });
+    const before = game.damageDealt;
+    step(game, 250);
+    assert.ok(target.hp <= 0); assert.equal(game.kills, 1); assert.ok(game.damageDealt > before);
+    assert.ok(game.orbs.some(orb => !orb.heal && orb.value === 13) || game.xp >= 13 || game.level > 1, 'summon kill creates collectible XP');
+  }
+});
+
+test('summoner I works without L and meteor control is bounded for elites and absent on bosses', () => {
+  const furina = makeGame(CHARACTERS.findIndex(char => char.id === 'furina'));
+  enemy(furina, 80); const initial = furina.attackDamage('jab');
+  tap(furina, 'KeyI'); step(furina, furina.player.attack.def.startup);
+  assert.equal(furina.summons.entities.length, 0); assert.ok(furina.damageDealt > 0);
+  assert.ok(furina.attackDamage('jab') > initial); assert.ok(furina.getSnapshot().buffRemaining > 6);
+  const geo = makeGame(CHARACTERS.findIndex(char => char.id === 'zhongli'));
+  const normal = enemy(geo, 130), elite = enemy(geo, 150, { elite: true }), boss = enemy(geo, 170, { boss: true });
+  tap(geo, 'KeyI'); step(geo, geo.player.attack.def.startup);
+  assert.ok(normal.petrify > elite.petrify); assert.ok(elite.petrify > 0 && elite.petrify <= 36); assert.ok(!boss.petrify);
+  step(geo, 160); assert.equal(normal.petrify, 0); assert.equal(elite.petrify, 0);
+});
+
+test('summoner projectiles stop on swept solid slopes but can hit over terrain and cross one-way platforms', () => {
+  for (const kind of ['bubble', 'water-pierce']) {
+    const game = makeGame(CHARACTERS.findIndex(char => char.id === 'furina'));
+    const context = game.summonContext();
+    assert.equal(context.projectileBlocked(2700, 840, 3200, 840), true, 'line crosses the raised solid terrace');
+    assert.equal(context.projectileBlocked(2700, 650, 3200, 650), false, 'the same line passes above the terrace');
+    const platform = data.SURVIVAL_WORLD.platforms[4];
+    assert.equal(context.projectileBlocked(platform.x + 30, platform.y - 40, platform.x + 30, platform.y + 40), false, 'soft platforms are one-way for fighters, not walls for water');
+    const target = enemy(game, 850, { x: 3150, y: 860 });
+    game.summons.effect(context.owners[0], kind, 2700, 840, 17, 34, 20, 55, {}, 500, 0);
+    game.updateSummons(); assert.equal(target.hp, 10000); assert.equal(game.summons.effects.length, 0, 'blocked projectile cannot deal through-ground damage');
+    target.y = 680;
+    game.summons.effect(context.owners[0], kind, 2700, 650, 17, 34, 20, 55, {}, 500, 0);
+    game.updateSummons(); assert.ok(target.hp < 10000, 'swept target is hittable in open air');
+  }
+});
+
+test('summoner shield absorbs damage while preserving manual attack and jump with only hitstop', () => {
+  const game = makeGame(CHARACTERS.findIndex(char => char.id === 'zhongli'));
+  tap(game, 'KeyL'); step(game, 100); tap(game, 'KeyW'); tap(game, 'KeyJ');
+  const { attack, y, vy, facing, jumps, hp } = game.player, shield = game.getSnapshot().shieldHp;
+  game.player.invuln = 0; game.hurtPlayer(7);
+  assert.equal(game.player.hp, hp); assert.equal(game.getSnapshot().shieldHp, shield - 7);
+  assert.equal(game.player.attack, attack); assert.equal(game.player.y, y); assert.equal(game.player.vy, vy);
+  assert.equal(game.player.facing, facing); assert.equal(game.player.jumps, jumps); assert.equal(game.hitstop, 4);
 });
 
 let failures = 0;

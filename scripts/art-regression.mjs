@@ -10,7 +10,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const activePacks = JSON.parse(fs.readFileSync(path.join(root, 'src/game/animation-packs.json'), 'utf8'));
 const packUrl = (id, file = 'manifest.json') => `/assets/animations/${activePacks[id]}/${file}`;
 const isPackUrl = url => Object.values(activePacks).some(directory => url.includes(`/animations/${directory}/`));
-function harness(rejected = () => false, metadataTransform = value => value, enhanced = false, fixtures = {}) {
+function harness(rejected = () => false, metadataTransform = value => value, enhanced = false, fixtures = {}, decoding = async () => undefined) {
   const calls = [];
   const decodes = [], fetched = [];
   const noop = () => undefined;
@@ -27,6 +27,7 @@ function harness(rejected = () => false, metadataTransform = value => value, enh
     src = ''; naturalWidth = 400; naturalHeight = 400;
     async decode() {
       decodes.push(this.src);
+      await decoding(this.src);
       if (rejected(this.src)) throw new Error('fixture: unavailable image');
       if (isPackUrl(this.src)) {
         if (!enhanced) throw new Error('fixture: legacy regression pack');
@@ -54,8 +55,9 @@ function harness(rejected = () => false, metadataTransform = value => value, enh
     return mod.exports;
   }
   const art = load(path.join(root, 'src/game/art.ts'));
-  const rawLoad = art.loadGameArt;
-  art.loadGameArt = (ids = enhanced ? ['eula'] : []) => rawLoad(ids);
+  // Rendering regressions hold their artwork for the duration of this isolated
+  // harness. Runtime callers use explicit leases and release on teardown.
+  art.loadGameArt = (ids = enhanced ? ['eula'] : Object.keys(activePacks)) => art.acquireGameArt(ids, { legacy: !enhanced }).ready;
   return { art, decodes, fetched, load, animation: load(path.join(root, 'src/game/animation.ts')), draw, calls, reset: () => { calls.length = 0; draw.globalAlpha = 1; draw.save = noop; draw.restore = noop; } };
 }
 // A small read-only PNG decoder keeps shipped sprite integrity checks independent
@@ -443,16 +445,18 @@ test('Eula sword light is one fading smooth arc ending at the current blade tip 
   }
 });
 
-test('any missing or invalid Eula clip falls back to the complete original fighter and leaves others untouched', async () => {
+test('any missing or invalid Eula clip falls back to the complete original fighter without loading others', async () => {
   for (const [reject, transform] of [
     [url => url.endsWith('/run.png'), value => value],
     [() => false, (value, url) => url.includes('eula-v4/manifest') ? { ...value, clips: { ...value.clips, run: { ...value.clips.run, width: 1 } } } : value],
   ]) {
     const h = harness(reject, transform, true); await h.art.loadGameArt(); assert.equal(h.art.getEulaAnimationStatus().status, 'fallback');
-    for (const id of ['eula', 'raiden', 'jean', 'diluc', 'xiao']) {
+    for (const id of ['eula']) {
       h.reset(); assert.equal(h.art.drawFighterArt(h.draw, id, 0, 76, 112, animation), true);
       assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith(`${id}-actions-v3.png`));
     }
+    assert.equal(h.art.drawFighterArt(h.draw, 'raiden', 0, 76, 112, animation), false);
+    assert.equal(h.decodes.some(url => url.includes('raiden')), false);
   }
 });
 
@@ -584,6 +588,7 @@ test('registered base and alternate J/K trails replace duplicate PVP and surviva
   const { Game } = h.load(path.join(root, 'src/game/engine.ts'));
   const { renderSurvival } = h.load(path.join(root, 'src/game/survival-render.ts'));
   const { CHARACTERS } = h.load(path.join(root, 'src/game/data.ts'));
+  const { SummonRuntime } = h.load(path.join(root, 'src/game/summons.ts'));
   for (const id of ids) {
     const char = CHARACTERS.find(character => character.id === id);
     for (const kind of ['jab', 'smash']) for (const variant of ['base', 'alternate']) {
@@ -595,7 +600,7 @@ test('registered base and alternate J/K trails replace duplicate PVP and surviva
       // The slash remains in simulation for identical caps/timing; renderer uses
       // its captured form even after the player has recovered or started another move.
       const melee = { kind, variant }, effect = { kind: 'slash', x: 620, y: 710, size: 170, age: 3, life: 19, color: char.color, melee };
-      const game = { char, context: h.draw, camera: { x: 0, y: 0 }, frame: 60, fields: [], orbs: [], enemies: [], shots: [], texts: [], effects: [effect], notice: '', hitstop: 0,
+      const game = { char, context: h.draw, camera: { x: 0, y: 0 }, frame: 60, summons: new SummonRuntime(), fields: [], orbs: [], enemies: [], shots: [], texts: [], effects: [effect], notice: '', hitstop: 0,
         player: { x: 620, y: 750, vx: 0, vy: 0, facing: 1, onGround: true, dodge: 0, attack: null, invuln: 0 } };
       const snapshot = JSON.stringify(effect); h.reset(); renderSurvival(game);
       assert.equal(h.calls.filter(call => call.kind === 'drawImage' && call.args[0].src?.endsWith('elemental-bursts-v3.png')).length, 0);
@@ -616,13 +621,14 @@ test('registered base and alternate J/K trails replace duplicate PVP and surviva
   assert.ok(legacy.calls.some(call => call.kind === 'drawImage'), 'legacy fallback keeps its original crescent');
 });
 
-test('all 400 delivered frames render their registered source in both facings with one decode per atlas', async () => {
-  const ids = ['eula', 'raiden', 'jean', 'diluc', 'xiao'], h = harness(() => false, value => value, true); await h.art.loadGameArt(ids);
+test('all 532 delivered frames render their registered sheet, source and scale in both facings with one decode per atlas', async () => {
+  const ids = ['eula', 'raiden', 'jean', 'diluc', 'xiao', 'zhongli', 'furina'], h = harness(() => false, value => value, true); await h.art.loadGameArt(ids);
   let count = 0;
   for (const id of ids) {
     const manifest = JSON.parse(fs.readFileSync(path.join(root, 'public', packUrl(id)), 'utf8'));
-    const status = h.art.getCharacterAnimationStatus(id); assert.equal(status.status, 'ready'); assert.equal(status.frames, 80);
-    for (const [kind, clip, variant] of [...Object.entries(manifest.clips).map(([kind, clip]) => [kind, clip, 'base']), ...Object.entries(manifest.variants).map(([kind, clip]) => [kind, clip, 'alternate'])]) {
+    const summoner = id === 'zhongli' || id === 'furina';
+    const status = h.art.getCharacterAnimationStatus(id); assert.equal(status.status, 'ready', id); assert.equal(status.frames, summoner ? 66 : 80);
+    for (const [kind, clip, variant] of [...Object.entries(manifest.clips).map(([kind, clip]) => [kind, clip, 'base']), ...Object.entries(manifest.variants ?? {}).map(([kind, clip]) => [kind, clip, 'alternate'])]) {
       for (const frame of clip.frames) for (const facing of [-1, 1]) {
         const peers = clip.frames.filter(peer => kind === 'jump' ? peer.name === frame.name : peer.phase === frame.phase), index = peers.indexOf(frame);
         const progress = (peers.slice(0, index).reduce((sum, peer) => sum + (peer.duration ?? 6), 0) + (frame.duration ?? 6) / 2) / peers.reduce((sum, peer) => sum + (peer.duration ?? 6), 0);
@@ -640,16 +646,89 @@ test('all 400 delivered frames render their registered source in both facings wi
         }
         h.reset(); assert.equal(h.art.drawFighterArt(h.draw, id, 0, 112, 112, sample, { facing }), true);
         const drawn = h.calls.find(call => call.kind === 'drawImage').args;
-        assert.equal(drawn[0].src, packUrl(id, clip.image));
+        assert.equal(drawn[0].src, packUrl(id, frame.image ?? clip.image));
         assert.deepEqual(drawn.slice(1, 5), [frame.sourceRect.x + 1, frame.sourceRect.y + 1, frame.sourceRect.width - 2, frame.sourceRect.height - 2]);
+        const scale = 112 / clip.standingBodyHeightPixels * (frame.sourceScale ?? 1);
+        assert.deepEqual(drawn.slice(-2), [(frame.sourceRect.width - 2) * scale, (frame.sourceRect.height - 2) * scale]);
         if (facing === 1) count++;
       }
     }
-    const expectedAtlases = [...new Set([...Object.values(manifest.clips), ...Object.values(manifest.variants)].map(clip => packUrl(id, clip.image)))].sort();
+    const expected = [...Object.values(manifest.clips), ...Object.values(manifest.variants ?? {})].flatMap(clip => [packUrl(id, clip.image), ...clip.frames.filter(frame => frame.image).map(frame => packUrl(id, frame.image))]);
+    if (summoner) {
+      expected.push(h.art.CHARACTER_ART[id]);
+      const summonManifest = JSON.parse(fs.readFileSync(path.join(root, 'src/game/summoner-art-manifest.json'), 'utf8'));
+      expected.push(...Object.values(summonManifest.assets).filter(asset => asset.owner === id).map(asset => `/assets/animations/${asset.image}`));
+    }
+    const expectedAtlases = [...new Set(expected)].sort();
     const decodedAtlases = h.decodes.filter(url => url.startsWith(packUrl(id, ''))).sort();
     assert.deepEqual(decodedAtlases, expectedAtlases, `${id}: decode every referenced atlas exactly once and no unreferenced atlas`);
   }
-  assert.equal(count, 400);
+  assert.equal(count, 532);
+});
+
+test('summoner running art keeps pelvis roots, ground baselines and airborne clearance without clipping', () => {
+  for (const id of ['zhongli', 'furina']) {
+    const directory = path.join(root, `public/assets/animations/${activePacks[id]}`);
+    const authored = JSON.parse(fs.readFileSync(path.join(directory, 'run-v2.json'), 'utf8'));
+    const manifest = JSON.parse(fs.readFileSync(path.join(directory, 'manifest.json'), 'utf8'));
+    const { registration, ...clip } = authored;
+    assert.deepEqual(manifest.clips.run, clip, `${id}: builder must retain the reviewed root registration`);
+    assert.equal(registration.method, 'pelvis-ground');
+    assert.equal(registration.pelvisPixels.length, 8);
+    const { width, height, pixels } = readRgbaPng(path.join(directory, clip.image));
+    assert.equal(width, clip.width); assert.equal(height, clip.height);
+    let transparent = 0;
+    for (let at = 3; at < pixels.length; at += 4) if (pixels[at] === 0) transparent++;
+    assert.ok(transparent / (width * height) > 0.45, `${id}: actual transparent atlas`);
+    const registeredHips = [];
+    for (const [index, frame] of clip.frames.entries()) {
+      const rect = frame.sourceRect, hip = registration.pelvisPixels[index];
+      const rootX = rect.x + rect.width * frame.footAnchor.x;
+      const groundY = rect.y + rect.height * frame.footAnchor.y;
+      assert.ok(Math.abs(groundY - registration.groundRows[Math.floor(index / 4)]) < 0.001, `${id}/${index}: ground must not follow the moving shoe`);
+      assert.equal(frame.sourceScale, undefined, `${id}: one anatomical scale for the entire cycle`);
+      registeredHips.push((hip[0] - rootX) / clip.standingBodyHeightPixels);
+      assert.ok(Math.abs(hip[0] - rootX) < clip.standingBodyHeightPixels * 0.035, `${id}/${index}: root follows the reviewed pelvis projection`);
+      assert.ok(hip[1] < groundY - clip.standingBodyHeightPixels * 0.35, `${id}/${index}: landmark is the pelvis, not a shoe`);
+      let visible = 0, edge = 0, bottom = -1;
+      for (let y = rect.y; y < rect.y + rect.height; y++) for (let x = rect.x; x < rect.x + rect.width; x++) {
+        if (pixels[(y * width + x) * 4 + 3] <= 32) continue;
+        visible++; bottom = Math.max(bottom, y);
+        if (x < rect.x + 3 || x >= rect.x + rect.width - 3 || y < rect.y + 3 || y >= rect.y + rect.height - 3) edge++;
+      }
+      assert.ok(visible > 1000, `${id}/${index}: visible authored pose`);
+      assert.equal(edge, 0, `${id}/${index}: hands, coat, hat and shoes stay within the source cell`);
+      if (frame.name.endsWith('flight')) assert.ok(groundY - bottom >= 2, `${id}/${index}: flight retains visible ground clearance`);
+      else assert.ok(Math.abs(groundY - bottom) < clip.standingBodyHeightPixels * 0.035, `${id}/${index}: support feet meet the shared ground`);
+    }
+    for (const [index, hip] of registeredHips.entries()) {
+      assert.ok(Math.abs(hip - registeredHips[(index + 1) % registeredHips.length]) < 0.04, `${id}: body root stays continuous including the final-to-first transition`);
+    }
+  }
+});
+
+test('summoner art leases own complete pet animation and effects without requesting nonexistent legacy sheets', async () => {
+  const h = harness(() => false, value => value, true);
+  const art = h.load(path.join(root, 'src/game/summoner-art.ts'));
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'src/game/summoner-art-manifest.json'), 'utf8'));
+  const first = h.art.acquireGameArt(['furina', 'zhongli'], { legacy: true }); await first.ready;
+  const second = h.art.acquireGameArt(['furina']); await second.ready;
+  assert.equal(h.decodes.some(url => /(?:zhongli|furina)-(?:actions|secondary)/.test(url)), false);
+  assert.equal(h.decodes.some(url => url.includes('undefined')), false);
+  for (const [kind, asset] of Object.entries(manifest.assets)) {
+    for (let index = 0; index < asset.frames.length; index++) for (const facing of [-1, 1]) {
+      const options = { facing, age: index * 12, ...(index >= 4 ? { attackProgress: (index - 4 + .5) / 8 } : {}) };
+      const before = JSON.stringify(options); h.reset(); assert.equal(art.drawSummonArt(h.draw, kind, 20, 120, 60, options), true);
+      const call = h.calls.find(call => call.kind === 'drawImage'), frame = asset.frames[index], source = frame.sourceRect;
+      assert.equal(call.args[0].src, `/assets/animations/${asset.image}`);
+      assert.deepEqual(call.args.slice(1, 5), [source.x + 1, source.y + 1, source.width - 2, source.height - 2]);
+      assert.equal(JSON.stringify(options), before);
+    }
+  }
+  first.release(); assert.equal(art.drawSummonArt(h.draw, 'geo-pillar', 0, 0, 150), false);
+  assert.equal(art.drawSummonArt(h.draw, 'usher', 0, 0, 45), true);
+  second.release(); second.release();
+  assert.equal(art.drawSummonArt(h.draw, 'usher', 0, 0, 45), false);
 });
 
 test('rebuilt Raiden cuts use measured arcs while the elemental thunder command has no slash trail', async () => {
@@ -690,6 +769,89 @@ test('real Xiao dive and impact spear tips share the physical ground registratio
       assert.equal(JSON.stringify(sample), before);
     }
   }
+});
+
+test('art leases load one live character without decoding unused portraits, old poses or Xiao effects', async () => {
+  const h = harness(() => false, value => value, true), lease = h.art.acquireGameArt(['eula', 'eula', 'unknown']);
+  await lease.ready;
+  assert.equal(h.art.getEulaAnimationStatus().status, 'ready');
+  assert.equal(h.fetched.filter(url => url === packUrl('eula')).length, 1);
+  assert.equal(h.decodes.some(url => /raiden|jean|diluc|xiao|actions-v3|eula-secondary-v1/.test(url)), false);
+  assert.ok(h.decodes.includes('/assets/characters/eula-v2.png'), 'canvas HUD portrait remains available');
+  lease.release();
+  assert.equal(h.art.drawFighterArt(h.draw, 'eula', 0, 0, 112, animation), false);
+});
+
+test('art leases deduplicate shared actors and release only after the last consumer, including duplicate cleanup', async () => {
+  const h = harness(() => false, value => value, true, packFixtures(['raiden', 'jean']));
+  const battle = h.art.acquireGameArt(['raiden', 'jean']), survivor = h.art.acquireGameArt(['jean']);
+  await Promise.all([battle.ready, survivor.ready]);
+  assert.equal(h.decodes.filter(url => url === packUrl('jean', 'shared.png')).length, 1);
+  battle.release(); battle.release();
+  assert.equal(h.art.drawFighterArt(h.draw, 'raiden', 0, 0, 112, animation), false);
+  assert.equal(h.art.drawFighterArt(h.draw, 'jean', 0, 0, 112, animation), true);
+  assert.equal(h.art.drawArenaBackground(h.draw, 1280, 720), true);
+  assert.equal(h.art.drawSecondaryEffect(h.draw, 'jean', 0, 0, 100, 100), true);
+  survivor.release();
+  assert.equal(h.art.drawFighterArt(h.draw, 'jean', 0, 0, 112, animation), false);
+  assert.equal(h.art.drawArenaBackground(h.draw, 1280, 720), false);
+  assert.equal(h.art.drawSecondaryEffect(h.draw, 'jean', 0, 0, 100, 100), false);
+  const next = h.art.acquireGameArt(['jean']); await next.ready;
+  assert.equal(h.decodes.filter(url => url === packUrl('jean', 'shared.png')).length, 2, 'next match gets a fresh owned cache');
+  assert.equal(h.art.getCharacterAnimationStatus('jean').status, 'ready'); next.release();
+});
+
+test('an animation preview can add legacy comparison to a live pack without unloading the game', async () => {
+  const h = harness(() => false, value => value, true, packFixtures(['raiden']));
+  const battle = h.art.acquireGameArt(['raiden']); await battle.ready;
+  assert.equal(h.decodes.some(url => url.endsWith('raiden-actions-v3.png')), false);
+  const preview = h.art.acquireGameArt(['raiden'], { legacy: true }); await preview.ready;
+  h.reset(); h.art.drawFighterArt(h.draw, 'raiden', 0, 0, 112, animation, { legacy: true });
+  assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith('raiden-actions-v3.png'));
+  preview.release();
+  assert.equal(h.art.getCharacterAnimationStatus('raiden').status, 'ready');
+  assert.equal(h.decodes.filter(url => url === packUrl('raiden', 'shared.png')).length, 1);
+  battle.release(); assert.equal(h.art.drawFighterArt(h.draw, 'raiden', 0, 0, 112, animation), false);
+});
+
+test('late decodes from a released lease cannot overwrite a replacement character or arena generation', async () => {
+  let unblock, started;
+  const gate = new Promise(resolve => { unblock = resolve; });
+  const decodingStarted = new Promise(resolve => { started = resolve; });
+  const blocked = new Set();
+  const h = harness(() => false, value => value, true, packFixtures(['raiden']), async url => {
+    if ((url === packUrl('raiden', 'shared.png') || url.endsWith('liyue-dawn-v2.png')) && !blocked.has(url)) {
+      blocked.add(url); if (isPackUrl(url)) started(); await gate;
+    }
+  });
+  const stale = h.art.acquireGameArt(['raiden']); await decodingStarted; stale.release();
+  const current = h.art.acquireGameArt(['raiden']); await current.ready;
+  h.reset(); h.art.drawFighterArt(h.draw, 'raiden', 0, 0, 112, animation);
+  const currentSprite = h.calls.find(call => call.kind === 'drawImage').args[0];
+  h.reset(); h.art.drawArenaBackground(h.draw, 1280, 720);
+  const currentArena = h.calls.find(call => call.kind === 'drawImage').args[0];
+  unblock(); await stale.ready;
+  h.reset(); h.art.drawFighterArt(h.draw, 'raiden', 0, 0, 112, animation);
+  assert.equal(h.calls.find(call => call.kind === 'drawImage').args[0], currentSprite);
+  h.reset(); h.art.drawArenaBackground(h.draw, 1280, 720);
+  assert.equal(h.calls.find(call => call.kind === 'drawImage').args[0], currentArena);
+  stale.release(); assert.equal(h.art.getCharacterAnimationStatus('raiden').status, 'ready');
+  current.release(); assert.equal(h.art.drawArenaBackground(h.draw, 1280, 720), false);
+});
+
+test('art leases retry a failed atlas after release and never revive resources after early teardown', async () => {
+  let reject = true;
+  const h = harness(url => reject && url === packUrl('raiden', 'shared.png'), value => value, true, packFixtures(['raiden']));
+  const failed = h.art.acquireGameArt(['raiden']); await failed.ready;
+  assert.equal(h.art.getCharacterAnimationStatus('raiden').status, 'fallback');
+  h.reset(); h.art.drawFighterArt(h.draw, 'raiden', 0, 0, 112, animation);
+  assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith('raiden-actions-v3.png'));
+  failed.release(); reject = false;
+  const early = h.art.acquireGameArt(['raiden']); early.release(); await early.ready;
+  assert.equal(h.art.drawFighterArt(h.draw, 'raiden', 0, 0, 112, animation), false);
+  assert.equal(h.art.drawArenaBackground(h.draw, 1280, 720), false);
+  const recovered = h.art.acquireGameArt(['raiden']); await recovered.ready;
+  assert.equal(h.art.getCharacterAnimationStatus('raiden').status, 'ready'); recovered.release();
 });
 
 let failures = 0;

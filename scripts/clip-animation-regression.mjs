@@ -47,6 +47,37 @@ test('manifest rejects incomplete packs, invalid source dimensions and unsafe as
   }
 });
 
+test('multi-atlas frames validate their own dimensions, path and uniform scale', () => {
+  const multiple = clone(manifest);
+  multiple.clips.special.frames[4] = { ...multiple.clips.special.frames[4], image: 'second-atlas.png', width: 2000, height: 1600, sourceScale: 1.12 };
+  assert.equal(validClipManifest(multiple), true);
+  for (const mutate of [frame => { frame.image = '../escape.png'; }, frame => { delete frame.width; }, frame => { frame.width = 20; }, frame => { frame.sourceScale = 0; }, frame => { frame.height = NaN; }]) {
+    const broken = clone(multiple); mutate(broken.clips.special.frames[4]); assert.equal(validClipManifest(broken), false);
+  }
+  const repeated = clone(manifest); repeated.clips.idle.frames[1] = clone(repeated.clips.idle.frames[0]);
+  assert.equal(validClipManifest(repeated), true, 'returning to an identical approved neutral pose is authored reuse');
+  repeated.clips.idle.frames[1].sourceRect.x = 3;
+  assert.equal(validClipManifest(repeated), false, 'partially overlapping source cells remain rejected');
+});
+
+test('summoner releases use the approved cast poses and Furina hat continuity sources', () => {
+  const releases = { zhongli: { special: 9, secondary: 11 }, furina: { special: 10, secondary: 10 } };
+  for (const [id, timings] of Object.entries(releases)) {
+    const pack = JSON.parse(fs.readFileSync(path.join(root, `public/assets/animations/${activePacks[id]}/manifest.json`), 'utf8'));
+    for (const [kind, index] of Object.entries(timings)) {
+      const input = { ...base(), state: 'attack', attack: { def: { kind, startup: 50, active: 8, endlag: 26 }, t: 50 } };
+      assert.equal(selectClipFrame(pack, input).frame, index, `${id}/${kind} release`);
+      input.attack.t = 49; assert.equal(selectClipFrame(pack, input).phase, 'windup');
+    }
+    if (id === 'furina') {
+      const letters = pack.clips.special.frames.map(frame => (frame.image ?? pack.clips.special.image).match(/-([abcd])\.png$/)[1]);
+      assert.deepEqual(letters, ['a', 'd', 'd', 'd', 'b', 'b', 'b', 'b', 'c', 'c', 'c', 'c', 'd', 'd', 'd', 'a']);
+      const clip = pack.clips.special;
+      assert.deepEqual(clip.frames[0].sourceRect, clip.frames.at(-1).sourceRect);
+    } else assert.equal(pack.clips.special.image, 'l-skill-cross-charge.png');
+  }
+});
+
 test('all Eula attack frames are selected within their live startup/contact/recovery windows in both modes', () => {
   for (const kind of ['jab', 'smash', 'special', 'secondary']) {
     for (const survival of [false, true]) {
@@ -144,6 +175,31 @@ test('all eight run drawings form a full distance loop independently of elapsed 
     visited.add(selectClipFrame(manifest, { ...base(), motion, time: 1e8, vx: 5 }).frame);
   }
   assert.equal(visited.size, 8); assert.equal(motion.distance, 0);
+});
+
+test('summoner run cycles preserve Eula gait phases across full-distance loops and both facings', () => {
+  const eulaPack = JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations/eula-v4/manifest.json'), 'utf8'));
+  for (const id of ['zhongli', 'furina']) {
+    const character = CHARACTERS.find(item => item.id === id);
+    const pack = JSON.parse(fs.readFileSync(path.join(root, `public/assets/animations/${activePacks[id]}/manifest.json`), 'utf8'));
+    assert.equal(pack.clips.run.image, 'run-v2.png');
+    assert.deepEqual(pack.clips.run.frames.map(frame => frame.name), eulaPack.clips.run.frames.map(frame => frame.name));
+    assert.deepEqual(pack.clips.run.frames.map(frame => frame.duration), eulaPack.clips.run.frames.map(frame => frame.duration));
+    for (const facing of [-1, 1]) for (const speed of [character.speed, character.speed * 1.24]) {
+      const motion = newMotionState(facing), visited = new Set();
+      for (let tick = 0; tick < 120; tick++) {
+        advanceMotion(motion, { dx: facing * speed, onGround: true, facing, walking: true });
+        const input = { ...base(), motion, vx: facing * speed, time: 1e8 + tick };
+        const selection = selectClipFrame(pack, input); visited.add(selection.frame);
+        assert.equal(selection.frame, selectClipFrame(eulaPack, input).frame, `${id}: same distance means same gait phase`);
+      }
+      assert.equal(visited.size, 8, `${id}: every frame remains visible at live movement speeds`);
+      motion.distance = 95.99; motion.moving = true;
+      assert.equal(selectClipFrame(pack, { ...base(), motion }).frame, 7);
+      advanceMotion(motion, { dx: facing * 0.02, onGround: true, facing, walking: true });
+      assert.equal(selectClipFrame(pack, { ...base(), motion }).frame, 0);
+    }
+  }
 });
 
 test('jump rise/apex/fall use physics and landing can immediately yield to input or attack', () => {
@@ -265,11 +321,12 @@ test('Xiao preview manually-equivalent jump precedes L and landing alone advance
   }
 });
 
-test('shipped five-character clips reach every combat drawing at all current PVP and survival attack speeds', () => {
+test('all shipped character clips reach every combat drawing at current PVP and survival attack speeds', () => {
   const missing = [];
   for (const character of CHARACTERS) {
     const pack = JSON.parse(fs.readFileSync(path.join(root, `public/assets/animations/${activePacks[character.id]}/manifest.json`), 'utf8'));
-    assert.equal(validClipManifest(pack), true); assert.equal(validVariantClips(pack), true);
+    assert.equal(validClipManifest(pack), true, character.id);
+    if (pack.variants) assert.equal(validVariantClips(pack), true, character.id);
     for (const kind of EULA_ATTACKS) for (const visualVariant of ['base', 'alternate']) for (const level of [-1, 0, 1, 2, 3]) {
       const speed = 1 + Math.max(0, level) * 0.035, survival = level >= 0;
       const def = { ...character[kind], startup: survival ? Math.max(3, Math.round(character[kind].startup / speed)) : character[kind].startup,

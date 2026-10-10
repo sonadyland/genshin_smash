@@ -1,0 +1,163 @@
+{
+  "image": "run-v2.png",
+  "width": 1774,
+  "height": 887,
+  "standingBodyHeightPixels": 400,
+  "trail": "none",
+  "frames": [
+    {
+      "name": "right-contact",
+      "sourceRect": {
+        "x": 0,
+        "y": 0,
+        "width": 443,
+        "height": 460
+      },
+      "footAnchor": {
+        "x": 0.61851016,
+        "y": 0.95652174
+      },
+      "duration": 6
+    },
+    {
+      "name": "right-compress",
+      "sourceRect": {
+        "x": 443,
+        "y": 0,
+        "width": 444,
+        "height": 460
+      },
+      "footAnchor": {
+        "x": 0.61486486,
+        "y": 0.95652174
+      },
+      "duration": 5
+    },
+    {
+      "name": "right-push",
+      "sourceRect": {
+        "x": 887,
+        "y": 0,
+        "width": 443,
+        "height": 460
+      },
+      "footAnchor": {
+        "x": 0.62076749,
+        "y": 0.95652174
+      },
+      "duration": 5
+    },
+    {
+      "name": "left-flight",
+      "sourceRect": {
+        "x": 1330,
+        "y": 0,
+        "width": 444,
+        "height": 460
+      },
+      "footAnchor": {
+        "x": 0.62387387,
+        "y": 0.95652174
+      },
+      "duration": 5
+    },
+    {
+      "name": "left-contact",
+      "sourceRect": {
+        "x": 0,
+        "y": 460,
+        "width": 443,
+        "height": 427
+      },
+      "footAnchor": {
+        "x": 0.62528217,
+        "y": 0.95316159
+      },
+      "duration": 6
+    },
+    {
+      "name": "left-compress",
+      "sourceRect": {
+        "x": 443,
+        "y": 460,
+        "width": 444,
+        "height": 427
+      },
+      "footAnchor": {
+        "x": 0.62612613,
+        "y": 0.95316159
+      },
+      "duration": 5
+    },
+    {
+      "name": "left-push",
+      "sourceRect": {
+        "x": 887,
+        "y": 460,
+        "width": 443,
+        "height": 427
+      },
+      "footAnchor": {
+        "x": 0.63431151,
+        "y": 0.95316159
+      },
+      "duration": 5
+    },
+    {
+      "name": "right-flight",
+      "sourceRect": {
+        "x": 1330,
+        "y": 460,
+        "width": 444,
+        "height": 427
+      },
+      "footAnchor": {
+        "x": 0.6463964,
+        "y": 0.95316159
+      },
+      "duration": 5
+    }
+  ],
+  "registration": {
+    "method": "pelvis-ground",
+    "groundRows": [
+      440,
+      867
+    ],
+    "pelvisPixels": [
+      [
+        274,
+        251
+      ],
+      [
+        716,
+        257
+      ],
+      [
+        1162,
+        246
+      ],
+      [
+        1607,
+        230
+      ],
+      [
+        277,
+        704
+      ],
+      [
+        721,
+        718
+      ],
+      [
+        1168,
+        696
+      ],
+      [
+        1617,
+        681
+      ]
+    ],
+    "notes": "Hand-reviewed pelvis positions and shared row ground; flight feet retain clearance. One anatomical scale for all eight drawings. Original PNG unchanged."
+  }
+}

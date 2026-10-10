@@ -1,6 +1,9 @@
 import { drawArenaBackground, drawFighterArt, drawElementEffect, drawXiaoPlungeEffect, drawSecondaryEffect, hasRegisteredMeleeTrail } from './art';
 import { SURVIVAL_WORLD, groundHeightAt } from './survival-data';
 import type { SurvivalGame, SurvivalEnemy, SurvivalField } from './survival-engine';
+import { effectGlow } from './visual-quality';
+import type { VisualQuality } from './visual-quality';
+import { drawSummonArt } from './summoner-art';
 
 const W = 1280, H = 720;
 const visible = (game: SurvivalGame, x: number, padding = 140) => x > game.camera.x - padding && x < game.camera.x + W + padding;
@@ -18,11 +21,12 @@ export function renderSurvival(game: SurvivalGame) {
   c.fillStyle = atmosphere; c.fillRect(0, 0, W, H);
   c.save(); c.translate(-camera.x, -camera.y);
   scenery(game);
-  for (const field of game.fields) if (visible(game, field.x, field.radius)) drawField(c, field);
+  drawSummons(game);
+  for (const field of game.fields) if (visible(game, field.x, field.radius)) drawField(c, field, game.visualQuality);
   for (const orb of game.orbs) if (visible(game, orb.x)) {
     const bob = Math.sin(game.frame * 0.06 + orb.x) * 2;
     c.save(); c.translate(orb.x, orb.y + bob);
-    c.shadowColor = orb.heal ? '#a8f4be' : '#71deed'; c.shadowBlur = 12;
+    c.shadowColor = orb.heal ? '#a8f4be' : '#71deed'; c.shadowBlur = effectGlow(game.visualQuality, 12);
     c.fillStyle = orb.heal ? '#b8f5af' : orb.value > 12 ? '#d5b3ff' : '#83eff1';
     if (orb.heal) { c.fillRect(-3, -8, 6, 16); c.fillRect(-8, -3, 16, 6); }
     else {
@@ -37,7 +41,7 @@ export function renderSurvival(game: SurvivalGame) {
     c.save(); c.translate(shot.x, shot.y);
     if (shot.secondary) { c.scale(shot.vx < 0 ? -1 : 1, 1); c.rotate(Math.atan2(shot.vy, Math.abs(shot.vx))); }
     else c.rotate(Math.atan2(shot.vy, shot.vx));
-    c.shadowColor = shot.color; c.shadowBlur = 15;
+    c.shadowColor = shot.color; c.shadowBlur = effectGlow(game.visualQuality, 15);
     if (shot.secondary) {
       // The surrounding transform follows shot direction, while the source art faces right.
       const id = shot.kind === 'wind' ? 'xiao' : 'diluc';
@@ -63,7 +67,7 @@ export function renderSurvival(game: SurvivalGame) {
     const t = effect.age / effect.life;
     c.save(); c.globalAlpha = 1 - t;
     if (effect.kind === 'chain') {
-      c.strokeStyle = effect.color; c.lineWidth = 3; c.shadowColor = effect.color; c.shadowBlur = 10;
+      c.strokeStyle = effect.color; c.lineWidth = 3; c.shadowColor = effect.color; c.shadowBlur = effectGlow(game.visualQuality, 10);
       c.beginPath(); c.moveTo(effect.x, effect.y);
       for (let i = 1; i <= 5; i++) c.lineTo(effect.x + ((effect.x2 ?? effect.x) - effect.x) * i / 6 + (i % 2 ? 7 : -7), effect.y + ((effect.y2 ?? effect.y) - effect.y) * i / 6);
       c.lineTo(effect.x2 ?? effect.x, effect.y2 ?? effect.y); c.stroke();
@@ -76,6 +80,17 @@ export function renderSurvival(game: SurvivalGame) {
     c.restore();
   }
   const p = game.player;
+  const shield = game.summons.getShield(0);
+  if (shield) {
+    c.save(); c.globalAlpha = Math.min(0.75, shield.life / 30); c.strokeStyle = '#f4d080'; c.fillStyle = '#e3b45318'; c.lineWidth = 2.5;
+    c.shadowColor = '#dfb757'; c.shadowBlur = effectGlow(game.visualQuality, 12);
+    c.beginPath(); c.ellipse(p.x, p.y - 52, 40, 66, 0, 0, Math.PI * 2); c.fill(); c.stroke();
+    c.globalAlpha *= 0.6; c.beginPath(); c.moveTo(p.x - 24, p.y - 87); c.lineTo(p.x, p.y - 108); c.lineTo(p.x + 24, p.y - 87); c.stroke(); c.restore();
+  }
+  if (game.summons.getBuff(0)) {
+    c.save(); c.strokeStyle = '#9bdfff'; c.globalAlpha = .55; c.lineWidth = 2;
+    c.beginPath(); c.ellipse(p.x, p.y - 2, 44, 12, 0, 0, Math.PI * 2); c.stroke(); c.restore();
+  }
   if (p.attack?.plunge?.phase === 'dive') drawXiaoPlungeEffect(c, 'descent', p.x, p.y - 90, 150, 230, 0.58);
   c.save();
   const shadowY = supportBelow(p.x, p.y);
@@ -109,6 +124,48 @@ export function renderSurvival(game: SurvivalGame) {
     const width = c.measureText(game.notice).width + 48;
     c.fillStyle = 'rgba(13,36,43,.84)'; c.beginPath(); c.roundRect((W - width) / 2, 24, width, 37, 18); c.fill();
     c.strokeStyle = 'rgba(219,204,155,.35)'; c.stroke(); c.fillStyle = '#f3e8bd'; c.fillText(game.notice, W / 2, 48); c.restore();
+  }
+}
+
+function drawSummons(game: SurvivalGame) {
+  const c = game.context, p = game.player;
+  const attack = p.attack;
+  if (game.char.id === 'zhongli' && attack?.def.kind === 'secondary' && attack.t < attack.def.startup && attack.t > attack.def.startup * .42) {
+    const progress = (attack.t / attack.def.startup - .42) / .58;
+    const x = p.x + p.facing * 145;
+    const floor = Math.min(groundHeightAt(x), ...SURVIVAL_WORLD.platforms.filter(platform => x >= platform.x && x <= platform.x + platform.w && platform.y >= p.y - 12).map(platform => platform.y));
+    if (visible(game, x, 180)) drawSummonArt(c, 'geo-meteor', x - p.facing * (1 - progress) * 90, floor - (1 - progress) * 360, 190, { age: attack.t, facing: p.facing, alpha: Math.min(1, progress * 4) });
+  }
+  for (const entity of game.summons.entities) if (visible(game, entity.x, entity.height)) {
+    const alpha = Math.min(1, entity.life / 35, entity.age / 9);
+    const rise = entity.kind === 'geo-pillar' ? Math.min(1, entity.age / 10) : 1;
+    const floating = entity.kind === 'usher' || entity.kind === 'chevalmarin';
+    const feet = entity.feetY - (floating ? 22 + Math.sin(entity.age * .065) * 4 : 0);
+    if (!drawSummonArt(c, entity.kind, entity.x, feet, entity.height * rise, { age: entity.age, attackProgress: entity.attackProgress, facing: entity.facing, alpha })) {
+      c.save(); c.globalAlpha = alpha; c.fillStyle = entity.kind === 'geo-pillar' ? '#af8651' : '#83d3f5'; c.strokeStyle = '#e6f5ff'; c.lineWidth = 2;
+      if (entity.kind === 'geo-pillar') { c.fillRect(entity.x - 18, feet - entity.height * rise, 36, entity.height * rise); c.strokeRect(entity.x - 18, feet - entity.height * rise, 36, entity.height * rise); }
+      else { c.beginPath(); c.ellipse(entity.x, feet - 25, 24, 26, 0, 0, Math.PI * 2); c.fill(); c.stroke(); }
+      c.restore();
+    }
+  }
+  for (const effect of game.summons.effects) if (visible(game, effect.x, effect.radius * 2)) {
+    const t = effect.age / effect.maxLife;
+    const geo = effect.kind.startsWith('geo-');
+    c.save(); c.globalAlpha = Math.min(1, effect.life / 12); c.strokeStyle = geo ? '#f0c573' : '#92e2ff'; c.fillStyle = geo ? '#d9a25038' : '#80d9ff24';
+    c.lineWidth = 3; c.shadowColor = geo ? '#e3b45f' : '#65c7ff'; c.shadowBlur = effectGlow(game.visualQuality, 12);
+    if (effect.kind === 'geo-meteor') {
+      if (t < .28) drawSummonArt(c, 'geo-meteor', effect.x, effect.feetY, 190 * (1 - t), { age: effect.age, alpha: 1 - t * 3 });
+      c.beginPath(); c.ellipse(effect.x, effect.feetY - 5, effect.radius * (.45 + t * .55), 18 + t * 24, 0, 0, Math.PI * 2); c.fill(); c.stroke();
+      for (let i = 0; i < 7; i++) { const angle = i * Math.PI * 2 / 7; const x = effect.x + Math.cos(angle) * effect.radius * (.2 + t * .55); c.fillRect(x - 4, effect.feetY - Math.sin(t * Math.PI) * (32 + i % 3 * 18), 9, 12); }
+    } else if (effect.kind === 'bubble') {
+      c.beginPath(); c.arc(effect.x, effect.feetY, effect.radius, 0, Math.PI * 2); c.fill(); c.stroke(); c.fillStyle = '#f0fcff'; c.beginPath(); c.arc(effect.x - 5, effect.feetY - 5, 4, 0, Math.PI * 2); c.fill();
+    } else if (effect.kind === 'water-pierce') {
+      c.lineWidth = 6; c.beginPath(); c.moveTo(effect.x - effect.vx * 3, effect.feetY - effect.vy * 3); c.lineTo(effect.x, effect.feetY); c.stroke(); c.strokeStyle = '#effcff'; c.lineWidth = 2; c.stroke();
+    } else {
+      c.beginPath(); c.ellipse(effect.x, effect.feetY - 8, effect.radius * (.5 + t * .5), effect.kind === 'hydro-wave' ? effect.height * .4 * (1 - t * .35) : 16 + t * 18, 0, 0, Math.PI * 2); c.fill(); c.stroke();
+      if (effect.kind === 'crab-splash') for (let i = 0; i < 6; i++) { const dx = (i - 2.5) * effect.radius / 3; c.beginPath(); c.arc(effect.x + dx * t, effect.feetY - Math.sin(t * Math.PI) * (35 + (i % 2) * 20), 4 * (1 - t) + 1, 0, Math.PI * 2); c.fill(); }
+    }
+    c.restore();
   }
 }
 
@@ -148,18 +205,18 @@ function scenery(game: SurvivalGame) {
   for (const x of [18, SURVIVAL_WORLD.width - 18]) if (visible(game, x)) {
     const ground = groundHeightAt(x);
     c.fillStyle = '#45615f'; c.fillRect(x - 13, ground - 110, 26, 110); c.fillStyle = '#c7cea7'; c.fillRect(x - 20, ground - 113, 40, 9);
-    c.fillStyle = '#9fe1cd'; c.shadowColor = '#7ffad5'; c.shadowBlur = 12; c.fillRect(x - 4, ground - 96, 8, 38); c.shadowBlur = 0;
+    c.fillStyle = '#9fe1cd'; c.shadowColor = '#7ffad5'; c.shadowBlur = effectGlow(game.visualQuality, 12); c.fillRect(x - 4, ground - 96, 8, 38); c.shadowBlur = 0;
   }
 }
 
 function drawEnemy(c: CanvasRenderingContext2D, e: SurvivalEnemy, frame: number) {
   const r = e.radius, colors = e.boss ? ['#ffc58b', '#994c5c'] : e.elite ? ['#f5d887', '#8b7549'] : e.kind === 'slime' ? ['#9ddbd1', '#317c79'] : e.kind === 'flyer' ? ['#d3bcf2', '#715796'] : ['#eab793', '#906258'];
-  const bob = Math.sin(frame * 0.085 + e.id) * (e.kind === 'flyer' ? 5 : 2);
+  const bob = e.petrify ? 0 : Math.sin(frame * 0.085 + e.id) * (e.kind === 'flyer' ? 5 : 2);
   c.save(); c.translate(e.x, e.y);
   c.fillStyle = 'rgba(8,26,34,.2)'; c.beginPath(); c.ellipse(0, supportBelow(e.x, e.y) - e.y + 3, r * 0.95, 7, 0, 0, Math.PI * 2); c.fill();
   c.translate(0, -r * 0.72 + bob);
   const gradient = c.createRadialGradient(-r * 0.3, -r * 0.45, 2, 0, 0, r * 1.25);
-  gradient.addColorStop(0, e.flash > 0 ? '#fffbe9' : colors[0]); gradient.addColorStop(1, colors[1]);
+  gradient.addColorStop(0, e.flash > 0 ? '#fffbe9' : e.petrify ? '#d2bd87' : colors[0]); gradient.addColorStop(1, e.petrify ? '#877756' : colors[1]);
   c.fillStyle = gradient; c.strokeStyle = colors[0]; c.lineWidth = 1.5;
   if (e.kind === 'slime') {
     c.beginPath(); c.moveTo(-r, r * 0.5); c.bezierCurveTo(-r * 1.15, -r * 0.3, -r * 0.68, -r, 0, -r * 0.94); c.bezierCurveTo(r * 0.76, -r, r * 1.1, -r * 0.23, r, r * 0.5); c.quadraticCurveTo(0, r * 0.91, -r, r * 0.5); c.fill(); c.stroke();
@@ -188,13 +245,13 @@ function drawEnemy(c: CanvasRenderingContext2D, e: SurvivalEnemy, frame: number)
   }
 }
 
-function drawField(c: CanvasRenderingContext2D, field: SurvivalField) {
+function drawField(c: CanvasRenderingContext2D, field: SurvivalField, quality: VisualQuality) {
   const fade = Math.min(1, (field.life - field.age) / 30), t = field.age * 0.055;
   c.save(); c.globalAlpha = 0.8 * fade; c.translate(field.x, field.y);
   if (field.kind === 'thunder' || field.kind === 'updraft') {
     const thunder = field.kind === 'thunder', height = field.height ?? 200;
     const color = thunder ? '#c4a4ff' : '#a5f1d5';
-    c.shadowColor = color; c.shadowBlur = 18;
+    c.shadowColor = color; c.shadowBlur = effectGlow(quality, 18);
     if (!drawSecondaryEffect(c, thunder ? 'raiden' : 'jean', 0, 0, field.radius * 2.5, height, { alpha: fade })) {
       c.strokeStyle = color; c.lineWidth = thunder ? 7 : 3; c.beginPath();
       if (thunder) { c.moveTo(-9, -height / 2); c.lineTo(13, -height * 0.12); c.lineTo(-8, 0); c.lineTo(7, height / 2); }
@@ -205,8 +262,10 @@ function drawField(c: CanvasRenderingContext2D, field: SurvivalField) {
     c.restore(); return;
   }
   const color = field.kind === 'flame' ? '#f7a270' : field.kind === 'orbit' ? '#b5eaff' : '#9ae6cb';
-  const glow = c.createRadialGradient(0, 0, 5, 0, 0, field.radius); glow.addColorStop(0, `${color}20`); glow.addColorStop(0.8, `${color}13`); glow.addColorStop(1, `${color}00`);
-  c.fillStyle = glow; c.beginPath(); c.arc(0, 0, field.radius, 0, Math.PI * 2); c.fill();
+  if (quality !== 'low') {
+    const glow = c.createRadialGradient(0, 0, 5, 0, 0, field.radius); glow.addColorStop(0, `${color}20`); glow.addColorStop(0.8, `${color}13`); glow.addColorStop(1, `${color}00`);
+    c.fillStyle = glow; c.beginPath(); c.arc(0, 0, field.radius, 0, Math.PI * 2); c.fill();
+  }
   c.strokeStyle = color; c.lineWidth = 2;
   if (field.kind === 'pillar') {
     for (let i = 0; i < 3; i++) { c.beginPath(); c.moveTo(-35 + i * 30, 55); c.quadraticCurveTo(55 * Math.sin(t + i), -25, -15 + i * 20, -120); c.stroke(); }
