@@ -6,9 +6,9 @@ import type { AttackKind, AttackVisualVariant } from './clip-animation';
 import { CHARACTERS } from './data';
 import animationPacks from './animation-packs.json';
 import { acquireSummonerArt } from './summoner-art';
+import { assetUrl as asset } from './asset-url';
 
 /** Shared, locally hosted artwork for the lobby and the canvas arena. */
-const asset = (path: string) => `${import.meta.env.BASE_URL}assets/${path}`;
 export const CHARACTER_ART: Record<string, string> = {
   raiden: asset('characters/raiden-v2.png'), jean: asset('characters/jean-v2.png'),
   eula: asset('characters/eula-v2.png'), diluc: asset('characters/diluc-v2.png'),
@@ -26,6 +26,8 @@ export const SECONDARY_ACTION_ART: Record<string, string> = Object.fromEntries(
   LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-secondary-v1.png`)]),
 );
 export const SECONDARY_EFFECT_ART = asset('effects/secondary-effects-v1.png');
+const ACTION_METADATA = Object.fromEntries(LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-actions-v3.json`)]));
+const SECONDARY_ACTION_METADATA = Object.fromEntries(LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-secondary-v1.json`)]));
 export const CHARACTER_CLIP_MANIFESTS = Object.fromEntries(CHARACTER_CLIP_IDS.map(id => [id, asset(`animations/${animationPacks[id]}/manifest.json`)])) as Record<ClipCharacterId, string>;
 export const EULA_CLIP_MANIFEST = CHARACTER_CLIP_MANIFESTS.eula;
 interface SourceRect { x: number; y: number; width: number; height: number }
@@ -105,7 +107,7 @@ async function loadCharacterPack(id: ClipCharacterId, owner: CharacterResources)
     if (!validClipManifest(manifest) || manifest.character !== id) throw new Error(`Invalid ${id} clip manifest`);
     const sheets = new Map<string, ClipSheet>();
     const loadAtlas = async (name: string, width: number, height: number) => {
-      const sheet = await loadClipSheet(manifestUrl.replace('manifest.json', name), owner);
+      const sheet = await loadClipSheet(asset(`animations/${animationPacks[id]}/${name}`), owner);
       if (sheet.image.naturalWidth !== width || sheet.image.naturalHeight !== height) throw new Error(`Invalid ${id} clip dimensions: ${name}`);
       sheets.set(name, sheet);
     };
@@ -131,12 +133,12 @@ function validSourceRect(rect: SourceRect | undefined, image: HTMLImageElement):
   return !!rect && [rect.x, rect.y, rect.width, rect.height].every(Number.isFinite) && rect.width > 2 && rect.height > 2 &&
     rect.x >= 0 && rect.y >= 0 && rect.x + rect.width <= image.naturalWidth && rect.y + rect.height <= image.naturalHeight;
 }
-async function loadActionSheet(id: string, url: string, secondary = false) {
+async function loadActionSheet(id: string, url: string, metadataUrl: string, secondary = false) {
   const image = new Image();
   image.decoding = 'async'; image.src = url;
   await image.decode();
   if (image.naturalWidth < 4 || image.naturalHeight < 4) return;
-  const response = await fetch(url.replace(/\.png$/, '.json'));
+  const response = await fetch(metadataUrl);
   if (!response.ok) throw new Error(`Missing action registration: ${id}`);
   const registration: ActionRegistration = await response.json();
   const columns = secondary ? 2 : 4, count = secondary ? 4 : 16;
@@ -163,7 +165,7 @@ async function loadActionSheet(id: string, url: string, secondary = false) {
 async function loadSecondaryEffects() {
   const image = new Image(); image.decoding = 'async'; image.src = SECONDARY_EFFECT_ART;
   await image.decode();
-  const response = await fetch(SECONDARY_EFFECT_ART.replace(/\.png$/, '.json'));
+  const response = await fetch(asset('effects/secondary-effects-v1.json'));
   if (!response.ok) throw new Error('Missing secondary effect registration');
   const registration: SecondaryEffectRegistration = await response.json();
   const ids = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'impact'];
@@ -184,7 +186,7 @@ async function loadEffects() {
 async function loadPlungeEffects() {
   const image = new Image(); image.decoding = 'async'; image.src = XIAO_PLUNGE_ART;
   await image.decode();
-  const response = await fetch(XIAO_PLUNGE_ART.replace(/\.png$/, '.json'));
+  const response = await fetch(asset('effects/xiao-plunge-v3.json'));
   if (!response.ok) throw new Error('Missing Xiao plunge registration');
   const registration: PlungeRegistration = await response.json();
   if (registration.width !== image.naturalWidth || registration.height !== image.naturalHeight || registration.frames?.length !== 2 ||
@@ -241,10 +243,10 @@ async function loadImage(url: string, trim: boolean) {
 function loadLegacyCharacter(id: ClipCharacterId, owner: CharacterResources): Promise<void> {
   if (!LEGACY_CHARACTER_IDS.includes(id)) return Promise.resolve();
   owner.legacyReady ??= Promise.allSettled([
-    loadActionSheet(id, ACTION_ART[id]).then(sheet => {
+    loadActionSheet(id, ACTION_ART[id], ACTION_METADATA[id]).then(sheet => {
       if (sheet && characterResources.get(id) === owner) actionSheets.set(id, sheet);
     }),
-    loadActionSheet(id, SECONDARY_ACTION_ART[id], true).then(sheet => {
+    loadActionSheet(id, SECONDARY_ACTION_ART[id], SECONDARY_ACTION_METADATA[id], true).then(sheet => {
       if (sheet && characterResources.get(id) === owner) secondarySheets.set(id, sheet);
     }),
   ]).then(() => undefined);

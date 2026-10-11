@@ -1,4 +1,5 @@
 import registration from './summoner-art-manifest.json';
+import { assetUrl } from './asset-url';
 
 export type SummonArtKind = 'geo-pillar' | 'geo-meteor' | 'usher' | 'chevalmarin' | 'crabaletta';
 interface RegisteredFrame {
@@ -22,7 +23,7 @@ export function acquireSummonerArt(character: string): { ready: Promise<void>; r
     owner = entry; owners.set(character, entry);
     entry.ready = Promise.allSettled(Object.entries(assets).filter(([, asset]) => asset.owner === character).map(async ([name, asset]) => {
       const image = new Image(); image.decoding = 'async';
-      image.src = `${import.meta.env.BASE_URL}assets/animations/${asset.image}`;
+      image.src = assetUrl(`animations/${asset.image}`);
       await image.decode();
       if (image.naturalWidth !== asset.width || image.naturalHeight !== asset.height) throw new Error(`Invalid summon atlas: ${name}`);
       if (owners.get(character) === entry) entry.images.set(name as SummonArtKind, image);
