@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { CHARACTERS } from '../game/data';
-import { CHARACTER_ART } from '../game/art';
+import { LOBBY_CHARACTER_ART } from '../game/lobby-art';
+import { useArtLoading, useBattleArt } from '../hooks/useArtLoading';
+import ArtLoading from '../components/ArtLoading';
 import { SurvivalGame } from '../game/survival-engine';
 import { getSecondaryProfile } from '../game/survival-data';
 import type { UpgradeChoice } from '../game/survival-data';
@@ -62,7 +64,9 @@ export default function SurvivalBattle({ options, muted, onMutedChange, onExit }
   const initialMuted = useRef(muted);
   const lastSelectionAt = useRef(0);
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
+  const hasStarted = snapshot !== null;
   const character = CHARACTERS[options.player];
+  const loading = useArtLoading();
   const phase = snapshot?.phase || 'playing';
   const choicesKey = offerKey(snapshot);
   const hasOverlay = phase !== 'playing';
@@ -75,7 +79,7 @@ export default function SurvivalBattle({ options, muted, onMutedChange, onExit }
     setEditingControls(true);
   }, []);
 
-  useEffect(() => {
+  const start = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const game = new SurvivalGame(canvas);
@@ -97,8 +101,10 @@ export default function SurvivalBattle({ options, muted, onMutedChange, onExit }
       gameRef.current = null;
     };
   }, [options, onMutedChange]);
+  const preparation = useBattleArt([character.id], start);
   useMobileBattleLifecycle(gameRef, mobile.enabled, mobile.portrait, phase);
   useEffect(() => {
+    initialMuted.current = muted;
     gameRef.current?.setMuted(muted);
     if (gameRef.current?.getSnapshot().phase === 'playing' && !document.activeElement?.closest('[data-audio-settings]')) canvasRef.current?.focus({ preventScroll: true });
   }, [muted]);
@@ -115,7 +121,7 @@ export default function SurvivalBattle({ options, muted, onMutedChange, onExit }
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (editingControls || (mobile.enabled && mobile.portrait)) return;
+    if (!hasStarted || editingControls || (mobile.enabled && mobile.portrait)) return;
     if (!hasOverlay) {
       canvas?.focus({ preventScroll: true });
       return;
@@ -175,7 +181,7 @@ export default function SurvivalBattle({ options, muted, onMutedChange, onExit }
       document.removeEventListener('focusin', keepFocus);
       document.removeEventListener('keydown', keyboard, true);
     };
-  }, [hasOverlay, phase, choicesKey, editingControls, mobile.enabled, mobile.portrait]);
+  }, [hasOverlay, phase, choicesKey, editingControls, mobile.enabled, mobile.portrait, hasStarted]);
 
   const hp = snapshot?.hp ?? 100;
   const maxHp = snapshot?.maxHp ?? 100;
@@ -193,15 +199,15 @@ export default function SurvivalBattle({ options, muted, onMutedChange, onExit }
     {mobile.enabled && mobile.portrait && <RotateDeviceGuide onExit={onExit}/>}
     <div className="arena-toolbar survival-toolbar">
       <div><span className="tiny-label">ENDLESS TIDES · TEN MINUTES</span><h1>秘境生存 <span>· 千岩浮境</span></h1></div>
-      <div className="arena-actions">{mobile.enabled && <button className="quiet-button" disabled={phase === 'upgrade' || isResult} onClick={openControlEditor}>触控布局</button>}<button className="quiet-button" disabled={phase === 'upgrade' || isResult} onClick={() => { if (phase === 'paused' && !(mobile.enabled && mobile.portrait)) { unlockBattleAudio(); gameRef.current?.resume(); } else gameRef.current?.pause(); }}>{phase === 'paused' ? '▷ 继续' : 'Ⅱ 暂停'}<kbd>Esc</kbd></button><button className="quiet-button" onClick={onExit}>返回大厅 <span>↗</span></button></div>
+      <div className="arena-actions">{mobile.enabled && <button className="quiet-button" disabled={!snapshot || phase === 'upgrade' || isResult} onClick={openControlEditor}>触控布局</button>}<button className="quiet-button" disabled={!snapshot || phase === 'upgrade' || isResult} onClick={() => { if (phase === 'paused' && !(mobile.enabled && mobile.portrait)) { unlockBattleAudio(); gameRef.current?.resume(); } else gameRef.current?.pause(); }}>{phase === 'paused' ? '▷ 继续' : 'Ⅱ 暂停'}<kbd>Esc</kbd></button><button className="quiet-button" onClick={onExit}>返回大厅 <span>↗</span></button></div>
     </div>
     <section className="survival-status" aria-label="生存状态">
-      <div className="survival-hero-status"><div className="survival-avatar"><img src={CHARACTER_ART[character.id]} alt=""/></div><div className="survival-vitals"><div className="survival-name"><strong>{character.name}</strong><span>LV. {level}</span></div><div className="survival-health" role="progressbar" aria-label="生命值" aria-valuenow={Math.ceil(hp)} aria-valuemin={0} aria-valuemax={maxHp}><i style={{ width: `${Math.max(0, hp / maxHp) * 100}%` }}/><span>{Math.ceil(hp)} / {maxHp}</span></div>{summonStatus}</div></div>
+      <div className="survival-hero-status"><div className="survival-avatar"><img src={snapshot || loading.homeReadyUrls.includes(LOBBY_CHARACTER_ART[character.id]) ? LOBBY_CHARACTER_ART[character.id] : undefined} alt=""/></div><div className="survival-vitals"><div className="survival-name"><strong>{character.name}</strong><span>LV. {level}</span></div><div className="survival-health" role="progressbar" aria-label="生命值" aria-valuenow={Math.ceil(hp)} aria-valuemin={0} aria-valuemax={maxHp}><i style={{ width: `${Math.max(0, hp / maxHp) * 100}%` }}/><span>{Math.ceil(hp)} / {maxHp}</span></div>{summonStatus}</div></div>
       <div className="survival-clock"><span>坚持至秘境关闭</span><strong>{formatTime(snapshot?.remaining ?? 600)}</strong><small>{snapshot?.waveName || '初入秘境'}</small></div>
       <div className="survival-run-stats"><div><span>击败敌人</span><strong>{snapshot?.kills ?? 0}</strong></div><div className="survival-route"><span>L · 元素 Lv.{snapshot?.skillLevel ?? 1}</span><strong>{snapshot?.branchName || '尚未进化'}</strong></div></div>
     </section>
     <div className="survival-experience" role="progressbar" aria-label="升级经验" aria-valuenow={xp} aria-valuemin={0} aria-valuemax={xpNeeded}><i style={{ width: `${Math.min(100, xp / xpNeeded * 100)}%` }}/><span>经验 {Math.floor(xp)} / {xpNeeded}</span></div>
-    <div className="arena-frame survival-arena"><canvas ref={canvasRef} tabIndex={-1} onPointerDown={() => canvasRef.current?.focus({ preventScroll: true })} aria-label={`${character.name}的秘境生存战场，A D移动，W跳跃，J K手动攻击，L元素技能，I战技，H闪避`}/></div>
+    <div className="arena-frame survival-arena"><canvas ref={canvasRef} tabIndex={-1} onPointerDown={() => canvasRef.current?.focus({ preventScroll: true })} aria-label={`${character.name}的秘境生存战场，A D移动，W跳跃，J K手动攻击，L元素技能，I战技，H闪避`}/>{!snapshot && <ArtLoading characterIds={[character.id]} progress={preparation.progress} onRetry={preparation.retry} onExit={onExit}/>}</div>
     <div className="survival-actionbar">
       <SurvivalControls compact/>
       <div className="survival-cooldowns"><Cooldown label={character.special.name} hotkey="L" remaining={snapshot?.skillCooldown ?? 0} maximum={snapshot?.skillCooldownMax ?? 1} description={character.desc}/><Cooldown label={character.secondary.name} hotkey="I" level={secondaryLevel} remaining={snapshot?.secondaryCooldown ?? 0} maximum={snapshot?.secondaryCooldownMax ?? character.secondaryCooldown} description={secondaryForm}/><Cooldown label="闪避" hotkey="H" remaining={snapshot?.dodgeCooldown ?? 0} maximum={snapshot?.dodgeCooldownMax ?? 1}/></div>
@@ -232,7 +238,7 @@ export default function SurvivalBattle({ options, muted, onMutedChange, onExit }
           <AudioSettings muted={muted} onMutedChange={onMutedChange} inline onResume={() => gameRef.current?.resume()}/>
           <button className="start-button" onClick={() => { unlockBattleAudio(); gameRef.current?.resume(); }}>继续挑战 <span>→</span></button><button className="overlay-back" onClick={onExit}>结束本局，返回大厅</button>
         </> : <>
-          <div className="survival-result-portrait"><img src={CHARACTER_ART[character.id]} alt=""/></div><span className="tiny-label">{phase === 'victory' ? 'DOMAIN CONQUERED' : 'UNTIL THE NEXT DAWN'}</span><h2 id="survival-dialog-title">{phase === 'victory' ? '十分钟，破局而归' : '此行暂告一段落'}</h2><p className="survival-dialog-intro">{phase === 'victory' ? '风浪已息。你的元素之力，刻下了新的战绩。' : '记住这次选择，下次从新的招式中寻找答案。'}</p>
+          <div className="survival-result-portrait"><img src={LOBBY_CHARACTER_ART[character.id]} alt=""/></div><span className="tiny-label">{phase === 'victory' ? 'DOMAIN CONQUERED' : 'UNTIL THE NEXT DAWN'}</span><h2 id="survival-dialog-title">{phase === 'victory' ? '十分钟，破局而归' : '此行暂告一段落'}</h2><p className="survival-dialog-intro">{phase === 'victory' ? '风浪已息。你的元素之力，刻下了新的战绩。' : '记住这次选择，下次从新的招式中寻找答案。'}</p>
           <div className="survival-result-stats"><div><span>生存时间</span><strong>{formatTime(snapshot?.elapsed ?? 0)}</strong></div><div><span>击败敌人</span><strong>{snapshot?.kills ?? 0}</strong></div><div><span>最终等级</span><strong>{level}</strong></div><div><span>精英击败</span><strong>{snapshot?.eliteKills ?? 0}</strong></div></div>
           <div className="survival-result-route">{skillLoadout}<small>{snapshot?.bossKilled ? '✦ 已击败秘境首领' : '秘境首领未击败'} · 总伤害 {Math.round(snapshot?.damageDealt ?? 0).toLocaleString()}</small></div>
           <button className="start-button" onClick={() => { unlockBattleAudio(); lastSelectionAt.current = 0; gameRef.current?.rematch(); if (gameRef.current) pauseForMobileEnvironment(gameRef.current); if (gameRef.current) setSnapshot(gameRef.current.getSnapshot()); }}>再次挑战 <span>→</span></button><button className="overlay-back" onClick={onExit}>返回大厅，选择新的斗士</button>

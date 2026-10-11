@@ -1,0 +1,20 @@
+.art-loading { position: absolute; z-index: 8; inset: 0; display: grid; place-items: center; overflow: auto; padding: 24px; background-color: #10282d; background-position: center; background-size: cover; }
+.art-loading-portraits { position: absolute; inset: 0; display: flex; align-items: end; justify-content: space-between; overflow: hidden; pointer-events: none; opacity: .22; }
+.art-loading-portraits img { height: 96%; width: 42%; object-fit: contain; object-position: center bottom; filter: saturate(.7); }
+.art-loading-portraits img:only-child { margin-left: auto; width: 54%; }
+.art-loading-panel { position: relative; width: min(440px, 100%); padding: 24px 28px; border: 1px solid #bcae7e55; background: #10262beb; box-shadow: 0 20px 80px #0004; }
+.art-loading-panel > .tiny-label { font-size: 8px; letter-spacing: 2px; color: #9cac9c; }
+.art-loading-panel h2 { margin: 10px 0 9px; color: #ecdfbe; font: 25px/1.4 "Songti SC", SimSun, serif; letter-spacing: 3px; }
+.art-loading-characters { color: #b9c9c1; font-size: 12px; letter-spacing: 2px; margin: 0 0 22px; }
+.art-loading-track { height: 5px; background: #06161cbf; overflow: hidden; border: 1px solid #8a9f8555; }
+.art-loading-track i { height: 100%; display: block; background: linear-gradient(90deg, #84b5a7, #decb93); transition: width .15s linear; }
+.art-loading-progress { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-top: 10px; font-variant-numeric: tabular-nums; }
+.art-loading-progress strong { color: #decda5; font: 18px Georgia, serif; }
+.art-loading-progress > span { font: 10px system-ui, sans-serif; color: #93aaa2; }
+.art-loading-note { margin: 15px 0 18px; color: #8ea9a3; font-size: 11px; line-height: 1.85; }
+.art-loading-note.art-loading-error { color: #dfb499; }
+.art-loading-actions { display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+.art-loading-actions .start-button { width: auto; font-size: 11px; letter-spacing: 1px; padding: 9px 15px; }
+.art-loading-actions .quiet-button { min-height: 38px; }
+@media (max-height: 540px) { .art-loading { padding: 10px 24px; }.art-loading-panel { padding: 14px 22px; width: min(450px,100%); }.art-loading-panel > .tiny-label { display: none; }.art-loading-panel h2 { font-size: 21px; margin-top: 0; margin-bottom: 5px; }.art-loading-characters { margin-bottom: 13px; font-size: 11px; }.art-loading-note { margin: 10px 0; font-size: 10px; }.art-loading-progress { margin-top: 7px; } }
+@media (max-width: 480px) { .art-loading { padding: 12px; }.art-loading-panel { padding: 18px; }.art-loading-panel h2 { font-size: 21px; letter-spacing: 1px; }.art-loading-note { font-size: 10px; }.art-loading-portraits { opacity: .12; } }

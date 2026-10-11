@@ -3,14 +3,17 @@ import type { CSSProperties } from 'react';
 import { Game } from '../game/engine';
 import type { MatchOptions } from '../game/engine';
 import { CHARACTERS } from '../game/data';
-import { BACKGROUND_ART, CHARACTER_ART } from '../game/art';
+import { LOBBY_BACKGROUND_ART, LOBBY_CHARACTER_ART } from '../game/lobby-art';
+import { assetLoading } from '../game/asset-loading';
+import { useArtLoading, useBattleArt } from '../hooks/useArtLoading';
+import ArtLoading from '../components/ArtLoading';
 import { getSecondaryProfile, SURVIVAL_BRANCHES } from '../game/survival-data';
 import type { SurvivalOptions } from '../game/survival-data';
 import { unlockBattleAudio } from '../game/audio';
 import AudioSettings from './AudioSettings';
 import SurvivalBattle, { SurvivalControls } from './SurvivalBattle';
 import MobileControls, { ControlModeSetting, RotateDeviceGuide } from '../components/mobile/MobileControls';
-import { enterMobileFullscreen, pauseForMobileEnvironment, readMobileVisualQuality, useMobileBattleLifecycle, useMobileEnvironment } from '../hooks/useMobileGame';
+import { enterMobileFullscreen, pauseForMobileEnvironment, readMobileEnvironment, readMobileVisualQuality, useMobileBattleLifecycle, useMobileEnvironment } from '../hooks/useMobileGame';
 import './Home.css';
 
 const CHARACTER_DETAILS: Record<string, { element: string; english: string; role: string; line: string; color: string }> = {
@@ -27,11 +30,11 @@ function Crest({ small = false }: { small?: boolean }) {
   return <svg className={small ? 'crest crest-small' : 'crest'} viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 2 30 18 46 24 30 30 24 46 18 30 2 24 18 18Z" stroke="currentColor" strokeWidth="1.3"/><path d="m24 11 4 13-4 13-4-13Z" fill="currentColor"/><path d="m11 24 13-4 13 4-13 4Z" fill="currentColor"/><circle cx="24" cy="24" r="18" stroke="currentColor" strokeWidth=".5"/></svg>;
 }
 
-function Artwork({ id, className = '', alt = '' }: { id: string; className?: string; alt?: string }) {
+function Artwork({ id, available, unavailable = false, className = '', alt = '' }: { id: string; available: boolean; unavailable?: boolean; className?: string; alt?: string }) {
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
-  if (failed) return <span className="artwork-unavailable">立绘暂未载入</span>;
-  return <><img className={`${className} artwork-image ${loaded ? 'is-loaded' : ''}`} src={CHARACTER_ART[id]} alt={alt} draggable={false} onLoad={() => setLoaded(true)} onError={() => setFailed(true)}/>{!loaded && <span className="artwork-loading" aria-label="正在载入角色立绘">✦</span>}</>;
+  if (failed || unavailable) return <span className="artwork-unavailable">立绘暂未载入</span>;
+  return <><img className={`${className} artwork-image ${loaded ? 'is-loaded' : ''}`} src={available ? LOBBY_CHARACTER_ART[id] : undefined} alt={alt} draggable={false} onLoad={() => setLoaded(true)} onError={() => setFailed(true)}/>{!loaded && <span className="artwork-loading" aria-label="正在载入角色立绘">✦</span>}</>;
 }
 
 function ControlsGuide() {
@@ -56,12 +59,13 @@ function Battle({ options, muted, onMutedChange, onExit }: { options: MatchOptio
     if (game && ['fight', 'countdown'].includes(game.getSnapshot().phase)) game.pause();
     setEditingControls(true);
   }, []);
-  useEffect(() => {
+  const start = useCallback(() => {
     if (!canvasRef.current) return;
     const game = new Game(canvasRef.current);
     gameRef.current = game;
     game.setMuted(initialMuted.current);
     game.setVisualQuality(readMobileVisualQuality());
+    game.setMobileHud(readMobileEnvironment().enabled);
     game.start(options);
     pauseForMobileEnvironment(game);
     setSnapshot(game.getSnapshot());
@@ -77,7 +81,9 @@ function Battle({ options, muted, onMutedChange, onExit }: { options: MatchOptio
       gameRef.current = null;
     };
   }, [options, onMutedChange]);
-  useEffect(() => { gameRef.current?.setMuted(muted); }, [muted]);
+  const battleCharacterIds = [CHARACTERS[options.player].id, CHARACTERS[options.opponent].id];
+  const preparation = useBattleArt(battleCharacterIds, start);
+  useEffect(() => { initialMuted.current = muted; gameRef.current?.setMuted(muted); }, [muted]);
   useEffect(() => { gameRef.current?.setMobileHud(mobile.enabled); }, [mobile.enabled]);
   const paused = snapshot?.phase === 'paused';
   const result = snapshot?.phase === 'result';
@@ -117,9 +123,10 @@ function Battle({ options, muted, onMutedChange, onExit }: { options: MatchOptio
     CHARACTERS[options.opponent].id === 'xiao' && (options.mode === 'pvp' ? 'P2：↑ 起跳 → 空中按 /' : '对手魈仅能在空中释放技能'),
   ].filter(Boolean);
   return <main className="battle-main">
-    <div className="arena-toolbar"><div><span className="tiny-label">JADE CHAMBER ARENA</span><h1>群玉之巅 <span>· {options.mode === 'cpu' ? '单人试炼' : '本地双人'}</span></h1></div><div className="arena-actions">{mobile.enabled && <button className="quiet-button" onClick={openControlEditor}>触控布局</button>}<button className="quiet-button" onClick={() => { if (paused) unlockBattleAudio(); if (paused && !(mobile.enabled && mobile.portrait)) gameRef.current?.resume(); else if (!paused) gameRef.current?.pause(); }} disabled={result}>{paused ? '▷ 继续' : 'Ⅱ 暂停'}<kbd>Esc</kbd></button><button className="quiet-button" onClick={onExit}>返回大厅 <span>↗</span></button></div></div>
+    <div className="arena-toolbar"><div><span className="tiny-label">JADE CHAMBER ARENA</span><h1>群玉之巅 <span>· {options.mode === 'cpu' ? '单人试炼' : '本地双人'}</span></h1></div><div className="arena-actions">{mobile.enabled && <button className="quiet-button" disabled={!snapshot} onClick={openControlEditor}>触控布局</button>}<button className="quiet-button" onClick={() => { if (paused) unlockBattleAudio(); if (paused && !(mobile.enabled && mobile.portrait)) gameRef.current?.resume(); else if (!paused) gameRef.current?.pause(); }} disabled={!snapshot || result}>{paused ? '▷ 继续' : 'Ⅱ 暂停'}<kbd>Esc</kbd></button><button className="quiet-button" onClick={onExit}>返回大厅 <span>↗</span></button></div></div>
     <div className="arena-frame">
       <canvas ref={canvasRef} tabIndex={-1} aria-label="提瓦特大乱斗对战场地，P1按I释放战技，P2按单引号或小键盘5释放战技，完整操作说明见下方" />
+      {!snapshot && <ArtLoading characterIds={battleCharacterIds} progress={preparation.progress} onRetry={preparation.retry} onExit={onExit}/>}
       {showOverlay && !editingControls && !(mobile.enabled && mobile.portrait) && <div className="battle-overlay"><div ref={dialogRef} className="overlay-panel" role="dialog" aria-modal="true" aria-label={paused ? '战斗已暂停' : '对战结果'}><Crest /><span className="tiny-label">{paused ? 'TAKE A BREATH' : snapshot?.draw ? 'AN EVEN MATCH' : 'VICTORY'}</span><h2>{paused ? '暂歇片刻' : snapshot?.draw ? '不分伯仲' : `${winner.name} 获胜`}</h2><p>{paused ? '战场为你停留。准备好，就继续这场交锋。' : snapshot?.draw ? '旗鼓相当的交锋，再来一场决定胜负。' : `${snapshot?.winner === 0 ? 'P1' : options.mode === 'cpu' ? 'CPU' : 'P2'} 赢下了这场对决。下一场，新的可能。`}</p>{paused && mobile.enabled && <button className="quiet-button mobile-pause-settings" onClick={openControlEditor}>触控布局</button>}{paused && <AudioSettings muted={muted} onMutedChange={onMutedChange} inline onResume={() => gameRef.current?.resume()}/>}<button className="start-button" onClick={() => { unlockBattleAudio(); if (paused) gameRef.current?.resume(); else { gameRef.current?.rematch(); pauseForMobileEnvironment(gameRef.current!); } }}>{paused ? '继续战斗' : '再战一场'} <span>→</span></button><button className="overlay-back" onClick={onExit}>返回角色选择</button></div></div>}
     </div>
     {mobile.enabled && <MobileControls gameRef={gameRef} snapshot={snapshot} character={CHARACTERS[options.player]} active={snapshot?.phase === 'fight' && !mobile.portrait} editing={editingControls && !mobile.portrait} onCloseEditor={() => setEditingControls(false)}/>}
@@ -146,24 +153,45 @@ export default function Home() {
   const detail = CHARACTER_DETAILS[selected.id];
   const isSurvival = mode === 'survival';
   const inBattle = !!match || !!survival;
+  const loading = useArtLoading();
+  const [homeImageAttempt, setHomeImageAttempt] = useState(0);
+  const backgroundReady = loading.homeReadyUrls.includes(LOBBY_BACKGROUND_ART);
+  const portraitReady = (id: string) => loading.homeReadyUrls.includes(LOBBY_CHARACTER_ART[id]);
+  const retryHome = () => { setHomeImageAttempt(value => value + 1); assetLoading.retryHome(); };
+  useEffect(() => {
+    if (inBattle) return;
+    return assetLoading.enterLobby();
+  }, [inBattle]);
   useEffect(() => {
     if (!inBattle && wasInMatch.current) startButtonRef.current?.focus({ preventScroll: true });
     wasInMatch.current = inBattle;
   }, [inBattle]);
-  return <div className={`game-shell ${mobile.enabled ? 'mobile-mode' : ''} ${inBattle ? 'in-battle' : ''} ${survival ? 'in-survival' : ''}`} style={{ '--mobile-stage-art': `url("${BACKGROUND_ART}")` } as CSSProperties}>
+  return <div className={`game-shell ${mobile.enabled ? 'mobile-mode' : ''} ${inBattle ? 'in-battle' : ''} ${survival ? 'in-survival' : ''}`} style={{ '--mobile-stage-art': backgroundReady ? `url("${LOBBY_BACKGROUND_ART}")` : 'none' } as CSSProperties}>
     <header className="site-header"><a className="brand" href="#" onClick={event => { event.preventDefault(); setMatch(null); setSurvival(null); }} aria-label="返回提瓦特大乱斗大厅"><Crest small /><span>提瓦特<span className="brand-sub">ELEMENTAL CLASH</span></span><span className="brand-divider"/><span className="brand-edition">大乱斗</span></a><div className="header-right"><span className="edition-tag"><i/> FANTASY ARENA <span>03</span></span><AudioSettings muted={muted} onMutedChange={setMuted} inBattle={inBattle}/></div></header>
     {survival ? <SurvivalBattle options={survival} muted={muted} onMutedChange={setMuted} onExit={() => setSurvival(null)}/> : match ? <Battle options={match} muted={muted} onMutedChange={setMuted} onExit={() => setMatch(null)} /> : <main className={`lobby-main ${isSurvival ? 'survival-lobby' : ''}`}>
       <div className="lobby-grid">
         <section className="roster-section" aria-label="角色选择" style={{ '--character-color': detail.color } as CSSProperties}>
-          <div className="hero-showcase" style={{ backgroundImage: `linear-gradient(90deg, rgba(9, 24, 30, .97) 0%, rgba(9, 24, 30, .8) 32%, rgba(9, 24, 30, .18) 100%), url("${BACKGROUND_ART}")` }}>
+          <div key={homeImageAttempt} className="hero-showcase" style={{ backgroundImage: `linear-gradient(90deg, rgba(9, 24, 30, .97) 0%, rgba(9, 24, 30, .8) 32%, rgba(9, 24, 30, .18) 100%)${backgroundReady ? `, url("${LOBBY_BACKGROUND_ART}")` : ''}` }}>
             <div className="hero-orbit"/><div className="hero-star hero-star-one">✦</div><div className="hero-star hero-star-two">✧</div>
             <div className="hero-copy"><div className="eyebrow"><span/> {isSurvival ? '秘境新篇 · 千岩浮境' : '风起提瓦特 · 群玉之巅'}</div><h1>{isSurvival ? <>身陷千重围，<br/>以<span>元素破局。</span></> : <>每一次交锋，<br/>皆是<span>高光时刻。</span></>}</h1><p>{isSurvival ? <>跃过高低浮台，迎战十分钟怪潮。<br/>手动出招，在每次成长中进化。</> : <>跃上浮空擂台，释放元素之力。<br/>把对手击出边界，成为最后的赢家。</>}</p><div className="hero-rule"><span>{isSurvival ? '10' : '3'} <small>{isSurvival ? '分钟生存' : '条生命'}</small></span><i/><span>{isSurvival ? '2' : '3'} <small>{isSurvival ? '条进化分支' : '分钟对决'}</small></span><i/><span>{CHARACTERS.length} <small>位斗士</small></span></div></div>
-            <div className="hero-art-wrap" key={selected.id}><span className="element-watermark">{detail.element}</span><Artwork id={selected.id} className="hero-character" alt={`${selected.name}全身立绘`}/></div>
+            <div className="hero-art-wrap" key={selected.id}><span className="element-watermark">{detail.element}</span><Artwork id={selected.id} available={portraitReady(selected.id)} unavailable={loading.home.status === 'error' && !portraitReady(selected.id)} className="hero-character" alt={`${selected.name}全身立绘`}/></div>
             <div className="featured-character"><span>{detail.english}</span><h2>{selected.name}<small>{selected.title}</small></h2><p>{detail.line}</p></div>
             <div className="hero-caption"><span className="live-dot"/> {isSurvival ? '全新玩法 · 手动战斗 × 随机成长' : '全新元素竞技场'} <span>{isSurvival ? '02 / 千岩浮境' : '01 / 群玉之巅'}</span></div>
           </div>
+          {loading.home.status !== 'ready' && <div className={`lobby-loading-note ${loading.home.status === 'error' ? 'has-error' : ''}`} role="status"><span>{loading.home.status === 'error' ? '部分首页图片未能载入，仍可选择角色出战。' : `正在加载首页图片 · ${Math.floor(loading.home.percent)}%`}</span>{loading.home.status === 'error' && <button type="button" onClick={retryHome}>重试首页图片</button>}</div>}
           <div className="roster-heading"><h2>选择你的斗士 <span>SELECT YOUR FIGHTER</span></h2><span>P1 出战角色</span></div>
-          <div className="character-roster">{CHARACTERS.map((character, index) => <button key={character.id} className={`character-card ${index === player ? 'selected' : ''}`} onClick={() => setPlayer(index)} aria-pressed={index === player} aria-label={`选择${character.name}`} style={{ '--card-color': CHARACTER_DETAILS[character.id].color } as CSSProperties}><div className="card-art"><Artwork id={character.id}/></div><span className="card-element">{CHARACTER_DETAILS[character.id].element}</span><span className="card-copy"><strong>{character.name}</strong><small>{CHARACTER_DETAILS[character.id].role}</small></span>{index === player && <span className="card-selected">✓</span>}</button>)}</div>
+          <div className="character-roster">{CHARACTERS.map((character, index) => {
+            const progress = loading.characters[character.id] ?? { status: 'waiting', loadedBytes: 0, totalBytes: 0, percent: 0 };
+            const showProgress = progress.status !== 'ready';
+            const percent = Math.floor(progress.percent);
+            return <div key={character.id} className="character-slot">
+              <button className={`character-card ${index === player ? 'selected' : ''} ${showProgress ? 'has-loading-progress' : ''}`} onClick={() => setPlayer(index)} aria-pressed={index === player} aria-label={`选择${character.name}`} style={{ '--card-color': CHARACTER_DETAILS[character.id].color } as CSSProperties}>
+                <div className="card-art"><Artwork key={`${character.id}:${homeImageAttempt}`} id={character.id} available={portraitReady(character.id)} unavailable={loading.home.status === 'error' && !portraitReady(character.id)}/></div><span className="card-element">{CHARACTER_DETAILS[character.id].element}</span><span className="card-copy"><strong>{character.name}</strong><small>{CHARACTER_DETAILS[character.id].role}</small></span>{index === player && <span className="card-selected">✓</span>}
+                {showProgress && <span className={`card-loading-progress ${progress.status}`}><span>{progress.status === 'error' ? '素材加载失败' : progress.status === 'waiting' ? `等待加载${percent > 0 ? ` · ${percent}%` : ''}` : `素材加载 ${percent}%`}</span><span className="card-loading-track" role="progressbar" aria-label={`${character.name}素材加载进度`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={percent}><i style={{ width: `${percent}%` }}/></span></span>}
+              </button>
+              {progress.status === 'error' && <button type="button" className="card-loading-retry" aria-label={`重试${character.name}素材`} onClick={() => assetLoading.retryCharacter(character.id)}>重试</button>}
+            </div>;
+          })}</div>
         </section>
         <aside className="match-panel" aria-label="对战设置">
           <div className="panel-heading"><div><span className="tiny-label">READY TO CLASH</span><h2>出战准备</h2></div><Crest small/></div>
@@ -178,7 +206,7 @@ export default function Home() {
           <ControlModeSetting mode={mobile.mode}/>
           {mobile.enabled && mode === 'pvp' && <p className="mobile-pvp-note">本地双人需要外接键盘；屏幕按键仅控制 P1。</p>}
           <button ref={startButtonRef} className="start-button" onClick={() => { unlockBattleAudio(); void enterMobileFullscreen(); if (mode === 'survival') setSurvival({ player }); else setMatch({ mode, player, opponent, difficulty, stocks: 3, duration: 180, items }); }}><span className="button-spark">✦</span> {isSurvival ? '进入秘境' : '进入战场'} <span>→</span></button>
-          <p className="start-note"><span>⌨</span> {mobile.enabled ? '横持设备 · 两侧触屏按键 · 全手动战斗' : isSurvival ? '十分钟挑战 · 升级选择期间暂停计时' : '键盘操作 · 无需下载，即刻开战'}</p>
+          <p className="start-note"><span>⌨</span> {mobile.enabled ? '横持设备 · 两侧触屏按键 · 全手动战斗' : isSurvival ? '十分钟挑战 · 升级选择期间暂停计时' : '键盘操作 · 素材就绪后自动开战'}</p>
         </aside>
       </div>
       <details className="guide"><summary><span><span className="guide-icon">⌘</span> 初次来访？了解操作与胜负规则</span><span>展开指南 ＋</span></summary>{isSurvival ? <div className="guide-content"><div className="guide-intro"><strong>手动出招，选择成长，突破十分钟怪潮。</strong><p>在大型横版秘境中击败敌人、拾取经验。每次升级三选一，L 元素技能达到 4 级后二选一进化；I 战技独立升至 5 级，在 3、5 级改变形态。两招未满级时会持续提供强化机会。最多携带两种随手动攻击触发的追击强化。存活至 10:00 即可通关，击败第 9 分钟出现的首领获得额外战绩。</p></div><SurvivalControls/></div> : <ControlsGuide />}</details>

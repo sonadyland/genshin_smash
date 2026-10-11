@@ -2,14 +2,15 @@ import { createHash } from 'node:crypto';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import type { Plugin } from 'vite';
+import { createArtCatalog } from './art-inventory';
 
-const artDirectories = ['animations', 'backgrounds', 'characters', 'effects'];
+const artDirectories = ['animations', 'backgrounds', 'characters', 'effects', 'lobby'];
 export interface FingerprintedArt {
   urls: Record<string, string>;
   files: Map<string, Buffer>;
 }
 
-/** Fingerprint each image/registration independently. No runtime prefetch list. */
+/** Fingerprint each image/registration independently, including display-sized WebP. */
 export function fingerprintArtAssets(publicDirectory: string): FingerprintedArt {
   const assetDirectory = path.join(publicDirectory, 'assets');
   if (existsSync(path.join(assetDirectory, 'cache'))) {
@@ -24,7 +25,7 @@ export function fingerprintArtAssets(publicDirectory: string): FingerprintedArt 
       const filename = path.join(directory, entry.name);
       if (entry.isDirectory()) { visit(filename, logicalPath); continue; }
       const extension = path.extname(entry.name).toLowerCase();
-      if (!entry.isFile() || !['.png', '.json'].includes(extension)) continue;
+      if (!entry.isFile() || !['.png', '.webp', '.json'].includes(extension)) continue;
       const source = readFileSync(filename);
       const digest = createHash('sha256').update(source).digest('hex');
       const output = `assets/cache/${digest}${extension}`;
@@ -40,16 +41,28 @@ export function fingerprintArtAssets(publicDirectory: string): FingerprintedArt 
 
 /** Vite still copies public source URLs for existing art review pages. */
 export function publicAssetCache(): Plugin {
-  let artwork: FingerprintedArt;
+  let artwork: FingerprintedArt = { urls: {}, files: new Map() };
+  let catalogInputs: string[] = [];
   return {
     name: 'content-hashed-game-art',
-    apply: 'build',
-    config(config) {
+    config(config, environment) {
       const root = path.resolve(config.root ?? process.cwd());
-      artwork = config.publicDir === false
-        ? { urls: {}, files: new Map() }
-        : fingerprintArtAssets(path.resolve(root, config.publicDir ?? 'public'));
-      return { define: { __GAME_ART_URLS__: JSON.stringify(artwork.urls) } };
+      const publicDirectory = path.resolve(root, config.publicDir || 'public');
+      const catalog = config.publicDir === false ? { home: [], shared: [], characters: {}, sizes: {} }
+        : createArtCatalog(root, publicDirectory);
+      if (environment.command === 'build' && config.publicDir !== false) artwork = fingerprintArtAssets(publicDirectory);
+      catalogInputs = [path.join(publicDirectory, 'assets'), path.join(root, 'src/game/animation-packs.json'),
+        path.join(root, 'src/game/summoner-art-manifest.json')].map(filename => filename.replaceAll('\\', '/'));
+      return { define: { __GAME_ART_URLS__: JSON.stringify(artwork.urls), __GAME_ART_CATALOG__: JSON.stringify(catalog) } };
+    },
+    async handleHotUpdate(context) {
+      // Re-evaluate byte totals and the live dependency graph after editing art.
+      // Development still uses the original URLs and normal Vite cache policy.
+      const filename = context.file.replaceAll('\\', '/');
+      if (catalogInputs.some(input => filename === input || filename.startsWith(`${input}/`))) {
+        await context.server.restart();
+        return [];
+      }
     },
     generateBundle() {
       for (const [fileName, source] of artwork.files) this.emitFile({ type: 'asset', fileName, source });

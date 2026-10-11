@@ -106,7 +106,7 @@ test('cold/failed assets degrade to portrait or existing pixel fallback', async 
   await h.art.loadGameArt();
   h.reset();
   assert.equal(h.art.drawFighterArt(h.draw, 'raiden', 0, 76, 112, animation), true);
-  assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith('raiden-v2.png'));
+  assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith('lobby/raiden.webp'));
   assert.equal(h.art.drawElementEffect(h.draw, 'raiden', false, 0, 0, 100, 100), false);
   const missing = harness(() => true);
   await missing.art.loadGameArt();
@@ -161,11 +161,11 @@ test('missing or invalid registration falls back instead of drawing misaligned f
   for (const invalid of [data => ({ ...data, width: 1 }), data => ({ ...data, standingBodyHeightPixels: 0 }), data => ({ ...data, frames: [] }), data => ({ ...data, frames: data.frames.map(frame => ({ ...frame, footAnchor: { x: -1, y: 0.8 } })) })]) {
     const h = harness(() => false, invalid); await h.art.loadGameArt(); h.reset();
     assert.equal(h.art.drawFighterArt(h.draw, 'raiden', 0, 76, 112, animation), true);
-    assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith('raiden-v2.png'));
+    assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith('lobby/raiden.webp'));
   }
   const h = harness(url => url.endsWith('.json')); await h.art.loadGameArt(); h.reset();
   assert.equal(h.art.drawFighterArt(h.draw, 'raiden', 0, 76, 112, animation), true);
-  assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith('raiden-v2.png'));
+  assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith('lobby/raiden.webp'));
 });
 
 test('hit flashes use the same frame crop while HUD art remains the static portrait', async () => {
@@ -174,7 +174,7 @@ test('hit flashes use the same frame crop while HUD art remains the static portr
   const drawn = h.calls.filter(call => call.kind === 'drawImage');
   assert.equal(drawn.length, 2); assert.deepEqual(drawn[0].args.slice(1), drawn[1].args.slice(1));
   h.reset(); h.art.drawCharacterArt(h.draw, 'raiden', 0, 76, 112);
-  assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith('raiden-v2.png'));
+  assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith('lobby/raiden.webp'));
 });
 
 test('elemental effect atlas selects all four columns and the correct impact row', async () => {
@@ -216,7 +216,7 @@ test('Xiao missing artwork and invalid plunge registration safely retain fallbac
   const portraitOnly = harness(url => url.includes('/animations/xiao') || url.includes('/effects/xiao'));
   await portraitOnly.art.loadGameArt(); portraitOnly.reset();
   assert.equal(portraitOnly.art.drawFighterArt(portraitOnly.draw, 'xiao', 0, 76, 112, animation), true);
-  assert.ok(portraitOnly.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith('xiao-v3.png'));
+  assert.ok(portraitOnly.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith('lobby/xiao.webp'));
   for (const phase of ['windup', 'dive', 'impact', 'recover']) {
     portraitOnly.reset();
     const plunge = { ...animation, attack: { ...animation.attack, plunge: { phase, elapsed: 0 } } };
@@ -654,8 +654,8 @@ test('all 532 delivered frames render their registered sheet, source and scale i
       }
     }
     const expected = [...Object.values(manifest.clips), ...Object.values(manifest.variants ?? {})].flatMap(clip => [packUrl(id, clip.image), ...clip.frames.filter(frame => frame.image).map(frame => packUrl(id, frame.image))]);
+    assert.equal(h.decodes.filter(url => url === h.art.CHARACTER_ART[id]).length, 1, `${id}: decode the shared HUD portrait exactly once`);
     if (summoner) {
-      expected.push(h.art.CHARACTER_ART[id]);
       const summonManifest = JSON.parse(fs.readFileSync(path.join(root, 'src/game/summoner-art-manifest.json'), 'utf8'));
       expected.push(...Object.values(summonManifest.assets).filter(asset => asset.owner === id).map(asset => `/assets/animations/${asset.image}`));
     }
@@ -777,7 +777,7 @@ test('art leases load one live character without decoding unused portraits, old 
   assert.equal(h.art.getEulaAnimationStatus().status, 'ready');
   assert.equal(h.fetched.filter(url => url === packUrl('eula')).length, 1);
   assert.equal(h.decodes.some(url => /raiden|jean|diluc|xiao|actions-v3|eula-secondary-v1/.test(url)), false);
-  assert.ok(h.decodes.includes('/assets/characters/eula-v2.png'), 'canvas HUD portrait remains available');
+  assert.ok(h.decodes.includes('/assets/lobby/eula.webp'), 'canvas HUD portrait remains available');
   lease.release();
   assert.equal(h.art.drawFighterArt(h.draw, 'eula', 0, 0, 112, animation), false);
 });
@@ -820,7 +820,7 @@ test('late decodes from a released lease cannot overwrite a replacement characte
   const decodingStarted = new Promise(resolve => { started = resolve; });
   const blocked = new Set();
   const h = harness(() => false, value => value, true, packFixtures(['raiden']), async url => {
-    if ((url === packUrl('raiden', 'shared.png') || url.endsWith('liyue-dawn-v2.png')) && !blocked.has(url)) {
+    if ((url === packUrl('raiden', 'shared.png') || url.endsWith('lobby/liyue-dawn.webp')) && !blocked.has(url)) {
       blocked.add(url); if (isPackUrl(url)) started(); await gate;
     }
   });
@@ -852,6 +852,32 @@ test('art leases retry a failed atlas after release and never revive resources a
   assert.equal(h.art.drawArenaBackground(h.draw, 1280, 720), false);
   const recovered = h.art.acquireGameArt(['raiden']); await recovered.ready;
   assert.equal(h.art.getCharacterAnimationStatus('raiden').status, 'ready'); recovered.release();
+});
+
+test('strict battle preparation rejects failed required artwork and does not request legacy fallbacks', async () => {
+  const failures = [packUrl('raiden', 'shared.png'), '/assets/effects/secondary-effects-v1.png', '/assets/lobby/raiden.webp'];
+  for (const failure of failures) {
+    const h = harness(url => url === failure, value => value, true, packFixtures(['raiden']));
+    const lease = h.art.acquireGameArt(['raiden'], { strict: true });
+    await assert.rejects(lease.ready);
+    assert.equal(h.decodes.some(url => /raiden-(?:actions|secondary)/.test(url)), false);
+    lease.release();
+  }
+});
+
+test('strict battle preparation requires alternate attacks and summoned pets, then retries after release', async () => {
+  const eula = JSON.parse(fs.readFileSync(path.join(root, `public/assets/animations/${activePacks.eula}/manifest.json`), 'utf8'));
+  const variant = packUrl('eula', eula.variants.jab.image);
+  const summon = JSON.parse(fs.readFileSync(path.join(root, 'src/game/summoner-art-manifest.json'), 'utf8')).assets.usher;
+  for (const [id, broken] of [['eula', variant], ['furina', `/assets/animations/${summon.image}`]]) {
+    let reject = true;
+    const h = harness(url => reject && url === broken, value => value, true);
+    const failed = h.art.acquireGameArt([id], { strict: true }); await assert.rejects(failed.ready); failed.release();
+    reject = false;
+    const current = h.art.acquireGameArt([id], { strict: true }); await current.ready;
+    assert.equal(h.art.getCharacterAnimationStatus(id).status, 'ready'); current.release();
+    assert.equal(h.art.drawFighterArt(h.draw, id, 0, 0, 112, animation), false);
+  }
 });
 
 let failures = 0;

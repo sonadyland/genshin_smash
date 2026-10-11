@@ -26,6 +26,7 @@ function moduleLoader(globals = {}, base = '/') {
   return load;
 }
 const { fingerprintArtAssets, publicAssetCache } = moduleLoader()(path.join(root, 'build/public-asset-cache.ts'));
+const { createArtCatalog } = moduleLoader()(path.join(root, 'build/art-inventory.ts'));
 const shipped = fingerprintArtAssets(path.join(root, 'public'));
 const cases = [];
 const test = (name, run) => cases.push({ name, run });
@@ -76,9 +77,9 @@ test('URL resolver respects root, relative, subpath and CDN bases, with unhashed
 
 test('build plugin defines independent URL map and emits each unique file through the asset API', () => {
   const plugin = publicAssetCache();
-  assert.equal(plugin.apply, 'build');
-  const config = plugin.config({ root });
+  const config = plugin.config({ root }, { command: 'build' });
   assert.deepEqual(JSON.parse(config.define.__GAME_ART_URLS__), JSON.parse(JSON.stringify(shipped.urls)));
+  assert.deepEqual(JSON.parse(config.define.__GAME_ART_CATALOG__), JSON.parse(JSON.stringify(createArtCatalog(root, path.join(root, 'public')))));
   const emitted = [];
   plugin.generateBundle.call({ emitFile: file => emitted.push(file) });
   assert.equal(emitted.length, shipped.files.size);
@@ -87,6 +88,61 @@ test('build plugin defines independent URL map and emits each unique file throug
     assert.ok(shipped.files.get(file.fileName).equals(file.source));
   }
 });
+
+test('development exposes the same live catalog but retains editable logical URLs', () => {
+  const plugin = publicAssetCache();
+  const config = plugin.config({ root }, { command: 'serve' });
+  assert.deepEqual(JSON.parse(config.define.__GAME_ART_URLS__), {});
+  const catalog = JSON.parse(config.define.__GAME_ART_CATALOG__);
+  assert.equal(catalog.home.length, 8);
+  assert.deepEqual(Object.keys(catalog.characters), ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina']);
+  const exported = moduleLoader({ __GAME_ART_CATALOG__: catalog })(path.join(root, 'src/game/asset-catalog.ts'));
+  assert.deepEqual(exported.ART_CATALOG, catalog);
+  const none = publicAssetCache().config({ root, publicDir: false }, { command: 'build' });
+  assert.deepEqual(JSON.parse(none.define.__GAME_ART_CATALOG__), { home: [], shared: [], characters: {}, sizes: {} });
+});
+
+test('queue inventory uses real bytes and contains complete active packs without legacy/review art', () => {
+  const catalog = createArtCatalog(root, path.join(root, 'public'));
+  const paths = [...new Set([...catalog.home, ...catalog.shared, ...Object.values(catalog.characters).flat()])];
+  assert.deepEqual(Object.keys(catalog.sizes).sort(), paths.sort());
+  for (const logical of paths) {
+    assert.equal(catalog.sizes[logical], fs.statSync(path.join(root, 'public/assets', logical)).size, logical);
+    assert.ok(shipped.urls[logical], logical);
+    assert.ok(!/actions-v3|secondary-v1|preview|characters\//.test(logical), logical);
+  }
+  assert.ok(catalog.home.every(logical => logical.startsWith('lobby/') && logical.endsWith('.webp')));
+  assert.ok(catalog.home.reduce((total, logical) => total + catalog.sizes[logical], 0) < 2 * 1024 * 1024, 'display-sized lobby stays under 2 MiB');
+  assert.ok(catalog.shared.includes('lobby/liyue-dawn.webp'));
+  assert.ok(catalog.characters.xiao.includes('effects/xiao-plunge-v3.json'));
+  const packs = JSON.parse(fs.readFileSync(path.join(root, 'src/game/animation-packs.json'), 'utf8'));
+  for (const [id, directory] of Object.entries(packs)) {
+    assert.ok(catalog.characters[id].includes(`lobby/${id}.webp`));
+    assert.ok(catalog.characters[id].includes(`animations/${directory}/manifest.json`));
+    const manifest = JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations', directory, 'manifest.json'), 'utf8'));
+    for (const clip of [...Object.values(manifest.clips), ...Object.values(manifest.variants ?? {})]) {
+      for (const image of [clip.image, ...clip.frames.filter(frame => frame.image).map(frame => frame.image)]) {
+        assert.ok(catalog.characters[id].includes(`animations/${directory}/${image}`), `${id}: ${image}`);
+      }
+    }
+  }
+  const summons = JSON.parse(fs.readFileSync(path.join(root, 'src/game/summoner-art-manifest.json'), 'utf8'));
+  for (const asset of Object.values(summons.assets)) assert.ok(catalog.characters[asset.owner].includes(`animations/${asset.image}`));
+});
+
+function imageDimensions(bytes) {
+  if (bytes.toString('ascii', 1, 4) === 'PNG') return [bytes.readUInt32BE(16), bytes.readUInt32BE(20)];
+  assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
+  assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
+  for (let offset = 12; offset + 8 <= bytes.length;) {
+    const type = bytes.toString('ascii', offset, offset + 4), size = bytes.readUInt32LE(offset + 4), data = offset + 8;
+    if (type === 'VP8X') return [1 + bytes.readUIntLE(data + 4, 3), 1 + bytes.readUIntLE(data + 7, 3)];
+    if (type === 'VP8 ') return [bytes.readUInt16LE(data + 6) & 0x3fff, bytes.readUInt16LE(data + 8) & 0x3fff];
+    if (type === 'VP8L') { const bits = bytes.readUInt32LE(data + 1); return [1 + (bits & 0x3fff), 1 + ((bits >>> 14) & 0x3fff)]; }
+    offset = data + size + (size % 2);
+  }
+  throw new Error('WebP image dimensions missing');
+}
 
 function artHarness(reject = () => false, base = '/') {
   const images = [], fetched = [];
@@ -101,7 +157,7 @@ function artHarness(reject = () => false, base = '/') {
     async decode() {
       images.push(this.src);
       const bytes = getBytes(this.src);
-      this.naturalWidth = bytes.readUInt32BE(16); this.naturalHeight = bytes.readUInt32BE(20);
+      [this.naturalWidth, this.naturalHeight] = imageDimensions(bytes);
     }
   }
   const noop = () => undefined;

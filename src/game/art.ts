@@ -7,15 +7,11 @@ import { CHARACTERS } from './data';
 import animationPacks from './animation-packs.json';
 import { acquireSummonerArt } from './summoner-art';
 import { assetUrl as asset } from './asset-url';
+import { LOBBY_BACKGROUND_ART, LOBBY_CHARACTER_ART } from './lobby-art';
 
 /** Shared, locally hosted artwork for the lobby and the canvas arena. */
-export const CHARACTER_ART: Record<string, string> = {
-  raiden: asset('characters/raiden-v2.png'), jean: asset('characters/jean-v2.png'),
-  eula: asset('characters/eula-v2.png'), diluc: asset('characters/diluc-v2.png'),
-  xiao: asset('characters/xiao-v3.png'),
-  zhongli: asset('animations/zhongli-v1/portrait.png'), furina: asset('animations/furina-v1/portrait.png'),
-};
-export const BACKGROUND_ART = asset('backgrounds/liyue-dawn-v2.png');
+export const CHARACTER_ART: Record<string, string> = LOBBY_CHARACTER_ART;
+export const BACKGROUND_ART = LOBBY_BACKGROUND_ART;
 const LEGACY_CHARACTER_IDS = ['raiden', 'jean', 'eula', 'diluc', 'xiao'];
 export const ACTION_ART: Record<string, string> = Object.fromEntries(
   LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-actions-v3.png`)]),
@@ -64,12 +60,14 @@ export interface GameArtLease { ready: Promise<void>; release: () => void }
 interface CharacterResources {
   references: number;
   ready: Promise<void>;
+  strictReady: Promise<void>;
+  strictIssue?: Error;
   legacyReady?: Promise<void>;
   sheets: Map<string, Promise<ClipSheet>>;
-  summonLease?: { ready: Promise<void>; release: () => void };
+  summonLease?: { ready: Promise<void>; strictReady: Promise<void>; release: () => void };
 }
 const characterResources = new Map<ClipCharacterId, CharacterResources>();
-let sharedResources: { references: number; ready: Promise<void> } | undefined;
+let sharedResources: { references: number; ready: Promise<void>; strictReady: Promise<void> } | undefined;
 // Atlases are shared by clips within one live character generation, never kept
 // in a process-wide decoded-image cache after its final consumer leaves.
 async function loadClipSheet(url: string, owner: CharacterResources): Promise<ClipSheet> {
@@ -98,7 +96,7 @@ export function hasRegisteredMeleeTrail(id: string, kind: AttackKind, variant?: 
   const clip = selectedClip(pack.manifest, { clip: kind, variant });
   return (clip.trail === 'arc' || clip.trail === 'thrust') && clip.frames.some(frame => frame.phase === 'contact' && !!frame.weaponTip);
 }
-async function loadCharacterPack(id: ClipCharacterId, owner: CharacterResources): Promise<CharacterPack> {
+async function loadCharacterPack(id: ClipCharacterId, owner: CharacterResources, strict = false): Promise<CharacterPack> {
     const manifestUrl = CHARACTER_CLIP_MANIFESTS[id], response = await fetch(manifestUrl);
     if (characterResources.get(id) !== owner) throw new Error('Released character art');
     if (!response.ok) throw new Error(`Missing ${id} clip manifest`);
@@ -120,12 +118,21 @@ async function loadCharacterPack(id: ClipCharacterId, owner: CharacterResources)
     // Only J/K have alternative forms. Invalid optional clips fall back on their
     // own base move; the other validated variants and base pack remain usable.
     await Promise.all(VARIANT_ATTACKS.map(async kind => {
-      if (!validVariantClip(manifest, kind)) return;
+      if (!validVariantClip(manifest, kind)) {
+        if (manifest.variants?.[kind]) {
+          owner.strictIssue = new Error(`Invalid ${id} variant: ${kind}`);
+          if (strict) throw owner.strictIssue;
+        }
+        return;
+      }
       try {
         const clip = manifest.variants![kind]!;
         await loadClip(clip);
         loadedManifest.variants ??= {}; loadedManifest.variants[kind] = clip;
-      } catch { /* This move retains its validated base clip. */ }
+      } catch (error) {
+        owner.strictIssue = error instanceof Error ? error : new Error(String(error));
+        if (strict) throw error; /* Preview retains its validated base clip. */
+      }
     }));
     return { manifest: loadedManifest, sheets };
 }
@@ -254,48 +261,57 @@ function loadLegacyCharacter(id: ClipCharacterId, owner: CharacterResources): Pr
 }
 
 /** Hold only this match's actors. A preview explicitly opts into old/new comparison. */
-export function acquireGameArt(characterIds: readonly string[], options: { legacy?: boolean } = {}): GameArtLease {
+export function acquireGameArt(characterIds: readonly string[], options: { legacy?: boolean; strict?: boolean } = {}): GameArtLease {
   if (!sharedResources) {
-    const owner = { references: 0, ready: Promise.resolve() };
+    const owner = { references: 0, ready: Promise.resolve(), strictReady: Promise.resolve() };
     sharedResources = owner;
-    owner.ready = Promise.allSettled([
-      loadImage(BACKGROUND_ART, false).then(art => { if (art && sharedResources === owner) loaded.set('arena', art); }),
-      loadEffects().then(art => { if (sharedResources === owner) effects = art; }),
+    const work = [
+      loadImage(BACKGROUND_ART, false).then(art => { if (!art) throw new Error('Invalid arena image'); if (sharedResources === owner) loaded.set('arena', art); }),
+      loadEffects().then(art => { if (!art) throw new Error('Invalid elemental effects'); if (sharedResources === owner) effects = art; }),
       loadSecondaryEffects().then(art => { if (sharedResources === owner) secondaryEffects = art; }),
-    ]).then(() => undefined);
+    ];
+    owner.strictReady = Promise.all(work).then(() => undefined);
+    void owner.strictReady.catch(() => undefined);
+    owner.ready = Promise.allSettled(work).then(() => undefined);
   }
   const shared = sharedResources;
   shared.references++;
   const retained = CHARACTER_CLIP_IDS.filter(id => characterIds.includes(id)).map(id => {
     let owner = characterResources.get(id);
     if (!owner) {
-      const entry: CharacterResources = { references: 0, ready: Promise.resolve(), sheets: new Map() };
+      const entry: CharacterResources = { references: 0, ready: Promise.resolve(), strictReady: Promise.resolve(), sheets: new Map() };
       entry.summonLease = acquireSummonerArt(id);
       owner = entry;
       characterResources.set(id, entry);
       packStatuses.set(id, 'loading');
-      entry.ready = Promise.allSettled([
-        entry.summonLease.ready,
+      const work = [
+        entry.summonLease.strictReady,
         // Portraits remain necessary for the canvas HUD and the final fallback.
-        loadImage(CHARACTER_ART[id], true).then(art => { if (art && characterResources.get(id) === entry) loaded.set(id, art); }),
-        loadCharacterPack(id, entry).then(pack => {
+        loadImage(CHARACTER_ART[id], true).then(art => { if (!art) throw new Error(`Invalid ${id} portrait`); if (characterResources.get(id) === entry) loaded.set(id, art); }),
+        loadCharacterPack(id, entry, options.strict).then(pack => {
           if (characterResources.get(id) !== entry) return;
           characterPacks.set(id, pack); packStatuses.set(id, 'ready');
-        }).catch(async () => {
+        }).catch(async (error) => {
           if (characterResources.get(id) !== entry) return;
           // A failed pack must not pin partially decoded atlases alongside fallback.
           entry.sheets.clear(); packStatuses.set(id, 'fallback');
+          if (options.strict) throw error;
           await loadLegacyCharacter(id, entry);
-        }),
+          throw error;
+        }).then(() => { if (entry.strictIssue) throw entry.strictIssue; }),
         ...(id === 'xiao' ? [loadPlungeEffects().then(art => { if (characterResources.get(id) === entry) plungeEffects = art; })] : []),
-      ]).then(() => undefined);
+      ];
+      entry.strictReady = Promise.all(work).then(() => undefined);
+      void entry.strictReady.catch(() => undefined);
+      entry.ready = Promise.allSettled(work).then(() => undefined);
     }
     owner.references++;
-    return { id, owner, ready: options.legacy ? Promise.all([owner.ready, loadLegacyCharacter(id, owner)]) : owner.ready };
+    const ready = options.strict ? owner.strictReady : owner.ready;
+    return { id, owner, ready: options.legacy ? Promise.all([ready, loadLegacyCharacter(id, owner)]) : ready };
   });
   let released = false;
   return {
-    ready: Promise.all([shared.ready, ...retained.map(resource => resource.ready)]).then(() => undefined),
+    ready: Promise.all([options.strict ? shared.strictReady : shared.ready, ...retained.map(resource => resource.ready)]).then(() => undefined),
     release() {
       if (released) return;
       released = true;

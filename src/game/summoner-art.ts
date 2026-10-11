@@ -12,26 +12,29 @@ interface RegisteredAsset {
   standingBodyHeightPixels: number; frames: RegisteredFrame[];
 }
 const assets: Record<SummonArtKind, RegisteredAsset> = registration.assets;
-const owners = new Map<string, { references: number; ready: Promise<void>; images: Map<SummonArtKind, HTMLImageElement> }>();
+const owners = new Map<string, { references: number; ready: Promise<void>; strictReady: Promise<void>; images: Map<SummonArtKind, HTMLImageElement> }>();
 
 /** Artwork lifetime follows the same match/preview lease as its summoner. */
-export function acquireSummonerArt(character: string): { ready: Promise<void>; release: () => void } {
-  if (character !== 'zhongli' && character !== 'furina') return { ready: Promise.resolve(), release() {} };
+export function acquireSummonerArt(character: string): { ready: Promise<void>; strictReady: Promise<void>; release: () => void } {
+  if (character !== 'zhongli' && character !== 'furina') return { ready: Promise.resolve(), strictReady: Promise.resolve(), release() {} };
   let owner = owners.get(character);
   if (!owner) {
-    const entry = { references: 0, ready: Promise.resolve(), images: new Map<SummonArtKind, HTMLImageElement>() };
+    const entry = { references: 0, ready: Promise.resolve(), strictReady: Promise.resolve(), images: new Map<SummonArtKind, HTMLImageElement>() };
     owner = entry; owners.set(character, entry);
-    entry.ready = Promise.allSettled(Object.entries(assets).filter(([, asset]) => asset.owner === character).map(async ([name, asset]) => {
+    const work = Object.entries(assets).filter(([, asset]) => asset.owner === character).map(async ([name, asset]) => {
       const image = new Image(); image.decoding = 'async';
       image.src = assetUrl(`animations/${asset.image}`);
       await image.decode();
       if (image.naturalWidth !== asset.width || image.naturalHeight !== asset.height) throw new Error(`Invalid summon atlas: ${name}`);
       if (owners.get(character) === entry) entry.images.set(name as SummonArtKind, image);
-    })).then(() => undefined);
+    });
+    entry.strictReady = Promise.all(work).then(() => undefined);
+    void entry.strictReady.catch(() => undefined);
+    entry.ready = Promise.allSettled(work).then(() => undefined);
   }
   owner.references++;
   const retained = owner; let released = false;
-  return { ready: retained.ready, release() {
+  return { ready: retained.ready, strictReady: retained.strictReady, release() {
     if (released) return; released = true;
     if (--retained.references || owners.get(character) !== retained) return;
     owners.delete(character); retained.images.clear();
