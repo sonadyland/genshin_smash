@@ -37,6 +37,7 @@ const modules = new Map();
 function loadModule(file) {
   if (file.endsWith('/summoner-art.ts')) return { drawSummonArt: (_canvas, kind, x, feetY, height, options) => { trace.push(['summon', kind, x, feetY, height, plain(options)]); return true; } };
   if (file.endsWith('/art.ts')) return {
+    getSwordCastTip: () => undefined, drawSwordCastRelease: () => false,
     acquireGameArt: () => ({ ready: Promise.resolve(), release: noop }),
     drawArenaBackground: () => true, drawCharacterArt: () => true,
     drawFighterArt: (_canvas, id, x, y, height, animation, options) => { trace.push(['fighter', id, x, y, height, plain(animation), plain(options)]); return true; },

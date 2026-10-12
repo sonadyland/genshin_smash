@@ -1,0 +1,161 @@
+{
+  "image": "jab-downstroke.png",
+  "width": 1774,
+  "height": 887,
+  "standingBodyHeightPixels": 277.159,
+  "frames": [
+    {
+      "name": "jab-downstroke-01",
+      "sourceRect": {
+        "x": 50,
+        "y": 165,
+        "width": 400,
+        "height": 291
+      },
+      "footAnchor": {
+        "x": 0.356996,
+        "y": 0.957099
+      },
+      "phase": "windup",
+      "duration": 5,
+      "weaponTip": {
+        "x": 393,
+        "y": 278
+      }
+    },
+    {
+      "name": "jab-downstroke-02",
+      "sourceRect": {
+        "x": 484,
+        "y": 49,
+        "width": 344,
+        "height": 407
+      },
+      "footAnchor": {
+        "x": 0.619528,
+        "y": 0.973259
+      },
+      "phase": "windup",
+      "duration": 3,
+      "weaponTip": {
+        "x": 5,
+        "y": 5
+      }
+    },
+    {
+      "name": "jab-downstroke-03",
+      "sourceRect": {
+        "x": 940,
+        "y": 170,
+        "width": 391,
+        "height": 286
+      },
+      "footAnchor": {
+        "x": 0.416877,
+        "y": 0.959937
+      },
+      "phase": "contact",
+      "duration": 2,
+      "weaponTip": {
+        "x": 384,
+        "y": 233
+      }
+    },
+    {
+      "name": "jab-downstroke-04",
+      "sourceRect": {
+        "x": 1409,
+        "y": 190,
+        "width": 355,
+        "height": 270
+      },
+      "footAnchor": {
+        "x": 0.421605,
+        "y": 0.910695
+      },
+      "phase": "contact",
+      "duration": 3,
+      "weaponTip": {
+        "x": 348,
+        "y": 263
+      }
+    },
+    {
+      "name": "jab-downstroke-05",
+      "sourceRect": {
+        "x": 51,
+        "y": 586,
+        "width": 393,
+        "height": 267
+      },
+      "footAnchor": {
+        "x": 0.415998,
+        "y": 0.926369
+      },
+      "phase": "followthrough",
+      "duration": 3,
+      "weaponTip": {
+        "x": 386,
+        "y": 260
+      }
+    },
+    {
+      "name": "jab-downstroke-06",
+      "sourceRect": {
+        "x": 537,
+        "y": 594,
+        "width": 387,
+        "height": 254
+      },
+      "footAnchor": {
+        "x": 0.440444,
+        "y": 0.968901
+      },
+      "phase": "followthrough",
+      "duration": 5,
+      "weaponTip": {
+        "x": 380,
+        "y": 245
+      }
+    },
+    {
+      "name": "jab-downstroke-07",
+      "sourceRect": {
+        "x": 980,
+        "y": 567,
+        "width": 372,
+        "height": 288
+      },
+      "footAnchor": {
+        "x": 0.383514,
+        "y": 0.954977
+      },
+      "phase": "recover",
+      "duration": 3,
+      "weaponTip": {
+        "x": 365,
+        "y": 281
+      }
+    },
+    {
+      "name": "jab-downstroke-08",
+      "sourceRect": {
+        "x": 1421,
+        "y": 542,
+        "width": 342,
+        "height": 308
+      },
+      "footAnchor": {
+        "x": 0.440622,
+        "y": 0.949957
+      },
+      "phase": "recover",
+      "duration": 2,
+      "weaponTip": {
+        "x": 335,
+        "y": 301
+      }
+    }
+  ],
+  "trail": "arc"
+}

@@ -178,7 +178,7 @@ test('all eight run drawings form a full distance loop independently of elapsed 
 });
 
 test('summoner run cycles preserve Eula gait phases across full-distance loops and both facings', () => {
-  const eulaPack = JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations/eula-v4/manifest.json'), 'utf8'));
+  const eulaPack = JSON.parse(fs.readFileSync(path.join(root, `public/assets/animations/${activePacks.eula}/manifest.json`), 'utf8'));
   for (const id of ['zhongli', 'furina']) {
     const character = CHARACTERS.find(item => item.id === id);
     const pack = JSON.parse(fs.readFileSync(path.join(root, `public/assets/animations/${activePacks[id]}/manifest.json`), 'utf8'));
@@ -283,9 +283,11 @@ test('every character maps attacks to live timings while L/I remain fixed even w
       }
     }
   }
-  const shipped = JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations/eula-v4/manifest.json'), 'utf8'));
+  const shipped = JSON.parse(fs.readFileSync(path.join(root, `public/assets/animations/${activePacks.eula}/manifest.json`), 'utf8'));
   assert.deepEqual(Object.keys(shipped.variants).sort(), ['jab', 'smash']);
-  assert.equal(shipped.clips.special.image, 'special.png'); assert.equal(shipped.clips.secondary.image, 'secondary-v5.png');
+  for (const kind of ['special', 'secondary']) {
+    assert.equal(selectedClip(shipped, { clip: kind, frame: 0, variant: 'alternate' }), shipped.clips[kind]);
+  }
 });
 
 test('Xiao plunge uses distinct named poses and keeps only spear-down dive frames until real impact', () => {

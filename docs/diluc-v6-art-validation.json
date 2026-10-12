@@ -1,0 +1,161 @@
+{
+  "character": "diluc",
+  "pack": "diluc-v6",
+  "ok": true,
+  "baseFrames": 64,
+  "variantFrames": 16,
+  "totalFrames": 80,
+  "uniqueAtlases": 8,
+  "decodedRgbaMiB": 48.0,
+  "atlases": [
+    {
+      "image": "locomotion.png",
+      "clip": "idle",
+      "variant": false,
+      "frames": 4,
+      "size": [
+        1448,
+        1086
+      ],
+      "transparentPercent": 69.82,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 300.131,
+      "sha256": "fb9ebba9e83ef8c069cb05e487916c89b7d52f308a6dc1dc0770a10378ece3fc"
+    },
+    {
+      "image": "locomotion.png",
+      "clip": "run",
+      "variant": false,
+      "frames": 8,
+      "size": [
+        1448,
+        1086
+      ],
+      "transparentPercent": 69.82,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 298.533,
+      "sha256": "fb9ebba9e83ef8c069cb05e487916c89b7d52f308a6dc1dc0770a10378ece3fc"
+    },
+    {
+      "image": "aerial.png",
+      "clip": "jump",
+      "variant": false,
+      "frames": 8,
+      "size": [
+        1448,
+        1086
+      ],
+      "transparentPercent": 66.96,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 312.365,
+      "sha256": "8fd66ae2c16df87134a168b1c43f8f303caecadb005ad0d10f0dc7ddc2a0970e"
+    },
+    {
+      "image": "aerial.png",
+      "clip": "dodge",
+      "variant": false,
+      "frames": 4,
+      "size": [
+        1448,
+        1086
+      ],
+      "transparentPercent": 66.96,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 315.982,
+      "sha256": "8fd66ae2c16df87134a168b1c43f8f303caecadb005ad0d10f0dc7ddc2a0970e"
+    },
+    {
+      "image": "jab-v5.png",
+      "clip": "jab",
+      "variant": false,
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "transparentPercent": 79.05,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 247.69,
+      "sha256": "7881273f29706bd7b80abfde0501f0724724ab9ea094cec4b36eb9bbd222e234"
+    },
+    {
+      "image": "basic.png",
+      "clip": "smash",
+      "variant": false,
+      "frames": 8,
+      "size": [
+        1448,
+        1086
+      ],
+      "transparentPercent": 73.53,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 181.87,
+      "sha256": "177f034c2b7cb32a7321e763f5f6c96788c96c8661aa7ee4a9ab2461e8f9c795"
+    },
+    {
+      "image": "special-v5.png",
+      "clip": "special",
+      "variant": false,
+      "frames": 12,
+      "size": [
+        1448,
+        1086
+      ],
+      "transparentPercent": 82.22,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 203.027,
+      "sha256": "fe09ba7911468c37328c3d34d25e8847ebb97219752ec202a4deb411332ba5d5"
+    },
+    {
+      "image": "secondary-v5.png",
+      "clip": "secondary",
+      "variant": false,
+      "frames": 12,
+      "size": [
+        1448,
+        1086
+      ],
+      "transparentPercent": 67.85,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 271.532,
+      "sha256": "2d96eeb2a42388504f09f541734187fc8e21db84072fa5c6eac3d4b7a41dc9a5"
+    },
+    {
+      "image": "jab-variant-v5.png",
+      "clip": "jab",
+      "variant": true,
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "transparentPercent": 72.68,
+      "minimumOpaqueGutterPx": 3,
+      "standingBodyHeightPixels": 285.827,
+      "sha256": "b76c88c7364f4f066958a63fcefb93da329c86e911667adf6887005a6460d4dc"
+    },
+    {
+      "image": "smash-variant-v5.png",
+      "clip": "smash",
+      "variant": true,
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "transparentPercent": 71.39,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 312.823,
+      "sha256": "e96a7d179d75fe6c3cfa484ebf41e3dfa6528e24a1a0dd833c003290126b5807"
+    }
+  ],
+  "timingAndPhasesUnchanged": true,
+  "nativeRasterUnmodified": true,
+  "minimumAlphaAbove32GutterPx": 2,
+  "bodyRegistration": {
+    "method": "SIFT body correspondences with one median scale per clip",
+    "minimumInliers": 10,
+    "maximumMedianErrorPixels": 1.788,
+    "perFrameScaleAdded": false
+  }
+}

@@ -13,8 +13,8 @@ ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / 'public' / 'assets'
 SOURCES = {
     'raiden': 'characters/raiden-v2.png', 'jean': 'characters/jean-v2.png',
-    'eula': 'characters/eula-v2.png', 'diluc': 'characters/diluc-v2.png',
-    'xiao': 'characters/xiao-v3.png', 'zhongli': 'animations/zhongli-v1/portrait.png',
+    'eula': 'characters/eula-v6.png', 'diluc': 'characters/diluc-v6.png',
+    'xiao': 'characters/xiao-v6.png', 'zhongli': 'animations/zhongli-v1/portrait.png',
     'furina': 'animations/furina-v1/portrait.png', 'liyue-dawn': 'backgrounds/liyue-dawn-v2.png',
 }
 
@@ -22,6 +22,7 @@ SOURCES = {
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--review-dir', type=Path)
+    parser.add_argument('--only', nargs='+', choices=list(SOURCES), help='Re-encode only these named portraits/backgrounds')
     args = parser.parse_args()
     destination = ASSETS / 'lobby'
     destination.mkdir(exist_ok=True)
@@ -29,6 +30,8 @@ def main():
         args.review_dir.mkdir(parents=True, exist_ok=True)
     report = {}
     for name, source_path in SOURCES.items():
+        if args.only and name not in args.only:
+            continue
         source = ASSETS / source_path
         with Image.open(source) as original:
             image = original.copy()

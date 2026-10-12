@@ -46,6 +46,14 @@ export interface AnimationClip {
 }
 export interface ClipManifest { version: 1; character: ClipCharacterId; clips: Record<ClipName, AnimationClip>; variants?: Partial<Record<VariantAttackKind, AnimationClip>> }
 
+/** The exact local registration used by both blade trails and spell origins. */
+export function registeredWeaponTip(clip: AnimationClip, frame: ClipFrame, height: number) {
+  if (!frame.weaponTip) return undefined;
+  const scale = height / clip.standingBodyHeightPixels * (frame.sourceScale ?? 1);
+  return { x: (frame.weaponTip.x - frame.sourceRect.width * frame.footAnchor.x) * scale,
+    y: (frame.weaponTip.y - frame.sourceRect.height * frame.footAnchor.y) * scale };
+}
+
 /** This is simulation state, never advanced by drawing or wall-clock time. */
 export interface MotionState {
   distance: number; age: number; airAge: number; landAge: number; turnAge: number;

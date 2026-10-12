@@ -8,8 +8,10 @@ import { CHARACTERS, ITEMS, STAGE, WORLD } from './data';
 import { SPRITES, SPRITE_W, SPRITE_H, ITEM_SPRITES, ITEM_SPRITE_SIZE } from './sprites';
 import type { SpriteFrame } from './sprites';
 import type { CharDef, ItemDef, MoveDef } from './data';
-import { acquireGameArt, drawArenaBackground, drawCharacterArt, drawFighterArt, drawElementEffect, drawXiaoPlungeEffect, drawSecondaryEffect, hasRegisteredMeleeTrail } from './art';
+import { acquireGameArt, drawArenaBackground, drawCharacterArt, drawFighterArt, drawElementEffect, drawXiaoPlungeEffect, drawSecondaryEffect, hasRegisteredMeleeTrail, getSwordCastTip, drawSwordCastRelease } from './art';
 import type { GameArtLease } from './art';
+import { castVisualFromTip, projectileVisualPosition } from './cast-visual';
+import type { CastVisual } from './cast-visual';
 import { attackPhase } from './animation';
 import type { FighterAnimation, PlungeAnimation } from './animation';
 import { advanceMotion, newMotionState, newAttackVariants, takeAttackVariant } from './clip-animation';
@@ -123,6 +125,7 @@ interface Projectile {
   vx: number; vy: number;
   life: number;
   color: string;
+  castVisual?: CastVisual;
 }
 
 interface Particle {
@@ -886,9 +889,11 @@ export class Game {
       return;
     }
     if (def.effect === 'thrust') return;
+    const tip = getSwordCastTip(f.char.id, f.x, f.y + f.h, 112, this.fighterAnimation(f), f.facing);
     const add = (kind: Projectile['kind'], x: number, y: number, vx: number, vy: number, radius: number, height: number, life: number) => {
       if (this.projectiles.length >= 80) return;
-      this.projectiles.push({ kind, owner: f.idx, charId: f.char.id, x, y, vx, vy, radius, height, life, color: f.char.color, def: { ...def }, hit: new Set() });
+      this.projectiles.push({ kind, owner: f.idx, charId: f.char.id, x, y, vx, vy, radius, height, life, color: f.char.color, def: { ...def }, hit: new Set(),
+        castVisual: castVisualFromTip(tip, x, y, vx) });
     };
     const feet = f.y + f.h;
     if (def.effect === 'thunder') add('thunder', f.x + f.facing * 95, feet - 100, 0, 0, 38, 230, 25);
@@ -1108,6 +1113,7 @@ export class Game {
     for (let i = this.projectiles.length - 1; i >= 0; i--) {
       const p = this.projectiles[i];
       p.life--;
+      if (p.castVisual) p.castVisual.age++;
       if (p.kind === 'bomb' || p.kind === 'slime') p.vy += 0.32;
       p.x += p.vx;
       p.y += p.vy;
@@ -1115,7 +1121,8 @@ export class Game {
 
       if (dead) { this.projectiles.splice(i, 1); continue; }
       if (p.def) {
-        this.burst(p.x, p.y, 1, p.color, 2);
+        const visual = projectileVisualPosition(p);
+        this.burst(visual.x, visual.y, 1, p.color, 2);
         for (const f of this.fighters) {
           if (f.idx === p.owner || f.respawnTimer > 0 || f.invuln > 0 || p.hit?.has(f.idx)) continue;
           if (Math.abs(p.x - f.x) < (p.kind === 'slash' ? 30 : (p.radius ?? 30) + f.w / 2) && Math.abs(p.y - (f.y + f.h / 2)) < (p.kind === 'slash' ? 40 : (p.height ?? 42) / 2 + f.h / 2)) {
@@ -1498,7 +1505,8 @@ export class Game {
   private drawProjectiles(g: CanvasRenderingContext2D) {
     for (const p of this.projectiles) {
       g.save();
-      g.translate(p.x, p.y);
+      const visual = projectileVisualPosition(p);
+      g.translate(visual.x, visual.y);
       if (p.kind === 'frost') {
         g.scale(p.vx < 0 ? -1 : 1, 1); g.rotate(Math.atan2(p.vy, Math.abs(p.vx)));
         g.fillStyle = '#bbf5ff'; g.strokeStyle = '#f1fdff'; g.lineWidth = 1.5; g.shadowColor = '#8adbf1'; g.shadowBlur = effectGlow(this.visualQuality, 13);
@@ -1710,6 +1718,7 @@ export class Game {
     }
     g.save();
     if (def.kind === 'secondary') {
+      if ((c.id === 'eula' || c.id === 'diluc') && drawSwordCastRelease(g, c.id, 0, f.h, 112, this.fighterAnimation(f))) { g.restore(); return; }
       if (phase === 'contact' || (phase === 'followthrough' && progress < 0.45)) {
         const alpha = phase === 'contact' ? 0.7 : 0.7 * (1 - progress / 0.45);
         drawSecondaryEffect(g, c.id, def.effect === 'thrust' ? 40 : 25, 24, def.effect === 'thrust' ? 185 : def.effect === 'frost' ? 215 : 85, def.effect === 'thrust' ? 72 : def.effect === 'frost' ? 125 : 110, { alpha });

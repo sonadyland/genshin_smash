@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { attackPhase } from '../game/animation';
 import type { ClipCharacterId, ClipName } from '../game/clip-animation';
+import { CHARACTER_CLIPS } from '../game/clip-animation';
 import { advancePreviewClock, createPreviewClock, previewFrame } from '../game/animation-preview-state';
 import type { PreviewSettings } from '../game/animation-preview-state';
 import { acquireGameArt, drawFighterArt, getCharacterAnimationStatus } from '../game/art';
@@ -21,7 +22,10 @@ const choicesFor = (id: string) => {
 export default function AnimationPreview({ initialCharacter = 'eula' }: { initialCharacter?: ClipCharacterId }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const [characterId, setCharacterId] = useState<ClipCharacterId>(initialCharacter);
-  const [clip, setClip] = useState<ClipName>('run');
+  const [clip, setClip] = useState<ClipName>(() => {
+    const requested = new URLSearchParams(window.location.search).get('clip');
+    return CHARACTER_CLIPS.includes(requested as ClipName) ? requested as ClipName : 'run';
+  });
   const [form, setForm] = useState<NonNullable<PreviewSettings['form']>>('new');
   const [speed, setSpeed] = useState(1);
   const [paused, setPaused] = useState(false);

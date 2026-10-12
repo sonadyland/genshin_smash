@@ -1,4 +1,5 @@
-import { drawArenaBackground, drawFighterArt, drawElementEffect, drawXiaoPlungeEffect, drawSecondaryEffect, hasRegisteredMeleeTrail } from './art';
+import { drawArenaBackground, drawFighterArt, drawElementEffect, drawXiaoPlungeEffect, drawSecondaryEffect, hasRegisteredMeleeTrail, drawSwordCastRelease } from './art';
+import { projectileVisualPosition } from './cast-visual';
 import { SURVIVAL_WORLD, groundHeightAt } from './survival-data';
 import type { SurvivalGame, SurvivalEnemy, SurvivalField } from './survival-engine';
 import { effectGlow } from './visual-quality';
@@ -38,7 +39,8 @@ export function renderSurvival(game: SurvivalGame) {
   }
   for (const enemy of game.enemies) if (visible(game, enemy.x)) drawEnemy(c, enemy, game.frame);
   for (const shot of game.shots) if (visible(game, shot.x)) {
-    c.save(); c.translate(shot.x, shot.y);
+    const visual = projectileVisualPosition(shot);
+    c.save(); c.translate(visual.x, visual.y);
     if (shot.secondary) { c.scale(shot.vx < 0 ? -1 : 1, 1); c.rotate(Math.atan2(shot.vy, Math.abs(shot.vx))); }
     else c.rotate(Math.atan2(shot.vy, shot.vx));
     c.shadowColor = shot.color; c.shadowBlur = effectGlow(game.visualQuality, 15);
@@ -112,6 +114,8 @@ export function renderSurvival(game: SurvivalGame) {
   }
   c.restore();
   // A small position marker remains readable in dense elemental effects.
+  drawSwordCastRelease(c, game.char.id, p.x, p.y, 112, { state: p.attack ? 'attack' : 'free', attack: p.attack,
+    onGround: p.onGround, vx: p.vx, vy: p.vy, dodgeTimer: p.dodge, time: game.frame, motion: p.motion }, p.facing);
   c.fillStyle = '#e6edbd'; c.beginPath(); c.moveTo(p.x, p.y - 131); c.lineTo(p.x - 5, p.y - 139); c.lineTo(p.x + 5, p.y - 139); c.fill();
   for (const text of game.texts) if (visible(game, text.x)) {
     c.save(); c.globalAlpha = Math.min(1, (48 - text.age) / 17); c.font = `${text.big ? '700 22' : '600 16'}px system-ui`; c.textAlign = 'center'; c.lineWidth = 3; c.strokeStyle = '#20303c'; c.fillStyle = text.color;

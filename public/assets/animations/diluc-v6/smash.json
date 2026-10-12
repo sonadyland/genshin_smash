@@ -1,0 +1,161 @@
+{
+  "image": "basic.png",
+  "width": 1448,
+  "height": 1086,
+  "standingBodyHeightPixels": 181.87,
+  "frames": [
+    {
+      "name": "smash-01",
+      "sourceRect": {
+        "x": 31,
+        "y": 614,
+        "width": 264,
+        "height": 181
+      },
+      "footAnchor": {
+        "x": 0.630131,
+        "y": 0.973167
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 7,
+        "y": 169
+      },
+      "phase": "windup"
+    },
+    {
+      "name": "smash-02",
+      "sourceRect": {
+        "x": 399,
+        "y": 563,
+        "width": 276,
+        "height": 233
+      },
+      "footAnchor": {
+        "x": 0.661847,
+        "y": 0.97722
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 5,
+        "y": 92
+      },
+      "phase": "windup"
+    },
+    {
+      "name": "smash-03",
+      "sourceRect": {
+        "x": 818,
+        "y": 610,
+        "width": 275,
+        "height": 190
+      },
+      "footAnchor": {
+        "x": 0.49587,
+        "y": 0.947426
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 268,
+        "y": 183
+      },
+      "phase": "contact"
+    },
+    {
+      "name": "smash-04",
+      "sourceRect": {
+        "x": 1149,
+        "y": 635,
+        "width": 290,
+        "height": 164
+      },
+      "footAnchor": {
+        "x": 0.497271,
+        "y": 0.925285
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 283,
+        "y": 157
+      },
+      "phase": "contact"
+    },
+    {
+      "name": "smash-05",
+      "sourceRect": {
+        "x": 74,
+        "y": 900,
+        "width": 314,
+        "height": 144
+      },
+      "footAnchor": {
+        "x": 0.425138,
+        "y": 0.973012
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 306,
+        "y": 131
+      },
+      "phase": "followthrough"
+    },
+    {
+      "name": "smash-06",
+      "sourceRect": {
+        "x": 472,
+        "y": 830,
+        "width": 228,
+        "height": 217
+      },
+      "footAnchor": {
+        "x": 0.451185,
+        "y": 0.985017
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 221,
+        "y": 5
+      },
+      "phase": "followthrough"
+    },
+    {
+      "name": "smash-07",
+      "sourceRect": {
+        "x": 831,
+        "y": 863,
+        "width": 248,
+        "height": 188
+      },
+      "footAnchor": {
+        "x": 0.501943,
+        "y": 0.969015
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 241,
+        "y": 181
+      },
+      "phase": "recover"
+    },
+    {
+      "name": "smash-08",
+      "sourceRect": {
+        "x": 1159,
+        "y": 851,
+        "width": 245,
+        "height": 198
+      },
+      "footAnchor": {
+        "x": 0.466789,
+        "y": 0.973814
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 238,
+        "y": 191
+      },
+      "phase": "recover"
+    }
+  ],
+  "trail": "arc"
+}

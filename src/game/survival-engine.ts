@@ -3,8 +3,10 @@ import type { CharDef, MoveDef } from './data';
 import type { PlungeAnimation } from './animation';
 import { advanceMotion, newMotionState, newAttackVariants, takeAttackVariant } from './clip-animation';
 import type { AttackVariantState, AttackVisualVariant, MotionState } from './clip-animation';
-import { acquireGameArt } from './art';
+import { acquireGameArt, getSwordCastTip } from './art';
 import type { GameArtLease } from './art';
+import { castVisualFromTip } from './cast-visual';
+import type { CastVisual } from './cast-visual';
 import {
   SURVIVAL_WORLD, SURVIVAL_DURATION, SURVIVAL_BASE_HP, SURVIVAL_BRANCHES, groundHeightAt,
   makeInitialProgress, xpForLevel, getUpgradeChoices, rerollUpgradeChoices, applyChoice, getUpgradeSummary, getSurvivalStats, getSecondaryProfile,
@@ -45,6 +47,7 @@ export interface SurvivalShot {
   radius: number; damage: number; owner: 'player' | 'enemy'; color: string;
   hit: Set<number>; returning: boolean; returned: boolean; kind: 'blade' | 'fire' | 'bolt' | 'frost' | 'phoenix' | 'wind';
   secondary?: boolean; piercing?: boolean;
+  castVisual?: CastVisual;
 }
 export interface SurvivalField {
   x: number; y: number; radius: number; age: number; life: number; damage: number;
@@ -439,6 +442,8 @@ export class SurvivalGame {
   private releaseSecondary() {
     const p = this.player, profile = getSecondaryProfile(this.char.id, this.progress.secondaryLevel);
     const range = this.secondaryRange(), damage = this.attackDamage('secondary');
+    const tip = getSwordCastTip(this.char.id, p.x, p.y, 112, { state: p.attack ? 'attack' : 'free', attack: p.attack,
+      onGround: p.onGround, vx: p.vx, vy: p.vy, dodgeTimer: p.dodge, time: this.frame, motion: p.motion }, p.facing);
     if (this.char.id === 'raiden' || this.char.id === 'jean') {
       const thunder = this.char.id === 'raiden';
       for (let i = 0; i < profile.count; i++) {
@@ -450,13 +455,13 @@ export class SurvivalGame {
           damage, age: 0, tick: 0, life: thunder ? 28 : 85, hit: new Set() });
       }
     } else if (this.char.id === 'eula') {
-      this.effect('secondary', p.x + p.facing * 90, p.y - 40, 225 * range, this.char.color, 20);
+      if (!tip) this.effect('secondary', p.x + p.facing * 90, p.y - 40, 225 * range, this.char.color, 20);
       for (let i = 0; i < profile.count; i++) {
         const angle = (i - (profile.count - 1) / 2) * 0.15;
-        this.secondaryShot(p.x + p.facing * 32, p.y - 38, p.facing * Math.cos(angle) * 8.8, Math.sin(angle) * 8.8, damage, 'frost', 23 * range, false);
+        this.secondaryShot(p.x + p.facing * 32, p.y - 38, p.facing * Math.cos(angle) * 8.8, Math.sin(angle) * 8.8, damage, 'frost', 23 * range, false, tip);
       }
     } else if (this.char.id === 'diluc') {
-      for (let i = 0; i < profile.count; i++) this.secondaryShot(p.x + p.facing * 38, p.y - 45 - i * 64, p.facing * (7.8 + i * 0.6), 0, damage, 'phoenix', 45 * range, profile.piercing);
+      for (let i = 0; i < profile.count; i++) this.secondaryShot(p.x + p.facing * 38, p.y - 45 - i * 64, p.facing * (7.8 + i * 0.6), 0, damage, 'phoenix', 45 * range, profile.piercing, tip);
     } else if (this.char.id === 'xiao') {
       for (let i = 0; i < profile.count; i++) this.secondaryShot(p.x + p.facing * 45, p.y - 38 - i * 53, p.facing * (9.5 + i), 0, damage * 0.55, 'wind', 34 * range, true);
       this.effect('secondary', p.x + p.facing * 48, p.y - 45, 200 * range, this.char.color, 18);
@@ -470,10 +475,10 @@ export class SurvivalGame {
     this.audio.play('cast', { charId: this.char.id, kind: 'secondary' });
   }
 
-  private secondaryShot(x: number, y: number, vx: number, vy: number, damage: number, kind: SurvivalShot['kind'], radius: number, piercing: boolean) {
+  private secondaryShot(x: number, y: number, vx: number, vy: number, damage: number, kind: SurvivalShot['kind'], radius: number, piercing: boolean, tip?: { x: number; y: number }) {
     if (this.shots.length >= 100) return;
     this.shots.push({ x, y, startX: x, vx, vy, damage, kind, radius, piercing, secondary: true, owner: 'player',
-      returning: false, returned: false, age: 0, life: kind === 'frost' ? 60 : 75, color: this.char.color, hit: new Set() });
+      returning: false, returned: false, age: 0, life: kind === 'frost' ? 60 : 75, color: this.char.color, hit: new Set(), castVisual: castVisualFromTip(tip, x, y, vx) });
   }
 
   private releaseSpecial() {
@@ -644,6 +649,7 @@ export class SurvivalGame {
   private updateShots() {
     for (const shot of this.shots) {
       shot.age++; shot.x += shot.vx; shot.y += shot.vy;
+      if (shot.castVisual) shot.castVisual.age++;
       // Solid terrain blocks projectiles; one-way platforms still let them pass.
       if (shot.y >= groundHeightAt(shot.x)) {
         this.effect('impact', shot.x, groundHeightAt(shot.x) - 5, Math.max(30, shot.radius * 2), shot.color, 12);

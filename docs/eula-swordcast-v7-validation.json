@@ -1,0 +1,283 @@
+{
+  "image": "public/assets/animations/eula-v6/secondary-swordcast-v7.png",
+  "metadata": "public/assets/animations/eula-v6/secondary-swordcast-v7.json",
+  "generator": "built-in image_gen",
+  "width": 1684,
+  "height": 934,
+  "sha256": "4f47286658574cb1a22ea7801f0e49be17684e16611774a364af92ff5158d4b0",
+  "bytes": 1443125,
+  "mode": "RGBA",
+  "transparentPercent": 64.524,
+  "frames": 12,
+  "ticks": 44,
+  "standingBodyHeightPixels": 250,
+  "sourceScale": "unchanged; no per-frame body resizing",
+  "imageUnchanged": true,
+  "minimumAlpha32GutterPx": 3,
+  "registration": [
+    {
+      "frame": 1,
+      "name": "secondary-01",
+      "phase": "windup",
+      "duration": 4,
+      "sourceRect": {
+        "x": 27,
+        "y": 70,
+        "width": 303,
+        "height": 262
+      },
+      "footAbsolute": [
+        227.5,
+        326
+      ],
+      "weaponTipAbsolute": [
+        43,
+        308
+      ],
+      "tipAlpha": 221,
+      "minimumAlpha32GutterPx": 5
+    },
+    {
+      "frame": 2,
+      "name": "secondary-02",
+      "phase": "windup",
+      "duration": 5,
+      "sourceRect": {
+        "x": 427,
+        "y": 96,
+        "width": 347,
+        "height": 234
+      },
+      "footAbsolute": [
+        648.75,
+        325
+      ],
+      "weaponTipAbsolute": [
+        440,
+        320
+      ],
+      "tipAlpha": 217,
+      "minimumAlpha32GutterPx": 3
+    },
+    {
+      "frame": 3,
+      "name": "secondary-03",
+      "phase": "windup",
+      "duration": 4,
+      "sourceRect": {
+        "x": 853,
+        "y": 126,
+        "width": 348,
+        "height": 206
+      },
+      "footAbsolute": [
+        1069,
+        325
+      ],
+      "weaponTipAbsolute": [
+        869,
+        321
+      ],
+      "tipAlpha": 199,
+      "minimumAlpha32GutterPx": 4
+    },
+    {
+      "frame": 4,
+      "name": "secondary-04",
+      "phase": "windup",
+      "duration": 2,
+      "sourceRect": {
+        "x": 1259,
+        "y": 93,
+        "width": 352,
+        "height": 237
+      },
+      "footAbsolute": [
+        1487,
+        325
+      ],
+      "weaponTipAbsolute": [
+        1274,
+        310
+      ],
+      "tipAlpha": 240,
+      "minimumAlpha32GutterPx": 3
+    },
+    {
+      "frame": 5,
+      "name": "secondary-05",
+      "phase": "contact",
+      "duration": 3,
+      "sourceRect": {
+        "x": 42,
+        "y": 375,
+        "width": 405,
+        "height": 220
+      },
+      "footAbsolute": [
+        185,
+        590
+      ],
+      "weaponTipAbsolute": [
+        431,
+        454
+      ],
+      "tipAlpha": 200,
+      "minimumAlpha32GutterPx": 5
+    },
+    {
+      "frame": 6,
+      "name": "secondary-06",
+      "phase": "contact",
+      "duration": 4,
+      "sourceRect": {
+        "x": 463,
+        "y": 387,
+        "width": 410,
+        "height": 208
+      },
+      "footAbsolute": [
+        610.5,
+        590
+      ],
+      "weaponTipAbsolute": [
+        859,
+        455
+      ],
+      "tipAlpha": 195,
+      "minimumAlpha32GutterPx": 5
+    },
+    {
+      "frame": 7,
+      "name": "secondary-07",
+      "phase": "followthrough",
+      "duration": 4,
+      "sourceRect": {
+        "x": 892,
+        "y": 386,
+        "width": 403,
+        "height": 210
+      },
+      "footAbsolute": [
+        1041.75,
+        590
+      ],
+      "weaponTipAbsolute": [
+        1280,
+        455
+      ],
+      "tipAlpha": 228,
+      "minimumAlpha32GutterPx": 5
+    },
+    {
+      "frame": 8,
+      "name": "secondary-08",
+      "phase": "followthrough",
+      "duration": 4,
+      "sourceRect": {
+        "x": 1313,
+        "y": 374,
+        "width": 365,
+        "height": 226
+      },
+      "footAbsolute": [
+        1456,
+        594
+      ],
+      "weaponTipAbsolute": [
+        1667,
+        455
+      ],
+      "tipAlpha": 207,
+      "minimumAlpha32GutterPx": 5
+    },
+    {
+      "frame": 9,
+      "name": "secondary-09",
+      "phase": "followthrough",
+      "duration": 5,
+      "sourceRect": {
+        "x": 65,
+        "y": 639,
+        "width": 368,
+        "height": 250
+      },
+      "footAbsolute": [
+        210.25,
+        883
+      ],
+      "weaponTipAbsolute": [
+        417,
+        854
+      ],
+      "tipAlpha": 222,
+      "minimumAlpha32GutterPx": 4
+    },
+    {
+      "frame": 10,
+      "name": "secondary-10",
+      "phase": "recover",
+      "duration": 3,
+      "sourceRect": {
+        "x": 481,
+        "y": 637,
+        "width": 360,
+        "height": 252
+      },
+      "footAbsolute": [
+        620.75,
+        883
+      ],
+      "weaponTipAbsolute": [
+        829,
+        868
+      ],
+      "tipAlpha": 194,
+      "minimumAlpha32GutterPx": 4
+    },
+    {
+      "frame": 11,
+      "name": "secondary-11",
+      "phase": "recover",
+      "duration": 3,
+      "sourceRect": {
+        "x": 905,
+        "y": 637,
+        "width": 362,
+        "height": 251
+      },
+      "footAbsolute": [
+        1032.75,
+        883
+      ],
+      "weaponTipAbsolute": [
+        1251,
+        870
+      ],
+      "tipAlpha": 222,
+      "minimumAlpha32GutterPx": 5
+    },
+    {
+      "frame": 12,
+      "name": "secondary-12",
+      "phase": "recover",
+      "duration": 3,
+      "sourceRect": {
+        "x": 1343,
+        "y": 629,
+        "width": 339,
+        "height": 259
+      },
+      "footAbsolute": [
+        1464.75,
+        883
+      ],
+      "weaponTipAbsolute": [
+        1666,
+        874
+      ],
+      "tipAlpha": 219,
+      "minimumAlpha32GutterPx": 5
+    }
+  ]
+}

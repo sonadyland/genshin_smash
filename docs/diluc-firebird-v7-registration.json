@@ -1,0 +1,243 @@
+{
+  "image": "public/assets/animations/diluc-v6/secondary-firebird-v7.png",
+  "sha256": "bd353ddd28990998f887d22c3a242f2b5907e7358c644202e5cb53e62dcff90a",
+  "generator": "built-in image_gen; 3 calls; final unmodified RGBA output",
+  "size": [
+    1448,
+    1086
+  ],
+  "frames": 12,
+  "timingAndPhasesPreserved": true,
+  "fixedStandingBodyHeightPixels": 276,
+  "minimumAlpha32GutterPx": 5,
+  "measurements": [
+    {
+      "frame": 1,
+      "phase": "windup",
+      "sourceRect": {
+        "x": 16,
+        "y": 81,
+        "width": 324,
+        "height": 288
+      },
+      "footPixels": [
+        218,
+        366
+      ],
+      "weaponTipPixels": [
+        22,
+        283
+      ],
+      "alpha32GutterPx": 5
+    },
+    {
+      "frame": 2,
+      "phase": "windup",
+      "sourceRect": {
+        "x": 371,
+        "y": 95,
+        "width": 328,
+        "height": 274
+      },
+      "footPixels": [
+        585,
+        366
+      ],
+      "weaponTipPixels": [
+        377,
+        293
+      ],
+      "alpha32GutterPx": 5
+    },
+    {
+      "frame": 3,
+      "phase": "windup",
+      "sourceRect": {
+        "x": 769,
+        "y": 139,
+        "width": 308,
+        "height": 230
+      },
+      "footPixels": [
+        961,
+        366
+      ],
+      "weaponTipPixels": [
+        776,
+        303
+      ],
+      "alpha32GutterPx": 5
+    },
+    {
+      "frame": 4,
+      "phase": "windup",
+      "sourceRect": {
+        "x": 1097,
+        "y": 95,
+        "width": 319,
+        "height": 274
+      },
+      "footPixels": [
+        1291,
+        366
+      ],
+      "weaponTipPixels": [
+        1104,
+        279
+      ],
+      "alpha32GutterPx": 5
+    },
+    {
+      "frame": 5,
+      "phase": "contact",
+      "sourceRect": {
+        "x": 57,
+        "y": 409,
+        "width": 318,
+        "height": 348
+      },
+      "footPixels": [
+        207,
+        754
+      ],
+      "weaponTipPixels": [
+        369,
+        415
+      ],
+      "alpha32GutterPx": 5
+    },
+    {
+      "frame": 6,
+      "phase": "contact",
+      "sourceRect": {
+        "x": 421,
+        "y": 395,
+        "width": 312,
+        "height": 362
+      },
+      "footPixels": [
+        575,
+        754
+      ],
+      "weaponTipPixels": [
+        727,
+        400
+      ],
+      "alpha32GutterPx": 5
+    },
+    {
+      "frame": 7,
+      "phase": "followthrough",
+      "sourceRect": {
+        "x": 818,
+        "y": 387,
+        "width": 267,
+        "height": 370
+      },
+      "footPixels": [
+        972,
+        754
+      ],
+      "weaponTipPixels": [
+        1054,
+        393
+      ],
+      "alpha32GutterPx": 5
+    },
+    {
+      "frame": 8,
+      "phase": "followthrough",
+      "sourceRect": {
+        "x": 1160,
+        "y": 419,
+        "width": 270,
+        "height": 338
+      },
+      "footPixels": [
+        1327,
+        754
+      ],
+      "weaponTipPixels": [
+        1167,
+        425
+      ],
+      "alpha32GutterPx": 5
+    },
+    {
+      "frame": 9,
+      "phase": "followthrough",
+      "sourceRect": {
+        "x": 47,
+        "y": 787,
+        "width": 321,
+        "height": 242
+      },
+      "footPixels": [
+        188,
+        1026
+      ],
+      "weaponTipPixels": [
+        361,
+        796
+      ],
+      "alpha32GutterPx": 5
+    },
+    {
+      "frame": 10,
+      "phase": "recover",
+      "sourceRect": {
+        "x": 415,
+        "y": 787,
+        "width": 299,
+        "height": 242
+      },
+      "footPixels": [
+        544,
+        1026
+      ],
+      "weaponTipPixels": [
+        707,
+        997
+      ],
+      "alpha32GutterPx": 5
+    },
+    {
+      "frame": 11,
+      "phase": "recover",
+      "sourceRect": {
+        "x": 787,
+        "y": 786,
+        "width": 291,
+        "height": 243
+      },
+      "footPixels": [
+        916,
+        1026
+      ],
+      "weaponTipPixels": [
+        1071,
+        1008
+      ],
+      "alpha32GutterPx": 5
+    },
+    {
+      "frame": 12,
+      "phase": "recover",
+      "sourceRect": {
+        "x": 1137,
+        "y": 786,
+        "width": 290,
+        "height": 243
+      },
+      "footPixels": [
+        1269,
+        1026
+      ],
+      "weaponTipPixels": [
+        1420,
+        1012
+      ],
+      "alpha32GutterPx": 5
+    }
+  ]
+}

@@ -43,9 +43,11 @@ const context = vm.createContext({
 });
 const modules = new Map();
 const artLeases = [];
+let swordTipFixture = false;
 function loadModule(file) {
   if (file.endsWith('/survival-render.ts')) return { renderSurvival: noop };
   if (file.endsWith('/art.ts')) return {
+    getSwordCastTip: (id, x, feetY, _height, _animation, facing) => swordTipFixture && ['eula', 'diluc'].includes(id) ? { x: x + facing * 97, y: feetY - 120 } : undefined,
     acquireGameArt: ids => {
       const lease = { ids: [...ids], released: false };
       artLeases.push(lease);
@@ -1183,6 +1185,27 @@ test('summoner shield absorbs damage while preserving manual attack and jump wit
   assert.equal(game.player.hp, hp); assert.equal(game.getSnapshot().shieldHp, shield - 7);
   assert.equal(game.player.attack, attack); assert.equal(game.player.y, y); assert.equal(game.player.vy, vy);
   assert.equal(game.player.facing, facing); assert.equal(game.player.jumps, jumps); assert.equal(game.hitstop, 4);
+});
+
+test('sword release keeps survival upgrade counts, damage and hitboxes while deriving render origins from the blade', () => {
+  const { projectileVisualPosition } = loadModule(path.join(root, 'src/game/cast-visual.ts').replaceAll('\\', '/'));
+  const physical = shots => plain(shots.map(({ castVisual, ...shot }) => shot));
+  for (const id of ['eula', 'diluc', 'xiao']) for (const level of [1, 5]) for (const facing of [-1, 1]) {
+    const game = makeGame(CHARACTERS.findIndex(c => c.id === id)); game.progress.secondaryLevel = level;
+    game.player.facing = facing; game.player.y -= 200; game.enemies = [];
+    swordTipFixture = false; game.releaseSecondary(); const original = physical(game.shots);
+    if (id === 'eula') assert.ok(game.effects.some(e => e.kind === 'secondary'), 'fallback retains the old frost release');
+    for (let i = 0; i < 20; i++) game.updateShots(); const advanced = physical(game.shots); game.shots = []; game.effects = [];
+    swordTipFixture = true; game.releaseSecondary(); assert.deepEqual(physical(game.shots), original);
+    if (id === 'eula') assert.equal(game.effects.length, 0, 'registered cast replaces the old fixed-position cloud');
+    for (const shot of game.shots) {
+      if (id === 'xiao') assert.equal(shot.castVisual, undefined);
+      else assert.deepEqual(plain(projectileVisualPosition(shot)), { x: game.player.x + facing * 97, y: game.player.y - 120 });
+    }
+    for (let i = 0; i < 20; i++) game.updateShots(); assert.deepEqual(physical(game.shots), advanced);
+    for (const shot of game.shots) assert.deepEqual(plain(projectileVisualPosition(shot)), { x: shot.x, y: shot.y });
+  }
+  swordTipFixture = false;
 });
 
 let failures = 0;

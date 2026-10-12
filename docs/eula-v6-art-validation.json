@@ -1,0 +1,152 @@
+{
+  "character": "eula",
+  "pack": "eula-v6",
+  "ok": true,
+  "baseFrames": 64,
+  "variantFrames": 16,
+  "totalFrames": 80,
+  "uniqueAtlases": 10,
+  "decodedRgbaMiB": 60.01,
+  "atlases": [
+    {
+      "image": "idle.png",
+      "clip": "idle",
+      "variant": false,
+      "frames": 4,
+      "size": [
+        1254,
+        1254
+      ],
+      "transparentPercent": 69.48,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 539.784,
+      "sha256": "c452d8009886ab460011bb60e518deda6e691a80a2bb44d82fd0bbbd26099109"
+    },
+    {
+      "image": "run.png",
+      "clip": "run",
+      "variant": false,
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "transparentPercent": 71.34,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 363.968,
+      "sha256": "d3aee441779b6ce314221bf2d521f52224d2b4479b5139b32366da5cc46a878a"
+    },
+    {
+      "image": "jump.png",
+      "clip": "jump",
+      "variant": false,
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "transparentPercent": 75.49,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 333.418,
+      "sha256": "9806ada1ca104a0955d5d354740eff1459a631d8f521690c0392926fc0532481"
+    },
+    {
+      "image": "dodge.png",
+      "clip": "dodge",
+      "variant": false,
+      "frames": 4,
+      "size": [
+        1254,
+        1254
+      ],
+      "transparentPercent": 70.62,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 595.51,
+      "sha256": "c51c210b33e3a14ad14132c3c59c891df60228bd63e70cb72e94e65d36a1d36d"
+    },
+    {
+      "image": "jab.png",
+      "clip": "jab",
+      "variant": false,
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "transparentPercent": 74.44,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 300.568,
+      "sha256": "2c19c455c5f78a31acedcca0eaabd39209a71ed4c7035810819b23f4e0a82778"
+    },
+    {
+      "image": "smash.png",
+      "clip": "smash",
+      "variant": false,
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "transparentPercent": 71.8,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 292.588,
+      "sha256": "a2b7456b66bc2f753812126376a058a129581ad2fcf2f4edb0459fb4a9670179"
+    },
+    {
+      "image": "special.png",
+      "clip": "special",
+      "variant": false,
+      "frames": 12,
+      "size": [
+        1448,
+        1086
+      ],
+      "transparentPercent": 71.02,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 237.336,
+      "sha256": "b3255d317ab6fd1c1c4095fbfbe6230a19fe40158cb129febe253b60fa0db8a7"
+    },
+    {
+      "image": "secondary.png",
+      "clip": "secondary",
+      "variant": false,
+      "frames": 12,
+      "size": [
+        1448,
+        1086
+      ],
+      "transparentPercent": 66.72,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 260.63,
+      "sha256": "46cca9bd23525a1d279cbaf29bf6bae87fec99b6f28c894ea3fed3084adccaab"
+    },
+    {
+      "image": "jab-downstroke.png",
+      "clip": "jab",
+      "variant": true,
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "transparentPercent": 72.41,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 277.159,
+      "sha256": "a1eb4834809daddc3c889f2eedd37e68db44cb1556cd1b932d09ec7378d9873b"
+    },
+    {
+      "image": "smash-overhead.png",
+      "clip": "smash",
+      "variant": true,
+      "frames": 8,
+      "size": [
+        1774,
+        887
+      ],
+      "transparentPercent": 76.27,
+      "minimumOpaqueGutterPx": 5,
+      "standingBodyHeightPixels": 266.001,
+      "sha256": "e01f9108970e73c8c308fbb43c310f4f39cc67dc148ad45bdc14f6d0b1f7bf2f"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ import { inflateSync } from 'node:zlib';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const activePacks = JSON.parse(fs.readFileSync(path.join(root, 'src/game/animation-packs.json'), 'utf8'));
 const packUrl = (id, file = 'manifest.json') => `/assets/animations/${activePacks[id]}/${file}`;
+const packPath = (id, file = 'manifest.json') => path.join(root, 'public', packUrl(id, file));
 const isPackUrl = url => Object.values(activePacks).some(directory => url.includes(`/animations/${directory}/`));
 function harness(rejected = () => false, metadataTransform = value => value, enhanced = false, fixtures = {}, decoding = async () => undefined) {
   const calls = [];
@@ -381,7 +382,7 @@ test('actual six PNGs have registered dimensions, genuine alpha and isolated vis
 test('Eula pilot loads eight base and two alternate sheets and selects every registered frame with one body scale', async () => {
   const h = harness(() => false, value => value, true); await h.art.loadGameArt();
   assert.equal(h.art.getEulaAnimationStatus().status, 'ready'); assert.equal(h.art.getEulaAnimationStatus().frames, 80); assert.equal(h.art.getEulaAnimationStatus().variants, true);
-  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations/eula-v4/manifest.json'), 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(packPath('eula'), 'utf8'));
   const phases = ['windup', 'contact', 'followthrough', 'recover'];
   const entries = [...Object.entries(manifest.clips).map(([name, clip]) => [name, clip, 'base']), ...Object.entries(manifest.variants).map(([name, clip]) => [name, clip, 'alternate'])];
   for (const [name, clip, visualVariant] of entries) {
@@ -408,7 +409,7 @@ test('Eula pilot loads eight base and two alternate sheets and selects every reg
       h.reset(); assert.equal(h.art.drawFighterArt(h.draw, 'eula', 300, 400, 112, sample, { facing: -1, flash: true }), true);
       const draws = h.calls.filter(call => call.kind === 'drawImage'); assert.equal(draws.length, 2);
       const source = frame.sourceRect, scale = 112 / clip.standingBodyHeightPixels;
-      assert.ok(draws[0].args[0].src.endsWith(`/eula-v4/${clip.image}`), name);
+      assert.ok(draws[0].args[0].src.endsWith(packUrl('eula', clip.image)), name);
       assert.deepEqual(draws[0].args.slice(1, 5), [source.x + 1, source.y + 1, source.width - 2, source.height - 2], `${name}/${index}`);
       assert.deepEqual(draws[0].args.slice(5), [(1 - source.width * frame.footAnchor.x) * scale, (1 - source.height * frame.footAnchor.y) * scale, (source.width - 2) * scale, (source.height - 2) * scale]);
       assert.deepEqual(draws[1].args.slice(1), draws[0].args.slice(1));
@@ -420,14 +421,14 @@ test('Eula pilot loads eight base and two alternate sheets and selects every reg
 test('Eula PVP damage stays in the new art generation with the established recoil transform', async () => {
   const h = harness(() => false, value => value, true); await h.art.loadGameArt(); h.reset();
   assert.equal(h.art.drawFighterArt(h.draw, 'eula', 0, 112, 112, { ...animation, state: 'hitstun', attack: null }), true);
-  assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith('/eula-v4/jump.png'));
+  assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith(packUrl('eula', 'jump.png')));
   assert.ok(h.calls.some(call => call.kind === 'rotate' && call.args[0] === -0.22));
   assert.ok(h.calls.some(call => call.kind === 'scale' && call.args[0] === 0.94 && call.args[1] === 1.03));
 });
 
 test('Eula sword light is one fading smooth arc ending at the current blade tip only during contact', async () => {
   const h = harness(() => false, value => value, true); await h.art.loadGameArt();
-  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations/eula-v4/manifest.json'), 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(packPath('eula'), 'utf8'));
   const clip = manifest.clips.special, scale = 112 / clip.standingBodyHeightPixels;
   for (const facing of [-1, 1]) for (const t of [19, 25, 32]) {
     const sample = { ...animation, attack: { def: { kind: 'special', startup: 20, active: 12, endlag: 24 }, t } };
@@ -448,7 +449,7 @@ test('Eula sword light is one fading smooth arc ending at the current blade tip 
 test('any missing or invalid Eula clip falls back to the complete original fighter without loading others', async () => {
   for (const [reject, transform] of [
     [url => url.endsWith('/run.png'), value => value],
-    [() => false, (value, url) => url.includes('eula-v4/manifest') ? { ...value, clips: { ...value.clips, run: { ...value.clips.run, width: 1 } } } : value],
+    [() => false, (value, url) => url.includes(packUrl('eula')) ? { ...value, clips: { ...value.clips, run: { ...value.clips.run, width: 1 } } } : value],
   ]) {
     const h = harness(reject, transform, true); await h.art.loadGameArt(); assert.equal(h.art.getEulaAnimationStatus().status, 'fallback');
     for (const id of ['eula']) {
@@ -461,7 +462,7 @@ test('any missing or invalid Eula clip falls back to the complete original fight
 });
 
 test('all 64 base and 16 alternate Eula drawings have RGBA transparency and no cell-edge weapon clipping', () => {
-  const directory = path.join(root, 'public/assets/animations/eula-v4');
+  const directory = path.dirname(packPath('eula'));
   const manifest = JSON.parse(fs.readFileSync(path.join(directory, 'manifest.json'), 'utf8'));
   assert.equal(Object.values(manifest.clips).reduce((total, clip) => total + clip.frames.length, 0), 64);
   assert.equal(Object.values(manifest.variants).reduce((total, clip) => total + clip.frames.length, 0), 16);
@@ -485,10 +486,10 @@ test('all 64 base and 16 alternate Eula drawings have RGBA transparency and no c
 });
 
 test('a missing or malformed optional J/K drawing keeps the base pack and the other valid variant', async () => {
-  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations/eula-v4/manifest.json'), 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(packPath('eula'), 'utf8'));
   for (const kind of ['jab', 'smash']) for (const malformed of [false, true]) {
     const h = harness(url => !malformed && url.endsWith(`/${manifest.variants[kind].image}`), (value, url) => {
-      if (malformed && url.includes('eula-v4/manifest')) value.variants[kind].frames[0].weaponTip.y = -1;
+      if (malformed && url.includes(packUrl('eula'))) value.variants[kind].frames[0].weaponTip.y = -1;
       return value;
     }, true);
     await h.art.loadGameArt();
@@ -499,13 +500,13 @@ test('a missing or malformed optional J/K drawing keeps the base pack and the ot
       const sample = { ...animation, attack: { def: { kind: move, startup: 20, active: 6, endlag: 26 }, t: 20, visualVariant: 'alternate' } };
       h.reset(); assert.equal(h.art.drawFighterArt(h.draw, 'eula', 0, 76, 112, sample), true);
       const expected = move !== kind && manifest.variants[move] ? manifest.variants[move].image : manifest.clips[move].image;
-      assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith(`/eula-v4/${expected}`));
+      assert.ok(h.calls.find(call => call.kind === 'drawImage').args[0].src.endsWith(packUrl('eula', expected)));
     }
   }
 });
 
 test('alternate contact blades descend in support coordinates and their mirrored trails end at the current sword tip', async () => {
-  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations/eula-v4/manifest.json'), 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(packPath('eula'), 'utf8'));
   const h = harness(() => false, value => value, true); await h.art.loadGameArt();
   for (const [kind, clip] of Object.entries(manifest.variants)) {
     const contacts = clip.frames.filter(frame => frame.phase === 'contact');
@@ -525,7 +526,7 @@ test('alternate contact blades descend in support coordinates and their mirrored
 });
 
 function syntheticPack(id) {
-  const pack = JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations/eula-v4/manifest.json'), 'utf8')); pack.character = id;
+  const pack = JSON.parse(fs.readFileSync(packPath('eula'), 'utf8')); pack.character = id;
   for (const clip of [...Object.values(pack.clips), ...Object.values(pack.variants)]) {
     Object.assign(clip, { image: 'shared.png', width: 2048, height: 2048, standingBodyHeightPixels: 100 });
     clip.frames.forEach((frame, index) => {
@@ -754,7 +755,7 @@ test('rebuilt Raiden cuts use measured arcs while the elemental thunder command 
 
 test('real Xiao dive and impact spear tips share the physical ground registration without penetrating below it', async () => {
   const h = harness(() => false, value => value, true); await h.art.loadGameArt(['xiao']);
-  const clip = JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations/xiao-v4/special.json'), 'utf8'));
+  const clip = JSON.parse(fs.readFileSync(packPath('xiao', 'special.json'), 'utf8'));
   for (const phase of ['windup', 'dive', 'impact', 'recover']) for (const facing of [-1, 1]) {
     const frames = clip.frames.filter(frame => frame.name === phase);
     for (const [index, frame] of frames.entries()) {
@@ -877,6 +878,66 @@ test('strict battle preparation requires alternate attacks and summoned pets, th
     const current = h.art.acquireGameArt([id], { strict: true }); await current.ready;
     assert.equal(h.art.getCharacterAnimationStatus(id).status, 'ready'); current.release();
     assert.equal(h.art.drawFighterArt(h.draw, id, 0, 0, 112, animation), false);
+  }
+});
+
+test('sword-cast render bridges converge smoothly without pulling long-blade shots backwards', () => {
+  const h = harness(), { castVisualFromTip, projectileVisualPosition } = h.load(path.join(root, 'src/game/cast-visual.ts'));
+  for (const facing of [-1, 1]) for (const reach of [20, 70, 140]) for (const height of [-140, 0, 140]) {
+    const vx = facing * 7.5, origin = { x: 500 + facing * reach, y: 400 + height };
+    const shot = { x: 500, y: 400, castVisual: castVisualFromTip(origin, 500, 400, vx) };
+    let previous = projectileVisualPosition(shot);
+    assert.deepEqual(JSON.parse(JSON.stringify(previous)), origin);
+    for (let tick = 1; tick <= shot.castVisual.duration; tick++) {
+      shot.x += vx; shot.castVisual.age++; const before = JSON.stringify(shot), current = projectileVisualPosition(shot);
+      assert.equal(JSON.stringify(shot), before, 'render never mutates simulation');
+      assert.ok((current.x - previous.x) * facing > 0, 'outgoing art always continues forward');
+      assert.ok(Math.abs(current.y - previous.y) <= 18.01, 'upgraded firebird lanes separate gradually');
+      previous = current;
+    }
+    assert.deepEqual(JSON.parse(JSON.stringify(previous)), { x: shot.x, y: shot.y });
+  }
+  assert.equal(castVisualFromTip(undefined, 10, 20, 8), undefined);
+  assert.deepEqual(JSON.parse(JSON.stringify(projectileVisualPosition({ x: 10, y: 20 }))), { x: 10, y: 20 });
+});
+
+test('sword-cast contact glows follow each measured blade tip in both facings and leave other moves alone', async () => {
+  const h = harness(() => false, value => value, true); await h.art.loadGameArt(['eula', 'diluc', 'raiden']);
+  const { selectClipFrame } = h.load(path.join(root, 'src/game/clip-animation.ts'));
+  const { CHARACTERS } = h.load(path.join(root, 'src/game/data.ts'));
+  for (const id of ['eula', 'diluc']) {
+    const def = CHARACTERS.find(c => c.id === id).secondary;
+    const manifest = JSON.parse(fs.readFileSync(packPath(id), 'utf8'));
+    for (const height of [112, 224]) for (const facing of [-1, 1]) for (let t = def.startup; t < def.startup + def.active; t++) {
+      const state = { ...animation, attack: { def, t } };
+      const selection = selectClipFrame(manifest, state), clip = manifest.clips.secondary, frame = clip.frames[selection.frame];
+      const scale = height / clip.standingBodyHeightPixels * (frame.sourceScale ?? 1);
+      const expected = { x: 420 + facing * (frame.weaponTip.x - frame.sourceRect.width * frame.footAnchor.x) * scale,
+        y: 580 + (frame.weaponTip.y - frame.sourceRect.height * frame.footAnchor.y) * scale };
+      assert.deepEqual(JSON.parse(JSON.stringify(h.art.getSwordCastTip(id, 420, 580, height, state, facing))), expected);
+      h.reset(); assert.equal(h.art.drawSwordCastRelease(h.draw, id, 420, 580, height, state, facing), true);
+      const origin = h.calls.find(c => c.kind === 'translate'); assert.deepEqual(origin.args, [expected.x, expected.y]);
+    }
+    for (const t of [0, def.startup - 1, def.startup + def.active, def.startup + def.active + def.endlag - 1]) {
+      h.reset(); h.art.drawSwordCastRelease(h.draw, id, 0, 0, 112, { ...animation, attack: { def, t } });
+      assert.equal(h.calls.length, 0, 'only contact emits the blade glint');
+    }
+    for (const kind of ['jab', 'smash', 'special']) {
+      h.reset(); assert.equal(h.art.drawSwordCastRelease(h.draw, id, 0, 0, 112, { ...animation, attack: { def: { ...def, kind }, t: def.startup } }), false);
+      assert.equal(h.calls.length, 0);
+    }
+  }
+  h.reset(); assert.equal(h.art.drawSwordCastRelease(h.draw, 'raiden', 0, 0, 112, { ...animation, attack: { def: { ...animation.attack.def, kind: 'secondary' }, t: 20 } }), false);
+  assert.equal(h.calls.length, 0);
+  const missing = harness(() => true); await missing.art.loadGameArt();
+  const def = CHARACTERS.find(c => c.id === 'eula').secondary;
+  const secondary = { ...animation, attack: { def, t: def.startup } };
+  missing.reset();
+  assert.equal(missing.art.getSwordCastTip('eula', 0, 0, 112, secondary), undefined, 'missing artwork uses the complete old effect fallback');
+  assert.equal(missing.art.drawSwordCastRelease(missing.draw, 'eula', 0, 0, 112, secondary), false);
+  assert.equal(missing.calls.length, 0);
+  for (const invalid of [{ ...secondary, state: 'hitstun' }, { ...secondary, dodgeTimer: 5 }]) {
+    assert.equal(h.art.getSwordCastTip('eula', 0, 0, 112, invalid), undefined);
   }
 });
 

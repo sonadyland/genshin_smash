@@ -1,0 +1,1770 @@
+[
+  {
+    "clip": "idle",
+    "variant": false,
+    "frame": 0,
+    "image": "idle.png",
+    "rect": [
+      102,
+      59,
+      509,
+      553
+    ],
+    "foot": [
+      327.07,
+      606.1
+    ],
+    "scale": 0.90864,
+    "inliers": 108,
+    "medianError": 1.859,
+    "weaponTip": null
+  },
+  {
+    "clip": "idle",
+    "variant": false,
+    "frame": 1,
+    "image": "idle.png",
+    "rect": [
+      717,
+      59,
+      505,
+      556
+    ],
+    "foot": [
+      944.46,
+      609.97
+    ],
+    "scale": 0.9155,
+    "inliers": 102,
+    "medianError": 1.604,
+    "weaponTip": null
+  },
+  {
+    "clip": "idle",
+    "variant": false,
+    "frame": 2,
+    "image": "idle.png",
+    "rect": [
+      92,
+      667,
+      521,
+      560
+    ],
+    "foot": [
+      322.25,
+      1221.55
+    ],
+    "scale": 0.90481,
+    "inliers": 91,
+    "medianError": 1.306,
+    "weaponTip": null
+  },
+  {
+    "clip": "idle",
+    "variant": false,
+    "frame": 3,
+    "image": "idle.png",
+    "rect": [
+      715,
+      667,
+      513,
+      555
+    ],
+    "foot": [
+      948.16,
+      1216.52
+    ],
+    "scale": 0.90881,
+    "inliers": 58,
+    "medianError": 1.66,
+    "weaponTip": null
+  },
+  {
+    "clip": "run",
+    "variant": false,
+    "frame": 0,
+    "image": "run.png",
+    "rect": [
+      47,
+      99,
+      357,
+      326
+    ],
+    "foot": [
+      304.19,
+      419.8
+    ],
+    "scale": 0.90382,
+    "inliers": 47,
+    "medianError": 1.582,
+    "weaponTip": null
+  },
+  {
+    "clip": "run",
+    "variant": false,
+    "frame": 1,
+    "image": "run.png",
+    "rect": [
+      470,
+      99,
+      328,
+      327
+    ],
+    "foot": [
+      751.05,
+      420.24
+    ],
+    "scale": 0.9083,
+    "inliers": 54,
+    "medianError": 1.101,
+    "weaponTip": null
+  },
+  {
+    "clip": "run",
+    "variant": false,
+    "frame": 2,
+    "image": "run.png",
+    "rect": [
+      906,
+      98,
+      345,
+      331
+    ],
+    "foot": [
+      1166.17,
+      423.32
+    ],
+    "scale": 0.91154,
+    "inliers": 58,
+    "medianError": 0.92,
+    "weaponTip": null
+  },
+  {
+    "clip": "run",
+    "variant": false,
+    "frame": 3,
+    "image": "run.png",
+    "rect": [
+      1350,
+      99,
+      385,
+      329
+    ],
+    "foot": [
+      1617.72,
+      422.54
+    ],
+    "scale": 0.91603,
+    "inliers": 68,
+    "medianError": 0.977,
+    "weaponTip": null
+  },
+  {
+    "clip": "run",
+    "variant": false,
+    "frame": 4,
+    "image": "run.png",
+    "rect": [
+      32,
+      519,
+      381,
+      319
+    ],
+    "foot": [
+      307.67,
+      832.53
+    ],
+    "scale": 0.88051,
+    "inliers": 47,
+    "medianError": 1.235,
+    "weaponTip": null
+  },
+  {
+    "clip": "run",
+    "variant": false,
+    "frame": 5,
+    "image": "run.png",
+    "rect": [
+      468,
+      517,
+      343,
+      325
+    ],
+    "foot": [
+      748.71,
+      836.5
+    ],
+    "scale": 0.89873,
+    "inliers": 64,
+    "medianError": 1.124,
+    "weaponTip": null
+  },
+  {
+    "clip": "run",
+    "variant": false,
+    "frame": 6,
+    "image": "run.png",
+    "rect": [
+      905,
+      518,
+      356,
+      330
+    ],
+    "foot": [
+      1167.44,
+      842.37
+    ],
+    "scale": 0.91916,
+    "inliers": 53,
+    "medianError": 1.386,
+    "weaponTip": null
+  },
+  {
+    "clip": "run",
+    "variant": false,
+    "frame": 7,
+    "image": "run.png",
+    "rect": [
+      1350,
+      518,
+      393,
+      327
+    ],
+    "foot": [
+      1629.7,
+      839.93
+    ],
+    "scale": 0.9116,
+    "inliers": 51,
+    "medianError": 1.157,
+    "weaponTip": null
+  },
+  {
+    "clip": "jump",
+    "variant": false,
+    "frame": 0,
+    "image": "jump.png",
+    "rect": [
+      65,
+      195,
+      353,
+      233
+    ],
+    "foot": [
+      205.11,
+      406.19
+    ],
+    "scale": 0.84824,
+    "inliers": 48,
+    "medianError": 1.191,
+    "weaponTip": null
+  },
+  {
+    "clip": "jump",
+    "variant": false,
+    "frame": 1,
+    "image": "jump.png",
+    "rect": [
+      519,
+      159,
+      357,
+      255
+    ],
+    "foot": [
+      670.95,
+      395.2
+    ],
+    "scale": 0.79599,
+    "inliers": 52,
+    "medianError": 1.528,
+    "weaponTip": null
+  },
+  {
+    "clip": "jump",
+    "variant": false,
+    "frame": 2,
+    "image": "jump.png",
+    "rect": [
+      947,
+      113,
+      376,
+      310
+    ],
+    "foot": [
+      1098.68,
+      417.72
+    ],
+    "scale": 0.83131,
+    "inliers": 41,
+    "medianError": 0.917,
+    "weaponTip": null
+  },
+  {
+    "clip": "jump",
+    "variant": false,
+    "frame": 3,
+    "image": "jump.png",
+    "rect": [
+      1400,
+      110,
+      349,
+      318
+    ],
+    "foot": [
+      1556.88,
+      422.16
+    ],
+    "scale": 0.83578,
+    "inliers": 30,
+    "medianError": 1.714,
+    "weaponTip": null
+  },
+  {
+    "clip": "jump",
+    "variant": false,
+    "frame": 4,
+    "image": "jump.png",
+    "rect": [
+      71,
+      537,
+      355,
+      322
+    ],
+    "foot": [
+      233.19,
+      853.26
+    ],
+    "scale": 0.8362,
+    "inliers": 30,
+    "medianError": 1.296,
+    "weaponTip": null
+  },
+  {
+    "clip": "jump",
+    "variant": false,
+    "frame": 5,
+    "image": "jump.png",
+    "rect": [
+      529,
+      532,
+      344,
+      326
+    ],
+    "foot": [
+      679.54,
+      852.23
+    ],
+    "scale": 0.84398,
+    "inliers": 51,
+    "medianError": 1.067,
+    "weaponTip": null
+  },
+  {
+    "clip": "jump",
+    "variant": false,
+    "frame": 6,
+    "image": "jump.png",
+    "rect": [
+      962,
+      608,
+      374,
+      228
+    ],
+    "foot": [
+      1108.35,
+      817.68
+    ],
+    "scale": 0.82649,
+    "inliers": 48,
+    "medianError": 1.326,
+    "weaponTip": null
+  },
+  {
+    "clip": "jump",
+    "variant": false,
+    "frame": 7,
+    "image": "jump.png",
+    "rect": [
+      1411,
+      532,
+      337,
+      294
+    ],
+    "foot": [
+      1574.82,
+      813.26
+    ],
+    "scale": 0.81962,
+    "inliers": 49,
+    "medianError": 1.148,
+    "weaponTip": null
+  },
+  {
+    "clip": "dodge",
+    "variant": false,
+    "frame": 0,
+    "image": "dodge.png",
+    "rect": [
+      11,
+      176,
+      539,
+      425
+    ],
+    "foot": [
+      393.62,
+      595.13
+    ],
+    "scale": 1.00249,
+    "inliers": 184,
+    "medianError": 1.116,
+    "weaponTip": null
+  },
+  {
+    "clip": "dodge",
+    "variant": false,
+    "frame": 1,
+    "image": "dodge.png",
+    "rect": [
+      596,
+      193,
+      598,
+      405
+    ],
+    "foot": [
+      1072.11,
+      591.78
+    ],
+    "scale": 1.00259,
+    "inliers": 161,
+    "medianError": 1.204,
+    "weaponTip": null
+  },
+  {
+    "clip": "dodge",
+    "variant": false,
+    "frame": 2,
+    "image": "dodge.png",
+    "rect": [
+      25,
+      774,
+      589,
+      401
+    ],
+    "foot": [
+      427.65,
+      1169.58
+    ],
+    "scale": 1.00261,
+    "inliers": 142,
+    "medianError": 1.067,
+    "weaponTip": null
+  },
+  {
+    "clip": "dodge",
+    "variant": false,
+    "frame": 3,
+    "image": "dodge.png",
+    "rect": [
+      656,
+      718,
+      545,
+      456
+    ],
+    "foot": [
+      1093.01,
+      1167.79
+    ],
+    "scale": 0.99823,
+    "inliers": 128,
+    "medianError": 0.855,
+    "weaponTip": null
+  },
+  {
+    "clip": "jab",
+    "variant": false,
+    "frame": 0,
+    "image": "jab.png",
+    "rect": [
+      60,
+      111,
+      342,
+      316
+    ],
+    "foot": [
+      204.03,
+      411.8
+    ],
+    "scale": 1.21577,
+    "inliers": 19,
+    "medianError": 1.432,
+    "weaponTip": [
+      395,
+      420
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": false,
+    "frame": 1,
+    "image": "jab.png",
+    "rect": [
+      471,
+      111,
+      365,
+      319
+    ],
+    "foot": [
+      716.46,
+      424.52
+    ],
+    "scale": 1.26653,
+    "inliers": 12,
+    "medianError": 1.425,
+    "weaponTip": [
+      481,
+      135
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": false,
+    "frame": 2,
+    "image": "jab.png",
+    "rect": [
+      925,
+      127,
+      403,
+      294
+    ],
+    "foot": [
+      1078.65,
+      406.92
+    ],
+    "scale": 1.17804,
+    "inliers": 34,
+    "medianError": 1.205,
+    "weaponTip": [
+      1321,
+      232
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": false,
+    "frame": 3,
+    "image": "jab.png",
+    "rect": [
+      1398,
+      131,
+      366,
+      290
+    ],
+    "foot": [
+      1552.24,
+      403.47
+    ],
+    "scale": 1.15941,
+    "inliers": 48,
+    "medianError": 1.273,
+    "weaponTip": [
+      1757,
+      217
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": false,
+    "frame": 4,
+    "image": "jab.png",
+    "rect": [
+      52,
+      543,
+      376,
+      288
+    ],
+    "foot": [
+      212.32,
+      815.49
+    ],
+    "scale": 1.15265,
+    "inliers": 38,
+    "medianError": 1.592,
+    "weaponTip": [
+      420,
+      823
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": false,
+    "frame": 5,
+    "image": "jab.png",
+    "rect": [
+      496,
+      576,
+      423,
+      253
+    ],
+    "foot": [
+      679.12,
+      819.76
+    ],
+    "scale": 1.15121,
+    "inliers": 33,
+    "medianError": 1.302,
+    "weaponTip": [
+      912,
+      820
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": false,
+    "frame": 6,
+    "image": "jab.png",
+    "rect": [
+      980,
+      531,
+      315,
+      302
+    ],
+    "foot": [
+      1110.55,
+      811.77
+    ],
+    "scale": 1.07465,
+    "inliers": 23,
+    "medianError": 1.437,
+    "weaponTip": [
+      1287,
+      825
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": false,
+    "frame": 7,
+    "image": "jab.png",
+    "rect": [
+      1424,
+      518,
+      312,
+      315
+    ],
+    "foot": [
+      1551.48,
+      817.82
+    ],
+    "scale": 1.13761,
+    "inliers": 30,
+    "medianError": 1.225,
+    "weaponTip": [
+      1729,
+      826
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": false,
+    "frame": 0,
+    "image": "smash.png",
+    "rect": [
+      11,
+      129,
+      380,
+      298
+    ],
+    "foot": [
+      262.81,
+      421.49
+    ],
+    "scale": 1.14389,
+    "inliers": 32,
+    "medianError": 1.637,
+    "weaponTip": [
+      19,
+      407
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": false,
+    "frame": 1,
+    "image": "smash.png",
+    "rect": [
+      429,
+      137,
+      418,
+      291
+    ],
+    "foot": [
+      708.65,
+      422.04
+    ],
+    "scale": 1.15659,
+    "inliers": 48,
+    "medianError": 1.288,
+    "weaponTip": [
+      436,
+      393
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": false,
+    "frame": 2,
+    "image": "smash.png",
+    "rect": [
+      919,
+      171,
+      414,
+      261
+    ],
+    "foot": [
+      1122.47,
+      426.12
+    ],
+    "scale": 1.16194,
+    "inliers": 56,
+    "medianError": 1.102,
+    "weaponTip": [
+      1326,
+      328
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": false,
+    "frame": 3,
+    "image": "smash.png",
+    "rect": [
+      1346,
+      156,
+      420,
+      272
+    ],
+    "foot": [
+      1529.76,
+      422.78
+    ],
+    "scale": 1.1401,
+    "inliers": 55,
+    "medianError": 1.174,
+    "weaponTip": [
+      1758,
+      235
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": false,
+    "frame": 4,
+    "image": "smash.png",
+    "rect": [
+      45,
+      537,
+      429,
+      282
+    ],
+    "foot": [
+      232.92,
+      813.07
+    ],
+    "scale": 1.15092,
+    "inliers": 21,
+    "medianError": 1.597,
+    "weaponTip": [
+      467,
+      657
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": false,
+    "frame": 5,
+    "image": "smash.png",
+    "rect": [
+      506,
+      560,
+      434,
+      257
+    ],
+    "foot": [
+      707.87,
+      803.45
+    ],
+    "scale": 1.10827,
+    "inliers": 53,
+    "medianError": 1.243,
+    "weaponTip": [
+      933,
+      805
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": false,
+    "frame": 6,
+    "image": "smash.png",
+    "rect": [
+      965,
+      517,
+      355,
+      304
+    ],
+    "foot": [
+      1122.23,
+      814.1
+    ],
+    "scale": 1.15968,
+    "inliers": 46,
+    "medianError": 1.222,
+    "weaponTip": [
+      1313,
+      814
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": false,
+    "frame": 7,
+    "image": "smash.png",
+    "rect": [
+      1409,
+      522,
+      328,
+      300
+    ],
+    "foot": [
+      1549.14,
+      810.53
+    ],
+    "scale": 1.10792,
+    "inliers": 57,
+    "medianError": 1.005,
+    "weaponTip": [
+      1729,
+      814
+    ]
+  },
+  {
+    "clip": "special",
+    "variant": false,
+    "frame": 0,
+    "image": "special.png",
+    "rect": [
+      40,
+      107,
+      292,
+      262
+    ],
+    "foot": [
+      171.45,
+      363.75
+    ],
+    "scale": 1.03057,
+    "inliers": 22,
+    "medianError": 1.877,
+    "weaponTip": [
+      325,
+      358
+    ]
+  },
+  {
+    "clip": "special",
+    "variant": false,
+    "frame": 1,
+    "image": "special.png",
+    "rect": [
+      400,
+      104,
+      276,
+      266
+    ],
+    "foot": [
+      589.53,
+      364.09
+    ],
+    "scale": 1.05608,
+    "inliers": 30,
+    "medianError": 0.64,
+    "weaponTip": [
+      407,
+      305
+    ]
+  },
+  {
+    "clip": "special",
+    "variant": false,
+    "frame": 2,
+    "image": "special.png",
+    "rect": [
+      729,
+      109,
+      287,
+      265
+    ],
+    "foot": [
+      943.67,
+      368.63
+    ],
+    "scale": 1.07777,
+    "inliers": 23,
+    "medianError": 0.941,
+    "weaponTip": [
+      737,
+      250
+    ]
+  },
+  {
+    "clip": "special",
+    "variant": false,
+    "frame": 3,
+    "image": "special.png",
+    "rect": [
+      1137,
+      113,
+      299,
+      258
+    ],
+    "foot": [
+      1301.31,
+      365.9
+    ],
+    "scale": 1.07056,
+    "inliers": 24,
+    "medianError": 1.382,
+    "weaponTip": [
+      1429,
+      291
+    ]
+  },
+  {
+    "clip": "special",
+    "variant": false,
+    "frame": 4,
+    "image": "special.png",
+    "rect": [
+      34,
+      448,
+      348,
+      238
+    ],
+    "foot": [
+      198.09,
+      677.39
+    ],
+    "scale": 0.97826,
+    "inliers": 33,
+    "medianError": 1.11,
+    "weaponTip": [
+      375,
+      544
+    ]
+  },
+  {
+    "clip": "special",
+    "variant": false,
+    "frame": 5,
+    "image": "special.png",
+    "rect": [
+      443,
+      461,
+      305,
+      232
+    ],
+    "foot": [
+      527.73,
+      687.02
+    ],
+    "scale": 0.98633,
+    "inliers": 21,
+    "medianError": 1.568,
+    "weaponTip": [
+      741,
+      550
+    ]
+  },
+  {
+    "clip": "special",
+    "variant": false,
+    "frame": 6,
+    "image": "special.png",
+    "rect": [
+      783,
+      458,
+      328,
+      234
+    ],
+    "foot": [
+      955.75,
+      686.92
+    ],
+    "scale": 1.01128,
+    "inliers": 21,
+    "medianError": 1.298,
+    "weaponTip": [
+      1104,
+      553
+    ]
+  },
+  {
+    "clip": "special",
+    "variant": false,
+    "frame": 7,
+    "image": "special.png",
+    "rect": [
+      1127,
+      459,
+      268,
+      231
+    ],
+    "foot": [
+      1359.81,
+      682.19
+    ],
+    "scale": 0.99567,
+    "inliers": 38,
+    "medianError": 1.181,
+    "weaponTip": [
+      1134,
+      554
+    ]
+  },
+  {
+    "clip": "special",
+    "variant": false,
+    "frame": 8,
+    "image": "special.png",
+    "rect": [
+      48,
+      766,
+      295,
+      246
+    ],
+    "foot": [
+      202.43,
+      1006.31
+    ],
+    "scale": 1.0086,
+    "inliers": 31,
+    "medianError": 1.277,
+    "weaponTip": [
+      336,
+      1002
+    ]
+  },
+  {
+    "clip": "special",
+    "variant": false,
+    "frame": 9,
+    "image": "special.png",
+    "rect": [
+      450,
+      766,
+      284,
+      245
+    ],
+    "foot": [
+      585.0,
+      1005.53
+    ],
+    "scale": 0.9976,
+    "inliers": 32,
+    "medianError": 1.441,
+    "weaponTip": [
+      727,
+      1004
+    ]
+  },
+  {
+    "clip": "special",
+    "variant": false,
+    "frame": 10,
+    "image": "special.png",
+    "rect": [
+      799,
+      765,
+      281,
+      246
+    ],
+    "foot": [
+      926.19,
+      1005.67
+    ],
+    "scale": 1.00749,
+    "inliers": 24,
+    "medianError": 1.697,
+    "weaponTip": [
+      1073,
+      1004
+    ]
+  },
+  {
+    "clip": "special",
+    "variant": false,
+    "frame": 11,
+    "image": "special.png",
+    "rect": [
+      1153,
+      764,
+      280,
+      254
+    ],
+    "foot": [
+      1289.79,
+      1012.97
+    ],
+    "scale": 1.04319,
+    "inliers": 34,
+    "medianError": 1.111,
+    "weaponTip": [
+      1426,
+      1006
+    ]
+  },
+  {
+    "clip": "secondary",
+    "variant": false,
+    "frame": 0,
+    "image": "secondary.png",
+    "rect": [
+      69,
+      72,
+      291,
+      287
+    ],
+    "foot": [
+      187.85,
+      339.94
+    ],
+    "scale": 0.91098,
+    "inliers": 46,
+    "medianError": 0.987,
+    "weaponTip": [
+      353,
+      352
+    ]
+  },
+  {
+    "clip": "secondary",
+    "variant": false,
+    "frame": 1,
+    "image": "secondary.png",
+    "rect": [
+      438,
+      74,
+      293,
+      286
+    ],
+    "foot": [
+      556.18,
+      342.31
+    ],
+    "scale": 0.90826,
+    "inliers": 53,
+    "medianError": 1.537,
+    "weaponTip": [
+      724,
+      353
+    ]
+  },
+  {
+    "clip": "secondary",
+    "variant": false,
+    "frame": 2,
+    "image": "secondary.png",
+    "rect": [
+      784,
+      72,
+      295,
+      288
+    ],
+    "foot": [
+      904.39,
+      341.52
+    ],
+    "scale": 0.90838,
+    "inliers": 39,
+    "medianError": 1.386,
+    "weaponTip": [
+      1072,
+      353
+    ]
+  },
+  {
+    "clip": "secondary",
+    "variant": false,
+    "frame": 3,
+    "image": "secondary.png",
+    "rect": [
+      1148,
+      72,
+      290,
+      288
+    ],
+    "foot": [
+      1266.87,
+      342.21
+    ],
+    "scale": 0.91306,
+    "inliers": 43,
+    "medianError": 1.402,
+    "weaponTip": [
+      1431,
+      353
+    ]
+  },
+  {
+    "clip": "secondary",
+    "variant": false,
+    "frame": 4,
+    "image": "secondary.png",
+    "rect": [
+      69,
+      414,
+      293,
+      286
+    ],
+    "foot": [
+      188.59,
+      681.12
+    ],
+    "scale": 0.90194,
+    "inliers": 56,
+    "medianError": 1.129,
+    "weaponTip": [
+      355,
+      693
+    ]
+  },
+  {
+    "clip": "secondary",
+    "variant": false,
+    "frame": 5,
+    "image": "secondary.png",
+    "rect": [
+      436,
+      414,
+      296,
+      286
+    ],
+    "foot": [
+      560.24,
+      680.21
+    ],
+    "scale": 0.89752,
+    "inliers": 41,
+    "medianError": 1.381,
+    "weaponTip": [
+      725,
+      693
+    ]
+  },
+  {
+    "clip": "secondary",
+    "variant": false,
+    "frame": 6,
+    "image": "secondary.png",
+    "rect": [
+      783,
+      413,
+      297,
+      287
+    ],
+    "foot": [
+      912.0,
+      679.07
+    ],
+    "scale": 0.89291,
+    "inliers": 37,
+    "medianError": 0.905,
+    "weaponTip": [
+      1073,
+      693
+    ]
+  },
+  {
+    "clip": "secondary",
+    "variant": false,
+    "frame": 7,
+    "image": "secondary.png",
+    "rect": [
+      1142,
+      414,
+      294,
+      286
+    ],
+    "foot": [
+      1262.04,
+      682.88
+    ],
+    "scale": 0.90981,
+    "inliers": 45,
+    "medianError": 1.318,
+    "weaponTip": [
+      1429,
+      693
+    ]
+  },
+  {
+    "clip": "secondary",
+    "variant": false,
+    "frame": 8,
+    "image": "secondary.png",
+    "rect": [
+      69,
+      754,
+      292,
+      287
+    ],
+    "foot": [
+      189.75,
+      1023.53
+    ],
+    "scale": 0.89992,
+    "inliers": 47,
+    "medianError": 1.432,
+    "weaponTip": [
+      354,
+      1034
+    ]
+  },
+  {
+    "clip": "secondary",
+    "variant": false,
+    "frame": 9,
+    "image": "secondary.png",
+    "rect": [
+      439,
+      756,
+      292,
+      285
+    ],
+    "foot": [
+      556.23,
+      1022.12
+    ],
+    "scale": 0.88405,
+    "inliers": 42,
+    "medianError": 1.308,
+    "weaponTip": [
+      724,
+      1034
+    ]
+  },
+  {
+    "clip": "secondary",
+    "variant": false,
+    "frame": 10,
+    "image": "secondary.png",
+    "rect": [
+      788,
+      756,
+      294,
+      284
+    ],
+    "foot": [
+      907.91,
+      1025.06
+    ],
+    "scale": 0.908,
+    "inliers": 48,
+    "medianError": 1.083,
+    "weaponTip": [
+      1075,
+      1033
+    ]
+  },
+  {
+    "clip": "secondary",
+    "variant": false,
+    "frame": 11,
+    "image": "secondary.png",
+    "rect": [
+      1151,
+      756,
+      285,
+      285
+    ],
+    "foot": [
+      1270.27,
+      1020.87
+    ],
+    "scale": 0.88651,
+    "inliers": 53,
+    "medianError": 1.285,
+    "weaponTip": [
+      1429,
+      1034
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": true,
+    "frame": 0,
+    "image": "jab-downstroke.png",
+    "rect": [
+      50,
+      165,
+      400,
+      291
+    ],
+    "foot": [
+      192.8,
+      443.52
+    ],
+    "scale": 1.1771,
+    "inliers": 34,
+    "medianError": 1.199,
+    "weaponTip": [
+      443,
+      443
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": true,
+    "frame": 1,
+    "image": "jab-downstroke.png",
+    "rect": [
+      484,
+      49,
+      344,
+      407
+    ],
+    "foot": [
+      697.12,
+      445.12
+    ],
+    "scale": 1.20197,
+    "inliers": 51,
+    "medianError": 1.582,
+    "weaponTip": [
+      489,
+      54
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": true,
+    "frame": 2,
+    "image": "jab-downstroke.png",
+    "rect": [
+      940,
+      170,
+      391,
+      286
+    ],
+    "foot": [
+      1103.0,
+      444.54
+    ],
+    "scale": 1.14575,
+    "inliers": 39,
+    "medianError": 1.838,
+    "weaponTip": [
+      1324,
+      403
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": true,
+    "frame": 3,
+    "image": "jab-downstroke.png",
+    "rect": [
+      1409,
+      190,
+      355,
+      270
+    ],
+    "foot": [
+      1558.67,
+      435.89
+    ],
+    "scale": 1.13434,
+    "inliers": 34,
+    "medianError": 1.71,
+    "weaponTip": [
+      1757,
+      453
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": true,
+    "frame": 4,
+    "image": "jab-downstroke.png",
+    "rect": [
+      51,
+      586,
+      393,
+      267
+    ],
+    "foot": [
+      214.49,
+      833.34
+    ],
+    "scale": 1.15257,
+    "inliers": 40,
+    "medianError": 1.337,
+    "weaponTip": [
+      437,
+      846
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": true,
+    "frame": 5,
+    "image": "jab-downstroke.png",
+    "rect": [
+      537,
+      594,
+      387,
+      254
+    ],
+    "foot": [
+      707.45,
+      840.1
+    ],
+    "scale": 1.19216,
+    "inliers": 34,
+    "medianError": 1.231,
+    "weaponTip": [
+      917,
+      839
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": true,
+    "frame": 6,
+    "image": "jab-downstroke.png",
+    "rect": [
+      980,
+      567,
+      372,
+      288
+    ],
+    "foot": [
+      1122.67,
+      842.03
+    ],
+    "scale": 1.13385,
+    "inliers": 42,
+    "medianError": 1.442,
+    "weaponTip": [
+      1345,
+      848
+    ]
+  },
+  {
+    "clip": "jab",
+    "variant": true,
+    "frame": 7,
+    "image": "jab-downstroke.png",
+    "rect": [
+      1421,
+      542,
+      342,
+      308
+    ],
+    "foot": [
+      1571.69,
+      834.59
+    ],
+    "scale": 1.15709,
+    "inliers": 24,
+    "medianError": 1.432,
+    "weaponTip": [
+      1756,
+      843
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": true,
+    "frame": 0,
+    "image": "smash-overhead.png",
+    "rect": [
+      84,
+      104,
+      272,
+      358
+    ],
+    "foot": [
+      253.27,
+      456.69
+    ],
+    "scale": 1.00271,
+    "inliers": 33,
+    "medianError": 1.121,
+    "weaponTip": [
+      91,
+      110
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": true,
+    "frame": 1,
+    "image": "smash-overhead.png",
+    "rect": [
+      547,
+      16,
+      280,
+      449
+    ],
+    "foot": [
+      708.44,
+      459.88
+    ],
+    "scale": 1.02089,
+    "inliers": 49,
+    "medianError": 1.493,
+    "weaponTip": [
+      554,
+      23
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": true,
+    "frame": 2,
+    "image": "smash-overhead.png",
+    "rect": [
+      948,
+      113,
+      360,
+      366
+    ],
+    "foot": [
+      1099.58,
+      473.84
+    ],
+    "scale": 1.04681,
+    "inliers": 45,
+    "medianError": 1.471,
+    "weaponTip": [
+      1301,
+      120
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": true,
+    "frame": 3,
+    "image": "smash-overhead.png",
+    "rect": [
+      1446,
+      252,
+      257,
+      212
+    ],
+    "foot": [
+      1583.88,
+      458.86
+    ],
+    "scale": 0.9907,
+    "inliers": 38,
+    "medianError": 1.472,
+    "weaponTip": [
+      1615,
+      456
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": true,
+    "frame": 4,
+    "image": "smash-overhead.png",
+    "rect": [
+      84,
+      580,
+      376,
+      264
+    ],
+    "foot": [
+      236.14,
+      827.21
+    ],
+    "scale": 1.02527,
+    "inliers": 41,
+    "medianError": 1.32,
+    "weaponTip": [
+      452,
+      836
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": true,
+    "frame": 5,
+    "image": "smash-overhead.png",
+    "rect": [
+      548,
+      584,
+      368,
+      258
+    ],
+    "foot": [
+      703.17,
+      830.68
+    ],
+    "scale": 1.03569,
+    "inliers": 52,
+    "medianError": 1.338,
+    "weaponTip": [
+      909,
+      835
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": true,
+    "frame": 6,
+    "image": "smash-overhead.png",
+    "rect": [
+      966,
+      555,
+      335,
+      280
+    ],
+    "foot": [
+      1104.88,
+      824.78
+    ],
+    "scale": 1.02024,
+    "inliers": 50,
+    "medianError": 1.084,
+    "weaponTip": [
+      1294,
+      828
+    ]
+  },
+  {
+    "clip": "smash",
+    "variant": true,
+    "frame": 7,
+    "image": "smash-overhead.png",
+    "rect": [
+      1449,
+      544,
+      312,
+      297
+    ],
+    "foot": [
+      1586.27,
+      824.41
+    ],
+    "scale": 1.04685,
+    "inliers": 71,
+    "medianError": 1.437,
+    "weaponTip": [
+      1754,
+      834
+    ]
+  }
+]

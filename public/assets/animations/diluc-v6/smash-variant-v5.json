@@ -1,0 +1,161 @@
+{
+  "image": "smash-variant-v5.png",
+  "width": 1774,
+  "height": 887,
+  "standingBodyHeightPixels": 312.823,
+  "frames": [
+    {
+      "name": "smash-overhead-01",
+      "sourceRect": {
+        "x": 45,
+        "y": 21,
+        "width": 344,
+        "height": 477
+      },
+      "footAnchor": {
+        "x": 0.531149,
+        "y": 0.984651
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 45,
+        "y": 6
+      },
+      "phase": "windup"
+    },
+    {
+      "name": "smash-overhead-02",
+      "sourceRect": {
+        "x": 470,
+        "y": 13,
+        "width": 352,
+        "height": 485
+      },
+      "footAnchor": {
+        "x": 0.56749,
+        "y": 0.992643
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 6,
+        "y": 7
+      },
+      "phase": "windup"
+    },
+    {
+      "name": "smash-overhead-03",
+      "sourceRect": {
+        "x": 890,
+        "y": 198,
+        "width": 449,
+        "height": 300
+      },
+      "footAnchor": {
+        "x": 0.408593,
+        "y": 0.984328
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 442,
+        "y": 278
+      },
+      "phase": "contact"
+    },
+    {
+      "name": "smash-overhead-04",
+      "sourceRect": {
+        "x": 1355,
+        "y": 240,
+        "width": 407,
+        "height": 274
+      },
+      "footAnchor": {
+        "x": 0.414542,
+        "y": 0.920949
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 399,
+        "y": 267
+      },
+      "phase": "contact"
+    },
+    {
+      "name": "smash-overhead-05",
+      "sourceRect": {
+        "x": 53,
+        "y": 608,
+        "width": 419,
+        "height": 257
+      },
+      "footAnchor": {
+        "x": 0.366744,
+        "y": 0.921601
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 412,
+        "y": 250
+      },
+      "phase": "followthrough"
+    },
+    {
+      "name": "smash-overhead-06",
+      "sourceRect": {
+        "x": 482,
+        "y": 588,
+        "width": 409,
+        "height": 262
+      },
+      "footAnchor": {
+        "x": 0.413447,
+        "y": 0.977619
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 402,
+        "y": 251
+      },
+      "phase": "followthrough"
+    },
+    {
+      "name": "smash-overhead-07",
+      "sourceRect": {
+        "x": 905,
+        "y": 556,
+        "width": 418,
+        "height": 296
+      },
+      "footAnchor": {
+        "x": 0.380132,
+        "y": 0.979585
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 411,
+        "y": 288
+      },
+      "phase": "recover"
+    },
+    {
+      "name": "smash-overhead-08",
+      "sourceRect": {
+        "x": 1360,
+        "y": 527,
+        "width": 387,
+        "height": 325
+      },
+      "footAnchor": {
+        "x": 0.407401,
+        "y": 0.980583
+      },
+      "duration": 4,
+      "weaponTip": {
+        "x": 380,
+        "y": 309
+      },
+      "phase": "recover"
+    }
+  ],
+  "trail": "arc"
+}

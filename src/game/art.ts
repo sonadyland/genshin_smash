@@ -1,6 +1,6 @@
-import { selectActionFrame } from './animation';
+import { attackPhase, selectActionFrame } from './animation';
 import type { FighterAnimation } from './animation';
-import { CHARACTER_CLIPS, CHARACTER_CLIP_IDS, VARIANT_ATTACKS, selectClipFrame, selectedClip, validClipManifest, validVariantClip } from './clip-animation';
+import { CHARACTER_CLIPS, CHARACTER_CLIP_IDS, VARIANT_ATTACKS, selectClipFrame, selectedClip, validClipManifest, validVariantClip, registeredWeaponTip } from './clip-animation';
 import type { ClipManifest, ClipSelection, ClipCharacterId } from './clip-animation';
 import type { AttackKind, AttackVisualVariant } from './clip-animation';
 import { CHARACTERS } from './data';
@@ -95,6 +95,36 @@ export function hasRegisteredMeleeTrail(id: string, kind: AttackKind, variant?: 
   if (!pack) return false;
   const clip = selectedClip(pack.manifest, { clip: kind, variant });
   return (clip.trail === 'arc' || clip.trail === 'thrust') && clip.frames.some(frame => frame.phase === 'contact' && !!frame.weaponTip);
+}
+
+/** Only the two sword-cast I skills opt in; unavailable packs retain legacy FX. */
+export function getSwordCastTip(id: string, x: number, feetY: number, height: number, animation: FighterAnimation, facing: 1 | -1 = 1) {
+  if ((id !== 'eula' && id !== 'diluc') || animation.state === 'hitstun' || animation.attack?.def.kind !== 'secondary') return undefined;
+  const pack = characterPacks.get(id), selection = pack && selectClipFrame(pack.manifest, animation);
+  if (!pack || !selection || selection.clip !== 'secondary') return undefined;
+  const clip = selectedClip(pack.manifest, selection), tip = registeredWeaponTip(clip, clip.frames[selection.frame], height);
+  // Attacking clips have neither the idle slope lean nor the hitstun transform.
+  return tip ? { x: x + tip.x * facing, y: feetY + tip.y } : undefined;
+}
+
+/** Contact glints stay on the actual blade, rather than a fixed chest position. */
+export function drawSwordCastRelease(context: CanvasRenderingContext2D, id: string, x: number, feetY: number, height: number, animation: FighterAnimation, facing: 1 | -1 = 1): boolean {
+  const tip = getSwordCastTip(id, x, feetY, height, animation, facing);
+  if (!tip || !animation.attack) return false;
+  const { phase, progress } = attackPhase(animation.attack);
+  if (phase !== 'contact') return true;
+  const scale = height / 112, radius = (id === 'eula' ? 11 : 15) * scale;
+  context.save(); context.translate(tip.x, tip.y); context.scale(facing, 1);
+  const glow = context.createRadialGradient(0, 0, 0, 0, 0, radius * 2);
+  glow.addColorStop(0, '#fffdf3'); glow.addColorStop(.24, id === 'eula' ? '#a6edff' : '#ffc467'); glow.addColorStop(1, 'transparent');
+  context.globalAlpha *= .82 - progress * .25; context.fillStyle = glow;
+  context.beginPath(); context.arc(0, 0, radius * 2, 0, Math.PI * 2); context.fill();
+  context.strokeStyle = id === 'eula' ? '#ddfaff' : '#ffb457'; context.lineWidth = 1.5 * scale;
+  for (const angle of [-.4, 0, .4]) {
+    context.beginPath(); context.moveTo(0, 0);
+    context.lineTo(Math.cos(angle) * radius * (1.5 + progress), Math.sin(angle) * radius * 1.7); context.stroke();
+  }
+  context.restore(); return true;
 }
 async function loadCharacterPack(id: ClipCharacterId, owner: CharacterResources, strict = false): Promise<CharacterPack> {
     const manifestUrl = CHARACTER_CLIP_MANIFESTS[id], response = await fetch(manifestUrl);
@@ -391,11 +421,7 @@ function drawCharacterClip(context: CanvasRenderingContext2D, pack: CharacterPac
     : (id === 'xiao' && (selection.clip === 'secondary' || selection.clip === 'jab' && selection.variant !== 'alternate'))
       || (id === 'jean' && selection.clip === 'special') || (id === 'raiden' && selection.clip === 'jab' && selection.variant !== 'alternate') ? 'thrust' : 'arc');
   if (trail !== 'none' && animation.attack && !animation.attack.plunge && selection.phase === 'contact') {
-    const points = clip.frames.slice(Math.max(0, selection.frame - 2), selection.frame + 1).filter(f => f.weaponTip).map(f => {
-      const registeredScale = height / clip.standingBodyHeightPixels * (f.sourceScale ?? 1);
-      return { x: (f.weaponTip!.x - f.sourceRect.width * f.footAnchor.x) * registeredScale,
-        y: (f.weaponTip!.y - f.sourceRect.height * f.footAnchor.y) * registeredScale };
-    });
+    const points = clip.frames.slice(Math.max(0, selection.frame - 2), selection.frame + 1).filter(f => f.weaponTip).map(f => registeredWeaponTip(clip, f, height)!);
     if (points.length > 1) {
       const first = points[0], tip = points[points.length - 1];
       const control = points.length > 2 ? points[1] : {

@@ -1,0 +1,161 @@
+{
+  "image": "basic-variants.png",
+  "width": 1254,
+  "height": 1254,
+  "standingBodyHeightPixels": 169.5468,
+  "trail": "arc",
+  "frames": [
+    {
+      "name": "smash-rising-sweep-01",
+      "sourceRect": {
+        "x": 56,
+        "y": 762,
+        "width": 246,
+        "height": 138
+      },
+      "footAnchor": {
+        "x": 0.42592418,
+        "y": 0.91042963
+      },
+      "duration": 10,
+      "phase": "windup",
+      "weaponTip": {
+        "x": 235,
+        "y": 124
+      }
+    },
+    {
+      "name": "smash-rising-sweep-02",
+      "sourceRect": {
+        "x": 382,
+        "y": 752,
+        "width": 250,
+        "height": 150
+      },
+      "footAnchor": {
+        "x": 0.4072913,
+        "y": 0.90298022
+      },
+      "duration": 8,
+      "phase": "windup",
+      "weaponTip": {
+        "x": 240,
+        "y": 140
+      }
+    },
+    {
+      "name": "smash-rising-sweep-03",
+      "sourceRect": {
+        "x": 689,
+        "y": 734,
+        "width": 224,
+        "height": 168
+      },
+      "footAnchor": {
+        "x": 0.51371087,
+        "y": 0.92842428
+      },
+      "duration": 3,
+      "phase": "contact",
+      "weaponTip": {
+        "x": 214,
+        "y": 9
+      }
+    },
+    {
+      "name": "smash-rising-sweep-04",
+      "sourceRect": {
+        "x": 1012,
+        "y": 698,
+        "width": 223,
+        "height": 205
+      },
+      "footAnchor": {
+        "x": 0.53456818,
+        "y": 0.95291393
+      },
+      "duration": 4,
+      "phase": "contact",
+      "weaponTip": {
+        "x": 214,
+        "y": 9
+      }
+    },
+    {
+      "name": "smash-rising-sweep-05",
+      "sourceRect": {
+        "x": 43,
+        "y": 984,
+        "width": 247,
+        "height": 190
+      },
+      "footAnchor": {
+        "x": 0.45603441,
+        "y": 0.9347024
+      },
+      "duration": 7,
+      "phase": "followthrough",
+      "weaponTip": {
+        "x": 237,
+        "y": 9
+      }
+    },
+    {
+      "name": "smash-rising-sweep-06",
+      "sourceRect": {
+        "x": 364,
+        "y": 989,
+        "width": 238,
+        "height": 185
+      },
+      "footAnchor": {
+        "x": 0.49646218,
+        "y": 0.94507997
+      },
+      "duration": 6,
+      "phase": "followthrough",
+      "weaponTip": {
+        "x": 229,
+        "y": 9
+      }
+    },
+    {
+      "name": "smash-rising-sweep-07",
+      "sourceRect": {
+        "x": 685,
+        "y": 1023,
+        "width": 254,
+        "height": 151
+      },
+      "footAnchor": {
+        "x": 0.46614854,
+        "y": 0.94714658
+      },
+      "duration": 4,
+      "phase": "recover",
+      "weaponTip": {
+        "x": 244,
+        "y": 123
+      }
+    },
+    {
+      "name": "smash-rising-sweep-08",
+      "sourceRect": {
+        "x": 1000,
+        "y": 1019,
+        "width": 247,
+        "height": 160
+      },
+      "footAnchor": {
+        "x": 0.50014458,
+        "y": 0.88397978
+      },
+      "duration": 3,
+      "phase": "recover",
+      "weaponTip": {
+        "x": 237,
+        "y": 36
+      }
+    }
+  ]
+}

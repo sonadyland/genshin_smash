@@ -40,10 +40,13 @@ const context = vm.createContext({
 const modules = new Map();
 const artDrawCalls = [];
 const artLeases = [];
+let swordTipFixture = false;
 function loadModule(file) {
   if (file.endsWith('/summoner-art.ts')) return { drawSummonArt: () => false };
   if (file.endsWith('/art.ts')) return {
     hasRegisteredMeleeTrail: () => false,
+    getSwordCastTip: (id, x, feetY, _height, _animation, facing) => swordTipFixture && ['eula', 'diluc'].includes(id) ? { x: x + facing * 97, y: feetY - 120 } : undefined,
+    drawSwordCastRelease: () => false,
     acquireGameArt: ids => {
       const lease = { ids: [...ids], released: false };
       artLeases.push(lease);
@@ -1087,6 +1090,29 @@ test('summoners respect cooldown input, CPU uses summons, and KO/rematch/destroy
     const fresh = game.fighters[0]; game.summons.castSalon(game.summonOwner(fresh), game.summonContext());
     game.destroy(); assert.equal(game.summons.entities.length, 0);
   }
+});
+
+test('sword release visually starts at the blade without moving versus projectile physics or fallback effects', () => {
+  const { projectileVisualPosition } = loadModule(path.join(root, 'src/game/cast-visual.ts').replaceAll('\\', '/'));
+  const physical = shots => JSON.parse(JSON.stringify(shots.map(({ castVisual, ...shot }) => shot)));
+  for (const id of ['eula', 'diluc', 'raiden', 'jean']) for (const facing of [-1, 1]) {
+    const game = fighting({ player: CHARACTERS.findIndex(c => c.id === id) }), f = game.fighters[0];
+    f.facing = facing; f.x = 600; f.y = 300; game.fighters[1].invuln = 1000;
+    swordTipFixture = false; game.releaseSecondary(f, f.char.secondary);
+    const original = physical(game.projectiles); for (let i = 0; i < 20; i++) game.updateProjectiles();
+    const advanced = physical(game.projectiles); game.projectiles = [];
+    swordTipFixture = true; game.releaseSecondary(f, f.char.secondary);
+    assert.deepEqual(physical(game.projectiles), original, `${id}: spawn/hitbox/damage/velocity/lifetime unchanged`);
+    for (const p of game.projectiles) {
+      const point = projectileVisualPosition(p);
+      if (['eula', 'diluc'].includes(id)) assert.deepEqual(JSON.parse(JSON.stringify(point)), { x: f.x + facing * 97, y: f.y + f.h - 120 });
+      else assert.equal(p.castVisual, undefined, 'other characters retain their original origin');
+    }
+    for (let i = 0; i < 20; i++) game.updateProjectiles();
+    assert.deepEqual(physical(game.projectiles), advanced, `${id}: simulation follows the identical path`);
+    for (const p of game.projectiles) assert.deepEqual(JSON.parse(JSON.stringify(projectileVisualPosition(p))), { x: p.x, y: p.y });
+  }
+  swordTipFixture = false;
 });
 
 let failures = 0;

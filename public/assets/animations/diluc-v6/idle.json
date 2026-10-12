@@ -1,0 +1,64 @@
+{
+  "image": "locomotion.png",
+  "width": 1448,
+  "height": 1086,
+  "standingBodyHeightPixels": 300.131,
+  "frames": [
+    {
+      "name": "idle-01",
+      "sourceRect": {
+        "x": 84,
+        "y": 79,
+        "width": 309,
+        "height": 312
+      },
+      "footAnchor": {
+        "x": 0.429407,
+        "y": 0.974655
+      },
+      "duration": 13
+    },
+    {
+      "name": "idle-02",
+      "sourceRect": {
+        "x": 435,
+        "y": 79,
+        "width": 317,
+        "height": 312
+      },
+      "footAnchor": {
+        "x": 0.44502,
+        "y": 0.976842
+      },
+      "duration": 11
+    },
+    {
+      "name": "idle-03",
+      "sourceRect": {
+        "x": 814,
+        "y": 79,
+        "width": 304,
+        "height": 312
+      },
+      "footAnchor": {
+        "x": 0.435625,
+        "y": 0.97351
+      },
+      "duration": 10
+    },
+    {
+      "name": "idle-04",
+      "sourceRect": {
+        "x": 1132,
+        "y": 79,
+        "width": 308,
+        "height": 312
+      },
+      "footAnchor": {
+        "x": 0.516544,
+        "y": 0.979373
+      },
+      "duration": 14
+    }
+  ]
+}

@@ -1,0 +1,2022 @@
+{
+  "ok": true,
+  "character": "xiao",
+  "pack": "xiao-v6",
+  "frames": 80,
+  "timingAndPhasesUnchanged": true,
+  "nativeRasterUnmodified": true,
+  "clipStandingBodyHeightPixels": {
+    "clips": {
+      "idle": 268.4711,
+      "run": 264.5543,
+      "jump": 274.189,
+      "dodge": 251.058,
+      "jab": 186.1686,
+      "smash": 189.5176,
+      "special": 342.1015,
+      "secondary": 220.3758
+    },
+    "variants": {
+      "jab": 172.7885,
+      "smash": 169.5468
+    }
+  },
+  "atlases": [
+    {
+      "image": "locomotion.png",
+      "generatedSource": "exec-2db5c553-9159-4338-8b2a-d9e8cfb55219.png",
+      "size": [
+        1448,
+        1086
+      ],
+      "bytes": 1192419,
+      "sha256": "1ad99866b5bdb47f2d19879cfbaa09fe748678efc248a984bcfe15a593b52747",
+      "transparentPercent": 71.19
+    },
+    {
+      "image": "aerial.png",
+      "generatedSource": "exec-3bb48e3b-5083-4428-bf6f-f7c09c86d305.png",
+      "size": [
+        1447,
+        1087
+      ],
+      "bytes": 1249555,
+      "sha256": "9191a0490696755ff0ace0c8995ae1a56076fd09a5cf3ecfd5e52eac62c25afa",
+      "transparentPercent": 68.83
+    },
+    {
+      "image": "basic.png",
+      "generatedSource": "exec-f455b6bb-12b6-48c3-b68e-269303d7b3b2.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "bytes": 1251441,
+      "sha256": "0e0939871f5848f5f625f2bf41f75ad290d2cbb34c3ef613300c118bb7961e0c",
+      "transparentPercent": 66.83
+    },
+    {
+      "image": "basic-variants.png",
+      "generatedSource": "exec-6a39aaf0-63d7-406c-9091-53cf40e36a4a.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "bytes": 928904,
+      "sha256": "6e4d5c5f8cb361971e0251afbfc6b19c05f6dd15a7922c05916ce29d4a595300",
+      "transparentPercent": 74.95
+    },
+    {
+      "image": "special.png",
+      "generatedSource": "exec-3ea54385-9034-4f64-a898-e750306a8df1.png",
+      "size": [
+        1447,
+        1087
+      ],
+      "bytes": 1294231,
+      "sha256": "5e068661f5efec1f316fb2f350df4742dcd4fb5cdd30b3541aab22714ac4bc40",
+      "transparentPercent": 68.9
+    },
+    {
+      "image": "secondary.png",
+      "generatedSource": "exec-a1bb5732-3429-4aca-87a5-59ce629aea79.png",
+      "size": [
+        1447,
+        1087
+      ],
+      "bytes": 801407,
+      "sha256": "7403c9546b6d722661f483197cc8fa44cb19f3cfca0ae916461add5f68f0d3ce",
+      "transparentPercent": 80.93
+    }
+  ],
+  "registration": [
+    {
+      "clip": "idle",
+      "variant": false,
+      "frame": 0,
+      "image": "locomotion.png",
+      "sourceRect": {
+        "x": 61,
+        "y": 91,
+        "width": 289,
+        "height": 288
+      },
+      "supportGlobal": [
+        200.55035775576607,
+        371.39437734159657
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.10246,
+      "bodyMatches": 17,
+      "medianBodyErrorPx": 1.2996,
+      "rgbaSha256": "65bda23cf67526a45a73d8a07b4e1553f82b245179ebd67e686bfb1d6c5e0430"
+    },
+    {
+      "clip": "idle",
+      "variant": false,
+      "frame": 1,
+      "image": "locomotion.png",
+      "sourceRect": {
+        "x": 432,
+        "y": 92,
+        "width": 285,
+        "height": 287
+      },
+      "supportGlobal": [
+        566.1090410373731,
+        367.2146759478793
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 8,
+      "bodyScale": 1.089142,
+      "bodyMatches": 11,
+      "medianBodyErrorPx": 0.8183,
+      "rgbaSha256": "555010b1885d144f0526b14d5294ec3f9f0518c7eff172687d9df3b6bef61a8f"
+    },
+    {
+      "clip": "idle",
+      "variant": false,
+      "frame": 2,
+      "image": "locomotion.png",
+      "sourceRect": {
+        "x": 775,
+        "y": 92,
+        "width": 291,
+        "height": 287
+      },
+      "supportGlobal": [
+        907.0777584948031,
+        364.6362152213978
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.067313,
+      "bodyMatches": 9,
+      "medianBodyErrorPx": 0.9129,
+      "rgbaSha256": "d6758883d3da19e45be619632be1a8ebd1f3eaef9b8fb2f2feb241f10ce39e8c"
+    },
+    {
+      "clip": "idle",
+      "variant": false,
+      "frame": 3,
+      "image": "locomotion.png",
+      "sourceRect": {
+        "x": 1144,
+        "y": 92,
+        "width": 289,
+        "height": 287
+      },
+      "supportGlobal": [
+        1282.5223354882946,
+        369.1423610004025
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.108827,
+      "bodyMatches": 19,
+      "medianBodyErrorPx": 1.2214,
+      "rgbaSha256": "4b2dea3adf8134020a8ebda1afa0a82b883bac80fc75907ef6a5f70dbd351923"
+    },
+    {
+      "clip": "run",
+      "variant": false,
+      "frame": 0,
+      "image": "locomotion.png",
+      "sourceRect": {
+        "x": 44,
+        "y": 468,
+        "width": 276,
+        "height": 226
+      },
+      "supportGlobal": [
+        222.18741822220744,
+        681.7340677036063
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 8,
+      "bodyScale": 1.075556,
+      "bodyMatches": 15,
+      "medianBodyErrorPx": 1.3412,
+      "rgbaSha256": "7fa8feb463b22e0afa46e20c5637d86b5e317a4d053c2ff2f87a59265bf00965"
+    },
+    {
+      "clip": "run",
+      "variant": false,
+      "frame": 1,
+      "image": "locomotion.png",
+      "sourceRect": {
+        "x": 410,
+        "y": 470,
+        "width": 263,
+        "height": 222
+      },
+      "supportGlobal": [
+        589.3938160145705,
+        679.0533718130933
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 8,
+      "bodyScale": 1.084071,
+      "bodyMatches": 15,
+      "medianBodyErrorPx": 1.0504,
+      "rgbaSha256": "f31cde3978e1dd211d780c7a0c6686aa3b7cbf34661b0b97d363f6d179e105be"
+    },
+    {
+      "clip": "run",
+      "variant": false,
+      "frame": 2,
+      "image": "locomotion.png",
+      "sourceRect": {
+        "x": 772,
+        "y": 466,
+        "width": 267,
+        "height": 227
+      },
+      "supportGlobal": [
+        945.7556091157121,
+        681.4679981839271
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.059051,
+      "bodyMatches": 16,
+      "medianBodyErrorPx": 1.2961,
+      "rgbaSha256": "85e80c1755f752ec891816cc9ead2e0ad54a6210bfb6bcdfaa2d70c676a7ea7b"
+    },
+    {
+      "clip": "run",
+      "variant": false,
+      "frame": 3,
+      "image": "locomotion.png",
+      "sourceRect": {
+        "x": 1132,
+        "y": 469,
+        "width": 254,
+        "height": 229
+      },
+      "supportGlobal": [
+        1292.9060235896377,
+        692.8961764329545
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.055623,
+      "bodyMatches": 26,
+      "medianBodyErrorPx": 1.2728,
+      "rgbaSha256": "fd387771338097e09157507724d477bba420e14f27c6a2af2565b52cd3c98439"
+    },
+    {
+      "clip": "run",
+      "variant": false,
+      "frame": 4,
+      "image": "locomotion.png",
+      "sourceRect": {
+        "x": 47,
+        "y": 782,
+        "width": 279,
+        "height": 226
+      },
+      "supportGlobal": [
+        230.99702018459612,
+        993.2067953277823
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 8,
+      "bodyScale": 1.087911,
+      "bodyMatches": 20,
+      "medianBodyErrorPx": 1.0009,
+      "rgbaSha256": "053d749b2b26c499a41020795e94218b964cdd7cc70696cdddee28fb9017d32d"
+    },
+    {
+      "clip": "run",
+      "variant": false,
+      "frame": 5,
+      "image": "locomotion.png",
+      "sourceRect": {
+        "x": 416,
+        "y": 780,
+        "width": 264,
+        "height": 227
+      },
+      "supportGlobal": [
+        584.8091982734902,
+        996.77391980225
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.113068,
+      "bodyMatches": 19,
+      "medianBodyErrorPx": 1.3486,
+      "rgbaSha256": "6f24d1c41496046b1eb0df51843f293cdc04eb5e6a8bd4f1892bf7cef0440213"
+    },
+    {
+      "clip": "run",
+      "variant": false,
+      "frame": 6,
+      "image": "locomotion.png",
+      "sourceRect": {
+        "x": 774,
+        "y": 779,
+        "width": 272,
+        "height": 228
+      },
+      "supportGlobal": [
+        941.7467176406834,
+        998.5677517986084
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 8,
+      "bodyScale": 1.089905,
+      "bodyMatches": 27,
+      "medianBodyErrorPx": 1.3339,
+      "rgbaSha256": "1d05c4df18a92248af887a744b6473ec3271e7287fb85b023b2333502be5e40d"
+    },
+    {
+      "clip": "run",
+      "variant": false,
+      "frame": 7,
+      "image": "locomotion.png",
+      "sourceRect": {
+        "x": 1127,
+        "y": 778,
+        "width": 266,
+        "height": 229
+      },
+      "supportGlobal": [
+        1303.1466067167946,
+        997.2772770539257
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 8,
+      "bodyScale": 1.043415,
+      "bodyMatches": 24,
+      "medianBodyErrorPx": 1.2044,
+      "rgbaSha256": "94ecb3afa50efc39b0127814ec63a983a52b3b5194123f6fd1d0b56c775a1cc0"
+    },
+    {
+      "clip": "jump",
+      "variant": false,
+      "frame": 0,
+      "image": "aerial.png",
+      "sourceRect": {
+        "x": 58,
+        "y": 139,
+        "width": 289,
+        "height": 242
+      },
+      "supportGlobal": [
+        213.92008355386915,
+        367.79258755544225
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.243634,
+      "bodyMatches": 10,
+      "medianBodyErrorPx": 1.4385,
+      "rgbaSha256": "00042d1077f447318803f58e219e9be727afdba8d4a37e63fb94afc69533d320"
+    },
+    {
+      "clip": "jump",
+      "variant": false,
+      "frame": 1,
+      "image": "aerial.png",
+      "sourceRect": {
+        "x": 421,
+        "y": 119,
+        "width": 295,
+        "height": 280
+      },
+      "supportGlobal": [
+        531.1305701753216,
+        393.0753416978132
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.218542,
+      "bodyMatches": 9,
+      "medianBodyErrorPx": 0.8977,
+      "rgbaSha256": "52b999be41c1bab8d0de704e62e95fc9ddcd478cbfe5b69afd339c7e3697e2d8"
+    },
+    {
+      "clip": "jump",
+      "variant": false,
+      "frame": 2,
+      "image": "aerial.png",
+      "sourceRect": {
+        "x": 776,
+        "y": 124,
+        "width": 292,
+        "height": 263
+      },
+      "supportGlobal": [
+        920.633335297209,
+        381.2492292061274
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.291361,
+      "bodyMatches": 18,
+      "medianBodyErrorPx": 1.3782,
+      "rgbaSha256": "cda202f9bb1d9e016d5705b497403e6cfc43bda057b853d0c84f7071ba03ada8"
+    },
+    {
+      "clip": "jump",
+      "variant": false,
+      "frame": 3,
+      "image": "aerial.png",
+      "sourceRect": {
+        "x": 1137,
+        "y": 123,
+        "width": 285,
+        "height": 275
+      },
+      "supportGlobal": [
+        1289.2025184988895,
+        392.10189325293516
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.229321,
+      "bodyMatches": 10,
+      "medianBodyErrorPx": 0.793,
+      "rgbaSha256": "484d2ec54b1078c2aa1ccff9258474af5e51db2ccdc4c2a48ec74b9919cc08b4"
+    },
+    {
+      "clip": "jump",
+      "variant": false,
+      "frame": 4,
+      "image": "aerial.png",
+      "sourceRect": {
+        "x": 54,
+        "y": 469,
+        "width": 304,
+        "height": 275
+      },
+      "supportGlobal": [
+        242.68371261889845,
+        738.9560560731557
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 10,
+      "bodyScale": 1.248993,
+      "bodyMatches": 13,
+      "medianBodyErrorPx": 0.8199,
+      "rgbaSha256": "2a7d49c4214bd9a67e3ca7e443a96d2453bdc9319742f188151424136787e3ca"
+    },
+    {
+      "clip": "jump",
+      "variant": false,
+      "frame": 5,
+      "image": "aerial.png",
+      "sourceRect": {
+        "x": 418,
+        "y": 468,
+        "width": 298,
+        "height": 274
+      },
+      "supportGlobal": [
+        549.70391189735,
+        736.8498542053245
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.322554,
+      "bodyMatches": 12,
+      "medianBodyErrorPx": 0.8384,
+      "rgbaSha256": "823bad7d38c41b353a648ec3ecd24a7f96d8f011d425c02f1712c5bb8fddfffa"
+    },
+    {
+      "clip": "jump",
+      "variant": false,
+      "frame": 6,
+      "image": "aerial.png",
+      "sourceRect": {
+        "x": 773,
+        "y": 472,
+        "width": 300,
+        "height": 257
+      },
+      "supportGlobal": [
+        943.5978873213296,
+        710.5620223812364
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 8,
+      "bodyScale": 1.335873,
+      "bodyMatches": 14,
+      "medianBodyErrorPx": 1.4345,
+      "rgbaSha256": "8e70c5371a1622e69af24ff6f544dcbe734be49df52d9c2c12cc5670bc536eaf"
+    },
+    {
+      "clip": "jump",
+      "variant": false,
+      "frame": 7,
+      "image": "aerial.png",
+      "sourceRect": {
+        "x": 1137,
+        "y": 459,
+        "width": 294,
+        "height": 286
+      },
+      "supportGlobal": [
+        1257.8851020981026,
+        739.3379573021896
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 10,
+      "bodyScale": 1.224124,
+      "bodyMatches": 9,
+      "medianBodyErrorPx": 1.3478,
+      "rgbaSha256": "8065e2153eff9959fcf4aaff67a2503bc9a9598c34364f960f460ebf4c27adaa"
+    },
+    {
+      "clip": "dodge",
+      "variant": false,
+      "frame": 0,
+      "image": "aerial.png",
+      "sourceRect": {
+        "x": 45,
+        "y": 833,
+        "width": 297,
+        "height": 187
+      },
+      "supportGlobal": [
+        223.3851027870811,
+        1003.1775844010465
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 10,
+      "bodyScale": 1.122397,
+      "bodyMatches": 11,
+      "medianBodyErrorPx": 0.9597,
+      "rgbaSha256": "86517c0ccb11e1125c9050075e78836d8948a845c2a9cfd41fd2576f89727bc9"
+    },
+    {
+      "clip": "dodge",
+      "variant": false,
+      "frame": 1,
+      "image": "aerial.png",
+      "sourceRect": {
+        "x": 404,
+        "y": 827,
+        "width": 285,
+        "height": 204
+      },
+      "supportGlobal": [
+        543.4569870980247,
+        1025.4722585213103
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 10,
+      "bodyScale": 1.159948,
+      "bodyMatches": 13,
+      "medianBodyErrorPx": 1.1042,
+      "rgbaSha256": "9c34d78575599b859239cb387eeebd6a15243aa060e5e1d4630d1377ba06851e"
+    },
+    {
+      "clip": "dodge",
+      "variant": false,
+      "frame": 2,
+      "image": "aerial.png",
+      "sourceRect": {
+        "x": 755,
+        "y": 827,
+        "width": 302,
+        "height": 197
+      },
+      "supportGlobal": [
+        902.7655670152651,
+        1018.5803350617841
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 10,
+      "bodyScale": 1.217106,
+      "bodyMatches": 7,
+      "medianBodyErrorPx": 1.3138,
+      "rgbaSha256": "994b2b3f98f6c13f1e426c8f79422c1a601a4fe7744bccc0f445675ace25ecd4"
+    },
+    {
+      "clip": "dodge",
+      "variant": false,
+      "frame": 3,
+      "image": "aerial.png",
+      "sourceRect": {
+        "x": 1116,
+        "y": 827,
+        "width": 293,
+        "height": 195
+      },
+      "supportGlobal": [
+        1302.9020092890823,
+        1015.5881717536114
+      ],
+      "weaponTipGlobal": null,
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.106572,
+      "bodyMatches": 15,
+      "medianBodyErrorPx": 1.141,
+      "rgbaSha256": "8f08cfe50394f427412030558f823d01c459c98faa91f65c43652738db40a309"
+    },
+    {
+      "clip": "jab",
+      "variant": false,
+      "frame": 0,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 58,
+        "y": 154,
+        "width": 254,
+        "height": 202
+      },
+      "supportGlobal": [
+        171.36852072019934,
+        345.17326126920665
+      ],
+      "weaponTipGlobal": [
+        302,
+        176
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.092069,
+      "bodyMatches": 29,
+      "medianBodyErrorPx": 1.1711,
+      "rgbaSha256": "7bfeaf27af09ff238a9a32396830f7a4f0de6db2d0231fb5e46c8aec84093ad1"
+    },
+    {
+      "clip": "jab",
+      "variant": false,
+      "frame": 1,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 353,
+        "y": 179,
+        "width": 293,
+        "height": 168
+      },
+      "supportGlobal": [
+        484.5788598203118,
+        336.3917511251642
+      ],
+      "weaponTipGlobal": [
+        636,
+        238
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.098103,
+      "bodyMatches": 17,
+      "medianBodyErrorPx": 1.0272,
+      "rgbaSha256": "eb2fe5191a69318cc2c46847b4aeb5981a1a52b33e6538cca95a9a0a6349d52e"
+    },
+    {
+      "clip": "jab",
+      "variant": false,
+      "frame": 2,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 650,
+        "y": 181,
+        "width": 307,
+        "height": 163
+      },
+      "supportGlobal": [
+        755.0743106401915,
+        336.08828290210954
+      ],
+      "weaponTipGlobal": [
+        947,
+        224
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.124644,
+      "bodyMatches": 17,
+      "medianBodyErrorPx": 0.9735,
+      "rgbaSha256": "4dc1196c384bb2b663f3edeb065c5728081f213dc506214531c75702f52a1f15"
+    },
+    {
+      "clip": "jab",
+      "variant": false,
+      "frame": 3,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 973,
+        "y": 186,
+        "width": 273,
+        "height": 160
+      },
+      "supportGlobal": [
+        1052.9390729769493,
+        335.3191359499078
+      ],
+      "weaponTipGlobal": [
+        1236,
+        225
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.099588,
+      "bodyMatches": 20,
+      "medianBodyErrorPx": 1.1729,
+      "rgbaSha256": "44154839a7db164e0da4f86684c4de6a3ef00e67919943dc112e05fe036920e0"
+    },
+    {
+      "clip": "jab",
+      "variant": false,
+      "frame": 4,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 55,
+        "y": 478,
+        "width": 290,
+        "height": 164
+      },
+      "supportGlobal": [
+        157.14976147564215,
+        632.7927923805313
+      ],
+      "weaponTipGlobal": [
+        335,
+        526
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.077327,
+      "bodyMatches": 27,
+      "medianBodyErrorPx": 0.8295,
+      "rgbaSha256": "1fa894d62e860f9f273262efdb54afc0c01ad35da5ac71c0bd516f4e16ca8f58"
+    },
+    {
+      "clip": "jab",
+      "variant": false,
+      "frame": 5,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 376,
+        "y": 483,
+        "width": 277,
+        "height": 159
+      },
+      "supportGlobal": [
+        473.5838614399149,
+        634.6629871513462
+      ],
+      "weaponTipGlobal": [
+        643,
+        552
+      ],
+      "minimumOpaqueGutterPx": 10,
+      "bodyScale": 1.092116,
+      "bodyMatches": 19,
+      "medianBodyErrorPx": 0.6429,
+      "rgbaSha256": "56f66e9041321f8c4d28c4580c27d4fb0103485b5dc1d94aa3c55433fa8f3752"
+    },
+    {
+      "clip": "jab",
+      "variant": false,
+      "frame": 6,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 662,
+        "y": 471,
+        "width": 285,
+        "height": 176
+      },
+      "supportGlobal": [
+        762.913308116504,
+        636.0381658451806
+      ],
+      "weaponTipGlobal": [
+        937,
+        566
+      ],
+      "minimumOpaqueGutterPx": 10,
+      "bodyScale": 1.07943,
+      "bodyMatches": 19,
+      "medianBodyErrorPx": 1.1618,
+      "rgbaSha256": "151ced30843206c2b577a7f0088f947fcd02ad35943a3116de3eef7bdc1000e2"
+    },
+    {
+      "clip": "jab",
+      "variant": false,
+      "frame": 7,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 973,
+        "y": 451,
+        "width": 253,
+        "height": 198
+      },
+      "supportGlobal": [
+        1067.554156696162,
+        642.8505726337376
+      ],
+      "weaponTipGlobal": [
+        1216,
+        488
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.098332,
+      "bodyMatches": 23,
+      "medianBodyErrorPx": 0.9559,
+      "rgbaSha256": "0e751aced4de7dbbeea70eb283f3fb54e19fb12a011d489525e3c0e1aa0f500a"
+    },
+    {
+      "clip": "smash",
+      "variant": false,
+      "frame": 0,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 51,
+        "y": 703,
+        "width": 256,
+        "height": 211
+      },
+      "supportGlobal": [
+        163.90031815837864,
+        908.2359313900239
+      ],
+      "weaponTipGlobal": [
+        297,
+        814
+      ],
+      "minimumOpaqueGutterPx": 10,
+      "bodyScale": 1.133474,
+      "bodyMatches": 23,
+      "medianBodyErrorPx": 1.3435,
+      "rgbaSha256": "cfa5b749df1c2a4dfd186632b6ac18da47de4ad37ce033cf767b3ef8a2cbc35e"
+    },
+    {
+      "clip": "smash",
+      "variant": false,
+      "frame": 1,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 358,
+        "y": 704,
+        "width": 276,
+        "height": 205
+      },
+      "supportGlobal": [
+        469.9679879213068,
+        895.5498674741991
+      ],
+      "weaponTipGlobal": [
+        624,
+        830
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.108874,
+      "bodyMatches": 19,
+      "medianBodyErrorPx": 0.6756,
+      "rgbaSha256": "6662c1542e8179e8d1c5e7153a24c389b0bca7bd9ff0eaed962c5aeae6cecbc8"
+    },
+    {
+      "clip": "smash",
+      "variant": false,
+      "frame": 2,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 643,
+        "y": 740,
+        "width": 321,
+        "height": 162
+      },
+      "supportGlobal": [
+        755.8499573936626,
+        896.6962021798192
+      ],
+      "weaponTipGlobal": [
+        954,
+        797
+      ],
+      "minimumOpaqueGutterPx": 10,
+      "bodyScale": 1.106349,
+      "bodyMatches": 24,
+      "medianBodyErrorPx": 0.7677,
+      "rgbaSha256": "92ba4bc20dab16c974438981a0945912450e589ffb3083d090d43a474f73778d"
+    },
+    {
+      "clip": "smash",
+      "variant": false,
+      "frame": 3,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 976,
+        "y": 732,
+        "width": 275,
+        "height": 175
+      },
+      "supportGlobal": [
+        1087.0319352750719,
+        897.4681523722827
+      ],
+      "weaponTipGlobal": [
+        1241,
+        822
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.109636,
+      "bodyMatches": 23,
+      "medianBodyErrorPx": 1.0054,
+      "rgbaSha256": "63a174f1755d7dbe2a6f84fa61383178044a6ffb00d9ce232c01b38c91d0224d"
+    },
+    {
+      "clip": "smash",
+      "variant": false,
+      "frame": 4,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 55,
+        "y": 1016,
+        "width": 295,
+        "height": 163
+      },
+      "supportGlobal": [
+        173.4965925079622,
+        1168.3544173609087
+      ],
+      "weaponTipGlobal": [
+        341,
+        1058
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.151371,
+      "bodyMatches": 27,
+      "medianBodyErrorPx": 0.9033,
+      "rgbaSha256": "80efeb4ac189378a40c270f74b81706b675dc75ad7349356662a088b0d957c48"
+    },
+    {
+      "clip": "smash",
+      "variant": false,
+      "frame": 5,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 360,
+        "y": 1010,
+        "width": 285,
+        "height": 170
+      },
+      "supportGlobal": [
+        476.9141309495106,
+        1172.3889072020274
+      ],
+      "weaponTipGlobal": [
+        639,
+        1119
+      ],
+      "minimumOpaqueGutterPx": 6,
+      "bodyScale": 1.150224,
+      "bodyMatches": 21,
+      "medianBodyErrorPx": 0.9039,
+      "rgbaSha256": "00178a405582ba96dfb04a93f52145f51ccafeca14aee45a1fe4af595f44a3a2"
+    },
+    {
+      "clip": "smash",
+      "variant": false,
+      "frame": 6,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 657,
+        "y": 999,
+        "width": 249,
+        "height": 192
+      },
+      "supportGlobal": [
+        761.6307541864878,
+        1181.1318142289713
+      ],
+      "weaponTipGlobal": [
+        897,
+        1037
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.118568,
+      "bodyMatches": 13,
+      "medianBodyErrorPx": 0.765,
+      "rgbaSha256": "1d1882a3d8e141d80c246e5ebb1e4f1cf60d498367db9e3ef816292b541819a4"
+    },
+    {
+      "clip": "smash",
+      "variant": false,
+      "frame": 7,
+      "image": "basic.png",
+      "sourceRect": {
+        "x": 964,
+        "y": 984,
+        "width": 255,
+        "height": 210
+      },
+      "supportGlobal": [
+        1073.8815015067144,
+        1182.2598959001587
+      ],
+      "weaponTipGlobal": [
+        1209,
+        1017
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.111051,
+      "bodyMatches": 20,
+      "medianBodyErrorPx": 0.8628,
+      "rgbaSha256": "f3947655bc70781b71e79ef329508c3619a1b2e695e1607d4065096fa94eef77"
+    },
+    {
+      "clip": "special",
+      "variant": false,
+      "frame": 0,
+      "image": "special.png",
+      "sourceRect": {
+        "x": 48,
+        "y": 15,
+        "width": 237,
+        "height": 364
+      },
+      "supportGlobal": [
+        244,
+        369
+      ],
+      "weaponTipGlobal": [
+        244,
+        369
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.997521,
+      "bodyMatches": 30,
+      "medianBodyErrorPx": 1.068,
+      "rgbaSha256": "b4e0741ab63f653d88f86a49da295e507147dbe4f8e4575780b2b2d3dbb8e0f7"
+    },
+    {
+      "clip": "special",
+      "variant": false,
+      "frame": 1,
+      "image": "special.png",
+      "sourceRect": {
+        "x": 437,
+        "y": 40,
+        "width": 201,
+        "height": 340
+      },
+      "supportGlobal": [
+        606,
+        370
+      ],
+      "weaponTipGlobal": [
+        606,
+        370
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.979008,
+      "bodyMatches": 32,
+      "medianBodyErrorPx": 1.1852,
+      "rgbaSha256": "1057e5f7d0a50534be62ec0eb5c9dd4f74bdc7ce0a28196b827c415960cd4954"
+    },
+    {
+      "clip": "special",
+      "variant": false,
+      "frame": 2,
+      "image": "special.png",
+      "sourceRect": {
+        "x": 802,
+        "y": 50,
+        "width": 205,
+        "height": 330
+      },
+      "supportGlobal": [
+        974,
+        376
+      ],
+      "weaponTipGlobal": [
+        974,
+        376
+      ],
+      "minimumOpaqueGutterPx": 4,
+      "bodyScale": 0.996984,
+      "bodyMatches": 35,
+      "medianBodyErrorPx": 1.1141,
+      "rgbaSha256": "5f58f149584f73f4cf7c760a77d7454a0d804e229361db09ca50dea1edd825f4"
+    },
+    {
+      "clip": "special",
+      "variant": false,
+      "frame": 3,
+      "image": "special.png",
+      "sourceRect": {
+        "x": 1133,
+        "y": 34,
+        "width": 236,
+        "height": 346
+      },
+      "supportGlobal": [
+        1314,
+        376
+      ],
+      "weaponTipGlobal": [
+        1314,
+        376
+      ],
+      "minimumOpaqueGutterPx": 4,
+      "bodyScale": 1.006328,
+      "bodyMatches": 40,
+      "medianBodyErrorPx": 0.8581,
+      "rgbaSha256": "e95055076dd6ad5bcedcffe4d342e7544129303c8ec67ffd27e8b28d2fb0f486"
+    },
+    {
+      "clip": "special",
+      "variant": false,
+      "frame": 4,
+      "image": "special.png",
+      "sourceRect": {
+        "x": 105,
+        "y": 384,
+        "width": 193,
+        "height": 358
+      },
+      "supportGlobal": [
+        242,
+        736
+      ],
+      "weaponTipGlobal": [
+        242,
+        736
+      ],
+      "minimumOpaqueGutterPx": 5,
+      "bodyScale": 1.005831,
+      "bodyMatches": 19,
+      "medianBodyErrorPx": 1.1112,
+      "rgbaSha256": "5f3988d9d7e512072c0f304f4e03e1874004701dc01286acbcedca723b4c9895"
+    },
+    {
+      "clip": "special",
+      "variant": false,
+      "frame": 5,
+      "image": "special.png",
+      "sourceRect": {
+        "x": 459,
+        "y": 380,
+        "width": 188,
+        "height": 362
+      },
+      "supportGlobal": [
+        594,
+        736
+      ],
+      "weaponTipGlobal": [
+        594,
+        736
+      ],
+      "minimumOpaqueGutterPx": 6,
+      "bodyScale": 1.03924,
+      "bodyMatches": 20,
+      "medianBodyErrorPx": 1.3325,
+      "rgbaSha256": "b076f45ccb0f282c3225a395113244283039bc0178717bdf07f0b841e6b8a74e"
+    },
+    {
+      "clip": "special",
+      "variant": false,
+      "frame": 6,
+      "image": "special.png",
+      "sourceRect": {
+        "x": 792,
+        "y": 380,
+        "width": 239,
+        "height": 362
+      },
+      "supportGlobal": [
+        970,
+        736
+      ],
+      "weaponTipGlobal": [
+        970,
+        736
+      ],
+      "minimumOpaqueGutterPx": 4,
+      "bodyScale": 1.062454,
+      "bodyMatches": 25,
+      "medianBodyErrorPx": 1.249,
+      "rgbaSha256": "fc31c8151690d2cef0d9acdab55e40f8fb1637e927dd6d4294c3a2826886d7e6"
+    },
+    {
+      "clip": "special",
+      "variant": false,
+      "frame": 7,
+      "image": "special.png",
+      "sourceRect": {
+        "x": 1156,
+        "y": 383,
+        "width": 209,
+        "height": 359
+      },
+      "supportGlobal": [
+        1312,
+        736
+      ],
+      "weaponTipGlobal": [
+        1312,
+        736
+      ],
+      "minimumOpaqueGutterPx": 5,
+      "bodyScale": 1.001442,
+      "bodyMatches": 25,
+      "medianBodyErrorPx": 1.2328,
+      "rgbaSha256": "365059854794336612ac8fbbf35e4e82e1a662cc2e5bc249948d9bcc0e53f8c7"
+    },
+    {
+      "clip": "special",
+      "variant": false,
+      "frame": 8,
+      "image": "special.png",
+      "sourceRect": {
+        "x": 49,
+        "y": 742,
+        "width": 246,
+        "height": 321
+      },
+      "supportGlobal": [
+        252,
+        1054
+      ],
+      "weaponTipGlobal": [
+        252,
+        1054
+      ],
+      "minimumOpaqueGutterPx": 4,
+      "bodyScale": 1.035704,
+      "bodyMatches": 36,
+      "medianBodyErrorPx": 1.1332,
+      "rgbaSha256": "6f6e6b38677f148c6c44e0b53b18f989c0a7a255c38c45bb7733c3fe25e42bcc"
+    },
+    {
+      "clip": "special",
+      "variant": false,
+      "frame": 9,
+      "image": "special.png",
+      "sourceRect": {
+        "x": 397,
+        "y": 742,
+        "width": 252,
+        "height": 321
+      },
+      "supportGlobal": [
+        606,
+        1053
+      ],
+      "weaponTipGlobal": [
+        606,
+        1053
+      ],
+      "minimumOpaqueGutterPx": 6,
+      "bodyScale": 1.028718,
+      "bodyMatches": 37,
+      "medianBodyErrorPx": 1.046,
+      "rgbaSha256": "b2c2b798e913395a31bfc4dbafbe8a2d4cb7d02773980edd106fc6163b97a4f7"
+    },
+    {
+      "clip": "special",
+      "variant": false,
+      "frame": 10,
+      "image": "special.png",
+      "sourceRect": {
+        "x": 761,
+        "y": 742,
+        "width": 243,
+        "height": 321
+      },
+      "supportGlobal": [
+        982,
+        1053
+      ],
+      "weaponTipGlobal": [
+        982,
+        1053
+      ],
+      "minimumOpaqueGutterPx": 6,
+      "bodyScale": 1.026433,
+      "bodyMatches": 28,
+      "medianBodyErrorPx": 1.0137,
+      "rgbaSha256": "14eb1f7b88f4be555c7490372506160b8f765e6576a545202a3fbc4bef684ea8"
+    },
+    {
+      "clip": "special",
+      "variant": false,
+      "frame": 11,
+      "image": "special.png",
+      "sourceRect": {
+        "x": 1118,
+        "y": 742,
+        "width": 248,
+        "height": 315
+      },
+      "supportGlobal": [
+        1327,
+        1048
+      ],
+      "weaponTipGlobal": [
+        1327,
+        1048
+      ],
+      "minimumOpaqueGutterPx": 6,
+      "bodyScale": 1.006034,
+      "bodyMatches": 24,
+      "medianBodyErrorPx": 1.4356,
+      "rgbaSha256": "aa75e2973ec8d048db784e7a08bf3dce9761845021723eeeb43bddd1bcae6291"
+    },
+    {
+      "clip": "secondary",
+      "variant": false,
+      "frame": 0,
+      "image": "secondary.png",
+      "sourceRect": {
+        "x": 69,
+        "y": 172,
+        "width": 289,
+        "height": 210
+      },
+      "supportGlobal": [
+        194.27673446740602,
+        375.0298647677132
+      ],
+      "weaponTipGlobal": [
+        348,
+        266
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.917997,
+      "bodyMatches": 27,
+      "medianBodyErrorPx": 1.2,
+      "rgbaSha256": "debd039a99ca4f70fc80246d99d2c00d5fcff3c419ce9a2c21815522f5d6e0a4"
+    },
+    {
+      "clip": "secondary",
+      "variant": false,
+      "frame": 1,
+      "image": "secondary.png",
+      "sourceRect": {
+        "x": 431,
+        "y": 184,
+        "width": 285,
+        "height": 200
+      },
+      "supportGlobal": [
+        559.7117026469749,
+        378.0326121755712
+      ],
+      "weaponTipGlobal": [
+        706,
+        270
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.937479,
+      "bodyMatches": 34,
+      "medianBodyErrorPx": 0.8982,
+      "rgbaSha256": "dbf05c588c3de27b397576198c5dfb5393a4f20d21ba9c19440cd7a9ebce807c"
+    },
+    {
+      "clip": "secondary",
+      "variant": false,
+      "frame": 2,
+      "image": "secondary.png",
+      "sourceRect": {
+        "x": 801,
+        "y": 211,
+        "width": 277,
+        "height": 174
+      },
+      "supportGlobal": [
+        896.1635548660239,
+        379.6759008367268
+      ],
+      "weaponTipGlobal": [
+        1068,
+        286
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.949972,
+      "bodyMatches": 24,
+      "medianBodyErrorPx": 0.671,
+      "rgbaSha256": "0fd736ac240eb6e6fcf261bc5cca703cb9432a9b94c98a954fb8c70056485732"
+    },
+    {
+      "clip": "secondary",
+      "variant": false,
+      "frame": 3,
+      "image": "secondary.png",
+      "sourceRect": {
+        "x": 1156,
+        "y": 198,
+        "width": 276,
+        "height": 187
+      },
+      "supportGlobal": [
+        1246.969644985571,
+        379.0796757082994
+      ],
+      "weaponTipGlobal": [
+        1422,
+        266
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.955908,
+      "bodyMatches": 22,
+      "medianBodyErrorPx": 1.1095,
+      "rgbaSha256": "fcd964e7d439cb05b7207f6c38219594b8f641850e76f906c7f86df5115e9e7f"
+    },
+    {
+      "clip": "secondary",
+      "variant": false,
+      "frame": 4,
+      "image": "secondary.png",
+      "sourceRect": {
+        "x": 65,
+        "y": 509,
+        "width": 311,
+        "height": 191
+      },
+      "supportGlobal": [
+        176.6313339657199,
+        694.4375969362634
+      ],
+      "weaponTipGlobal": [
+        367,
+        560
+      ],
+      "minimumOpaqueGutterPx": 8,
+      "bodyScale": 1.013328,
+      "bodyMatches": 21,
+      "medianBodyErrorPx": 1.2052,
+      "rgbaSha256": "41e4e08d71f22f3c825656848a414135a721b1b5519fdd9f73b01e7fc4196a7c"
+    },
+    {
+      "clip": "secondary",
+      "variant": false,
+      "frame": 5,
+      "image": "secondary.png",
+      "sourceRect": {
+        "x": 426,
+        "y": 519,
+        "width": 314,
+        "height": 173
+      },
+      "supportGlobal": [
+        534.6286130320871,
+        686.8815705297518
+      ],
+      "weaponTipGlobal": [
+        730,
+        568
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.967965,
+      "bodyMatches": 17,
+      "medianBodyErrorPx": 1.0933,
+      "rgbaSha256": "85150b13e56f052c5293533bf0864e94f5b005b13cf11451d0f955421da6ccf0"
+    },
+    {
+      "clip": "secondary",
+      "variant": false,
+      "frame": 6,
+      "image": "secondary.png",
+      "sourceRect": {
+        "x": 798,
+        "y": 522,
+        "width": 305,
+        "height": 174
+      },
+      "supportGlobal": [
+        901.9532374393696,
+        690.8685908314333
+      ],
+      "weaponTipGlobal": [
+        1094,
+        571
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.985297,
+      "bodyMatches": 20,
+      "medianBodyErrorPx": 0.7841,
+      "rgbaSha256": "6119e446de24e87c317029def4c6d6f7e01c3218781382f574eb50a37469269f"
+    },
+    {
+      "clip": "secondary",
+      "variant": false,
+      "frame": 7,
+      "image": "secondary.png",
+      "sourceRect": {
+        "x": 1158,
+        "y": 513,
+        "width": 280,
+        "height": 180
+      },
+      "supportGlobal": [
+        1265.336719113858,
+        687.4324790457342
+      ],
+      "weaponTipGlobal": [
+        1428,
+        570
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.952916,
+      "bodyMatches": 23,
+      "medianBodyErrorPx": 0.9023,
+      "rgbaSha256": "2bbba4c67b9e2814d2ccb695abe6ec84b931b04509bcf6ba2ca58d7a3e51e253"
+    },
+    {
+      "clip": "secondary",
+      "variant": false,
+      "frame": 8,
+      "image": "secondary.png",
+      "sourceRect": {
+        "x": 75,
+        "y": 804,
+        "width": 284,
+        "height": 204
+      },
+      "supportGlobal": [
+        201.18926337052636,
+        1002.2242629613307
+      ],
+      "weaponTipGlobal": [
+        349,
+        872
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.979013,
+      "bodyMatches": 19,
+      "medianBodyErrorPx": 1.3215,
+      "rgbaSha256": "aeb06ad9aede3bdfdd45e94f1f0d9f8f6040499ceb83acd2b37545b13ca119a3"
+    },
+    {
+      "clip": "secondary",
+      "variant": false,
+      "frame": 9,
+      "image": "secondary.png",
+      "sourceRect": {
+        "x": 440,
+        "y": 803,
+        "width": 281,
+        "height": 209
+      },
+      "supportGlobal": [
+        546.2345139259712,
+        1006.7576464637904
+      ],
+      "weaponTipGlobal": [
+        711,
+        871
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.011638,
+      "bodyMatches": 32,
+      "medianBodyErrorPx": 1.3774,
+      "rgbaSha256": "a7363e7b30a2ce4797b260fe8c929b9dfff2c981f27cb2623f02ed35c1f626ca"
+    },
+    {
+      "clip": "secondary",
+      "variant": false,
+      "frame": 10,
+      "image": "secondary.png",
+      "sourceRect": {
+        "x": 798,
+        "y": 804,
+        "width": 280,
+        "height": 202
+      },
+      "supportGlobal": [
+        924.809479352913,
+        1000.8997261595664
+      ],
+      "weaponTipGlobal": [
+        1069,
+        881
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.953833,
+      "bodyMatches": 24,
+      "medianBodyErrorPx": 1.3325,
+      "rgbaSha256": "5e235dbfe1ed0dce52c58af3a2d9c8d4c866b47054686470586785e5e0abaab6"
+    },
+    {
+      "clip": "secondary",
+      "variant": false,
+      "frame": 11,
+      "image": "secondary.png",
+      "sourceRect": {
+        "x": 1156,
+        "y": 798,
+        "width": 271,
+        "height": 209
+      },
+      "supportGlobal": [
+        1270.3295038405251,
+        1001.2621224997699
+      ],
+      "weaponTipGlobal": [
+        1417,
+        872
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.960403,
+      "bodyMatches": 30,
+      "medianBodyErrorPx": 0.9905,
+      "rgbaSha256": "e512ed16787cd497937ba01fdf24636350efd218aee24258250220f2fdff7656"
+    },
+    {
+      "clip": "jab",
+      "variant": true,
+      "frame": 0,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 51,
+        "y": 129,
+        "width": 248,
+        "height": 159
+      },
+      "supportGlobal": [
+        160.90162935071828,
+        279.8772600436611
+      ],
+      "weaponTipGlobal": [
+        289,
+        198
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.975494,
+      "bodyMatches": 20,
+      "medianBodyErrorPx": 1.1365,
+      "rgbaSha256": "fb392fb217e7f24070a96c8ede315e22e8fc2a8532ef3f0b17a199dfb0ed3434"
+    },
+    {
+      "clip": "jab",
+      "variant": true,
+      "frame": 1,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 358,
+        "y": 130,
+        "width": 275,
+        "height": 158
+      },
+      "supportGlobal": [
+        483.283180765727,
+        279.14400084640374
+      ],
+      "weaponTipGlobal": [
+        623,
+        234
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.963953,
+      "bodyMatches": 13,
+      "medianBodyErrorPx": 1.2047,
+      "rgbaSha256": "3df8c714dfeca6ea7ac1e8412884c2126fbe11f603e9288155f02bdb42645bc8"
+    },
+    {
+      "clip": "jab",
+      "variant": true,
+      "frame": 2,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 681,
+        "y": 137,
+        "width": 257,
+        "height": 151
+      },
+      "supportGlobal": [
+        802.7492423751793,
+        280.3357563015817
+      ],
+      "weaponTipGlobal": [
+        928,
+        208
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.984063,
+      "bodyMatches": 20,
+      "medianBodyErrorPx": 1.1227,
+      "rgbaSha256": "f858b62d8d650e2d4fc2455aec79e5bf14541da68ce38336ad08b8eefc37b055"
+    },
+    {
+      "clip": "jab",
+      "variant": true,
+      "frame": 3,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 1005,
+        "y": 130,
+        "width": 241,
+        "height": 159
+      },
+      "supportGlobal": [
+        1135.0525461832117,
+        281.12400196648184
+      ],
+      "weaponTipGlobal": [
+        1236,
+        182
+      ],
+      "minimumOpaqueGutterPx": 10,
+      "bodyScale": 0.990662,
+      "bodyMatches": 15,
+      "medianBodyErrorPx": 1.1159,
+      "rgbaSha256": "89d8fc046708be70451c95f389e38a318b5801b8e4f15cafc5c947f57b7dcf56"
+    },
+    {
+      "clip": "jab",
+      "variant": true,
+      "frame": 4,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 50,
+        "y": 441,
+        "width": 253,
+        "height": 151
+      },
+      "supportGlobal": [
+        156.84432545657648,
+        586.0146118440738
+      ],
+      "weaponTipGlobal": [
+        292,
+        574
+      ],
+      "minimumOpaqueGutterPx": 10,
+      "bodyScale": 1.021027,
+      "bodyMatches": 17,
+      "medianBodyErrorPx": 1.3768,
+      "rgbaSha256": "69c724c3ec05ebbbb6cd65ba64a3c62453d750496306090f0f04e0f84d5852e0"
+    },
+    {
+      "clip": "jab",
+      "variant": true,
+      "frame": 5,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 366,
+        "y": 438,
+        "width": 269,
+        "height": 156
+      },
+      "supportGlobal": [
+        485.6607442577176,
+        586.6738540191011
+      ],
+      "weaponTipGlobal": [
+        625,
+        574
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.030403,
+      "bodyMatches": 19,
+      "medianBodyErrorPx": 1.0776,
+      "rgbaSha256": "80348a4e7782c2c219781c29c9b040c7b2294527ab2f02f3c29906b596abb76e"
+    },
+    {
+      "clip": "jab",
+      "variant": true,
+      "frame": 6,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 692,
+        "y": 437,
+        "width": 245,
+        "height": 155
+      },
+      "supportGlobal": [
+        799.075219070615,
+        585.0448205165432
+      ],
+      "weaponTipGlobal": [
+        927,
+        576
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.978938,
+      "bodyMatches": 12,
+      "medianBodyErrorPx": 0.9593,
+      "rgbaSha256": "ef2ae2faf79e786b3be8a87c24e665d87e69e1eeb0858eec1117f982aefd75ed"
+    },
+    {
+      "clip": "jab",
+      "variant": true,
+      "frame": 7,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 1001,
+        "y": 435,
+        "width": 239,
+        "height": 159
+      },
+      "supportGlobal": [
+        1122.0587210713356,
+        586.0223392780267
+      ],
+      "weaponTipGlobal": [
+        1231,
+        481
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.994131,
+      "bodyMatches": 22,
+      "medianBodyErrorPx": 1.3414,
+      "rgbaSha256": "c2fabdde4269105f6ee045ba3062e9fed7a3fa28d66bf1a142568f0fd072a7fa"
+    },
+    {
+      "clip": "smash",
+      "variant": true,
+      "frame": 0,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 56,
+        "y": 762,
+        "width": 246,
+        "height": 138
+      },
+      "supportGlobal": [
+        160.77734844773894,
+        887.6392886619458
+      ],
+      "weaponTipGlobal": [
+        291,
+        886
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.970671,
+      "bodyMatches": 15,
+      "medianBodyErrorPx": 1.0917,
+      "rgbaSha256": "a8dd821c1de459bec9675b7a3d1abfe9a50bd72bbaf0ec9dd12dd226d2cac93c"
+    },
+    {
+      "clip": "smash",
+      "variant": true,
+      "frame": 1,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 382,
+        "y": 752,
+        "width": 250,
+        "height": 150
+      },
+      "supportGlobal": [
+        483.8228246776241,
+        887.4470332822483
+      ],
+      "weaponTipGlobal": [
+        622,
+        892
+      ],
+      "minimumOpaqueGutterPx": 10,
+      "bodyScale": 1.008578,
+      "bodyMatches": 12,
+      "medianBodyErrorPx": 1.0459,
+      "rgbaSha256": "4146a9f317a10d5df810eac3cab611cb0f4cb685a9eae51a07487148bee29dc0"
+    },
+    {
+      "clip": "smash",
+      "variant": true,
+      "frame": 2,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 689,
+        "y": 734,
+        "width": 224,
+        "height": 168
+      },
+      "supportGlobal": [
+        804.0712349265865,
+        889.975279553343
+      ],
+      "weaponTipGlobal": [
+        903,
+        743
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.966962,
+      "bodyMatches": 14,
+      "medianBodyErrorPx": 1.4887,
+      "rgbaSha256": "aee2985ee23d70a1f67196adba70e5cfb1472f5fde7f0ee7aa53bc4c092490b3"
+    },
+    {
+      "clip": "smash",
+      "variant": true,
+      "frame": 3,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 1012,
+        "y": 698,
+        "width": 223,
+        "height": 205
+      },
+      "supportGlobal": [
+        1131.2087042771689,
+        893.3473553367697
+      ],
+      "weaponTipGlobal": [
+        1226,
+        707
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.003594,
+      "bodyMatches": 20,
+      "medianBodyErrorPx": 0.9538,
+      "rgbaSha256": "54a0f6af63ec931b4754697c7bed0e3ed66796ff8da9d943b462fdd74c5fa7e0"
+    },
+    {
+      "clip": "smash",
+      "variant": true,
+      "frame": 4,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 43,
+        "y": 984,
+        "width": 247,
+        "height": 190
+      },
+      "supportGlobal": [
+        155.64049807677458,
+        1161.5934569087547
+      ],
+      "weaponTipGlobal": [
+        280,
+        993
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.923873,
+      "bodyMatches": 8,
+      "medianBodyErrorPx": 1.0673,
+      "rgbaSha256": "c10773129673733aeb65f77ca25185b1c946f7e2212e8bc044f55ea7f32c443d"
+    },
+    {
+      "clip": "smash",
+      "variant": true,
+      "frame": 5,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 364,
+        "y": 989,
+        "width": 238,
+        "height": 185
+      },
+      "supportGlobal": [
+        482.1579996539672,
+        1163.8397941895273
+      ],
+      "weaponTipGlobal": [
+        593,
+        998
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 0.967007,
+      "bodyMatches": 15,
+      "medianBodyErrorPx": 1.49,
+      "rgbaSha256": "e715c91ba04f5f661b4e0e0def276e8fceaf165112965748e2a473fbee1c5348"
+    },
+    {
+      "clip": "smash",
+      "variant": true,
+      "frame": 6,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 685,
+        "y": 1023,
+        "width": 254,
+        "height": 151
+      },
+      "supportGlobal": [
+        803.4017301630493,
+        1166.0191337052358
+      ],
+      "weaponTipGlobal": [
+        929,
+        1146
+      ],
+      "minimumOpaqueGutterPx": 9,
+      "bodyScale": 1.012819,
+      "bodyMatches": 12,
+      "medianBodyErrorPx": 0.8965,
+      "rgbaSha256": "7b05150d9551a5efb53fb9b86b8583011f9937054ea2eb85fce0ac39011fb7fa"
+    },
+    {
+      "clip": "smash",
+      "variant": true,
+      "frame": 7,
+      "image": "basic-variants.png",
+      "sourceRect": {
+        "x": 1000,
+        "y": 1019,
+        "width": 247,
+        "height": 160
+      },
+      "supportGlobal": [
+        1123.5357121508312,
+        1160.436765491734
+      ],
+      "weaponTipGlobal": [
+        1237,
+        1055
+      ],
+      "minimumOpaqueGutterPx": 10,
+      "bodyScale": 0.935549,
+      "bodyMatches": 8,
+      "medianBodyErrorPx": 0.7169,
+      "rgbaSha256": "75ab1578ac4b86ab7bd9713b4b21da1c867584e5398ab93a814f48521f31e59d"
+    }
+  ]
+}
