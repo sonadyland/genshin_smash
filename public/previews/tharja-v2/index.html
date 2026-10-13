@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#171321" />
+  <link rel="icon" href="data:," />
+  <title>Tharja · 暗咒全动作 | v3 造型样板</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="atelier">
+    <header><a class="wordmark" href="./index.html">动作工坊 <span>CHARACTER MOTION STUDY</span></a><a id="return-game" class="back" href="/">返回游戏 ↗</a></header>
+    <section class="intro"><div><p class="eyebrow">FIRE EMBLEM: AWAKENING · DARK MAGE</p><h1>Tharja <span>暗流咒文</span></h1></div><p>左手托书，右手引咒。<br />从静候到释放，让咒文有自己的节拍。</p></section>
+    <section class="motion-panel" aria-label="Tharja 动作审片">
+      <div class="motion-heading"><div id="clip-tabs" class="clip-tabs" role="group" aria-label="动作选择"></div><span class="study-badge">全动作样板 02</span></div>
+      <div class="stage-wrap"><canvas id="stage" width="1100" height="640" aria-label="Tharja 母版立绘与逐帧动作对照">浏览器需支持 Canvas 才能显示动作。</canvas><div class="stage-topline"><span id="clip-caption">静候咒文 / IDLE</span><span id="phase-label">加载中</span></div><div id="asset-status" role="status">正在加载美术与动作</div><div class="stage-bottomline"><span id="view-caption">同一站姿身高 · 原画比例对照</span><span id="frame-label">00 / 08</span></div></div>
+      <div class="transport"><button id="play-toggle" class="play" aria-label="暂停播放" disabled>Ⅱ</button><button id="step-back" aria-label="上一帧" disabled>‹</button><button id="step-forward" aria-label="下一帧" disabled>›</button><label class="scrubber"><span class="sr-only">动画进度</span><input id="timeline" type="range" min="0" max="1" value="0" step="1" disabled /><span id="time-label">0.00 / 0.00s</span></label><label><span class="sr-only">播放速度</span><select id="speed"><option value="1">正常 1×</option><option value="0.5">慢放 0.5×</option><option value="0.25">细看 0.25×</option></select></label></div>
+      <div class="view-options"><label>朝向<select id="facing"><option value="1">向右</option><option value="-1">向左</option></select></label><label>人物尺寸<select id="height"><option value="350">审片 350px</option><option value="224">放大 224px</option><option value="112">游戏 112px</option></select></label><label><input id="compare" type="checkbox" checked /> v3 站姿对照</label><label><input id="effects" type="checkbox" checked /> 法术演示</label><label><input id="guides" type="checkbox" /> 对齐参考线</label><label><input id="loop" type="checkbox" checked /> 循环</label><label><input id="reel" type="checkbox" /> 全动作轮播</label><button id="restart" disabled>重新播放 ↻</button></div>
+      <ol id="beats" class="beats"></ol><p id="motion-note" class="motion-note"></p>
+    </section>
+    <section class="notes"><article><p class="eyebrow">01 / CHARACTER</p><h2>自然站姿，稳定比例</h2><p>以已确认的 v3 松弛站姿为唯一造型参考，保持修长比例与自然脚距。每张源图共用固定站姿标尺。</p><a href="./assets/master.png" target="_blank" rel="noopener">查看批准站姿 ↗</a></article><article><p class="eyebrow">02 / MOTION</p><h2>从移动到四种咒术</h2><p>待机、跑步、跳跃、闪避、受击与 J / K / L / I 四种施法动作。按需载入当前动作，可逐帧检查或开启全动作轮播。</p></article><article><p class="eyebrow">03 / ART STUDY</p><h2>先审动作，再进入战斗</h2><p>法球、重咒、生命回流与远端咒域均为独立演示，未接入正式伤害。J / K / L / I 切换施法，空格暂停，方向键逐帧。</p></article></section>
+    <footer><span>跨界角色美术研究 · Tharja</span><a href="./README.md">资源与生成记录 ↗</a></footer>
+  </main>
+  <script type="module" src="./preview.js"></script>
+</body>
+</html>

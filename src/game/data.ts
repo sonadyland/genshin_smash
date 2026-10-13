@@ -14,7 +14,7 @@ export interface MoveDef {
   reach: number;    // 判定距离（像素）
   height: number;   // 判定高度
   kind: 'jab' | 'smash' | 'special' | 'secondary';
-  effect?: 'projectile' | 'dash' | 'spin' | 'gust' | 'plunge' | 'thunder' | 'updraft' | 'frost' | 'phoenix' | 'thrust' | 'geo-pillar' | 'geo-meteor' | 'salon' | 'revelry';
+  effect?: 'projectile' | 'dash' | 'spin' | 'gust' | 'plunge' | 'thunder' | 'updraft' | 'frost' | 'phoenix' | 'thrust' | 'geo-pillar' | 'geo-meteor' | 'salon' | 'revelry' | 'flux' | 'ruin' | 'nosferatu' | 'mire';
 }
 
 export interface CharDef {
@@ -29,7 +29,7 @@ export interface CharDef {
   jump: number;       // 跳跃力
   airDrift: number;   // 空中机动
   gravMul: number;    // 重力系数（<1 更飘）
-  weapon: 'sword' | 'claymore' | 'polearm';
+  weapon: 'sword' | 'claymore' | 'polearm' | 'tome';
   jab: MoveDef;
   smash: MoveDef;
   special: MoveDef;
@@ -162,6 +162,18 @@ export const CHARACTERS: CharDef[] = [
     specialCooldown: 8, secondaryCooldown: 10,
     secondaryDesc: '展开水幕打击前方，并暂时强化自身与沙龙成员；没有宠物时同样有效。',
     desc: '脱帽致意后请出三位沙龙成员，分别发射泡泡、穿刺水流与蟹钳水爆。重召会刷新成员。',
+  },
+  {
+    id: 'tharja', name: 'Tharja', title: '暗咒魔导师', color: '#be8fea', dark: '#34204d', hair: '#252337',
+    weight: 84, speed: 4.0, jump: 12.2, airDrift: 0.38, gravMul: 0.96, weapon: 'tome',
+    // Release clocks are the approved frames (395 / 615 / 460 / 1175 ms), rounded up at 60 Hz.
+    jab: { name: '暗流咒击 · Flux', dmg: 6.5, kb: 2.3, kbs: 0.048, angle: 28, startup: 24, active: 10, endlag: 26, reach: 420, height: 28, kind: 'jab', effect: 'flux' },
+    smash: { name: '凝咒重压 · Ruin', dmg: 17, kb: 5.7, kbs: 0.096, angle: 42, startup: 37, active: 12, endlag: 32, reach: 420, height: 100, kind: 'smash', effect: 'ruin' },
+    special: { name: '噬命回流 · Nosferatu', dmg: 13, kb: 2.5, kbs: 0.04, angle: 65, startup: 28, active: 32, endlag: 30, reach: 340, height: 210, kind: 'special', effect: 'nosferatu' },
+    secondary: { name: '幽沼咒域 · Mire', dmg: 3.2, kb: 1.1, kbs: 0.018, angle: 70, startup: 71, active: 8, endlag: 31, reach: 306, height: 74, kind: 'secondary', effect: 'mire' },
+    specialCooldown: 7, secondaryCooldown: 9,
+    secondaryDesc: '压掌在前方地面展开持续咒域，周期伤害接近地面的敌人；悬崖外无法成域。',
+    desc: '来自异界的黑魔法师。普通攻击发射远程暗咒，凝咒爆破压制敌人；噬命回拉命中后回复自身。',
   },
 ];
 

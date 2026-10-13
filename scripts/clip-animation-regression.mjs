@@ -346,7 +346,13 @@ test('all shipped character clips reach every combat drawing at current PVP and 
         // Both live engines increment an accepted attack before its first draw.
         for (let t = 1; t < def.startup + def.active + def.endlag; t++) {
           input.attack.t = t; const selected = selectClipFrame(pack, input); visited.add(selected.frame);
-          assert.equal(selectedClip(pack, selected).frames[selected.frame].phase, attackPhase(input.attack).phase);
+          const activeClip = selectedClip(pack, selected);
+          if (character.id === 'tharja' && activeClip.releaseFrame !== undefined) {
+            // Dark magic retains its authored hand choreography after release;
+            // its long-lived spell contact window does not freeze the cast pose.
+            assert.equal(selected.frame < activeClip.releaseFrame, t < def.startup);
+            if (t === def.startup) assert.equal(selected.frame, activeClip.releaseFrame);
+          } else assert.equal(activeClip.frames[selected.frame].phase, attackPhase(input.attack).phase);
         }
       }
       const clip = selectedClip(pack, { clip: kind, variant: visualVariant });

@@ -1,0 +1,182 @@
+{
+  "generator": "built-in image_gen",
+  "rasterEdits": false,
+  "frameCount": 12,
+  "durationMs": 1350,
+  "sheets": [
+    {
+      "file": "assets/smash-a.png",
+      "source": "public/previews/tharja-v2/assets/smash-a.png",
+      "bytes": 1021052,
+      "sha256": "e9d669a9a70c82aacec09a058c0a5d120b53d5a22bc48f74ad9c0496adbf19e8",
+      "unchanged": true,
+      "frames": [
+        {
+          "index": 0,
+          "bounds": [
+            156,
+            44,
+            520,
+            602
+          ],
+          "margin": 24,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 1,
+          "bounds": [
+            134,
+            46,
+            497,
+            603
+          ],
+          "margin": 23,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 2,
+          "bounds": [
+            152,
+            36,
+            523,
+            583
+          ],
+          "margin": 36,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 3,
+          "bounds": [
+            123,
+            36,
+            502,
+            583
+          ],
+          "margin": 36,
+          "origin": null,
+          "originAlpha": null
+        }
+      ]
+    },
+    {
+      "file": "assets/smash-b.png",
+      "source": "public/previews/tharja-v2/assets/smash-b.png",
+      "bytes": 1180061,
+      "sha256": "46fb6f9d4e0d03acdcdcf57c203a2bed5b2711e6ddd020d4bf50ea953b37dd86",
+      "unchanged": true,
+      "frames": [
+        {
+          "index": 4,
+          "bounds": [
+            136,
+            57,
+            541,
+            625
+          ],
+          "margin": 16,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 5,
+          "bounds": [
+            65,
+            58,
+            529,
+            624
+          ],
+          "margin": 17,
+          "origin": [
+            494,
+            162
+          ],
+          "originAlpha": 251
+        },
+        {
+          "index": 6,
+          "bounds": [
+            96,
+            21,
+            566,
+            579
+          ],
+          "margin": 21,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 7,
+          "bounds": [
+            110,
+            21,
+            508,
+            579
+          ],
+          "margin": 21,
+          "origin": null,
+          "originAlpha": null
+        }
+      ]
+    },
+    {
+      "file": "assets/smash-c.png",
+      "source": "public/previews/tharja-v2/assets/smash-c.png",
+      "bytes": 1181633,
+      "sha256": "9a7037c08ee981da6ce42810b7703361451adaeb43ac6c800dfaabe34ce350e2",
+      "unchanged": true,
+      "frames": [
+        {
+          "index": 8,
+          "bounds": [
+            108,
+            37,
+            556,
+            626
+          ],
+          "margin": 15,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 9,
+          "bounds": [
+            85,
+            38,
+            520,
+            626
+          ],
+          "margin": 15,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 10,
+          "bounds": [
+            149,
+            14,
+            549,
+            575
+          ],
+          "margin": 14,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 11,
+          "bounds": [
+            126,
+            14,
+            511,
+            575
+          ],
+          "margin": 14,
+          "origin": null,
+          "originAlpha": null
+        }
+      ]
+    }
+  ]
+}

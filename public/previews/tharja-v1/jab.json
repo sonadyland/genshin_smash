@@ -1,0 +1,220 @@
+{
+  "id": "jab",
+  "title": "暗流咒击 · Flux",
+  "sheets": [
+    {
+      "src": "./assets/jab-a.png",
+      "standingBodyHeight": 540
+    },
+    {
+      "src": "./assets/jab-b.png",
+      "standingBodyHeight": 552
+    },
+    {
+      "src": "./assets/jab-c.png",
+      "standingBodyHeight": 562
+    }
+  ],
+  "frames": [
+    {
+      "sheet": 0,
+      "name": "书页待势",
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        367.75,
+        598
+      ],
+      "durationMs": 70,
+      "phase": "引咒"
+    },
+    {
+      "sheet": 0,
+      "name": "抬腕引符",
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        331.25,
+        598
+      ],
+      "durationMs": 80,
+      "phase": "引咒"
+    },
+    {
+      "sheet": 0,
+      "name": "收指凝咒",
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        368.25,
+        583
+      ],
+      "durationMs": 90,
+      "phase": "引咒"
+    },
+    {
+      "sheet": 0,
+      "name": "收肘蓄势",
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        332.75,
+        583
+      ],
+      "durationMs": 90,
+      "phase": "引咒"
+    },
+    {
+      "sheet": 1,
+      "name": "前送施法手",
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        374.5,
+        610
+      ],
+      "durationMs": 65,
+      "phase": "前送"
+    },
+    {
+      "sheet": 1,
+      "name": "展掌放咒",
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        341.25,
+        610
+      ],
+      "durationMs": 100,
+      "phase": "释放",
+      "castOrigin": [
+        504,
+        182
+      ]
+    },
+    {
+      "sheet": 1,
+      "name": "腕指随势",
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        377.25,
+        591
+      ],
+      "durationMs": 60,
+      "phase": "释放"
+    },
+    {
+      "sheet": 1,
+      "name": "收肘回卷",
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        339.25,
+        590
+      ],
+      "durationMs": 70,
+      "phase": "回收"
+    },
+    {
+      "sheet": 2,
+      "name": "手回书前",
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        375.5,
+        615
+      ],
+      "durationMs": 75,
+      "phase": "回收"
+    },
+    {
+      "sheet": 2,
+      "name": "翻腕向页",
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        334.25,
+        615
+      ],
+      "durationMs": 85,
+      "phase": "回收"
+    },
+    {
+      "sheet": 2,
+      "name": "重心归位",
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        375,
+        595
+      ],
+      "durationMs": 95,
+      "phase": "回收"
+    },
+    {
+      "sheet": 2,
+      "name": "回到待势",
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        331.75,
+        594
+      ],
+      "durationMs": 120,
+      "phase": "回收"
+    }
+  ],
+  "releaseFrame": 5,
+  "loop": true,
+  "restMs": 500,
+  "note": "一次完整远程普攻：书页引咒、右掌前送、放咒和回收；人物保持原地承重，法球在独立预览层从右掌发射。动作样板时序不代表未来正式战斗硬直。"
+}

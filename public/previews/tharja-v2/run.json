@@ -1,0 +1,147 @@
+{
+  "id": "run",
+  "title": "携书疾行",
+  "sheets": [
+    {
+      "src": "./assets/run-a.png",
+      "standingBodyHeight": 455
+    },
+    {
+      "src": "./assets/run-b.png",
+      "standingBodyHeight": 510
+    }
+  ],
+  "frames": [
+    {
+      "sheet": 0,
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        366,
+        614
+      ],
+      "durationMs": 100,
+      "phase": "接触",
+      "name": "right-contact"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        345,
+        614
+      ],
+      "durationMs": 80,
+      "phase": "承重",
+      "name": "right-compression"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        356,
+        507
+      ],
+      "durationMs": 85,
+      "phase": "摆腿",
+      "name": "right-passing"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        337,
+        507
+      ],
+      "durationMs": 75,
+      "phase": "腾空",
+      "name": "left-precontact"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        366,
+        602
+      ],
+      "durationMs": 100,
+      "phase": "接触",
+      "name": "left-contact"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        345,
+        602
+      ],
+      "durationMs": 80,
+      "phase": "承重",
+      "name": "left-compression"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        369,
+        513
+      ],
+      "durationMs": 85,
+      "phase": "摆腿",
+      "name": "left-passing"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        349,
+        513
+      ],
+      "durationMs": 75,
+      "phase": "腾空",
+      "name": "right-precontact"
+    }
+  ],
+  "loop": true,
+  "restMs": 0,
+  "note": "8 相位跑步：左右接触、承重、交会与短腾空。左手稳托书，右臂平衡；虚拟地面基线配准保留腾空鞋底高度，未逐帧钉鞋或拉伸身体。"
+}

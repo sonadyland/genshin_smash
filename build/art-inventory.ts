@@ -5,7 +5,7 @@ import type { ArtCatalog } from '../src/game/asset-catalog';
 interface ClipImages { image: string; frames: { image?: string }[] }
 interface Manifest { character: string; clips: Record<string, ClipImages>; variants?: Record<string, ClipImages> }
 interface SummonRegistration { assets: Record<string, { owner: string; image: string }> }
-const characterOrder = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina'];
+const characterOrder = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina', 'tharja'];
 
 /** Only live clips, their optional frame sheets and owned summons enter the queue. */
 export function createArtCatalog(root: string, publicDirectory: string): ArtCatalog {

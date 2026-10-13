@@ -1,0 +1,79 @@
+{
+  "id": "hurt",
+  "title": "护书回稳 · HIT REACTION",
+  "sheets": [
+    {
+      "src": "./assets/hurt-a.png",
+      "standingBodyHeight": 583
+    }
+  ],
+  "frames": [
+    {
+      "sheet": 0,
+      "name": "缩肩护书",
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        383,
+        615
+      ],
+      "durationMs": 80,
+      "phase": "护书"
+    },
+    {
+      "sheet": 0,
+      "name": "承受冲击",
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        319.5,
+        615
+      ],
+      "durationMs": 105,
+      "phase": "受击"
+    },
+    {
+      "sheet": 0,
+      "name": "重心回稳",
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        385,
+        590
+      ],
+      "durationMs": 140,
+      "phase": "回稳"
+    },
+    {
+      "sheet": 0,
+      "name": "恢复待势",
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        334,
+        590
+      ],
+      "durationMs": 200,
+      "phase": "归位"
+    }
+  ],
+  "loop": false,
+  "restMs": 800,
+  "note": "短暂缩肩护书、轻微后仰，再回稳归位；这是受击姿态审片，不改变幸存者模式受击不会打断操作的规则。"
+}

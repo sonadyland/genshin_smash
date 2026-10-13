@@ -1,0 +1,151 @@
+{
+  "id": "jump",
+  "title": "轻跃落定",
+  "sheets": [
+    {
+      "src": "./assets/jump-a.png",
+      "standingBodyHeight": 541
+    },
+    {
+      "src": "./assets/jump-b.png",
+      "standingBodyHeight": 567
+    }
+  ],
+  "frames": [
+    {
+      "sheet": 0,
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        374,
+        610
+      ],
+      "durationMs": 100,
+      "phase": "起跳",
+      "name": "crouch-prepare"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        337,
+        610
+      ],
+      "durationMs": 70,
+      "phase": "起跳",
+      "name": "push-off"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        377,
+        610
+      ],
+      "durationMs": 110,
+      "phase": "腾空",
+      "name": "rise"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        343,
+        610
+      ],
+      "durationMs": 120,
+      "phase": "腾空",
+      "name": "apex"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        381,
+        610
+      ],
+      "durationMs": 100,
+      "phase": "下落",
+      "name": "descent",
+      "rootOffset": [
+        0,
+        -20
+      ]
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        381,
+        583
+      ],
+      "durationMs": 70,
+      "phase": "落定",
+      "name": "landing-contact"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        344,
+        609
+      ],
+      "durationMs": 90,
+      "phase": "落定",
+      "name": "landing-absorb"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        338,
+        588
+      ],
+      "durationMs": 170,
+      "phase": "落定",
+      "name": "neutral-recover"
+    }
+  ],
+  "loop": false,
+  "restMs": 500,
+  "note": "8 个起跳、腾空、下降与落地姿态。虚拟地面配准保留升空高度；下降帧有小量根偏移。落地按接触、膝部压缩、归位排列；每张图共用固定身体标尺。"
+}

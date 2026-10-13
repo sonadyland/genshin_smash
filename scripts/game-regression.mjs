@@ -728,11 +728,11 @@ test('Xiao CPU jumps into real plunges at every difficulty and prioritizes safe 
 });
 
 
-test('I manually releases a distinct secondary skill with real damage for all five fighters', () => {
+test('I manually releases a distinct secondary skill with real damage for every fighter', () => {
   for (let index = 0; index < CHARACTERS.length; index++) {
     const game = fighting({ player: index }), [f, target] = game.fighters;
     f.x = 540; target.x = 625;
-    key(game, 'KeyI'); step(game, 100);
+    key(game, 'KeyI'); step(game, Math.max(100, f.char.secondary.startup + f.char.secondary.active + f.char.secondary.endlag + 15));
     assert.ok(target.percent > 0, f.char.id);
     assert.ok(f.secondaryCooldown > 0, f.char.id);
     assert.equal(f.specialCooldown, 0);

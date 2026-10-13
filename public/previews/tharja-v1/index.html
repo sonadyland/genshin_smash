@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#171321" />
+  <link rel="icon" href="data:," />
+  <title>Tharja · 暗流咒文 | 动作样板</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="atelier">
+    <header><a class="wordmark" href="./index.html">动作工坊 <span>CHARACTER MOTION STUDY</span></a><a id="return-game" class="back" href="/">返回游戏 ↗</a></header>
+    <section class="intro"><div><p class="eyebrow">FIRE EMBLEM: AWAKENING · DARK MAGE</p><h1>Tharja <span>暗流咒文</span></h1></div><p>左手托书，右手引咒。<br />从静候到释放，让咒文有自己的节拍。</p></section>
+    <section class="motion-panel" aria-label="Tharja 动作审片">
+      <div class="motion-heading"><div class="clip-tabs" role="group" aria-label="动作选择"><button data-clip="idle" class="selected" aria-pressed="true" disabled><span>静候咒文</span><small>待机 · 呼吸与页角</small></button><button data-clip="jab" aria-pressed="false" disabled><span>暗流咒击</span><small>J 普攻 · 远程施法</small></button></div><span class="study-badge">美术样板 01</span></div>
+      <div class="stage-wrap"><canvas id="stage" width="1100" height="640" aria-label="Tharja 母版立绘与逐帧动作对照">浏览器需支持 Canvas 才能显示动作。</canvas><div class="stage-topline"><span id="clip-caption">静候咒文 / IDLE</span><span id="phase-label">加载中</span></div><div id="asset-status" role="status">正在加载美术与动作</div><div class="stage-bottomline"><span id="view-caption">同一站姿身高 · 原画比例对照</span><span id="frame-label">00 / 08</span></div></div>
+      <div class="transport"><button id="play-toggle" class="play" aria-label="暂停播放" disabled>Ⅱ</button><button id="step-back" aria-label="上一帧" disabled>‹</button><button id="step-forward" aria-label="下一帧" disabled>›</button><label class="scrubber"><span class="sr-only">动画进度</span><input id="timeline" type="range" min="0" max="1" value="0" step="1" disabled /><span id="time-label">0.00 / 0.00s</span></label><label><span class="sr-only">播放速度</span><select id="speed"><option value="1">正常 1×</option><option value="0.5">慢放 0.5×</option><option value="0.25">细看 0.25×</option></select></label></div>
+      <div class="view-options"><label>朝向<select id="facing"><option value="1">向右</option><option value="-1">向左</option></select></label><label>人物尺寸<select id="height"><option value="350">审片 350px</option><option value="224">放大 224px</option><option value="112">游戏 112px</option></select></label><label><input id="compare" type="checkbox" checked /> 立绘比例对照</label><label><input id="effects" type="checkbox" checked /> 法球演示</label><label><input id="guides" type="checkbox" /> 对齐参考线</label><label><input id="loop" type="checkbox" checked /> 循环</label><button id="restart" disabled>重新播放 ↻</button></div>
+      <ol id="beats" class="beats"></ol><p id="motion-note" class="motion-note"></p>
+    </section>
+    <section class="notes"><article><p class="eyebrow">01 / CHARACTER</p><h2>同一人物，同一比例</h2><p>以已确认的立绘为造型参考，按每张图的站姿标定固定身高。自然的呼吸和前倾保留在动作中。</p><a href="./assets/master.png" target="_blank" rel="noopener">查看批准立绘 ↗</a></article><article><p class="eyebrow">02 / MOTION</p><h2>书页引出，指掌送出</h2><p>待机 8 帧，远程普攻 12 帧。可暂停逐帧查看、慢放及切换朝向，检查托书、引咒、释放和回收。</p></article><article><p class="eyebrow">03 / ART STUDY</p><h2>先审动作，再进入战斗</h2><p>法球用于展示掌心释放和远程轨迹，尚未接入正式角色、伤害或技能系统。按 J 重播普攻，空格暂停，方向键逐帧。</p></article></section>
+    <footer><span>跨界角色美术研究 · Tharja</span><a href="./README.md">资源与生成记录 ↗</a></footer>
+  </main>
+  <script type="module" src="./preview.js"></script>
+</body>
+</html>

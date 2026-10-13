@@ -3,14 +3,14 @@ import type { CharDef, MoveDef } from './data';
 import type { PlungeAnimation } from './animation';
 import { advanceMotion, newMotionState, newAttackVariants, takeAttackVariant } from './clip-animation';
 import type { AttackVariantState, AttackVisualVariant, MotionState } from './clip-animation';
-import { acquireGameArt, getSwordCastTip } from './art';
+import { acquireGameArt, getSwordCastTip, getTharjaCastOrigin, getCharacterCastOrigin } from './art';
 import type { GameArtLease } from './art';
 import { castVisualFromTip } from './cast-visual';
 import type { CastVisual } from './cast-visual';
 import {
   SURVIVAL_WORLD, SURVIVAL_DURATION, SURVIVAL_BASE_HP, SURVIVAL_BRANCHES, groundHeightAt,
   TACTICAL_DURATION, getTacticalMap, EXPEDITION_WORLD, EXPEDITION_REGIONS, EXPEDITION_MAPS, getExpeditionRegion,
-  makeInitialProgress, xpForLevel, getUpgradeChoices, rerollUpgradeChoices, applyChoice, getUpgradeSummary, getSurvivalStats, getSecondaryProfile,
+  makeInitialProgress, xpForLevel, getUpgradeChoices, rerollUpgradeChoices, applyChoice, getUpgradeSummary, getSurvivalStats, getSecondaryProfile, getTharjaSurvivalProfile,
 } from './survival-data';
 import type { SurvivalProgress, UpgradeChoice, SurvivalOptions, SurvivalVariant, SurvivalWorld, TacticalMapDefinition, TacticalStats, TacticalEnemyRole, TacticalSpawn, TacticalHazardSnapshot, ExpeditionSnapshot, TacticalMapId } from './survival-data';
 import { renderSurvival } from './survival-render';
@@ -20,6 +20,8 @@ import type { BattleAction } from './input';
 import type { VisualQuality } from './visual-quality';
 import { SummonRuntime } from './summons';
 import type { SummonContext, SummonTuning } from './summons';
+import { TharjaRuntime, THARJA_COMBAT } from './tharja';
+import type { TharjaTuning, TharjaContext } from './tharja';
 
 export type SurvivalPhase = 'playing' | 'paused' | 'upgrade' | 'victory' | 'defeat';
 export interface SurvivalAttack {
@@ -116,6 +118,7 @@ export class SurvivalGame {
   effects: SurvivalEffect[] = [];
   texts: SurvivalText[] = [];
   summons = new SummonRuntime();
+  tharja = new TharjaRuntime();
   camera = { x: 0, y: 350 };
   private input = new BattleInput();
   private artLease?: GameArtLease;
@@ -178,6 +181,7 @@ export class SurvivalGame {
     this.tacticalLayer = this.player.y < 600 ? 2 : this.player.y < 800 ? 1 : 0;
     this.enemies = []; this.orbs = []; this.shots = []; this.fields = []; this.effects = []; this.texts = [];
     this.summons.clear();
+    this.tharja.clear();
     this.elapsed = 0; this.frame = 0; this.hitstop = 0; this.level = 1; this.xp = 0;
     this.kills = 0; this.eliteKills = 0; this.bossKilled = false; this.damageDealt = 0;
     this.choices = []; this.rerollsRemaining = 2; this.nextId = 1; this.eliteMilestones.clear(); this.spawnTimer = 30;
@@ -304,6 +308,7 @@ export class SurvivalGame {
     document.removeEventListener('visibilitychange', this.onVisibility);
     this.clearInput();
     this.summons.clear();
+    this.tharja.clear();
     this.artLease?.release();
     this.audio.destroy();
   }
@@ -348,6 +353,7 @@ export class SurvivalGame {
     this.updateTacticalHazards();
     if (this.phase !== 'playing') return;
     this.updateSummons();
+    this.updateTharja();
     this.updateSpawning();
     this.updateEnemies();
     if (this.phase !== 'playing') return;
@@ -361,7 +367,7 @@ export class SurvivalGame {
     this.camera.x += (clamp(this.player.x - VIEW_W / 2, 0, this.world.width - VIEW_W) - this.camera.x) * 0.12;
     const cameraY = this.variant !== 'survival' ? clamp(this.player.y - 200, 0, 230) : clamp(this.player.y - 510, 0, this.world.height - VIEW_H);
     this.camera.y += (cameraY - this.camera.y) * 0.10;
-    if (this.player.hp <= 0) { this.player.hp = 0; this.phase = 'defeat'; this.player.attack = null; this.player.nextAttackVariants = newAttackVariants(); this.clearInput(); this.summons.clear(); this.audio.setScene('result'); }
+    if (this.player.hp <= 0) { this.player.hp = 0; this.phase = 'defeat'; this.player.attack = null; this.player.nextAttackVariants = newAttackVariants(); this.clearInput(); this.summons.clear(); this.tharja.clear(); this.audio.setScene('result'); }
     else this.checkLevelUp();
     this.input.endTick();
   }
@@ -376,6 +382,7 @@ export class SurvivalGame {
     p.skillCooldown = Math.max(0, p.skillCooldown - 1); p.dodgeCooldown = Math.max(0, p.dodgeCooldown - 1);
     if (this.input.justPressed('dodge') && p.dodgeCooldown <= 0 && !p.attack?.plunge) {
       p.dodge = 16; p.dodgeCooldown = this.dodgeCooldownMax * 60; p.invuln = Math.max(p.invuln, 20); p.attack = null;
+      this.tharja.cancelDrain(0);
       this.audio.play('dodge', { charId: this.char.id });
     }
     const direction = this.input.horizontal();
@@ -488,7 +495,8 @@ export class SurvivalGame {
     const active = attack.t >= attack.def.startup && attack.t < attack.def.startup + attack.def.active;
     if (active && !attack.emitted) {
       attack.emitted = true;
-      if (attack.def.kind === 'secondary') this.releaseSecondary();
+      if (this.char.id === 'tharja') this.releaseTharja(attack.def.kind);
+      else if (attack.def.kind === 'secondary') this.releaseSecondary();
       else if (attack.def.kind === 'special') this.releaseSpecial();
       else {
         const stats = getSurvivalStats(this.progress);
@@ -523,6 +531,50 @@ export class SurvivalGame {
   private secondaryRange() { return getSurvivalStats(this.progress).rangeMultiplier * getSecondaryProfile(this.char.id, this.progress.secondaryLevel).rangeMultiplier; }
   private specialRange() {
     return getSurvivalStats(this.progress).rangeMultiplier * (1 + (this.progress.skillLevel - 1) * 0.08);
+  }
+
+  private releaseTharja(kind: MoveDef['kind']) {
+    const p = this.player, stats = getSurvivalStats(this.progress), profile = getTharjaSurvivalProfile(this.progress);
+    const context = this.tharjaContext();
+    const origin = getTharjaCastOrigin(p.x, p.y, 112, kind, p.facing) ?? { x: p.x + p.facing * 32, y: p.y - 52 };
+    const tuning: TharjaTuning = { damageMultiplier: stats.damageMultiplier * this.summons.damageMultiplier(0) * (kind === 'jab' ? 6.4 : 4.8), rangeMultiplier: stats.rangeMultiplier };
+    if (kind === 'jab') Object.assign(tuning, { damageMultiplier: tuning.damageMultiplier! * profile.fluxDamage, projectileCount: profile.fluxCount, pierce: profile.fluxPierce });
+    else if (kind === 'smash') Object.assign(tuning, { damageMultiplier: tuning.damageMultiplier! * profile.ruinDamage, projectileCount: profile.ruinCount, blastRadius: profile.ruinBlast * stats.rangeMultiplier });
+    else if (kind === 'special') Object.assign(tuning, { damageMultiplier: tuning.damageMultiplier! * (1 + (this.progress.skillLevel - 1) * .24) * profile.drainDamage,
+      rangeMultiplier: this.specialRange() * profile.drainRange, drainTargets: profile.drainTargets, healCap: profile.drainHealCap });
+    else Object.assign(tuning, { damageMultiplier: tuning.damageMultiplier! * getSecondaryProfile('tharja', this.progress.secondaryLevel).damageMultiplier,
+      fieldRadius: profile.fieldRadius * stats.rangeMultiplier, fieldDuration: profile.fieldDuration, tickFrames: profile.fieldTickFrames });
+    const spell = kind === 'jab' ? 'flux' : kind === 'smash' ? 'ruin' : kind === 'special' ? 'nosferatu' : 'mire';
+    this.tharja.cast(spell, context.owners[0], origin, context, tuning);
+    this.audio.play('cast', { charId: this.char.id, kind });
+  }
+
+  private tharjaContext(): TharjaContext {
+    const context = this.summonContext();
+    // Arriving outposts are visible but not yet valid targets or sources of healing.
+    const arriving = new Set(this.enemies.filter(enemy => enemy.state === 'arriving').map(enemy => enemy.id));
+    context.targets = context.targets.map(target => ({ ...target, alive: target.alive && !arriving.has(target.id) }));
+    return { ...context, castOriginAt: () => {
+      const p = this.player;
+      return getCharacterCastOrigin(this.char.id, p.x, p.y, 112, { state: p.attack ? 'attack' : 'free', attack: p.attack,
+        onGround: p.onGround, vx: p.vx, vy: p.vy, dodgeTimer: p.dodge, time: this.frame, motion: p.motion }, p.facing);
+    } };
+  }
+
+  private updateTharja() {
+    if (!this.tharja.effects.length) return;
+    for (const hit of this.tharja.step(this.tharjaContext())) {
+      const enemy = this.enemies.find(candidate => candidate.id === hit.targetId && candidate.hp > 0 && candidate.state !== 'arriving');
+      if (!enemy) continue;
+      const before = enemy.hp;
+      this.hurtEnemy(enemy, hit.amount, hit.facing, hit.kind === 'mire' ? 'field' : 'manual', hit.kind === 'ruin');
+      const actual = Math.max(0, before - Math.max(0, enemy.hp));
+      if (hit.heal > 0 && actual > 0 && this.player.hp > 0) {
+        const oldHp = this.player.hp;
+        this.player.hp = Math.min(getSurvivalStats(this.progress).maxHp, oldHp + Math.min(hit.heal, actual * THARJA_COMBAT.nosferatu.healRatio));
+        if (this.player.hp > oldHp) this.addText(this.player.x, this.player.y - 114, `+${(this.player.hp - oldHp).toFixed(1)}`, '#d7c0ef');
+      }
+    }
   }
 
   private melee(reach: number, height: number, damage: number, hit: Set<number>, both: boolean) {
@@ -828,6 +880,7 @@ export class SurvivalGame {
     if (p.hp <= 0) {
       this.phase = 'defeat'; this.hitstop = 0; p.attack = null; p.nextAttackVariants = newAttackVariants(); this.clearInput();
       this.summons.clear();
+      this.tharja.clear();
       this.audio.setScene('result');
       return true;
     }

@@ -1,0 +1,239 @@
+{
+  "id": "special",
+  "title": "吸取之咒 · Nosferatu",
+  "effect": "nosferatu",
+  "releaseFrame": 4,
+  "note": "向上摊指锁定、微合指牵引、收掌至胸前的吸取施法动作。掌心锚点逐帧跟随回流，左手持续托书；特效独立演示，未加入游戏机制。",
+  "sheets": [
+    {
+      "src": "./assets/special-a.png",
+      "standingBodyHeight": 556
+    },
+    {
+      "src": "./assets/special-b.png",
+      "standingBodyHeight": 551
+    },
+    {
+      "src": "./assets/special-c.png",
+      "standingBodyHeight": 558
+    }
+  ],
+  "frames": [
+    {
+      "sheet": 0,
+      "name": "静候起咒",
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        370,
+        615
+      ],
+      "durationMs": 90,
+      "phase": "祈引"
+    },
+    {
+      "sheet": 0,
+      "name": "抬腕离页",
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        329.25,
+        615
+      ],
+      "durationMs": 100,
+      "phase": "祈引"
+    },
+    {
+      "sheet": 0,
+      "name": "摊掌向上",
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        372.25,
+        582
+      ],
+      "durationMs": 130,
+      "phase": "祈引"
+    },
+    {
+      "sheet": 0,
+      "name": "举掌祈引",
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        336.5,
+        583
+      ],
+      "durationMs": 140,
+      "phase": "祈引"
+    },
+    {
+      "sheet": 1,
+      "name": "锁定咒源",
+      "rect": [
+        0,
+        0,
+        627,
+        637
+      ],
+      "pivot": [
+        354,
+        617
+      ],
+      "durationMs": 120,
+      "phase": "锁定",
+      "castOrigin": [
+        396,
+        49
+      ]
+    },
+    {
+      "sheet": 1,
+      "name": "合指牵引",
+      "rect": [
+        627,
+        0,
+        627,
+        637
+      ],
+      "pivot": [
+        335.5,
+        616
+      ],
+      "durationMs": 140,
+      "phase": "锁定",
+      "castOrigin": [
+        390,
+        94
+      ]
+    },
+    {
+      "sheet": 1,
+      "name": "屈肘引回",
+      "rect": [
+        0,
+        637,
+        627,
+        617
+      ],
+      "pivot": [
+        353.5,
+        575
+      ],
+      "durationMs": 140,
+      "phase": "牵引",
+      "castOrigin": [
+        398,
+        104
+      ]
+    },
+    {
+      "sheet": 1,
+      "name": "聚向胸前",
+      "rect": [
+        627,
+        637,
+        627,
+        617
+      ],
+      "pivot": [
+        343.75,
+        576
+      ],
+      "durationMs": 130,
+      "phase": "牵引",
+      "castOrigin": [
+        343,
+        168
+      ]
+    },
+    {
+      "sheet": 2,
+      "name": "纳咒入掌",
+      "rect": [
+        0,
+        0,
+        627,
+        643
+      ],
+      "pivot": [
+        382,
+        627
+      ],
+      "durationMs": 170,
+      "phase": "牵引",
+      "castOrigin": [
+        377,
+        205
+      ]
+    },
+    {
+      "sheet": 2,
+      "name": "松腕回落",
+      "rect": [
+        627,
+        0,
+        627,
+        643
+      ],
+      "pivot": [
+        333,
+        628
+      ],
+      "durationMs": 110,
+      "phase": "回收"
+    },
+    {
+      "sheet": 2,
+      "name": "指尖归页",
+      "rect": [
+        0,
+        643,
+        627,
+        611
+      ],
+      "pivot": [
+        383,
+        567
+      ],
+      "durationMs": 100,
+      "phase": "回收"
+    },
+    {
+      "sheet": 2,
+      "name": "复归静候",
+      "rect": [
+        627,
+        643,
+        627,
+        611
+      ],
+      "pivot": [
+        334,
+        569
+      ],
+      "durationMs": 130,
+      "phase": "回收"
+    }
+  ],
+  "loop": false,
+  "restMs": 500,
+  "returnFrame": 6,
+  "effectEndFrame": 8
+}

@@ -109,6 +109,20 @@ test('byte progress uses decoded catalog sizes rather than compressed Content-Le
   assert.equal(h.leases[0].released, 1);
 });
 
+test('Tharja adds only a homepage portrait, queues after the seven originals and reuses downloaded art on selection', async () => {
+  const order = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina', 'tharja'];
+  const characters = Object.fromEntries(['tharja', ...order.slice(0, -1)].map(id => [id, [`${id}.webp`]]));
+  const h = harness(catalog(['home.webp', 'tharja-portrait.webp'], characters, []));
+  const leave = h.loader.enterLobby(); await tick();
+  assert.ok(h.requests.every(url => url === '/assets/home.webp' || url === '/assets/tharja-portrait.webp'));
+  await h.finishAll();
+  assert.deepEqual(h.requests.filter(url => !url.includes('home.webp') && !url.includes('portrait')).map(url => url.slice(8, -5)), order);
+  assert.deepEqual(h.decodes, ['/assets/home.webp', '/assets/tharja-portrait.webp']);
+  const before = h.requests.length, selected = h.loader.prepareBattle(['tharja']); await selected.ready;
+  assert.equal(h.requests.length, before); assert.deepEqual(h.leases.at(-1).ids, ['tharja']);
+  selected.release(); leave();
+});
+
 test('entering battle prioritizes selected files, reuses in-flight URLs and pauses other characters', async () => {
   const h = harness(catalog([], { raiden: ['r-a.png', 'r-b.png'], jean: ['j-a.png'], furina: ['f-a.png', 'f-b.png'] }, []));
   const leave = h.loader.enterLobby(); await tick();

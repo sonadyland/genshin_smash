@@ -1,0 +1,221 @@
+{
+  "id": "smash",
+  "title": "凝咒重压 · Ruin",
+  "effect": "ruin",
+  "releaseFrame": 5,
+  "note": "书前蓄力、开放手掌短促前推的远程重咒。左手稳定托书、施法后披风随势；独立特效演示不代表正式游戏判定。",
+  "sheets": [
+    {
+      "src": "./assets/smash-a.png",
+      "standingBodyHeight": 554
+    },
+    {
+      "src": "./assets/smash-b.png",
+      "standingBodyHeight": 564
+    },
+    {
+      "src": "./assets/smash-c.png",
+      "standingBodyHeight": 578
+    }
+  ],
+  "frames": [
+    {
+      "sheet": 0,
+      "name": "稳书起势",
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        364.75,
+        602
+      ],
+      "durationMs": 90,
+      "phase": "凝咒"
+    },
+    {
+      "sheet": 0,
+      "name": "覆掌凝咒",
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        343.25,
+        603
+      ],
+      "durationMs": 140,
+      "phase": "凝咒"
+    },
+    {
+      "sheet": 0,
+      "name": "收指压缩",
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        363.5,
+        583
+      ],
+      "durationMs": 160,
+      "phase": "凝咒"
+    },
+    {
+      "sheet": 0,
+      "name": "沉肩蓄力",
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        340.75,
+        583
+      ],
+      "durationMs": 160,
+      "phase": "凝咒"
+    },
+    {
+      "sheet": 1,
+      "name": "短促前推",
+      "rect": [
+        0,
+        0,
+        627,
+        642
+      ],
+      "pivot": [
+        384.75,
+        625
+      ],
+      "durationMs": 65,
+      "phase": "前推"
+    },
+    {
+      "sheet": 1,
+      "name": "凝咒爆发",
+      "rect": [
+        627,
+        0,
+        627,
+        642
+      ],
+      "pivot": [
+        316.25,
+        624
+      ],
+      "durationMs": 115,
+      "phase": "释放",
+      "castOrigin": [
+        494,
+        162
+      ]
+    },
+    {
+      "sheet": 1,
+      "name": "压腕余势",
+      "rect": [
+        0,
+        642,
+        627,
+        612
+      ],
+      "pivot": [
+        385.25,
+        579
+      ],
+      "durationMs": 80,
+      "phase": "释放"
+    },
+    {
+      "sheet": 1,
+      "name": "抽肘缓收",
+      "rect": [
+        627,
+        642,
+        627,
+        612
+      ],
+      "pivot": [
+        349.5,
+        579
+      ],
+      "durationMs": 90,
+      "phase": "回收"
+    },
+    {
+      "sheet": 2,
+      "name": "掌回书前",
+      "rect": [
+        0,
+        0,
+        627,
+        642
+      ],
+      "pivot": [
+        382.75,
+        626
+      ],
+      "durationMs": 100,
+      "phase": "回收"
+    },
+    {
+      "sheet": 2,
+      "name": "松指归页",
+      "rect": [
+        627,
+        0,
+        627,
+        642
+      ],
+      "pivot": [
+        344,
+        626
+      ],
+      "durationMs": 100,
+      "phase": "回收"
+    },
+    {
+      "sheet": 2,
+      "name": "重心回正",
+      "rect": [
+        0,
+        642,
+        627,
+        612
+      ],
+      "pivot": [
+        386.25,
+        575
+      ],
+      "durationMs": 100,
+      "phase": "回收"
+    },
+    {
+      "sheet": 2,
+      "name": "复归静候",
+      "rect": [
+        627,
+        642,
+        627,
+        612
+      ],
+      "pivot": [
+        350.5,
+        575
+      ],
+      "durationMs": 150,
+      "phase": "回收"
+    }
+  ],
+  "loop": false,
+  "restMs": 500
+}

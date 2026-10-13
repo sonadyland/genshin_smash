@@ -1,0 +1,594 @@
+{
+  "generator": "built-in image_gen",
+  "pixelEdits": false,
+  "sheets": [
+    {
+      "src": "./assets/secondary-a.png",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeight": 594,
+      "bytes": 1166776,
+      "sha256": "53874e9bc0ecf4da5d35c37bf66e91c40ea672b4969f713750205e8676f03cf4",
+      "identicalToGeneratedSource": true,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "src": "./assets/secondary-b.png",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeight": 500,
+      "bytes": 923114,
+      "sha256": "01e7b1dace79e13c1bf5f6be85c83ac9e6235455dc0db77a93146451a68d1601",
+      "identicalToGeneratedSource": true,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "src": "./assets/secondary-c.png",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeight": 578,
+      "bytes": 1142002,
+      "sha256": "66a5c8b6547069c463b2bc36969adaa8a061c1830fc227b0a3e84498309d4b2c",
+      "identicalToGeneratedSource": true,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "src": "./assets/secondary-d.png",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeight": 595,
+      "bytes": 1124333,
+      "sha256": "f9ec76db5b83d98b8ffe4135e0ebba89294ab8017e9cb9b3be1dbe01cbf8a3b7",
+      "identicalToGeneratedSource": true,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "src": "./assets/hurt-a.png",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeight": 583,
+      "bytes": 1177869,
+      "sha256": "713c088ae4e0639b653a854d7b1ab562418194e87bf3d3dc20f4c4e31763f174",
+      "identicalToGeneratedSource": true,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "image": "secondary-a",
+      "frame": 1,
+      "rect": [
+        0,
+        0,
+        627,
+        648
+      ],
+      "pivot": [
+        383.5,
+        637
+      ],
+      "alpha32Bounds": [
+        143,
+        42,
+        541,
+        638
+      ],
+      "transparentMarginsLTRB": [
+        143,
+        42,
+        86,
+        10
+      ]
+    },
+    {
+      "image": "secondary-a",
+      "frame": 2,
+      "rect": [
+        627,
+        0,
+        627,
+        648
+      ],
+      "pivot": [
+        330,
+        636
+      ],
+      "alpha32Bounds": [
+        92,
+        50,
+        485,
+        637
+      ],
+      "transparentMarginsLTRB": [
+        92,
+        50,
+        142,
+        11
+      ]
+    },
+    {
+      "image": "secondary-a",
+      "frame": 3,
+      "rect": [
+        0,
+        648,
+        627,
+        606
+      ],
+      "pivot": [
+        387.5,
+        588
+      ],
+      "alpha32Bounds": [
+        147,
+        11,
+        545,
+        589
+      ],
+      "transparentMarginsLTRB": [
+        147,
+        11,
+        82,
+        17
+      ]
+    },
+    {
+      "image": "secondary-a",
+      "frame": 4,
+      "rect": [
+        627,
+        648,
+        627,
+        606
+      ],
+      "pivot": [
+        349.5,
+        585
+      ],
+      "alpha32Bounds": [
+        108,
+        11,
+        508,
+        586
+      ],
+      "transparentMarginsLTRB": [
+        108,
+        11,
+        119,
+        20
+      ]
+    },
+    {
+      "image": "secondary-b",
+      "frame": 1,
+      "rect": [
+        0,
+        0,
+        627,
+        634
+      ],
+      "pivot": [
+        356.5,
+        608
+      ],
+      "alpha32Bounds": [
+        155,
+        107,
+        488,
+        609
+      ],
+      "transparentMarginsLTRB": [
+        155,
+        107,
+        139,
+        25
+      ]
+    },
+    {
+      "image": "secondary-b",
+      "frame": 2,
+      "rect": [
+        627,
+        0,
+        627,
+        634
+      ],
+      "pivot": [
+        329.5,
+        608
+      ],
+      "alpha32Bounds": [
+        128,
+        91,
+        460,
+        609
+      ],
+      "transparentMarginsLTRB": [
+        128,
+        91,
+        167,
+        25
+      ]
+    },
+    {
+      "image": "secondary-b",
+      "frame": 3,
+      "rect": [
+        0,
+        634,
+        627,
+        620
+      ],
+      "pivot": [
+        359,
+        580
+      ],
+      "alpha32Bounds": [
+        158,
+        19,
+        489,
+        581
+      ],
+      "transparentMarginsLTRB": [
+        158,
+        19,
+        138,
+        39
+      ]
+    },
+    {
+      "image": "secondary-b",
+      "frame": 4,
+      "rect": [
+        627,
+        634,
+        627,
+        620
+      ],
+      "pivot": [
+        332.5,
+        580
+      ],
+      "alpha32Bounds": [
+        136,
+        69,
+        469,
+        581
+      ],
+      "transparentMarginsLTRB": [
+        136,
+        69,
+        158,
+        39
+      ]
+    },
+    {
+      "image": "secondary-c",
+      "frame": 1,
+      "rect": [
+        0,
+        0,
+        627,
+        647
+      ],
+      "pivot": [
+        384.5,
+        636
+      ],
+      "alpha32Bounds": [
+        143,
+        58,
+        536,
+        637
+      ],
+      "transparentMarginsLTRB": [
+        143,
+        58,
+        91,
+        10
+      ]
+    },
+    {
+      "image": "secondary-c",
+      "frame": 2,
+      "rect": [
+        627,
+        0,
+        627,
+        647
+      ],
+      "pivot": [
+        342.5,
+        636
+      ],
+      "alpha32Bounds": [
+        106,
+        68,
+        505,
+        637
+      ],
+      "transparentMarginsLTRB": [
+        106,
+        68,
+        122,
+        10
+      ]
+    },
+    {
+      "image": "secondary-c",
+      "frame": 3,
+      "rect": [
+        0,
+        647,
+        627,
+        607
+      ],
+      "pivot": [
+        384.5,
+        563
+      ],
+      "alpha32Bounds": [
+        148,
+        11,
+        543,
+        564
+      ],
+      "transparentMarginsLTRB": [
+        148,
+        11,
+        84,
+        43
+      ]
+    },
+    {
+      "image": "secondary-c",
+      "frame": 4,
+      "rect": [
+        627,
+        647,
+        627,
+        607
+      ],
+      "pivot": [
+        351,
+        564
+      ],
+      "alpha32Bounds": [
+        113,
+        11,
+        508,
+        565
+      ],
+      "transparentMarginsLTRB": [
+        113,
+        11,
+        119,
+        42
+      ]
+    },
+    {
+      "image": "secondary-d",
+      "frame": 1,
+      "rect": [
+        0,
+        0,
+        627,
+        632
+      ],
+      "pivot": [
+        390.5,
+        624
+      ],
+      "alpha32Bounds": [
+        155,
+        28,
+        538,
+        625
+      ],
+      "transparentMarginsLTRB": [
+        155,
+        28,
+        89,
+        7
+      ]
+    },
+    {
+      "image": "secondary-d",
+      "frame": 2,
+      "rect": [
+        627,
+        0,
+        627,
+        632
+      ],
+      "pivot": [
+        331,
+        624
+      ],
+      "alpha32Bounds": [
+        94,
+        31,
+        481,
+        625
+      ],
+      "transparentMarginsLTRB": [
+        94,
+        31,
+        146,
+        7
+      ]
+    },
+    {
+      "image": "secondary-d",
+      "frame": 3,
+      "rect": [
+        0,
+        632,
+        627,
+        622
+      ],
+      "pivot": [
+        391,
+        593
+      ],
+      "alpha32Bounds": [
+        152,
+        8,
+        546,
+        594
+      ],
+      "transparentMarginsLTRB": [
+        152,
+        8,
+        81,
+        28
+      ]
+    },
+    {
+      "image": "secondary-d",
+      "frame": 4,
+      "rect": [
+        627,
+        632,
+        627,
+        622
+      ],
+      "pivot": [
+        333,
+        593
+      ],
+      "alpha32Bounds": [
+        100,
+        8,
+        490,
+        594
+      ],
+      "transparentMarginsLTRB": [
+        100,
+        8,
+        137,
+        28
+      ]
+    },
+    {
+      "image": "hurt-a",
+      "frame": 1,
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        383,
+        615
+      ],
+      "alpha32Bounds": [
+        158,
+        46,
+        550,
+        616
+      ],
+      "transparentMarginsLTRB": [
+        158,
+        46,
+        77,
+        11
+      ]
+    },
+    {
+      "image": "hurt-a",
+      "frame": 2,
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        319.5,
+        615
+      ],
+      "alpha32Bounds": [
+        108,
+        48,
+        526,
+        616
+      ],
+      "transparentMarginsLTRB": [
+        108,
+        48,
+        101,
+        11
+      ]
+    },
+    {
+      "image": "hurt-a",
+      "frame": 3,
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        385,
+        590
+      ],
+      "alpha32Bounds": [
+        158,
+        12,
+        550,
+        591
+      ],
+      "transparentMarginsLTRB": [
+        158,
+        12,
+        77,
+        36
+      ]
+    },
+    {
+      "image": "hurt-a",
+      "frame": 4,
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        334,
+        590
+      ],
+      "alpha32Bounds": [
+        106,
+        12,
+        492,
+        591
+      ],
+      "transparentMarginsLTRB": [
+        106,
+        12,
+        135,
+        36
+      ]
+    }
+  ],
+  "frameCount": 20
+}

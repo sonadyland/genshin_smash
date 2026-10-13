@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "title": "Tharja · 暗咒全动作",
+  "reference": {
+    "src": "./assets/master.png",
+    "pivot": [610, 1440],
+    "bodyHeight": 1377,
+    "landmarks": [["头顶", 63], ["肩", 301], ["胯", 657], ["膝", 1020], ["脚底", 1440]]
+  },
+  "clips": [
+    { "id": "idle", "label": "静候咒文", "subtitle": "待机", "src": "./idle.json", "frames": 8 },
+    { "id": "run", "label": "持书疾行", "subtitle": "移动", "src": "./run.json", "frames": 8 },
+    { "id": "jump", "label": "跃起落定", "subtitle": "跳跃", "src": "./jump.json", "frames": 8 },
+    { "id": "dodge", "label": "收身闪避", "subtitle": "闪避", "src": "./dodge.json", "frames": 4 },
+    { "id": "jab", "label": "暗流咒击", "subtitle": "J · Flux", "src": "./jab.json", "frames": 12 },
+    { "id": "smash", "label": "凶咒破裂", "subtitle": "K · Ruin", "src": "./smash.json", "frames": 12 },
+    { "id": "special", "label": "噬生咒", "subtitle": "L · Nosferatu", "src": "./special.json", "frames": 12 },
+    { "id": "secondary", "label": "远渊咒域", "subtitle": "I · Mire", "src": "./secondary.json", "frames": 16 },
+    { "id": "hurt", "label": "护书回稳", "subtitle": "受击", "src": "./hurt.json", "frames": 4 }
+  ]
+}

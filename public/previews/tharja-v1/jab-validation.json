@@ -1,0 +1,260 @@
+{
+  "generator": "built-in image_gen",
+  "rasterEdits": false,
+  "frameCount": 12,
+  "durationMs": 1000,
+  "restMs": 500,
+  "releaseFrame": 5,
+  "calibration": "One fixed standing-body height per four-frame sheet; no per-frame scale or axis distortion.",
+  "sheets": [
+    {
+      "file": "assets/jab-a.png",
+      "source": "public/previews/tharja-v1/assets/jab-a.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1036858,
+      "sha256": "4c8412ab2e9a515e489376f6109b736a0131cc2c70929fd5b4b2d1bd7662ceb9",
+      "sourceCopiedByteForByte": true,
+      "imageUnchanged": true,
+      "standingBodyHeight": 540,
+      "transparentPixels": 1090344,
+      "redResidualPixels": 728,
+      "redResidualMaximumAlpha": 4,
+      "redPixelsWithAlphaAbove16": 0,
+      "frames": [
+        {
+          "index": 0,
+          "alpha32Bounds": [
+            143,
+            59,
+            504,
+            598
+          ],
+          "minimumAlpha32Gutter": 28,
+          "footPivot": [
+            367.75,
+            598
+          ],
+          "castOrigin": null,
+          "castOriginAlpha": null
+        },
+        {
+          "index": 1,
+          "alpha32Bounds": [
+            91,
+            59,
+            475,
+            598
+          ],
+          "minimumAlpha32Gutter": 28,
+          "footPivot": [
+            331.25,
+            598
+          ],
+          "castOrigin": null,
+          "castOriginAlpha": null
+        },
+        {
+          "index": 2,
+          "alpha32Bounds": [
+            140,
+            53,
+            512,
+            583
+          ],
+          "minimumAlpha32Gutter": 43,
+          "footPivot": [
+            368.25,
+            583
+          ],
+          "castOrigin": null,
+          "castOriginAlpha": null
+        },
+        {
+          "index": 3,
+          "alpha32Bounds": [
+            94,
+            54,
+            482,
+            583
+          ],
+          "minimumAlpha32Gutter": 43,
+          "footPivot": [
+            332.75,
+            583
+          ],
+          "castOrigin": null,
+          "castOriginAlpha": null
+        }
+      ]
+    },
+    {
+      "file": "assets/jab-b.png",
+      "source": "public/previews/tharja-v1/assets/jab-b.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1145681,
+      "sha256": "a08af7f3c0f54d7f3c1a1ec30da1c604061aa34f6a4c42a8d88d585a7a984163",
+      "sourceCopiedByteForByte": true,
+      "imageUnchanged": true,
+      "standingBodyHeight": 552,
+      "transparentPixels": 1032655,
+      "redResidualPixels": 1244,
+      "redResidualMaximumAlpha": 4,
+      "redPixelsWithAlphaAbove16": 0,
+      "frames": [
+        {
+          "index": 4,
+          "alpha32Bounds": [
+            135,
+            59,
+            535,
+            610
+          ],
+          "minimumAlpha32Gutter": 16,
+          "footPivot": [
+            374.5,
+            610
+          ],
+          "castOrigin": null,
+          "castOriginAlpha": null
+        },
+        {
+          "index": 5,
+          "alpha32Bounds": [
+            83,
+            58,
+            536,
+            610
+          ],
+          "minimumAlpha32Gutter": 16,
+          "footPivot": [
+            341.25,
+            610
+          ],
+          "castOrigin": [
+            504,
+            182
+          ],
+          "castOriginAlpha": 252
+        },
+        {
+          "index": 6,
+          "alpha32Bounds": [
+            116,
+            53,
+            571,
+            591
+          ],
+          "minimumAlpha32Gutter": 35,
+          "footPivot": [
+            377.25,
+            591
+          ],
+          "castOrigin": null,
+          "castOriginAlpha": null
+        },
+        {
+          "index": 7,
+          "alpha32Bounds": [
+            88,
+            53,
+            491,
+            590
+          ],
+          "minimumAlpha32Gutter": 36,
+          "footPivot": [
+            339.25,
+            590
+          ],
+          "castOrigin": null,
+          "castOriginAlpha": null
+        }
+      ]
+    },
+    {
+      "file": "assets/jab-c.png",
+      "source": "public/previews/tharja-v1/assets/jab-c.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1120030,
+      "sha256": "e64b12d989c721b78bd70e6afb06ca67ede5e8b2a914765eaaf71d84031a997e",
+      "sourceCopiedByteForByte": true,
+      "imageUnchanged": true,
+      "standingBodyHeight": 562,
+      "transparentPixels": 1033528,
+      "redResidualPixels": 189,
+      "redResidualMaximumAlpha": 4,
+      "redPixelsWithAlphaAbove16": 0,
+      "frames": [
+        {
+          "index": 8,
+          "alpha32Bounds": [
+            131,
+            54,
+            521,
+            615
+          ],
+          "minimumAlpha32Gutter": 11,
+          "footPivot": [
+            375.5,
+            615
+          ],
+          "castOrigin": null,
+          "castOriginAlpha": null
+        },
+        {
+          "index": 9,
+          "alpha32Bounds": [
+            81,
+            55,
+            485,
+            615
+          ],
+          "minimumAlpha32Gutter": 11,
+          "footPivot": [
+            334.25,
+            615
+          ],
+          "castOrigin": null,
+          "castOriginAlpha": null
+        },
+        {
+          "index": 10,
+          "alpha32Bounds": [
+            134,
+            40,
+            527,
+            595
+          ],
+          "minimumAlpha32Gutter": 31,
+          "footPivot": [
+            375,
+            595
+          ],
+          "castOrigin": null,
+          "castOriginAlpha": null
+        },
+        {
+          "index": 11,
+          "alpha32Bounds": [
+            81,
+            41,
+            481,
+            594
+          ],
+          "minimumAlpha32Gutter": 32,
+          "footPivot": [
+            331.75,
+            594
+          ],
+          "castOrigin": null,
+          "castOriginAlpha": null
+        }
+      ]
+    }
+  ]
+}

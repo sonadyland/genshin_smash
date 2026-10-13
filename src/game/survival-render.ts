@@ -4,6 +4,7 @@ import type { SurvivalGame, SurvivalEnemy, SurvivalField } from './survival-engi
 import { effectGlow } from './visual-quality';
 import type { VisualQuality } from './visual-quality';
 import { drawSummonArt } from './summoner-art';
+import { drawTharjaEffects } from './tharja';
 import { EXPEDITION_REGIONS, EXPEDITION_MAPS } from './survival-data';
 import type { TacticalMapDefinition } from './survival-data';
 
@@ -42,6 +43,7 @@ export function renderSurvival(game: SurvivalGame) {
     c.restore();
   }
   for (const enemy of game.enemies) if (visible(game, enemy.x)) drawEnemy(game, enemy, game.frame);
+  drawTharjaEffects(c, game.tharja.effects);
   for (const shot of game.shots) if (visible(game, shot.x)) {
     const visual = projectileVisualPosition(shot);
     c.save(); c.translate(visual.x, visual.y);

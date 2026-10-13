@@ -1,10 +1,11 @@
 import { attackPhase } from './animation';
 import type { AttackPhase, FighterAnimation } from './animation';
 
-export const CHARACTER_CLIP_IDS = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina'] as const;
+export const CHARACTER_CLIP_IDS = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina', 'tharja'] as const;
 export type ClipCharacterId = typeof CHARACTER_CLIP_IDS[number];
 export const CHARACTER_CLIPS = ['idle', 'run', 'jump', 'dodge', 'jab', 'smash', 'special', 'secondary'] as const;
-export type ClipName = typeof CHARACTER_CLIPS[number];
+export type RequiredClipName = typeof CHARACTER_CLIPS[number];
+export type ClipName = RequiredClipName | 'hurt';
 export const ATTACK_KINDS = ['jab', 'smash', 'special', 'secondary'] as const;
 export type AttackKind = typeof ATTACK_KINDS[number];
 export const VARIANT_ATTACKS = ['jab', 'smash'] as const;
@@ -36,15 +37,21 @@ export interface ClipFrame {
   sourceRect: { x: number; y: number; width: number; height: number };
   footAnchor: { x: number; y: number };
   weaponTip?: { x: number; y: number };
+  /** Measured casting palm; independent of melee blade/trail registration. */
+  castOrigin?: { x: number; y: number };
   phase?: AttackPhase;
   duration?: number;
 }
 export interface AnimationClip {
   image: string; width: number; height: number; standingBodyHeightPixels: number;
   trail?: 'arc' | 'thrust' | 'none';
+  /** Authored dark-spell timeline: startup is pinned to this measured release. */
+  releaseFrame?: number;
+  returnFrame?: number;
+  effectEndFrame?: number;
   frames: ClipFrame[];
 }
-export interface ClipManifest { version: 1; character: ClipCharacterId; clips: Record<ClipName, AnimationClip>; variants?: Partial<Record<VariantAttackKind, AnimationClip>> }
+export interface ClipManifest { version: 1; character: ClipCharacterId; clips: Record<RequiredClipName, AnimationClip> & { hurt?: AnimationClip }; variants?: Partial<Record<VariantAttackKind, AnimationClip>> }
 
 /** The exact local registration used by both blade trails and spell origins. */
 export function registeredWeaponTip(clip: AnimationClip, frame: ClipFrame, height: number) {
@@ -52,6 +59,13 @@ export function registeredWeaponTip(clip: AnimationClip, frame: ClipFrame, heigh
   const scale = height / clip.standingBodyHeightPixels * (frame.sourceScale ?? 1);
   return { x: (frame.weaponTip.x - frame.sourceRect.width * frame.footAnchor.x) * scale,
     y: (frame.weaponTip.y - frame.sourceRect.height * frame.footAnchor.y) * scale };
+}
+
+export function registeredCastOrigin(clip: AnimationClip, frame: ClipFrame, height: number) {
+  if (!frame.castOrigin) return undefined;
+  const scale = height / clip.standingBodyHeightPixels * (frame.sourceScale ?? 1);
+  return { x: (frame.castOrigin.x - frame.sourceRect.width * frame.footAnchor.x) * scale,
+    y: (frame.castOrigin.y - frame.sourceRect.height * frame.footAnchor.y) * scale };
 }
 
 /** This is simulation state, never advanced by drawing or wall-clock time. */
@@ -75,19 +89,27 @@ export function advanceMotion(motion: MotionState, input: { dx: number; onGround
   motion.slope = input.onGround ? Math.max(-0.4, Math.min(0.4, input.slope ?? 0)) : 0;
 }
 function finite(value: unknown): value is number { return typeof value === 'number' && Number.isFinite(value); }
-const atlasFilename = (value: unknown): value is string => typeof value === 'string' && /^[a-z][a-z0-9-]*\.png$/.test(value);
+const atlasFilename = (value: unknown): value is string => typeof value === 'string' && /^[a-z][a-z0-9-]*\.(png|webp)$/.test(value);
 /** Reject the entire optional pack: never silently mix damaged clips into one fighter. */
 export function validClipManifest(value: unknown): value is ClipManifest {
   if (!value || typeof value !== 'object') return false;
   const manifest = value as ClipManifest;
   if (manifest.version !== 1 || !isClipCharacterId(manifest.character) || !manifest.clips) return false;
-  return CHARACTER_CLIPS.every(name => {
+  const names: ClipName[] = [...CHARACTER_CLIPS, ...(manifest.clips.hurt !== undefined ? ['hurt' as const] : [])];
+  return names.every(name => {
     const clip = manifest.clips[name];
     if (!clip || !atlasFilename(clip.image) || !finite(clip.width) || !finite(clip.height) ||
       !Number.isInteger(clip.width) || !Number.isInteger(clip.height) || clip.width < 8 || clip.height < 8 ||
       !finite(clip.standingBodyHeightPixels) || clip.standingBodyHeightPixels <= 0 || !Array.isArray(clip.frames) || clip.frames.length < 2 || clip.frames.length > 32) return false;
     if (clip.trail !== undefined && !['arc', 'thrust', 'none'].includes(clip.trail)) return false;
     if (!clip.frames.every(frame => !!frame && typeof frame === 'object')) return false;
+    for (const key of ['releaseFrame', 'returnFrame', 'effectEndFrame'] as const) {
+      const index = clip[key];
+      if (index !== undefined && (!Number.isInteger(index) || index < 0 || index >= clip.frames.length)) return false;
+    }
+    if (clip.releaseFrame !== undefined && (!clip.frames[clip.releaseFrame].castOrigin || clip.releaseFrame < 1 ||
+      (clip.returnFrame !== undefined && clip.returnFrame < clip.releaseFrame) ||
+      (clip.effectEndFrame !== undefined && clip.effectEndFrame < (clip.returnFrame ?? clip.releaseFrame)))) return false;
     const attack = ['jab', 'smash', 'special', 'secondary'].includes(name);
     if (attack && !(['windup', 'contact', 'followthrough', 'recover'] as const).every(phase => clip.frames.some(frame => frame.phase === phase))) return false;
     if (name === 'jump' && !['takeoff', 'rise', 'apex', 'fall', 'land'].every(phase => clip.frames.some(frame => frame.name === phase))) return false;
@@ -95,7 +117,7 @@ export function validClipManifest(value: unknown): value is ClipManifest {
     let lastPhase = -1;
     const validFrames = clip.frames.every(frame => {
       if (!frame) return false;
-      const r = frame.sourceRect, a = frame.footAnchor, tip = frame.weaponTip;
+      const r = frame.sourceRect, a = frame.footAnchor, tip = frame.weaponTip, palm = frame.castOrigin;
       const width = frame.width ?? clip.width, height = frame.height ?? clip.height;
       if (frame.image !== undefined && (!atlasFilename(frame.image) || !Number.isInteger(frame.width) || !Number.isInteger(frame.height))) return false;
       if (frame.image === undefined && (frame.width !== undefined || frame.height !== undefined)) return false;
@@ -105,7 +127,8 @@ export function validClipManifest(value: unknown): value is ClipManifest {
         ![r.x, r.y, r.width, r.height].every(Number.isInteger) || r.x < 0 || r.y < 0 || r.width <= 4 || r.height <= 4 ||
         r.x + r.width > width || r.y + r.height > height || a.x < 0 || a.x > 1 || a.y < 0 || a.y > 1 ||
         (frame.duration !== undefined && (!finite(frame.duration) || frame.duration <= 0 || frame.duration > 120)) ||
-        (tip && (![tip.x, tip.y].every(finite) || tip.x < 0 || tip.y < 0 || tip.x > r.width || tip.y > r.height))) return false;
+        (tip && (![tip.x, tip.y].every(finite) || tip.x < 0 || tip.y < 0 || tip.x > r.width || tip.y > r.height)) ||
+        (palm && (![palm.x, palm.y].every(finite) || palm.x < 0 || palm.y < 0 || palm.x > r.width || palm.y > r.height))) return false;
       if (attack) {
         const order = ['windup', 'contact', 'followthrough', 'recover'].indexOf(frame.phase ?? '');
         if (order < lastPhase || order < 0) return false;
@@ -137,7 +160,7 @@ export function validVariantClips(manifest: ClipManifest): boolean {
 export interface ClipSelection { clip: ClipName; variant?: AttackVisualVariant; frame: number; phase?: AttackPhase; progress: number }
 export function selectedClip(manifest: ClipManifest, selection: Pick<ClipSelection, 'clip' | 'variant'>): AnimationClip {
   return selection.variant === 'alternate' && VARIANT_ATTACKS.includes(selection.clip as VariantAttackKind)
-    ? manifest.variants?.[selection.clip as VariantAttackKind] ?? manifest.clips[selection.clip] : manifest.clips[selection.clip];
+    ? manifest.variants?.[selection.clip as VariantAttackKind] ?? manifest.clips[selection.clip]! : manifest.clips[selection.clip] ?? manifest.clips.jump;
 }
 function weightedFrame(frames: ClipFrame[], candidates: number[], progress: number): number {
   const total = candidates.reduce((sum, index) => sum + (frames[index].duration ?? 6), 0);
@@ -148,7 +171,15 @@ function weightedFrame(frames: ClipFrame[], candidates: number[], progress: numb
 export function selectClipFrame(manifest: ClipManifest, input: FighterAnimation): ClipSelection | null {
   // Reuse a recoiled airborne pose from the new pack; changing art generations
   // during PVP damage is more distracting than sharing this physical pose.
-  if (input.state === 'hitstun') return { clip: 'jump', frame: manifest.clips.jump.frames.findIndex(frame => frame.name === 'fall'), progress: 0 };
+  if (input.state === 'hitstun') {
+    if (manifest.clips.hurt) {
+      const frames = manifest.clips.hurt.frames;
+      const duration = input.hitstunDuration ?? frames.reduce((sum, frame) => sum + (frame.duration ?? 6), 0);
+      const progress = Math.min(.999999, (input.hitstunAge ?? 0) / Math.max(1, duration));
+      return { clip: 'hurt', frame: weightedFrame(frames, frames.map((_, i) => i), progress), progress };
+    }
+    return { clip: 'jump', frame: manifest.clips.jump.frames.findIndex(frame => frame.name === 'fall'), progress: 0 };
+  }
   let clip: ClipName = 'idle', progress = 0;
   const motion = input.motion;
   if (input.dodgeTimer > 0) { clip = 'dodge'; progress = 1 - input.dodgeTimer / (input.dodgeDuration ?? 16); }
@@ -168,14 +199,21 @@ export function selectClipFrame(manifest: ClipManifest, input: FighterAnimation)
     clip = input.attack.def.kind;
     const phase = attackPhase(input.attack);
     const variant = input.attack.visualVariant === 'alternate' && VARIANT_ATTACKS.includes(clip as VariantAttackKind) && manifest.variants?.[clip as VariantAttackKind] ? 'alternate' : 'base';
-    const frames = selectedClip(manifest, { clip, variant }).frames;
+    const authored = selectedClip(manifest, { clip, variant }), frames = authored.frames;
+    if (manifest.character === 'tharja' && authored.releaseFrame !== undefined) {
+      const release = authored.releaseFrame, beforeRelease = input.attack.t < input.attack.def.startup;
+      const candidates = frames.map((_, i) => i).filter(i => beforeRelease ? i < release : i >= release);
+      const progress = beforeRelease ? input.attack.t / Math.max(1, input.attack.def.startup)
+        : (input.attack.t - input.attack.def.startup) / Math.max(1, input.attack.def.active + input.attack.def.endlag);
+      return { clip, variant, frame: weightedFrame(frames, candidates, progress), phase: phase.phase, progress };
+    }
     return { clip, variant, frame: weightedFrame(frames, frames.map((_, i) => i).filter(i => frames[i].phase === phase.phase), phase.progress), phase: phase.phase, progress: phase.progress };
   } else if (!input.onGround || (motion && motion.landAge >= 0 && motion.landAge < 8 && !motion.moving)) {
     clip = 'jump';
     const pose = input.onGround ? 'land' : (motion?.airAge ?? 10) < 3 && input.vy < 0 ? 'takeoff' : input.vy < -1.4 ? 'rise' : input.vy > 1.4 ? 'fall' : 'apex';
     const frames = manifest.clips.jump.frames;
     const candidates = frames.map((_, i) => i).filter(i => frames[i].name === pose);
-    progress = pose === 'land' ? (motion?.landAge ?? 0) / 8 : pose === 'rise' ? Math.min(0.99, (motion?.airAge ?? 0) / 18) : pose === 'fall' ? Math.min(0.99, input.vy / 12) : 0;
+    progress = pose === 'land' ? (motion?.landAge ?? 0) / 8 : pose === 'takeoff' ? (motion?.airAge ?? 0) / 3 : pose === 'rise' ? Math.min(0.99, (motion?.airAge ?? 0) / 18) : pose === 'fall' ? Math.min(0.99, input.vy / 12) : 0;
     return { clip, frame: weightedFrame(frames, candidates, progress), progress };
   } else if (motion ? motion.moving : Math.abs(input.vx) > 0.65) {
     clip = 'run'; progress = motion ? motion.distance / 96 : input.time % 24 / 24;
@@ -183,6 +221,6 @@ export function selectClipFrame(manifest: ClipManifest, input: FighterAnimation)
     const duration = manifest.clips.idle.frames.reduce((sum, frame) => sum + (frame.duration ?? 10), 0);
     progress = (motion?.age ?? input.time) % duration / duration;
   }
-  const frames = manifest.clips[clip].frames;
+  const frames = manifest.clips[clip]!.frames;
   return { clip, frame: weightedFrame(frames, frames.map((_, i) => i), progress), progress };
 }

@@ -22,7 +22,7 @@ function timing(settings: PreviewSettings) {
   const def = base ? { ...base, endlag: survival ? Math.round(base.endlag * 0.7) : base.endlag } : null;
   const attackLength = def ? def.startup + def.active + def.endlag : 0;
   const plunge = character.id === 'xiao' && clip === 'special';
-  return { character, def, plunge, attackLength, cycle: plunge ? 110 : def ? attackLength + 24 : clip === 'jump' ? 84 : clip === 'dodge' ? 40 : 240, dodgeDuration: survival ? 16 : 15 };
+  return { character, def, plunge, attackLength, cycle: plunge ? 110 : def ? attackLength + 24 : clip === 'jump' ? 84 : clip === 'dodge' ? 40 : clip === 'hurt' ? 60 : 240, dodgeDuration: survival ? 16 : 15 };
 }
 /** Display options are deliberately not written into the timeline. */
 export function advancePreviewClock(clock: PreviewClock, delta: number, settings: PreviewSettings, steps = 0) {
@@ -61,7 +61,8 @@ export function previewFrame(clock: PreviewClock, settings: PreviewSettings): { 
   const visualVariant = (settings.clip === 'jab' || settings.clip === 'smash') && (settings.form === 'new' || (settings.form === 'alternate' && Math.floor(clock.tick / cycle) % 2 === 0)) ? 'alternate' : 'base';
   const attack = def && (plunge ? !!clock.plunge : t < attackLength) ? { def, t, visualVariant, ...(clock.plunge ? { plunge: { ...clock.plunge } } : {}) } as const : null;
   return { t, cycle, y: clock.y, animation: {
-    state: attack ? 'attack' : 'free', attack,
+    state: settings.clip === 'hurt' && t < 32 ? 'hitstun' : attack ? 'attack' : 'free', attack,
+    ...(settings.clip === 'hurt' ? { hitstunAge: t, hitstunDuration: 32 } : {}),
     onGround: !clock.jumping, vx: settings.clip === 'run' ? character.speed : 0, vy: clock.vy,
     dodgeTimer: settings.clip === 'dodge' && t < dodgeDuration ? dodgeDuration - t : 0, dodgeDuration,
     time: clock.tick, motion: { ...clock.motion, facing: settings.facing, slope: settings.slope },

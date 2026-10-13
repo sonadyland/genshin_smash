@@ -61,7 +61,7 @@ interface LoaderOptions {
   idleTimeoutMs?: number;
   decodeTimeoutMs?: number;
 }
-const CHARACTER_ORDER = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina'];
+const CHARACTER_ORDER = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina', 'tharja'];
 const message = (error: unknown) => error instanceof Error ? error.message : String(error);
 const decodeImage = async (url: string) => {
   const image = new Image(); image.decoding = 'async'; image.src = url;

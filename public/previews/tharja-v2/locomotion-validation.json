@@ -1,0 +1,1038 @@
+{
+  "generator": "built-in image_gen",
+  "pixelEdits": false,
+  "assets": [
+    {
+      "src": "./assets/idle-a.png",
+      "generatedSource": "C:\\Users\\46637\\.codex\\generated_images\\01a1345a-0409-7392-acbc-b0863b44fa11\\exec-e4906caa-1e29-4aef-85a7-0f1cb2860900.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 718071,
+      "sha256": "defe51ad8e37dfa9c7a41501e9f76afe012313a2c8aaa1a59d11d50c6c5ac116",
+      "identicalToGeneratedSource": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fullyTransparentPixels": 1259756
+    },
+    {
+      "src": "./assets/idle-b.png",
+      "generatedSource": "C:\\Users\\46637\\.codex\\generated_images\\01a1345a-0409-7392-acbc-b0863b44fa11\\exec-56e45407-282c-405b-83c4-45df2e7cc212.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 763461,
+      "sha256": "3d5910c2cb99594f8989df072d238f1dbfb19c3fd8484681f56bdad79cc00789",
+      "identicalToGeneratedSource": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fullyTransparentPixels": 1222017
+    },
+    {
+      "src": "./assets/run-a.png",
+      "generatedSource": "C:\\Users\\46637\\.codex\\generated_images\\01a1345a-0409-7392-acbc-b0863b44fa11\\exec-cfa85fb7-5ef3-464b-8cc0-b0b83f7b2d68.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 675655,
+      "sha256": "cc4b2db103ce0eae07aa35d07615105ea02ee47ab1f7142ec7cea0bd05b78424",
+      "identicalToGeneratedSource": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fullyTransparentPixels": 1291967
+    },
+    {
+      "src": "./assets/run-b.png",
+      "generatedSource": "C:\\Users\\46637\\.codex\\generated_images\\01a1345a-0409-7392-acbc-b0863b44fa11\\exec-b4de86ef-ec1e-415e-ae2f-11c3f026d04f.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 825223,
+      "sha256": "548cdda5ed69febe5a0e721b2eeaef732e3e28b771f9a8619a7847e4529d97af",
+      "identicalToGeneratedSource": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fullyTransparentPixels": 1224687
+    },
+    {
+      "src": "./assets/jump-a.png",
+      "generatedSource": "C:\\Users\\46637\\.codex\\generated_images\\01a1345a-0409-7392-acbc-b0863b44fa11\\exec-0c5ea58d-89db-4356-956c-43063f6b268d.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 968618,
+      "sha256": "738ae99d32a932f6a0bec0bcea43b7e4b68ce927abe6411b53e252a7ac264c64",
+      "identicalToGeneratedSource": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fullyTransparentPixels": 1149988
+    },
+    {
+      "src": "./assets/jump-b.png",
+      "generatedSource": "C:\\Users\\46637\\.codex\\generated_images\\01a1345a-0409-7392-acbc-b0863b44fa11\\exec-fe66e691-99eb-42a3-bbc3-4fbf88a0c773.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1036639,
+      "sha256": "cd01c4e40e672f1b4c41755cb16d861c1ba5720f6cba2a27303d86887a267a2a",
+      "identicalToGeneratedSource": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fullyTransparentPixels": 1096769
+    },
+    {
+      "src": "./assets/dodge-a.png",
+      "generatedSource": "C:\\Users\\46637\\.codex\\generated_images\\01a1345a-0409-7392-acbc-b0863b44fa11\\exec-7b72e604-1e6c-420c-a653-e8f2bfc59467.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1151164,
+      "sha256": "9ff518aa6f5dd8aa435516656a8d73dca0887b1e020a62f5c72be91e5aedea18",
+      "identicalToGeneratedSource": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fullyTransparentPixels": 1050547
+    }
+  ],
+  "clips": [
+    {
+      "id": "idle",
+      "frameCount": 8,
+      "durationMs": 2190,
+      "frames": [
+        {
+          "frame": 1,
+          "name": "quiet-ready",
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            374,
+            562
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            193,
+            111,
+            488,
+            563
+          ],
+          "transparentMarginsLTRB": [
+            193,
+            111,
+            139,
+            64
+          ],
+          "standingBodyHeight": 452
+        },
+        {
+          "frame": 2,
+          "name": "inhale",
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            343,
+            562
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            167,
+            113,
+            457,
+            563
+          ],
+          "transparentMarginsLTRB": [
+            167,
+            113,
+            170,
+            64
+          ],
+          "standingBodyHeight": 452
+        },
+        {
+          "frame": 3,
+          "name": "blink-in",
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            374,
+            541
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            194,
+            93,
+            491,
+            542
+          ],
+          "transparentMarginsLTRB": [
+            194,
+            93,
+            136,
+            85
+          ],
+          "standingBodyHeight": 452
+        },
+        {
+          "frame": 4,
+          "name": "blink-crest",
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            344,
+            541
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            164,
+            95,
+            462,
+            542
+          ],
+          "transparentMarginsLTRB": [
+            164,
+            95,
+            165,
+            85
+          ],
+          "standingBodyHeight": 452
+        },
+        {
+          "frame": 5,
+          "name": "blink-out",
+          "sheet": 1,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            375,
+            543
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            191,
+            91,
+            493,
+            544
+          ],
+          "transparentMarginsLTRB": [
+            191,
+            91,
+            134,
+            83
+          ],
+          "standingBodyHeight": 455
+        },
+        {
+          "frame": 6,
+          "name": "exhale",
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            374,
+            564
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            190,
+            110,
+            494,
+            565
+          ],
+          "transparentMarginsLTRB": [
+            190,
+            110,
+            133,
+            62
+          ],
+          "standingBodyHeight": 455
+        },
+        {
+          "frame": 7,
+          "name": "cloth-settle",
+          "sheet": 1,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            337,
+            564
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            157,
+            110,
+            456,
+            565
+          ],
+          "transparentMarginsLTRB": [
+            157,
+            110,
+            171,
+            62
+          ],
+          "standingBodyHeight": 455
+        },
+        {
+          "frame": 8,
+          "name": "neutral-settle",
+          "sheet": 1,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            339,
+            543
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            157,
+            91,
+            459,
+            544
+          ],
+          "transparentMarginsLTRB": [
+            157,
+            91,
+            168,
+            83
+          ],
+          "standingBodyHeight": 455
+        }
+      ]
+    },
+    {
+      "id": "run",
+      "frameCount": 8,
+      "durationMs": 680,
+      "frames": [
+        {
+          "frame": 1,
+          "name": "right-contact",
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            366,
+            614
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            150,
+            206,
+            525,
+            612
+          ],
+          "transparentMarginsLTRB": [
+            150,
+            206,
+            102,
+            15
+          ],
+          "standingBodyHeight": 455
+        },
+        {
+          "frame": 2,
+          "name": "right-compression",
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            345,
+            614
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            93,
+            206,
+            399,
+            615
+          ],
+          "transparentMarginsLTRB": [
+            93,
+            206,
+            228,
+            12
+          ],
+          "standingBodyHeight": 455
+        },
+        {
+          "frame": 3,
+          "name": "right-passing",
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            356,
+            507
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            151,
+            99,
+            478,
+            507
+          ],
+          "transparentMarginsLTRB": [
+            151,
+            99,
+            149,
+            120
+          ],
+          "standingBodyHeight": 455
+        },
+        {
+          "frame": 4,
+          "name": "left-precontact",
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            337,
+            507
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            92,
+            101,
+            492,
+            482
+          ],
+          "transparentMarginsLTRB": [
+            92,
+            101,
+            135,
+            145
+          ],
+          "standingBodyHeight": 455
+        },
+        {
+          "frame": 5,
+          "name": "left-contact",
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            366,
+            602
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            131,
+            137,
+            553,
+            598
+          ],
+          "transparentMarginsLTRB": [
+            131,
+            137,
+            74,
+            29
+          ],
+          "standingBodyHeight": 510
+        },
+        {
+          "frame": 6,
+          "name": "left-compression",
+          "sheet": 1,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            345,
+            602
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            75,
+            137,
+            420,
+            603
+          ],
+          "transparentMarginsLTRB": [
+            75,
+            137,
+            207,
+            24
+          ],
+          "standingBodyHeight": 510
+        },
+        {
+          "frame": 7,
+          "name": "left-passing",
+          "sheet": 1,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            369,
+            513
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            152,
+            64,
+            503,
+            513
+          ],
+          "transparentMarginsLTRB": [
+            152,
+            64,
+            124,
+            114
+          ],
+          "standingBodyHeight": 510
+        },
+        {
+          "frame": 8,
+          "name": "right-precontact",
+          "sheet": 1,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            349,
+            513
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            81,
+            62,
+            560,
+            480
+          ],
+          "transparentMarginsLTRB": [
+            81,
+            62,
+            67,
+            147
+          ],
+          "standingBodyHeight": 510
+        }
+      ]
+    },
+    {
+      "id": "jump",
+      "frameCount": 8,
+      "durationMs": 830,
+      "frames": [
+        {
+          "frame": 1,
+          "name": "crouch-prepare",
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            374,
+            610
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            158,
+            129,
+            515,
+            611
+          ],
+          "transparentMarginsLTRB": [
+            158,
+            129,
+            112,
+            16
+          ],
+          "standingBodyHeight": 541
+        },
+        {
+          "frame": 2,
+          "name": "push-off",
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            337,
+            610
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            128,
+            72,
+            468,
+            611
+          ],
+          "transparentMarginsLTRB": [
+            128,
+            72,
+            159,
+            16
+          ],
+          "standingBodyHeight": 541
+        },
+        {
+          "frame": 3,
+          "name": "rise",
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            377,
+            610
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            163,
+            40,
+            526,
+            537
+          ],
+          "transparentMarginsLTRB": [
+            163,
+            40,
+            101,
+            90
+          ],
+          "standingBodyHeight": 541
+        },
+        {
+          "frame": 4,
+          "name": "apex",
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            343,
+            610
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            115,
+            17,
+            487,
+            507
+          ],
+          "transparentMarginsLTRB": [
+            115,
+            17,
+            140,
+            120
+          ],
+          "standingBodyHeight": 541
+        },
+        {
+          "frame": 5,
+          "name": "descent",
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            381,
+            610
+          ],
+          "rootOffset": [
+            0,
+            -20
+          ],
+          "alpha32Bounds": [
+            186,
+            67,
+            568,
+            594
+          ],
+          "transparentMarginsLTRB": [
+            186,
+            67,
+            59,
+            33
+          ],
+          "standingBodyHeight": 567
+        },
+        {
+          "frame": 6,
+          "name": "landing-contact",
+          "sheet": 1,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            381,
+            583
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            155,
+            39,
+            574,
+            584
+          ],
+          "transparentMarginsLTRB": [
+            155,
+            39,
+            53,
+            43
+          ],
+          "standingBodyHeight": 567
+        },
+        {
+          "frame": 7,
+          "name": "landing-absorb",
+          "sheet": 1,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            344,
+            609
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            114,
+            102,
+            493,
+            610
+          ],
+          "transparentMarginsLTRB": [
+            114,
+            102,
+            134,
+            17
+          ],
+          "standingBodyHeight": 567
+        },
+        {
+          "frame": 8,
+          "name": "neutral-recover",
+          "sheet": 1,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            338,
+            588
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            105,
+            22,
+            496,
+            589
+          ],
+          "transparentMarginsLTRB": [
+            105,
+            22,
+            131,
+            38
+          ],
+          "standingBodyHeight": 567
+        }
+      ]
+    },
+    {
+      "id": "dodge",
+      "frameCount": 4,
+      "durationMs": 520,
+      "frames": [
+        {
+          "frame": 1,
+          "name": "lower-center",
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            650
+          ],
+          "pivot": [
+            351,
+            618
+          ],
+          "rootOffset": [
+            0,
+            0
+          ],
+          "alpha32Bounds": [
+            141,
+            64,
+            531,
+            619
+          ],
+          "transparentMarginsLTRB": [
+            141,
+            64,
+            96,
+            31
+          ],
+          "standingBodyHeight": 555
+        },
+        {
+          "frame": 2,
+          "name": "sidestep",
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            650
+          ],
+          "pivot": [
+            342,
+            618
+          ],
+          "rootOffset": [
+            34,
+            0
+          ],
+          "alpha32Bounds": [
+            63,
+            94,
+            487,
+            618
+          ],
+          "transparentMarginsLTRB": [
+            63,
+            94,
+            140,
+            32
+          ],
+          "standingBodyHeight": 555
+        },
+        {
+          "frame": 3,
+          "name": "brake",
+          "sheet": 0,
+          "rect": [
+            0,
+            650,
+            627,
+            604
+          ],
+          "pivot": [
+            381,
+            562
+          ],
+          "rootOffset": [
+            52,
+            0
+          ],
+          "alpha32Bounds": [
+            137,
+            28,
+            565,
+            563
+          ],
+          "transparentMarginsLTRB": [
+            137,
+            28,
+            62,
+            41
+          ],
+          "standingBodyHeight": 555
+        },
+        {
+          "frame": 4,
+          "name": "return-to-book",
+          "sheet": 0,
+          "rect": [
+            627,
+            650,
+            627,
+            604
+          ],
+          "pivot": [
+            339,
+            568
+          ],
+          "rootOffset": [
+            42,
+            0
+          ],
+          "alpha32Bounds": [
+            107,
+            15,
+            484,
+            569
+          ],
+          "transparentMarginsLTRB": [
+            107,
+            15,
+            143,
+            35
+          ],
+          "standingBodyHeight": 555
+        }
+      ]
+    }
+  ],
+  "allChecksPassed": true
+}

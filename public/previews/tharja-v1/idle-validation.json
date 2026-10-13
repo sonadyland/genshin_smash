@@ -1,0 +1,304 @@
+{
+  "clip": "idle",
+  "frameCount": 8,
+  "durationMs": 2240,
+  "generator": "built-in image_gen",
+  "pixelEdits": false,
+  "sheets": [
+    {
+      "src": "./assets/idle-a.png",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeight": 535,
+      "bytes": 981546,
+      "sha256": "63e9a37a73c7d610da86f732c18083cb8cf0d9507fc309b226106f4c7f2a110a",
+      "identicalToGeneratedSource": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fullyTransparentPixels": 1109161
+    },
+    {
+      "src": "./assets/idle-b.png",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeight": 538,
+      "bytes": 992022,
+      "sha256": "914fbd3a072d1f0e0dc2439b5a75ba799fe4048bba6ad46e03e8b9d61f42b477",
+      "identicalToGeneratedSource": true,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fullyTransparentPixels": 1109978
+    }
+  ],
+  "frames": [
+    {
+      "frame": 1,
+      "sheet": 0,
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        368,
+        595
+      ],
+      "alpha32Bounds": [
+        148,
+        61,
+        502,
+        596
+      ],
+      "alpha128Bounds": [
+        149,
+        61,
+        501,
+        595
+      ],
+      "transparentMarginsLTRB": [
+        148,
+        61,
+        125,
+        31
+      ],
+      "fixedSheetScale": true
+    },
+    {
+      "frame": 2,
+      "sheet": 0,
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        332,
+        595
+      ],
+      "alpha32Bounds": [
+        111,
+        62,
+        467,
+        596
+      ],
+      "alpha128Bounds": [
+        112,
+        63,
+        467,
+        595
+      ],
+      "transparentMarginsLTRB": [
+        111,
+        62,
+        160,
+        31
+      ],
+      "fixedSheetScale": true
+    },
+    {
+      "frame": 3,
+      "sheet": 0,
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        370,
+        581
+      ],
+      "alpha32Bounds": [
+        144,
+        57,
+        513,
+        582
+      ],
+      "alpha128Bounds": [
+        145,
+        58,
+        512,
+        582
+      ],
+      "transparentMarginsLTRB": [
+        144,
+        57,
+        114,
+        45
+      ],
+      "fixedSheetScale": true
+    },
+    {
+      "frame": 4,
+      "sheet": 0,
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        339,
+        581
+      ],
+      "alpha32Bounds": [
+        103,
+        57,
+        479,
+        582
+      ],
+      "alpha128Bounds": [
+        104,
+        58,
+        478,
+        581
+      ],
+      "transparentMarginsLTRB": [
+        103,
+        57,
+        148,
+        45
+      ],
+      "fixedSheetScale": true
+    },
+    {
+      "frame": 5,
+      "sheet": 1,
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        369,
+        597
+      ],
+      "alpha32Bounds": [
+        132,
+        60,
+        515,
+        598
+      ],
+      "alpha128Bounds": [
+        132,
+        60,
+        514,
+        598
+      ],
+      "transparentMarginsLTRB": [
+        132,
+        60,
+        112,
+        29
+      ],
+      "fixedSheetScale": true
+    },
+    {
+      "frame": 6,
+      "sheet": 1,
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        334,
+        597
+      ],
+      "alpha32Bounds": [
+        112,
+        60,
+        480,
+        598
+      ],
+      "alpha128Bounds": [
+        113,
+        60,
+        479,
+        598
+      ],
+      "transparentMarginsLTRB": [
+        112,
+        60,
+        147,
+        29
+      ],
+      "fixedSheetScale": true
+    },
+    {
+      "frame": 7,
+      "sheet": 1,
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        371,
+        583
+      ],
+      "alpha32Bounds": [
+        142,
+        57,
+        518,
+        584
+      ],
+      "alpha128Bounds": [
+        143,
+        57,
+        518,
+        583
+      ],
+      "transparentMarginsLTRB": [
+        142,
+        57,
+        109,
+        43
+      ],
+      "fixedSheetScale": true
+    },
+    {
+      "frame": 8,
+      "sheet": 1,
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        337,
+        583
+      ],
+      "alpha32Bounds": [
+        110,
+        57,
+        481,
+        584
+      ],
+      "alpha128Bounds": [
+        111,
+        57,
+        480,
+        583
+      ],
+      "transparentMarginsLTRB": [
+        110,
+        57,
+        146,
+        43
+      ],
+      "fixedSheetScale": true
+    }
+  ],
+  "allChecksPassed": true
+}

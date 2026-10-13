@@ -1,0 +1,289 @@
+{
+  "id": "secondary",
+  "title": "远渊咒域 · Mire",
+  "sheets": [
+    {
+      "src": "./assets/secondary-a.png",
+      "standingBodyHeight": 594
+    },
+    {
+      "src": "./assets/secondary-b.png",
+      "standingBodyHeight": 500
+    },
+    {
+      "src": "./assets/secondary-c.png",
+      "standingBodyHeight": 578
+    },
+    {
+      "src": "./assets/secondary-d.png",
+      "standingBodyHeight": 595
+    }
+  ],
+  "frames": [
+    {
+      "sheet": 0,
+      "name": "书页待势",
+      "rect": [
+        0,
+        0,
+        627,
+        648
+      ],
+      "pivot": [
+        383.5,
+        637
+      ],
+      "durationMs": 110,
+      "phase": "读咒起势"
+    },
+    {
+      "sheet": 0,
+      "name": "垂眸读咒",
+      "rect": [
+        627,
+        0,
+        627,
+        648
+      ],
+      "pivot": [
+        330,
+        636
+      ],
+      "durationMs": 130,
+      "phase": "读咒起势"
+    },
+    {
+      "sheet": 0,
+      "name": "抬书起指",
+      "rect": [
+        0,
+        648,
+        627,
+        606
+      ],
+      "pivot": [
+        387.5,
+        588
+      ],
+      "durationMs": 140,
+      "phase": "读咒起势"
+    },
+    {
+      "sheet": 0,
+      "name": "右手抬腕",
+      "rect": [
+        627,
+        648,
+        627,
+        606
+      ],
+      "pivot": [
+        349.5,
+        585
+      ],
+      "durationMs": 140,
+      "phase": "读咒起势"
+    },
+    {
+      "sheet": 1,
+      "name": "抬肘描符",
+      "rect": [
+        0,
+        0,
+        627,
+        634
+      ],
+      "pivot": [
+        356.5,
+        608
+      ],
+      "durationMs": 130,
+      "phase": "抬手描符"
+    },
+    {
+      "sheet": 1,
+      "name": "手越额前",
+      "rect": [
+        627,
+        0,
+        627,
+        634
+      ],
+      "pivot": [
+        329.5,
+        608
+      ],
+      "durationMs": 120,
+      "phase": "抬手描符"
+    },
+    {
+      "sheet": 1,
+      "name": "向上引咒",
+      "rect": [
+        0,
+        634,
+        627,
+        620
+      ],
+      "pivot": [
+        359,
+        580
+      ],
+      "durationMs": 140,
+      "phase": "抬手描符"
+    },
+    {
+      "sheet": 1,
+      "name": "转掌蓄势",
+      "rect": [
+        627,
+        634,
+        627,
+        620
+      ],
+      "pivot": [
+        332.5,
+        580
+      ],
+      "durationMs": 130,
+      "phase": "抬手描符"
+    },
+    {
+      "sheet": 2,
+      "name": "掌势转下",
+      "rect": [
+        0,
+        0,
+        627,
+        647
+      ],
+      "pivot": [
+        384.5,
+        636
+      ],
+      "durationMs": 75,
+      "phase": "压掌成域"
+    },
+    {
+      "sheet": 2,
+      "name": "迅速压掌",
+      "rect": [
+        627,
+        0,
+        627,
+        647
+      ],
+      "pivot": [
+        342.5,
+        636
+      ],
+      "durationMs": 60,
+      "phase": "压掌成域"
+    },
+    {
+      "sheet": 2,
+      "name": "指地释放",
+      "rect": [
+        0,
+        647,
+        627,
+        607
+      ],
+      "pivot": [
+        384.5,
+        563
+      ],
+      "durationMs": 125,
+      "phase": "压掌成域",
+      "castOrigin": [
+        473,
+        220
+      ]
+    },
+    {
+      "sheet": 2,
+      "name": "掌势随动",
+      "rect": [
+        627,
+        647,
+        627,
+        607
+      ],
+      "pivot": [
+        351,
+        564
+      ],
+      "durationMs": 90,
+      "phase": "压掌成域"
+    },
+    {
+      "sheet": 3,
+      "name": "屈肘收掌",
+      "rect": [
+        0,
+        0,
+        627,
+        632
+      ],
+      "pivot": [
+        390.5,
+        624
+      ],
+      "durationMs": 90,
+      "phase": "回书归位"
+    },
+    {
+      "sheet": 3,
+      "name": "翻腕回书",
+      "rect": [
+        627,
+        0,
+        627,
+        632
+      ],
+      "pivot": [
+        331,
+        624
+      ],
+      "durationMs": 100,
+      "phase": "回书归位"
+    },
+    {
+      "sheet": 3,
+      "name": "指尖回页",
+      "rect": [
+        0,
+        632,
+        627,
+        622
+      ],
+      "pivot": [
+        391,
+        593
+      ],
+      "durationMs": 100,
+      "phase": "回书归位"
+    },
+    {
+      "sheet": 3,
+      "name": "归位静候",
+      "rect": [
+        627,
+        632,
+        627,
+        622
+      ],
+      "pivot": [
+        333,
+        593
+      ],
+      "durationMs": 150,
+      "phase": "回书归位"
+    }
+  ],
+  "effect": "mire",
+  "releaseFrame": 10,
+  "loop": false,
+  "restMs": 650,
+  "note": "缓慢抬书读咒，举起右手描符，再迅速前下压掌；第 11 帧指地时远方咒域展开，随后收掌回到松弛站姿。咒域是独立美术演示，尚无伤害判定。"
+}

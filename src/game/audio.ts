@@ -336,6 +336,12 @@ export class BattleAudio {
       else if (options.charId === 'xiao') { noise(secondary ? 0.2 : 0.36, 3000, 0.16); tone(secondary ? 740 : 500, 0.22, 'sine', 0.07, secondary ? 220 : 130); tone(150, 0.18, 'triangle', 0.065, 65); }
       else if (options.charId === 'zhongli') { tone(secondary ? 68 : 100, secondary ? .65 : .42, 'triangle', .17, 32); noise(secondary ? .5 : .27, 520, .18, 'lowpass'); [392, 588].forEach((f, i) => tone(f, .38, 'sine', .035, f * .96, i * .04)); }
       else if (options.charId === 'furina') { noise(.26, 2600, .1, 'bandpass'); [587, 740, 880, 1175].forEach((f, i) => tone(f, secondary ? .42 : .24, 'sine', .045, f * 1.005, i * .035)); tone(220, .22, 'triangle', .06, 110); }
+      else if (options.charId === 'tharja') {
+        const drain = options.kind === 'special', heavy = options.kind === 'smash';
+        noise(secondary ? .55 : drain ? .42 : .23, secondary ? 680 : 1200, .09, 'bandpass');
+        tone(heavy ? 90 : 165, secondary ? .6 : .32, 'triangle', heavy ? .12 : .07, drain ? 360 : 48);
+        tone(349, .27, 'sine', .035, drain ? 523 : 174); tone(370, .28, 'sine', .025, drain ? 554 : 185, .03);
+      }
       else { noise(0.48, 1700, 0.16); tone(392, 0.35, 'sine', 0.07, secondary ? 784 : 588); tone(587, 0.3, 'sine', 0.035, 880, 0.035); }
     } else if (event === 'shield') {
       tone(196, .18, 'triangle', .075, 90); tone(784, .22, 'sine', .04, 740); noise(.08, 900, .06, 'lowpass');
@@ -345,7 +351,9 @@ export class BattleAudio {
       else if (options.summonKind === 'water-pierce') { noise(.14, 3900, .065, 'highpass'); tone(920, .12, 'sine', .04, 480); }
       else { tone(360, .14, 'sine', .065, 890); tone(980, .12, 'sine', .025, 590, .055); noise(.09, 2100, .04); }
     } else if (event === 'attack' || event === 'throw') {
-      const heavy = options.kind === 'smash'; noise(heavy ? 0.21 : 0.12, heavy ? 1200 : 2500, heavy ? 0.14 : 0.09); tone(heavy ? 155 : 400, 0.09, 'triangle', 0.045, heavy ? 70 : 120);
+      const heavy = options.kind === 'smash';
+      if (options.charId === 'tharja') { noise(.14, 1900, .035, 'bandpass'); tone(174, heavy ? .3 : .18, 'sine', .035, heavy ? 261 : 196); }
+      else { noise(heavy ? 0.21 : 0.12, heavy ? 1200 : 2500, heavy ? 0.14 : 0.09); tone(heavy ? 155 : 400, 0.09, 'triangle', 0.045, heavy ? 70 : 120); }
     } else if (event === 'impact' || event === 'hurt' || event === 'land' || event === 'explosion') {
       const big = event === 'explosion', hurt = event === 'hurt';
       tone(big ? 90 : hurt ? 140 : 185, big ? 0.4 : 0.15, 'triangle', (big ? 0.2 : 0.09) * power, big ? 30 : 55);
@@ -354,6 +362,7 @@ export class BattleAudio {
       if (options.charId === 'raiden') noise(0.07, 7000, 0.06, 'highpass');
       if (options.charId === 'zhongli') { noise(.12, 650, .065, 'lowpass'); tone(110, .16, 'triangle', .045, 48); }
       if (options.charId === 'furina') { tone(720, .11, 'sine', .035, 1150); noise(.08, 3300, .035); }
+      if (options.charId === 'tharja') { tone(207, .24, 'sine', .05, 69); noise(.18, 850, .05, 'lowpass'); }
     } else if (event === 'jump' || event === 'dodge') { noise(event === 'jump' ? 0.08 : 0.19, 1800, 0.065); tone(event === 'jump' ? 220 : 700, 0.12, 'sine', 0.035, event === 'jump' ? 430 : 170); }
     else if (event === 'ko') { noise(0.4, 800, 0.2, 'lowpass'); tone(70, 0.5, 'triangle', 0.14, 25); tone(523, 0.5, 'sine', 0.065, 131); }
     else if (event === 'upgrade') { [523, 659, 784, 1047].forEach((f, i) => tone(f, 0.3, 'sine', 0.08, f, i * 0.055)); }

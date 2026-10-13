@@ -1,0 +1,252 @@
+{
+  "source": "approved public/previews/tharja-v2",
+  "images": [
+    {
+      "source": "public/previews/tharja-v2/assets/idle-a.png",
+      "target": "public/assets/animations/tharja-v1/idle-a.webp",
+      "sourceSha256": "defe51ad8e37dfa9c7a41501e9f76afe012313a2c8aaa1a59d11d50c6c5ac116",
+      "targetSha256": "199fe82597052016fed7f9b7e74081d333f3defb3cd7bd312f2a28060a68fa4f",
+      "sourceBytes": 718071,
+      "bytes": 167350,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/idle-b.png",
+      "target": "public/assets/animations/tharja-v1/idle-b.webp",
+      "sourceSha256": "3d5910c2cb99594f8989df072d238f1dbfb19c3fd8484681f56bdad79cc00789",
+      "targetSha256": "fe3492fd935db8513c465e07def41f0e0b1b7b0b4d053e2e616b7ba8f391d041",
+      "sourceBytes": 763461,
+      "bytes": 181196,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/run-a.png",
+      "target": "public/assets/animations/tharja-v1/run-a.webp",
+      "sourceSha256": "cc4b2db103ce0eae07aa35d07615105ea02ee47ab1f7142ec7cea0bd05b78424",
+      "targetSha256": "3acf2aba9f9383fb9a1969cca9c19f3c25d6d61970668c7f25647cb0ed0d80a7",
+      "sourceBytes": 675655,
+      "bytes": 160988,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/run-b.png",
+      "target": "public/assets/animations/tharja-v1/run-b.webp",
+      "sourceSha256": "548cdda5ed69febe5a0e721b2eeaef732e3e28b771f9a8619a7847e4529d97af",
+      "targetSha256": "f1f88f3e06c0a5bcf3da5a08e4a477970cabb797f8d901bee3bc0496a81e6640",
+      "sourceBytes": 825223,
+      "bytes": 189574,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/jump-a.png",
+      "target": "public/assets/animations/tharja-v1/jump-a.webp",
+      "sourceSha256": "738ae99d32a932f6a0bec0bcea43b7e4b68ce927abe6411b53e252a7ac264c64",
+      "targetSha256": "cf37488f6303a472a1fe9a76f63742c847ac07e5722ee8f0acd6974cf38aa9a4",
+      "sourceBytes": 968618,
+      "bytes": 215394,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/jump-b.png",
+      "target": "public/assets/animations/tharja-v1/jump-b.webp",
+      "sourceSha256": "cd01c4e40e672f1b4c41755cb16d861c1ba5720f6cba2a27303d86887a267a2a",
+      "targetSha256": "85f6cf54ef563e60e61627a30e82eb358ae90a7be2d115a5ec26a7c4850daf39",
+      "sourceBytes": 1036639,
+      "bytes": 224180,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/dodge-a.png",
+      "target": "public/assets/animations/tharja-v1/dodge-a.webp",
+      "sourceSha256": "9ff518aa6f5dd8aa435516656a8d73dca0887b1e020a62f5c72be91e5aedea18",
+      "targetSha256": "adc7d56ffcc20e3e2b30ff2a492e2231484447f60b81dac4ae21e51645e1cb28",
+      "sourceBytes": 1151164,
+      "bytes": 248076,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/jab-a.png",
+      "target": "public/assets/animations/tharja-v1/jab-a.webp",
+      "sourceSha256": "6fba52ae7d6e978277b3e88683f4105720ca8d9fe3dff7cd18d74fd1f20cc4eb",
+      "targetSha256": "06e3fb5814c5942b155c58519e509e43165510b48ec12ae8082009d4ed2fa7ca",
+      "sourceBytes": 757779,
+      "bytes": 174782,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/jab-b.png",
+      "target": "public/assets/animations/tharja-v1/jab-b.webp",
+      "sourceSha256": "2427dc7178d2fd728b984855ca81a3eee1dea3194761c325becbdb2ced663481",
+      "targetSha256": "38ab0168cfd62fd369e6ff4a84ad62225b5cf8f6fb25d755d2c2052e1866485d",
+      "sourceBytes": 1068838,
+      "bytes": 240646,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/jab-c.png",
+      "target": "public/assets/animations/tharja-v1/jab-c.webp",
+      "sourceSha256": "d3347560b978075b297c5ef8fd5197c51ab13f87afd54cdf40dc40e69fcd47de",
+      "targetSha256": "273a0b456833bd056f196ba40b3f9980feaf4683985bc8f856f8bebce11dd006",
+      "sourceBytes": 977648,
+      "bytes": 214782,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/smash-a.png",
+      "target": "public/assets/animations/tharja-v1/smash-a.webp",
+      "sourceSha256": "e9d669a9a70c82aacec09a058c0a5d120b53d5a22bc48f74ad9c0496adbf19e8",
+      "targetSha256": "e7752132753464e6eb46e8b5b120a4c79c78d8e6f8ea1af727208e969a7d7c8d",
+      "sourceBytes": 1021052,
+      "bytes": 225984,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/smash-b.png",
+      "target": "public/assets/animations/tharja-v1/smash-b.webp",
+      "sourceSha256": "46fb6f9d4e0d03acdcdcf57c203a2bed5b2711e6ddd020d4bf50ea953b37dd86",
+      "targetSha256": "63488e8ef99db0585cae27a91e71b01423b6d04aeed858e6c8d3b15001dcab15",
+      "sourceBytes": 1180061,
+      "bytes": 261790,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/smash-c.png",
+      "target": "public/assets/animations/tharja-v1/smash-c.webp",
+      "sourceSha256": "9a7037c08ee981da6ce42810b7703361451adaeb43ac6c800dfaabe34ce350e2",
+      "targetSha256": "efa3abd6f96e965d6842ec14948f2ecc0f6b51f43959116edbcf1e5962ba134d",
+      "sourceBytes": 1181633,
+      "bytes": 259152,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/special-a.png",
+      "target": "public/assets/animations/tharja-v1/special-a.webp",
+      "sourceSha256": "5d805838fa5131b3876f2dc64dc88a22a9cc9f4ecd33116841e615b4e3abe015",
+      "targetSha256": "dfbb2cb887c353910a20085698898d976ec075250b73d8b7f5caf014b85f7157",
+      "sourceBytes": 1060231,
+      "bytes": 242702,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/special-b.png",
+      "target": "public/assets/animations/tharja-v1/special-b.webp",
+      "sourceSha256": "a94d7927df445cec8b228d9d7dcab3b7eebaf03c2f1d2c65e663f7c8e4f50cb5",
+      "targetSha256": "2a82a74dead7c4813757d9c06f2c1803b2741da4eb13f79751b76496276c9155",
+      "sourceBytes": 1065032,
+      "bytes": 236106,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/special-c.png",
+      "target": "public/assets/animations/tharja-v1/special-c.webp",
+      "sourceSha256": "9f17c5a24d4adcd27fe47969f95f2dd3a779c3556f7932156741df6595a65c6e",
+      "targetSha256": "4887b9f26b494e0875de59a1c0cfb5b55dce3e60975577d2564486e4cc5be3d8",
+      "sourceBytes": 1033650,
+      "bytes": 228678,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/secondary-a.png",
+      "target": "public/assets/animations/tharja-v1/secondary-a.webp",
+      "sourceSha256": "53874e9bc0ecf4da5d35c37bf66e91c40ea672b4969f713750205e8676f03cf4",
+      "targetSha256": "03eb3de675c5c457df2543db8111d4f8c4dd7b1a4482f0f026a651cca1d1e8d1",
+      "sourceBytes": 1166776,
+      "bytes": 244974,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/secondary-b.png",
+      "target": "public/assets/animations/tharja-v1/secondary-b.webp",
+      "sourceSha256": "01e7b1dace79e13c1bf5f6be85c83ac9e6235455dc0db77a93146451a68d1601",
+      "targetSha256": "ff493116881c1c5123822e834844ba59a5c8c632ce0da173ff1c7bde1efd0636",
+      "sourceBytes": 923114,
+      "bytes": 221422,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/secondary-c.png",
+      "target": "public/assets/animations/tharja-v1/secondary-c.webp",
+      "sourceSha256": "66a5c8b6547069c463b2bc36969adaa8a061c1830fc227b0a3e84498309d4b2c",
+      "targetSha256": "6cd82b52113d6a62d111e3c85b498897e169b7f2e2f868b505ce675b2dc37df4",
+      "sourceBytes": 1142002,
+      "bytes": 247740,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/secondary-d.png",
+      "target": "public/assets/animations/tharja-v1/secondary-d.webp",
+      "sourceSha256": "f9ec76db5b83d98b8ffe4135e0ebba89294ab8017e9cb9b3be1dbe01cbf8a3b7",
+      "targetSha256": "a0d560bd69c5c358c013846e728b0634022c4167b1ff534d8ecf1d1237318008",
+      "sourceBytes": 1124333,
+      "bytes": 243750,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/assets/hurt-a.png",
+      "target": "public/assets/animations/tharja-v1/hurt-a.webp",
+      "sourceSha256": "713c088ae4e0639b653a854d7b1ab562418194e87bf3d3dc20f4c4e31763f174",
+      "targetSha256": "69950749e99b8698b035d86c6f43d27548aa2dcfe2236a990008ddd4c9758d30",
+      "sourceBytes": 1177869,
+      "bytes": 256940,
+      "width": 1254,
+      "height": 1254,
+      "alphaLossless": true
+    },
+    {
+      "source": "public/previews/tharja-v2/portrait.png",
+      "target": "public/assets/lobby/tharja.webp",
+      "sourceSha256": "93c586cf7c2b6a63baae8712a112f8dc812e448a333b265efcfbffb5e95b9357",
+      "targetSha256": "9d2509bfca48cd745dfb8591eb6fc0c62769643e884bb2ababb6580252647f8b",
+      "sourceBytes": 1887800,
+      "bytes": 82528,
+      "width": 640,
+      "height": 960,
+      "alphaLossless": true
+    }
+  ],
+  "frames": 84,
+  "atlasCompression": "WebP quality=92 method=6; original dimensions; alpha exact",
+  "movement": "Physics owns jump/dodge translation; no showcase rootOffset replay.",
+  "sourceBytes": 22906649,
+  "productionBytes": 4809079
+}

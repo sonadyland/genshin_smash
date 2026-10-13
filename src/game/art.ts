@@ -1,6 +1,6 @@
 import { attackPhase, selectActionFrame } from './animation';
 import type { FighterAnimation } from './animation';
-import { CHARACTER_CLIPS, CHARACTER_CLIP_IDS, VARIANT_ATTACKS, selectClipFrame, selectedClip, validClipManifest, validVariantClip, registeredWeaponTip } from './clip-animation';
+import { CHARACTER_CLIP_IDS, VARIANT_ATTACKS, selectClipFrame, selectedClip, validClipManifest, validVariantClip, registeredWeaponTip, registeredCastOrigin } from './clip-animation';
 import type { ClipManifest, ClipSelection, ClipCharacterId } from './clip-animation';
 import type { AttackKind, AttackVisualVariant } from './clip-animation';
 import { CHARACTERS } from './data';
@@ -88,6 +88,23 @@ export function getCharacterAnimationStatus(id: string) {
     frames: pack ? [...Object.values(pack.manifest.clips), ...Object.values(pack.manifest.variants ?? {})].reduce((sum, clip) => sum + clip.frames.length, 0) : 0 };
 }
 export function getEulaAnimationStatus() { return getCharacterAnimationStatus('eula'); }
+
+/** Release locations are measured on the same full-size sprite and mirrored once. */
+export function getTharjaCastOrigin(x: number, feetY: number, height: number, kind: AttackKind, facing: 1 | -1 = 1) {
+  const clip = characterPacks.get('tharja')?.manifest.clips[kind];
+  const frame = clip?.frames.find(frame => frame.phase === 'contact');
+  const palm = clip && frame && registeredCastOrigin(clip, frame, height);
+  return palm ? { x: x + palm.x * facing, y: feetY + palm.y } : undefined;
+}
+
+/** A sustained spell can follow the current hand through its return gesture. */
+export function getCharacterCastOrigin(id: string, x: number, feetY: number, height: number, animation: FighterAnimation, facing: 1 | -1 = 1) {
+  if (animation.state === 'hitstun') return undefined;
+  const pack = characterPacks.get(id), selection = pack && selectClipFrame(pack.manifest, animation);
+  if (!pack || !selection || !animation.attack) return undefined;
+  const clip = selectedClip(pack.manifest, selection), palm = registeredCastOrigin(clip, clip.frames[selection.frame], height);
+  return palm ? { x: x + palm.x * facing, y: feetY + palm.y } : undefined;
+}
 /** Read-only capability query: effects from a completed attack retain its form. */
 export function hasRegisteredMeleeTrail(id: string, kind: AttackKind, variant?: AttackVisualVariant): boolean {
   if (kind !== 'jab' && kind !== 'smash') return false;
@@ -142,7 +159,7 @@ async function loadCharacterPack(id: ClipCharacterId, owner: CharacterResources,
     const loadClip = async (clip: ClipManifest['clips']['idle']) => {
       await Promise.all([loadAtlas(clip.image, clip.width, clip.height), ...clip.frames.filter(frame => frame.image).map(frame => loadAtlas(frame.image!, frame.width!, frame.height!))]);
     };
-    await Promise.all(CHARACTER_CLIPS.map(name => loadClip(manifest.clips[name])));
+    await Promise.all(Object.values(manifest.clips).map(clip => loadClip(clip)));
     if (characterResources.get(id) !== owner) throw new Error('Released character art');
     const loadedManifest: ClipManifest = { version: 1, character: id, clips: manifest.clips };
     // Only J/K have alternative forms. Invalid optional clips fall back on their
@@ -410,7 +427,7 @@ function drawCharacterClip(context: CanvasRenderingContext2D, pack: CharacterPac
   const dx = (1 - source.width * frame.footAnchor.x) * scale, dy = (1 - source.height * frame.footAnchor.y) * scale;
   context.save(); context.globalAlpha *= options.alpha ?? 1;
   context.translate(x, feetY); context.scale(options.facing ?? 1, 1);
-  if (animation.state === 'hitstun') { context.rotate(-0.22); context.scale(0.94, 1.03); }
+  if (animation.state === 'hitstun' && selection.clip !== 'hurt') { context.rotate(-0.22); context.scale(0.94, 1.03); }
   // One registered support point follows the resolved terrain height. A small
   // body lean suggests the slope; this is not a two-foot IK solution.
   if (animation.state !== 'hitstun' && !animation.attack && animation.onGround && animation.motion) {

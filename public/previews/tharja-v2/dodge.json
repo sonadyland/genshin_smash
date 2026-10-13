@@ -1,0 +1,95 @@
+{
+  "id": "dodge",
+  "title": "携卷避让",
+  "sheets": [
+    {
+      "src": "./assets/dodge-a.png",
+      "standingBodyHeight": 555
+    }
+  ],
+  "frames": [
+    {
+      "sheet": 0,
+      "rect": [
+        0,
+        0,
+        627,
+        650
+      ],
+      "pivot": [
+        351,
+        618
+      ],
+      "durationMs": 110,
+      "phase": "预备",
+      "name": "lower-center",
+      "rootOffset": [
+        0,
+        0
+      ]
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        627,
+        0,
+        627,
+        650
+      ],
+      "pivot": [
+        342,
+        618
+      ],
+      "durationMs": 100,
+      "phase": "滑步",
+      "name": "sidestep",
+      "rootOffset": [
+        34,
+        0
+      ]
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        0,
+        650,
+        627,
+        604
+      ],
+      "pivot": [
+        381,
+        562
+      ],
+      "durationMs": 120,
+      "phase": "刹停",
+      "name": "brake",
+      "rootOffset": [
+        52,
+        0
+      ]
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        627,
+        650,
+        627,
+        604
+      ],
+      "pivot": [
+        339,
+        568
+      ],
+      "durationMs": 190,
+      "phase": "归稳",
+      "name": "return-to-book",
+      "rootOffset": [
+        42,
+        0
+      ]
+    }
+  ],
+  "loop": false,
+  "restMs": 500,
+  "note": "低身、短侧步、刹停与回书四姿态；书始终由左手托住。少量根平移用于独立审片展示闪避位移，左右镜像随朝向处理。"
+}

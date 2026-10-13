@@ -17,6 +17,9 @@ export interface FighterAnimation {
   vy: number;
   dodgeTimer: number;
   dodgeDuration?: number;
+  /** Optional authored hurt timeline; survival hit flashes never enter hitstun. */
+  hitstunAge?: number;
+  hitstunDuration?: number;
   /** Simulation clock owned by this fighter; neither hitstop nor pause advances it. */
   time: number;
   /** Simulation-owned locomotion for the character animation packs. */

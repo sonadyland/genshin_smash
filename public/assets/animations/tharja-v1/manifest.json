@@ -1,0 +1,1581 @@
+{
+  "version": 1,
+  "character": "tharja",
+  "clips": {
+    "idle": {
+      "image": "idle-a.webp",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeightPixels": 452,
+      "trail": "none",
+      "frames": [
+        {
+          "name": "quiet-ready",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5964912280701754,
+            "y": 0.8963317384370016
+          },
+          "sourceScale": 1.0,
+          "duration": 28.8
+        },
+        {
+          "name": "inhale",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5470494417862839,
+            "y": 0.8963317384370016
+          },
+          "sourceScale": 1.0,
+          "duration": 22.8
+        },
+        {
+          "name": "blink-in",
+          "sourceRect": {
+            "x": 0,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5964912280701754,
+            "y": 0.8628389154704944
+          },
+          "sourceScale": 1.0,
+          "duration": 4.2
+        },
+        {
+          "name": "blink-crest",
+          "sourceRect": {
+            "x": 627,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5486443381180224,
+            "y": 0.8628389154704944
+          },
+          "sourceScale": 1.0,
+          "duration": 4.2
+        },
+        {
+          "name": "blink-out",
+          "sourceRect": {
+            "x": 0,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5980861244019139,
+            "y": 0.8660287081339713
+          },
+          "sourceScale": 0.9934065934065934,
+          "duration": 4.8,
+          "image": "idle-b.webp",
+          "width": 1254,
+          "height": 1254
+        },
+        {
+          "name": "exhale",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5964912280701754,
+            "y": 0.8995215311004785
+          },
+          "sourceScale": 0.9934065934065934,
+          "duration": 20.4,
+          "image": "idle-b.webp",
+          "width": 1254,
+          "height": 1254
+        },
+        {
+          "name": "cloth-settle",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5374800637958532,
+            "y": 0.8995215311004785
+          },
+          "sourceScale": 0.9934065934065934,
+          "duration": 21.0,
+          "image": "idle-b.webp",
+          "width": 1254,
+          "height": 1254
+        },
+        {
+          "name": "neutral-settle",
+          "sourceRect": {
+            "x": 627,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5406698564593302,
+            "y": 0.8660287081339713
+          },
+          "sourceScale": 0.9934065934065934,
+          "duration": 25.2,
+          "image": "idle-b.webp",
+          "width": 1254,
+          "height": 1254
+        }
+      ]
+    },
+    "run": {
+      "image": "run-a.webp",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeightPixels": 455,
+      "trail": "none",
+      "frames": [
+        {
+          "name": "right-contact",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.583732057416268,
+            "y": 0.9792663476874003
+          },
+          "sourceScale": 1.0,
+          "duration": 6.0
+        },
+        {
+          "name": "right-compression",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5502392344497608,
+            "y": 0.9792663476874003
+          },
+          "sourceScale": 1.0,
+          "duration": 4.8
+        },
+        {
+          "name": "right-passing",
+          "sourceRect": {
+            "x": 0,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5677830940988836,
+            "y": 0.8086124401913876
+          },
+          "sourceScale": 1.0,
+          "duration": 5.1
+        },
+        {
+          "name": "left-precontact",
+          "sourceRect": {
+            "x": 627,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5374800637958532,
+            "y": 0.8086124401913876
+          },
+          "sourceScale": 1.0,
+          "duration": 4.5
+        },
+        {
+          "name": "left-contact",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.583732057416268,
+            "y": 0.960127591706539
+          },
+          "sourceScale": 0.8921568627450981,
+          "duration": 6.0,
+          "image": "run-b.webp",
+          "width": 1254,
+          "height": 1254
+        },
+        {
+          "name": "left-compression",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5502392344497608,
+            "y": 0.960127591706539
+          },
+          "sourceScale": 0.8921568627450981,
+          "duration": 4.8,
+          "image": "run-b.webp",
+          "width": 1254,
+          "height": 1254
+        },
+        {
+          "name": "left-passing",
+          "sourceRect": {
+            "x": 0,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5885167464114832,
+            "y": 0.8181818181818182
+          },
+          "sourceScale": 0.8921568627450981,
+          "duration": 5.1,
+          "image": "run-b.webp",
+          "width": 1254,
+          "height": 1254
+        },
+        {
+          "name": "right-precontact",
+          "sourceRect": {
+            "x": 627,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5566188197767146,
+            "y": 0.8181818181818182
+          },
+          "sourceScale": 0.8921568627450981,
+          "duration": 4.5,
+          "image": "run-b.webp",
+          "width": 1254,
+          "height": 1254
+        }
+      ]
+    },
+    "jump": {
+      "image": "jump-a.webp",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeightPixels": 541,
+      "trail": "none",
+      "frames": [
+        {
+          "name": "takeoff",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5964912280701754,
+            "y": 0.9728867623604466
+          },
+          "sourceScale": 1.0,
+          "duration": 6.0
+        },
+        {
+          "name": "takeoff",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5374800637958532,
+            "y": 0.9728867623604466
+          },
+          "sourceScale": 1.0,
+          "duration": 4.2
+        },
+        {
+          "name": "rise",
+          "sourceRect": {
+            "x": 0,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.6012759170653907,
+            "y": 0.9218500797448166
+          },
+          "sourceScale": 1.0,
+          "duration": 6.6
+        },
+        {
+          "name": "apex",
+          "sourceRect": {
+            "x": 627,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5470494417862839,
+            "y": 0.8819776714513556
+          },
+          "sourceScale": 1.0,
+          "duration": 7.2
+        },
+        {
+          "name": "fall",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.6076555023923444,
+            "y": 0.960127591706539
+          },
+          "sourceScale": 0.9541446208112875,
+          "duration": 6.0,
+          "image": "jump-b.webp",
+          "width": 1254,
+          "height": 1254
+        },
+        {
+          "name": "land",
+          "sourceRect": {
+            "x": 0,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.6076555023923444,
+            "y": 0.9298245614035088
+          },
+          "sourceScale": 0.9541446208112875,
+          "duration": 4.2,
+          "image": "jump-b.webp",
+          "width": 1254,
+          "height": 1254
+        },
+        {
+          "name": "land",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5486443381180224,
+            "y": 0.9712918660287081
+          },
+          "sourceScale": 0.9541446208112875,
+          "duration": 5.4,
+          "image": "jump-b.webp",
+          "width": 1254,
+          "height": 1254
+        },
+        {
+          "name": "land",
+          "sourceRect": {
+            "x": 627,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5390749601275917,
+            "y": 0.937799043062201
+          },
+          "sourceScale": 0.9541446208112875,
+          "duration": 10.2,
+          "image": "jump-b.webp",
+          "width": 1254,
+          "height": 1254
+        }
+      ]
+    },
+    "dodge": {
+      "image": "dodge-a.webp",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeightPixels": 555,
+      "trail": "none",
+      "frames": [
+        {
+          "name": "lower-center",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 650
+          },
+          "footAnchor": {
+            "x": 0.5598086124401914,
+            "y": 0.9507692307692308
+          },
+          "sourceScale": 1.0,
+          "duration": 6.6
+        },
+        {
+          "name": "sidestep",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 650
+          },
+          "footAnchor": {
+            "x": 0.5454545454545454,
+            "y": 0.9507692307692308
+          },
+          "sourceScale": 1.0,
+          "duration": 6.0
+        },
+        {
+          "name": "brake",
+          "sourceRect": {
+            "x": 0,
+            "y": 650,
+            "width": 627,
+            "height": 604
+          },
+          "footAnchor": {
+            "x": 0.6076555023923444,
+            "y": 0.9304635761589404
+          },
+          "sourceScale": 1.0,
+          "duration": 7.2
+        },
+        {
+          "name": "return-to-book",
+          "sourceRect": {
+            "x": 627,
+            "y": 650,
+            "width": 627,
+            "height": 604
+          },
+          "footAnchor": {
+            "x": 0.5406698564593302,
+            "y": 0.9403973509933775
+          },
+          "sourceScale": 1.0,
+          "duration": 11.4
+        }
+      ]
+    },
+    "jab": {
+      "image": "jab-a.webp",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeightPixels": 465,
+      "trail": "none",
+      "frames": [
+        {
+          "name": "书页待势",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5606060606060606,
+            "y": 0.9186602870813397
+          },
+          "sourceScale": 1.0,
+          "duration": 4.2,
+          "phase": "windup"
+        },
+        {
+          "name": "抬腕引符",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5454545454545454,
+            "y": 0.9186602870813397
+          },
+          "sourceScale": 1.0,
+          "duration": 4.8,
+          "phase": "windup"
+        },
+        {
+          "name": "收指凝咒",
+          "sourceRect": {
+            "x": 0,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5614035087719298,
+            "y": 0.8724082934609251
+          },
+          "sourceScale": 1.0,
+          "duration": 5.4,
+          "phase": "windup"
+        },
+        {
+          "name": "收肘蓄势",
+          "sourceRect": {
+            "x": 627,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.543859649122807,
+            "y": 0.8724082934609251
+          },
+          "sourceScale": 1.0,
+          "duration": 5.4,
+          "phase": "windup"
+        },
+        {
+          "name": "前送施法手",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 646
+          },
+          "footAnchor": {
+            "x": 0.5861244019138756,
+            "y": 0.9597523219814241
+          },
+          "sourceScale": 0.8691588785046729,
+          "duration": 3.9,
+          "image": "jab-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "windup"
+        },
+        {
+          "name": "展掌放咒",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 646
+          },
+          "footAnchor": {
+            "x": 0.5729665071770335,
+            "y": 0.9613003095975232
+          },
+          "sourceScale": 0.8691588785046729,
+          "duration": 6.0,
+          "image": "jab-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "contact",
+          "castOrigin": {
+            "x": 498,
+            "y": 188
+          }
+        },
+        {
+          "name": "腕指随势",
+          "sourceRect": {
+            "x": 0,
+            "y": 646,
+            "width": 627,
+            "height": 608
+          },
+          "footAnchor": {
+            "x": 0.5893141945773525,
+            "y": 0.9161184210526315
+          },
+          "sourceScale": 0.8691588785046729,
+          "duration": 3.6,
+          "image": "jab-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "followthrough"
+        },
+        {
+          "name": "收肘回卷",
+          "sourceRect": {
+            "x": 627,
+            "y": 646,
+            "width": 627,
+            "height": 608
+          },
+          "footAnchor": {
+            "x": 0.5789473684210527,
+            "y": 0.9177631578947368
+          },
+          "sourceScale": 0.8691588785046729,
+          "duration": 4.2,
+          "image": "jab-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "followthrough"
+        },
+        {
+          "name": "手回书前",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 646
+          },
+          "footAnchor": {
+            "x": 0.6032695374800638,
+            "y": 0.9643962848297214
+          },
+          "sourceScale": 0.8579335793357934,
+          "duration": 4.5,
+          "image": "jab-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "followthrough"
+        },
+        {
+          "name": "翻腕向页",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 646
+          },
+          "footAnchor": {
+            "x": 0.5330940988835726,
+            "y": 0.9659442724458205
+          },
+          "sourceScale": 0.8579335793357934,
+          "duration": 5.1,
+          "image": "jab-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "recover"
+        },
+        {
+          "name": "重心归位",
+          "sourceRect": {
+            "x": 0,
+            "y": 646,
+            "width": 627,
+            "height": 608
+          },
+          "footAnchor": {
+            "x": 0.6068580542264753,
+            "y": 0.9194078947368421
+          },
+          "sourceScale": 0.8579335793357934,
+          "duration": 5.7,
+          "image": "jab-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "recover"
+        },
+        {
+          "name": "回到待势",
+          "sourceRect": {
+            "x": 627,
+            "y": 646,
+            "width": 627,
+            "height": 608
+          },
+          "footAnchor": {
+            "x": 0.5342902711323764,
+            "y": 0.9194078947368421
+          },
+          "sourceScale": 0.8579335793357934,
+          "duration": 7.2,
+          "image": "jab-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "recover"
+        }
+      ],
+      "releaseFrame": 5
+    },
+    "smash": {
+      "image": "smash-a.webp",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeightPixels": 554,
+      "trail": "none",
+      "frames": [
+        {
+          "name": "稳书起势",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5817384370015949,
+            "y": 0.960127591706539
+          },
+          "sourceScale": 1.0,
+          "duration": 5.4,
+          "phase": "windup"
+        },
+        {
+          "name": "覆掌凝咒",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5474481658692185,
+            "y": 0.9617224880382775
+          },
+          "sourceScale": 1.0,
+          "duration": 8.4,
+          "phase": "windup"
+        },
+        {
+          "name": "收指压缩",
+          "sourceRect": {
+            "x": 0,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5797448165869219,
+            "y": 0.9298245614035088
+          },
+          "sourceScale": 1.0,
+          "duration": 9.6,
+          "phase": "windup"
+        },
+        {
+          "name": "沉肩蓄力",
+          "sourceRect": {
+            "x": 627,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5434609250398724,
+            "y": 0.9298245614035088
+          },
+          "sourceScale": 1.0,
+          "duration": 9.6,
+          "phase": "windup"
+        },
+        {
+          "name": "短促前推",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 642
+          },
+          "footAnchor": {
+            "x": 0.6136363636363636,
+            "y": 0.9735202492211839
+          },
+          "sourceScale": 0.9822695035460993,
+          "duration": 3.9,
+          "image": "smash-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "windup"
+        },
+        {
+          "name": "凝咒爆发",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 642
+          },
+          "footAnchor": {
+            "x": 0.5043859649122807,
+            "y": 0.9719626168224299
+          },
+          "sourceScale": 0.9822695035460993,
+          "duration": 6.9,
+          "image": "smash-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "contact",
+          "castOrigin": {
+            "x": 494,
+            "y": 162
+          }
+        },
+        {
+          "name": "压腕余势",
+          "sourceRect": {
+            "x": 0,
+            "y": 642,
+            "width": 627,
+            "height": 612
+          },
+          "footAnchor": {
+            "x": 0.6144338118022329,
+            "y": 0.946078431372549
+          },
+          "sourceScale": 0.9822695035460993,
+          "duration": 4.8,
+          "image": "smash-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "followthrough"
+        },
+        {
+          "name": "抽肘缓收",
+          "sourceRect": {
+            "x": 627,
+            "y": 642,
+            "width": 627,
+            "height": 612
+          },
+          "footAnchor": {
+            "x": 0.5574162679425837,
+            "y": 0.946078431372549
+          },
+          "sourceScale": 0.9822695035460993,
+          "duration": 5.4,
+          "image": "smash-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "followthrough"
+        },
+        {
+          "name": "掌回书前",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 642
+          },
+          "footAnchor": {
+            "x": 0.6104465709728868,
+            "y": 0.9750778816199377
+          },
+          "sourceScale": 0.9584775086505191,
+          "duration": 6.0,
+          "image": "smash-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "followthrough"
+        },
+        {
+          "name": "松指归页",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 642
+          },
+          "footAnchor": {
+            "x": 0.5486443381180224,
+            "y": 0.9750778816199377
+          },
+          "sourceScale": 0.9584775086505191,
+          "duration": 6.0,
+          "image": "smash-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "recover"
+        },
+        {
+          "name": "重心回正",
+          "sourceRect": {
+            "x": 0,
+            "y": 642,
+            "width": 627,
+            "height": 612
+          },
+          "footAnchor": {
+            "x": 0.6160287081339713,
+            "y": 0.9395424836601307
+          },
+          "sourceScale": 0.9584775086505191,
+          "duration": 6.0,
+          "image": "smash-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "recover"
+        },
+        {
+          "name": "复归静候",
+          "sourceRect": {
+            "x": 627,
+            "y": 642,
+            "width": 627,
+            "height": 612
+          },
+          "footAnchor": {
+            "x": 0.5590111642743222,
+            "y": 0.9395424836601307
+          },
+          "sourceScale": 0.9584775086505191,
+          "duration": 9.0,
+          "image": "smash-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "recover"
+        }
+      ],
+      "releaseFrame": 5
+    },
+    "special": {
+      "image": "special-a.webp",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeightPixels": 556,
+      "trail": "none",
+      "frames": [
+        {
+          "name": "静候起咒",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5901116427432217,
+            "y": 0.9808612440191388
+          },
+          "sourceScale": 1.0,
+          "duration": 5.4,
+          "phase": "windup"
+        },
+        {
+          "name": "抬腕离页",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5251196172248804,
+            "y": 0.9808612440191388
+          },
+          "sourceScale": 1.0,
+          "duration": 6.0,
+          "phase": "windup"
+        },
+        {
+          "name": "摊掌向上",
+          "sourceRect": {
+            "x": 0,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5937001594896332,
+            "y": 0.9282296650717703
+          },
+          "sourceScale": 1.0,
+          "duration": 7.8,
+          "phase": "windup"
+        },
+        {
+          "name": "举掌祈引",
+          "sourceRect": {
+            "x": 627,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5366826156299841,
+            "y": 0.9298245614035088
+          },
+          "sourceScale": 1.0,
+          "duration": 8.4,
+          "phase": "windup"
+        },
+        {
+          "name": "锁定咒源",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 637
+          },
+          "footAnchor": {
+            "x": 0.5645933014354066,
+            "y": 0.9686028257456829
+          },
+          "sourceScale": 1.0090744101633393,
+          "duration": 7.2,
+          "image": "special-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "contact",
+          "castOrigin": {
+            "x": 396,
+            "y": 49
+          }
+        },
+        {
+          "name": "合指牵引",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 637
+          },
+          "footAnchor": {
+            "x": 0.5350877192982456,
+            "y": 0.967032967032967
+          },
+          "sourceScale": 1.0090744101633393,
+          "duration": 8.4,
+          "image": "special-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "contact",
+          "castOrigin": {
+            "x": 390,
+            "y": 94
+          }
+        },
+        {
+          "name": "屈肘引回",
+          "sourceRect": {
+            "x": 0,
+            "y": 637,
+            "width": 627,
+            "height": 617
+          },
+          "footAnchor": {
+            "x": 0.5637958532695375,
+            "y": 0.9319286871961102
+          },
+          "sourceScale": 1.0090744101633393,
+          "duration": 8.4,
+          "image": "special-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "followthrough",
+          "castOrigin": {
+            "x": 398,
+            "y": 104
+          }
+        },
+        {
+          "name": "聚向胸前",
+          "sourceRect": {
+            "x": 627,
+            "y": 637,
+            "width": 627,
+            "height": 617
+          },
+          "footAnchor": {
+            "x": 0.5482456140350878,
+            "y": 0.93354943273906
+          },
+          "sourceScale": 1.0090744101633393,
+          "duration": 7.8,
+          "image": "special-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "followthrough",
+          "castOrigin": {
+            "x": 343,
+            "y": 168
+          }
+        },
+        {
+          "name": "纳咒入掌",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 643
+          },
+          "footAnchor": {
+            "x": 0.6092503987240829,
+            "y": 0.9751166407465007
+          },
+          "sourceScale": 0.996415770609319,
+          "duration": 10.2,
+          "image": "special-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "followthrough",
+          "castOrigin": {
+            "x": 377,
+            "y": 205
+          }
+        },
+        {
+          "name": "松腕回落",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 643
+          },
+          "footAnchor": {
+            "x": 0.5311004784688995,
+            "y": 0.9766718506998445
+          },
+          "sourceScale": 0.996415770609319,
+          "duration": 6.6,
+          "image": "special-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "recover"
+        },
+        {
+          "name": "指尖归页",
+          "sourceRect": {
+            "x": 0,
+            "y": 643,
+            "width": 627,
+            "height": 611
+          },
+          "footAnchor": {
+            "x": 0.6108452950558214,
+            "y": 0.9279869067103109
+          },
+          "sourceScale": 0.996415770609319,
+          "duration": 6.0,
+          "image": "special-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "recover"
+        },
+        {
+          "name": "复归静候",
+          "sourceRect": {
+            "x": 627,
+            "y": 643,
+            "width": 627,
+            "height": 611
+          },
+          "footAnchor": {
+            "x": 0.532695374800638,
+            "y": 0.9312602291325696
+          },
+          "sourceScale": 0.996415770609319,
+          "duration": 7.8,
+          "image": "special-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "recover"
+        }
+      ],
+      "releaseFrame": 4,
+      "returnFrame": 6,
+      "effectEndFrame": 8
+    },
+    "secondary": {
+      "image": "secondary-a.webp",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeightPixels": 594,
+      "trail": "none",
+      "frames": [
+        {
+          "name": "书页待势",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 648
+          },
+          "footAnchor": {
+            "x": 0.6116427432216905,
+            "y": 0.9830246913580247
+          },
+          "sourceScale": 1.0,
+          "duration": 6.6,
+          "phase": "windup"
+        },
+        {
+          "name": "垂眸读咒",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 648
+          },
+          "footAnchor": {
+            "x": 0.5263157894736842,
+            "y": 0.9814814814814815
+          },
+          "sourceScale": 1.0,
+          "duration": 7.8,
+          "phase": "windup"
+        },
+        {
+          "name": "抬书起指",
+          "sourceRect": {
+            "x": 0,
+            "y": 648,
+            "width": 627,
+            "height": 606
+          },
+          "footAnchor": {
+            "x": 0.6180223285486444,
+            "y": 0.9702970297029703
+          },
+          "sourceScale": 1.0,
+          "duration": 8.4,
+          "phase": "windup"
+        },
+        {
+          "name": "右手抬腕",
+          "sourceRect": {
+            "x": 627,
+            "y": 648,
+            "width": 627,
+            "height": 606
+          },
+          "footAnchor": {
+            "x": 0.5574162679425837,
+            "y": 0.9653465346534653
+          },
+          "sourceScale": 1.0,
+          "duration": 8.4,
+          "phase": "windup"
+        },
+        {
+          "name": "抬肘描符",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 634
+          },
+          "footAnchor": {
+            "x": 0.5685805422647527,
+            "y": 0.9589905362776026
+          },
+          "sourceScale": 1.188,
+          "duration": 7.8,
+          "image": "secondary-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "windup"
+        },
+        {
+          "name": "手越额前",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 634
+          },
+          "footAnchor": {
+            "x": 0.5255183413078149,
+            "y": 0.9589905362776026
+          },
+          "sourceScale": 1.188,
+          "duration": 7.2,
+          "image": "secondary-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "windup"
+        },
+        {
+          "name": "向上引咒",
+          "sourceRect": {
+            "x": 0,
+            "y": 634,
+            "width": 627,
+            "height": 620
+          },
+          "footAnchor": {
+            "x": 0.5725677830940988,
+            "y": 0.9354838709677419
+          },
+          "sourceScale": 1.188,
+          "duration": 8.4,
+          "image": "secondary-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "windup"
+        },
+        {
+          "name": "转掌蓄势",
+          "sourceRect": {
+            "x": 627,
+            "y": 634,
+            "width": 627,
+            "height": 620
+          },
+          "footAnchor": {
+            "x": 0.5303030303030303,
+            "y": 0.9354838709677419
+          },
+          "sourceScale": 1.188,
+          "duration": 7.8,
+          "image": "secondary-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "windup"
+        },
+        {
+          "name": "掌势转下",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 647
+          },
+          "footAnchor": {
+            "x": 0.613237639553429,
+            "y": 0.9829984544049459
+          },
+          "sourceScale": 1.027681660899654,
+          "duration": 4.5,
+          "image": "secondary-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "windup"
+        },
+        {
+          "name": "迅速压掌",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 647
+          },
+          "footAnchor": {
+            "x": 0.5462519936204147,
+            "y": 0.9829984544049459
+          },
+          "sourceScale": 1.027681660899654,
+          "duration": 3.6,
+          "image": "secondary-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "windup"
+        },
+        {
+          "name": "指地释放",
+          "sourceRect": {
+            "x": 0,
+            "y": 647,
+            "width": 627,
+            "height": 607
+          },
+          "footAnchor": {
+            "x": 0.613237639553429,
+            "y": 0.9275123558484349
+          },
+          "sourceScale": 1.027681660899654,
+          "duration": 7.5,
+          "image": "secondary-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "contact",
+          "castOrigin": {
+            "x": 473,
+            "y": 220
+          }
+        },
+        {
+          "name": "掌势随动",
+          "sourceRect": {
+            "x": 627,
+            "y": 647,
+            "width": 627,
+            "height": 607
+          },
+          "footAnchor": {
+            "x": 0.5598086124401914,
+            "y": 0.929159802306425
+          },
+          "sourceScale": 1.027681660899654,
+          "duration": 5.4,
+          "image": "secondary-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "followthrough"
+        },
+        {
+          "name": "屈肘收掌",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 632
+          },
+          "footAnchor": {
+            "x": 0.6228070175438597,
+            "y": 0.9873417721518988
+          },
+          "sourceScale": 0.9983193277310924,
+          "duration": 5.4,
+          "image": "secondary-d.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "followthrough"
+        },
+        {
+          "name": "翻腕回书",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 632
+          },
+          "footAnchor": {
+            "x": 0.5279106858054227,
+            "y": 0.9873417721518988
+          },
+          "sourceScale": 0.9983193277310924,
+          "duration": 6.0,
+          "image": "secondary-d.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "recover"
+        },
+        {
+          "name": "指尖回页",
+          "sourceRect": {
+            "x": 0,
+            "y": 632,
+            "width": 627,
+            "height": 622
+          },
+          "footAnchor": {
+            "x": 0.6236044657097288,
+            "y": 0.9533762057877814
+          },
+          "sourceScale": 0.9983193277310924,
+          "duration": 6.0,
+          "image": "secondary-d.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "recover"
+        },
+        {
+          "name": "归位静候",
+          "sourceRect": {
+            "x": 627,
+            "y": 632,
+            "width": 627,
+            "height": 622
+          },
+          "footAnchor": {
+            "x": 0.5311004784688995,
+            "y": 0.9533762057877814
+          },
+          "sourceScale": 0.9983193277310924,
+          "duration": 9.0,
+          "image": "secondary-d.webp",
+          "width": 1254,
+          "height": 1254,
+          "phase": "recover"
+        }
+      ],
+      "releaseFrame": 10
+    },
+    "hurt": {
+      "image": "hurt-a.webp",
+      "width": 1254,
+      "height": 1254,
+      "standingBodyHeightPixels": 583,
+      "trail": "none",
+      "frames": [
+        {
+          "name": "缩肩护书",
+          "sourceRect": {
+            "x": 0,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.6108452950558214,
+            "y": 0.9808612440191388
+          },
+          "sourceScale": 1.0,
+          "duration": 4.8
+        },
+        {
+          "name": "承受冲击",
+          "sourceRect": {
+            "x": 627,
+            "y": 0,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.5095693779904307,
+            "y": 0.9808612440191388
+          },
+          "sourceScale": 1.0,
+          "duration": 6.3
+        },
+        {
+          "name": "重心回稳",
+          "sourceRect": {
+            "x": 0,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.6140350877192983,
+            "y": 0.9409888357256778
+          },
+          "sourceScale": 1.0,
+          "duration": 8.4
+        },
+        {
+          "name": "恢复待势",
+          "sourceRect": {
+            "x": 627,
+            "y": 627,
+            "width": 627,
+            "height": 627
+          },
+          "footAnchor": {
+            "x": 0.532695374800638,
+            "y": 0.9409888357256778
+          },
+          "sourceScale": 1.0,
+          "duration": 12.0
+        }
+      ]
+    }
+  }
+}

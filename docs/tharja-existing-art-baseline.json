@@ -1,0 +1,573 @@
+{
+  "provenance": "Tracked Git index before Tharja production integration; seven existing active packs and portraits.",
+  "files": [
+    {
+      "path": "public/assets/animations/diluc-v6/aerial.png",
+      "gitBlobSha1": "e38089fcc1db339f7d2a2f31d5b3accb8b116217"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/basic.png",
+      "gitBlobSha1": "31a281b7365b70049353e231fa58f1b195c3902d"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/dodge.json",
+      "gitBlobSha1": "f6a3096e3436879298fa38bf91bff2ebc2934048"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/idle.json",
+      "gitBlobSha1": "813c409fc32c5c4c72bd8eb710a3a700fc23ad57"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/jab-v5.json",
+      "gitBlobSha1": "f4394aa0762db0fd9feb8a5cb92a72629dda8f46"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/jab-v5.png",
+      "gitBlobSha1": "d987579974354db50e45c9a6e8b729d257cb88c9"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/jab-variant-v5.json",
+      "gitBlobSha1": "32612fe249598460a5ef6c3fa5b8b2755223ce73"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/jab-variant-v5.png",
+      "gitBlobSha1": "1df5f1f4bbe8fb0f45fa5dc18e8c69d8f99bb434"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/jump.json",
+      "gitBlobSha1": "d70de9eb74b7bd6b7e5cb1dd455c4b1a5a613de3"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/locomotion.png",
+      "gitBlobSha1": "f78ad9ae60449a8946d34d5268e82168028c84a2"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/manifest.json",
+      "gitBlobSha1": "dcda24045c25a068c501b0debf6229264c2ce4a2"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/run.json",
+      "gitBlobSha1": "6332568890a1a0a90ddde9a8ba5171b4f79b56e7"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/secondary-firebird-v7.json",
+      "gitBlobSha1": "42af54cd09f9b9717b9c8320bd62ce1357e5cb2d"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/secondary-firebird-v7.png",
+      "gitBlobSha1": "15e3d2ad58b4954e9f14f8aa4cefc8f22bdb763d"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/secondary-v5.json",
+      "gitBlobSha1": "865f878a33620be076d6bb522c89e03f2f1904e3"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/secondary-v5.png",
+      "gitBlobSha1": "2b54e15d2fd17b8fd3c621bddc759f848e282623"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/smash-variant-v5.json",
+      "gitBlobSha1": "b6b5a60087d3b3daf022a139debe3a02327aaf36"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/smash-variant-v5.png",
+      "gitBlobSha1": "cf7a52daba208217ac727c91787b83b27f20863b"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/smash.json",
+      "gitBlobSha1": "4289af208ccec8fb564855014392cc82449aef9d"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/special-v5.json",
+      "gitBlobSha1": "f15f8c0a2127789b0aa2b0e5096f2ac54410bffb"
+    },
+    {
+      "path": "public/assets/animations/diluc-v6/special-v5.png",
+      "gitBlobSha1": "b417ea28ffc10eafa4f96dacc75e049eb9e271a6"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/dodge.json",
+      "gitBlobSha1": "b4e898dea7895ed2405639847a0983db01b2fc53"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/dodge.png",
+      "gitBlobSha1": "dd3dd30c66b56be44d50e1284a52d1b931ed2307"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/idle.json",
+      "gitBlobSha1": "9aff900c834fcf31b1725db91eb07a929bb8a7e2"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/idle.png",
+      "gitBlobSha1": "f603fd5cb3a93151c224154da244622106d12340"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/jab-downstroke.json",
+      "gitBlobSha1": "b8fe54e46147bf8e83754c90e38dc7e54f265a23"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/jab-downstroke.png",
+      "gitBlobSha1": "4b55b9228b6f8684f3104c8d3c3ca8ca178cc1ed"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/jab.json",
+      "gitBlobSha1": "31ab998b6f7c6f0cef84da1863ba173baec00ddc"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/jab.png",
+      "gitBlobSha1": "db5880691c8ea7999383771df25d240758ce5ffc"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/jump.json",
+      "gitBlobSha1": "9b8170765f157c7a49ff20860be6cbfc92075c62"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/jump.png",
+      "gitBlobSha1": "aeffd4fef2a005476fb13ab6e75b87d87937cff7"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/manifest.json",
+      "gitBlobSha1": "6b65ddc623b8880b16f85d4f3cdb625b31bc33fa"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/run.json",
+      "gitBlobSha1": "46c03d72c3b9fb96bf59098a32ff3b821e4d73f4"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/run.png",
+      "gitBlobSha1": "63ee9923bcb45cb2474660adcc0b0df8cfbc56cc"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/secondary-swordcast-v7.json",
+      "gitBlobSha1": "a3ab9d160b5b5c682a5ee1ff97d12820d0066088"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/secondary-swordcast-v7.png",
+      "gitBlobSha1": "5d593d70dc175782fe9c8820d2ca5618779da699"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/secondary.json",
+      "gitBlobSha1": "ff695db174147fad7d36f16c95414b2f2e8ba5e7"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/secondary.png",
+      "gitBlobSha1": "6caba22534e1f3c785a1554a50bb9827d9337864"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/smash-overhead.json",
+      "gitBlobSha1": "ac0f9239739b7b71727f8bf5b419890ce7643d2e"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/smash-overhead.png",
+      "gitBlobSha1": "39ccafefb1ca4ed703bf2998b268aca974e1b6bb"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/smash.json",
+      "gitBlobSha1": "8b86191749060268dddd220bf101e9060d8b6442"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/smash.png",
+      "gitBlobSha1": "07cf95b81ba2641d3ece538dce8c64dbf447d034"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/special.json",
+      "gitBlobSha1": "a73ab9c6a9779bdf3667631b9422a2b73c21383a"
+    },
+    {
+      "path": "public/assets/animations/eula-v6/special.png",
+      "gitBlobSha1": "92eaf64517d16b056f9f88f7add8f4c468e560d0"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/air.png",
+      "gitBlobSha1": "419cea01787cee90e0799f7347f51ae89b56bbb0"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/chevalmarin.png",
+      "gitBlobSha1": "d14ab121fe3f6d797140d7c6bbd4f0e791a364b7"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/crabaletta.png",
+      "gitBlobSha1": "0ad443e09e3c8f0f367e918c79d2bb14bbd30b96"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/i-burst-proportions-a.png",
+      "gitBlobSha1": "e8897a0c0b18632dd34f909a0c45e88dcfef182e"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/i-burst-proportions-b.png",
+      "gitBlobSha1": "0e5c456dfa6bfd0965478dd0109d5912aaf0150f"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/i-burst-proportions-c.png",
+      "gitBlobSha1": "2ddf8b69e98c97de507e916beabf2a20fa278b58"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/i-burst-proportions-d.png",
+      "gitBlobSha1": "12bbf83e891fadd09c09223c994f270cf2eed320"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/jab-thrust-proportions-b.png",
+      "gitBlobSha1": "2ae43c01acaf2b512ae019798112830dbf7aa560"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/jab-thrust-proportions.png",
+      "gitBlobSha1": "84ad9e2714ed0c3259433cd831536dae5fc4717f"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/l-skill-proportions-a.png",
+      "gitBlobSha1": "a305c8797c737cca17ff13dcbcde5bf105ba06a7"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/l-skill-proportions-b.png",
+      "gitBlobSha1": "2935f4166f3fa531778506ad95c598f239cce4fd"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/l-skill-proportions-c.png",
+      "gitBlobSha1": "0041284070ec5d205930880d2c06110afdf8bf34"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/l-skill-proportions-d.png",
+      "gitBlobSha1": "6876e397924951a333f4450163097f30817c4d57"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/manifest.json",
+      "gitBlobSha1": "ff0e3a202172d52b328c7415dca1b15165ab5b7e"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/portrait.png",
+      "gitBlobSha1": "be6511ca5350b8114d25ee2ed3819d028dc5fe93"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/run-v2-generation.json",
+      "gitBlobSha1": "5046895ffe4a52f0052560c51e3e43e482325111"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/run-v2.json",
+      "gitBlobSha1": "d858a4faf397133bcfb34c03016bfb43556e536f"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/run-v2.png",
+      "gitBlobSha1": "36d289bccc59e6fed1aa84145e56bbc6815f8f65"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/run.png",
+      "gitBlobSha1": "07cf28266218ccce435029775e4bad6bbdd6db22"
+    },
+    {
+      "path": "public/assets/animations/furina-v1/usher.png",
+      "gitBlobSha1": "900451d3eac252340b73cb0645339a0acab175c8"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/aerial.png",
+      "gitBlobSha1": "b3cb52aba4d913a950aa372f9422ed977e07b39b"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/basic-variants.png",
+      "gitBlobSha1": "ffadca41637dd260f3c454beffbba952d5d98ba8"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/basic.png",
+      "gitBlobSha1": "41e590225231311ac014a558de51403094a13749"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/dodge.json",
+      "gitBlobSha1": "3413275e1e0e14aaf576d17bbcae32bbb9450669"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/idle.json",
+      "gitBlobSha1": "cfce447ceb1a9574543f9b543d24f0eaf8773c3b"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/jab-thrust.json",
+      "gitBlobSha1": "8c80487b3dc216b438efe72e842ff9f128bb08a4"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/jab.json",
+      "gitBlobSha1": "00edf5f5cd10a3b2d6798ada7e8566becd9faa62"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/jump.json",
+      "gitBlobSha1": "14bf5b9f843f1e9c69d73f67f62b040b553ce9a2"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/locomotion.png",
+      "gitBlobSha1": "32c3e754d239cf386a2d4b0c35cc004fe36e2361"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/manifest.json",
+      "gitBlobSha1": "a95fe73457e2d553ce9e48eba317bebf72ddd239"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/run.json",
+      "gitBlobSha1": "1c1a69fc94200ae35823bbb4f3ffa67b9d28b745"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/secondary-v5.json",
+      "gitBlobSha1": "c723391d6759631a3d4e76823e227add17539eb8"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/secondary-v5.png",
+      "gitBlobSha1": "7c28dc7c0f5da5842f7be494f95b2ab5b56fce0a"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/secondary.json",
+      "gitBlobSha1": "c723391d6759631a3d4e76823e227add17539eb8"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/secondary.png",
+      "gitBlobSha1": "bf1724252e5a478bd00d017d924cac8e2047929f"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/smash-sweep.json",
+      "gitBlobSha1": "a29397b57d6caa1faffc4515d59ff7003c002e5a"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/smash.json",
+      "gitBlobSha1": "677637b94f8ac612d0e9876f0c5bf119360f493c"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/special-v5.json",
+      "gitBlobSha1": "322a843cf726cb3c30a966c7408cba12bcbdd49d"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/special-v5.png",
+      "gitBlobSha1": "d023ab7a9e07f4818f938cb68d5a0ca57f14186d"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/special.json",
+      "gitBlobSha1": "322a843cf726cb3c30a966c7408cba12bcbdd49d"
+    },
+    {
+      "path": "public/assets/animations/jean-v4/special.png",
+      "gitBlobSha1": "8dbc7876f7500b5d37c3cbd7056fa57a3b400772"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/aerial.png",
+      "gitBlobSha1": "20ce72219afe38409a0407270961562def52b225"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/basic-variants.png",
+      "gitBlobSha1": "c33d298c07b29237d8c3f564b6131c3d9d1cb27d"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/basic.png",
+      "gitBlobSha1": "86a3204bf06d872131fd3ce9cdf666a96456eedd"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/dodge.json",
+      "gitBlobSha1": "ea56035907de888cf9aa6ce001cbf3bf9ce583a6"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/idle.json",
+      "gitBlobSha1": "39fa37ed0c5ddcc7b38199b35ec674c77beebe20"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/jab-variant.json",
+      "gitBlobSha1": "f91151e97aed9899ad56facf9d7affedbf33b962"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/jab.json",
+      "gitBlobSha1": "80b5873bd0739a56dbca0bff7798cd59fc8c7686"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/jump.json",
+      "gitBlobSha1": "7d80932f7b86ae878254aa520114fa8d8a49307e"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/locomotion.png",
+      "gitBlobSha1": "747aa8f2ba15eeb91af6d476ec1678f80ae5a6af"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/manifest.json",
+      "gitBlobSha1": "d3c39e7c3550deb79b69af1d95e82e89cbbaefba"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/run.json",
+      "gitBlobSha1": "020f828824bd1932414a44481567748c31e7afc6"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/secondary-v6.json",
+      "gitBlobSha1": "4b750d034a38e6c018a343a4e3f18de369683dc6"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/secondary-v6.png",
+      "gitBlobSha1": "2262a567df628d2b29b4ab1b9cb150eb87c03e29"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/secondary.json",
+      "gitBlobSha1": "4b750d034a38e6c018a343a4e3f18de369683dc6"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/secondary.png",
+      "gitBlobSha1": "5e6e0e20c38c08e626bfec0d9bd0322b3fbc2324"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/smash-variant.json",
+      "gitBlobSha1": "b89b653cb4eb4d32368b85cdf31877ef4cc46099"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/smash.json",
+      "gitBlobSha1": "5ac82c6ae1f44171e8b7433faa1ab2641e129791"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/special-v6.json",
+      "gitBlobSha1": "af5e65bad0729a449fe79ad26d688f267c4aae79"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/special-v6.png",
+      "gitBlobSha1": "f647bc04cbe5e4cbd8dbff8def3c96770d94edd0"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/special.json",
+      "gitBlobSha1": "af5e65bad0729a449fe79ad26d688f267c4aae79"
+    },
+    {
+      "path": "public/assets/animations/raiden-v5/special.png",
+      "gitBlobSha1": "d1659b5f9c605ce176aed6c39f9d650e1d4a8107"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/aerial.png",
+      "gitBlobSha1": "f607c2a9904896ef223c70113ca83da4712957fc"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/basic-variants.png",
+      "gitBlobSha1": "956ce04b2da115f45caeb7c572379c406e604626"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/basic.png",
+      "gitBlobSha1": "a1168915ecfe81e7680e25a89a91e636449ae7b9"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/dodge.json",
+      "gitBlobSha1": "7b65a854260fb65e58d5b10523c7029243be6343"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/idle.json",
+      "gitBlobSha1": "2e82dcc28607a13af46833e2697c30c2e644dea5"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/jab-alternate.json",
+      "gitBlobSha1": "e2e94302929b49f0154280ce4b7217a057976fe5"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/jab.json",
+      "gitBlobSha1": "82f735f47145b5493dd1e448420656fe959495d7"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/jump.json",
+      "gitBlobSha1": "e0a0f9d367d24ecde8b552ef0f24e6fa76fd0a90"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/locomotion.png",
+      "gitBlobSha1": "9a262f6f39aa57fde06bdfdf46df7fc3d256d55a"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/manifest.json",
+      "gitBlobSha1": "7b5ee3c82866b5570be1cd68183d80a972e2eba3"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/run.json",
+      "gitBlobSha1": "d125e482c5624335b3fa2d89dee1d593dd72b908"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/secondary.json",
+      "gitBlobSha1": "2776127a9cb048ef9bf2975b2c4d399ff40bf059"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/secondary.png",
+      "gitBlobSha1": "26ea8a146194fb6959c912ff1908e43bfe4081a4"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/smash-alternate.json",
+      "gitBlobSha1": "6ad42adcbdd7bcc54c0a755252b1d29baad76561"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/smash.json",
+      "gitBlobSha1": "30d96487aacf81344ddd0ad158c471ee975585e6"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/special.json",
+      "gitBlobSha1": "d324bb39a60e255b75ad375a4e309da05b81a271"
+    },
+    {
+      "path": "public/assets/animations/xiao-v6/special.png",
+      "gitBlobSha1": "12bb0706f6e1ccfcb763f38fc3c8903dc82d4a97"
+    },
+    {
+      "path": "public/assets/animations/zhongli-v1/air.png",
+      "gitBlobSha1": "299af424c235d10c4635d96a09e995c98cb8d0e4"
+    },
+    {
+      "path": "public/assets/animations/zhongli-v1/i-burst.png",
+      "gitBlobSha1": "e6fd4c235c23f8a9c56a1f559d87517ac7d1022f"
+    },
+    {
+      "path": "public/assets/animations/zhongli-v1/jab-thrust.png",
+      "gitBlobSha1": "c58986c67cd64f0e3ffbd7084b30745d005cb4c9"
+    },
+    {
+      "path": "public/assets/animations/zhongli-v1/l-skill-cross-charge.png",
+      "gitBlobSha1": "1f13b3bac2b5309f245934083b30bf285598836b"
+    },
+    {
+      "path": "public/assets/animations/zhongli-v1/manifest.json",
+      "gitBlobSha1": "eb2918b761840f8c9a0dbd8bf0e6efad3a53fb4d"
+    },
+    {
+      "path": "public/assets/animations/zhongli-v1/meteor.png",
+      "gitBlobSha1": "7f0e4f3398b5d84c046aaddf5e384ae37d64e10e"
+    },
+    {
+      "path": "public/assets/animations/zhongli-v1/pillar.png",
+      "gitBlobSha1": "fcf31fa51b7a1b56cc4b2aa742c15e6f38722e45"
+    },
+    {
+      "path": "public/assets/animations/zhongli-v1/portrait.png",
+      "gitBlobSha1": "bff78d0291fe8affa3b9854e86e47a5a276fa814"
+    },
+    {
+      "path": "public/assets/animations/zhongli-v1/run-v2-generation.json",
+      "gitBlobSha1": "9c5dba832ade92628528b97f126fb83a61f2e9b5"
+    },
+    {
+      "path": "public/assets/animations/zhongli-v1/run-v2.json",
+      "gitBlobSha1": "2af25825d565b9323d5976d5b8c9441bbe450d5b"
+    },
+    {
+      "path": "public/assets/animations/zhongli-v1/run-v2.png",
+      "gitBlobSha1": "c48974d13236ece109a2029386d65298a211224c"
+    },
+    {
+      "path": "public/assets/animations/zhongli-v1/run.png",
+      "gitBlobSha1": "06c26f346adf18d8e0c28b34985d737d2916b46f"
+    },
+    {
+      "path": "public/assets/lobby/diluc.webp",
+      "gitBlobSha1": "53adc0b6fa415593bf6781eac1c1854ae0f5e6c8"
+    },
+    {
+      "path": "public/assets/lobby/eula.webp",
+      "gitBlobSha1": "75df77ce7c181bfe276dacc85cd64e1d374d9d08"
+    },
+    {
+      "path": "public/assets/lobby/furina.webp",
+      "gitBlobSha1": "147aa436b5ce5062c28561be9123ec8519784dad"
+    },
+    {
+      "path": "public/assets/lobby/jean.webp",
+      "gitBlobSha1": "693d6a25ba802d723e8fa4c4f432be18c041292b"
+    },
+    {
+      "path": "public/assets/lobby/raiden.webp",
+      "gitBlobSha1": "0ca3dc03faad01b30309e69524ed30432883ef69"
+    },
+    {
+      "path": "public/assets/lobby/xiao.webp",
+      "gitBlobSha1": "08a6a12c3fa85b9a2393e9047b6b54098539c848"
+    },
+    {
+      "path": "public/assets/lobby/zhongli.webp",
+      "gitBlobSha1": "e632509b716fbc20f6dce9d99a077fcb17477a53"
+    }
+  ]
+}

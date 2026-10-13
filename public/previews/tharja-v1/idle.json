@@ -1,0 +1,146 @@
+{
+  "id": "idle",
+  "title": "静候咒文",
+  "sheets": [
+    {
+      "src": "./assets/idle-a.png",
+      "standingBodyHeight": 535
+    },
+    {
+      "src": "./assets/idle-b.png",
+      "standingBodyHeight": 538
+    }
+  ],
+  "frames": [
+    {
+      "sheet": 0,
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        368,
+        595
+      ],
+      "durationMs": 500,
+      "phase": "静候",
+      "name": "quiet-ready"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        332,
+        595
+      ],
+      "durationMs": 400,
+      "phase": "吸气",
+      "name": "inhale"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        370,
+        581
+      ],
+      "durationMs": 70,
+      "phase": "吸气",
+      "name": "blink-in"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        339,
+        581
+      ],
+      "durationMs": 60,
+      "phase": "吸气",
+      "name": "blink-crest"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        369,
+        597
+      ],
+      "durationMs": 80,
+      "phase": "呼气",
+      "name": "blink-out"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        334,
+        597
+      ],
+      "durationMs": 380,
+      "phase": "呼气",
+      "name": "exhale"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        371,
+        583
+      ],
+      "durationMs": 350,
+      "phase": "归稳",
+      "name": "cloth-settle"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        337,
+        583
+      ],
+      "durationMs": 400,
+      "phase": "归稳",
+      "name": "neutral-settle"
+    }
+  ],
+  "loop": true,
+  "note": "8 张真实绘制的待机姿态，2.24 秒循环；呼吸、眨眼、指尖与书页，以及头发和披风的延迟回落。每张图统一站姿尺度，仅校准脚底坐标，不逐帧缩放或扭曲身体。"
+}

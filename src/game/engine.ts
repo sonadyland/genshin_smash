@@ -8,7 +8,7 @@ import { CHARACTERS, ITEMS, STAGE, WORLD } from './data';
 import { SPRITES, SPRITE_W, SPRITE_H, ITEM_SPRITES, ITEM_SPRITE_SIZE } from './sprites';
 import type { SpriteFrame } from './sprites';
 import type { CharDef, ItemDef, MoveDef } from './data';
-import { acquireGameArt, drawArenaBackground, drawCharacterArt, drawFighterArt, drawElementEffect, drawXiaoPlungeEffect, drawSecondaryEffect, hasRegisteredMeleeTrail, getSwordCastTip, drawSwordCastRelease } from './art';
+import { acquireGameArt, drawArenaBackground, drawCharacterArt, drawFighterArt, drawElementEffect, drawXiaoPlungeEffect, drawSecondaryEffect, hasRegisteredMeleeTrail, getSwordCastTip, drawSwordCastRelease, getTharjaCastOrigin, getCharacterCastOrigin } from './art';
 import type { GameArtLease } from './art';
 import { castVisualFromTip, projectileVisualPosition } from './cast-visual';
 import type { CastVisual } from './cast-visual';
@@ -24,6 +24,8 @@ import type { VisualQuality } from './visual-quality';
 import { SummonRuntime } from './summons';
 import type { SummonContext, SummonOwner } from './summons';
 import { drawSummonArt } from './summoner-art';
+import { TharjaRuntime, THARJA_COMBAT, isTharjaSpell, drawTharjaEffects } from './tharja';
+import type { TharjaContext } from './tharja';
 
 const GRAV = 0.52;
 const MAX_FALL = 9.5;
@@ -81,6 +83,7 @@ interface Fighter {
   state: 'free' | 'attack' | 'hitstun';
   attack: ActiveAttack | null;
   hitstun: number;
+  hitstunDuration: number;
   hitlag: number;
   petrified: number;
   invuln: number;
@@ -173,6 +176,7 @@ export class Game {
   private artLease?: GameArtLease;
   private sfx = new BattleAudio();
   private summons = new SummonRuntime();
+  private darkMagic = new TharjaRuntime();
 
   private mode: 'cpu' | 'pvp' = 'cpu';
   private selCursor = [0, 1];
@@ -225,6 +229,7 @@ export class Game {
     document.removeEventListener('visibilitychange', this.onVisibilityChange);
     this.clearInput();
     this.summons.clear();
+    this.darkMagic.clear();
     this.artLease?.release();
     this.sfx.destroy();
   }
@@ -350,6 +355,7 @@ export class Game {
 
   private startMatch() {
     this.summons.clear();
+    this.darkMagic.clear();
     this.items = [];
     this.projectiles = [];
     this.particles = [];
@@ -386,7 +392,7 @@ export class Game {
       onGround: true, jumpsLeft: 2,
       percent: 0, stocks: this.options.stocks,
       state: 'free', attack: null,
-      hitstun: 0, hitlag: 0, petrified: 0, invuln: 0, dropTimer: 0,
+      hitstun: 0, hitstunDuration: 0, hitlag: 0, petrified: 0, invuln: 0, dropTimer: 0,
       respawnTimer: 0, held: null,
       buffs: { atkUntil: 0, spdUntil: 0, slowUntil: 0 },
       isCPU, aiThink: 0, aiJumpCd: 0, koFlash: 0,
@@ -478,6 +484,7 @@ export class Game {
     this.resolveHits();
     this.updateProjectiles();
     this.updateSummons();
+    this.updateDarkMagic();
     this.updateItems();
     this.updateParticles();
     this.checkBlast();
@@ -535,6 +542,13 @@ export class Game {
     const dy = foe.y - f.y;
     const plunge = f.char.special.effect === 'plunge';
     const summoner = f.char.id === 'zhongli' || f.char.id === 'furina';
+    if (f.char.id === 'tharja' && !f.held && f.state === 'free' && f.aiThink === 0 && Math.abs(dx) < 430 && Math.abs(dy) < 180) {
+      f.facing = dx >= 0 ? 1 : -1;
+      if (f.specialCooldown === 0 && f.percent > 18 && Math.abs(dx) < 320) out.special = true;
+      else if (f.secondaryCooldown === 0 && f.onGround && Math.abs(dx) > 90 && Math.abs(dx) < 290 && Math.abs(dy) < 65) out.secondary = true;
+      else if (Math.abs(dy) < 72) { if (foe.percent > 60 && Math.abs(dx) > 120) out.smash = true; else out.jab = true; }
+      if (out.special || out.secondary || out.jab || out.smash) { f.aiThink = reaction; return out; }
+    }
     if (summoner && f.state === 'free' && f.onGround && f.aiThink === 0 && f.specialCooldown === 0 && Math.abs(dx) < 420 && Math.abs(dy) < 190) {
       f.facing = dx >= 0 ? 1 : -1; out.special = true; f.aiThink = reaction * 2; return out;
     }
@@ -544,7 +558,7 @@ export class Game {
       if (!f.held && (it.def.id !== 'heal' || f.percent > 20) && Math.abs(it.x - f.x) < 210 && Math.abs(it.y - f.y) < 100) { target = it.x; break; }
     }
     const goal = target ?? foe.x;
-    if (Math.abs(goal - f.x) > (target ? 8 : 46)) {
+    if (Math.abs(goal - f.x) > (target ? 8 : f.char.id === 'tharja' && Math.abs(dy) < 72 ? 240 : 46)) {
       if (goal < f.x) out.left = true; else out.right = true;
     }
     // Edge protection is deliberately conservative on the main platform only.
@@ -754,6 +768,11 @@ export class Game {
         }
       } else a.t++;
       if (a.t === def.startup && (def.kind === 'special' || def.kind === 'secondary') && !a.plunge) this.sfx.play('cast', { charId: c.id, kind: def.kind });
+      if (a.t === def.startup && isTharjaSpell(def.effect)) {
+        const origin = getTharjaCastOrigin?.(f.x, f.y + f.h, 112, def.kind, f.facing) ?? { x: f.x + f.facing * 28, y: f.y + f.h - 89 };
+        this.darkMagic.cast(def.effect, this.summonOwner(f), origin, this.tharjaContext(), { damageMultiplier: (f.buffs.atkUntil > this.frame ? 1.3 : 1) * this.summons.damageMultiplier(f.idx) });
+        if (def.kind === 'jab' || def.kind === 'smash') this.sfx.play('cast', { charId: c.id, kind: def.kind });
+      }
       if (a.t === def.startup && (def.effect === 'geo-pillar' || def.effect === 'salon')) {
         const owner = this.summonOwner(f), context = this.summonContext();
         if (def.effect === 'geo-pillar') this.summons.castGeo(owner, context);
@@ -888,7 +907,7 @@ export class Game {
       else this.summons.castRevelry(owner, context);
       return;
     }
-    if (def.effect === 'thrust') return;
+    if (def.effect === 'thrust' || isTharjaSpell(def.effect)) return;
     const tip = getSwordCastTip(f.char.id, f.x, f.y + f.h, 112, this.fighterAnimation(f), f.facing);
     const add = (kind: Projectile['kind'], x: number, y: number, vx: number, vy: number, radius: number, height: number, life: number) => {
       if (this.projectiles.length >= 80) return;
@@ -917,7 +936,7 @@ export class Game {
       return null;
     }
     if (t < def.startup || t >= def.startup + def.active) return null;
-    if (def.effect === 'projectile' || def.effect === 'geo-pillar' || def.effect === 'salon' || (def.kind === 'secondary' && def.effect !== 'thrust')) return null;
+    if (isTharjaSpell(def.effect) || def.effect === 'projectile' || def.effect === 'geo-pillar' || def.effect === 'salon' || (def.kind === 'secondary' && def.effect !== 'thrust')) return null;
     const reach = def.reach;
     if (def.effect === 'spin') {
       return { x: f.x - reach, y: f.y + f.h / 2 - def.height / 2, w: reach * 2, h: def.height };
@@ -959,7 +978,7 @@ export class Game {
       this.sfx.play('shield', { charId: vic.char.id, power: rawDamage });
       this.burst(vic.x, vic.y + vic.h / 2, 5, '#eac879', 2);
     }
-    if (dmg <= 0) { vic.hitlag = Math.max(vic.hitlag, 2); return; }
+    if (dmg <= 0) { vic.hitlag = Math.max(vic.hitlag, 2); return 0; }
     const before = vic.percent;
     vic.percent += dmg;
     // 大乱斗经典公式：基础击飞 + 百分比成长，再按体重修正
@@ -973,7 +992,9 @@ export class Game {
     vic.hitstun = Math.ceil(Math.max(8, Math.min(48, mag * 2.3)));
     if (controlFrames > 0) { vic.petrified = Math.min(70, controlFrames); vic.hitstun = Math.max(vic.hitstun, vic.petrified); vic.vx = 0; vic.vy = 0; }
     else if (vic.petrified > 0) vic.hitstun = Math.max(vic.hitstun, vic.petrified);
+    vic.hitstunDuration = vic.hitstun;
     vic.attack = null;
+    this.darkMagic.cancelDrain(vic.idx);
     vic.dropTimer = 0;
     vic.dodgeTimer = 0;
     vic.fastFalling = false;
@@ -994,6 +1015,7 @@ export class Game {
     this.burst(hx, hy, 10 + Math.floor(dmg), atk.char.color, 3);
     this.texts.push({ x: hx, y: hy - 30, text: `+${Math.round(dmg)}%`, color: '#fff3d5', life: 34, size: 19 + Math.min(8, dmg / 2) });
     if (mag > 14) this.texts.push({ x: hx, y: hy - 64, text: '强力击飞', color: '#f4d592', life: 42, size: 20 });
+    return dmg;
   }
 
   private overlap(a: { x: number; y: number; w: number; h: number }, b: { x: number; y: number; w: number; h: number }) {
@@ -1029,6 +1051,37 @@ export class Game {
       const meteor = hit.kind === 'geo-meteor';
       this.applyHit(owner, target, { name: hit.kind, dmg: hit.amount, kb: meteor ? 4 : 1.7, kbs: meteor ? 0.055 : 0.025,
         angle: 55, startup: 0, active: 1, endlag: 0, reach: 0, height: 0, kind: meteor || hit.kind === 'hydro-wave' ? 'secondary' : 'special' }, true, hit.controlFrames);
+    }
+  }
+
+  private tharjaContext(): TharjaContext {
+    return { ...this.summonContext(),
+      castOriginAt: id => {
+        const fighter = this.fighters.find(candidate => candidate.idx === id);
+        return fighter ? getCharacterCastOrigin?.('tharja', fighter.x, fighter.y + fighter.h, 112, this.fighterAnimation(fighter), fighter.facing) : undefined;
+      },
+      projectileBlocked: (oldX, oldY, x, y) => {
+        const steps = Math.max(1, Math.ceil(Math.hypot(x - oldX, y - oldY) / 8)), solid = STAGE.main;
+        for (let i = 0; i <= steps; i++) {
+          const sx = oldX + (x - oldX) * i / steps, sy = oldY + (y - oldY) * i / steps;
+          if (sx >= solid.x && sx <= solid.x + solid.w && sy >= solid.y && sy <= solid.y + solid.h) return true;
+        }
+        return false;
+      },
+    };
+  }
+
+  private updateDarkMagic(): void {
+    for (const hit of this.darkMagic.step(this.tharjaContext())) {
+      const owner = this.fighters.find(fighter => fighter.idx === hit.ownerId), target = this.fighters.find(fighter => fighter.idx === hit.targetId);
+      if (!owner || !target || owner.respawnTimer || owner.stocks <= 0 || target.invuln > 0 || target.respawnTimer || target.stocks <= 0) continue;
+      const kind = hit.kind === 'flux' ? 'jab' : hit.kind === 'ruin' ? 'smash' : hit.kind === 'nosferatu' ? 'special' : 'secondary';
+      const actual = this.applyHit(owner, target, { ...owner.char[kind], dmg: hit.amount }, true);
+      if (hit.heal > 0 && actual > 0) {
+        const heal = Math.min(owner.percent, hit.heal, actual * THARJA_COMBAT.nosferatu.healRatio);
+        owner.percent -= heal;
+        if (heal > 0) this.texts.push({ x: owner.x, y: owner.y - 20, text: `−${heal.toFixed(1)}%`, color: '#d1f0c0', life: 36, size: 18 });
+      }
     }
   }
 
@@ -1215,6 +1268,7 @@ export class Game {
 
   private ko(f: Fighter) {
     this.summons.clearOwner(f.idx);
+    this.darkMagic.clearOwner(f.idx);
     this.sfx.play('ko', { charId: f.char.id });
     this.shake = 16;
     this.flash = 0.7;
@@ -1248,6 +1302,7 @@ export class Game {
 
   private respawn(f: Fighter) {
     this.summons.clearOwner(f.idx);
+    this.darkMagic.clearOwner(f.idx);
     f.x = WORLD.w / 2 + (f.idx === 0 ? -80 : 80);
     f.y = 60;
     f.vx = 0; f.vy = 0;
@@ -1333,6 +1388,7 @@ export class Game {
       this.drawItems(g);
       this.drawProjectiles(g);
       this.drawSummons(g);
+      drawTharjaEffects(g, this.darkMagic.effects);
       for (const trail of this.afterimages) {
         drawFighterArt(g, trail.charId, trail.x, trail.feetY, 112, trail.animation, { facing: trail.facing, alpha: trail.life / 10 * 0.22 });
       }
@@ -1603,6 +1659,7 @@ export class Game {
       state: f.state, attack: f.attack ? { def: f.attack.def, t: f.attack.t, visualVariant: f.attack.visualVariant, plunge: f.attack.plunge ? { phase: f.attack.plunge.phase, elapsed: f.attack.plunge.elapsed, recoveryDuration: Math.max(1, f.attack.def.endlag - f.attack.def.active) } : undefined } : null,
       onGround: f.onGround, vx: f.vx, vy: f.vy, dodgeTimer: f.dodgeTimer, time: f.animationFrame,
       dodgeDuration: DODGE_FRAMES,
+      hitstunAge: Math.max(0, f.hitstunDuration - f.hitstun), hitstunDuration: f.hitstunDuration,
       motion: { ...f.motion },
     };
   }
@@ -1710,6 +1767,7 @@ export class Game {
     const c = f.char;
     if (!f.attack) return;
     const { def, t } = f.attack;
+    if (isTharjaSpell(def.effect)) return;
     if (def.effect === 'geo-pillar' || def.effect === 'geo-meteor' || def.effect === 'salon' || def.effect === 'revelry') return;
     const { phase, progress } = attackPhase(f.attack);
     if (f.attack.plunge) {

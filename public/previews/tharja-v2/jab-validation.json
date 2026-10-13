@@ -1,0 +1,182 @@
+{
+  "generator": "built-in image_gen",
+  "rasterEdits": false,
+  "frameCount": 12,
+  "durationMs": 1000,
+  "sheets": [
+    {
+      "file": "assets/jab-a.png",
+      "source": "public/previews/tharja-v2/assets/jab-a.png",
+      "bytes": 757779,
+      "sha256": "6fba52ae7d6e978277b3e88683f4105720ca8d9fe3dff7cd18d74fd1f20cc4eb",
+      "unchanged": true,
+      "frames": [
+        {
+          "index": 0,
+          "bounds": [
+            170,
+            109,
+            482,
+            576
+          ],
+          "margin": 50,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 1,
+          "bounds": [
+            161,
+            108,
+            475,
+            576
+          ],
+          "margin": 50,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 2,
+          "bounds": [
+            171,
+            85,
+            484,
+            547
+          ],
+          "margin": 79,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 3,
+          "bounds": [
+            160,
+            84,
+            476,
+            547
+          ],
+          "margin": 79,
+          "origin": null,
+          "originAlpha": null
+        }
+      ]
+    },
+    {
+      "file": "assets/jab-b.png",
+      "source": "public/previews/tharja-v2/assets/jab-b.png",
+      "bytes": 1068838,
+      "sha256": "2427dc7178d2fd728b984855ca81a3eee1dea3194761c325becbdb2ced663481",
+      "unchanged": true,
+      "frames": [
+        {
+          "index": 4,
+          "bounds": [
+            141,
+            81,
+            530,
+            620
+          ],
+          "margin": 25,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 5,
+          "bounds": [
+            110,
+            81,
+            526,
+            621
+          ],
+          "margin": 24,
+          "origin": [
+            498,
+            188
+          ],
+          "originAlpha": 250
+        },
+        {
+          "index": 6,
+          "bounds": [
+            115,
+            27,
+            534,
+            557
+          ],
+          "margin": 27,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 7,
+          "bounds": [
+            142,
+            27,
+            524,
+            558
+          ],
+          "margin": 27,
+          "origin": null,
+          "originAlpha": null
+        }
+      ]
+    },
+    {
+      "file": "assets/jab-c.png",
+      "source": "public/previews/tharja-v2/assets/jab-c.png",
+      "bytes": 977648,
+      "sha256": "d3347560b978075b297c5ef8fd5197c51ab13f87afd54cdf40dc40e69fcd47de",
+      "unchanged": true,
+      "frames": [
+        {
+          "index": 8,
+          "bounds": [
+            165,
+            75,
+            528,
+            623
+          ],
+          "margin": 22,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 9,
+          "bounds": [
+            125,
+            80,
+            489,
+            624
+          ],
+          "margin": 21,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 10,
+          "bounds": [
+            172,
+            24,
+            535,
+            559
+          ],
+          "margin": 24,
+          "origin": null,
+          "originAlpha": null
+        },
+        {
+          "index": 11,
+          "bounds": [
+            130,
+            26,
+            491,
+            559
+          ],
+          "margin": 26,
+          "origin": null,
+          "originAlpha": null
+        }
+      ]
+    }
+  ]
+}

@@ -321,6 +321,10 @@ export const SURVIVAL_BRANCHES: Record<string, [UpgradeChoice, UpgradeChoice]> =
     branch('hydro-ranged', '万众喝彩', '乌瑟勋爵加快发射泡泡，海薇玛夫人扩大水线射程。', '#8ccfff'),
     branch('hydro-crab', '盛宴时刻', '谢贝蕾妲小姐扩大扑击水花的范围，强化近身清场。', '#8ccfff'),
   ],
+  tharja: [
+    branch('tharja-coven', '群咒牵引', '吸命同时额外牵引 2 名敌人，扩大前方范围；只有造成伤害后才恢复生命。', '#c5a2ef'),
+    branch('tharja-vital', '噬命回响', '吸命强化伤害，每次施法的恢复上限增加 12 点；空放不恢复生命。', '#c5a2ef'),
+  ],
 };
 
 const SURVIVAL_SKILL_CAP = 5;
@@ -339,6 +343,41 @@ const UPGRADE_DEFINITIONS: UpgradeChoice[] = [
   { id: 'aux-flame', name: '流焰', description: '手动出招时向前发射火弹；提高等级增强伤害。', kind: 'auxiliary', level: 0, maxLevel: 3, color: '#ffae78' },
 ];
 
+const THARJA_UPGRADE_DEFINITIONS: UpgradeChoice[] = [
+  { id: 'tharja-flux', name: 'J · 暗流精修', description: '', kind: 'passive', level: 0, maxLevel: 3, color: '#c5a2ef' },
+  { id: 'tharja-ruin', name: 'K · 重咒精修', description: '', kind: 'passive', level: 0, maxLevel: 3, color: '#d0b1f1' },
+];
+
+/** The same form data drives upgrade copy and the manual spell adapter. */
+export function getTharjaSurvivalProfile(progress: SurvivalProgress) {
+  const flux = Math.max(0, Math.min(3, progress.upgrades['tharja-flux'] ?? 0));
+  const ruin = Math.max(0, Math.min(3, progress.upgrades['tharja-ruin'] ?? 0));
+  const main = Math.max(1, Math.min(5, progress.skillLevel));
+  const secondary = Math.max(1, Math.min(5, progress.secondaryLevel));
+  return {
+    fluxCount: flux >= 3 ? 2 : 1,
+    fluxPierce: flux >= 2 ? 3 : flux >= 1 ? 2 : 1,
+    fluxDamage: 1 + flux * .12,
+    ruinCount: ruin >= 3 ? 2 : 1,
+    ruinDamage: 1 + ruin * .2,
+    ruinBlast: 78 * (1 + ruin * .15),
+    drainTargets: (main >= 5 ? 3 : main >= 3 ? 2 : 1) + (progress.branch === 'tharja-coven' ? 2 : 0),
+    drainRange: progress.branch === 'tharja-coven' ? 1.25 : 1,
+    drainDamage: progress.branch === 'tharja-vital' ? 1.25 : 1,
+    drainHealCap: 12 + (main - 1) * 2 + (progress.branch === 'tharja-vital' ? 12 : 0),
+    fieldDuration: 240 + (secondary - 1) * 30,
+    fieldRadius: 116 + (secondary - 1) * 10.5,
+    fieldTickFrames: 40 - (secondary - 1) * 3,
+  };
+}
+
+function tharjaUpgradeDescription(id: string, level: number): string {
+  const profile = getTharjaSurvivalProfile({ ...makeInitialProgress('tharja'), upgrades: { [id]: level } });
+  return id === 'tharja-flux'
+    ? `${profile.fluxCount} 枚手动暗流咒弹，每枚最多穿透 ${profile.fluxPierce} 名敌人；伤害 +${Math.round((profile.fluxDamage - 1) * 100)}%。`
+    : `${profile.ruinCount} 枚手动重咒，命中爆破半径 ${Math.round(profile.ruinBlast)}；伤害 +${Math.round((profile.ruinDamage - 1) * 100)}%。`;
+}
+
 export function makeInitialProgress(charId: string): SurvivalProgress {
   return { charId, skillLevel: 1, secondaryLevel: 1, branch: null, upgrades: {} };
 }
@@ -351,12 +390,13 @@ export function xpForLevel(level: number): number {
 
 function eligibleChoices(progress: SurvivalProgress): UpgradeChoice[] {
   const auxiliaryCount = Object.keys(progress.upgrades).filter(id => id.startsWith('aux-') && progress.upgrades[id] > 0).length;
-  return UPGRADE_DEFINITIONS.flatMap(definition => {
+  const definitions = progress.charId === 'tharja' ? [...UPGRADE_DEFINITIONS, ...THARJA_UPGRADE_DEFINITIONS] : UPGRADE_DEFINITIONS;
+  return definitions.flatMap(definition => {
     const current = definition.kind === 'core' ? progress.skillLevel : definition.kind === 'secondary' ? progress.secondaryLevel : (progress.upgrades[definition.id] || 0);
     const maximum = definition.kind === 'core' || definition.kind === 'secondary' ? SURVIVAL_SKILL_CAP : definition.maxLevel;
     if (current >= maximum) return [];
     if (definition.kind === 'auxiliary' && !current && auxiliaryCount >= 2) return [];
-    return [{ ...definition, maxLevel: maximum, level: current + 1, ...(definition.kind === 'secondary' ? { name: CHARACTERS.find(c => c.id === progress.charId)!.secondary.name, description: getSecondaryProfile(progress.charId, current + 1).description } : {}), ...(definition.kind === 'core' && progress.charId === 'zhongli' ? { description: '提升岩柱共鸣伤害、范围和护盾吸收量；4 级选择双柱或护盾岩震。' } : definition.kind === 'core' && progress.charId === 'furina' ? { description: '提升沙龙成员的伤害和蟹形水爆范围；4 级选择远程水弹或蟹形范围扑击。' } : {}) }];
+    return [{ ...definition, maxLevel: maximum, level: current + 1, ...(definition.kind === 'secondary' ? { name: CHARACTERS.find(c => c.id === progress.charId)!.secondary.name, description: getSecondaryProfile(progress.charId, current + 1).description } : {}), ...(definition.kind === 'core' && progress.charId === 'zhongli' ? { description: '提升岩柱共鸣伤害、范围和护盾吸收量；4 级选择双柱或护盾岩震。' } : definition.kind === 'core' && progress.charId === 'furina' ? { description: '提升沙龙成员的伤害和蟹形水爆范围；4 级选择远程水弹或蟹形范围扑击。' } : definition.kind === 'core' && progress.charId === 'tharja' ? { name: '吸命精修', description: `提升吸命伤害、范围和恢复上限；${current + 1 >= 5 ? '同时牵引 3 名敌人' : current + 1 >= 3 ? '同时牵引 2 名敌人' : '牵引前方 1 名敌人'}，4 级选择群咒或噬命进化。` } : {}), ...(definition.id.startsWith('tharja-') ? { description: tharjaUpgradeDescription(definition.id, current + 1) } : {}) }];
   });
 }
 
@@ -414,10 +454,10 @@ export function applyChoice(progress: SurvivalProgress, choiceId: string, offere
 }
 
 export function getUpgradeSummary(progress: SurvivalProgress): { id: string; name: string; level: number }[] {
-  const result = [{ id: 'core', name: '元素精修', level: progress.skillLevel }, { id: 'secondary', name: CHARACTERS.find(c => c.id === progress.charId)!.secondary.name, level: progress.secondaryLevel }];
+  const result = [{ id: 'core', name: progress.charId === 'tharja' ? '吸命精修' : '元素精修', level: progress.skillLevel }, { id: 'secondary', name: CHARACTERS.find(c => c.id === progress.charId)!.secondary.name, level: progress.secondaryLevel }];
   const chosenBranch = SURVIVAL_BRANCHES[progress.charId]?.find(choice => choice.id === progress.branch);
   if (chosenBranch) result.push({ id: chosenBranch.id, name: chosenBranch.name, level: 1 });
-  for (const definition of UPGRADE_DEFINITIONS) {
+  for (const definition of [...UPGRADE_DEFINITIONS, ...THARJA_UPGRADE_DEFINITIONS]) {
     const level = progress.upgrades[definition.id];
     if (level > 0) result.push({ id: definition.id, name: definition.name, level });
   }
@@ -439,6 +479,13 @@ export function getSurvivalStats(progress: SurvivalProgress) {
 /** One source for upgrade copy and actual secondary-skill form/scaling. */
 export function getSecondaryProfile(charId: string, rawLevel: number) {
   const level = Math.max(1, Math.min(SURVIVAL_SKILL_CAP, Math.floor(rawLevel)));
+  if (charId === 'tharja') {
+    const form = getTharjaSurvivalProfile({ ...makeInitialProgress('tharja'), secondaryLevel: level });
+    const damageMultiplier = 1 + (level - 1) * .18;
+    const cooldownMultiplier = 1 - (level - 1) * .05;
+    return { level, count: 1, piercing: false, damageMultiplier, rangeMultiplier: form.fieldRadius / 116, cooldownMultiplier,
+      description: `地面咒阵半径 ${Math.round(form.fieldRadius)}，持续 ${(form.fieldDuration / 60).toFixed(1)} 秒，每 ${(form.fieldTickFrames / 60).toFixed(2)} 秒脉冲；伤害 +${Math.round((damageMultiplier - 1) * 100)}%，冷却缩短 ${Math.round((1 - cooldownMultiplier) * 100)}%。` };
+  }
   if (charId === 'zhongli' || charId === 'furina') {
     const geo = charId === 'zhongli';
     const damageMultiplier = geo ? (19 + level * 3) / 22 : (13 + level * 2.5) / 15.5;

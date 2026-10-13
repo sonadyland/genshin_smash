@@ -48,6 +48,8 @@ function loadModule(file) {
   if (file.endsWith('/survival-render.ts')) return { renderSurvival: noop };
   if (file.endsWith('/art.ts')) return {
     getSwordCastTip: (id, x, feetY, _height, _animation, facing) => swordTipFixture && ['eula', 'diluc'].includes(id) ? { x: x + facing * 97, y: feetY - 120 } : undefined,
+    getTharjaCastOrigin: (x, feetY, _height, _kind, facing) => ({ x: x + facing * 32, y: feetY - 52 }),
+    getCharacterCastOrigin: (_id, x, feetY, _height, _animation, facing) => ({ x: x + facing * 17, y: feetY - 75 }),
     acquireGameArt: ids => {
       const lease = { ids: [...ids], released: false };
       artLeases.push(lease);
@@ -74,8 +76,8 @@ const cases = [];
 function test(name, run) { cases.push({ name, run }); }
 function plain(value) { return JSON.parse(JSON.stringify(value)); }
 
-test('all seven characters have distinct, valid evolution pairs and reproducible starting progress', () => {
-  assert.equal(CHARACTERS.length, 7);
+test('all eight characters have distinct, valid evolution pairs and reproducible starting progress', () => {
+  assert.equal(CHARACTERS.length, 8);
   const ids = new Set();
   for (const character of CHARACTERS) {
     const progress = makeInitialProgress(character.id);
@@ -682,6 +684,15 @@ test('manual I hits enemies for all five characters without primary cooldown or 
     assert.ok(game.damageDealt > 0, game.char.id);
     assert.equal(game.player.skillCooldown, 0);
     assert.ok(game.getSnapshot().secondaryCooldown > 0);
+    if (game.char.id === 'tharja') {
+      assert.equal(game.tharja.effects.filter(effect => effect.kind === 'mire').length, 1);
+      // A single manual Mire continues pulsing until its authored lifetime ends.
+      step(game, 400); assert.equal(game.tharja.effects.length, 0);
+      const damage = game.damageDealt;
+      key(game, 'KeyI', true); step(game, 80);
+      assert.equal(game.damageDealt, damage); assert.equal(game.player.attack, null);
+      continue;
+    }
     const damage = game.damageDealt;
     step(game, 400);
     key(game, 'KeyI', true); step(game, 80);
@@ -701,6 +712,11 @@ test('secondary levels three and five produce their advertised distinct numbers 
       } else if (index < 5) {
         assert.equal(game.shots.length, profile.count);
         if (index === 3) assert.ok(game.shots.every(shot => shot.piercing === (level >= 3)));
+      } else if (game.char.id === 'tharja') {
+        assert.equal(game.shots.length, 0);
+        const domains = game.tharja.effects.filter(effect => effect.kind === 'mire');
+        assert.equal(domains.length, 1);
+        assert.equal(domains[0].radius, data.getTharjaSurvivalProfile(game.progress).fieldRadius);
       } else {
         assert.equal(game.shots.length, 0, 'summoner casts must never fall into Xiao wind blades');
         assert.ok(game.summons.effects.some(effect => effect.kind === (game.char.id === 'zhongli' ? 'geo-meteor' : 'hydro-wave')));
@@ -981,7 +997,10 @@ test('ordinary slash visuals retain their successful attack form while skill and
       game.player.attack = null; game.effects = []; game.beginAttack(kind); const attack = game.player.attack;
       step(game, attack.def.startup + 1);
       const slash = game.effects.find(effect => effect.kind === 'slash');
-      assert.deepEqual(plain(slash.melee), { kind, variant });
+      if (game.char.id === 'tharja') {
+        assert.equal(slash, undefined, 'ranged spells must never create a melee slash');
+        assert.ok(game.tharja.effects.some(effect => effect.kind === (kind === 'jab' ? 'flux' : 'ruin')));
+      } else assert.deepEqual(plain(slash.melee), { kind, variant });
     }
   }
   for (const player of [1, 3]) {
