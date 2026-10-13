@@ -185,9 +185,9 @@ test('rerolls guarantee a different valid combination and preserve the core card
 const { SurvivalGame } = loadModule(path.join(root, 'src/game/survival-engine.ts').replaceAll('\\', '/'));
 const firstPlatformY = data.SURVIVAL_WORLD.platforms[0].y;
 const games = [];
-function makeGame(player = 0) {
+function makeGame(player = 0, variant = 'survival', mapId) {
   const game = new SurvivalGame(canvas());
-  game.setMuted(true); game.start({ player });
+  game.setMuted(true); game.start({ player, variant, mapId });
   game.player.invuln = 100000;
   game.spawnTimer = 100000;
   games.push(game);
@@ -1206,6 +1206,981 @@ test('sword release keeps survival upgrade counts, damage and hitboxes while der
     for (const shot of game.shots) assert.deepEqual(plain(projectileVisualPosition(shot)), { x: shot.x, y: shot.y });
   }
   swordTipFixture = false;
+});
+
+// Tactical cases share the actual input, physics and combat pipeline above.
+function tacticalGame(player = 0, clearEnemies = false, mapId) {
+  const game = makeGame(player, 'tactical', mapId);
+  if (clearEnemies) game.enemies = [];
+  return game;
+}
+function tacticalTarget(role) {
+  const game = tacticalGame();
+  const target = game.enemies.find(foe => foe.role === role);
+  assert.ok(target, `the opening formation contains ${role}`);
+  game.enemies = [target];
+  target.hp = target.maxHp = 10000;
+  return { game, target };
+}
+
+test('tactical starts seven fixed builds without modifying the ten-minute survival world', () => {
+  const originalWorld = plain(data.SURVIVAL_WORLD);
+  for (let index = 0; index < CHARACTERS.length; index++) {
+    const tactical = tacticalGame(index), snapshot = tactical.getSnapshot();
+    assert.equal(snapshot.variant, 'tactical'); assert.equal(snapshot.duration, 90); assert.equal(snapshot.remaining, 90);
+    assert.equal(snapshot.skillLevel, 3); assert.equal(snapshot.secondaryLevel, 3);
+    assert.equal(snapshot.branch, null); assert.equal(snapshot.rerollsRemaining, 0);
+    assert.deepEqual(plain(tactical.progress.upgrades), {});
+    assert.ok(snapshot.worldWidth < data.SURVIVAL_WORLD.width);
+    tactical.xp = 100000; tactical.checkLevelUp();
+    assert.equal(tactical.phase, 'playing'); assert.equal(tactical.choices.length, 0); assert.equal(tactical.level, 1);
+    const ordinary = makeGame(index);
+    assert.equal(ordinary.duration, 600); assert.equal(ordinary.world, data.SURVIVAL_WORLD);
+    assert.equal(ordinary.progress.skillLevel, 1); assert.equal(ordinary.progress.secondaryLevel, 1);
+    assert.equal(ordinary.groundHeightAt(790), data.groundHeightAt(790));
+    assert.notEqual(ordinary.groundHeightAt(790), tactical.groundHeightAt(790));
+  }
+  assert.deepEqual(plain(data.SURVIVAL_WORLD), originalWorld);
+});
+
+test('tactical survives exactly ninety active seconds and rematch preserves mode while clearing results', () => {
+  const game = tacticalGame(4);
+  step(game, 5399);
+  assert.equal(game.phase, 'playing'); assert.ok(game.getSnapshot().remaining > 0);
+  step(game); assert.equal(game.phase, 'victory'); assert.equal(game.elapsed, 90);
+  assert.equal(game.getSnapshot().remaining, 0);
+  game.tacticalStats.windRides = 3; game.tacticalStats.guardsBroken = 2; game.damageDealt = 150;
+  game.rematch();
+  assert.equal(game.variant, 'tactical'); assert.equal(game.selectedPlayer, 4);
+  assert.equal(game.getSnapshot().remaining, 90); assert.equal(game.phase, 'playing');
+  assert.equal(game.damageDealt, 0); assert.equal(game.kills, 0);
+  assert.ok(Object.values(game.tacticalStats).every(count => count === 0));
+  game.player.invuln = 0; game.hurtPlayer(100000);
+  assert.equal(game.phase, 'defeat'); const elapsed = game.elapsed; step(game, 60); assert.equal(game.elapsed, elapsed);
+  game.rematch(); assert.equal(game.variant, 'tactical'); assert.equal(game.player.hp, 100);
+  game.start({ player: 0 }); assert.equal(game.variant, 'survival'); assert.equal(game.duration, 600);
+});
+
+test('tactical formations arrive at zero thirty and sixty seconds only once', () => {
+  const game = tacticalGame();
+  Object.assign(game.player, { x: 38, y: game.groundHeightAt(38) });
+  const observed = new Map(game.enemies.map(foe => [foe.id, foe.role]));
+  const groupCounts = [];
+  for (let frame = 1; frame < 5400; frame++) {
+    // Clear completed enemies between waves, so occupied outposts can accept the next formation.
+    if (frame === 1799 || frame === 3599) game.enemies = [];
+    step(game);
+    for (const foe of game.enemies) observed.set(foe.id, foe.role);
+    if (frame === 1798 || frame === 3598 || frame === 5399) groupCounts.push(observed.size);
+  }
+  assert.deepEqual(groupCounts, [3, 7, 12]);
+  assert.equal(game.encounterIndex, 2); assert.equal(game.nextId, 13);
+  assert.equal(game.enemies.some(foe => !foe.role || foe.elite || foe.boss), false);
+});
+
+test('tactical occupied spawn positions wait at their authored location instead of moving onto players', () => {
+  const game = tacticalGame(), nextSpawn = data.TACTICAL_ENCOUNTERS[1].enemies[0];
+  game.enemies = [];
+  Object.assign(game.player, { x: nextSpawn.x, y: nextSpawn.y, onGround: true });
+  game.frame = 1799; step(game);
+  assert.equal(game.encounterIndex, 1);
+  assert.equal(game.enemies.some(foe => foe.homeX === nextSpawn.x && foe.y === nextSpawn.y), false);
+  key(game, 'KeyD'); step(game, 45); release(game, 'KeyD');
+  const spawned = game.enemies.find(foe => foe.homeX === nextSpawn.x);
+  assert.ok(spawned); assert.equal(spawned.x, nextSpawn.x); assert.equal(spawned.y, nextSpawn.y);
+  assert.equal(spawned.state, 'arriving');
+});
+
+test('tactical pause freezes encounter time enemies and movement statistics', () => {
+  const game = tacticalGame(); step(game, 90); game.pause();
+  const before = JSON.stringify({ snapshot: game.getSnapshot(), enemies: game.enemies, player: game.player });
+  step(game, 3600);
+  assert.equal(JSON.stringify({ snapshot: game.getSnapshot(), enemies: game.enemies, player: game.player }), before);
+  game.resume(); step(game); assert.equal(game.frame, 91);
+});
+
+test('tactical wind carries all seven characters above the upper platform with a single counted ride', () => {
+  for (let index = 0; index < CHARACTERS.length; index++) {
+    const game = tacticalGame(index, true);
+    Object.assign(game.player, { x: data.TACTICAL_WIND.x, y: data.TACTICAL_WIND.bottom });
+    step(game, 70);
+    assert.ok(game.player.y < 500, `${game.char.id} reaches the upper fighting lane`);
+    assert.equal(game.tacticalStats.windRides, 1); assert.ok(game.tacticalStats.layerChanges >= 1);
+    key(game, 'KeyD'); step(game, 25); release(game, 'KeyD'); step(game, 60);
+    assert.equal(game.player.y, 500); assert.equal(game.player.onGround, true);
+    assert.equal(game.tacticalStats.windRides, 1);
+  }
+});
+
+test('tactical east slope is walkable to the high lane by every character without jumping', () => {
+  for (let index = 0; index < CHARACTERS.length; index++) {
+    const game = tacticalGame(index, true);
+    Object.assign(game.player, { x: 1150, y: game.groundHeightAt(1150), onGround: true });
+    key(game, 'KeyD'); step(game, 330); release(game, 'KeyD');
+    assert.ok(game.player.x >= 2000, game.char.id); assert.equal(game.player.y, 500);
+    assert.equal(game.player.onGround, true); assert.equal(game.player.jumps, 2);
+    assert.equal(game.tacticalStats.windRides, 0);
+  }
+});
+
+test('tactical down input crosses both soft platforms and suppresses the wind until released', () => {
+  const game = tacticalGame(0, true);
+  Object.assign(game.player, { x: data.TACTICAL_WIND.x, y: 500, onGround: true });
+  key(game, 'KeyS'); step(game, 35);
+  assert.equal(game.player.y, 700); assert.equal(game.player.onGround, true);
+  release(game, 'KeyS'); key(game, 'KeyS'); step(game, 35);
+  assert.equal(game.player.y, 900); assert.equal(game.player.onGround, true);
+  assert.equal(game.tacticalStats.windRides, 0);
+  release(game, 'KeyS'); step(game); assert.ok(game.player.vy < 0); assert.equal(game.tacticalStats.windRides, 1);
+});
+
+test('tactical Xiao plunge crosses the wind without interruption and lands on the first platform', () => {
+  const game = tacticalGame(4, true);
+  airborne(game, data.TACTICAL_WIND.x, 410); key(game, 'KeyS'); tap(game, 'KeyL');
+  let observedDive = false;
+  for (let frame = 0; frame < 90 && !game.player.onGround; frame++) {
+    step(game); observedDive ||= game.player.attack?.plunge?.phase === 'dive' && game.player.vy >= 25;
+  }
+  assert.ok(observedDive); assert.equal(game.player.y, 500);
+  assert.equal(game.player.attack.plunge.phase, 'impact'); assert.equal(game.tacticalStats.windRides, 0);
+  release(game, 'KeyS'); step(game, 5); assert.equal(game.player.y, 500);
+});
+
+test('tactical guards reduce frontal jabs allow back and recovery hits and break to actual heavy attacks', () => {
+  const losses = {};
+  for (const scenario of ['front', 'back', 'recovery', 'heavy']) {
+    const { game, target } = tacticalTarget('guard');
+    Object.assign(target, { state: scenario === 'recovery' ? 'recover' : 'windup', stateTimer: 200, facing: -1 });
+    Object.assign(game.player, { x: target.x + (scenario === 'back' ? 65 : -65), y: target.y, facing: scenario === 'back' ? -1 : 1, onGround: true });
+    tap(game, scenario === 'heavy' ? 'KeyK' : 'KeyJ'); step(game, 35);
+    losses[scenario] = 10000 - target.hp;
+    assert.ok(losses[scenario] > 0, scenario);
+    if (scenario === 'heavy') { assert.equal(target.state, 'recover'); assert.equal(game.tacticalStats.guardsBroken, 1); }
+  }
+  assert.ok(losses.front < losses.back); assert.equal(losses.back, losses.recovery);
+  assert.ok(Math.abs(losses.front / losses.back - .35) < .0001);
+});
+
+test('tactical charger locks its tell direction then recovers after the player jumps over its path', () => {
+  const { game, target } = tacticalTarget('charger');
+  Object.assign(game.player, { x: target.x - 240, y: target.y, onGround: true, invuln: 0 });
+  Object.assign(target, { state: 'ready', cooldown: 0 }); step(game);
+  assert.equal(target.state, 'windup'); const facing = target.facing, x = target.x;
+  step(game, 55); assert.equal(target.x, x); assert.equal(target.facing, facing);
+  tap(game, 'KeyW'); step(game, 4); assert.equal(target.state, 'active');
+  const hp = game.player.hp;
+  step(game, 38);
+  assert.equal(game.player.hp, hp); assert.equal(target.state, 'recover');
+  assert.equal(game.tacticalStats.chargesEvaded, 1); assert.ok(target.x < x - 250);
+  const recoveryX = target.x; step(game, 30); assert.equal(target.x, recoveryX);
+
+  const second = tacticalTarget('charger');
+  Object.assign(second.game.player, { x: second.target.x - 180, y: second.target.y, onGround: true });
+  Object.assign(second.target, { state: 'ready', cooldown: 0 }); step(second.game);
+  const lockedFacing = second.target.facing;
+  key(second.game, 'KeyD'); step(second.game, 60); release(second.game, 'KeyD');
+  assert.ok(second.game.player.x > second.target.x, 'the player crossed the locked direction during the warning');
+  assert.equal(second.target.facing, lockedFacing); assert.equal(second.target.state, 'active');
+});
+
+test('tactical sniper shoots the old aimed position and remains on its authored platform', () => {
+  const { game, target } = tacticalTarget('sniper');
+  Object.assign(game.player, { x: 650, y: 500, onGround: true });
+  Object.assign(target, { state: 'ready', cooldown: 0 }); step(game);
+  assert.equal(target.state, 'windup'); const aim = { x: target.aimX, y: target.aimY }, origin = { x: target.x, y: target.y };
+  key(game, 'KeyD'); step(game, 22); release(game, 'KeyD');
+  assert.ok(Math.abs(game.player.x - aim.x) > 80); assert.equal(target.aimX, aim.x); assert.equal(target.aimY, aim.y);
+  step(game, 50);
+  const shot = game.shots.find(shot => shot.owner === 'enemy'); assert.ok(shot);
+  const aimedAngle = Math.atan2(aim.y - (origin.y - target.radius), aim.x - origin.x);
+  assert.ok(Math.abs(Math.atan2(shot.vy, shot.vx) - aimedAngle) < .0001);
+  assert.equal(target.x, origin.x); assert.equal(target.y, origin.y); assert.equal(target.state, 'recover');
+});
+
+test('tactical manual damage interrupts sniper warning and cancels its pending shot', () => {
+  const { game, target } = tacticalTarget('sniper');
+  Object.assign(game.player, { x: target.x - 65, y: target.y, onGround: true, facing: 1 });
+  Object.assign(target, { state: 'ready', cooldown: 0 }); step(game);
+  assert.equal(target.state, 'windup'); tap(game, 'KeyJ'); step(game, 20);
+  assert.ok(target.hp < 10000); assert.equal(target.state, 'recover'); assert.equal(target.tell, 0);
+  step(game, 55); assert.equal(game.shots.filter(shot => shot.owner === 'enemy').length, 0);
+  assert.equal(target.y, 500); assert.equal(target.x, target.homeX);
+});
+
+test('tactical all seven characters retain manual J K L I attacks against enemies on the new upper platform', () => {
+  for (let index = 0; index < CHARACTERS.length; index++) for (const code of ['KeyJ', 'KeyK', 'KeyL', 'KeyI']) {
+    const game = tacticalGame(index, true);
+    Object.assign(game.player, { x: 610, y: 500, onGround: true });
+    if (game.char.id === 'xiao' && code === 'KeyL') airborne(game, 610, 410);
+    enemy(game, 65, { y: 500 });
+    tap(game, code); step(game, 160);
+    assert.ok(game.damageDealt > 0, `${game.char.id} ${code}`);
+    assert.equal(game.phase, 'playing'); assert.equal(game.player.attack, null);
+  }
+});
+
+test('tactical summons use the active map for platform placement solid terrain and projectile bounds', () => {
+  for (const id of ['zhongli', 'furina']) {
+    const game = tacticalGame(CHARACTERS.findIndex(character => character.id === id), true);
+    Object.assign(game.player, { x: 610, y: 500, onGround: true });
+    tap(game, 'KeyL'); step(game, game.player.attack.def.startup);
+    assert.ok(game.summons.entities.length > 0);
+    for (const summon of game.summons.entities) assert.equal(summon.feetY, 500, id);
+    const context = game.summonContext();
+    assert.equal(context.surfaceAt(2100, 400), 500);
+    assert.equal(context.surfaceAt(2300, 400), null);
+    assert.equal(context.projectileBlocked(1100, 800, 1750, 800), true, 'east slope blocks the sweep');
+    assert.equal(context.projectileBlocked(1100, 400, 1750, 400), false, 'clear air above the slope');
+    assert.equal(context.projectileBlocked(610, 450, 610, 550), false, 'soft upper platforms allow projectiles');
+  }
+});
+
+test('tactical pressure permits at most two warnings or active attacks while every role gets a turn', () => {
+  const game = tacticalGame();
+  Object.assign(game.player, { x: 650, y: 900, onGround: true });
+  for (const foe of game.enemies) Object.assign(foe, {
+    x: foe.role === 'guard' ? 570 : foe.role === 'charger' ? 840 : 1010,
+    y: 900, state: 'ready', cooldown: 0,
+  });
+  const acted = new Set(); let maximum = 0;
+  for (let tick = 0; tick < 240; tick++) {
+    step(game);
+    const busy = game.enemies.filter(foe => foe.state === 'windup' || foe.state === 'active');
+    maximum = Math.max(maximum, busy.length);
+    assert.ok(busy.length <= 2, `pressure exceeded its limit at tick ${tick}`);
+    busy.forEach(foe => acted.add(foe.role));
+  }
+  assert.equal(maximum, 2); assert.deepEqual([...acted].sort(), ['charger', 'guard', 'sniper']);
+});
+
+test('tactical Zhongli meteor freezes an enemy action timer and resumes its warning after petrification', () => {
+  const game = tacticalGame(CHARACTERS.findIndex(character => character.id === 'zhongli'));
+  const target = game.enemies.find(foe => foe.role === 'guard'); game.enemies = [target];
+  Object.assign(target, { x: 700, y: 500, hp: 10000, state: 'windup', stateTimer: 200, tell: 200 });
+  Object.assign(game.player, { x: 610, y: 500, onGround: true, facing: 1 });
+  tap(game, 'KeyI');
+  for (let tick = 0; tick < 70 && !target.petrify; tick++) step(game);
+  assert.ok(target.petrify > 0 && target.hp < 10000);
+  const timer = target.stateTimer, position = { x: target.x, y: target.y }, frozenTicks = target.petrify;
+  step(game, frozenTicks);
+  assert.equal(target.petrify, 0); assert.equal(target.stateTimer, timer);
+  assert.deepEqual({ x: target.x, y: target.y }, position);
+  step(game); assert.equal(target.stateTimer, timer - 1); assert.equal(target.state, 'windup');
+});
+
+test('tactical a persistent summoned pillar actually damages and interrupts a sniper warning', () => {
+  const game = tacticalGame(CHARACTERS.findIndex(character => character.id === 'zhongli'));
+  const target = game.enemies.find(foe => foe.role === 'sniper'); game.enemies = [];
+  Object.assign(game.player, { x: 610, y: 500, onGround: true, facing: 1 });
+  tap(game, 'KeyL'); step(game, 100); assert.equal(game.player.attack, null);
+  assert.equal(game.summons.entities.length, 1);
+  Object.assign(target, { x: 730, homeX: 730, y: 500, hp: 10000, state: 'windup', stateTimer: 200, tell: 200 });
+  game.enemies = [target]; const damage = game.damageDealt;
+  for (let tick = 0; tick < 150 && target.hp === 10000; tick++) step(game);
+  assert.ok(target.hp < 10000 && game.damageDealt > damage);
+  assert.equal(target.state, 'recover'); assert.equal(target.tell, 0);
+  assert.equal(game.shots.filter(shot => shot.owner === 'enemy').length, 0);
+});
+
+for (const role of ['guard', 'charger', 'sniper']) test(`tactical Jean updraft moves ${role} once per tick in each action state and lands again`, () => {
+  for (const state of role === 'sniper' ? ['ready', 'windup', 'recover'] : ['ready', 'windup', 'active', 'recover']) {
+    const game = tacticalGame(CHARACTERS.findIndex(character => character.id === 'jean'));
+    const target = game.enemies.find(foe => foe.role === role); game.enemies = [target];
+    Object.assign(target, { x: 600, homeX: 600, y: 700, hp: 10000, maxHp: 10000, state: 'recover', stateTimer: 200 });
+    Object.assign(game.player, { x: 515, y: 700, onGround: true, facing: 1 });
+    tap(game, 'KeyI');
+    for (let tick = 0; tick < 40 && target.vy >= 0; tick++) step(game);
+    assert.ok(target.hp < 10000 && target.vy < 0, `${role} is launched by the actual I field`);
+    // Continue the same launched enemy in each legal state to catch omitted or double physics.
+    Object.assign(target, { state, stateTimer: 200, cooldown: 1000, facing: -1 });
+    const before = { y: target.y, vy: target.vy };
+    step(game);
+    assert.equal(target.vy, before.vy + .5, `${role}/${state} applies gravity exactly once`);
+    assert.equal(target.y, before.y + target.vy, `${role}/${state} really moves upward`);
+    assert.equal(target.grounded, false);
+    step(game, 100);
+    assert.equal(target.grounded, true, `${role}/${state} returns to a support surface`);
+    assert.equal(target.vy, 0);
+    assert.ok(target.y === game.groundHeightAt(target.x) || game.world.platforms.some(platform => target.x >= platform.x - 16 && target.x <= platform.x + platform.w + 16 && target.y === platform.y));
+  }
+});
+
+test('tactical map selection safely defaults unknown IDs and never changes ordinary survival', () => {
+  for (const mapId of [undefined, '', 'missing-arena', 'constructor', '__proto__', 'toString']) {
+    const game = tacticalGame(0, false, mapId);
+    assert.equal(data.getTacticalMap(mapId).id, 'wind-ruins');
+    assert.equal(game.getSnapshot().mapId, 'wind-ruins');
+    assert.equal(game.world, data.TACTICAL_WORLD);
+    assert.equal(game.tacticalMap.wind, data.TACTICAL_WIND);
+    assert.equal(game.tacticalMap.encounters, data.TACTICAL_ENCOUNTERS);
+    assert.ok(game.enemies.some(foe => foe.role === 'sniper' && foe.y === 500));
+  }
+  const ordinary = makeGame(0, 'survival', 'broken-bridge');
+  assert.equal(ordinary.world, data.SURVIVAL_WORLD);
+  assert.equal(ordinary.getSnapshot().remaining, 600);
+  assert.equal(ordinary.player.x, data.SURVIVAL_WORLD.width / 2);
+  assert.equal(ordinary.enemies.length, 0);
+  assert.equal(ordinary.getSnapshot().skillLevel, 1);
+});
+
+test('tactical broken-bridge alternating starts and rematches preserve only the selected arena', () => {
+  const game = tacticalGame(5, false, 'broken-bridge');
+  for (const mapId of ['broken-bridge', 'wind-ruins', 'broken-bridge']) {
+    game.start({ player: 5, variant: 'tactical', mapId });
+    const arena = data.getTacticalMap(mapId);
+    assert.equal(game.world, arena.world); assert.equal(game.getSnapshot().mapName, arena.name);
+    assert.equal(game.player.x, arena.spawnX); assert.equal(game.player.y, game.groundHeightAt(arena.spawnX));
+    tap(game, 'KeyL'); step(game, 60); assert.ok(game.summons.entities.length > 0);
+    game.tacticalStats.windRides = 2; game.tacticalStats.layerChanges = 3;
+    game.damageDealt = 200; game.pendingSpawns.push({ role: 'guard', x: 2000, y: 500 });
+    game.rematch();
+    assert.equal(game.getSnapshot().mapId, mapId); assert.equal(game.selectedPlayer, 5);
+    assert.equal(game.frame, 0); assert.equal(game.damageDealt, 0);
+    assert.equal(game.summons.entities.length, 0); assert.equal(game.pendingSpawns.length, 0);
+    assert.equal(game.enemies.length, 3); assert.equal(game.shots.length, 0);
+    assert.ok(Object.values(game.tacticalStats).every(count => count === 0));
+  }
+  game.start({ player: 0 });
+  assert.equal(game.world, data.SURVIVAL_WORLD); assert.equal(game.duration, 600);
+  assert.equal(game.enemies.length, 0); assert.equal(game.summons.entities.length, 0);
+});
+
+test('tactical broken-bridge has no inherited lift at the original wind shaft', () => {
+  for (let index = 0; index < CHARACTERS.length; index++) {
+    const game = tacticalGame(index, true, 'broken-bridge');
+    Object.assign(game.player, { x: data.TACTICAL_WIND.x, y: 900, onGround: true });
+    step(game, 80);
+    assert.equal(game.player.y, 900, game.char.id); assert.equal(game.player.vy, 0);
+    assert.equal(game.tacticalStats.windRides, 0);
+    tap(game, 'KeyW'); step(game, 100);
+    assert.equal(game.player.y, 900); assert.equal(game.tacticalStats.windRides, 0);
+  }
+});
+
+for (const mapId of ['broken-bridge', 'mechanism-hall']) test(`tactical ${mapId} formations spawn on real surfaces once at each encounter boundary`, () => {
+  const game = tacticalGame(0, false, mapId);
+  Object.assign(game.player, { x: 38, y: game.groundHeightAt(38) });
+  const observed = new Set(); const counts = [];
+  function inspectNewFoes() {
+    for (const foe of game.enemies) if (!observed.has(foe.id)) {
+      observed.add(foe.id);
+      assert.ok(foe.role && !foe.elite && !foe.boss);
+      assert.ok(foe.y === game.groundHeightAt(foe.x) || game.world.platforms.some(platform =>
+        foe.x >= platform.x && foe.x <= platform.x + platform.w && foe.y === platform.y),
+      `${foe.role} at ${foe.x},${foe.y} starts on a support surface`);
+    }
+  }
+  inspectNewFoes();
+  for (let frame = 1; frame < 5400; frame++) {
+    if (frame === 1799 || frame === 3599) game.enemies = [];
+    step(game); inspectNewFoes();
+    if (frame === 1798 || frame === 3598 || frame === 5399) counts.push(observed.size);
+  }
+  assert.deepEqual(counts, [3, 7, 12]); assert.equal(game.nextId, 13);
+  assert.equal(game.encounterIndex, 2); assert.equal(game.pendingSpawns.length, 0);
+  assert.equal(game.getSnapshot().encounterName, game.tacticalMap.encounters[2].name);
+});
+
+test('tactical broken-bridge all seven characters cross the gap in both directions with two jumps', () => {
+  for (let index = 0; index < CHARACTERS.length; index++) for (const direction of [-1, 1]) {
+    const game = tacticalGame(index, true, 'broken-bridge');
+    Object.assign(game.player, { x: direction === 1 ? 980 : 1220, y: 580, onGround: true });
+    const code = direction === 1 ? 'KeyD' : 'KeyA';
+    key(game, code); tap(game, 'KeyW'); step(game, 17); tap(game, 'KeyW');
+    for (let tick = 0; tick < 100 && (direction === 1 ? game.player.x < 1220 : game.player.x > 980); tick++) step(game);
+    release(game, code); step(game, 100);
+    assert.ok(direction === 1 ? game.player.x >= 1220 : game.player.x <= 980, `${game.char.id}/${direction} crosses`);
+    assert.equal(game.player.y, 580, `${game.char.id}/${direction} lands on the opposite bridge`);
+    assert.equal(game.player.onGround, true); assert.equal(game.player.jumps, 2);
+  }
+});
+
+test('tactical broken-bridge all seven characters can return from the valley via the central ledge', () => {
+  for (let index = 0; index < CHARACTERS.length; index++) {
+    const game = tacticalGame(index, true, 'broken-bridge');
+    Object.assign(game.player, { x: 1100, y: 900, onGround: true });
+    tap(game, 'KeyW'); step(game, 17); tap(game, 'KeyW'); step(game, 100);
+    assert.equal(game.player.y, 740, `${game.char.id} reaches the middle ledge`);
+    assert.equal(game.player.onGround, true); assert.equal(game.player.jumps, 2);
+    key(game, 'KeyD'); tap(game, 'KeyW'); step(game, 17); tap(game, 'KeyW');
+    for (let tick = 0; tick < 100 && game.player.x < 1250; tick++) step(game);
+    release(game, 'KeyD'); step(game, 100);
+    assert.equal(game.player.y, 580, `${game.char.id} returns from the middle ledge to the bridge`);
+    assert.equal(game.player.onGround, true); assert.equal(game.tacticalStats.windRides, 0);
+  }
+});
+
+test('tactical broken-bridge both valley ramps and flush shore-to-bridge seams are walkable by all seven characters', () => {
+  for (let index = 0; index < CHARACTERS.length; index++) for (const direction of [-1, 1]) {
+    const game = tacticalGame(index, true, 'broken-bridge');
+    Object.assign(game.player, { x: 1100, y: 900, onGround: true });
+    const away = direction === 1 ? 'KeyD' : 'KeyA', back = direction === 1 ? 'KeyA' : 'KeyD';
+    key(game, away); step(game, 300); release(game, away);
+    assert.equal(game.player.y, 580, `${game.char.id}/${direction} walks out of the valley`);
+    assert.equal(game.player.onGround, true);
+    key(game, back);
+    for (let tick = 0; tick < 160 && (direction === 1 ? game.player.x > 1600 : game.player.x < 600); tick++) {
+      step(game);
+      assert.equal(game.player.y, 580, `${game.char.id}/${direction} stays level across the bridge seam`);
+      assert.equal(game.player.onGround, true);
+    }
+    release(game, back);
+    assert.ok(direction === 1 ? game.player.x <= 1600 : game.player.x >= 600);
+    assert.equal(game.tacticalStats.windRides, 0);
+  }
+});
+
+test('tactical broken-bridge down input and walking off the bridge both leave the upper route', () => {
+  for (let index = 0; index < CHARACTERS.length; index++) {
+    const drop = tacticalGame(index, true, 'broken-bridge');
+    Object.assign(drop.player, { x: 850, y: 580, onGround: true });
+    key(drop, 'KeyS'); step(drop, 80); release(drop, 'KeyS');
+    assert.equal(drop.player.y, 900, `${drop.char.id} deliberately drops to the valley`);
+    assert.equal(drop.player.onGround, true); assert.equal(drop.player.hp, 100);
+    const gap = tacticalGame(index, true, 'broken-bridge');
+    Object.assign(gap.player, { x: 980, y: 580, onGround: true });
+    key(gap, 'KeyD');
+    for (let tick = 0; tick < 80 && gap.player.x < 1100; tick++) step(gap);
+    release(gap, 'KeyD'); step(gap, 100);
+    assert.equal(gap.player.y, 740, `${gap.char.id} naturally falls onto the central safety ledge`);
+    assert.equal(gap.player.onGround, true); assert.equal(gap.player.hp, 100);
+  }
+});
+
+test('tactical broken-bridge fast ground skills keep their footing when crossing a shore seam', () => {
+  for (const [id, code] of [['diluc', 'KeyL'], ['xiao', 'KeyI']]) for (const direction of [-1, 1]) {
+    const game = tacticalGame(CHARACTERS.findIndex(character => character.id === id), true, 'broken-bridge');
+    Object.assign(game.player, { x: direction === 1 ? 290 : 1910, y: 580, onGround: true, facing: direction });
+    tap(game, code); step(game, 70);
+    assert.ok(direction === 1 ? game.player.x > 310 : game.player.x < 1890, `${id}/${direction} crosses the seam`);
+    assert.equal(game.player.y, 580, `${id}/${direction} stays on the bridge`);
+    assert.equal(game.player.onGround, true); assert.equal(game.player.attack, null);
+  }
+});
+
+test('tactical broken-bridge summons respect the bridge valley slopes and map bounds', () => {
+  for (const id of ['zhongli', 'furina']) {
+    const game = tacticalGame(CHARACTERS.findIndex(character => character.id === id), true, 'broken-bridge');
+    Object.assign(game.player, { x: 600, y: 580, onGround: true });
+    tap(game, 'KeyL'); step(game, game.player.attack.def.startup);
+    assert.ok(game.summons.entities.length > 0);
+    for (const summon of game.summons.entities) assert.equal(summon.feetY, 580, id);
+    const summonContext = game.summonContext();
+    assert.equal(summonContext.surfaceAt(1100, 700), 740);
+    assert.equal(summonContext.surfaceAt(1100, 800), 900);
+    assert.equal(summonContext.surfaceAt(2300, 500), null);
+    assert.equal(summonContext.projectileBlocked(1100, 800, 1900, 800), true);
+    assert.equal(summonContext.projectileBlocked(1100, 500, 1900, 500), false);
+    assert.equal(summonContext.projectileBlocked(600, 530, 600, 630), false);
+  }
+});
+
+test('tactical broken-bridge completes ninety active seconds and restarts the same arena cleanly', () => {
+  const game = tacticalGame(6, false, 'broken-bridge');
+  step(game, 5399); assert.equal(game.phase, 'playing'); assert.ok(game.getSnapshot().remaining > 0);
+  step(game); assert.equal(game.phase, 'victory'); assert.equal(game.getSnapshot().remaining, 0);
+  assert.equal(game.getSnapshot().mapId, 'broken-bridge'); assert.equal(game.tacticalStats.windRides, 0);
+  game.rematch();
+  assert.equal(game.phase, 'playing'); assert.equal(game.getSnapshot().remaining, 90);
+  assert.equal(game.getSnapshot().mapId, 'broken-bridge'); assert.equal(game.char.id, 'furina');
+  assert.equal(game.player.x, 200); assert.equal(game.player.y, 580);
+  assert.equal(game.enemies.length, 3); assert.equal(game.encounterIndex, 0);
+  assert.equal(game.getSnapshot().encounterName, '01 · 断桥试探');
+  assert.ok(Object.values(game.tacticalStats).every(count => count === 0));
+});
+
+function mechanismGame(player = 0) {
+  const game = tacticalGame(player, true, 'mechanism-hall');
+  game.player.invuln = 0;
+  return game;
+}
+function westFire(game) { return game.getSnapshot().tacticalHazards.find(hazard => hazard.id === 'west-fire'); }
+function atFire(game, frame = 479, x = 650, y = 900) {
+  game.frame = frame; game.elapsed = frame / 60;
+  Object.assign(game.player, { x, y, vx: 0, vy: 0, onGround: true, invuln: 0, dodge: 0 });
+}
+
+test('tactical mechanism-hall selection rematch and returning to older modes reset hazard state', () => {
+  const game = mechanismGame(6), arena = data.getTacticalMap('mechanism-hall');
+  assert.equal(game.world, arena.world); assert.equal(game.tacticalMap.wind, null);
+  assert.equal(game.getSnapshot().mapName, '机关回廊'); assert.equal(game.player.x, 240);
+  assert.equal(game.getSnapshot().tacticalHazards.length, 2);
+  atFire(game); step(game); assert.equal(game.player.hp, 92);
+  game.rematch(); game.enemies = [];
+  assert.equal(game.frame, 0); assert.equal(game.player.hp, 100); assert.equal(game.char.id, 'furina');
+  assert.equal(game.getSnapshot().mapId, 'mechanism-hall');
+  assert.ok(game.getSnapshot().tacticalHazards.every(hazard => hazard.state === 'off' && hazard.cycleIndex === -1));
+  atFire(game); step(game); assert.equal(game.player.hp, 92, 'the first eruption can hurt again after rematch');
+  for (const mapId of ['wind-ruins', 'broken-bridge']) {
+    game.start({ player: 6, variant: 'tactical', mapId });
+    game.enemies = []; atFire(game); step(game);
+    assert.deepEqual(plain(game.getSnapshot().tacticalHazards), []); assert.equal(game.player.hp, 100);
+  }
+  game.start({ player: 0, mapId: 'mechanism-hall' });
+  assert.equal(game.world, data.SURVIVAL_WORLD); assert.equal(game.duration, 600);
+  assert.deepEqual(plain(game.getSnapshot().tacticalHazards), []);
+  game.start({ player: 0, variant: 'tactical', mapId: 'mechanism-hall' });
+  game.enemies = []; atFire(game); step(game); assert.equal(game.player.hp, 92, 'switching maps clears accepted hits');
+});
+
+test('tactical mechanism-hall fire boundaries follow active simulation time with no overlapping eruptions', () => {
+  const game = mechanismGame();
+  for (const [frame, state, remaining, cycle] of [[0, 'off', 6, -1], [359, 'off', 1 / 60, -1], [360, 'warning', 2, 0], [479, 'warning', 1 / 60, 0], [480, 'active', 2, 0], [599, 'active', 1 / 60, 0], [600, 'off', 12, 0], [1320, 'warning', 2, 1], [1440, 'active', 2, 1]]) {
+    game.frame = frame; const hazard = westFire(game);
+    assert.equal(hazard.state, state, `frame ${frame}`); assert.equal(hazard.cycleIndex, cycle);
+    assert.ok(Math.abs(hazard.phaseRemaining - remaining) < .00001);
+  }
+  const seen = new Set();
+  for (let frame = 0; frame < 5400; frame++) {
+    game.frame = frame; const active = game.getTacticalHazards().filter(hazard => hazard.state === 'active');
+    assert.ok(active.length <= 1, `both vents erupted at frame ${frame}`);
+    active.forEach(hazard => seen.add(hazard.id));
+  }
+  assert.deepEqual([...seen].sort(), ['east-fire', 'west-fire']);
+});
+
+test('tactical mechanism-hall warnings are harmless and stepping into an ongoing eruption hurts once', () => {
+  const game = mechanismGame(); atFire(game, 359);
+  step(game, 120); assert.equal(game.frame, 479); assert.equal(game.player.hp, 100);
+  game.player.x = 470; step(game, 10); assert.equal(westFire(game).state, 'active');
+  assert.equal(game.player.hp, 100);
+  key(game, 'KeyD');
+  for (let tick = 0; tick < 30 && game.player.hp === 100; tick++) step(game);
+  release(game, 'KeyD'); assert.equal(game.player.hp, 92);
+  assert.ok(game.frame > 480 && game.frame < 600); assert.ok(game.hitstop > 0);
+  // Leave and re-enter after hurt immunity ends: this eruption remains consumed.
+  game.player.x = 460; step(game, 65); game.player.x = 650; game.player.invuln = 0; step(game);
+  assert.equal(westFire(game).state, 'active'); assert.equal(game.player.hp, 92);
+  game.frame = 1439; game.elapsed = game.frame / 60; step(game);
+  assert.equal(game.player.hp, 84); assert.equal(westFire(game).cycleIndex, 1);
+});
+
+test('tactical mechanism-hall invulnerability does not consume an eruption before protection expires', () => {
+  const game = mechanismGame(); atFire(game); game.player.invuln = 4;
+  step(game, 3); assert.equal(game.player.hp, 100);
+  step(game); assert.equal(game.player.hp, 92); assert.equal(westFire(game).state, 'active');
+});
+
+test('tactical mechanism-hall actual H dodge blocks fire and leaves that eruption dangerous afterwards', () => {
+  const game = mechanismGame(); atFire(game, 479, 530); game.player.facing = 1;
+  tap(game, 'KeyH'); assert.equal(game.player.hp, 100); assert.ok(game.player.dodge > 0);
+  for (let tick = 0; tick < 30 && game.player.hp === 100; tick++) step(game);
+  assert.equal(game.player.hp, 92); assert.ok(game.player.x > 650 && game.player.x < 800);
+  assert.equal(westFire(game).state, 'active');
+});
+
+test('tactical mechanism-hall actual Zhongli shield absorbs one fire hit and consumes the eruption', () => {
+  const game = mechanismGame(CHARACTERS.findIndex(character => character.id === 'zhongli'));
+  tap(game, 'KeyL'); step(game, 70);
+  const shield = game.getSnapshot().shieldHp; assert.ok(shield > 8);
+  atFire(game); step(game);
+  assert.equal(game.player.hp, 100); assert.equal(game.getSnapshot().shieldHp, shield - 8);
+  step(game, 70); game.player.invuln = 0; step(game);
+  assert.equal(westFire(game).state, 'active');
+  assert.equal(game.player.hp, 100); assert.equal(game.getSnapshot().shieldHp, shield - 8);
+});
+
+test('tactical mechanism-hall fire uses the shared armor mitigation path', () => {
+  const game = mechanismGame(); game.progress.upgrades.armor = 3;
+  atFire(game); step(game);
+  const loss = 100 - game.player.hp;
+  assert.ok(loss > 0 && loss < 8);
+  assert.ok(Math.abs(loss - 8 * getSurvivalStats(game.progress).armorMultiplier) < .00001);
+});
+
+test('tactical mechanism-hall rising jumps escape fire while deliberate platform drops enter it', () => {
+  const jump = mechanismGame(); atFire(jump, 470);
+  tap(jump, 'KeyW'); step(jump, 100);
+  assert.equal(jump.player.hp, 100); assert.equal(jump.player.y, 790); assert.equal(jump.player.onGround, true);
+  const drop = mechanismGame(); atFire(drop, 489, 650, 790);
+  step(drop, 10); assert.equal(drop.player.hp, 100);
+  tap(drop, 'KeyS'); step(drop, 30);
+  assert.equal(drop.player.y, 900); assert.equal(drop.player.hp, 92);
+});
+
+test('tactical mechanism-hall middle and upper platforms remain outside the ground fire volume', () => {
+  for (const [x, y] of [[650, 790], [1550, 790], [1100, 590]]) {
+    const game = mechanismGame(); atFire(game, x > 1400 ? 959 : 479, x, y);
+    step(game, 120); assert.equal(game.player.hp, 100); assert.equal(game.player.y, y);
+  }
+});
+
+test('tactical mechanism-hall pause and actual hurt hitstop freeze the same hazard clock', () => {
+  const game = mechanismGame(); atFire(game, 420);
+  game.pause(); const paused = plain(game.getSnapshot().tacticalHazards);
+  step(game, 300); assert.deepEqual(plain(game.getSnapshot().tacticalHazards), paused); assert.equal(game.frame, 420);
+  game.resume(); step(game); assert.equal(game.frame, 421);
+  atFire(game); step(game); const hurt = plain(game.getSnapshot().tacticalHazards), frame = game.frame;
+  assert.ok(game.hitstop > 0); step(game, game.hitstop);
+  assert.equal(game.frame, frame); assert.deepEqual(plain(game.getSnapshot().tacticalHazards), hurt);
+  step(game); assert.equal(game.frame, frame + 1); assert.ok(westFire(game).phaseRemaining < hurt[0].phaseRemaining);
+});
+
+test('tactical mechanism-hall lethal fire ends immediately and never advances enemy actions after defeat', () => {
+  const game = tacticalGame(0, false, 'mechanism-hall');
+  const target = game.enemies[0]; target.stateTimer = 100;
+  atFire(game); game.player.hp = 8;
+  const age = target.age, timer = target.stateTimer; step(game);
+  assert.equal(game.phase, 'defeat'); assert.equal(game.player.hp, 0);
+  assert.equal(target.age, age); assert.equal(target.stateTimer, timer); assert.equal(game.hitstop, 0);
+  const frozen = plain(game.getSnapshot()); step(game, 300); assert.deepEqual(plain(game.getSnapshot()), frozen);
+});
+
+test('tactical mechanism-hall fire does not damage enemies or remove persistent summons', () => {
+  const game = mechanismGame(CHARACTERS.findIndex(character => character.id === 'zhongli'));
+  Object.assign(game.player, { x: 560, y: 900, onGround: true });
+  tap(game, 'KeyL'); step(game, 70);
+  const pillar = game.summons.entities[0]; assert.ok(pillar.x > 520 && pillar.x < 780 && pillar.feetY === 900);
+  const target = enemy(game, 80, { x: 680, y: 900, hp: 10000, maxHp: 10000, role: 'guard', state: 'recover', stateTimer: 1000 });
+  // Keep the pillar's independent combat pulse idle so any enemy damage is from the vent.
+  pillar.cooldown = 1000; game.summons.effects = []; game.fields = [];
+  game.player.x = 240; game.frame = 479; const life = pillar.life;
+  step(game, 120);
+  assert.equal(target.hp, 10000); assert.equal(game.damageDealt, 0); assert.equal(game.kills, 0);
+  assert.ok(game.summons.entities.includes(pillar)); assert.equal(pillar.life, life - 120);
+});
+
+test('tactical mechanism-hall every character can single-jump onto shelter and double-jump to the upper lane', () => {
+  for (let index = 0; index < CHARACTERS.length; index++) {
+    const game = mechanismGame(index);
+    Object.assign(game.player, { x: 1100, y: 900, onGround: true });
+    tap(game, 'KeyW'); step(game, 100);
+    assert.equal(game.player.y, 790, `${game.char.id} single-jumps onto shelter`); assert.equal(game.player.jumps, 2);
+    tap(game, 'KeyW'); step(game, 17); tap(game, 'KeyW'); step(game, 100);
+    assert.equal(game.player.y, 590, `${game.char.id} double-jumps onto the upper lane`);
+    assert.equal(game.player.onGround, true); assert.equal(game.tacticalStats.windRides, 0);
+    assert.equal(game.player.hp, 100);
+  }
+});
+
+test('tactical mechanism-hall the slowest character can retreat from either vent within its warning', () => {
+  const index = CHARACTERS.reduce((slowest, character, i) => character.speed < CHARACTERS[slowest].speed ? i : slowest, 0);
+  for (const [x, warningStart, code] of [[650, 360, 'KeyA'], [1560, 840, 'KeyD']]) {
+    const game = mechanismGame(index); atFire(game, warningStart, x);
+    key(game, code); step(game, 60); release(game, code); step(game, 70);
+    assert.equal(game.player.hp, 100);
+    const active = game.getTacticalHazards().find(hazard => hazard.state === 'active'); assert.ok(active);
+    assert.ok(game.player.x + 18 <= active.x || game.player.x - 18 >= active.x + active.width);
+  }
+});
+
+for (const [mapId, cap] of [['wind-ruins', 2], ['broken-bridge', 2], ['mechanism-hall', 1]]) test(`tactical ${mapId} reserves its intended concurrent special-attack budget`, () => {
+  const game = tacticalGame(0, false, mapId);
+  Object.assign(game.player, { x: 650, y: 900, onGround: true });
+  for (const foe of game.enemies) Object.assign(foe, { x: foe.role === 'guard' ? 570 : foe.role === 'charger' ? 840 : 1010, homeX: foe.role === 'guard' ? 570 : 840, y: 900, state: 'ready', cooldown: 0 });
+  let maximum = 0;
+  for (let tick = 0; tick < 300; tick++) {
+    step(game); const busy = game.enemies.filter(foe => foe.state === 'windup' || foe.state === 'active').length;
+    maximum = Math.max(maximum, busy); assert.ok(busy <= cap, `${mapId} tick ${tick}`);
+  }
+  assert.equal(maximum, cap);
+});
+
+test('tactical mechanism-hall completes ninety active seconds then freezes hazards and enemies until rematch', () => {
+  const game = tacticalGame(6, false, 'mechanism-hall'); step(game, 5399);
+  assert.equal(game.phase, 'playing'); assert.ok(game.getSnapshot().remaining > 0);
+  assert.equal(westFire(game).state, 'active');
+  const age = game.enemies[0].age;
+  Object.assign(game.player, { x: 650, y: 900, onGround: true, hp: 8, invuln: 0 });
+  step(game); assert.equal(game.phase, 'victory'); assert.equal(game.player.hp, 8); assert.equal(game.getSnapshot().remaining, 0);
+  assert.equal(game.enemies[0].age, age); assert.equal(westFire(game).state, 'off');
+  const frozen = plain(game.getSnapshot()); step(game, 180); assert.deepEqual(plain(game.getSnapshot()), frozen);
+  game.rematch(); assert.equal(game.getSnapshot().mapId, 'mechanism-hall'); assert.equal(game.char.id, 'furina');
+  assert.equal(game.player.x, 240); assert.equal(game.player.y, 900); assert.equal(game.getSnapshot().remaining, 90);
+  assert.equal(game.enemies.length, 3); assert.equal(game.encounterIndex, 0);
+});
+
+// Expedition checks exercise the production game through the same input/update
+// pipeline; terrain-only runs remove opponents to isolate navigation failures.
+function expeditionGame(player = 0) {
+  return makeGame(player, 'expedition');
+}
+function terrainStep(game, frames = 1) {
+  for (let frame = 0; frame < frames; frame++) {
+    game.enemies = []; game.shots = []; step(game);
+  }
+}
+function walkTo(game, destination, groundRoute = false) {
+  const direction = destination > game.player.x ? 1 : -1;
+  const code = direction > 0 ? 'KeyD' : 'KeyA';
+  if (groundRoute) key(game, 'KeyS');
+  key(game, code);
+  let ticks = 0;
+  while ((destination - game.player.x) * direction > 0 && ticks++ < 6000) {
+    terrainStep(game);
+    assert.equal(game.phase, 'playing', `${game.char.id} route remains playable`);
+    assert.ok(Number.isFinite(game.player.x) && Number.isFinite(game.player.y));
+  }
+  release(game, code); if (groundRoute) release(game, 'KeyS');
+  assert.ok((destination - game.player.x) * direction <= 0, `${game.char.id} reaches x=${destination}`);
+}
+
+test('expedition starts every available character at level one in the shared ten-minute world', () => {
+  for (let index = 0; index < CHARACTERS.length; index++) {
+    const game = expeditionGame(index), snapshot = game.getSnapshot();
+    assert.equal(snapshot.variant, 'expedition'); assert.equal(snapshot.duration, 600);
+    assert.equal(snapshot.remaining, 600); assert.equal(snapshot.worldWidth, 7200);
+    assert.equal(game.world, data.EXPEDITION_WORLD); assert.equal(game.world.height, 1080);
+    assert.equal(game.player.x, 400); assert.equal(snapshot.skillLevel, 1); assert.equal(snapshot.secondaryLevel, 1);
+    assert.equal(snapshot.branch, null); assert.equal(snapshot.level, 1); assert.equal(snapshot.rerollsRemaining, 2);
+    assert.equal(snapshot.expedition.regionId, 'wind-ruins');
+    assert.deepEqual(plain(snapshot.expedition.visitedRegions), ['wind-ruins']);
+    assert.equal(snapshot.expedition.bossStarted, false);
+  }
+});
+
+test('expedition every character walks the complete connected world and both seams in both directions without resetting progress', () => {
+  for (let index = 0; index < CHARACTERS.length; index++) {
+    const game = expeditionGame(index);
+    game.player.hp = 73; game.level = 3; game.xp = 2; game.kills = 7; game.damageDealt = 123;
+    game.progress.skillLevel = 2; game.progress.secondaryLevel = 2; game.progress.upgrades.armor = 1;
+    const progress = plain(game.progress);
+    // S keeps the player on the walkable ground route, including the wind shaft
+    // and the bridge valley; no teleports or direct position writes along it.
+    for (const destination of [2350, 4750, 4850, 7080, 4750, 2350, 2100, 400]) {
+      walkTo(game, destination, true);
+      assert.ok(Math.abs(game.player.y - game.groundHeightAt(game.player.x)) < 1, `${game.char.id} stands on connected ground at ${destination}`);
+      assert.equal(game.player.onGround, true); assert.equal(game.player.hp, 73);
+      assert.deepEqual(plain(game.progress), progress); assert.equal(game.xp, 2); assert.equal(game.level, 3);
+      assert.equal(game.kills, 7); assert.equal(game.damageDealt, 123);
+    }
+    assert.equal(game.getSnapshot().expedition.regionId, 'wind-ruins');
+    assert.deepEqual([...game.getSnapshot().expedition.visitedRegions].sort(), ['broken-bridge', 'mechanism-hall', 'wind-ruins']);
+    assert.ok(game.elapsed > 30 && game.elapsed < 600); assert.equal(game.frame, game.elapsed * 60);
+  }
+});
+
+test('expedition translated bridge has traversable flush shores, a real gap and a valley return for every character', () => {
+  for (let index = 0; index < CHARACTERS.length; index++) {
+    const game = expeditionGame(index);
+    for (const direction of [-1, 1]) {
+      Object.assign(game.player, { x: 2400 + (direction > 0 ? 290 : 1910), y: 580, vy: 0, onGround: true, jumps: 2 });
+      walkTo(game, 2400 + (direction > 0 ? 600 : 1600));
+      assert.equal(game.player.y, 580, `${game.char.id}/${direction} keeps bridge footing`);
+      assert.equal(game.player.onGround, true);
+    }
+    Object.assign(game.player, { x: 3380, y: 580, vy: 0, onGround: true, jumps: 2 });
+    walkTo(game, 3500); terrainStep(game, 100);
+    assert.equal(game.player.y, 740, `${game.char.id} falls through the translated bridge gap onto the safety ledge`);
+    tap(game, 'KeyS'); terrainStep(game, 80); assert.equal(game.player.y, 900);
+    tap(game, 'KeyW'); terrainStep(game, 17); tap(game, 'KeyW'); terrainStep(game, 100);
+    assert.equal(game.player.y, 740); assert.equal(game.player.onGround, true);
+    key(game, 'KeyD'); tap(game, 'KeyW'); terrainStep(game, 17); tap(game, 'KeyW');
+    for (let tick = 0; tick < 100 && game.player.x < 3650; tick++) terrainStep(game);
+    release(game, 'KeyD'); terrainStep(game, 100);
+    assert.equal(game.player.y, 580, `${game.char.id} returns to the translated bridge with actual jumps`);
+    assert.equal(game.player.onGround, true);
+  }
+});
+
+test('expedition wind retains actual ascent and controllable platform descent for every character', () => {
+  for (let index = 0; index < CHARACTERS.length; index++) {
+    const game = expeditionGame(index);
+    Object.assign(game.player, { x: data.TACTICAL_WIND.x, y: 900, onGround: true, vy: 0 });
+    terrainStep(game, 70); assert.ok(game.player.y < 500, `${game.char.id} rises above the upper lane`);
+    key(game, 'KeyS'); terrainStep(game, 80);
+    assert.equal(game.player.y, 500);
+    release(game, 'KeyS'); key(game, 'KeyS'); terrainStep(game, 40); assert.equal(game.player.y, 700);
+    release(game, 'KeyS'); key(game, 'KeyS'); terrainStep(game, 40); assert.equal(game.player.y, 900);
+    release(game, 'KeyS'); terrainStep(game); assert.ok(game.player.vy < 0);
+  }
+});
+
+test('expedition translated fire starts safely on entry and freezes through pause and an actual upgrade', () => {
+  const game = expeditionGame(); game.frame = 12345; game.elapsed = game.frame / 60;
+  assert.deepEqual(plain(game.getTacticalHazards()), []);
+  Object.assign(game.player, { x: 5650, y: 900, vy: 0, onGround: true }); terrainStep(game);
+  assert.equal(game.getSnapshot().expedition.regionId, 'mechanism-hall');
+  assert.equal(westFire(game).x, 5520); assert.equal(westFire(game).state, 'off');
+  assert.ok(westFire(game).phaseRemaining > 5.9);
+  terrainStep(game, 358); assert.equal(westFire(game).state, 'off');
+  terrainStep(game); assert.equal(westFire(game).state, 'warning'); assert.equal(westFire(game).phaseRemaining, 2);
+  game.pause(); const paused = plain(game.getSnapshot().tacticalHazards), before = game.frame;
+  terrainStep(game, 300); assert.equal(game.frame, before); assert.deepEqual(plain(game.getSnapshot().tacticalHazards), paused);
+  game.resume(); game.xp = xpForLevel(game.level); game.checkLevelUp(); assert.equal(game.phase, 'upgrade');
+  terrainStep(game, 300); assert.equal(game.frame, before); assert.deepEqual(plain(game.getSnapshot().tacticalHazards), paused);
+  assert.ok(game.chooseUpgrade('core')); assert.equal(game.progress.skillLevel, 2);
+  terrainStep(game, 119); assert.equal(westFire(game).state, 'warning');
+  terrainStep(game); assert.equal(westFire(game).state, 'active');
+});
+
+test('expedition translated fire damages ground once, spares shelter and resets its safe clock when reentered', () => {
+  const game = expeditionGame();
+  Object.assign(game.player, { x: 5650, y: 900, vy: 0, onGround: true, invuln: 0 }); terrainStep(game);
+  terrainStep(game, 478); assert.equal(game.player.hp, 100);
+  terrainStep(game); assert.equal(game.player.hp, 92); assert.equal(westFire(game).state, 'active');
+  const hazard = plain(westFire(game)), frame = game.frame;
+  terrainStep(game, game.hitstop); assert.equal(game.frame, frame); assert.deepEqual(plain(westFire(game)), hazard);
+  terrainStep(game, 60); game.player.invuln = 0; terrainStep(game); assert.equal(game.player.hp, 92);
+  Object.assign(game.player, { x: 4750, y: game.groundHeightAt(4750), vy: 0 }); terrainStep(game);
+  assert.deepEqual(plain(game.getTacticalHazards()), []);
+  Object.assign(game.player, { x: 5650, y: 790, vy: 0, onGround: true, invuln: 0 }); terrainStep(game);
+  assert.equal(westFire(game).state, 'off'); assert.ok(westFire(game).phaseRemaining > 5.9);
+  terrainStep(game, 479); assert.equal(westFire(game).state, 'active'); assert.equal(game.player.hp, 92);
+  tap(game, 'KeyS'); terrainStep(game, 30);
+  assert.equal(game.player.y, 900); assert.equal(game.player.hp, 84, 'a fresh eruption can hit after a deliberate shelter drop');
+});
+
+test('expedition local formations and pursuit enemies arrive away from the player with harmless visible warning time', () => {
+  for (const x of [60, 400, 3400, 5650, 7140]) {
+    const game = expeditionGame(); game.enemies = []; game.spawnTimer = 0;
+    Object.assign(game.player, { x, y: game.groundHeightAt(x), vy: 0, onGround: true });
+    step(game);
+    assert.ok(game.enemies.length > 0);
+    const normal = game.enemies.find(foe => !foe.role); assert.ok(normal);
+    for (const foe of game.enemies) {
+      assert.equal(foe.state, 'arriving'); assert.ok(foe.stateTimer >= 73);
+      const gap = Math.hypot(foe.x - game.player.x, foe.y - game.player.y);
+      assert.ok(gap >= 175, `${x}/${foe.role ?? foe.kind} starts at a safe distance`);
+      assert.ok(Math.abs(foe.x - game.player.x) <= 780);
+      assert.ok(foe.x >= 0 && foe.x <= 7200);
+      assert.ok(foe.y <= game.groundHeightAt(foe.x), 'arrivals are not buried in the terrain');
+    }
+    assert.ok(Math.abs(normal.x - game.player.x) >= 320);
+    const hp = normal.hp; game.hurtEnemy(normal, 10000, 1, 'manual'); assert.equal(normal.hp, hp, 'warning cannot be farmed');
+    Object.assign(game.player, { x: normal.x, y: normal.y, vy: 0, onGround: true, invuln: 0 });
+    step(game, 20); assert.equal(normal.state, 'arriving'); assert.equal(game.player.hp, 100);
+    assert.equal(normal.hp, hp);
+  }
+});
+
+test('expedition occupied local outposts wait in place and region waves use time actually spent there', () => {
+  const game = expeditionGame(); game.enemies = []; game.frame = 200 * 60; game.elapsed = 200;
+  const spawn = data.EXPEDITION_MAPS[1].encounters[0].enemies[0];
+  Object.assign(game.player, { x: spawn.x, y: spawn.y, vy: 0, onGround: true }); step(game);
+  assert.equal(game.enemies.some(foe => foe.homeX === spawn.x), false, 'occupied authored point remains empty');
+  assert.ok([...game.expeditionOutposts].filter(key => key.startsWith('broken-bridge:')).every(key => key.startsWith('broken-bridge:0:')), 'late first visit does not dump all three formations');
+  key(game, 'KeyA'); step(game, 55); release(game, 'KeyA');
+  const foe = game.enemies.find(candidate => candidate.homeX === spawn.x);
+  assert.ok(foe); assert.equal(foe.x, spawn.x); assert.equal(foe.state, 'arriving');
+  const id = foe.id; game.enemies = [];
+  Object.assign(game.player, { x: 500, y: 900, vy: 0 }); step(game);
+  Object.assign(game.player, { x: spawn.x - 220, y: spawn.y, vy: 0 }); step(game);
+  assert.equal(game.enemies.some(candidate => candidate.homeX === spawn.x || candidate.id === id), false, 'retired outpost does not respawn on revisit');
+});
+
+test('expedition level-one manual combat kills a local defender and its crystal triggers a real upgrade', () => {
+  const game = expeditionGame(); game.enemies = [];
+  Object.assign(game.player, { x: 400, y: 900, vy: 0, onGround: true, facing: 1 });
+  game.spawnTacticalEnemy({ role: 'guard', x: 460, y: 900 });
+  const target = game.enemies.at(-1);
+  Object.assign(target, { state: 'recover', stateTimer: 10000, cooldown: 10000 });
+  assert.ok(target.hp < 125 && target.xp > 0);
+  game.xp = xpForLevel(game.level) - target.xp;
+  for (let attack = 0; attack < 12 && target.hp > 0; attack++) { tap(game, 'KeyK'); step(game, 60); }
+  assert.ok(target.hp <= 0, 'level-one heavy attacks can defeat the intact local guard');
+  assert.ok(game.kills >= 1); assert.ok(game.damageDealt > 0); assert.equal(game.progress.skillLevel, 1);
+  // Move only after the real kill, so the crystal must use the pickup pipeline.
+  Object.assign(game.player, { x: target.x, y: target.y, vy: 0 });
+  for (let tick = 0; tick < 150 && game.phase === 'playing'; tick++) step(game);
+  assert.equal(game.phase, 'upgrade'); assert.equal(game.level, 2);
+  assert.ok(game.choices.some(choice => choice.id === 'core'));
+  assert.ok(game.chooseUpgrade('core')); assert.equal(game.progress.skillLevel, 2); assert.equal(game.phase, 'playing');
+});
+
+test('expedition leaving enemies far behind retires them without teleporting, rewards or accumulated reinforcements', () => {
+  const game = expeditionGame(); game.spawnTimer = 0; step(game, 5);
+  const oldIds = new Set(game.enemies.map(foe => foe.id)); assert.ok(oldIds.size);
+  const kills = game.kills, xp = game.xp, damage = game.damageDealt;
+  Object.assign(game.player, { x: 6300, y: 900, vy: 0 }); step(game);
+  assert.ok(game.enemies.every(foe => !oldIds.has(foe.id)));
+  assert.equal(game.kills, kills); assert.equal(game.xp, xp); assert.equal(game.damageDealt, damage); assert.equal(game.orbs.length, 0);
+  for (let visit = 0; visit < 18; visit++) {
+    const x = [500, 3500, 6300][visit % 3];
+    Object.assign(game.player, { x, y: game.groundHeightAt(x), vy: 0 }); game.spawnTimer = 0; step(game, 10);
+    assert.ok(game.enemies.length <= 14);
+    assert.ok(game.enemies.every(foe => Math.abs(foe.x - game.player.x) <= 1350));
+  }
+});
+
+for (const [region, x, cap] of [['wind-ruins', 650, 2], ['broken-bridge', 3050, 2], ['mechanism-hall', 5650, 1]]) test(`expedition ${region} keeps its regional strong-attack pressure budget`, () => {
+  const game = expeditionGame(); game.enemies = [];
+  for (const map of data.EXPEDITION_MAPS) map.encounters.forEach((encounter, wave) => encounter.enemies.forEach((_, spawn) => game.expeditionOutposts.add(`${map.id}:${wave}:${spawn}`)));
+  Object.assign(game.player, { x, y: 900, vy: 0, onGround: true });
+  for (const [role, offset] of [['guard', -80], ['charger', 190], ['sniper', 360]]) {
+    game.spawnTacticalEnemy({ role, x: x + offset, y: 900 });
+    Object.assign(game.enemies.at(-1), { state: 'ready', cooldown: 0 });
+  }
+  let maximum = 0;
+  for (let tick = 0; tick < 360; tick++) {
+    step(game); const busy = game.enemies.filter(foe => foe.state === 'windup' || foe.state === 'active').length;
+    maximum = Math.max(maximum, busy); assert.ok(busy <= cap, `${region} at ${tick}`);
+  }
+  assert.equal(maximum, cap, 'the regional budget still allows enemies to act');
+});
+
+test('expedition ninth-minute boss arrives once, extinguishes fire and stops reinforcements across revisits', () => {
+  const game = expeditionGame(); Object.assign(game.player, { x: 5650, y: 900, vy: 0 }); step(game);
+  game.expeditionHazardFrame = 479; game.frame = 540 * 60 - 1; game.spawnTimer = 0; step(game);
+  assert.equal(game.getSnapshot().expedition.bossStarted, true);
+  const boss = game.enemies.find(foe => foe.boss); assert.ok(boss); assert.equal(boss.state, 'arriving');
+  assert.ok(boss.stateTimer >= 149); assert.ok(Math.abs(boss.x - game.player.x) >= 320);
+  assert.ok(game.getTacticalHazards().every(hazard => hazard.state === 'off'));
+  const nextId = game.nextId;
+  for (const x of [500, 3500, 6300, 500, 5650]) {
+    Object.assign(game.player, { x, y: game.groundHeightAt(x), vy: 0 }); game.spawnTimer = 0; step(game, 10);
+    assert.equal(game.nextId, nextId); assert.equal(game.enemies.filter(foe => foe.boss).length, 1);
+    assert.equal(game.enemies.find(foe => foe.boss).id, boss.id);
+    assert.ok(game.getTacticalHazards().every(hazard => hazard.state === 'off'));
+  }
+  game.frame = 35999; step(game); assert.equal(game.phase, 'victory'); assert.equal(game.elapsed, 600);
+  assert.equal(game.bossKilled, false, 'survival victory does not require boss damage');
+});
+
+test('expedition rematch clears growth visits hazard hits and outposts without changing older modes', () => {
+  const game = expeditionGame(CHARACTERS.length - 1), charId = game.char.id;
+  Object.assign(game.player, { x: 5650, y: 900, vy: 0 }); step(game, 500);
+  game.player.hp = 17; game.level = 5; game.xp = 9; game.progress.skillLevel = 3; game.kills = 8; game.damageDealt = 200;
+  game.hazardHitCycles.set('west-fire', 0); game.rematch();
+  const snapshot = game.getSnapshot();
+  assert.equal(snapshot.variant, 'expedition'); assert.equal(snapshot.charId, charId); assert.equal(snapshot.remaining, 600);
+  assert.equal(snapshot.hp, 100); assert.equal(snapshot.level, 1); assert.equal(snapshot.xp, 0); assert.equal(snapshot.skillLevel, 1);
+  assert.equal(snapshot.kills, 0); assert.equal(snapshot.damageDealt, 0); assert.equal(game.player.x, 400);
+  assert.deepEqual(plain(snapshot.expedition.visitedRegions), ['wind-ruins']); assert.equal(snapshot.expedition.bossStarted, false);
+  assert.equal(game.hazardHitCycles.size, 0); assert.equal(game.expeditionHazardFrame, 0);
+  assert.ok([...game.expeditionOutposts].every(key => key.startsWith('wind-ruins:0:')));
+  for (const mapId of ['wind-ruins', 'broken-bridge', 'mechanism-hall']) {
+    game.start({ player: 0, variant: 'tactical', mapId });
+    assert.equal(game.world, data.getTacticalMap(mapId).world); assert.equal(game.duration, 90); assert.equal(game.getSnapshot().expedition, null);
+  }
+  game.start({ player: 0, variant: 'survival' });
+  assert.equal(game.world, data.SURVIVAL_WORLD); assert.equal(game.duration, 600); assert.equal(game.getSnapshot().expedition, null);
+  assert.deepEqual(plain(game.getTacticalHazards()), []);
+});
+
+test('expedition every character completes ten-minute moving combat with real upgrades and bounded finite entities', () => {
+  for (let index = 0; index < CHARACTERS.length; index++) {
+    const game = expeditionGame(index); game.spawnTimer = 0;
+    let direction = 1, choices = 0, ticks = 0, maxEnemies = 0;
+    const visited = new Set();
+    while (game.phase !== 'victory' && ticks++ < 45000) {
+      if (game.phase === 'upgrade') {
+        const choice = game.choices.find(candidate => candidate.id === 'core') ?? game.choices[0];
+        assert.ok(choice && game.chooseUpgrade(choice.id)); choices++;
+        continue;
+      }
+      assert.equal(game.phase, 'playing', game.char.id);
+      if (game.player.x > 7050) direction = -1;
+      if (game.player.x < 150) direction = 1;
+      release(game, direction > 0 ? 'KeyA' : 'KeyD'); key(game, direction > 0 ? 'KeyD' : 'KeyA'); key(game, 'KeyS');
+      const attacks = [['KeyJ', 35], ['KeyK', 83], ['KeyL', 227], ['KeyI', 181]];
+      for (const [code, period] of attacks) { if (ticks % period === 0) key(game, code); else release(game, code); }
+      step(game);
+      visited.add(game.getSnapshot().expedition.regionId); maxEnemies = Math.max(maxEnemies, game.enemies.length);
+      if (ticks % 60 === 0) {
+        assert.ok(game.enemies.length <= 15, `${game.char.id} nearby population stays bounded including boss`);
+        assert.ok(game.shots.length <= data.SURVIVAL_LIMITS.projectiles); assert.ok(game.orbs.length <= data.SURVIVAL_LIMITS.gems);
+        assert.ok(game.effects.length <= data.SURVIVAL_LIMITS.effects);
+        assert.ok([game.player.x, game.player.y, game.player.hp].every(Number.isFinite));
+        assert.ok(game.enemies.every(foe => [foe.x, foe.y, foe.hp].every(Number.isFinite)));
+      }
+    }
+    assert.equal(game.phase, 'victory', `${game.char.id} finishes the active ten-minute run`);
+    assert.equal(game.elapsed, 600); assert.equal(visited.size, 3); assert.ok(maxEnemies > 1);
+    assert.ok(game.kills > 0 && game.damageDealt > 0, `${game.char.id} fought during traversal`);
+    assert.ok(choices > 0 && game.level > 1, `${game.char.id} collected and chose real upgrades`);
+    assert.equal(game.expeditionBossStarted, true); assert.equal(game.eliteMilestones.size, 1);
+  }
 });
 
 let failures = 0;

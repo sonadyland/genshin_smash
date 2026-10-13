@@ -53,3 +53,87 @@
 }
 .survival-summon-status { display: flex; flex-wrap: wrap; gap: 3px 12px; margin-top: 5px; color: #c1d9ca; font-size: 9px; line-height: 1.5; }
 .mobile-mode .survival-summon-status { gap: 3px 7px; font-size: 8px; margin-top: 3px; }
+.tactical-main { --survival-stage-height: min(720px, max(300px, calc(100svh - 380px))); }
+.tactical-stagebar { padding: 7px 16px 8px; background: #10282b; border: 1px solid #adad7940; border-top: 0; }
+.tactical-encounters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+.tactical-encounters > span { display: flex; align-items: center; gap: 7px; min-width: 0; padding-bottom: 6px; border-bottom: 2px solid #586b603b; color: #7c958c; font-size: 10px; }
+.tactical-encounters > span > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.tactical-encounters b { flex: none; display: grid; place-items: center; width: 16px; height: 16px; border: 1px solid currentColor; border-radius: 50%; font: 9px Georgia, serif; }
+.tactical-encounters small { margin-left: auto; font: 9px Georgia, serif; font-variant-numeric: tabular-nums; }
+.tactical-encounters > .active { color: #e0ce9f; border-color: #d8c18b; }
+.tactical-encounters > .complete { color: #93b4a3; border-color: #729b84; }
+.tactical-stage-hint { display: flex; justify-content: space-between; gap: 12px; margin-top: 6px; color: #a7beb0; font-size: 9px; line-height: 1.5; }
+.tactical-stage-hint small { flex: none; color: #c3c3a0; font-size: 9px; font-variant-numeric: tabular-nums; }
+.tactical-touch-tip { display: none; }
+.tactical-hazards { display: flex; flex-wrap: wrap; gap: 6px 15px; margin-top: 6px; color: #c4c8b3; }
+.tactical-hazard { display: flex; align-items: center; gap: 5px; border-left: 2px solid #83a193; padding-left: 6px; font-size: 9px; line-height: 1.5; white-space: nowrap; }
+.tactical-hazard > span:first-child { font-size: 11px; }
+.tactical-hazard small { color: inherit; font-size: 9px; font-variant-numeric: tabular-nums; min-width: 20px; }
+.tactical-hazard.hazard-warning { color: #f0d182; border-color: #e2bd5d; }
+.tactical-hazard.hazard-active { color: #ffc2a0; border-color: #ff8969; }
+.tactical-pause-tip { display: none; color: #adc5b5; font-size: 10px; line-height: 1.8; }
+.tactical-result-actions { display: flex; justify-content: center; gap: 25px; color: #8da89a; font-size: 10px; margin: -3px 0 19px; }
+.tactical-result-actions strong { color: #ddcfaa; font: 17px Georgia, serif; margin-left: 7px; }
+@media (max-width: 700px) {
+  .tactical-stagebar { padding: 7px 11px; }
+  .tactical-encounters { gap: 7px; }
+  .tactical-encounters > span { gap: 4px; font-size: 9px; }
+  .tactical-encounters small { font-size: 8px; }
+  .tactical-stage-hint { flex-wrap: wrap; gap: 3px; font-size: 8px; }
+  .tactical-stage-hint small { font-size: 8px; }
+}
+@media (max-height: 800px) and (min-width: 701px) {
+  .tactical-main { --survival-stage-height: max(240px, calc(100svh - 270px)); }
+  .tactical-stagebar { padding: 5px 13px; }
+  .tactical-encounters > span { padding-bottom: 3px; font-size: 9px; }
+  .tactical-encounters b { height: 13px; width: 13px; font-size: 8px; }
+  .tactical-stage-hint { margin-top: 4px; font-size: 8px; }
+  .tactical-stage-hint small { font-size: 8px; }
+}
+.mobile-mode .tactical-stagebar { position: absolute; z-index: 10; top: calc(var(--mobile-safe-top) + 66px); left: max(10px, env(safe-area-inset-left)); width: min(48vw, 430px); border: 0; border-radius: 5px; padding: 5px 8px; pointer-events: none; background: #0a211bc4; }
+.mobile-mode .tactical-encounters { gap: 5px; }
+.mobile-mode .tactical-encounters > span { gap: 4px; padding-bottom: 3px; font-size: 8px; white-space: nowrap; }
+.mobile-mode .tactical-encounters b { height: 12px; width: 12px; font-size: 7px; }
+.mobile-mode .tactical-encounters small, .mobile-mode .tactical-stage-hint > span { display: none; }
+.mobile-mode .tactical-stage-hint { margin-top: 4px; }
+.mobile-mode .tactical-stage-hint small { font-size: 8px; }
+.mobile-mode .tactical-touch-tip { display: block; color: #aac3b3; font-size: 8px; margin: 3px 0 0; line-height: 1.5; }
+.mobile-mode .tactical-hazards { gap: 4px 10px; margin-top: 3px; }
+.mobile-mode .tactical-hazard { gap: 3px; padding-left: 4px; font-size: 8px; }
+.mobile-mode .tactical-hazard > span:first-child { font-size: 9px; }
+.mobile-mode .tactical-hazard small { min-width: 16px; font-size: 8px; }
+.mobile-mode .tactical-pause-tip { display: block; margin: 8px 0; }
+.mobile-mode .tactical-result-actions { margin: 9px 0; font-size: 9px; }
+.expedition-main { --survival-stage-height: min(720px, max(300px, calc(100svh - 395px))); }
+.expedition-navigation { display: grid; grid-template-columns: minmax(180px, 1fr) auto; gap: 5px 16px; padding: 8px 17px; border: 1px solid #adad7940; border-top: 0; background: #112a2c; }
+.expedition-current { display: flex; align-items: center; gap: 12px; color: #9fb8a8; font-size: 9px; }
+.expedition-current strong { color: #e0d0a4; font-size: 11px; font-weight: 500; }
+.expedition-region-list { display: flex; align-items: center; gap: 15px; font-size: 9px; color: #77938a; }
+.expedition-region-list .visited { color: #abc6ae; }
+.expedition-region-list .current { color: #f0d89e; }
+.expedition-objective { grid-column: 1/-1; margin: 0; color: #9fb5aa; font-size: 9px; line-height: 1.6; }
+.expedition-navigation.has-hazards .expedition-objective { grid-column: 1; }
+.expedition-navigation .tactical-hazards { grid-column: 2; grid-row: 2; margin: 0; gap: 5px 10px; }
+.expedition-pause-tip { display: none; color: #adc5b5; font-size: 10px; line-height: 1.7; }
+.expedition-result-regions { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px 17px; color: #718f84; font-size: 10px; margin: 0 0 15px; }
+.expedition-result-regions .visited { color: #cbd7ae; }
+@media (max-width: 800px) {
+  .expedition-navigation { grid-template-columns: 1fr; padding: 7px 12px; }
+  .expedition-region-list { display: none; }
+  .expedition-navigation .tactical-hazards { grid-column: 1; grid-row: auto; }
+}
+@media (max-height: 800px) and (min-width: 701px) {
+  .expedition-main { --survival-stage-height: max(240px, calc(100svh - 285px)); }
+  .expedition-navigation { padding: 6px 13px; gap: 4px 12px; }
+}
+.mobile-mode .expedition-navigation { position: absolute; z-index: 10; top: calc(var(--mobile-safe-top) + 61px); left: max(10px, env(safe-area-inset-left)); width: min(48vw, 430px); display: block; padding: 5px 8px; border: 0; border-radius: 5px; background: #0a211bc4; pointer-events: none; }
+.mobile-mode .expedition-region-list { display: none; }
+.mobile-mode .expedition-current { justify-content: space-between; gap: 7px; font-size: 8px; }
+.mobile-mode .expedition-current strong { font-size: 9px; }
+.mobile-mode .expedition-objective { margin-top: 3px; font-size: 8px; line-height: 1.5; }
+.mobile-mode .expedition-navigation.has-hazards .expedition-objective { display: none; }
+.mobile-mode .expedition-navigation .tactical-hazards { margin-top: 3px; }
+.mobile-mode .expedition-main.has-summon-status .survival-experience { top: calc(var(--mobile-safe-top) + 65px); }
+.mobile-mode .expedition-main.has-summon-status .expedition-navigation { top: calc(var(--mobile-safe-top) + 77px); }
+.mobile-mode .expedition-pause-tip { display: block; margin: 7px 0; }
+.mobile-mode .expedition-result-regions { font-size: 9px; margin: 8px 0; gap: 7px 12px; }

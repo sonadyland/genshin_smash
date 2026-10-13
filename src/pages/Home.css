@@ -72,6 +72,50 @@ button:disabled { opacity: .45; cursor: default; }
 .plunge-tip { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 12px; margin: 9px 0 0; color: #91b5ad; font-size: 9px; line-height: 1.7; }
 .plunge-tip > span { color: #91e5ca; }.plunge-tip b { color: #729e93; font-weight: 400; }
 .mode-switch.three-modes { gap: 2px; }.mode-switch.three-modes button { font-size: 10px; padding: 10px 2px; white-space: nowrap; }.mode-switch.three-modes button span { font-size: 11px; padding-right: 2px; }
+.survival-variant-switch { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 12px; }
+.survival-variant-switch button { min-width: 0; padding: 10px 7px; border: 1px solid #79938735; background: #0b2025; color: #b0bcb0; text-align: left; }
+.survival-variant-switch button.active { border-color: #c6b27d9c; background: linear-gradient(125deg, #39463c, #20352f); box-shadow: inset 2px 0 #d1bb85; }
+.survival-variant-switch button:hover { border-color: #c6b27d; }
+.survival-variant-switch button > span { display: flex; align-items: center; gap: 6px; color: #a8b49b; font-size: 9px; }
+.survival-variant-switch button em { padding: 0 4px; color: #dce9c8; border: 1px solid #b2c8924d; font-style: normal; font-size: 8px; }
+.survival-variant-switch button strong { display: block; margin-top: 5px; color: #e2d8b8; font-size: 12px; font-weight: 500; }
+.survival-variant-switch button small { display: block; margin-top: 5px; color: #8ca69c; font-size: 8px; line-height: 1.5; }
+.expedition-lobby-route { margin-top: 12px; padding: 10px 0 0; border-top: 1px solid #97a99b24; }
+.expedition-lobby-route > div { display: flex; align-items: center; justify-content: space-between; gap: 4px; color: #c9d5b8; font-size: 9px; }
+.expedition-lobby-route i { color: #8ba99a; font-style: normal; }
+.expedition-lobby-route p { color: #93aa9c; font-size: 9px; line-height: 1.8; margin: 8px 0 0; }
+.tactical-map-picker { padding-top: 15px; }
+.tactical-map-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; color: #c5c8b4; font-size: 10px; }
+.tactical-map-heading small { color: #829c91; font-size: 8px; }
+.tactical-map-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.tactical-map-options button { position: relative; min-width: 0; min-height: 88px; padding: 8px 7px; border: 1px solid #789b8750; background: #10272b; color: #a3b7aa; text-align: left; }
+.tactical-map-options button:hover { border-color: #b3c8a5; }
+.tactical-map-options button.active { border-color: #b7c995; background: linear-gradient(135deg, #2e453b, #1c3430); box-shadow: inset 0 -2px #b7c995; }
+.tactical-map-options button > span { display: block; margin-bottom: 7px; color: #9dbaa2; font: 17px/1 Georgia, serif; }
+.tactical-map-options strong { display: block; color: #d7ddc0; font-size: 10px; font-weight: 500; white-space: nowrap; }
+.tactical-map-options small { display: block; color: #93aa9b; font-size: 8px; line-height: 1.6; margin-top: 5px; }
+.tactical-map-picker > p { color: #93aa9c; font-size: 9px; line-height: 1.8; margin: 8px 0 0; }
+.tactical-lobby-brief { padding: 12px 0 15px; border-bottom: 1px solid #97a99b24; margin-bottom: 15px; }
+.tactical-brief-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 5px; color: #c2c4ab; font-size: 10px; }
+.tactical-brief-heading strong { font-size: 9px; font-weight: 400; color: #b4cbab; }
+.tactical-lobby-brief p { margin: 9px 0 0; color: #92aaa2; font-size: 9px; line-height: 1.8; }
+.tactical-lobby-brief b { color: #c7c9ad; font-weight: 400; margin-right: 3px; }
+.tactical-lobby-brief b:not(:first-child) { margin-left: 5px; }
+.tactical-lobby-brief > small { display: block; margin-top: 8px; color: #8aa89c; font-size: 9px; line-height: 1.8; }
+.tactical-loadout-preview { display: flex; align-items: flex-start; gap: 6px; padding-top: 10px; color: #92aaa2; font-size: 9px; line-height: 1.7; }
+.tactical-loadout-preview kbd { margin: 0; font-size: 9px; color: #cfc49e; }
+.mobile-mode .survival-variant-switch { margin-top: 8px; }
+.mobile-mode .survival-variant-switch button { min-height: 72px; padding: 8px 6px; }
+.mobile-mode .survival-variant-switch button strong { font-size: 11px; }
+.mobile-mode .survival-variant-switch button > span { gap: 3px; font-size: 8px; }
+.mobile-mode .survival-variant-switch button small { font-size: 8px; }
+.mobile-mode .expedition-lobby-route { margin-top: 9px; padding-top: 8px; }
+.mobile-mode .expedition-lobby-route > div { gap: 3px; font-size: 8px; }
+.mobile-mode .expedition-lobby-route p { margin-top: 6px; font-size: 8px; }
+.mobile-mode .tactical-map-picker { padding-top: 10px; }
+.mobile-mode .tactical-map-options button { min-height: 82px; }
+.mobile-mode .tactical-lobby-brief { margin-bottom: 10px; padding-block: 10px; }
+.mobile-mode .tactical-loadout-preview { display: none; }
 .survival-lobby-intro { padding: 17px 0 14px; border-bottom: 1px solid #97a99b24; }.survival-lobby-intro > strong { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; font-size: 15px; font-weight: 500; color: #eee7d1; }.survival-lobby-intro strong small { font-size: 8px; color: #8ea398; font-weight: 400; }.survival-lobby-intro > p { margin: 9px 0 0; font-size: 10px; line-height: 1.8; color: #94aba3; }
 .survival-path-preview { border-top: 1px solid #97a99b24; padding-top: 13px; margin-bottom: 17px; }.survival-path-heading { display: flex; align-items: center; justify-content: space-between; color: #bbbfa5; font-size: 10px; margin-bottom: 12px; }.survival-path-heading > span { font-size: 8px; color: #758e87; }.survival-path-option { display: flex; gap: 10px; padding: 0 0 11px; }.survival-path-option > span { color: var(--path-color); font: 20px Georgia,serif; opacity: .85; width: 21px; text-align: center; padding-top: 3px; flex: none; }.survival-path-option strong { color: #ccd0b8; font-size: 11px; font-weight: 400; }.survival-path-option p { color: #7f9a92; font-size: 9px; line-height: 1.8; margin: 4px 0 0; }.survival-manual-note { margin: 0; padding-top: 8px; border-top: 1px solid #97a99b20; font-size: 8px; line-height: 1.8; color: #8ca79d; }.survival-manual-note kbd { font-size: 8px; margin: 0 2px 0 0; padding: 1px 3px; }.survival-manual-note > span { display: inline-block; color: #c0ba95; margin-left: 7px; }
 .survival-lobby .character-brief { padding-block: 12px; }.survival-lobby .match-panel { padding-bottom: 17px; }

@@ -1,7 +1,15 @@
 import { CHARACTERS } from './data';
 /** Shared rules for the manual-combat, ten-minute survival mode. */
 export type SurvivalPhase = 'playing' | 'paused' | 'upgrade' | 'victory' | 'defeat';
-export interface SurvivalOptions { player: number }
+export type SurvivalVariant = 'survival' | 'tactical' | 'expedition';
+export type TacticalMapId = 'wind-ruins' | 'broken-bridge' | 'mechanism-hall';
+export interface SurvivalOptions { player: number; variant?: SurvivalVariant; mapId?: TacticalMapId }
+export interface TacticalStats { windRides: number; layerChanges: number; guardsBroken: number; chargesEvaded: number }
+export interface SurvivalWorld {
+  width: number; height: number; groundY: number;
+  terrain: { x: number; y: number }[];
+  platforms: { x: number; y: number; w: number }[];
+}
 export interface UpgradeChoice {
   id: string;
   name: string;
@@ -19,6 +27,15 @@ export interface SurvivalProgress {
   upgrades: Record<string, number>;
 }
 export interface SurvivalSnapshot {
+  variant: SurvivalVariant;
+  mapId: TacticalMapId;
+  mapName: string;
+  duration: number;
+  encounterName: string;
+  encounterIndex: number;
+  tacticalStats: TacticalStats;
+  tacticalHazards: TacticalHazardSnapshot[];
+  expedition: ExpeditionSnapshot | null;
   phase: SurvivalPhase;
   muted: boolean;
   charId: string;
@@ -57,7 +74,7 @@ export interface SurvivalSnapshot {
 
 export const SURVIVAL_DURATION = 600;
 export const SURVIVAL_BASE_HP = 100;
-export const SURVIVAL_WORLD = {
+export const SURVIVAL_WORLD: SurvivalWorld = {
   width: 4600,
   height: 1080,
   groundY: 920,
@@ -84,9 +101,9 @@ export const SURVIVAL_WORLD = {
 };
 
 /** Shared collision/rendering surface, clamped safely at the world boundaries. */
-export function groundHeightAt(x: number): number {
-  const points = SURVIVAL_WORLD.terrain;
-  const position = Math.max(0, Math.min(SURVIVAL_WORLD.width, x));
+export function groundHeightAt(x: number, world: SurvivalWorld = SURVIVAL_WORLD): number {
+  const points = world.terrain;
+  const position = Math.max(0, Math.min(world.width, x));
   for (let i = 1; i < points.length; i++) {
     if (position <= points[i].x) {
       const a = points[i - 1], b = points[i];
@@ -95,6 +112,174 @@ export function groundHeightAt(x: number): number {
   }
   return points[points.length - 1].y;
 }
+export const TACTICAL_DURATION = 90;
+/** Three stacked fighting lanes, with a continuous walking route up the east slope. */
+export const TACTICAL_WORLD: SurvivalWorld = {
+  width: 2200, height: 1080, groundY: 900,
+  terrain: [
+    { x: 0, y: 900 }, { x: 1150, y: 900 }, { x: 1500, y: 700 },
+    { x: 1680, y: 700 }, { x: 2000, y: 500 }, { x: 2200, y: 500 },
+  ],
+  platforms: [
+    { x: 230, y: 700, w: 720 }, { x: 1050, y: 700, w: 460 },
+    { x: 560, y: 500, w: 600 }, { x: 1280, y: 500, w: 730 },
+  ],
+};
+export interface TacticalWind { x: number; width: number; bottom: number; top: number }
+export const TACTICAL_WIND: TacticalWind = { x: 790, width: 112, bottom: 900, top: 440 };
+export type TacticalEnemyRole = 'guard' | 'charger' | 'sniper';
+export interface TacticalSpawn { role: TacticalEnemyRole; x: number; y: number }
+export interface TacticalEncounter { start: number; name: string; hint: string; enemies: TacticalSpawn[] }
+export interface TacticalLandmark { x: number; y: number; number: string; name: string; detail: string; color: string }
+export interface TacticalHazard {
+  id: string; name: string; x: number; y: number; width: number; height: number;
+  periodFrames: number; offsetFrames: number; warningFrames: number; activeFrames: number; damage: number;
+}
+export interface TacticalHazardSnapshot extends TacticalHazard {
+  state: 'off' | 'warning' | 'active'; phaseRemaining: number; cycleIndex: number;
+}
+export interface TacticalMapDefinition {
+  id: TacticalMapId; name: string; subtitle: string; description: string;
+  world: SurvivalWorld; wind: TacticalWind | null; spawnX: number;
+  encounters: TacticalEncounter[]; landmarks: TacticalLandmark[]; routeHint: string;
+  routeLabel: { x: number; y: number };
+  hazards?: TacticalHazard[];
+}
+export const TACTICAL_ENCOUNTERS: TacticalEncounter[] = [
+  { start: 0, name: '01 · 破阵登高', hint: '风井登高，优先压制射手 · 重击 K 可破盾', enemies: [
+    { role: 'guard', x: 550, y: 700 }, { role: 'charger', x: 1060, y: 900 }, { role: 'sniper', x: 1010, y: 500 },
+  ] },
+  { start: 30, name: '02 · 两翼夹击', hint: '冲锋锁定后跳过或闪避 · S 下穿并压住风井', enemies: [
+    { role: 'guard', x: 1180, y: 700 }, { role: 'charger', x: 300, y: 900 },
+    { role: 'sniper', x: 1470, y: 500 }, { role: 'guard', x: 800, y: 500 },
+  ] },
+  { start: 60, name: '03 · 三线合围', hint: '变换楼层切断射线 · 抓住蓝色恢复窗口反击', enemies: [
+    { role: 'guard', x: 600, y: 700 }, { role: 'charger', x: 1080, y: 900 },
+    { role: 'sniper', x: 960, y: 500 }, { role: 'charger', x: 1560, y: 700 }, { role: 'sniper', x: 2080, y: 500 },
+  ] },
+];
+export const TACTICAL_MAPS: Record<TacticalMapId, TacticalMapDefinition> = {
+  'wind-ruins': {
+    id: 'wind-ruins', name: '风井遗迹', subtitle: '三层地形 · 公共风井',
+    description: '借风井快速登高，在三层遗迹之间切换，压制射手并绕后破盾。',
+    world: TACTICAL_WORLD, wind: TACTICAL_WIND, spawnX: 400, encounters: TACTICAL_ENCOUNTERS,
+    landmarks: [
+      { x: 325, y: 500, number: '03', name: '风蚀高台', detail: '压制射手', color: '#b9d9f1' },
+      { x: 130, y: 700, number: '02', name: '遗迹廊桥', detail: '绕后破盾', color: '#e2d4a3' },
+      { x: 120, y: 900, number: '01', name: '元素谷地', detail: '诱导冲锋', color: '#a1d8c8' },
+    ],
+    routeHint: '沿坡道步行登高 →', routeLabel: { x: 1420, y: 817 },
+  },
+  'broken-bridge': {
+    id: 'broken-bridge', name: '断桥回廊', subtitle: '断桥两岸 · 中央落脚台',
+    description: '二段跳跨过断桥，或下穿桥面进入谷地。中央平台与两侧缓坡提供回桥路线。',
+    world: {
+      width: 2200, height: 1080, groundY: 900,
+      terrain: [
+        { x: 0, y: 580 }, { x: 300, y: 580 }, { x: 780, y: 900 },
+        { x: 1420, y: 900 }, { x: 1900, y: 580 }, { x: 2200, y: 580 },
+      ],
+      platforms: [
+        { x: 300, y: 580, w: 690 }, { x: 1210, y: 580, w: 690 }, { x: 970, y: 740, w: 260 },
+      ],
+    },
+    wind: null, spawnX: 200,
+    encounters: [
+      { start: 0, name: '01 · 断桥试探', hint: '桥面重击破盾 · 二段跳跨断口，也可下穿桥面', enemies: [
+        { role: 'guard', x: 610, y: 580 }, { role: 'charger', x: 1130, y: 900 }, { role: 'sniper', x: 840, y: 580 },
+      ] },
+      { start: 30, name: '02 · 上下夹击', hint: '中央台二段跳回桥 · 沿两侧缓坡也能返回高处', enemies: [
+        { role: 'guard', x: 1530, y: 580 }, { role: 'charger', x: 780, y: 900 },
+        { role: 'sniper', x: 1370, y: 580 }, { role: 'guard', x: 1100, y: 740 },
+      ] },
+      { start: 60, name: '03 · 两岸合围', hint: '落差避开冲锋 · 抓住射手与盾卫的蓝色恢复窗口', enemies: [
+        { role: 'guard', x: 910, y: 580 }, { role: 'charger', x: 1220, y: 900 },
+        { role: 'sniper', x: 680, y: 580 }, { role: 'charger', x: 1570, y: 580 }, { role: 'sniper', x: 1770, y: 580 },
+      ] },
+    ],
+    landmarks: [
+      { x: 320, y: 580, number: '01', name: '西岸廊桥', detail: '重击破盾 · 下穿转线', color: '#e2d4a3' },
+      { x: 1040, y: 740, number: '02', name: '中央落脚台', detail: '二段跳返回桥面', color: '#a1d8c8' },
+      { x: 1450, y: 580, number: '03', name: '东岸回廊', detail: '压制射手 · 跨岸反击', color: '#b9d9f1' },
+    ],
+    routeHint: '← 两侧缓坡回桥 · 中央二段跳 ↑', routeLabel: { x: 1100, y: 935 },
+  },
+  'mechanism-hall': {
+    id: 'mechanism-hall', name: '机关回廊', subtitle: '错峰地火 · 避险高台',
+    description: '黄纹预警后地火喷发，跳上避险台或暂退，等待熄火再穿行。地火不伤敌人。',
+    world: {
+      width: 2200, height: 1080, groundY: 900,
+      terrain: [{ x: 0, y: 900 }, { x: 2200, y: 900 }],
+      platforms: [
+        { x: 380, y: 790, w: 450 }, { x: 960, y: 790, w: 280 },
+        { x: 1420, y: 790, w: 400 }, { x: 825, y: 590, w: 550 },
+      ],
+    },
+    wind: null, spawnX: 240,
+    hazards: [
+      { id: 'west-fire', name: '西侧地火', x: 520, y: 900, width: 260, height: 48, periodFrames: 960, offsetFrames: 360, warningFrames: 120, activeFrames: 120, damage: 8 },
+      { id: 'east-fire', name: '东侧地火', x: 1430, y: 900, width: 260, height: 48, periodFrames: 960, offsetFrames: 840, warningFrames: 120, activeFrames: 120, damage: 8 },
+    ],
+    encounters: [
+      { start: 0, name: '01 · 识破机关', hint: '黄纹预警 → 红色喷发 · 跳上避险台或暂退，地火不伤敌人', enemies: [
+        { role: 'guard', x: 650, y: 790 }, { role: 'charger', x: 1100, y: 900 }, { role: 'sniper', x: 1170, y: 590 },
+      ] },
+      { start: 30, name: '02 · 错峰转线', hint: '两侧地火交错启动 · 等熄火后转线，平台上也要提防盾卫', enemies: [
+        { role: 'guard', x: 1570, y: 790 }, { role: 'charger', x: 340, y: 900 },
+        { role: 'sniper', x: 1730, y: 790 }, { role: 'guard', x: 1010, y: 790 },
+      ] },
+      { start: 60, name: '03 · 高低合围', hint: '借高台避开地火 · 压制射手，再趁蓝色恢复窗口反击', enemies: [
+        { role: 'guard', x: 760, y: 790 }, { role: 'charger', x: 1130, y: 900 },
+        { role: 'sniper', x: 945, y: 590 }, { role: 'charger', x: 1660, y: 900 }, { role: 'sniper', x: 1530, y: 790 },
+      ] },
+    ],
+    landmarks: [
+      { x: 410, y: 790, number: '01', name: '西侧避险台', detail: '黄纹预警 → 红色喷发', color: '#ecd097' },
+      { x: 870, y: 590, number: '02', name: '中央制高点', detail: '二段跳登高 · 压制射手', color: '#b9d9f1' },
+      { x: 1450, y: 790, number: '03', name: '东侧避险台', detail: '错峰穿行 · 地火不伤敌人', color: '#ecd097' },
+    ],
+    routeHint: '黄纹预警 → 红色喷发 · 跳上避险台或暂退 · 地火不伤敌人', routeLabel: { x: 1100, y: 937 },
+  },
+};
+
+/** Unknown persisted or external IDs always fall back to the original arena. */
+export function getTacticalMap(id?: TacticalMapId | string): TacticalMapDefinition {
+  return id === 'broken-bridge' || id === 'mechanism-hall' ? TACTICAL_MAPS[id] : TACTICAL_MAPS['wind-ruins'];
+}
+
+export interface ExpeditionRegion {
+  id: TacticalMapId; name: string; startX: number; endX: number; offsetX: number;
+  color: string; objective: string;
+}
+export interface ExpeditionSnapshot {
+  regionId: TacticalMapId; regionName: string; visitedRegions: TacticalMapId[];
+  objective: string; bossStarted: boolean;
+}
+export const EXPEDITION_REGIONS: ExpeditionRegion[] = [
+  { id: 'wind-ruins', name: '风井遗迹', startX: 0, endX: 2300, offsetX: 0, color: '#95d8c1', objective: '借风井登高，沿东侧坡道前往断桥 →' },
+  { id: 'broken-bridge', name: '断桥回廊', startX: 2300, endX: 4800, offsetX: 2400, color: '#c7d0e8', objective: '跨过断桥或走谷底，继续向东探索机关 →' },
+  { id: 'mechanism-hall', name: '机关回廊', startX: 4800, endX: 7200, offsetX: 5000, color: '#e5bd88', objective: '观察地火节拍，在高台之间往返作战' },
+];
+/** Authored arenas retain their geometry; adjoining endpoints form walkable links. */
+export const EXPEDITION_WORLD: SurvivalWorld = {
+  width: 7200, height: 1080, groundY: 900,
+  terrain: EXPEDITION_REGIONS.flatMap(region => TACTICAL_MAPS[region.id].world.terrain.map(point => ({ ...point, x: point.x + region.offsetX }))),
+  platforms: EXPEDITION_REGIONS.flatMap(region => TACTICAL_MAPS[region.id].world.platforms.map(platform => ({ ...platform, x: platform.x + region.offsetX }))),
+};
+export function getExpeditionRegion(x: number): ExpeditionRegion {
+  return EXPEDITION_REGIONS.find(region => x < region.endX) ?? EXPEDITION_REGIONS[EXPEDITION_REGIONS.length - 1];
+}
+/** Shared absolute-coordinate capabilities used by physics and rendering. */
+export const EXPEDITION_MAPS: TacticalMapDefinition[] = EXPEDITION_REGIONS.map(region => {
+  const map = TACTICAL_MAPS[region.id];
+  return { ...map, world: EXPEDITION_WORLD, spawnX: map.spawnX + region.offsetX,
+    wind: map.wind ? { ...map.wind, x: map.wind.x + region.offsetX } : null,
+    hazards: map.hazards?.map(hazard => ({ ...hazard, x: hazard.x + region.offsetX })),
+    landmarks: map.landmarks.map(label => ({ ...label, x: label.x + region.offsetX })),
+    routeLabel: { ...map.routeLabel, x: map.routeLabel.x + region.offsetX },
+    encounters: map.encounters.map(encounter => ({ ...encounter, enemies: encounter.enemies.map(enemy => ({ ...enemy, x: enemy.x + region.offsetX })) })),
+  };
+});
 export const SURVIVAL_LIMITS = { enemies: 110, gems: 150, effects: 140, projectiles: 100 };
 export const SURVIVAL_WAVES = [
   { start: 0, name: '初入秘境', interval: 1.5, enemyTypes: ['walker'] },
