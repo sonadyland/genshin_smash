@@ -24,7 +24,7 @@ docker compose up -d --build
 
 浏览器访问 `http://服务器IP:18021/`。宿主机 **18021** 端口映射到容器内 **8080**；服务器防火墙或云安全组需要允许 TCP 18021。无需在服务器另行安装 Node.js。
 
-镜像分为 Node.js 24 构建阶段和非 root Nginx 运行阶段，最终镜像仅包含构建产物与静态服务。容器启动后执行首页健康检查，并配置 `unless-stopped` 重启策略。游戏美术与帧数据逐文件生成内容哈希 URL，和 JS / CSS 一样使用浏览器长期缓存；未修改的图片在新版本中仍可复用。首页优先加载轻量背景和立绘，再从雷电将军开始逐角色后台准备；开战时优先准备本局素材并显示进度，加载完成后才开始战斗。页面、音乐配置和旧美术审片地址会重新验证缓存。Chrome / Edge 后续访问可复用缓存。应用部署于域名或 IP 的根路径 `/`，支持 SPA 路由刷新。详见[浏览器缓存与验收说明](docs/browser-cache.md)。
+镜像使用 Node.js 24 构建，Compose 运行非 root Nginx 和内部 Node 签名服务，二者均有健康检查与重启策略。游戏美术与帧数据逐文件生成内容哈希路径，并使用浏览器长期缓存；完整 URL 一致时可复用未修改的图片，私有 OSS 签名换批后可能重新下载。首页优先加载轻量背景和立绘，再从雷电将军开始逐角色后台准备；开战时优先准备本局素材并显示进度，加载完成后才开始战斗。页面、音乐配置和旧美术审片地址会重新验证缓存。应用部署于域名或 IP 的根路径 `/`，支持 SPA 路由刷新。详见[浏览器缓存与验收说明](docs/browser-cache.md)。
 
 ```sh
 # 查看运行状态与健康状态
@@ -40,7 +40,13 @@ docker compose up -d --build
 docker compose down
 ```
 
-需要同时更新 Node / Nginx 基础镜像时，执行 `docker compose build --pull`，再执行 `docker compose up -d`。构建过程需要联网拉取基础镜像和 npm 依赖；运行时使用本地打包的美术资源，不需要图像生成 API 密钥。
+需要同时更新 Node / Nginx 基础镜像时，执行 `docker compose build --pull`，再执行 `docker compose up -d`。构建过程需要联网拉取基础镜像和 npm 依赖；默认运行时使用本地打包的美术资源，也可按下文配置 OSS/CDN，不需要图像生成 API 密钥。
+
+## OSS / CDN 美术分发
+
+支持私有 OSS：在 `.env` 配置完整 OSS 信息并使用 `GAME_ART_MODE=auto`（或 `signed`），保持 `GAME_ASSET_BASE_URL` 留空。Docker 内部 Node 服务仅为构建清单内的哈希资源生成 V4 短期 GET URL；浏览器直接下载 OSS 美术，AccessKeySecret 只在服务端使用。未配置 OSS 时自动使用同源资源。公开 CDN 可显式使用 `GAME_ART_MODE=direct`。
+
+发布前执行 `npm run build`、`node scripts/upload-art.mjs --dry-run`，再 `npm run upload:art`。用 `node scripts/configure-oss-cors.mjs --inspect` 审阅保留旧规则的 CORS 方案，`--apply` 只修改 CORS；来源含生产 `http://180.76.101.97:18021` 和本地 3000 端口，只允许 GET/HEAD。CORS 不会将私有 Bucket 变为匿名可读。最后 `docker compose up -d --build` 同时更新游戏与 signer。配置、控制台字段和验收见 [私有 OSS 部署说明](docs/oss-assets.md)。
 
 ## 音乐与音效
 

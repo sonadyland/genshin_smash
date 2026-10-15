@@ -49,7 +49,7 @@ function harness(rejected = () => false, metadataTransform = value => value, enh
   function load(file) {
     if (modules.has(file)) return modules.get(file).exports;
     if (file.endsWith('.json')) return { default: JSON.parse(fs.readFileSync(file, 'utf8')) };
-    const source = fs.readFileSync(file, 'utf8').replaceAll('import.meta.env.BASE_URL', "'/'");
+    const source = fs.readFileSync(file, 'utf8').replaceAll('import.meta.env.BASE_URL', "'/'").replaceAll('import.meta.env.VITE_GAME_ASSET_BASE_URL', "''");
     const output = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS } }).outputText;
     const mod = { exports: {} }; modules.set(file, mod);
     vm.runInContext(`(function(exports, require, module) { ${output}\n})`, context, { filename: file })(mod.exports, specifier => load(path.resolve(path.dirname(file), specifier.endsWith('.json') ? specifier : `${specifier}.ts`)), mod);

@@ -3,13 +3,45 @@ services:
     image: genshin-smash:local
     build:
       context: .
+      target: runtime
+    environment:
+      GAME_ASSET_BASE_URL: ${GAME_ASSET_BASE_URL:-}
+      GAME_ART_MODE: ${GAME_ART_MODE:-auto}
+    depends_on:
+      signer:
+        condition: service_healthy
     ports:
       - "18021:8080"
     restart: unless-stopped
-    cap_drop:
-      - ALL
-    security_opt:
-      - no-new-privileges:true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+  signer:
+    image: genshin-smash-signer:local
+    build:
+      context: .
+      target: signer
+    environment:
+      GAME_ART_MODE: ${GAME_ART_MODE:-auto}
+      GAME_ASSET_BASE_URL: ${GAME_ASSET_BASE_URL:-}
+      OSS_BUCKET: ${OSS_BUCKET:-}
+      OSS_REGION: ${OSS_REGION:-}
+      OSS_ENDPOINT: ${OSS_ENDPOINT:-}
+      OSS_ART_PREFIX: ${OSS_ART_PREFIX:-}
+      OSS_ADDRESSING_STYLE: ${OSS_ADDRESSING_STYLE:-virtual}
+      OSS_ACCESS_KEY_ID: ${OSS_ACCESS_KEY_ID:-}
+      OSS_ACCESS_KEY_SECRET: ${OSS_ACCESS_KEY_SECRET:-}
+      OSS_SESSION_TOKEN: ${OSS_SESSION_TOKEN:-}
+      OSS_SIGNED_URL_TTL_SECONDS: ${OSS_SIGNED_URL_TTL_SECONDS:-3600}
+      TRUST_PROXY: "true"
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
     logging:
       driver: json-file
       options:

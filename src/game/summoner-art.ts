@@ -22,7 +22,7 @@ export function acquireSummonerArt(character: string): { ready: Promise<void>; s
     const entry = { references: 0, ready: Promise.resolve(), strictReady: Promise.resolve(), images: new Map<SummonArtKind, HTMLImageElement>() };
     owner = entry; owners.set(character, entry);
     const work = Object.entries(assets).filter(([, asset]) => asset.owner === character).map(async ([name, asset]) => {
-      const image = new Image(); image.decoding = 'async';
+      const image = new Image(); image.crossOrigin = 'anonymous'; image.decoding = 'async';
       image.src = assetUrl(`animations/${asset.image}`);
       await image.decode();
       if (image.naturalWidth !== asset.width || image.naturalHeight !== asset.height) throw new Error(`Invalid summon atlas: ${name}`);

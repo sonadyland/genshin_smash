@@ -1,3 +1,4 @@
+import { ensureArtUrls, onArtUrlsChanged } from './art-url-session';
 import { ART_CATALOG } from './asset-catalog';
 import { assetUrl } from './asset-url';
 import { acquireGameArt } from './art';
@@ -46,6 +47,7 @@ interface PreparationState {
   snapshot: BattleLoadingProgress;
   phase: BattleLoadingProgress['phase'];
   settled: boolean;
+  authorizing: boolean;
   released: boolean;
   lease?: GameArtLease;
   resolve: () => void;
@@ -64,7 +66,7 @@ interface LoaderOptions {
 const CHARACTER_ORDER = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina', 'tharja', 'corrin'];
 const message = (error: unknown) => error instanceof Error ? error.message : String(error);
 const decodeImage = async (url: string) => {
-  const image = new Image(); image.decoding = 'async'; image.src = url;
+  const image = new Image(); image.crossOrigin = 'anonymous'; image.decoding = 'async'; image.src = url;
   await image.decode();
   if (!image.naturalWidth || !image.naturalHeight) throw new Error('图片解码失败');
 };
@@ -89,13 +91,13 @@ export function createAssetLoading(catalog: AssetCatalog, options: LoaderOptions
     const result = new Map<string, Download>();
     for (const path of paths) {
       const url = resolveUrl(path);
-      let entry = downloads.get(url);
+      let entry = downloads.get(path);
       if (!entry) {
         entry = { path, url, size: catalog.sizes[path] ?? 0, loaded: 0, state: 'waiting', home: false };
-        downloads.set(url, entry);
+        downloads.set(path, entry);
       }
       if (catalog.home.includes(path)) entry.home = true;
-      result.set(url, entry);
+      result.set(path, entry);
     }
     return [...result.values()];
   }
@@ -151,6 +153,8 @@ export function createAssetLoading(catalog: AssetCatalog, options: LoaderOptions
     const heartbeat = () => { clearTimeout(timer); timer = setTimeout(() => controller.abort(), idleTimeout); };
     heartbeat();
     try {
+      if (!options.resolveUrl) await ensureArtUrls();
+      file.url = resolveUrl(file.path);
       // default honors the production immutable HTTP cache without overriding
       // dev validation. Do not route, cache-bust or retain response buffers.
       const response = await fetchAsset(file.url, { cache: 'default', signal: controller.signal });
@@ -176,7 +180,7 @@ export function createAssetLoading(catalog: AssetCatalog, options: LoaderOptions
       if (file.size && received !== file.size) throw new Error('素材不完整，请重试');
       if (!file.size) file.size = received;
       if (file.home) await timeout((options.decodeHome ?? decodeImage)(file.url), decodeTimeout, '首页图片解码超时，请重试');
-      file.loaded = file.size; file.state = 'ready';
+      file.loaded = file.size; file.state = file.url === resolveUrl(file.path) ? 'ready' : 'waiting';
     } catch (error) {
       file.state = 'error';
       file.error = controller.signal.aborted ? '网络长时间无响应，请重试' : message(error);
@@ -196,7 +200,10 @@ export function createAssetLoading(catalog: AssetCatalog, options: LoaderOptions
   }
   function checkPreparations() {
     for (const preparation of preparations) {
-      if (preparation.settled || preparation.released || preparation.phase !== 'download') continue;
+      if (preparation.settled || preparation.released || preparation.phase !== 'download' || preparation.authorizing) continue;
+      for (const file of preparation.files) if (file.state === 'ready' && file.url !== resolveUrl(file.path)) {
+        file.url = resolveUrl(file.path); file.state = 'waiting'; file.loaded = 0;
+      }
       const state = progress(preparation.files);
       if (state.status === 'error') { finishError(preparation, new Error(state.error)); continue; }
       if (state.status !== 'ready') continue;
@@ -243,16 +250,31 @@ export function createAssetLoading(catalog: AssetCatalog, options: LoaderOptions
   function reset(entries: readonly Download[]) {
     for (const file of entries) if (file.state === 'error') { file.state = 'waiting'; file.loaded = 0; file.error = undefined; }
   }
+  if (!options.resolveUrl) onArtUrlsChanged(() => {
+    for (const file of downloads.values()) {
+      if (file.state === 'loading' || (file.state === 'ready' && !file.home)) continue;
+      file.url = resolveUrl(file.path);
+      file.state = 'waiting'; file.loaded = 0; file.error = undefined;
+    }
+    preparationErrors.clear(); publish(); schedule();
+  });
   publish();
   return {
     subscribe(listener: () => void) { listeners.add(listener); return () => { listeners.delete(listener); }; },
     getSnapshot: () => snapshot,
     enterLobby() {
+      if (!options.resolveUrl) void ensureArtUrls().catch(() => undefined);
       lobbyReferences++; schedule(); let released = false;
       return () => { if (released) return; released = true; lobbyReferences--; schedule(); };
     },
-    retryHome() { reset(home); publish(); schedule(); },
-    retryCharacter(id: string) { preparationErrors.delete(id); reset(characterFiles[id] ?? []); publish(); schedule(); },
+    retryHome() {
+      const retry = () => { reset(home); publish(); schedule(); };
+      if (options.resolveUrl) retry(); else void ensureArtUrls(true).catch(() => undefined).then(retry);
+    },
+    retryCharacter(id: string) {
+      const retry = () => { preparationErrors.delete(id); reset(characterFiles[id] ?? []); publish(); schedule(); };
+      if (options.resolveUrl) retry(); else void ensureArtUrls(true).catch(() => undefined).then(retry);
+    },
     prepareBattle(ids: readonly string[]): BattlePreparation {
       const selected = [...new Set(ids)];
       const unknown = selected.find(id => !characterFiles[id]);
@@ -264,8 +286,16 @@ export function createAssetLoading(catalog: AssetCatalog, options: LoaderOptions
       // Consumers normally attach immediately; cleanup in React StrictMode can
       // cancel a session before its effect has attached an error handler.
       void ready.catch(() => undefined);
-      const preparation: PreparationState = { ids: selected, files: entries, listeners: new Set(), snapshot: { ...progress(entries), phase: 'download' }, phase: 'download', settled: false, released: false, resolve, reject };
+      const preparation: PreparationState = { ids: selected, files: entries, listeners: new Set(), snapshot: { ...progress(entries), phase: 'download' }, phase: 'download', settled: false, authorizing: !options.resolveUrl, released: false, resolve, reject };
       preparations.add(preparation);
+      if (!options.resolveUrl) void ensureArtUrls().then(() => {
+        // Warm the exact current URLs that the new art lease will decode.
+        // Background packs retain progress across expiry until actually selected.
+        for (const file of entries) if (file.state !== 'loading' && file.url !== resolveUrl(file.path)) {
+          file.url = resolveUrl(file.path); file.state = 'waiting'; file.loaded = 0; file.error = undefined;
+        }
+        preparation.authorizing = false; publish(); schedule();
+      }, error => finishError(preparation, new Error(message(error))));
       if (!selected.length || unknown) finishError(preparation, new Error('无法识别本局角色'));
       publish(); schedule();
       return {

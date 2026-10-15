@@ -52,3 +52,5 @@ test-results/
 /output/imagegen/*
 !/output/imagegen/secondary-art-a-prompts.json
 !/output/imagegen/secondary-art-b-prompts.json
+
+/dist-server/

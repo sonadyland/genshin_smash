@@ -26,7 +26,7 @@ export default function ArtLoading({ characterIds, progress, onRetry, onExit }: 
   useEffect(() => { exitRef.current?.focus({ preventScroll: true }); }, []);
 
   return <section className="art-loading" aria-label="战斗素材准备" style={{ backgroundImage: `linear-gradient(100deg, #07191bea, #102a30db)${homeReadyUrls.includes(LOBBY_BACKGROUND_ART) ? `, url("${LOBBY_BACKGROUND_ART}")` : ''}` }}>
-    <div className="art-loading-portraits" aria-hidden="true">{characters.map(character => <img key={character.id} src={homeReadyUrls.includes(LOBBY_CHARACTER_ART[character.id]) ? LOBBY_CHARACTER_ART[character.id] : undefined} alt=""/>)}</div>
+    <div className="art-loading-portraits" aria-hidden="true">{characters.map(character => <img crossOrigin="anonymous" key={character.id} src={homeReadyUrls.includes(LOBBY_CHARACTER_ART[character.id]) ? LOBBY_CHARACTER_ART[character.id] : undefined} alt=""/>)}</div>
     <div className="art-loading-panel">
       <span className="tiny-label">READY FOR THE NEXT ADVENTURE</span>
       <h2>{title}</h2>

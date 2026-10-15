@@ -11,8 +11,18 @@ const source = ts.transpileModule(fs.readFileSync(path.join(root, 'src/game/asse
   compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
 }).outputText;
 const mod = { exports: {} };
-vm.runInNewContext(`(function(exports,require,module){${source}\n})`, { console, setTimeout, clearTimeout, queueMicrotask, AbortController, Error })(mod.exports, id => {
+const decodedHomeImages = [];
+class HomeImage {
+  naturalWidth = 1; naturalHeight = 1;
+  set src(value) {
+    assert.equal(this.crossOrigin, 'anonymous', 'home decode must match the CORS fetch before setting src');
+    decodedHomeImages.push(value);
+  }
+  async decode() {}
+}
+vm.runInNewContext(`(function(exports,require,module){${source}\n})`, { console, setTimeout, clearTimeout, queueMicrotask, AbortController, Error, Image: HomeImage })(mod.exports, id => {
   if (id === './asset-catalog') return { ART_CATALOG: empty };
+  if (id === './art-url-session') return { ensureArtUrls: async () => {}, onArtUrlsChanged: () => {} };
   if (id === './asset-url') return { assetUrl: value => `/assets/${value}` };
   if (id === './art') return { acquireGameArt: () => { throw new Error('fixture must provide art'); } };
   throw new Error(`Unexpected dependency: ${id}`);
@@ -72,6 +82,16 @@ function harness(catalogue, overrides = {}) {
 }
 const cases = [];
 const test = (name, run) => cases.push({ name, run });
+
+test('default homepage image decode uses anonymous CORS before releasing its ready URL', async () => {
+  const h = harness(catalog(['home.webp'], {}, []), { decodeHome: undefined });
+  const leave = h.loader.enterLobby(); await tick();
+  h.finish('home.webp');
+  await waitFor(() => h.loader.getSnapshot().home.status === 'ready', 'home image did not finish decoding');
+  assert.deepEqual(decodedHomeImages, ['/assets/home.webp']);
+  assert.deepEqual([...h.loader.getSnapshot().homeReadyUrls], ['/assets/home.webp']);
+  leave();
+});
 
 test('homepage download and decode gate one complete character at a time, without decoding background atlases', async () => {
   const h = harness(catalog());

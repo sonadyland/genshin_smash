@@ -1,3 +1,4 @@
+import { ensureArtUrls } from '../game/art-url-session';
 import { useCallback, useEffect, useState, useSyncExternalStore } from 'react';
 import { assetLoading } from '../game/asset-loading';
 
@@ -17,7 +18,9 @@ export function useBattleArt(characterIds: readonly string[], start: () => (() =
   const characterKey = [...new Set(characterIds)].sort().join(',');
   const [attempt, setAttempt] = useState(0);
   const [progress, setProgress] = useState<BattleArtProgress>(INITIAL_PROGRESS);
-  const retry = useCallback(() => setAttempt(value => value + 1), []);
+  const retry = useCallback(() => {
+    void ensureArtUrls(true).catch(() => undefined).then(() => setAttempt(value => value + 1));
+  }, []);
 
   useEffect(() => {
     let active = true;

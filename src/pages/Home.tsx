@@ -44,7 +44,7 @@ function Artwork({ id, available, unavailable = false, className = '', alt = '' 
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   if (failed || unavailable) return <span className="artwork-unavailable">立绘暂未载入</span>;
-  return <><img className={`${className} artwork-image ${loaded ? 'is-loaded' : ''}`} src={available ? LOBBY_CHARACTER_ART[id] : undefined} alt={alt} draggable={false} onLoad={() => setLoaded(true)} onError={() => setFailed(true)}/>{!loaded && <span className="artwork-loading" aria-label="正在载入角色立绘">✦</span>}</>;
+  return <><img crossOrigin="anonymous" className={`${className} artwork-image ${loaded ? 'is-loaded' : ''}`} src={available ? LOBBY_CHARACTER_ART[id] : undefined} alt={alt} draggable={false} onLoad={() => setLoaded(true)} onError={() => setFailed(true)}/>{!loaded && <span className="artwork-loading" aria-label="正在载入角色立绘">✦</span>}</>;
 }
 
 function ControlsGuide() {

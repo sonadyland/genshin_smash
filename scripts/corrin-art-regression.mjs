@@ -34,7 +34,7 @@ function harness() {
   function load(file) {
     if (file.endsWith('.json')) return { default: JSON.parse(fs.readFileSync(file, 'utf8')) };
     if (modules.has(file)) return modules.get(file).exports;
-    const source = fs.readFileSync(file, 'utf8').replaceAll('import.meta.env.BASE_URL', "'/'"), module = { exports: {} }; modules.set(file, module);
+    const source = fs.readFileSync(file, 'utf8').replaceAll('import.meta.env.BASE_URL', "'/'").replaceAll('import.meta.env.VITE_GAME_ASSET_BASE_URL', "''"), module = { exports: {} }; modules.set(file, module);
     const output = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS } }).outputText;
     vm.runInContext(`(function(exports,require,module){${output}\n})`, context)(module.exports, name => load(path.resolve(path.dirname(file), name.endsWith('.json') ? name : `${name}.ts`)), module); return module.exports;
   }

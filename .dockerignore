@@ -16,8 +16,11 @@
 !src/**
 !public/
 !public/**
+!server/
+!server/**
 !docker/
 !docker/nginx.conf
+!docker/40-game-runtime-config.sh
 
 # Never include local credentials, even if they are inside a source directory.
 **/.env

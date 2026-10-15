@@ -10,13 +10,15 @@ import ts from 'typescript';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(import.meta.url);
-function moduleLoader(globals = {}, base = '/') {
-  const context = vm.createContext({ console, Buffer, process, Uint8ClampedArray, ...globals });
+function moduleLoader(globals = {}, base = '/', assetBase = '') {
+  const context = vm.createContext({ console, Buffer, process, Uint8ClampedArray, URL, ...globals });
   const modules = new Map();
   function load(filename) {
     if (modules.has(filename)) return modules.get(filename).exports;
     if (filename.endsWith('.json')) return { __esModule: true, default: JSON.parse(fs.readFileSync(filename, 'utf8')) };
-    const source = fs.readFileSync(filename, 'utf8').replaceAll('import.meta.env.BASE_URL', JSON.stringify(base));
+    const source = fs.readFileSync(filename, 'utf8')
+      .replaceAll('import.meta.env.BASE_URL', JSON.stringify(base))
+      .replaceAll('import.meta.env.VITE_GAME_ASSET_BASE_URL', JSON.stringify(assetBase));
     const output = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS, esModuleInterop: true } }).outputText;
     const mod = { exports: {} }; modules.set(filename, mod);
     vm.runInContext(`(function(exports, require, module) { ${output}\n})`, context, { filename })(mod.exports, specifier =>
@@ -73,6 +75,42 @@ test('URL resolver respects root, relative, subpath and CDN bases, with unhashed
     const dev = moduleLoader({}, base)(path.join(root, 'src/game/asset-url.ts'));
     assert.equal(dev.assetUrl(logical), `${base}assets/${logical}`);
   }
+});
+
+test('runtime art host overrides build-time host and normalizes its optional prefix without changing app base', () => {
+  const logical = 'characters/eula-v2.png';
+  const resolve = (runtime, build = '', hashed = true) => moduleLoader({
+    ...(hashed ? { __GAME_ART_URLS__: shipped.urls } : {}),
+    ...(runtime === undefined ? {} : { __GAME_RUNTIME_CONFIG__: { artAssetBaseUrl: runtime } }),
+  }, '/game/', build)(path.join(root, 'src/game/asset-url.ts')).assetUrl;
+  for (const configured of ['https://art.example.test', ' https://art.example.test/ ', 'https://art.example.test///']) {
+    assert.equal(resolve(configured, 'https://build.example.test')(logical), `https://art.example.test/${shipped.urls[logical]}`);
+  }
+  assert.equal(resolve('https://art.example.test/releases/v1///')(logical), `https://art.example.test/releases/v1/${shipped.urls[logical]}`);
+  assert.equal(resolve('http://localhost:0/art-prefix///')(logical), `http://localhost:0/art-prefix/${shipped.urls[logical]}`);
+  for (const runtime of [undefined, '', '   ']) {
+    assert.equal(resolve(runtime, ' https://build.example.test/dev/// ')(logical), `https://build.example.test/dev/${shipped.urls[logical]}`);
+    assert.equal(resolve(runtime, '  ')(logical), `/game/${shipped.urls[logical]}`);
+  }
+  assert.equal(resolve('', 'https://dev.example.test/art', false)(logical), `https://dev.example.test/art/assets/${logical}`);
+  for (const invalid of ['/relative/art', '//art.example.test', 'ftp://art.example.test', 'https://user:secret@art.example.test',
+    'https://art.example.test?query', 'https://art.example.test/#fragment', 'https://art.example.test/path with space',
+    'https://art.example.test/"injection', 'https://art.example.test/\\path', 'https://art.example.test:65536']) {
+    assert.throws(() => resolve(invalid), /Invalid artwork asset base URL/);
+    assert.throws(() => resolve('', invalid), /Invalid artwork asset base URL/);
+  }
+});
+
+test('default runtime configuration is empty and its classic script blocks before the app module', () => {
+  const context = vm.createContext({});
+  vm.runInContext(fs.readFileSync(path.join(root, 'public/runtime-config.js'), 'utf8'), context);
+  assert.equal(context.__GAME_RUNTIME_CONFIG__.artAssetBaseUrl, '');
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const scripts = [...html.matchAll(/<script\b([^>]*)>/g)].map(match => match[1]);
+  const runtimeIndex = scripts.findIndex(attributes => /src="\/runtime-config\.js"/.test(attributes));
+  const moduleIndex = scripts.findIndex(attributes => /type="module"/.test(attributes));
+  assert.ok(runtimeIndex >= 0 && moduleIndex > runtimeIndex);
+  assert.ok(!/\b(async|defer|type)\b/.test(scripts[runtimeIndex]), 'runtime configuration must execute before module initialization');
 });
 
 test('build plugin defines independent URL map and emits each unique file through the asset API', () => {
@@ -144,16 +182,23 @@ function imageDimensions(bytes) {
   throw new Error('WebP image dimensions missing');
 }
 
-function artHarness(reject = () => false, base = '/') {
+function artHarness(reject = () => false, base = '/', runtimeBase) {
   const images = [], fetched = [];
+  const artBase = runtimeBase ?? base;
+  let pixelReads = 0;
   const getBytes = url => {
-    assert.ok(url.startsWith(`${base}assets/cache/`), `unfingerprinted runtime artwork: ${url}`);
-    const bytes = shipped.files.get(url.slice(base.length));
+    assert.ok(url.startsWith(`${artBase}assets/cache/`), `unfingerprinted runtime artwork: ${url}`);
+    const bytes = shipped.files.get(url.slice(artBase.length));
     assert.ok(bytes, `unemitted runtime artwork: ${url}`);
     return bytes;
   };
   class Image {
-    src = ''; naturalWidth = 0; naturalHeight = 0;
+    _src = ''; naturalWidth = 0; naturalHeight = 0;
+    set src(value) {
+      assert.equal(this.crossOrigin, 'anonymous', `CORS must be selected before requesting ${value}`);
+      this._src = value;
+    }
+    get src() { return this._src; }
     async decode() {
       images.push(this.src);
       const bytes = getBytes(this.src);
@@ -161,13 +206,25 @@ function artHarness(reject = () => false, base = '/') {
     }
   }
   const noop = () => undefined;
-  const draw = new Proxy({}, { get: (_target, key) => key === 'getImageData'
-    ? () => ({ data: new Uint8ClampedArray(0) }) : noop });
+  const createCanvas = () => {
+    let image;
+    const draw = new Proxy({}, { get: (_target, key) => {
+      if (key === 'drawImage') return value => { image = value; };
+      if (key === 'getImageData') return () => {
+        assert.equal(image.crossOrigin, 'anonymous', 'canvas pixel reads require CORS-enabled images');
+        pixelReads++;
+        return { data: new Uint8ClampedArray(0) };
+      };
+      return noop;
+    } });
+    return { width: 0, height: 0, getContext: () => draw };
+  };
   const load = moduleLoader({ __GAME_ART_URLS__: shipped.urls, Image,
+    ...(runtimeBase ? { __GAME_RUNTIME_CONFIG__: { artAssetBaseUrl: runtimeBase } } : {}),
     fetch: async url => { fetched.push(url); return { ok: !reject(url), json: async () => JSON.parse(getBytes(url).toString()) }; },
-    document: { createElement: () => ({ width: 0, height: 0, getContext: () => draw }) },
+    document: { createElement: createCanvas },
   }, base);
-  return { art: load(path.join(root, 'src/game/art.ts')), images, fetched };
+  return { art: load(path.join(root, 'src/game/art.ts')), images, fetched, get pixelReads() { return pixelReads; } };
 }
 
 test('all nine production packs, multi-sheet frames, summons and legacy registrations load via independent hashes', async () => {
@@ -204,6 +261,20 @@ test('missing hashed pack retains legacy fallback, including under subpath base'
     assert.ok(h.images.includes(`${base}${shipped.urls[`animations/eula-${suffix}.png`]}`));
     assert.ok(h.fetched.includes(`${base}${shipped.urls[`animations/eula-${suffix}.json`]}`));
   }
+  lease.release();
+});
+
+test('runtime CDN prefix loads every actor, summon and JSON while portraits remain readable by canvas', async () => {
+  const base = 'https://art.example.test/release-2026/';
+  const packs = JSON.parse(fs.readFileSync(path.join(root, 'src/game/animation-packs.json'), 'utf8'));
+  const h = artHarness(undefined, '/game/', base);
+  const lease = h.art.acquireGameArt(Object.keys(packs), { legacy: true, strict: true });
+  await lease.ready;
+  for (const id of Object.keys(packs)) assert.equal(h.art.getCharacterAnimationStatus(id).status, 'ready', id);
+  assert.equal(h.pixelReads, Object.keys(packs).length, 'every portrait completed its transparent-pixel bounds scan');
+  assert.ok(h.images.length > 100);
+  assert.ok(h.fetched.length > Object.keys(packs).length);
+  assert.ok([...h.images, ...h.fetched].every(url => url.startsWith(`${base}assets/cache/`)));
   lease.release();
 });
 

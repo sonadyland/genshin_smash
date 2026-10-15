@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import type { Plugin } from 'vite';
 import { createArtCatalog } from './art-inventory';
@@ -43,10 +43,12 @@ export function fingerprintArtAssets(publicDirectory: string): FingerprintedArt 
 export function publicAssetCache(): Plugin {
   let artwork: FingerprintedArt = { urls: {}, files: new Map() };
   let catalogInputs: string[] = [];
+  let manifestDirectory = '';
   return {
     name: 'content-hashed-game-art',
     config(config, environment) {
       const root = path.resolve(config.root ?? process.cwd());
+      manifestDirectory = path.join(root, 'dist-server');
       const publicDirectory = path.resolve(root, config.publicDir || 'public');
       const catalog = config.publicDir === false ? { home: [], shared: [], characters: {}, sizes: {} }
         : createArtCatalog(root, publicDirectory);
@@ -66,6 +68,11 @@ export function publicAssetCache(): Plugin {
     },
     generateBundle() {
       for (const [fileName, source] of artwork.files) this.emitFile({ type: 'asset', fileName, source });
+    },
+    writeBundle() {
+      // Server-only allowlist; never serve this directory as the web root.
+      mkdirSync(manifestDirectory, { recursive: true });
+      writeFileSync(path.join(manifestDirectory, 'art-manifest.json'), JSON.stringify(artwork.urls));
     },
   };
 }

@@ -1,3 +1,4 @@
+import { onArtUrlsChanged } from './art-url-session';
 import { attackPhase, selectActionFrame } from './animation';
 import type { FighterAnimation } from './animation';
 import { CHARACTER_CLIP_IDS, VARIANT_ATTACKS, selectClipFrame, selectedClip, validClipManifest, validVariantClip, registeredWeaponTip, registeredCastOrigin } from './clip-animation';
@@ -12,22 +13,39 @@ import { loadCorrinPack, drawCorrinFighter, corrinCastOrigin, corrinFangSegment,
 import type { CorrinArtPack, CorrinWaterKind } from './corrin-art';
 
 /** Shared, locally hosted artwork for the lobby and the canvas arena. */
-export const CHARACTER_ART: Record<string, string> = LOBBY_CHARACTER_ART;
-export const BACKGROUND_ART = LOBBY_BACKGROUND_ART;
+export let CHARACTER_ART: Record<string, string> = LOBBY_CHARACTER_ART;
+export let BACKGROUND_ART = LOBBY_BACKGROUND_ART;
 const LEGACY_CHARACTER_IDS = ['raiden', 'jean', 'eula', 'diluc', 'xiao'];
-export const ACTION_ART: Record<string, string> = Object.fromEntries(
+export let ACTION_ART: Record<string, string> = Object.fromEntries(
   LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-actions-v3.png`)]),
 );
-export const ELEMENT_EFFECT_ART = asset('effects/elemental-bursts-v3.png');
-export const XIAO_PLUNGE_ART = asset('effects/xiao-plunge-v3.png');
-export const SECONDARY_ACTION_ART: Record<string, string> = Object.fromEntries(
+export let ELEMENT_EFFECT_ART = asset('effects/elemental-bursts-v3.png');
+export let XIAO_PLUNGE_ART = asset('effects/xiao-plunge-v3.png');
+export let SECONDARY_ACTION_ART: Record<string, string> = Object.fromEntries(
   LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-secondary-v1.png`)]),
 );
-export const SECONDARY_EFFECT_ART = asset('effects/secondary-effects-v1.png');
-const ACTION_METADATA = Object.fromEntries(LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-actions-v3.json`)]));
-const SECONDARY_ACTION_METADATA = Object.fromEntries(LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-secondary-v1.json`)]));
-export const CHARACTER_CLIP_MANIFESTS = Object.fromEntries(CHARACTER_CLIP_IDS.map(id => [id, asset(`animations/${animationPacks[id]}/manifest.json`)])) as Record<ClipCharacterId, string>;
-export const EULA_CLIP_MANIFEST = CHARACTER_CLIP_MANIFESTS.eula;
+export let SECONDARY_EFFECT_ART = asset('effects/secondary-effects-v1.png');
+let ACTION_METADATA = Object.fromEntries(LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-actions-v3.json`)]));
+let SECONDARY_ACTION_METADATA = Object.fromEntries(LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-secondary-v1.json`)]));
+export let CHARACTER_CLIP_MANIFESTS = Object.fromEntries(CHARACTER_CLIP_IDS.map(id => [id, asset(`animations/${animationPacks[id]}/manifest.json`)])) as Record<ClipCharacterId, string>;
+export let EULA_CLIP_MANIFEST = CHARACTER_CLIP_MANIFESTS.eula;
+onArtUrlsChanged(() => {
+CHARACTER_ART = LOBBY_CHARACTER_ART;
+BACKGROUND_ART = LOBBY_BACKGROUND_ART;
+ACTION_ART = Object.fromEntries(
+  LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-actions-v3.png`)]),
+);
+ELEMENT_EFFECT_ART = asset('effects/elemental-bursts-v3.png');
+XIAO_PLUNGE_ART = asset('effects/xiao-plunge-v3.png');
+SECONDARY_ACTION_ART = Object.fromEntries(
+  LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-secondary-v1.png`)]),
+);
+SECONDARY_EFFECT_ART = asset('effects/secondary-effects-v1.png');
+ACTION_METADATA = Object.fromEntries(LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-actions-v3.json`)]));
+SECONDARY_ACTION_METADATA = Object.fromEntries(LEGACY_CHARACTER_IDS.map(id => [id, asset(`animations/${id}-secondary-v1.json`)]));
+CHARACTER_CLIP_MANIFESTS = Object.fromEntries(CHARACTER_CLIP_IDS.map(id => [id, asset(`animations/${animationPacks[id]}/manifest.json`)])) as Record<ClipCharacterId, string>;
+EULA_CLIP_MANIFEST = CHARACTER_CLIP_MANIFESTS.eula;
+});
 interface SourceRect { x: number; y: number; width: number; height: number }
 interface PlungeRegistration {
   width: number; height: number;
@@ -77,7 +95,7 @@ async function loadClipSheet(url: string, owner: CharacterResources): Promise<Cl
   let pending = owner.sheets.get(url);
   if (!pending) {
     pending = (async () => {
-      const image = new Image(); image.decoding = 'async'; image.src = url; await image.decode();
+      const image = new Image(); image.crossOrigin = 'anonymous'; image.decoding = 'async'; image.src = url; await image.decode();
       return { image, flash: null };
     })();
     owner.sheets.set(url, pending);
@@ -211,7 +229,7 @@ function validSourceRect(rect: SourceRect | undefined, image: HTMLImageElement):
 }
 async function loadActionSheet(id: string, url: string, metadataUrl: string, secondary = false) {
   const image = new Image();
-  image.decoding = 'async'; image.src = url;
+  image.crossOrigin = 'anonymous'; image.decoding = 'async'; image.src = url;
   await image.decode();
   if (image.naturalWidth < 4 || image.naturalHeight < 4) return;
   const response = await fetch(metadataUrl);
@@ -239,7 +257,7 @@ async function loadActionSheet(id: string, url: string, metadataUrl: string, sec
   return { image, flash: g ? flash : null, registration };
 }
 async function loadSecondaryEffects() {
-  const image = new Image(); image.decoding = 'async'; image.src = SECONDARY_EFFECT_ART;
+  const image = new Image(); image.crossOrigin = 'anonymous'; image.decoding = 'async'; image.src = SECONDARY_EFFECT_ART;
   await image.decode();
   const response = await fetch(asset('effects/secondary-effects-v1.json'));
   if (!response.ok) throw new Error('Missing secondary effect registration');
@@ -255,12 +273,12 @@ async function loadSecondaryEffects() {
   return { image, registration };
 }
 async function loadEffects() {
-  const image = new Image(); image.decoding = 'async'; image.src = ELEMENT_EFFECT_ART;
+  const image = new Image(); image.crossOrigin = 'anonymous'; image.decoding = 'async'; image.src = ELEMENT_EFFECT_ART;
   await image.decode();
   if (image.naturalWidth >= 4 && image.naturalHeight >= 2) return image;
 }
 async function loadPlungeEffects() {
-  const image = new Image(); image.decoding = 'async'; image.src = XIAO_PLUNGE_ART;
+  const image = new Image(); image.crossOrigin = 'anonymous'; image.decoding = 'async'; image.src = XIAO_PLUNGE_ART;
   await image.decode();
   const response = await fetch(asset('effects/xiao-plunge-v3.json'));
   if (!response.ok) throw new Error('Missing Xiao plunge registration');
@@ -275,7 +293,7 @@ async function loadPlungeEffects() {
 }
 async function loadImage(url: string, trim: boolean) {
   const image = new Image();
-  image.decoding = 'async'; image.src = url;
+  image.crossOrigin = 'anonymous'; image.decoding = 'async'; image.src = url;
   await image.decode();
   const width = image.naturalWidth, height = image.naturalHeight;
   if (!width || !height) return;
