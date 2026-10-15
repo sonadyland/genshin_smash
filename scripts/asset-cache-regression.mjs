@@ -7,6 +7,7 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import ts from 'typescript';
+import { inspectAssets } from './upload-art.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(import.meta.url);
@@ -32,16 +33,121 @@ const { createArtCatalog } = moduleLoader()(path.join(root, 'build/art-inventory
 const shipped = fingerprintArtAssets(path.join(root, 'public'));
 const cases = [];
 const test = (name, run) => cases.push({ name, run });
+const emittedBytes = (logical, source) => path.extname(logical).toLowerCase() === '.json'
+  ? Buffer.from(source.toString('utf8').replace(/\r\n/g, '\n')) : source;
 
-test('every production art URL is its exact SHA-256, with music/previews excluded', () => {
+function productionCatalog() {
+  return JSON.parse(publicAssetCache().config({ root }, { command: 'build' }).define.__GAME_ART_CATALOG__);
+}
+
+test('every production art URL hashes the exact emitted bytes, with JSON line endings normalized', () => {
   assert.ok(Object.keys(shipped.urls).length > 100);
   for (const [logical, output] of Object.entries(shipped.urls)) {
-    const source = fs.readFileSync(path.join(root, 'public/assets', logical));
+    const source = emittedBytes(logical, fs.readFileSync(path.join(root, 'public/assets', logical)));
     assert.equal(output, `assets/cache/${createHash('sha256').update(source).digest('hex')}${path.extname(logical)}`);
     assert.ok(shipped.files.get(output).equals(source));
   }
   assert.ok(!Object.keys(shipped.urls).some(name => /^(audio|previews)\//.test(name)));
   assert.ok(!Object.keys(shipped.urls).some(name => name.endsWith('.md')));
+});
+
+test('LF and CRLF checkouts emit identical hashes, JSON bytes and download sizes without changing images', async () => {
+  const fixture = fs.mkdtempSync(path.join(os.tmpdir(), 'genshin-art-newlines-'));
+  try {
+    const publicDirectory = path.join(fixture, 'public');
+    const assetDirectory = path.join(publicDirectory, 'assets');
+    const ids = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina', 'tharja', 'corrin'];
+    const packs = Object.fromEntries(ids.map(id => [id, `${id}-fixture`]));
+    const jsonFiles = new Map();
+    const image = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0xff, 0x00]);
+    function write(logical, bytes) {
+      const filename = path.join(assetDirectory, logical);
+      fs.mkdirSync(path.dirname(filename), { recursive: true });
+      fs.writeFileSync(filename, bytes);
+      if (logical.endsWith('.json')) jsonFiles.set(filename, bytes);
+    }
+    fs.mkdirSync(path.join(fixture, 'src/game'), { recursive: true });
+    fs.writeFileSync(path.join(fixture, 'src/game/animation-packs.json'), JSON.stringify(packs));
+    fs.writeFileSync(path.join(fixture, 'src/game/summoner-art-manifest.json'), '{"assets":{}}');
+    for (const id of ids) {
+      write(`lobby/${id}.webp`, image);
+      write(`animations/${packs[id]}/idle.png`, image);
+      write(`animations/${packs[id]}/manifest.json`, JSON.stringify({ character: id,
+        clips: { idle: { image: 'idle.png', frames: [] } } }, null, 2) + '\n');
+    }
+    for (const logical of ['lobby/liyue-dawn.webp', 'effects/elemental-bursts-v3.png',
+      'effects/secondary-effects-v1.png', 'effects/xiao-plunge-v3.png']) write(logical, image);
+    for (const logical of ['effects/secondary-effects-v1.json', 'effects/xiao-plunge-v3.json']) {
+      write(logical, '{\n  "label": "中文",\n  "frame": 1\n}\n');
+    }
+    function build() {
+      const plugin = publicAssetCache();
+      const config = plugin.config({ root: fixture }, { command: 'build' });
+      const files = new Map();
+      plugin.generateBundle.call({ emitFile: file => files.set(file.fileName, file.source) });
+      return { urls: JSON.parse(config.define.__GAME_ART_URLS__),
+        catalog: JSON.parse(config.define.__GAME_ART_CATALOG__), files };
+    }
+    const lf = build();
+    for (const [filename, source] of jsonFiles) fs.writeFileSync(filename, source.replaceAll('\n', '\r\n'));
+    const crlf = build();
+    assert.deepEqual(crlf.urls, lf.urls);
+    assert.deepEqual(crlf.catalog, lf.catalog);
+    for (const [logical, output] of Object.entries(crlf.urls)) {
+      const bytes = crlf.files.get(output);
+      assert.ok(bytes.equals(lf.files.get(output)), logical);
+      assert.equal(createHash('sha256').update(bytes).digest('hex'), path.basename(output).split('.')[0]);
+      assert.equal(crlf.catalog.sizes[logical], bytes.length, 'catalog must match actual download bytes');
+      if (logical.endsWith('.json')) assert.ok(!bytes.includes(Buffer.from('\r\n')), logical);
+      else assert.ok(bytes.equals(image), 'binary image CRLF and invalid UTF-8 bytes must stay unchanged');
+    }
+    const dev = JSON.parse(publicAssetCache().config({ root: fixture }, { command: 'serve' }).define.__GAME_ART_CATALOG__);
+    for (const [filename, source] of jsonFiles) {
+      const logical = path.relative(assetDirectory, filename).replaceAll('\\', '/');
+      assert.equal(fs.readFileSync(filename, 'utf8'), source.replaceAll('\n', '\r\n'), 'build must not rewrite source art');
+      assert.equal(dev.sizes[logical], fs.statSync(filename).size, 'dev downloads original CRLF files');
+      assert.ok(dev.sizes[logical] > crlf.catalog.sizes[logical]);
+    }
+    const cacheDirectory = path.join(fixture, 'emitted-cache');
+    fs.mkdirSync(cacheDirectory);
+    for (const [output, bytes] of crlf.files) fs.writeFileSync(path.join(cacheDirectory, path.basename(output)), bytes);
+    const inspected = await inspectAssets(cacheDirectory);
+    assert.equal(inspected.count, crlf.files.size);
+    assert.equal(inspected.bytes, [...crlf.files.values()].reduce((total, bytes) => total + bytes.length, 0));
+    // Exercise the real loader's strict byte-count check against built files.
+    const loaderModule = { exports: {} };
+    const loaderCode = ts.transpileModule(fs.readFileSync(path.join(root, 'src/game/asset-loading.ts'), 'utf8'), {
+      compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
+    }).outputText;
+    vm.runInNewContext(`(function(exports, require, module) { ${loaderCode}\n})`,
+      { console, setTimeout, clearTimeout, queueMicrotask, AbortController, Error })(loaderModule.exports, specifier => {
+      const dependencies = { './asset-catalog': { ART_CATALOG: crlf.catalog },
+        './art-url-session': { onArtUrlsChanged: () => {} },
+        './asset-url': { assetUrl: logical => crlf.urls[logical] }, './art': {} };
+      assert.ok(dependencies[specifier], specifier);
+      return dependencies[specifier];
+    }, loaderModule);
+    const downloads = [];
+    const loader = loaderModule.exports.createAssetLoading(crlf.catalog, {
+      resolveUrl: logical => crlf.urls[logical],
+      fetch: async url => { downloads.push(url); return new Response(crlf.files.get(url)); },
+      decodeHome: async () => {},
+      acquireArt: () => ({ ready: Promise.resolve(), release() {} }),
+    });
+    const preparation = loader.prepareBattle(ids);
+    await preparation.ready;
+    assert.equal(preparation.getSnapshot().phase, 'ready');
+    assert.ok(downloads.some(url => url.endsWith('.json')), 'real loader must validate normalized JSON downloads');
+    preparation.release();
+    const changedPath = 'effects/secondary-effects-v1.json';
+    const changedFile = path.join(assetDirectory, changedPath);
+    fs.writeFileSync(changedFile, fs.readFileSync(changedFile, 'utf8').replace('"frame": 1', '"frame": 2'));
+    const changed = build();
+    assert.notEqual(changed.urls[changedPath], crlf.urls[changedPath]);
+    for (const logical of Object.keys(crlf.urls).filter(logical => logical !== changedPath)) {
+      assert.equal(changed.urls[logical], crlf.urls[logical], logical);
+    }
+  } finally { fs.rmSync(fixture, { recursive: true, force: true }); }
 });
 
 test('one changed image invalidates only itself; repeat/restore retain URLs and duplicate bytes share output', () => {
@@ -117,7 +223,9 @@ test('build plugin defines independent URL map and emits each unique file throug
   const plugin = publicAssetCache();
   const config = plugin.config({ root }, { command: 'build' });
   assert.deepEqual(JSON.parse(config.define.__GAME_ART_URLS__), JSON.parse(JSON.stringify(shipped.urls)));
-  assert.deepEqual(JSON.parse(config.define.__GAME_ART_CATALOG__), JSON.parse(JSON.stringify(createArtCatalog(root, path.join(root, 'public')))));
+  const catalog = createArtCatalog(root, path.join(root, 'public'));
+  for (const logical of Object.keys(catalog.sizes)) catalog.sizes[logical] = shipped.files.get(shipped.urls[logical]).length;
+  assert.deepEqual(JSON.parse(config.define.__GAME_ART_CATALOG__), JSON.parse(JSON.stringify(catalog)));
   const emitted = [];
   plugin.generateBundle.call({ emitFile: file => emitted.push(file) });
   assert.equal(emitted.length, shipped.files.size);
@@ -140,12 +248,12 @@ test('development exposes the same live catalog but retains editable logical URL
   assert.deepEqual(JSON.parse(none.define.__GAME_ART_CATALOG__), { home: [], shared: [], characters: {}, sizes: {} });
 });
 
-test('queue inventory uses real bytes and contains complete active packs without legacy/review art', () => {
-  const catalog = createArtCatalog(root, path.join(root, 'public'));
+test('queue inventory uses emitted bytes and contains complete active packs without legacy/review art', () => {
+  const catalog = productionCatalog();
   const paths = [...new Set([...catalog.home, ...catalog.shared, ...Object.values(catalog.characters).flat()])];
   assert.deepEqual(Object.keys(catalog.sizes).sort(), paths.sort());
   for (const logical of paths) {
-    assert.equal(catalog.sizes[logical], fs.statSync(path.join(root, 'public/assets', logical)).size, logical);
+    assert.equal(catalog.sizes[logical], shipped.files.get(shipped.urls[logical]).length, logical);
     assert.ok(shipped.urls[logical], logical);
     assert.ok(!/actions-v3|secondary-v1|preview|characters\//.test(logical), logical);
   }

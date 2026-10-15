@@ -26,7 +26,10 @@ export function fingerprintArtAssets(publicDirectory: string): FingerprintedArt 
       if (entry.isDirectory()) { visit(filename, logicalPath); continue; }
       const extension = path.extname(entry.name).toLowerCase();
       if (!entry.isFile() || !['.png', '.webp', '.json'].includes(extension)) continue;
-      const source = readFileSync(filename);
+      const original = readFileSync(filename);
+      // Git checkouts can use CRLF on Windows and LF on Linux. Hash and emit
+      // the same JSON bytes so independently built uploads keep identical URLs.
+      const source = extension === '.json' ? Buffer.from(original.toString('utf8').replace(/\r\n/g, '\n')) : original;
       const digest = createHash('sha256').update(source).digest('hex');
       const output = `assets/cache/${digest}${extension}`;
       const existing = files.get(output);
@@ -50,9 +53,14 @@ export function publicAssetCache(): Plugin {
       const root = path.resolve(config.root ?? process.cwd());
       manifestDirectory = path.join(root, 'dist-server');
       const publicDirectory = path.resolve(root, config.publicDir || 'public');
-      const catalog = config.publicDir === false ? { home: [], shared: [], characters: {}, sizes: {} }
+      let catalog = config.publicDir === false ? { home: [], shared: [], characters: {}, sizes: {} }
         : createArtCatalog(root, publicDirectory);
-      if (environment.command === 'build' && config.publicDir !== false) artwork = fingerprintArtAssets(publicDirectory);
+      if (environment.command === 'build' && config.publicDir !== false) {
+        artwork = fingerprintArtAssets(publicDirectory);
+        // Downloads validate emitted bytes, while dev still serves raw files.
+        catalog = { ...catalog, sizes: Object.fromEntries(Object.keys(catalog.sizes)
+          .map(logical => [logical, artwork.files.get(artwork.urls[logical])!.length])) };
+      }
       catalogInputs = [path.join(publicDirectory, 'assets'), path.join(root, 'src/game/animation-packs.json'),
         path.join(root, 'src/game/summoner-art-manifest.json')].map(filename => filename.replaceAll('\\', '/'));
       return { define: { __GAME_ART_URLS__: JSON.stringify(artwork.urls), __GAME_ART_CATALOG__: JSON.stringify(catalog) } };
