@@ -1212,7 +1212,9 @@ export class SurvivalGame {
     let side = Math.random() < 0.5 ? -1 : 1;
     if (!leftSpace) side = 1; else if (!rightSpace) side = -1;
     const x = spawnX ?? clamp(side < 0 ? this.camera.x - 70 - Math.random() * 120 : this.camera.x + VIEW_W + 70 + Math.random() * 120, 45, this.world.width - 45);
-    const radius = boss ? 62 : elite ? 43 : kind === 'flyer' ? 22 : kind === 'ranged' ? 25 : 27;
+    // Slimes share this radius for their visible body and every combat target.
+    // A regular slime is ~92px tall beside a 112px fighter; its feet stay at y.
+    const radius = boss ? 62 : elite ? (kind === 'slime' ? 68 : 43) : kind === 'flyer' ? 22 : kind === 'ranged' ? 25 : 56;
     const hp = (22 + this.elapsed * 0.13) * (boss ? 35 : elite ? 9 : kind === 'ranged' ? 1.4 : 1);
     const enemy: SurvivalEnemy = { id: this.nextId++, kind, elite, boss, x, y: kind === 'flyer' ? clamp(p.y - 45 + Math.random() * 100, 160, this.groundHeightAt(x) - 70) : this.groundHeightAt(x),
       vx: 0, vy: 0, radius, hp, maxHp: hp, speed: (1.1 + this.elapsed / 600) * (kind === 'flyer' ? 1.2 : elite ? 0.85 : 1),

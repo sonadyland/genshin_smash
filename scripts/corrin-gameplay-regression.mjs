@@ -125,9 +125,39 @@ test('survival damage pauses and preserves transformations/attacks, pause/upgrad
   const water = plain(game.corrinWater.effects); game.phase = 'paused'; ticks(game, 90); assert.deepEqual(plain(game.corrinWater.effects), water); game.destroy();
 });
 test('survival human fang uses physical segment, hits once, excludes behind and empty spell does not spawn hidden projectile', () => {
-  const game = survival(), target = enemy(game, 95, { radius: 48 }), behind = enemy(game, -60), low = enemy(game, 100); game.beginAttack('secondary'); const startup = game.player.attack.def.startup;
-  ticks(game, startup - 1); assert.equal(target.hp, 10000); ticks(game, 1); assert.ok(target.hp < 10000); const hp = target.hp; ticks(game, 20);
-  assert.equal(target.hp, hp); assert.equal(behind.hp, 10000); assert.equal(low.hp, 10000, 'low slime stays below the authored raised dragon-fang'); assert.equal(game.shots.length, 0); assert.equal(game.corrinWater.effects.length, 0); game.destroy();
+  for (const variant of ['survival', 'tactical', 'expedition']) for (const facing of [-1, 1]) {
+    const game = survival(variant); game.player.facing = facing;
+    const target = game.spawnEnemy('slime', false, false, game.player.x + facing * 95);
+    Object.assign(target, { hp: 10000, maxHp: 10000, speed: 0, damage: 0, xp: 0 });
+    const behind = enemy(game, -facing * 100), low = enemy(game, facing * 100);
+    game.beginAttack('secondary'); const startup = game.player.attack.def.startup;
+    ticks(game, startup - 1); assert.equal(target.hp, 10000); ticks(game, 1);
+    assert.ok(target.hp < 10000, `${variant}, facing ${facing}: the real spawned blue slime intersects the authored fang`);
+    const hp = target.hp; ticks(game, 20);
+    assert.equal(target.hp, hp); assert.equal(behind.hp, 10000);
+    assert.equal(low.hp, 10000, 'deliberately short fixture stays below the unchanged raised dragon-fang');
+    assert.equal(game.shots.length, 0); assert.equal(game.corrinWater.effects.length, 0); game.destroy();
+  }
+});
+test('larger blue slimes share visible/combat size and keep grounded and platform feet in every mode', () => {
+  for (const variant of ['survival', 'tactical', 'expedition']) {
+    const game = survival(variant), target = game.spawnEnemy('slime', false, false, game.player.x + 180);
+    assert.equal(target.radius, 56); assert.equal(target.y, game.groundHeightAt(target.x));
+    const body = game.summonContext().targets.find(candidate => candidate.id === target.id);
+    assert.equal(body.feetY, target.y); assert.ok(Math.abs(body.height - 89.6) < 1e-8); assert.ok(body.height < 112);
+    assert.ok(game.spawnEnemy('slime', true).radius > target.radius, 'gold elite stays larger than a regular slime');
+    assert.equal(game.spawnEnemy('flyer').radius, 22); assert.equal(game.spawnEnemy('ranged').radius, 25);
+    assert.equal(game.spawnEnemy('ranged', true).radius, 43); assert.equal(game.spawnEnemy('ranged', true, true).radius, 62);
+    game.enemies = [target]; target.speed = 0; target.damage = 0;
+    for (let i = 0; i < 12; i++) game.updateEnemies();
+    assert.equal(target.y, game.groundHeightAt(target.x)); assert.equal(target.grounded, true);
+    const platform = game.world.platforms[0];
+    Object.assign(target, { x: platform.x + platform.w / 2, y: platform.y - 10, vy: 5, grounded: false });
+    game.player.y = platform.y;
+    for (let i = 0; i < 6; i++) game.updateEnemies();
+    assert.equal(target.y, platform.y, `${variant}: feet land on the platform without a radius offset`);
+    assert.equal(target.grounded, true); game.destroy();
+  }
 });
 test('survival upgrades change both form damage, orb shape, beam pulses, waterburst radius and shared I cooldown', () => {
   const game = survival(), base = game.attackDamage('jab'); game.progress.skillLevel = 5; game.progress.secondaryLevel = 5; game.progress.upgrades['corrin-jab'] = 3; game.progress.upgrades['corrin-smash'] = 3; game.progress.branch = 'corrin-tide';

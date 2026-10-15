@@ -71,15 +71,16 @@ test('J is one manual ranged projectile; no melee hit or idle/held-repeat attack
   const damage = run.damageDealt; ticks(run, 150); assert.equal(run.damageDealt, damage);
 });
 
-test('actual approved palm coordinates launch visible J/K paths that hit nearby short slimes', () => {
-  for (const kind of ['jab', 'smash']) for (const facing of [-1, 1]) {
+test('actual approved palm coordinates launch visible J/K paths that hit spawned blue slimes and short fixtures', () => {
+  for (const kind of ['jab', 'smash']) for (const facing of [-1, 1]) for (const spawned of [false, true]) {
     const run = game(); run.player.facing = facing;
-    const target = enemy(run, facing * 65);
+    const target = spawned ? run.spawnEnemy('slime', false, false, run.player.x + facing * 65) : enemy(run, facing * 65);
+    Object.assign(target, { hp: 10000, maxHp: 10000, speed: 0, damage: 0, xp: 0 });
     const palm = registeredPalm(run.player.x, run.player.y, 112, kind, facing);
-    assert.ok(palm.y < run.player.y - 85, 'authored palm really is above the small enemy silhouette');
+    assert.ok(palm.y < run.player.y - 85, 'the original high palm origin stays unchanged');
     run.releaseTharja(kind);
     const shot = run.tharja.effects[0]; assert.equal(shot.x, palm.x); assert.equal(shot.y, palm.y);
-    magicTicks(run, 75); assert.ok(target.hp < 10000, `${kind} ${facing} must hit a 43 px tall slime`);
+    magicTicks(run, 75); assert.ok(target.hp < 10000, `${kind} ${facing} must hit ${spawned ? 'the real spawned blue slime' : 'the short fixture'}`);
   }
 });
 
