@@ -1,0 +1,207 @@
+{
+  "id": "dragon",
+  "title": "白龙 · 四足安定",
+  "status": "ready",
+  "gameHeight": 135,
+  "reference": {
+    "src": "./assets/dragon-master.png",
+    "width": 1536,
+    "height": 1024,
+    "bodyHeight": 950,
+    "pivot": [
+      850,
+      999
+    ],
+    "bounds": [
+      45,
+      49,
+      1456,
+      950
+    ]
+  },
+  "sheets": [
+    {
+      "src": "./assets/dragon-idle-a.png",
+      "width": 1254,
+      "height": 1254,
+      "bodyHeight": 400
+    },
+    {
+      "src": "./assets/dragon-idle-b.png",
+      "width": 1254,
+      "height": 1254,
+      "bodyHeight": 403
+    }
+  ],
+  "frames": [
+    {
+      "sheet": 0,
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        320,
+        551
+      ],
+      "bounds": [
+        51,
+        151,
+        525,
+        399
+      ],
+      "duration": 600,
+      "phase": "四足静候"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        336,
+        551
+      ],
+      "bounds": [
+        67,
+        150,
+        523,
+        401
+      ],
+      "duration": 500,
+      "phase": "缓慢吸气"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        320,
+        526
+      ],
+      "bounds": [
+        50,
+        128,
+        526,
+        398
+      ],
+      "duration": 80,
+      "phase": "眼睑轻收"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        336,
+        526
+      ],
+      "bounds": [
+        69,
+        129,
+        524,
+        397
+      ],
+      "duration": 80,
+      "phase": "呼吸峰值"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        320,
+        552
+      ],
+      "bounds": [
+        48,
+        149,
+        531,
+        403
+      ],
+      "duration": 100,
+      "phase": "重新睁眼"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        334,
+        552
+      ],
+      "bounds": [
+        60,
+        151,
+        532,
+        401
+      ],
+      "duration": 550,
+      "phase": "胸腹回落"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        320,
+        527
+      ],
+      "bounds": [
+        49,
+        128,
+        530,
+        399
+      ],
+      "duration": 500,
+      "phase": "尾尖归稳"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        334,
+        528
+      ],
+      "bounds": [
+        60,
+        129,
+        531,
+        399
+      ],
+      "duration": 590,
+      "phase": "回到静候"
+    }
+  ],
+  "note": "8 张真实动作帧；每表固定角尖至前爪标尺，四足支撑不变。胸腹与颈部缓慢起伏，3 秒循环。"
+}

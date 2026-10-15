@@ -2,10 +2,10 @@ import { readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import type { ArtCatalog } from '../src/game/asset-catalog';
 
-interface ClipImages { image: string; frames: { image?: string }[] }
+interface ClipImages { image?: string; sheets?: { image: string }[]; frames: { image?: string }[] }
 interface Manifest { character: string; clips: Record<string, ClipImages>; variants?: Record<string, ClipImages> }
 interface SummonRegistration { assets: Record<string, { owner: string; image: string }> }
-const characterOrder = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina', 'tharja'];
+const characterOrder = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina', 'tharja', 'corrin'];
 
 /** Only live clips, their optional frame sheets and owned summons enter the queue. */
 export function createArtCatalog(root: string, publicDirectory: string): ArtCatalog {
@@ -25,7 +25,8 @@ export function createArtCatalog(root: string, publicDirectory: string): ArtCata
     if (manifest.character !== id) throw new Error(`Wrong character in ${manifestPath}`);
     const resources = new Set([`lobby/${id}.webp`, manifestPath]);
     for (const clip of [...Object.values(manifest.clips), ...Object.values(manifest.variants ?? {})]) {
-      resources.add(prefix + clip.image);
+      if (clip.image) resources.add(prefix + clip.image);
+      for (const sheet of clip.sheets ?? []) resources.add(prefix + sheet.image);
       for (const frame of clip.frames) if (frame.image) resources.add(prefix + frame.image);
     }
     for (const summon of Object.values(summons.assets)) {

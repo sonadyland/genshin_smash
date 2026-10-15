@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "method": "Browser review followed by manual support-claw identification in original full-resolution sheets. Alpha 128 contour corroborates the selected claw tip. These are explicit grounded attack pivots, not automatic per-frame bounding-box normalization. Sheet bodyHeight and every PNG remain unchanged. Jump/air roots are deliberately excluded.",
+  "clips": {
+    "dragon:jab": { "pivotY": [468, 468, 435, 438, 436, 436, 422, 421] },
+    "dragon:smash": { "pivotY": [482, 487, 437, 445, 468, 465, 434, 440, 457, 463, 432, 434] },
+    "dragon:secondary": { "pivotY": [451, 451, 450, 450, 475, 471, 460, 460, 453, 453, 445, 445] }
+  }
+}

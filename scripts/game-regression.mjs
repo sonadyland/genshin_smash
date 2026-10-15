@@ -40,11 +40,15 @@ const context = vm.createContext({
 const modules = new Map();
 const artDrawCalls = [];
 const artLeases = [];
+const corrinArtPack = { manifest: JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations/corrin-v1/manifest.json'), 'utf8')), sheets: new Map() };
 let swordTipFixture = false;
 function loadModule(file) {
   if (file.endsWith('/summoner-art.ts')) return { drawSummonArt: () => false };
   if (file.endsWith('/art.ts')) return {
     hasRegisteredMeleeTrail: () => false,
+    getCorrinCastOrigin: (...args) => loadModule(path.join(root, 'src/game/corrin-art.ts').replaceAll('\\', '/')).corrinCastOrigin(corrinArtPack, ...args),
+    getCorrinFangSegment: (...args) => loadModule(path.join(root, 'src/game/corrin-art.ts').replaceAll('\\', '/')).corrinFangSegment(corrinArtPack, ...args),
+    drawCorrinWaterEffect: () => false,
     getSwordCastTip: (id, x, feetY, _height, _animation, facing) => swordTipFixture && ['eula', 'diluc'].includes(id) ? { x: x + facing * 97, y: feetY - 120 } : undefined,
     drawSwordCastRelease: () => false,
     acquireGameArt: ids => {
@@ -419,6 +423,13 @@ test('each elemental attack and its impact/afterimage render without changing co
     for (const def of [fighter.char.jab, fighter.char.smash, fighter.char.special]) {
       if (def.effect === 'plunge') fighter.onGround = false;
       game.startAttack(fighter, def);
+      if (def.effect === 'transform') {
+        const before = JSON.stringify(fighter.corrin); game.render(); game.render();
+        assert.equal(JSON.stringify(fighter.corrin), before, 'render cannot advance transform');
+        for (let i = 0; i < 46; i++) game.updateFighter(fighter, noInput);
+        assert.equal(fighter.corrin.form, 'dragon'); assert.equal(fighter.corrin.transform, undefined);
+        continue;
+      }
       for (const t of [1, def.startup, def.startup + def.active, def.startup + def.active + def.endlag - 1]) {
         fighter.attack.t = t;
         game.render(); game.render();
@@ -947,6 +958,12 @@ test('every fighter alternates J/K only while skills retain mechanic-matched pos
       for (let repeat = 0; repeat < 3; repeat++) {
         f.attack = null; f.state = 'free'; f.onGround = kind !== 'special' || f.char.id !== 'xiao';
         game.startAttack(f, f.char[kind]);
+        if (f.char.id === 'corrin' && kind === 'special') {
+          const target = repeat % 2 === 0 ? 'dragon' : 'human';
+          assert.equal(f.attack, null); assert.equal(f.corrin.transform.to, target);
+          for (let i = 0; i < 46; i++) game.updateFighter(f, noInput);
+          assert.equal(f.corrin.form, target); assert.equal(f.corrin.transform, undefined); continue;
+        }
         const expected = ['jab', 'smash'].includes(kind) && repeat % 2 === 0 ? 'alternate' : 'base';
         assert.equal(f.attack.visualVariant, expected, `${f.char.id}/${kind}/${repeat}`);
       }
@@ -1116,10 +1133,11 @@ test('sword release visually starts at the blade without moving versus projectil
 });
 
 let failures = 0;
-for (const { name, run } of cases) {
+const selectedCases = process.env.GAME_TEST_FILTER ? cases.filter(entry => entry.name.includes(process.env.GAME_TEST_FILTER)) : cases;
+for (const { name, run } of selectedCases) {
   try { run(); console.log(`PASS ${name}`); }
   catch (error) { failures++; console.error(`FAIL ${name}\n${error.stack}`); }
 }
 for (const game of games) game.destroy();
-console.log(`\n${cases.length - failures}/${cases.length} gameplay regression checks passed.`);
+console.log(`\n${selectedCases.length - failures}/${selectedCases.length} gameplay regression checks passed.`);
 process.exitCode = failures ? 1 : 0;

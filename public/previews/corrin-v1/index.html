@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#17272e" />
+  <link rel="icon" href="data:," />
+  <title>女神威 · 人与白龙 | 全动作美术预览</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="atelier">
+    <header><a class="wordmark" href="./index.html">动作工坊 <span>CHARACTER MOTION STUDY</span></a><a id="return-game" class="back" href="/">返回游戏 ↗</a></header>
+    <section class="intro"><div><p class="eyebrow">FIRE EMBLEM FATES · CORRIN</p><h1>女神威 <span>人与白龙</span></h1></div><p>剑术、龙化与水息。<br />逐帧观察蓄力、释放与收势。</p></section>
+    <section class="motion-panel" aria-label="女神威双形态全动作审片">
+      <div class="motion-heading"><div class="form-tabs" role="group" aria-label="形态选择"><button data-view="both" aria-pressed="true" class="selected">双形态 <small>同地面对照</small></button><button data-view="human" aria-pressed="false">人形 <small>白甲与夜刀神</small></button><button data-view="dragon" aria-pressed="false">白龙 <small>四足与水息</small></button><button data-view="fx" aria-pressed="false">特效 <small>独立逐帧</small></button></div><span id="study-badge" class="study-badge">全动作审片</span></div>
+      <div class="clip-toolbar"><label for="clip-select">选择动作</label><select id="clip-select" aria-label="选择动作"></select><span id="clip-detail">读取动作目录</span><button id="refresh-assets" title="重新读取美术登记">刷新资源 ↻</button></div>
+      <div class="stage-wrap"><canvas id="stage" aria-label="女神威人形、白龙、变形与特效逐帧预览">浏览器需支持 Canvas 才能显示动作。</canvas><div class="stage-topline"><span id="view-caption">同地面 · 双形态</span><span id="scale-label">审片尺寸</span></div><div id="asset-status" role="status">正在读取动作目录</div><div class="stage-bottomline"><span id="phase-label">加载中</span><span id="frame-label">—</span></div></div>
+      <div class="transport"><button id="play-toggle" class="play" aria-label="暂停播放" disabled>Ⅱ</button><button id="step-back" aria-label="上一帧" disabled>‹</button><button id="step-forward" aria-label="下一帧" disabled>›</button><label class="scrubber"><span class="sr-only">动画进度</span><input id="timeline" type="range" min="0" max="1000" value="0" step="1" disabled /><span id="time-label">0.00s</span></label><label><span class="sr-only">播放速度</span><select id="speed"><option value="1">正常 1×</option><option value="0.5">慢放 0.5×</option><option value="0.25">细看 0.25×</option></select></label></div>
+      <div class="view-options"><label>朝向<select id="facing"><option value="1">向右</option><option value="-1">向左</option></select></label><label>显示尺寸<select id="size"><option value="review">审片大图</option><option value="game">游戏实际尺寸</option></select></label><label><input id="compare" type="checkbox" checked disabled /> 母版对照 <small>单形态可用</small></label><label>对照方式<select id="comparison"><option value="side">同尺度并排</option><option value="overlay">半透明叠合</option></select></label><label><input id="effects" type="checkbox" checked /> 技能特效</label><label><input id="loop" type="checkbox" checked /> 循环审片</label><label><input id="guides" type="checkbox" /> 骨骼／剑刃与轨迹</label><button id="freeze-frame">冻结当前帧作对照</button><button id="restart" disabled>从第一帧播放 ↻</button></div>
+      <p id="motion-note" class="motion-note">原画逐帧播放，以每张图表的固定身体标尺绘制。仅加载当前动作，选择其他动作时再读取其素材。</p>
+    </section>
+    <section class="notes"><article><p class="eyebrow">01 / HUMAN</p><h2>剑术与局部龙化</h2><p>J 分别审看斜斩、反手斩与短突刺；K 双手蓄力下劈，I 收剑并伸出龙化前臂。每招独立呈现准备、释放、收势。</p><a href="./assets/human-master.png" target="_blank" rel="noopener">查看人形母版 ↗</a></article><article><p class="eyebrow">02 / WHITE DRAGON</p><h2>四足承力，三种水息</h2><p>J 低头发射水弹，K 稳住四足后喷出水平水柱，I 抬颈抛出水团并落地绽开。嘴部发射点随动作登记。</p><a href="./assets/dragon-master.png" target="_blank" rel="noopener">查看白龙母版 ↗</a></article><article><p class="eyebrow">03 / REVIEW</p><h2>双向变形与逐帧审看</h2><p>L 地面、空中双向变形均为独立原画。空格播放／暂停，左右方向键逐帧；特效可关掉单看人物。循环审片不会代表自动攻击。</p><a href="./README.md">资源与预览说明 ↗</a></article></section>
+    <footer><span>跨界角色美术研究 · 女神威</span><span>全动作美术预览 · 尚未加入可玩角色</span></footer>
+  </main>
+  <script type="module" src="./preview.js"></script>
+</body>
+</html>

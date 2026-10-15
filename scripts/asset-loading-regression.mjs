@@ -219,6 +219,21 @@ test('stalled requests report a retryable timeout while completed artwork never 
   await assert.rejects(missing.ready, /404/); missing.release(); assert.equal(broken.leases.length, 0);
 });
 
+test('Corrin follows the eight existing fighters and prepares both forms before battle', async () => {
+  const ids = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina', 'tharja', 'corrin'];
+  const chars = Object.fromEntries(ids.map(id => [id, id === 'corrin' ? ['human.webp', 'dragon.webp', 'transform.webp', 'water.webp'] : [`${id}.webp`]]));
+  const h = harness(catalog(['home.webp', 'portrait-corrin.webp'], chars, []));
+  const leave = h.loader.enterLobby(); await h.finishAll();
+  assert.deepEqual(h.requests, ['/assets/home.webp', '/assets/portrait-corrin.webp', ...ids.slice(0, -1).map(id => `/assets/${id}.webp`), '/assets/human.webp', '/assets/dragon.webp', '/assets/transform.webp', '/assets/water.webp']);
+  assert.deepEqual(h.decodes, ['/assets/home.webp', '/assets/portrait-corrin.webp']);
+  assert.equal(h.leases.length, 0, 'lobby prefetch does not decode character atlases');
+  assert.equal(h.loader.getSnapshot().characters.corrin.status, 'ready');
+  const prep = h.loader.prepareBattle(['corrin']); await prep.ready;
+  assert.equal(h.leases.length, 1); assert.deepEqual(h.leases[0].ids, ['corrin']);
+  assert.equal(h.requests.length, 14, 'battle uses the completed transfers for both forms');
+  prep.release(); leave();
+});
+
 let failures = 0;
 for (const { name, run } of cases) {
   try { await run(); console.log(`PASS ${name}`); }

@@ -7,7 +7,7 @@ export interface PlungeAnimation {
   /** The two existing modes have different landing recovery lengths. */
   recoveryDuration?: number;
 }
-export type AttackTimeline = { def: Pick<MoveDef, 'kind' | 'startup' | 'active' | 'endlag'>; t: number; plunge?: PlungeAnimation; visualVariant?: AttackVisualVariant };
+export type AttackTimeline = { def: Pick<MoveDef, 'kind' | 'startup' | 'active' | 'endlag'>; t: number; plunge?: PlungeAnimation; visualVariant?: AttackVisualVariant; corrinForm?: 'human' | 'dragon'; corrinCombo?: 0 | 1 | 2 };
 export type AttackPhase = 'windup' | 'contact' | 'followthrough' | 'recover';
 export interface FighterAnimation {
   state: 'free' | 'attack' | 'hitstun';
@@ -24,6 +24,13 @@ export interface FighterAnimation {
   time: number;
   /** Simulation-owned locomotion for the character animation packs. */
   motion?: MotionState;
+  /** One character identity; simulation freezes the source form and combo at input. */
+  corrin?: {
+    form: 'human' | 'dragon'; combo?: 0 | 1 | 2;
+    transform?: { from: 'human' | 'dragon'; to: 'human' | 'dragon'; airborne: boolean; elapsed: number; duration: number; commit?: number };
+  };
+  defeated?: boolean;
+  defeatAge?: number;
 }
 export interface ActionFrame {
   row: number;

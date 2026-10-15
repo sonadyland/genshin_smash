@@ -19,6 +19,8 @@ function load(relative) {
 const { EULA_CLIPS, EULA_ATTACKS, VARIANT_ATTACKS, validClipManifest, validVariantClips, newMotionState, advanceMotion, selectClipFrame, selectedClip } = load('src/game/clip-animation.ts');
 const { CHARACTERS } = load('src/game/data.ts');
 const { attackPhase } = load('src/game/animation.ts');
+const { validCorrinManifest, selectCorrinFrame } = load('src/game/corrin-art.ts');
+const { CORRIN_MOVES } = load('src/game/corrin.ts');
 const { createPreviewClock, advancePreviewClock, previewFrame } = load('src/game/animation-preview-state.ts');
 const eula = CHARACTERS.find(character => character.id === 'eula');
 const phases = ['windup', 'contact', 'followthrough', 'recover'];
@@ -265,8 +267,9 @@ test('both 15-tick and 16-tick dodges show the first and final pose without exte
   }
 });
 
-test('every character maps attacks to live timings while L/I remain fixed even with a forced alternate flag', () => {
+test('conventional character packs map attacks to live timings while L/I ignore alternate flags', () => {
   for (const character of CHARACTERS) {
+    if (character.id === 'corrin') continue; // Form changes use the separate registered 228-frame schema below.
     const pack = clone(extended); pack.character = character.id;
     if (character.id === 'xiao') pack.clips.special.frames.forEach(frame => { frame.name = ['windup', 'dive', 'impact', 'recover'][phases.indexOf(frame.phase)]; });
     assert.equal(validClipManifest(pack), true, character.id);
@@ -327,6 +330,20 @@ test('all shipped character clips reach every combat drawing at current PVP and 
   const missing = [];
   for (const character of CHARACTERS) {
     const pack = JSON.parse(fs.readFileSync(path.join(root, `public/assets/animations/${activePacks[character.id]}/manifest.json`), 'utf8'));
+    if (character.id === 'corrin') {
+      assert.equal(validCorrinManifest(pack), true);
+      for (const form of ['human', 'dragon']) for (const kind of ['jab', 'smash', 'secondary']) for (const combo of form === 'human' && kind === 'jab' ? [0, 1, 2] : [0]) for (const level of [-1, 0, 1, 2, 3]) {
+        const original = CORRIN_MOVES[form][kind], speed = 1 + Math.max(0, level) * .035;
+        const def = { ...original, startup: level < 0 ? original.startup : Math.max(3, Math.round(original.startup / speed)), endlag: level < 0 ? original.endlag : Math.round(original.endlag * .7 / speed) };
+        const visited = new Set(), key = `${form}:${form === 'human' && kind === 'jab' ? `jab${combo + 1}` : kind}`;
+        for (let t = 1; t < def.startup + def.active + def.endlag; t++) {
+          const sample = selectCorrinFrame(pack, { ...base(), corrin: { form }, attack: { def, t, corrinForm: form, corrinCombo: combo } });
+          assert.equal(sample.key, key); assert.equal(sample.phase, attackPhase({ def, t }).phase); visited.add(sample.frame);
+        }
+        if (visited.size !== pack.clips[key].frames.length) missing.push(`corrin/${key}/speed${level}: ${visited.size} frames`);
+      }
+      continue;
+    }
     assert.equal(validClipManifest(pack), true, character.id);
     if (pack.variants) assert.equal(validVariantClips(pack), true, character.id);
     for (const kind of EULA_ATTACKS) for (const visualVariant of ['base', 'alternate']) for (const level of [-1, 0, 1, 2, 3]) {

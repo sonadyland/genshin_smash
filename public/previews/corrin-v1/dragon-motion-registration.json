@@ -1,0 +1,1874 @@
+{
+  "version": 1,
+  "status": "15 sheets / 60 frames complete; independent browser preview checked",
+  "baseline": "Approved dragon-idle-a: approximately400px head-horns-to-ground per627cell. Each sheet.bodyHeight is a fixed anatomical scale, not pose bounding height; sprite must retain crouch/jump deformation.",
+  "clips": [
+    {
+      "id": "run",
+      "title": "四足奔跑",
+      "loop": true,
+      "sheets": [
+        {
+          "src": "assets/dragon-run-a.png",
+          "width": 1551,
+          "height": 1014,
+          "bodyHeight": 340,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-4a06b9f1-12a5-4b45-9909-3312b132cb4c.png",
+          "measurement": {
+            "size": [
+              1551,
+              1014
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                145,
+                95,
+                621,
+                441
+              ],
+              [
+                149,
+                97,
+                618,
+                425
+              ],
+              [
+                145,
+                83,
+                600,
+                427
+              ],
+              [
+                146,
+                83,
+                624,
+                426
+              ]
+            ],
+            "transparentPixels": 1227788,
+            "bytes": 1039508,
+            "sha256": "c73a60d238d479c0d49720f7a7515f8a2939859b594a0da0c1b1a880e32c2ace",
+            "sourceIdentical": true
+          }
+        },
+        {
+          "src": "assets/dragon-run-b.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 270,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-3212cb91-ee68-4a6f-aa89-5607a283d1a4.png",
+          "measurement": {
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                189,
+                155,
+                591,
+                425
+              ],
+              [
+                189,
+                155,
+                584,
+                415
+              ],
+              [
+                190,
+                122,
+                571,
+                386
+              ],
+              [
+                189,
+                122,
+                579,
+                384
+              ]
+            ],
+            "transparentPixels": 1329237,
+            "bytes": 1577229,
+            "sha256": "4ef710eadde4c4fe7287e0ed02ad325be3b42d09b2555eacebe13461fd503209",
+            "sourceIdentical": true
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            775,
+            507
+          ],
+          "pivot": [
+            400,
+            441
+          ],
+          "duration": 85,
+          "phase": "near contact"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            775,
+            0,
+            776,
+            507
+          ],
+          "pivot": [
+            400,
+            441
+          ],
+          "duration": 85,
+          "phase": "near load"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            507,
+            775,
+            507
+          ],
+          "pivot": [
+            400,
+            427
+          ],
+          "duration": 85,
+          "phase": "near passing"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            775,
+            507,
+            776,
+            507
+          ],
+          "pivot": [
+            400,
+            427
+          ],
+          "duration": 85,
+          "phase": "near lift"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            390,
+            425
+          ],
+          "duration": 85,
+          "phase": "far contact"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            390,
+            425
+          ],
+          "duration": 85,
+          "phase": "far load"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            390,
+            386
+          ],
+          "duration": 85,
+          "phase": "far passing"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            390,
+            386
+          ],
+          "duration": 85,
+          "phase": "far lift"
+        }
+      ]
+    },
+    {
+      "id": "jump",
+      "title": "四足起跳与落地",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/dragon-jump-a.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-9c61a619-662c-431f-afe1-1c04655cded7.png",
+          "measurement": {
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                136,
+                167,
+                644,
+                463
+              ],
+              [
+                107,
+                100,
+                638,
+                472
+              ],
+              [
+                157,
+                85,
+                646,
+                404
+              ],
+              [
+                188,
+                77,
+                595,
+                338
+              ]
+            ],
+            "transparentPixels": 1254740,
+            "bytes": 1743020,
+            "sha256": "25cf227d368133c5b7aa4ada85814ec4bfbdd1ef597400c088fbea9408fa7fdf",
+            "sourceIdentical": true
+          }
+        },
+        {
+          "src": "assets/dragon-jump-b.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-b6793699-3f15-4198-85cb-b0ae4ee66136.png",
+          "measurement": {
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                150,
+                107,
+                650,
+                478
+              ],
+              [
+                125,
+                148,
+                637,
+                492
+              ],
+              [
+                135,
+                130,
+                685,
+                420
+              ],
+              [
+                117,
+                99,
+                639,
+                435
+              ]
+            ],
+            "transparentPixels": 1174673,
+            "bytes": 1928839,
+            "sha256": "e1fcd17a08f686f7456cc4bf5532f40cb508809730a2a3f4dd078afabb598fac",
+            "sourceIdentical": true
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            463
+          ],
+          "duration": 110,
+          "phase": "crouch"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            488
+          ],
+          "duration": 70,
+          "phase": "launch"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            490
+          ],
+          "duration": 140,
+          "phase": "rise"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            490
+          ],
+          "duration": 180,
+          "phase": "apex"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            495
+          ],
+          "duration": 140,
+          "phase": "descend"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            490
+          ],
+          "duration": 65,
+          "phase": "fore contact"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            424
+          ],
+          "duration": 100,
+          "phase": "compression"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            435
+          ],
+          "duration": 130,
+          "phase": "recover"
+        }
+      ]
+    },
+    {
+      "id": "dodge",
+      "title": "低身闪避",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/dragon-dodge-a.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-8b0fb5a1-d562-4cec-b932-42e2c83769dc.png",
+          "measurement": {
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                143,
+                186,
+                641,
+                439
+              ],
+              [
+                62,
+                191,
+                688,
+                431
+              ],
+              [
+                152,
+                150,
+                717,
+                395
+              ],
+              [
+                112,
+                117,
+                648,
+                403
+              ]
+            ],
+            "transparentPixels": 1231271,
+            "bytes": 1776289,
+            "sha256": "3137d2be48bb0573b12e5355934775e0e90a7a8a4c9923cfd68448290db9e2a8",
+            "sourceIdentical": true
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            440
+          ],
+          "duration": 70,
+          "phase": "compress"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            440
+          ],
+          "duration": 90,
+          "phase": "lunge"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            400
+          ],
+          "duration": 80,
+          "phase": "catch"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            400
+          ],
+          "duration": 100,
+          "phase": "recover"
+        }
+      ]
+    },
+    {
+      "id": "hurt",
+      "title": "轻微受击",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/dragon-hurt-a.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 330,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-0cde24a0-2dd8-48d6-9763-a59e8fbbf893.png",
+          "measurement": {
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                173,
+                100,
+                619,
+                441
+              ],
+              [
+                153,
+                139,
+                612,
+                440
+              ],
+              [
+                159,
+                88,
+                619,
+                434
+              ],
+              [
+                176,
+                85,
+                631,
+                434
+              ]
+            ],
+            "transparentPixels": 1225096,
+            "bytes": 1836074,
+            "sha256": "2139b0027ac8a7e65c584e30ad2a272f7c6c637c130715a71b7e8a41980f6341",
+            "sourceIdentical": true
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            439
+          ],
+          "duration": 45,
+          "phase": "flinch"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            439
+          ],
+          "duration": 55,
+          "phase": "peak"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            431
+          ],
+          "duration": 70,
+          "phase": "release"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            431
+          ],
+          "duration": 90,
+          "phase": "recover"
+        }
+      ]
+    },
+    {
+      "id": "defeat",
+      "title": "失力伏地",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/dragon-defeat-a.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-41a77bc4-ca57-4e91-b686-1653cb2744a4.png",
+          "measurement": {
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                147,
+                135,
+                654,
+                492
+              ],
+              [
+                111,
+                228,
+                634,
+                489
+              ],
+              [
+                143,
+                204,
+                668,
+                431
+              ],
+              [
+                134,
+                277,
+                651,
+                435
+              ]
+            ],
+            "transparentPixels": 1222423,
+            "bytes": 1792812,
+            "sha256": "bc3a486513146ac0126cc842c35485f4ec0e244fb418eec318048f5df95699b9",
+            "sourceIdentical": true
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            486
+          ],
+          "duration": 130,
+          "phase": "weaken"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            486
+          ],
+          "duration": 160,
+          "phase": "fore collapse"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            431
+          ],
+          "duration": 220,
+          "phase": "fold"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            431
+          ],
+          "duration": 900,
+          "phase": "rest"
+        }
+      ]
+    },
+    {
+      "id": "jab",
+      "title": "J 低首水息弹",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/dragon-jab-a.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-b4430990-01d8-44a4-8085-5f0f24f41484.png",
+          "measurement": {
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                117,
+                114,
+                628,
+                469
+              ],
+              [
+                86,
+                207,
+                654,
+                469
+              ],
+              [
+                108,
+                170,
+                684,
+                436
+              ],
+              [
+                86,
+                177,
+                717,
+                438
+              ]
+            ],
+            "transparentPixels": 1170423,
+            "bytes": 1877506,
+            "sha256": "db4c6cb95cce8243c51b8000da92c76b85793e5aa175b633db212fd610d844ce",
+            "sourceIdentical": true
+          }
+        },
+        {
+          "src": "assets/dragon-jab-b.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-773d239b-2517-462d-9983-45524b6c4520.png",
+          "measurement": {
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                139,
+                172,
+                688,
+                436
+              ],
+              [
+                130,
+                134,
+                660,
+                436
+              ],
+              [
+                136,
+                77,
+                662,
+                423
+              ],
+              [
+                127,
+                66,
+                649,
+                422
+              ]
+            ],
+            "transparentPixels": 1173421,
+            "bytes": 1887261,
+            "sha256": "d002265d3ccf63de282315bf13bca502802d1757ea58614095b6423855f4032c",
+            "sourceIdentical": true
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            466
+          ],
+          "duration": 90,
+          "phase": "lower",
+          "anchors": {
+            "mouth": [
+              620,
+              278
+            ]
+          },
+          "anchorNote": "mouth manually estimated from full-resolution sprite; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            466
+          ],
+          "duration": 90,
+          "phase": "aim",
+          "anchors": {
+            "mouth": [
+              648,
+              339
+            ]
+          },
+          "anchorNote": "mouth manually estimated from full-resolution sprite; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            437
+          ],
+          "duration": 120,
+          "phase": "charge",
+          "anchors": {
+            "mouth": [
+              666,
+              305
+            ]
+          },
+          "anchorNote": "mouth manually estimated from full-resolution sprite; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            437
+          ],
+          "duration": 60,
+          "phase": "release",
+          "anchors": {
+            "mouth": [
+              650,
+              286
+            ]
+          },
+          "anchorNote": "mouth manually estimated from full-resolution sprite; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            435
+          ],
+          "duration": 70,
+          "phase": "recoil",
+          "anchors": {
+            "mouth": [
+              673,
+              273
+            ]
+          },
+          "anchorNote": "mouth manually estimated from full-resolution sprite; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            435
+          ],
+          "duration": 85,
+          "phase": "close",
+          "anchors": {
+            "mouth": [
+              655,
+              240
+            ]
+          },
+          "anchorNote": "mouth manually estimated from full-resolution sprite; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            423
+          ],
+          "duration": 90,
+          "phase": "rise",
+          "anchors": {
+            "mouth": [
+              652,
+              191
+            ]
+          },
+          "anchorNote": "mouth manually estimated from full-resolution sprite; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            423
+          ],
+          "duration": 120,
+          "phase": "recover",
+          "anchors": {
+            "mouth": [
+              644,
+              186
+            ]
+          },
+          "anchorNote": "mouth manually estimated from full-resolution sprite; overlay checked in independent browser preview"
+        }
+      ]
+    },
+    {
+      "id": "smash",
+      "title": "K 贯流水炮",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/dragon-smash-a.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-142a29f2-54ac-4cfc-a583-fa5cd19772af.png",
+          "measurement": {
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                118,
+                117,
+                653,
+                483
+              ],
+              [
+                92,
+                206,
+                660,
+                487
+              ],
+              [
+                110,
+                137,
+                670,
+                438
+              ],
+              [
+                99,
+                168,
+                667,
+                446
+              ]
+            ],
+            "transparentPixels": 1175532,
+            "bytes": 1901636,
+            "sha256": "9cf35dc1548356cfaa1a09fefa61934f7a095ecd123014669986a15a4ec086f1",
+            "sourceIdentical": true
+          }
+        },
+        {
+          "src": "assets/dragon-smash-b.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-073eea46-cbd4-4763-9ef8-23ca8eb639fd.png",
+          "measurement": {
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                121,
+                184,
+                659,
+                469
+              ],
+              [
+                77,
+                194,
+                735,
+                466
+              ],
+              [
+                105,
+                157,
+                709,
+                435
+              ],
+              [
+                117,
+                168,
+                661,
+                440
+              ]
+            ],
+            "transparentPixels": 1157164,
+            "bytes": 1834134,
+            "sha256": "6a1569560f16f61abcc3e3ceaeb4d4286d2ae03460e0ab016d0396c5b3c22b03",
+            "sourceIdentical": true
+          }
+        },
+        {
+          "src": "assets/dragon-smash-c.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-da3005d0-9227-4180-9082-b2b247edff1d.png",
+          "measurement": {
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                138,
+                179,
+                691,
+                458
+              ],
+              [
+                128,
+                114,
+                640,
+                463
+              ],
+              [
+                150,
+                51,
+                661,
+                432
+              ],
+              [
+                150,
+                57,
+                634,
+                435
+              ]
+            ],
+            "transparentPixels": 1154573,
+            "bytes": 1946686,
+            "sha256": "d60232238d84041080c3ac9cede94302c14c4913ca7d5e23dc9c2060a0bd10a0",
+            "sourceIdentical": true
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            486
+          ],
+          "duration": 90,
+          "phase": "brace",
+          "anchors": {
+            "mouth": [
+              618,
+              261
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            486
+          ],
+          "duration": 90,
+          "phase": "lower",
+          "anchors": {
+            "mouth": [
+              650,
+              374
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            444
+          ],
+          "duration": 110,
+          "phase": "compress",
+          "anchors": {
+            "mouth": [
+              634,
+              234
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            444
+          ],
+          "duration": 130,
+          "phase": "charge",
+          "anchors": {
+            "mouth": [
+              646,
+              291
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            466
+          ],
+          "duration": 140,
+          "phase": "crest",
+          "anchors": {
+            "mouth": [
+              634,
+              324
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            466
+          ],
+          "duration": 55,
+          "phase": "release",
+          "anchors": {
+            "mouth": [
+              645,
+              311
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            437
+          ],
+          "duration": 90,
+          "phase": "follow",
+          "anchors": {
+            "mouth": [
+              660,
+              270
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            437
+          ],
+          "duration": 80,
+          "phase": "recoil",
+          "anchors": {
+            "mouth": [
+              640,
+              280
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            458
+          ],
+          "duration": 85,
+          "phase": "close",
+          "anchors": {
+            "mouth": [
+              685,
+              274
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            458
+          ],
+          "duration": 90,
+          "phase": "rise",
+          "anchors": {
+            "mouth": [
+              607,
+              231
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            437
+          ],
+          "duration": 100,
+          "phase": "settle",
+          "anchors": {
+            "mouth": [
+              650,
+              178
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            437
+          ],
+          "duration": 130,
+          "phase": "recover",
+          "anchors": {
+            "mouth": [
+              615,
+              177
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        }
+      ]
+    },
+    {
+      "id": "secondary",
+      "title": "I 仰首潮涌爆裂",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/dragon-secondary-a.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-590f6e15-3cf2-4810-938c-55d3ca7b4394.png",
+          "measurement": {
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                154,
+                99,
+                623,
+                452
+              ],
+              [
+                127,
+                91,
+                617,
+                452
+              ],
+              [
+                147,
+                76,
+                652,
+                451
+              ],
+              [
+                137,
+                58,
+                649,
+                451
+              ]
+            ],
+            "transparentPixels": 1176340,
+            "bytes": 1918622,
+            "sha256": "d57671b6bb6a166e34392d64fc3a29549f0c459998557869fb82ae7a93489f70",
+            "sourceIdentical": true
+          }
+        },
+        {
+          "src": "assets/dragon-secondary-b.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-5943ec18-b86d-4c97-98e1-ce58910ef82a.png",
+          "measurement": {
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                128,
+                57,
+                663,
+                476
+              ],
+              [
+                114,
+                93,
+                639,
+                471
+              ],
+              [
+                106,
+                56,
+                662,
+                461
+              ],
+              [
+                109,
+                81,
+                665,
+                460
+              ]
+            ],
+            "transparentPixels": 1115709,
+            "bytes": 2028903,
+            "sha256": "fbe1022c945616882137afd84e8d5130c1403d033bc65517693a486018f444a5",
+            "sourceIdentical": true
+          }
+        },
+        {
+          "src": "assets/dragon-secondary-c.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-29befb54-09f8-4b46-9490-15910af7d372.png",
+          "measurement": {
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                130,
+                86,
+                642,
+                454
+              ],
+              [
+                112,
+                121,
+                646,
+                454
+              ],
+              [
+                135,
+                88,
+                647,
+                445
+              ],
+              [
+                135,
+                88,
+                649,
+                445
+              ]
+            ],
+            "transparentPixels": 1148922,
+            "bytes": 1952436,
+            "sha256": "10cdc6d21b7cfd6efbcaebf7ae9c3d99730909420dc1255bdebb8dbb5aac3e8e",
+            "sourceIdentical": true
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            452
+          ],
+          "duration": 85,
+          "phase": "lift",
+          "anchors": {
+            "mouth": [
+              605,
+              199
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            452
+          ],
+          "duration": 95,
+          "phase": "raise",
+          "anchors": {
+            "mouth": [
+              569,
+              137
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            451
+          ],
+          "duration": 110,
+          "phase": "coil",
+          "anchors": {
+            "mouth": [
+              585,
+              105
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            451
+          ],
+          "duration": 120,
+          "phase": "charge",
+          "anchors": {
+            "mouth": [
+              548,
+              96
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            476
+          ],
+          "duration": 140,
+          "phase": "crest",
+          "anchors": {
+            "mouth": [
+              557,
+              105
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            471
+          ],
+          "duration": 60,
+          "phase": "release",
+          "anchors": {
+            "mouth": [
+              578,
+              131
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            461
+          ],
+          "duration": 85,
+          "phase": "follow",
+          "anchors": {
+            "mouth": [
+              612,
+              87
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            460
+          ],
+          "duration": 85,
+          "phase": "recoil",
+          "anchors": {
+            "mouth": [
+              607,
+              126
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            454
+          ],
+          "duration": 90,
+          "phase": "close",
+          "anchors": {
+            "mouth": [
+              610,
+              139
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            454
+          ],
+          "duration": 90,
+          "phase": "lower",
+          "anchors": {
+            "mouth": [
+              640,
+              233
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            445
+          ],
+          "duration": 110,
+          "phase": "settle",
+          "anchors": {
+            "mouth": [
+              627,
+              201
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            445
+          ],
+          "duration": 140,
+          "phase": "recover",
+          "anchors": {
+            "mouth": [
+              633,
+              201
+            ]
+          },
+          "anchorNote": "mouth manually estimated in cell pixels; overlay checked in independent browser preview"
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "generation": "built-in image_gen__imagegen only",
+    "pngCopiesIdentical": true,
+    "alpha": "all RGBA, >1.1 million transparent pixels each; alpha>32 silhouettes do not cross quadrants",
+    "registration": "Sheet dimensions and alpha bounds measured with Pillow read-only; bodyHeight anatomical-size estimates and mouth anchors remain manual visual measurements. Emission overlays were checked in the independent browser preview; grounded attack support-claw corrections are in preview-registration-overrides.json. Not a game-runtime validation."
+  },
+  "previewVerification": {
+    "date": "2026-10-14",
+    "scope": "Independent Canvas preview only; complete catalogue 29 clips / 216 frames checked in Chrome. No game integration validation.",
+    "pngModified": false
+  }
+}

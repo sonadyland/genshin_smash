@@ -43,10 +43,13 @@ const context = vm.createContext({
 });
 const modules = new Map();
 const artLeases = [];
+const corrinArtPack = { manifest: JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations/corrin-v1/manifest.json'), 'utf8')), sheets: new Map() };
 let swordTipFixture = false;
 function loadModule(file) {
   if (file.endsWith('/survival-render.ts')) return { renderSurvival: noop };
   if (file.endsWith('/art.ts')) return {
+    getCorrinCastOrigin: (...args) => loadModule(path.join(root, 'src/game/corrin-art.ts').replaceAll('\\', '/')).corrinCastOrigin(corrinArtPack, ...args),
+    getCorrinFangSegment: (...args) => loadModule(path.join(root, 'src/game/corrin-art.ts').replaceAll('\\', '/')).corrinFangSegment(corrinArtPack, ...args),
     getSwordCastTip: (id, x, feetY, _height, _animation, facing) => swordTipFixture && ['eula', 'diluc'].includes(id) ? { x: x + facing * 97, y: feetY - 120 } : undefined,
     getTharjaCastOrigin: (x, feetY, _height, _kind, facing) => ({ x: x + facing * 32, y: feetY - 52 }),
     getCharacterCastOrigin: (_id, x, feetY, _height, _animation, facing) => ({ x: x + facing * 17, y: feetY - 75 }),
@@ -76,8 +79,8 @@ const cases = [];
 function test(name, run) { cases.push({ name, run }); }
 function plain(value) { return JSON.parse(JSON.stringify(value)); }
 
-test('all eight characters have distinct, valid evolution pairs and reproducible starting progress', () => {
-  assert.equal(CHARACTERS.length, 8);
+test('all nine characters have distinct, valid evolution pairs and reproducible starting progress', () => {
+  assert.equal(CHARACTERS.length, 9);
   const ids = new Set();
   for (const character of CHARACTERS) {
     const progress = makeInitialProgress(character.id);
@@ -248,6 +251,9 @@ test('J, K and L are separate manual attacks that damage enemies for every chara
       if (CHARACTERS[i].id === 'xiao' && code === 'KeyL') airborne(game);
       enemy(game, 65, { y: CHARACTERS[i].id === 'xiao' && code === 'KeyL' ? firstPlatformY : game.player.y });
       tap(game, code); step(game, 100);
+      if (game.char.id === 'corrin' && code === 'KeyL') {
+        assert.equal(game.player.corrin.form, 'dragon'); assert.equal(game.player.corrin.transform, undefined); assert.equal(game.damageDealt, 0); continue;
+      }
       assert.ok(game.damageDealt > 0, `${CHARACTERS[i].id} ${code}`);
       assert.equal(game.player.attack, null);
     }
@@ -380,6 +386,10 @@ test('nonfatal damage preserves every manual attack and Xiao windup, dive and la
       assert.deepEqual(actionState(game.player), before);
       step(game);
       assert.equal(game.player.attack, attack);
+      if (game.char.id === 'corrin' && code === 'KeyL') {
+        assert.equal(game.player.corrin.transform.elapsed, before.corrin.transform.elapsed + 1);
+        step(game, 100); assert.equal(game.player.corrin.form, 'dragon'); assert.equal(game.damageDealt, 0); continue;
+      }
       assert.equal(attack.t, before.attack.t + 1);
       step(game, 100); assert.ok(game.damageDealt > 0, `${CHARACTERS[player].id} ${code} still connects`);
     }
@@ -678,7 +688,7 @@ test('both skill cards are guaranteed, secondary levels transact independently a
 
 test('manual I hits enemies for all five characters without primary cooldown or automatic repeats', () => {
   for (let index = 0; index < CHARACTERS.length; index++) {
-    const game = makeGame(index); enemy(game, 80);
+    const game = makeGame(index); enemy(game, 80, game.char.id === 'corrin' ? { radius: 48 } : {});
     key(game, 'KeyI', true); step(game); assert.equal(game.player.attack, null);
     key(game, 'KeyI'); step(game, 110);
     assert.ok(game.damageDealt > 0, game.char.id);
@@ -717,6 +727,9 @@ test('secondary levels three and five produce their advertised distinct numbers 
         const domains = game.tharja.effects.filter(effect => effect.kind === 'mire');
         assert.equal(domains.length, 1);
         assert.equal(domains[0].radius, data.getTharjaSurvivalProfile(game.progress).fieldRadius);
+      } else if (game.char.id === 'corrin') {
+        assert.equal(game.shots.length, 0); assert.equal(game.corrinWater.effects.length, 0);
+        assert.equal(game.player.attack.def.effect, 'dragon-fang');
       } else {
         assert.equal(game.shots.length, 0, 'summoner casts must never fall into Xiao wind blades');
         assert.ok(game.summons.effects.some(effect => effect.kind === (game.char.id === 'zhongli' ? 'geo-meteor' : 'hydro-wave')));
@@ -734,7 +747,7 @@ test('secondary upgrade scaling increases actual damage for every fighter', () =
   for (let index = 0; index < CHARACTERS.length; index++) {
     const amounts = [];
     for (const level of [1, 5]) {
-      const game = makeGame(index); game.progress.secondaryLevel = level; enemy(game, 80);
+      const game = makeGame(index); game.progress.secondaryLevel = level; enemy(game, 80, game.char.id === 'corrin' ? { radius: 48 } : {});
       tap(game, 'KeyI'); step(game, 100); amounts.push(game.damageDealt);
     }
     assert.ok(amounts[1] > amounts[0], `${CHARACTERS[index].id}: ${amounts}`);
@@ -983,8 +996,18 @@ test('every survivor alternates J/K while fixed skill poses survive speed upgrad
         p.attack = null; p.skillCooldown = 0; p.secondaryCooldown = 0;
         if (game.char.id === 'xiao' && kind === 'special') airborne(game, p.x, p.y - 120);
         game.beginAttack(kind);
+        if (game.char.id === 'corrin' && kind === 'special') {
+          const target = repeat % 2 === 0 ? 'dragon' : 'human', before = plain(p.corrin);
+          assert.equal(p.attack, null); assert.equal(p.corrin.transform.to, target);
+          p.invuln = 0; game.hurtPlayer(5); step(game, 4);
+          assert.deepEqual(plain(p.corrin), before, 'noninterrupting hitstop preserves transform');
+          game.pause(); step(game, 8); assert.deepEqual(plain(p.corrin), before, 'pause preserves transform'); game.resume();
+          step(game, before.transform.duration); assert.equal(p.corrin.form, target); assert.equal(p.corrin.transform, undefined);
+          assert.equal(game.damageDealt, 0, 'L remains a manual form change without hidden damage'); continue;
+        }
         const expected = ['jab', 'smash'].includes(kind) && repeat % 2 === 0 ? 'alternate' : 'base';
         assert.equal(p.attack.visualVariant, expected, `${game.char.id}/${kind}/${repeat}`);
+        if (game.char.id === 'corrin' && kind === 'jab') assert.equal(p.attack.corrinCombo, repeat);
       }
     }
   }
@@ -1000,6 +1023,14 @@ test('ordinary slash visuals retain their successful attack form while skill and
       if (game.char.id === 'tharja') {
         assert.equal(slash, undefined, 'ranged spells must never create a melee slash');
         assert.ok(game.tharja.effects.some(effect => effect.kind === (kind === 'jab' ? 'flux' : 'ruin')));
+      } else if (game.char.id === 'corrin') {
+        assert.equal(slash, undefined, 'registered Corrin blade FX must not receive a second generic slash');
+        assert.equal(game.player.attack, attack); assert.equal(attack.corrinForm, 'human');
+        if (kind === 'jab') assert.equal(attack.corrinCombo, variant === 'alternate' ? 0 : 1);
+        const frame = loadModule(path.join(root, 'src/game/corrin-art.ts').replaceAll('\\', '/')).selectCorrinFrame(corrinArtPack.manifest, game.playerAnimation());
+        assert.equal(frame.key, kind === 'jab' ? `human:jab${attack.corrinCombo + 1}` : 'human:smash');
+        assert.equal(frame.phase, 'contact');
+        assert.ok(corrinArtPack.manifest.clips[frame.key].weaponEffect.active.some(slot => slot.frame === frame.frame));
       } else assert.deepEqual(plain(slash.melee), { kind, variant });
     }
   }
@@ -1426,13 +1457,24 @@ test('tactical manual damage interrupts sniper warning and cancels its pending s
   assert.equal(target.y, 500); assert.equal(target.x, target.homeX);
 });
 
-test('tactical all seven characters retain manual J K L I attacks against enemies on the new upper platform', () => {
+test('tactical all characters retain manual attacks and Corrin form changes on the upper platform', () => {
   for (let index = 0; index < CHARACTERS.length; index++) for (const code of ['KeyJ', 'KeyK', 'KeyL', 'KeyI']) {
     const game = tacticalGame(index, true);
     Object.assign(game.player, { x: 610, y: 500, onGround: true });
     if (game.char.id === 'xiao' && code === 'KeyL') airborne(game, 610, 410);
-    enemy(game, 65, { y: 500 });
+    enemy(game, 65, { y: 500, ...(game.char.id === 'corrin' && code === 'KeyI' ? { radius: 48 } : {}) });
     tap(game, code); step(game, 160);
+    if (game.char.id === 'corrin' && code === 'KeyL') {
+      assert.equal(game.player.corrin.form, 'dragon'); assert.equal(game.player.corrin.transform, undefined); assert.equal(game.damageDealt, 0);
+      assert.equal(game.player.y, 500); assert.equal(game.player.onGround, true);
+      for (const dragonCode of ['KeyJ', 'KeyK', 'KeyI']) {
+        game.enemies = []; enemy(game, dragonCode === 'KeyI' ? 330 : 180, { y: 500 });
+        const before = game.damageDealt; tap(game, dragonCode); step(game, 160);
+        assert.ok(game.damageDealt > before, `white dragon ${dragonCode} damages a real upper-platform enemy`);
+        assert.equal(game.player.corrin.form, 'dragon'); assert.equal(game.player.attack, null);
+      }
+      assert.equal(game.phase, 'playing'); continue;
+    }
     assert.ok(game.damageDealt > 0, `${game.char.id} ${code}`);
     assert.equal(game.phase, 'playing'); assert.equal(game.player.attack, null);
   }

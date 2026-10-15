@@ -1,0 +1,2116 @@
+{
+  "version": 2,
+  "revision": "human-proportion-v2-transform",
+  "status": "22 human-end frames registered; ground/air interfaces, master-scale human endpoints and the additional air F3/F4 passed browser and independent visual review",
+  "identityReference": "assets/human-master.png",
+  "anatomyReference": "assets/human-v2-idle.png",
+  "pixelEditing": false,
+  "newFrames": 22,
+  "retainedFrames": 18,
+  "notes": [
+    "Source PNGs are unchanged copies of built-in image generation. No pixel editing.",
+    "Fixed anatomy ruler per source/form, never pose bbox scaling. Air root is virtual and can extend beyond the crop.",
+    "The air-to-dragon source separates HUMAN and completed DRAGON into two fixed form rulers on the same PNG. Renderer caches the source once.",
+    "Manual landmarks have 6-10px visual uncertainty; head measurements are review estimates, not precision anatomy proof.",
+    "The two legacy human-air early frames have also been replaced; unchanged white/dragon sources total18frames."
+  ],
+  "clips": [
+    {
+      "id": "transform-to-dragon-ground",
+      "title": "地面 · 人形 → 白龙",
+      "loop": false,
+      "worldHeight": 112,
+      "sheets": [
+        {
+          "src": "assets/transform-human-v2-to-dragon-ground-a-refined.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 510,
+          "bodyHeightMethod": "fixed standing anatomical ruler, from crown/chin/hip/long bone comparison to approved master; no pose bbox scaling",
+          "bodyHeightUncertaintyPixels": 12,
+          "sha256": "4744a43d2340e2541bd15204b05945a7bb5673c5365f9de144b1980db8ccad95",
+          "alphaRange": [
+            0,
+            255
+          ]
+        },
+        {
+          "src": "assets/transform-to-dragon-ground-b-v2.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 398
+        },
+        {
+          "src": "assets/transform-to-dragon-ground-c.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 367
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            610
+          ],
+          "duration": 70,
+          "phase": "待机",
+          "anchors": {
+            "headTop": [
+              350,
+              101
+            ],
+            "chin": [
+              365,
+              175
+            ],
+            "hip": [
+              350,
+              335
+            ],
+            "hand": [
+              297,
+              360
+            ],
+            "weaponBase": [
+              329,
+              390
+            ],
+            "swordTip": [
+              565,
+              577
+            ],
+            "kneeNear": [
+              297,
+              459
+            ],
+            "ankleNear": [
+              275,
+              571
+            ],
+            "origin": [
+              350,
+              610
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            99,
+            100,
+            569,
+            613
+          ],
+          "bounds": [
+            99,
+            100,
+            470,
+            513
+          ],
+          "bladeLengthPixels": 301.1
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            330,
+            610
+          ],
+          "duration": 85,
+          "phase": "龙石抬至胸前",
+          "anchors": {
+            "headTop": [
+              320,
+              110
+            ],
+            "chin": [
+              337,
+              182
+            ],
+            "hip": [
+              330,
+              337
+            ],
+            "hand": [
+              273,
+              367
+            ],
+            "weaponBase": [
+              304,
+              396
+            ],
+            "swordTip": [
+              536,
+              579
+            ],
+            "stone": [
+              353,
+              222
+            ],
+            "kneeNear": [
+              275,
+              459
+            ],
+            "ankleNear": [
+              257,
+              571
+            ],
+            "origin": [
+              330,
+              610
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            81,
+            110,
+            537,
+            613
+          ],
+          "bounds": [
+            81,
+            110,
+            456,
+            503
+          ],
+          "bladeLengthPixels": 295.5
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            360,
+            555
+          ],
+          "duration": 85,
+          "phase": "收剑屈膝",
+          "anchors": {
+            "headTop": [
+              382,
+              103
+            ],
+            "chin": [
+              397,
+              171
+            ],
+            "hip": [
+              385,
+              328
+            ],
+            "hand": [
+              318,
+              344
+            ],
+            "weaponBase": [
+              347,
+              363
+            ],
+            "swordTip": [
+              510,
+              470
+            ],
+            "stone": [
+              399,
+              219
+            ],
+            "kneeNear": [
+              339,
+              416
+            ],
+            "ankleNear": [
+              284,
+              505
+            ],
+            "origin": [
+              360,
+              555
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            87,
+            102,
+            514,
+            554
+          ],
+          "bounds": [
+            87,
+            102,
+            427,
+            452
+          ],
+          "bladeLengthPixels": 195.0
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            365,
+            555
+          ],
+          "duration": 65,
+          "phase": "前臂龙化",
+          "anchors": {
+            "headTop": [
+              429,
+              169
+            ],
+            "chin": [
+              443,
+              242
+            ],
+            "hip": [
+              384,
+              360
+            ],
+            "hand": [
+              358,
+              433
+            ],
+            "stone": [
+              404,
+              287
+            ],
+            "kneeNear": [
+              414,
+              412
+            ],
+            "ankleNear": [
+              316,
+              507
+            ],
+            "origin": [
+              365,
+              555
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            91,
+            154,
+            489,
+            556
+          ],
+          "bounds": [
+            91,
+            154,
+            398,
+            402
+          ]
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            640,
+            670
+          ],
+          "pivot": [
+            332,
+            623
+          ],
+          "duration": 45,
+          "phase": "前爪形成",
+          "anchors": {
+            "origin": [
+              332,
+              623
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            640,
+            0,
+            614,
+            670
+          ],
+          "pivot": [
+            328,
+            625
+          ],
+          "duration": 45,
+          "phase": "躯干与四肢展开",
+          "anchors": {
+            "origin": [
+              328,
+              625
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            670,
+            640,
+            584
+          ],
+          "pivot": [
+            335,
+            515
+          ],
+          "duration": 45,
+          "phase": "四足落地",
+          "anchors": {
+            "origin": [
+              335,
+              515
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            640,
+            670,
+            614,
+            584
+          ],
+          "pivot": [
+            330,
+            510
+          ],
+          "duration": 50,
+          "phase": "前肢压低",
+          "anchors": {
+            "origin": [
+              330,
+              510
+            ]
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            0,
+            640,
+            627
+          ],
+          "pivot": [
+            350,
+            584
+          ],
+          "duration": 55,
+          "phase": "重心缓冲",
+          "anchors": {
+            "origin": [
+              350,
+              584
+            ]
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            640,
+            0,
+            614,
+            627
+          ],
+          "pivot": [
+            338,
+            586
+          ],
+          "duration": 65,
+          "phase": "胸部抬升",
+          "anchors": {
+            "origin": [
+              338,
+              586
+            ]
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            627,
+            640,
+            627
+          ],
+          "pivot": [
+            345,
+            558
+          ],
+          "duration": 65,
+          "phase": "四足稳定",
+          "anchors": {
+            "origin": [
+              345,
+              558
+            ]
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            640,
+            627,
+            614,
+            627
+          ],
+          "pivot": [
+            343,
+            567
+          ],
+          "duration": 90,
+          "phase": "白龙待机",
+          "anchors": {
+            "origin": [
+              343,
+              567
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "transform-to-human-ground",
+      "title": "地面 · 白龙 → 人形",
+      "loop": false,
+      "worldHeight": 112,
+      "sheets": [
+        {
+          "src": "assets/transform-to-human-ground-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 410
+        },
+        {
+          "src": "assets/transform-human-v2-to-human-ground-b.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 510,
+          "bodyHeightMethod": "fixed standing anatomical ruler, from crown/chin/hip/long bone comparison to approved master; no pose bbox scaling",
+          "bodyHeightUncertaintyPixels": 12,
+          "sha256": "0b8d527cba21119f86b402174f0db02986c0b70365b5fb0b15eb16ba69dba594",
+          "alphaRange": [
+            0,
+            255
+          ]
+        },
+        {
+          "src": "assets/transform-human-v2-to-human-ground-c.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 526,
+          "bodyHeightMethod": "fixed standing anatomical ruler, from crown/chin/hip/long bone comparison to approved master; no pose bbox scaling",
+          "bodyHeightUncertaintyPixels": 12,
+          "sha256": "d698c164c3f2093d044e0d5b5bc3db61798483fe235828b106cdc1462335b9bd",
+          "alphaRange": [
+            0,
+            255
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            640
+          ],
+          "pivot": [
+            335,
+            609
+          ],
+          "duration": 65,
+          "phase": "白龙蓄势",
+          "anchors": {
+            "origin": [
+              335,
+              609
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            640
+          ],
+          "pivot": [
+            332,
+            609
+          ],
+          "duration": 60,
+          "phase": "收颈",
+          "anchors": {
+            "origin": [
+              332,
+              609
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            640,
+            627,
+            614
+          ],
+          "pivot": [
+            342,
+            545
+          ],
+          "duration": 60,
+          "phase": "收拢四肢",
+          "anchors": {
+            "origin": [
+              342,
+              545
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            640,
+            627,
+            614
+          ],
+          "pivot": [
+            340,
+            544
+          ],
+          "duration": 55,
+          "phase": "前肢缩回",
+          "anchors": {
+            "origin": [
+              340,
+              544
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            390,
+            563
+          ],
+          "duration": 50,
+          "phase": "人形躯干恢复",
+          "anchors": {
+            "headTop": [
+              412,
+              132
+            ],
+            "chin": [
+              434,
+              205
+            ],
+            "hip": [
+              380,
+              338
+            ],
+            "hand": [
+              418,
+              287
+            ],
+            "kneeNear": [
+              409,
+              418
+            ],
+            "ankleNear": [
+              340,
+              520
+            ],
+            "origin": [
+              390,
+              563
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            179,
+            100,
+            498,
+            565
+          ],
+          "bounds": [
+            179,
+            100,
+            319,
+            465
+          ]
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            563
+          ],
+          "duration": 55,
+          "phase": "鳞甲恢复银甲",
+          "anchors": {
+            "headTop": [
+              356,
+              149
+            ],
+            "chin": [
+              375,
+              221
+            ],
+            "hip": [
+              352,
+              340
+            ],
+            "hand": [
+              276,
+              377
+            ],
+            "stone": [
+              371,
+              265
+            ],
+            "kneeNear": [
+              378,
+              422
+            ],
+            "ankleNear": [
+              291,
+              521
+            ],
+            "origin": [
+              350,
+              563
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            120,
+            146,
+            448,
+            564
+          ],
+          "bounds": [
+            120,
+            146,
+            328,
+            418
+          ]
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            404,
+            527
+          ],
+          "duration": 65,
+          "phase": "夜刀重现",
+          "anchors": {
+            "headTop": [
+              426,
+              123
+            ],
+            "chin": [
+              444,
+              195
+            ],
+            "hip": [
+              424,
+              335
+            ],
+            "hand": [
+              358,
+              352
+            ],
+            "weaponBase": [
+              392,
+              381
+            ],
+            "swordTip": [
+              571,
+              526
+            ],
+            "stone": [
+              444,
+              235
+            ],
+            "kneeNear": [
+              428,
+              420
+            ],
+            "ankleNear": [
+              346,
+              486
+            ],
+            "origin": [
+              404,
+              527
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            174,
+            121,
+            573,
+            535
+          ],
+          "bounds": [
+            174,
+            121,
+            399,
+            414
+          ],
+          "bladeLengthPixels": 230.4
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            338,
+            557
+          ],
+          "duration": 65,
+          "phase": "收拢龙石",
+          "anchors": {
+            "headTop": [
+              329,
+              51
+            ],
+            "chin": [
+              345,
+              125
+            ],
+            "hip": [
+              330,
+              285
+            ],
+            "hand": [
+              274,
+              307
+            ],
+            "weaponBase": [
+              307,
+              337
+            ],
+            "swordTip": [
+              537,
+              520
+            ],
+            "kneeNear": [
+              274,
+              412
+            ],
+            "ankleNear": [
+              257,
+              509
+            ],
+            "origin": [
+              338,
+              557
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            98,
+            48,
+            535,
+            558
+          ],
+          "bounds": [
+            98,
+            48,
+            437,
+            510
+          ],
+          "bladeLengthPixels": 293.9
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            365,
+            615
+          ],
+          "duration": 65,
+          "phase": "人形缓冲",
+          "anchors": {
+            "headTop": [
+              364,
+              88
+            ],
+            "chin": [
+              381,
+              169
+            ],
+            "hip": [
+              365,
+              330
+            ],
+            "hand": [
+              315,
+              356
+            ],
+            "weaponBase": [
+              347,
+              386
+            ],
+            "swordTip": [
+              604,
+              590
+            ],
+            "stone": [
+              439,
+              299
+            ],
+            "kneeNear": [
+              323,
+              463
+            ],
+            "ankleNear": [
+              296,
+              568
+            ],
+            "origin": [
+              365,
+              615
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            109,
+            86,
+            605,
+            615
+          ],
+          "bounds": [
+            109,
+            86,
+            496,
+            529
+          ],
+          "bladeLengthPixels": 328.1
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            307,
+            615
+          ],
+          "duration": 65,
+          "phase": "收起龙石",
+          "anchors": {
+            "headTop": [
+              303,
+              92
+            ],
+            "chin": [
+              319,
+              171
+            ],
+            "hip": [
+              305,
+              332
+            ],
+            "hand": [
+              247,
+              356
+            ],
+            "weaponBase": [
+              277,
+              384
+            ],
+            "swordTip": [
+              543,
+              593
+            ],
+            "stone": [
+              390,
+              306
+            ],
+            "kneeNear": [
+              265,
+              464
+            ],
+            "ankleNear": [
+              232,
+              570
+            ],
+            "origin": [
+              307,
+              615
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            60,
+            88,
+            544,
+            615
+          ],
+          "bounds": [
+            60,
+            88,
+            484,
+            527
+          ],
+          "bladeLengthPixels": 338.3
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            376,
+            561
+          ],
+          "duration": 70,
+          "phase": "呼吸恢复",
+          "anchors": {
+            "headTop": [
+              362,
+              43
+            ],
+            "chin": [
+              378,
+              122
+            ],
+            "hip": [
+              365,
+              285
+            ],
+            "hand": [
+              319,
+              305
+            ],
+            "weaponBase": [
+              347,
+              335
+            ],
+            "swordTip": [
+              611,
+              537
+            ],
+            "kneeNear": [
+              323,
+              414
+            ],
+            "ankleNear": [
+              300,
+              517
+            ],
+            "origin": [
+              376,
+              561
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            121,
+            40,
+            611,
+            561
+          ],
+          "bounds": [
+            121,
+            40,
+            490,
+            521
+          ],
+          "bladeLengthPixels": 332.4
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            561
+          ],
+          "duration": 90,
+          "phase": "人形待机",
+          "anchors": {
+            "headTop": [
+              298,
+              47
+            ],
+            "chin": [
+              314,
+              125
+            ],
+            "hip": [
+              304,
+              287
+            ],
+            "hand": [
+              247,
+              306
+            ],
+            "weaponBase": [
+              280,
+              336
+            ],
+            "swordTip": [
+              550,
+              540
+            ],
+            "kneeNear": [
+              268,
+              414
+            ],
+            "ankleNear": [
+              240,
+              518
+            ],
+            "origin": [
+              320,
+              561
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            64,
+            42,
+            551,
+            562
+          ],
+          "bounds": [
+            64,
+            42,
+            487,
+            520
+          ],
+          "bladeLengthPixels": 338.4
+        }
+      ]
+    },
+    {
+      "id": "transform-to-dragon-air",
+      "title": "空中 · 人形 → 白龙",
+      "loop": false,
+      "worldHeight": 112,
+      "rootMode": "air-virtual-root",
+      "sheets": [
+        {
+          "src": "assets/transform-human-v2-to-dragon-air-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 540,
+          "bodyHeightMethod": "fixed standing anatomical ruler, from crown/chin/hip/long bone comparison to approved master; no pose bbox scaling",
+          "bodyHeightUncertaintyPixels": 12,
+          "sha256": "0dd55e79bb407c90acc9e09ceca31f1392663cf93efaefb18ad7155ffbc2fe54",
+          "alphaRange": [
+            0,
+            255
+          ]
+        },
+        {
+          "src": "assets/transform-to-dragon-air-b.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 395
+        },
+        {
+          "src": "assets/transform-human-v2-to-dragon-air-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 315,
+          "bodyHeightMethod": "fixed completed-white-dragon anatomical ruler, matched to existing dragon source structural proportions; same PNG, independent from human skeleton scale",
+          "bodyHeightUncertaintyPixels": 12,
+          "sha256": "0dd55e79bb407c90acc9e09ceca31f1392663cf93efaefb18ad7155ffbc2fe54",
+          "alphaRange": [
+            0,
+            255
+          ],
+          "form": "dragon"
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            420,
+            665
+          ],
+          "duration": 85,
+          "phase": "空中收身",
+          "anchors": {
+            "center": [
+              420,
+              340
+            ],
+            "headTop": [
+              471,
+              172
+            ],
+            "chin": [
+              486,
+              248
+            ],
+            "hip": [
+              425,
+              400
+            ],
+            "hand": [
+              290,
+              394
+            ],
+            "weaponBase": [
+              266,
+              438
+            ],
+            "swordTip": [
+              136,
+              616
+            ],
+            "stone": [
+              486,
+              289
+            ],
+            "kneeNear": [
+              455,
+              481
+            ],
+            "ankleNear": [
+              292,
+              487
+            ],
+            "origin": [
+              420,
+              665
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            120,
+            168,
+            537,
+            618
+          ],
+          "bounds": [
+            120,
+            168,
+            417,
+            450
+          ],
+          "bladeLengthPixels": 220.4
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            374,
+            680
+          ],
+          "duration": 75,
+          "phase": "龙石共鸣",
+          "anchors": {
+            "center": [
+              374,
+              355
+            ],
+            "headTop": [
+              422,
+              233
+            ],
+            "chin": [
+              441,
+              303
+            ],
+            "hip": [
+              346,
+              420
+            ],
+            "hand": [
+              413,
+              423
+            ],
+            "weaponBase": [
+              432,
+              448
+            ],
+            "swordTip": [
+              524,
+              564
+            ],
+            "stone": [
+              409,
+              334
+            ],
+            "kneeNear": [
+              394,
+              511
+            ],
+            "ankleNear": [
+              293,
+              549
+            ],
+            "origin": [
+              374,
+              680
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            126,
+            175,
+            522,
+            608
+          ],
+          "bounds": [
+            126,
+            175,
+            396,
+            433
+          ],
+          "bladeLengthPixels": 148.1
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            368,
+            573
+          ],
+          "duration": 60,
+          "phase": "前肢龙化",
+          "anchors": {
+            "center": [
+              368,
+              363
+            ],
+            "headTop": [
+              439,
+              137
+            ],
+            "chin": [
+              553,
+              263
+            ],
+            "hip": [
+              330,
+              329
+            ],
+            "hand": [
+              502,
+              427
+            ],
+            "origin": [
+              368,
+              573
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            107,
+            130,
+            568,
+            507
+          ],
+          "bounds": [
+            107,
+            130,
+            461,
+            377
+          ]
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            359,
+            572
+          ],
+          "duration": 60,
+          "phase": "四足展开",
+          "anchors": {
+            "center": [
+              359,
+              362
+            ],
+            "headTop": [
+              409,
+              142
+            ],
+            "chin": [
+              513,
+              271
+            ],
+            "hip": [
+              316,
+              334
+            ],
+            "hand": [
+              489,
+              433
+            ],
+            "origin": [
+              359,
+              572
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            98,
+            130,
+            536,
+            505
+          ],
+          "bounds": [
+            98,
+            130,
+            438,
+            375
+          ]
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            600
+          ],
+          "duration": 65,
+          "phase": "白龙腾空",
+          "anchors": {
+            "origin": [
+              320,
+              600
+            ],
+            "center": [
+              320,
+              340
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            340,
+            610
+          ],
+          "duration": 65,
+          "phase": "收拢前肢",
+          "anchors": {
+            "origin": [
+              340,
+              610
+            ],
+            "center": [
+              340,
+              350
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            335,
+            610
+          ],
+          "duration": 65,
+          "phase": "准备下落",
+          "anchors": {
+            "origin": [
+              335,
+              610
+            ],
+            "center": [
+              335,
+              350
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            345,
+            610
+          ],
+          "duration": 85,
+          "phase": "白龙下落姿态",
+          "anchors": {
+            "origin": [
+              345,
+              610
+            ],
+            "center": [
+              345,
+              350
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "transform-to-human-air",
+      "title": "空中 · 白龙 → 人形",
+      "loop": false,
+      "worldHeight": 112,
+      "rootMode": "air-virtual-root",
+      "sheets": [
+        {
+          "src": "assets/transform-to-human-air-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 460
+        },
+        {
+          "src": "assets/transform-human-v2-to-human-air-b.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 515,
+          "bodyHeightMethod": "fixed standing anatomical ruler, from crown/chin/hip/long bone comparison to approved master; no pose bbox scaling",
+          "bodyHeightUncertaintyPixels": 12,
+          "sha256": "ab5abd960aa297fe7a33df12916a3d6cd8c04edd124b7403c3646e575e542b3b",
+          "alphaRange": [
+            0,
+            255
+          ]
+        },
+        {
+          "src": "assets/transform-human-v2-to-human-air-early.png",
+          "width": 1774,
+          "height": 887,
+          "bodyHeight": 920,
+          "bodyHeightMethod": "fixed implied standing skeleton ruler from unchanged torso and long bones against new air-b; tucked visible height is not used",
+          "bodyHeightUncertaintyPixels": 25,
+          "sha256": "517620d2a627a0c06655e856f2c6a4f5464c7b1b6b6865b2bcbb468f9d634856",
+          "alphaRange": [
+            0,
+            255
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            650,
+            627
+          ],
+          "pivot": [
+            340,
+            630
+          ],
+          "duration": 70,
+          "phase": "白龙在空",
+          "anchors": {
+            "origin": [
+              340,
+              630
+            ],
+            "center": [
+              340,
+              350
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            650,
+            0,
+            604,
+            627
+          ],
+          "pivot": [
+            340,
+            630
+          ],
+          "duration": 65,
+          "phase": "收颈收四肢",
+          "anchors": {
+            "origin": [
+              340,
+              630
+            ],
+            "center": [
+              340,
+              350
+            ]
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            0,
+            887,
+            887
+          ],
+          "pivot": [
+            590,
+            985
+          ],
+          "duration": 55,
+          "phase": "恢复躯干",
+          "anchors": {
+            "origin": [
+              590,
+              985
+            ],
+            "center": [
+              590,
+              430
+            ],
+            "headTop": [
+              632,
+              186
+            ],
+            "chin": [
+              650,
+              303
+            ],
+            "hip": [
+              590,
+              556
+            ],
+            "hand": [
+              568,
+              485
+            ],
+            "stone": [
+              639,
+              386
+            ],
+            "kneeNear": [
+              741,
+              560
+            ],
+            "ankleNear": [
+              568,
+              752
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks with virtual air origin outside cell; fixed skeleton ruler",
+          "anchorUncertaintyPixels": 10,
+          "opaqueBoundsMeasured": [
+            48,
+            25,
+            829,
+            838
+          ],
+          "bounds": [
+            48,
+            25,
+            781,
+            813
+          ]
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            887,
+            0,
+            887,
+            887
+          ],
+          "pivot": [
+            550,
+            970
+          ],
+          "duration": 60,
+          "phase": "收拢龙石",
+          "anchors": {
+            "origin": [
+              550,
+              970
+            ],
+            "center": [
+              550,
+              415
+            ],
+            "headTop": [
+              603,
+              170
+            ],
+            "chin": [
+              626,
+              307
+            ],
+            "hip": [
+              558,
+              570
+            ],
+            "hand": [
+              466,
+              580
+            ],
+            "stone": [
+              613,
+              390
+            ],
+            "kneeNear": [
+              717,
+              610
+            ],
+            "ankleNear": [
+              545,
+              800
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks with virtual air origin outside cell; fixed skeleton ruler",
+          "anchorUncertaintyPixels": 10,
+          "opaqueBoundsMeasured": [
+            69,
+            55,
+            808,
+            871
+          ],
+          "bounds": [
+            69,
+            55,
+            739,
+            816
+          ]
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            385,
+            620
+          ],
+          "duration": 65,
+          "phase": "人形收身",
+          "anchors": {
+            "center": [
+              385,
+              310
+            ],
+            "headTop": [
+              393,
+              163
+            ],
+            "chin": [
+              407,
+              237
+            ],
+            "hip": [
+              375,
+              362
+            ],
+            "hand": [
+              330,
+              373
+            ],
+            "weaponBase": [
+              363,
+              400
+            ],
+            "swordTip": [
+              554,
+              530
+            ],
+            "stone": [
+              408,
+              272
+            ],
+            "kneeNear": [
+              445,
+              380
+            ],
+            "ankleNear": [
+              340,
+              465
+            ],
+            "origin": [
+              385,
+              620
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            133,
+            91,
+            552,
+            529
+          ],
+          "bounds": [
+            133,
+            91,
+            419,
+            438
+          ],
+          "bladeLengthPixels": 231.0
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            325,
+            640
+          ],
+          "duration": 65,
+          "phase": "右手恢复夜刀",
+          "anchors": {
+            "center": [
+              325,
+              330
+            ],
+            "headTop": [
+              339,
+              134
+            ],
+            "chin": [
+              350,
+              211
+            ],
+            "hip": [
+              333,
+              360
+            ],
+            "hand": [
+              227,
+              382
+            ],
+            "weaponBase": [
+              259,
+              411
+            ],
+            "swordTip": [
+              497,
+              590
+            ],
+            "stone": [
+              363,
+              264
+            ],
+            "kneeNear": [
+              357,
+              432
+            ],
+            "ankleNear": [
+              297,
+              549
+            ],
+            "origin": [
+              325,
+              640
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            59,
+            86,
+            498,
+            613
+          ],
+          "bounds": [
+            59,
+            86,
+            439,
+            527
+          ],
+          "bladeLengthPixels": 297.8
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            393,
+            580
+          ],
+          "duration": 65,
+          "phase": "展开双腿",
+          "anchors": {
+            "center": [
+              393,
+              270
+            ],
+            "headTop": [
+              414,
+              52
+            ],
+            "chin": [
+              429,
+              125
+            ],
+            "hip": [
+              395,
+              275
+            ],
+            "hand": [
+              352,
+              283
+            ],
+            "weaponBase": [
+              386,
+              313
+            ],
+            "swordTip": [
+              585,
+              465
+            ],
+            "kneeNear": [
+              390,
+              379
+            ],
+            "ankleNear": [
+              372,
+              502
+            ],
+            "origin": [
+              393,
+              580
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            131,
+            25,
+            584,
+            540
+          ],
+          "bounds": [
+            131,
+            25,
+            453,
+            515
+          ],
+          "bladeLengthPixels": 250.4
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            337,
+            580
+          ],
+          "duration": 85,
+          "phase": "人形下落姿态",
+          "anchors": {
+            "center": [
+              337,
+              270
+            ],
+            "headTop": [
+              322,
+              56
+            ],
+            "chin": [
+              337,
+              130
+            ],
+            "hip": [
+              329,
+              284
+            ],
+            "hand": [
+              270,
+              301
+            ],
+            "weaponBase": [
+              302,
+              333
+            ],
+            "swordTip": [
+              516,
+              502
+            ],
+            "kneeNear": [
+              296,
+              403
+            ],
+            "ankleNear": [
+              284,
+              501
+            ],
+            "origin": [
+              337,
+              580
+            ]
+          },
+          "newHumanV2": true,
+          "registrationMethod": "manual physical landmarks; alpha bounds measured independently; virtual root retained for air",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            59,
+            37,
+            515,
+            567
+          ],
+          "bounds": [
+            59,
+            37,
+            456,
+            530
+          ],
+          "bladeLengthPixels": 272.7
+        }
+      ]
+    }
+  ]
+}

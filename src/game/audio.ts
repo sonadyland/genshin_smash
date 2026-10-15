@@ -336,6 +336,12 @@ export class BattleAudio {
       else if (options.charId === 'xiao') { noise(secondary ? 0.2 : 0.36, 3000, 0.16); tone(secondary ? 740 : 500, 0.22, 'sine', 0.07, secondary ? 220 : 130); tone(150, 0.18, 'triangle', 0.065, 65); }
       else if (options.charId === 'zhongli') { tone(secondary ? 68 : 100, secondary ? .65 : .42, 'triangle', .17, 32); noise(secondary ? .5 : .27, 520, .18, 'lowpass'); [392, 588].forEach((f, i) => tone(f, .38, 'sine', .035, f * .96, i * .04)); }
       else if (options.charId === 'furina') { noise(.26, 2600, .1, 'bandpass'); [587, 740, 880, 1175].forEach((f, i) => tone(f, secondary ? .42 : .24, 'sine', .045, f * 1.005, i * .035)); tone(220, .22, 'triangle', .06, 110); }
+      else if (options.charId === 'corrin') {
+        const morph = options.kind === 'special', beam = options.kind === 'smash';
+        noise(morph ? .52 : beam ? .42 : .24, morph ? 900 : 2400, .11, 'bandpass');
+        tone(morph ? 146 : 440, morph ? .5 : .22, 'triangle', .065, morph ? 293 : 220);
+        tone(880, .27, 'sine', .035, 587, .06);
+      }
       else if (options.charId === 'tharja') {
         const drain = options.kind === 'special', heavy = options.kind === 'smash';
         noise(secondary ? .55 : drain ? .42 : .23, secondary ? 680 : 1200, .09, 'bandpass');

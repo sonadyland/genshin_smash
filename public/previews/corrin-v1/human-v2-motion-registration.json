@@ -1,0 +1,2085 @@
+{
+  "version": 2,
+  "form": "human",
+  "status": "6 clips /36 frames registered; revised run passing phases, cape continuity, master-scale anatomy and dodge head correction passed browser playback and independent visual review",
+  "reference": "assets/human-master.png",
+  "calibration": "assets/human-v2-calibration-refined.png",
+  "masterMeasurements": {
+    "standingHeight": 1131,
+    "headHeight": 164,
+    "shoulderWidth": 210,
+    "waistWidth": [
+      115,
+      125
+    ],
+    "pelvisWidth": [
+      185,
+      205
+    ],
+    "hipToGround": 614,
+    "swordBladeLength": 605
+  },
+  "clips": [
+    {
+      "id": "idle",
+      "title": "人形 · 同比例持剑静候",
+      "loop": true,
+      "sheets": [
+        {
+          "src": "assets/human-v2-idle.png",
+          "bodyHeight": 430,
+          "bodyHeightMethod": "fixed standing-equivalent anatomical ruler for the whole source sheet; no per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 10,
+          "width": 1774,
+          "height": 887,
+          "sha256": "9beb49899fec0f9683800e36b1ead74fbbddeaffbabeecbff820dbe400d4a1bc",
+          "alphaRange": [
+            0,
+            255
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            444,
+            449
+          ],
+          "pivot": [
+            229,
+            443
+          ],
+          "duration": 470,
+          "phase": "静候",
+          "anchors": {
+            "hand": [
+              188,
+              235
+            ],
+            "swordTip": [
+              415,
+              416
+            ],
+            "headTop": [
+              222,
+              14
+            ],
+            "chin": [
+              239,
+              77
+            ],
+            "hip": [
+              224,
+              231
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            31,
+            13,
+            417,
+            445
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            444,
+            0,
+            443,
+            449
+          ],
+          "pivot": [
+            229,
+            443
+          ],
+          "duration": 360,
+          "phase": "吸气初升",
+          "anchors": {
+            "hand": [
+              188,
+              235
+            ],
+            "swordTip": [
+              415,
+              416
+            ],
+            "headTop": [
+              222,
+              14
+            ],
+            "chin": [
+              239,
+              77
+            ],
+            "hip": [
+              224,
+              231
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            18,
+            12,
+            415,
+            445
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            887,
+            0,
+            444,
+            449
+          ],
+          "pivot": [
+            229,
+            443
+          ],
+          "duration": 300,
+          "phase": "呼吸顶点",
+          "anchors": {
+            "hand": [
+              188,
+              235
+            ],
+            "swordTip": [
+              415,
+              416
+            ],
+            "headTop": [
+              222,
+              14
+            ],
+            "chin": [
+              239,
+              77
+            ],
+            "hip": [
+              224,
+              231
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            13,
+            13,
+            415,
+            445
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            1331,
+            0,
+            443,
+            449
+          ],
+          "pivot": [
+            229,
+            443
+          ],
+          "duration": 65,
+          "phase": "眼睑低垂",
+          "anchors": {
+            "hand": [
+              188,
+              235
+            ],
+            "swordTip": [
+              415,
+              416
+            ],
+            "headTop": [
+              222,
+              14
+            ],
+            "chin": [
+              239,
+              77
+            ],
+            "hip": [
+              224,
+              231
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            22,
+            16,
+            415,
+            445
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            449,
+            444,
+            438
+          ],
+          "pivot": [
+            229,
+            434
+          ],
+          "duration": 65,
+          "phase": "眨眼闭合",
+          "anchors": {
+            "hand": [
+              188,
+              226
+            ],
+            "swordTip": [
+              415,
+              407
+            ],
+            "headTop": [
+              222,
+              5
+            ],
+            "chin": [
+              239,
+              68
+            ],
+            "hip": [
+              224,
+              222
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            24,
+            8,
+            417,
+            434
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            444,
+            449,
+            443,
+            438
+          ],
+          "pivot": [
+            229,
+            434
+          ],
+          "duration": 85,
+          "phase": "睁眼恢复",
+          "anchors": {
+            "hand": [
+              188,
+              226
+            ],
+            "swordTip": [
+              415,
+              407
+            ],
+            "headTop": [
+              222,
+              5
+            ],
+            "chin": [
+              239,
+              68
+            ],
+            "hip": [
+              224,
+              222
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            19,
+            9,
+            414,
+            434
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            887,
+            449,
+            444,
+            438
+          ],
+          "pivot": [
+            229,
+            434
+          ],
+          "duration": 380,
+          "phase": "呼气",
+          "anchors": {
+            "hand": [
+              188,
+              226
+            ],
+            "swordTip": [
+              415,
+              407
+            ],
+            "headTop": [
+              222,
+              5
+            ],
+            "chin": [
+              239,
+              68
+            ],
+            "hip": [
+              224,
+              222
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            21,
+            9,
+            416,
+            434
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            1331,
+            449,
+            443,
+            438
+          ],
+          "pivot": [
+            229,
+            434
+          ],
+          "duration": 340,
+          "phase": "衣摆归稳",
+          "anchors": {
+            "hand": [
+              188,
+              226
+            ],
+            "swordTip": [
+              415,
+              407
+            ],
+            "headTop": [
+              222,
+              5
+            ],
+            "chin": [
+              239,
+              68
+            ],
+            "hip": [
+              224,
+              222
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            26,
+            9,
+            415,
+            434
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "jump",
+      "title": "人形 · 起跳与落地缓冲",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/human-v2-jump.png",
+          "bodyHeight": 467,
+          "bodyHeightMethod": "fixed standing-equivalent anatomical ruler for the whole source sheet; no per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 10,
+          "width": 1536,
+          "height": 1024,
+          "sha256": "922de2ac3468fd5e5c844bde218a1468cffec1fc8ce1633f679c60c336d33893",
+          "alphaRange": [
+            0,
+            254
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            373,
+            521
+          ],
+          "pivot": [
+            210,
+            511
+          ],
+          "duration": 90,
+          "phase": "屈膝蓄力",
+          "anchors": {
+            "hand": [
+              139,
+              336
+            ],
+            "swordTip": [
+              343,
+              503
+            ],
+            "headTop": [
+              271,
+              130
+            ],
+            "chin": [
+              286,
+              198
+            ],
+            "hip": [
+              207,
+              324
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false,
+          "opaqueBoundsMeasured": [
+            13,
+            130,
+            345,
+            511
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            373,
+            0,
+            413,
+            521
+          ],
+          "pivot": [
+            242,
+            511
+          ],
+          "duration": 65,
+          "phase": "伸腿离地",
+          "anchors": {
+            "hand": [
+              184,
+              282
+            ],
+            "swordTip": [
+              412,
+              477
+            ],
+            "headTop": [
+              298,
+              70
+            ],
+            "chin": [
+              311,
+              135
+            ],
+            "hip": [
+              242,
+              278
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": true,
+          "opaqueBoundsMeasured": [
+            31,
+            69,
+            413,
+            510
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 3,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            786,
+            0,
+            353,
+            521
+          ],
+          "pivot": [
+            176,
+            511
+          ],
+          "duration": 90,
+          "phase": "腾起收腿",
+          "anchors": {
+            "hand": [
+              130,
+              244
+            ],
+            "swordTip": [
+              341,
+              448
+            ],
+            "headTop": [
+              212,
+              38
+            ],
+            "chin": [
+              223,
+              99
+            ],
+            "hip": [
+              175,
+              239
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": true,
+          "opaqueBoundsMeasured": [
+            0,
+            37,
+            344,
+            479
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 20,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            1139,
+            0,
+            397,
+            521
+          ],
+          "pivot": [
+            246,
+            511
+          ],
+          "duration": 140,
+          "phase": "顶点悬停",
+          "anchors": {
+            "hand": [
+              157,
+              230
+            ],
+            "swordTip": [
+              376,
+              406
+            ],
+            "headTop": [
+              257,
+              25
+            ],
+            "chin": [
+              273,
+              85
+            ],
+            "hip": [
+              246,
+              198
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": true,
+          "opaqueBoundsMeasured": [
+            10,
+            23,
+            378,
+            408
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            521,
+            365,
+            503
+          ],
+          "pivot": [
+            222,
+            479
+          ],
+          "duration": 105,
+          "phase": "伸腿下落",
+          "anchors": {
+            "hand": [
+              145,
+              210
+            ],
+            "swordTip": [
+              342,
+              446
+            ],
+            "headTop": [
+              261,
+              12
+            ],
+            "chin": [
+              275,
+              70
+            ],
+            "hip": [
+              221,
+              203
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": true,
+          "opaqueBoundsMeasured": [
+            8,
+            9,
+            342,
+            471
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            365,
+            521,
+            389,
+            503
+          ],
+          "pivot": [
+            259,
+            472
+          ],
+          "duration": 70,
+          "phase": "前脚接地",
+          "anchors": {
+            "hand": [
+              184,
+              285
+            ],
+            "swordTip": [
+              377,
+              460
+            ],
+            "headTop": [
+              300,
+              87
+            ],
+            "chin": [
+              315,
+              151
+            ],
+            "hip": [
+              259,
+              291
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false,
+          "opaqueBoundsMeasured": [
+            23,
+            82,
+            377,
+            470
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            754,
+            521,
+            371,
+            503
+          ],
+          "pivot": [
+            218,
+            475
+          ],
+          "duration": 100,
+          "phase": "双膝缓冲",
+          "anchors": {
+            "hand": [
+              151,
+              345
+            ],
+            "swordTip": [
+              363,
+              476
+            ],
+            "headTop": [
+              275,
+              147
+            ],
+            "chin": [
+              290,
+              208
+            ],
+            "hip": [
+              217,
+              341
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false,
+          "opaqueBoundsMeasured": [
+            21,
+            146,
+            358,
+            476
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            1125,
+            521,
+            411,
+            503
+          ],
+          "pivot": [
+            219,
+            478
+          ],
+          "duration": 150,
+          "phase": "起身归稳",
+          "anchors": {
+            "hand": [
+              168,
+              240
+            ],
+            "swordTip": [
+              392,
+              439
+            ],
+            "headTop": [
+              240,
+              11
+            ],
+            "chin": [
+              251,
+              69
+            ],
+            "hip": [
+              219,
+              220
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false,
+          "opaqueBoundsMeasured": [
+            11,
+            9,
+            396,
+            480
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        }
+      ],
+      "notes": [
+        "Custom row-wise source rectangles retain all feet, sword and cape. Frames2/3 meet at x786: sword-tip terminates atx785 while next cape beginsx786; isolated boundaryalpha expected.",
+        "Jump root is a fixed virtual ground line; airborne feet are not re-anchored to currenttoe height."
+      ]
+    },
+    {
+      "id": "dodge",
+      "title": "人形 · 低身闪步",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/human-v2-dodge.png",
+          "bodyHeight": 516,
+          "bodyHeightMethod": "fixed standing-equivalent anatomical ruler for the whole source sheet; no per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 10,
+          "width": 1434,
+          "height": 1097,
+          "sha256": "f016c2ed35057e2c2a2f3962d4a76127585860262eedd6384e9239e48d1d98d0",
+          "alphaRange": [
+            0,
+            255
+          ]
+        },
+        {
+          "src": "assets/human-v2-dodge-headfix.png",
+          "width": 1434,
+          "height": 1097,
+          "bodyHeight": 516,
+          "bodyHeightMethod": "unchanged full-body anatomical ruler516; generated local head-only correction in final pose",
+          "bodyHeightUncertaintyPixels": 8,
+          "sha256": "70f6489088096b09a8dbd4fe9fb50b85ebc10409c645000711a9c47f7c835326",
+          "alphaRange": [
+            0,
+            255
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            717,
+            544
+          ],
+          "pivot": [
+            441,
+            536
+          ],
+          "duration": 90,
+          "phase": "下沉蓄步",
+          "anchors": {
+            "hand": [
+              326,
+              308
+            ],
+            "swordTip": [
+              37,
+              421
+            ],
+            "headTop": [
+              505,
+              79
+            ],
+            "chin": [
+              535,
+              158
+            ],
+            "hip": [
+              443,
+              316
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            36,
+            77,
+            596,
+            537
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            717,
+            0,
+            717,
+            544
+          ],
+          "pivot": [
+            467,
+            536
+          ],
+          "duration": 70,
+          "phase": "展腿冲刺",
+          "anchors": {
+            "hand": [
+              306,
+              273
+            ],
+            "swordTip": [
+              8,
+              358
+            ],
+            "headTop": [
+              548,
+              109
+            ],
+            "chin": [
+              567,
+              188
+            ],
+            "hip": [
+              456,
+              331
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            7,
+            107,
+            693,
+            534
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            544,
+            717,
+            553
+          ],
+          "pivot": [
+            481,
+            516
+          ],
+          "duration": 75,
+          "phase": "收腿过步",
+          "anchors": {
+            "hand": [
+              357,
+              261
+            ],
+            "swordTip": [
+              99,
+              400
+            ],
+            "headTop": [
+              530,
+              34
+            ],
+            "chin": [
+              555,
+              116
+            ],
+            "hip": [
+              475,
+              277
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            97,
+            35,
+            646,
+            511
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            717,
+            544,
+            717,
+            553
+          ],
+          "pivot": [
+            439,
+            522
+          ],
+          "duration": 130,
+          "phase": "落脚归势 · 母版头身比",
+          "anchors": {
+            "hand": [
+              368,
+              270
+            ],
+            "swordTip": [
+              630,
+              502
+            ],
+            "headTop": [
+              438,
+              10
+            ],
+            "chin": [
+              465,
+              86
+            ],
+            "hip": [
+              433,
+              280
+            ]
+          },
+          "registrationMethod": "manual original-pixel joints and fixed virtual-ground root; alpha measured read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            111,
+            9,
+            632,
+            521
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        }
+      ],
+      "notes": [
+        "Only final pose uses targeted head correction. Original first3frames retain previous source and same bodyHeight516. No per-frame renderer scaling.",
+        "Head landmark vertical span76px over H516 is0.1473, near originalmaster0.145."
+      ]
+    },
+    {
+      "id": "hurt",
+      "title": "人形 · 轻受击反馈",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/human-v2-hurt.png",
+          "bodyHeight": 602,
+          "bodyHeightMethod": "fixed standing-equivalent anatomical ruler for the whole source sheet; no per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 10,
+          "width": 1122,
+          "height": 1402,
+          "sha256": "aad5218a8109026e919735dc75bae3abe289d0524ebcff286630fe468fa0701d",
+          "alphaRange": [
+            0,
+            255
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            561,
+            730
+          ],
+          "pivot": [
+            314,
+            658
+          ],
+          "duration": 70,
+          "phase": "感知冲击",
+          "anchors": {
+            "hand": [
+              246,
+              359
+            ],
+            "swordTip": [
+              533,
+              598
+            ],
+            "headTop": [
+              310,
+              58
+            ],
+            "chin": [
+              333,
+              147
+            ],
+            "hip": [
+              315,
+              337
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            28,
+            57,
+            535,
+            658
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            561,
+            0,
+            561,
+            730
+          ],
+          "pivot": [
+            317,
+            658
+          ],
+          "duration": 65,
+          "phase": "肩背后收",
+          "anchors": {
+            "hand": [
+              257,
+              376
+            ],
+            "swordTip": [
+              545,
+              603
+            ],
+            "headTop": [
+              292,
+              80
+            ],
+            "chin": [
+              320,
+              165
+            ],
+            "hip": [
+              321,
+              361
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            12,
+            79,
+            548,
+            659
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            730,
+            561,
+            672
+          ],
+          "pivot": [
+            380,
+            629
+          ],
+          "duration": 85,
+          "phase": "重心归还",
+          "anchors": {
+            "hand": [
+              260,
+              367
+            ],
+            "swordTip": [
+              44,
+              554
+            ],
+            "headTop": [
+              430,
+              103
+            ],
+            "chin": [
+              447,
+              196
+            ],
+            "hip": [
+              351,
+              370
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            38,
+            101,
+            512,
+            627
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            561,
+            730,
+            561,
+            672
+          ],
+          "pivot": [
+            316,
+            640
+          ],
+          "duration": 120,
+          "phase": "恢复警戒",
+          "anchors": {
+            "hand": [
+              259,
+              365
+            ],
+            "swordTip": [
+              535,
+              601
+            ],
+            "headTop": [
+              304,
+              66
+            ],
+            "chin": [
+              328,
+              153
+            ],
+            "hip": [
+              318,
+              353
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            23,
+            66,
+            534,
+            638
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "defeat",
+      "title": "人形 · 力竭跪地",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/human-v2-defeat.png",
+          "bodyHeight": 780,
+          "bodyHeightMethod": "fixed standing-equivalent anatomical ruler for the whole source sheet; no per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 10,
+          "width": 1122,
+          "height": 1402,
+          "sha256": "a4594a2ea5ef604250b9a6ea285a76246bd3e3ee28ba6f40fd65962accdf2df1",
+          "alphaRange": [
+            0,
+            255
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            580,
+            800
+          ],
+          "pivot": [
+            347,
+            713
+          ],
+          "duration": 140,
+          "phase": "单膝失力",
+          "anchors": {
+            "hand": [
+              240,
+              451
+            ],
+            "swordTip": [
+              549,
+              693
+            ],
+            "headTop": [
+              410,
+              102
+            ],
+            "chin": [
+              445,
+              220
+            ],
+            "hip": [
+              330,
+              403
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            34,
+            101,
+            552,
+            713
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            580,
+            0,
+            542,
+            800
+          ],
+          "pivot": [
+            304,
+            720
+          ],
+          "duration": 160,
+          "phase": "手掌撑地",
+          "anchors": {
+            "hand": [
+              171,
+              522
+            ],
+            "swordTip": [
+              466,
+              761
+            ],
+            "headTop": [
+              408,
+              217
+            ],
+            "chin": [
+              430,
+              336
+            ],
+            "hip": [
+              297,
+              489
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            14,
+            214,
+            492,
+            765
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            800,
+            610,
+            602
+          ],
+          "pivot": [
+            407,
+            480
+          ],
+          "duration": 190,
+          "phase": "双膝下沉",
+          "anchors": {
+            "hand": [
+              276,
+              409
+            ],
+            "swordTip": [
+              562,
+              578
+            ],
+            "headTop": [
+              498,
+              132
+            ],
+            "chin": [
+              513,
+              250
+            ],
+            "hip": [
+              406,
+              375
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            29,
+            132,
+            591,
+            575
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            610,
+            800,
+            512,
+            602
+          ],
+          "pivot": [
+            298,
+            460
+          ],
+          "duration": 500,
+          "phase": "伏地力竭",
+          "anchors": {
+            "hand": [
+              216,
+              399
+            ],
+            "swordTip": [
+              484,
+              577
+            ],
+            "headTop": [
+              344,
+              77
+            ],
+            "chin": [
+              375,
+              199
+            ],
+            "hip": [
+              301,
+              382
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            16,
+            77,
+            487,
+            575
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "run",
+      "title": "人形 · 交替双腿奔跑",
+      "loop": true,
+      "status": "passing poses redrawn after browser review; revised F3/F7 knee crossings and opposite support phases passed playback and independent visual review",
+      "sheets": [
+        {
+          "src": "assets/human-v2-run-near.png",
+          "bodyHeight": 690,
+          "bodyHeightMethod": "fixed standing-equivalent anatomical ruler for the whole source sheet; no per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 10,
+          "width": 1230,
+          "height": 1278,
+          "sha256": "e084b14322a55d111670d3a9d55873652ebcb69f20b6bb139e1864042725a4f4",
+          "alphaRange": [
+            0,
+            255
+          ]
+        },
+        {
+          "src": "assets/human-v2-run-opposite-draft.png",
+          "bodyHeight": 620,
+          "bodyHeightMethod": "fixed standing-equivalent anatomical ruler for the whole source sheet; no per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 10,
+          "width": 1434,
+          "height": 1097,
+          "sha256": "e971752c1dee3c7398361bcefc047bacac44bab221bc3dc20017388f874f7722",
+          "alphaRange": [
+            0,
+            255
+          ]
+        },
+        {
+          "src": "assets/human-v2-run-passing.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 690,
+          "bodyHeightMethod": "fixed whole-sheet anatomical ruler matched to existing run-near; no frame-specific scaling",
+          "bodyHeightUncertaintyPixels": 8,
+          "sha256": "3bfaa64ccc9e141cff20dd7a5e65c0c7b4bb661936b69b1a2888d5d0c48fcb28",
+          "alphaRange": [
+            0,
+            255
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            608,
+            640
+          ],
+          "pivot": [
+            410,
+            630
+          ],
+          "duration": 85,
+          "phase": "右腿前触地",
+          "anchors": {
+            "hand": [
+              283,
+              323
+            ],
+            "swordTip": [
+              42,
+              473
+            ],
+            "headTop": [
+              448,
+              26
+            ],
+            "chin": [
+              468,
+              130
+            ],
+            "hip": [
+              403,
+              343
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            39,
+            27,
+            605,
+            626
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            608,
+            0,
+            622,
+            640
+          ],
+          "pivot": [
+            371,
+            630
+          ],
+          "duration": 80,
+          "phase": "右腿承重下沉",
+          "anchors": {
+            "hand": [
+              249,
+              327
+            ],
+            "swordTip": [
+              2,
+              476
+            ],
+            "headTop": [
+              410,
+              35
+            ],
+            "chin": [
+              435,
+              132
+            ],
+            "hip": [
+              365,
+              344
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            5,
+            34,
+            501,
+            631
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            0,
+            627,
+            632
+          ],
+          "pivot": [
+            412,
+            625
+          ],
+          "duration": 80,
+          "phase": "右腿支撑 · 左膝向前越过",
+          "anchors": {
+            "hand": [
+              286,
+              305
+            ],
+            "swordTip": [
+              32,
+              455
+            ],
+            "headTop": [
+              463,
+              21
+            ],
+            "chin": [
+              482,
+              119
+            ],
+            "hip": [
+              412,
+              299
+            ],
+            "kneeNear": [
+              392,
+              457
+            ],
+            "ankleNear": [
+              402,
+              596
+            ],
+            "kneeFar": [
+              513,
+              315
+            ],
+            "ankleFar": [
+              454,
+              414
+            ]
+          },
+          "registrationMethod": "manual original-pixel joints and fixed virtual-ground root; alpha measured read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            31,
+            20,
+            579,
+            624
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            556,
+            745,
+            541
+          ],
+          "pivot": [
+            483,
+            525
+          ],
+          "duration": 75,
+          "phase": "右腿后蹬左腿前摆",
+          "anchors": {
+            "hand": [
+              331,
+              260
+            ],
+            "swordTip": [
+              52,
+              445
+            ],
+            "headTop": [
+              539,
+              15
+            ],
+            "chin": [
+              560,
+              109
+            ],
+            "hip": [
+              485,
+              274
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            50,
+            13,
+            656,
+            523
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            745,
+            556
+          ],
+          "pivot": [
+            488,
+            553
+          ],
+          "duration": 85,
+          "phase": "左腿前触地",
+          "anchors": {
+            "hand": [
+              342,
+              275
+            ],
+            "swordTip": [
+              71,
+              469
+            ],
+            "headTop": [
+              530,
+              25
+            ],
+            "chin": [
+              554,
+              116
+            ],
+            "hip": [
+              490,
+              300
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            57,
+            23,
+            717,
+            552
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            745,
+            0,
+            689,
+            556
+          ],
+          "pivot": [
+            441,
+            553
+          ],
+          "duration": 80,
+          "phase": "左腿承重下沉",
+          "anchors": {
+            "hand": [
+              295,
+              281
+            ],
+            "swordTip": [
+              27,
+              458
+            ],
+            "headTop": [
+              495,
+              25
+            ],
+            "chin": [
+              515,
+              115
+            ],
+            "hip": [
+              443,
+              299
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            23,
+            24,
+            599,
+            553
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            632,
+            627,
+            622
+          ],
+          "pivot": [
+            435,
+            605
+          ],
+          "duration": 80,
+          "phase": "左腿支撑 · 右膝向前越过",
+          "anchors": {
+            "hand": [
+              303,
+              291
+            ],
+            "swordTip": [
+              33,
+              445
+            ],
+            "headTop": [
+              478,
+              7
+            ],
+            "chin": [
+              498,
+              107
+            ],
+            "hip": [
+              435,
+              285
+            ],
+            "kneeNear": [
+              553,
+              293
+            ],
+            "ankleNear": [
+              481,
+              400
+            ],
+            "kneeFar": [
+              410,
+              450
+            ],
+            "ankleFar": [
+              429,
+              576
+            ]
+          },
+          "registrationMethod": "manual original-pixel joints and fixed virtual-ground root; alpha measured read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            29,
+            4,
+            603,
+            604
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            608,
+            640,
+            622,
+            638
+          ],
+          "pivot": [
+            389,
+            598
+          ],
+          "duration": 75,
+          "phase": "右腿前伸准备",
+          "anchors": {
+            "hand": [
+              269,
+              310
+            ],
+            "swordTip": [
+              30,
+              462
+            ],
+            "headTop": [
+              434,
+              10
+            ],
+            "chin": [
+              458,
+              111
+            ],
+            "hip": [
+              386,
+              330
+            ]
+          },
+          "registrationMethod": "manual original-pixel landmarks; alpha bounds are computed read-only",
+          "anchorUncertaintyPixels": 8,
+          "opaqueBoundsMeasured": [
+            26,
+            10,
+            602,
+            590
+          ],
+          "opaqueBoundaryPixels": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          }
+        }
+      ],
+      "notes": [
+        "Contact poses retained; revised cycle near1,near2,passing1,opposite3,opposite1,opposite2,passing3,near4.",
+        "F3/F7 are new genuine forward-knee passing drawings, not retimed previous contact frames. Near leg is sword-arm side; hip/near-knee/far-knee anchors identify each passing phase.",
+        "All source sheets use one fixed standing anatomy ruler per sheet."
+      ]
+    }
+  ]
+}

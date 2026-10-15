@@ -1,7 +1,7 @@
 import { attackPhase } from './animation';
 import type { AttackPhase, FighterAnimation } from './animation';
 
-export const CHARACTER_CLIP_IDS = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina', 'tharja'] as const;
+export const CHARACTER_CLIP_IDS = ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina', 'tharja', 'corrin'] as const;
 export type ClipCharacterId = typeof CHARACTER_CLIP_IDS[number];
 export const CHARACTER_CLIPS = ['idle', 'run', 'jump', 'dodge', 'jab', 'smash', 'special', 'secondary'] as const;
 export type RequiredClipName = typeof CHARACTER_CLIPS[number];

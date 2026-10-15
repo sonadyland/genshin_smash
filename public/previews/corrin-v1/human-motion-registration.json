@@ -1,0 +1,2047 @@
+{
+  "version": 2,
+  "status": "13 sheets / 52 frames source registration complete; independent browser preview checked",
+  "form": "human",
+  "grid": [
+    2,
+    2
+  ],
+  "cellOrder": [
+    "top-left",
+    "top-right",
+    "bottom-left",
+    "bottom-right"
+  ],
+  "clips": [
+    {
+      "id": "run",
+      "title": "人形奔跑",
+      "loop": true,
+      "sheets": [
+        {
+          "src": "assets/human-run-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 445,
+          "bodyHeightMethod": "manual standing-equivalent anatomical ruler; never per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 15,
+          "alphaRange": [
+            0,
+            255
+          ],
+          "sha256": "ebd1dccdeb3989dd441213f3dbd5b18f5d6914d0776ebb3a3a80859991ad7880"
+        },
+        {
+          "src": "assets/human-run-b-v4.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 500,
+          "bodyHeightMethod": "same v3 torso and leg anatomical ruler, local blade/head edits only",
+          "bodyHeightUncertaintyPixels": 15,
+          "alphaRange": [
+            0,
+            254
+          ],
+          "sha256": "d4b41a4cbc9836a7952a64eca01c38deb2fdabd77c51a95de831302b401e4bb6"
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            351,
+            563
+          ],
+          "duration": 90,
+          "phase": "前伸接地A",
+          "anchors": {
+            "hand": [
+              294,
+              370
+            ],
+            "swordTip": [
+              110,
+              453
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            110,
+            169,
+            539,
+            563
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            313,
+            573
+          ],
+          "duration": 80,
+          "phase": "支撑交叉A",
+          "anchors": {
+            "hand": [
+              251,
+              371
+            ],
+            "swordTip": [
+              74,
+              453
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            72,
+            168,
+            473,
+            573
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            349,
+            510
+          ],
+          "duration": 80,
+          "phase": "蹬地收腿A",
+          "anchors": {
+            "hand": [
+              295,
+              343
+            ],
+            "swordTip": [
+              108,
+              381
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            107,
+            106,
+            525,
+            510
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            339,
+            505
+          ],
+          "duration": 90,
+          "phase": "伸腿腾空A",
+          "anchors": {
+            "hand": [
+              247,
+              342
+            ],
+            "swordTip": [
+              64,
+              379
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            64,
+            106,
+            532,
+            479
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": true
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            440,
+            491
+          ],
+          "duration": 90,
+          "phase": "远左腿前接地、近右腿后伸",
+          "anchors": {
+            "hand": [
+              340,
+              232
+            ],
+            "swordTip": [
+              94,
+              301
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            92,
+            26,
+            678,
+            491
+          ],
+          "registrationMethod": "manual full-resolution visual landmarks; alpha bounds measured numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            450,
+            493
+          ],
+          "duration": 80,
+          "phase": "远左腿承重、近右腿后抬跟",
+          "anchors": {
+            "hand": [
+              342,
+              230
+            ],
+            "swordTip": [
+              101,
+              301
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            97,
+            26,
+            679,
+            497
+          ],
+          "registrationMethod": "manual full-resolution visual landmarks; alpha bounds measured numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            440,
+            494
+          ],
+          "duration": 80,
+          "phase": "近右腿回收过髋、远腿支撑",
+          "anchors": {
+            "hand": [
+              341,
+              233
+            ],
+            "swordTip": [
+              95,
+              307
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            92,
+            24,
+            679,
+            495
+          ],
+          "registrationMethod": "manual full-resolution visual landmarks; alpha bounds measured numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            440,
+            492
+          ],
+          "duration": 90,
+          "phase": "远左腿前伸腾空、近右腿后折",
+          "anchors": {
+            "hand": [
+              342,
+              232
+            ],
+            "swordTip": [
+              97,
+              307
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            94,
+            24,
+            688,
+            474
+          ],
+          "registrationMethod": "manual full-resolution visual landmarks; alpha bounds measured numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": true
+        }
+      ],
+      "status": "v4 transparent final source; independent browser preview checked",
+      "reviewNotes": "V4 preserves architect-approved opposite-leg positions from V3, shortens backward golden Yato blades, and slightly reduces head size. Same torso/hips/feet scale, all four sword tips and hands re-registered. Final native image output alpha verified with fully transparent empty regions; source B/v3 preserved. Final browser comparison completed with v4."
+    },
+    {
+      "id": "jump",
+      "title": "人形跳跃",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/human-jump-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 535,
+          "bodyHeightMethod": "manual standing-equivalent anatomical ruler; never per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 15,
+          "alphaRange": [
+            0,
+            255
+          ],
+          "sha256": "131eb34f0d7a570658ee61c36faedc12b5937a0ea1efa0fd53d83481a2592037"
+        },
+        {
+          "src": "assets/human-jump-b.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 440,
+          "bodyHeightMethod": "manual standing-equivalent anatomical ruler; never per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 15,
+          "alphaRange": [
+            0,
+            255
+          ],
+          "sha256": "41605ffc2f3f0ef406ef53cbd652a48bffb133f6ce76cd23c4ef177f03a8f758"
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            345,
+            616
+          ],
+          "duration": 100,
+          "phase": "屈膝蓄力",
+          "anchors": {
+            "hand": [
+              282,
+              403
+            ],
+            "swordTip": [
+              555,
+              610
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            83,
+            202,
+            558,
+            617
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            330,
+            650
+          ],
+          "duration": 80,
+          "phase": "蹬地离地",
+          "anchors": {
+            "hand": [
+              273,
+              339
+            ],
+            "swordTip": [
+              545,
+              575
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            65,
+            102,
+            552,
+            624
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": true
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            340,
+            650
+          ],
+          "duration": 100,
+          "phase": "上升收腿",
+          "anchors": {
+            "hand": [
+              283,
+              306
+            ],
+            "swordTip": [
+              555,
+              514
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            79,
+            70,
+            559,
+            529
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": true
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            335,
+            680
+          ],
+          "duration": 130,
+          "phase": "空中顶点",
+          "anchors": {
+            "hand": [
+              273,
+              251
+            ],
+            "swordTip": [
+              556,
+              464
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            50,
+            33,
+            558,
+            521
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": true
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            365,
+            700
+          ],
+          "duration": 110,
+          "phase": "下落伸腿",
+          "anchors": {
+            "hand": [
+              310,
+              363
+            ],
+            "swordTip": [
+              540,
+              538
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            154,
+            130,
+            541,
+            591
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": true
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            330,
+            596
+          ],
+          "duration": 70,
+          "phase": "前脚触地",
+          "anchors": {
+            "hand": [
+              252,
+              416
+            ],
+            "swordTip": [
+              482,
+              580
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            108,
+            228,
+            493,
+            596
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            522
+          ],
+          "duration": 110,
+          "phase": "落地深蹲缓冲",
+          "anchors": {
+            "hand": [
+              295,
+              392
+            ],
+            "swordTip": [
+              520,
+              538
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            135,
+            232,
+            523,
+            553
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            539
+          ],
+          "duration": 120,
+          "phase": "回到待机",
+          "anchors": {
+            "hand": [
+              273,
+              328
+            ],
+            "swordTip": [
+              498,
+              503
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            121,
+            100,
+            498,
+            539
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        }
+      ],
+      "status": "source-registered; independent browser preview checked",
+      "reviewNotes": "Airborne pivots intentionally extend below sprite soles; keep actual tuck and flight displacement rather than pinning current feet to ground."
+    },
+    {
+      "id": "dodge",
+      "title": "人形闪避",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/human-dodge-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 420,
+          "bodyHeightMethod": "manual standing-equivalent anatomical ruler; never per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 15,
+          "alphaRange": [
+            0,
+            255
+          ],
+          "sha256": "c8cc478e91d906342309994ac238d7e79206dd5abd172abf87938f8077c1c02a"
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            340,
+            544
+          ],
+          "duration": 80,
+          "phase": "压身蓄力",
+          "anchors": {
+            "hand": [
+              240,
+              362
+            ],
+            "swordTip": [
+              90,
+              470
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            90,
+            210,
+            486,
+            546
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            360,
+            544
+          ],
+          "duration": 80,
+          "phase": "低身前冲",
+          "anchors": {
+            "hand": [
+              290,
+              351
+            ],
+            "swordTip": [
+              81,
+              382
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            80,
+            223,
+            539,
+            547
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            360,
+            501
+          ],
+          "duration": 90,
+          "phase": "前脚刹停",
+          "anchors": {
+            "hand": [
+              300,
+              317
+            ],
+            "swordTip": [
+              110,
+              365
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            109,
+            184,
+            527,
+            503
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            330,
+            534
+          ],
+          "duration": 120,
+          "phase": "回到待机",
+          "anchors": {
+            "hand": [
+              292,
+              345
+            ],
+            "swordTip": [
+              506,
+              503
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            134,
+            119,
+            505,
+            535
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        }
+      ],
+      "status": "source-registered; independent browser preview checked"
+    },
+    {
+      "id": "hurt",
+      "title": "人形受击",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/human-hurt-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 505,
+          "bodyHeightMethod": "manual standing-equivalent anatomical ruler; never per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 15,
+          "alphaRange": [
+            0,
+            255
+          ],
+          "sha256": "36c83ae67f557ec8507261e9a3b126df03a194404f3a27593815a7e49c75c238"
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            345,
+            612
+          ],
+          "duration": 45,
+          "phase": "受击收肩",
+          "anchors": {
+            "hand": [
+              295,
+              370
+            ],
+            "swordTip": [
+              572,
+              579
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            112,
+            107,
+            574,
+            614
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            341,
+            614
+          ],
+          "duration": 65,
+          "phase": "小幅闭眼停顿",
+          "anchors": {
+            "hand": [
+              290,
+              373
+            ],
+            "swordTip": [
+              551,
+              583
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            69,
+            112,
+            552,
+            615
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            345,
+            552
+          ],
+          "duration": 70,
+          "phase": "恢复目光",
+          "anchors": {
+            "hand": [
+              295,
+              309
+            ],
+            "swordTip": [
+              571,
+              521
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            112,
+            53,
+            572,
+            555
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            341,
+            555
+          ],
+          "duration": 90,
+          "phase": "恢复待机",
+          "anchors": {
+            "hand": [
+              287,
+              311
+            ],
+            "swordTip": [
+              550,
+              523
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            96,
+            53,
+            551,
+            557
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        }
+      ],
+      "status": "source-registered; independent browser preview checked"
+    },
+    {
+      "id": "defeat",
+      "title": "人形败退",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/human-defeat-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 455,
+          "bodyHeightMethod": "manual standing-equivalent anatomical ruler; never per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 15,
+          "alphaRange": [
+            0,
+            255
+          ],
+          "sha256": "6ae9e80d0a754d2cb5813e273faba1333a3082a4a7bf212867bf22f279f325db"
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            340,
+            587
+          ],
+          "duration": 170,
+          "phase": "失力垂肩",
+          "anchors": {
+            "hand": [
+              288,
+              381
+            ],
+            "swordTip": [
+              519,
+              566
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            146,
+            152,
+            521,
+            587
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            310,
+            587
+          ],
+          "duration": 170,
+          "phase": "屈膝下沉",
+          "anchors": {
+            "hand": [
+              248,
+              407
+            ],
+            "swordTip": [
+              492,
+              587
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            123,
+            211,
+            492,
+            587
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            340,
+            523
+          ],
+          "duration": 200,
+          "phase": "一膝触地左手支撑",
+          "anchors": {
+            "hand": [
+              268,
+              435
+            ],
+            "swordTip": [
+              520,
+              554
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            133,
+            251,
+            521,
+            555
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            305,
+            525
+          ],
+          "duration": 500,
+          "phase": "低姿静止",
+          "anchors": {
+            "hand": [
+              233,
+              456
+            ],
+            "swordTip": [
+              491,
+              554
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            114,
+            258,
+            492,
+            555
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        }
+      ],
+      "status": "source-registered; independent browser preview checked"
+    },
+    {
+      "id": "jab1",
+      "title": "J 一段踏步斜斩",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/human-jab1-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 360,
+          "bodyHeightMethod": "manual standing-equivalent anatomical ruler; never per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 15,
+          "alphaRange": [
+            0,
+            255
+          ],
+          "sha256": "55ac7c52a7d36ef27fcd34bd5136d09f174e25320ead532b0b1f9b872ced3e72"
+        },
+        {
+          "src": "assets/human-jab1-b.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 366,
+          "bodyHeightMethod": "manual standing-equivalent anatomical ruler; never per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 15,
+          "alphaRange": [
+            0,
+            255
+          ],
+          "sha256": "8c08629378c2e75b986362dcf4d64faa84d61b42f72cfe35223cc8a7a00cad94"
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            335,
+            551
+          ],
+          "duration": 70,
+          "phase": "低位持剑",
+          "anchors": {
+            "hand": [
+              282,
+              384
+            ],
+            "swordTip": [
+              500,
+              516
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            138,
+            195,
+            501,
+            553
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            332,
+            556
+          ],
+          "duration": 75,
+          "phase": "肩后提剑",
+          "anchors": {
+            "hand": [
+              314,
+              222
+            ],
+            "swordTip": [
+              196,
+              134
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            143,
+            134,
+            440,
+            556
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            355,
+            506
+          ],
+          "duration": 80,
+          "phase": "举剑蓄力",
+          "anchors": {
+            "hand": [
+              342,
+              143
+            ],
+            "swordTip": [
+              222,
+              81
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            153,
+            80,
+            515,
+            506
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            330,
+            486
+          ],
+          "duration": 45,
+          "phase": "斜劈启动",
+          "anchors": {
+            "hand": [
+              428,
+              277
+            ],
+            "swordTip": [
+              540,
+              189
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            125,
+            170,
+            541,
+            486
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            345,
+            524
+          ],
+          "duration": 55,
+          "phase": "前下方命中",
+          "anchors": {
+            "hand": [
+              416,
+              375
+            ],
+            "swordTip": [
+              573,
+              505
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            152,
+            212,
+            574,
+            524
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            335,
+            519
+          ],
+          "duration": 70,
+          "phase": "压重心随动",
+          "anchors": {
+            "hand": [
+              319,
+              389
+            ],
+            "swordTip": [
+              508,
+              506
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            127,
+            220,
+            510,
+            519
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            340,
+            498
+          ],
+          "duration": 85,
+          "phase": "收剑",
+          "anchors": {
+            "hand": [
+              350,
+              304
+            ],
+            "swordTip": [
+              529,
+              407
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            188,
+            151,
+            532,
+            498
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            505
+          ],
+          "duration": 110,
+          "phase": "回到待机",
+          "anchors": {
+            "hand": [
+              285,
+              326
+            ],
+            "swordTip": [
+              506,
+              492
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            159,
+            139,
+            507,
+            505
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        }
+      ],
+      "status": "source-registered; independent browser preview checked"
+    },
+    {
+      "id": "jab2",
+      "title": "J 二段反手横斩",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/human-jab2-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 385,
+          "bodyHeightMethod": "manual standing-equivalent anatomical ruler; never per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 15,
+          "alphaRange": [
+            0,
+            255
+          ],
+          "sha256": "72a6a8c1c429d05ced8e7ea37c0f208bf3df5ecb26d1e9a5ddb78787d2631db5"
+        },
+        {
+          "src": "assets/human-jab2-b.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 385,
+          "bodyHeightMethod": "manual standing-equivalent anatomical ruler; never per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 15,
+          "alphaRange": [
+            0,
+            255
+          ],
+          "sha256": "23ea1b2c45b434eeb078d3caebf558774e134559450c30371fc54b5a06ce8f53"
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            355,
+            577
+          ],
+          "duration": 65,
+          "phase": "低位准备",
+          "anchors": {
+            "hand": [
+              344,
+              398
+            ],
+            "swordTip": [
+              560,
+              565
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            143,
+            212,
+            561,
+            579
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            577
+          ],
+          "duration": 75,
+          "phase": "腰前反收",
+          "anchors": {
+            "hand": [
+              279,
+              372
+            ],
+            "swordTip": [
+              40,
+              378
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            39,
+            231,
+            466,
+            579
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            360,
+            500
+          ],
+          "duration": 80,
+          "phase": "转髋蓄力",
+          "anchors": {
+            "hand": [
+              386,
+              245
+            ],
+            "swordTip": [
+              131,
+              267
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            131,
+            140,
+            525,
+            500
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            330,
+            501
+          ],
+          "duration": 45,
+          "phase": "横斩释放",
+          "anchors": {
+            "hand": [
+              429,
+              267
+            ],
+            "swordTip": [
+              610,
+              274
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            111,
+            150,
+            611,
+            501
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            310,
+            562
+          ],
+          "duration": 55,
+          "phase": "横斩随动",
+          "anchors": {
+            "hand": [
+              406,
+              306
+            ],
+            "swordTip": [
+              621,
+              309
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            102,
+            223,
+            623,
+            563
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            562
+          ],
+          "duration": 75,
+          "phase": "剑尖下沉",
+          "anchors": {
+            "hand": [
+              388,
+              384
+            ],
+            "swordTip": [
+              579,
+              507
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            93,
+            230,
+            580,
+            563
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            340,
+            520
+          ],
+          "duration": 85,
+          "phase": "收剑",
+          "anchors": {
+            "hand": [
+              322,
+              319
+            ],
+            "swordTip": [
+              539,
+              460
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            154,
+            157,
+            539,
+            522
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            310,
+            524
+          ],
+          "duration": 110,
+          "phase": "回到待机",
+          "anchors": {
+            "hand": [
+              261,
+              322
+            ],
+            "swordTip": [
+              489,
+              509
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            132,
+            143,
+            489,
+            526
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        }
+      ],
+      "status": "source-registered; independent browser preview checked"
+    },
+    {
+      "id": "jab3",
+      "title": "J 三段收身突刺",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/human-jab3-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 415,
+          "bodyHeightMethod": "manual standing-equivalent anatomical ruler; never per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 15,
+          "alphaRange": [
+            0,
+            255
+          ],
+          "sha256": "31c03530f80a75683a2f78b4209da093e075627e63bbb0101dfa9aea9b00b4e8"
+        },
+        {
+          "src": "assets/human-jab3-b.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 335,
+          "bodyHeightMethod": "manual standing-equivalent anatomical ruler; never per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 15,
+          "alphaRange": [
+            0,
+            255
+          ],
+          "sha256": "c1419ad88162af51cee32bbc310fd9c38d348f7e32265876210b2edbdec2ee61"
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            605
+          ],
+          "duration": 65,
+          "phase": "低位准备",
+          "anchors": {
+            "hand": [
+              289,
+              402
+            ],
+            "swordTip": [
+              535,
+              570
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            125,
+            207,
+            536,
+            607
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            300,
+            605
+          ],
+          "duration": 75,
+          "phase": "收剑至腰侧",
+          "anchors": {
+            "hand": [
+              252,
+              365
+            ],
+            "swordTip": [
+              521,
+              365
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            74,
+            206,
+            523,
+            606
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            310,
+            513
+          ],
+          "duration": 80,
+          "phase": "屈膝蓄力",
+          "anchors": {
+            "hand": [
+              294,
+              323
+            ],
+            "swordTip": [
+              550,
+              322
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            95,
+            181,
+            551,
+            514
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            260,
+            518
+          ],
+          "duration": 45,
+          "phase": "踏步突刺",
+          "anchors": {
+            "hand": [
+              363,
+              289
+            ],
+            "swordTip": [
+              604,
+              291
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            14,
+            181,
+            607,
+            518
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            325,
+            545
+          ],
+          "duration": 55,
+          "phase": "突刺伸展",
+          "anchors": {
+            "hand": [
+              428,
+              343
+            ],
+            "swordTip": [
+              594,
+              347
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            163,
+            259,
+            595,
+            546
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            548
+          ],
+          "duration": 75,
+          "phase": "抽回剑身",
+          "anchors": {
+            "hand": [
+              274,
+              374
+            ],
+            "swordTip": [
+              468,
+              372
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            138,
+            242,
+            469,
+            548
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            340,
+            474
+          ],
+          "duration": 85,
+          "phase": "重心回收",
+          "anchors": {
+            "hand": [
+              328,
+              313
+            ],
+            "swordTip": [
+              511,
+              450
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            210,
+            141,
+            512,
+            474
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            310,
+            475
+          ],
+          "duration": 110,
+          "phase": "回到待机",
+          "anchors": {
+            "hand": [
+              282,
+              315
+            ],
+            "swordTip": [
+              466,
+              453
+            ]
+          },
+          "opaqueBoundsMeasured": [
+            156,
+            142,
+            467,
+            475
+          ],
+          "registrationMethod": "manual visual landmarks in original pixels; alpha bounds read numerically",
+          "anchorUncertaintyPixels": 8,
+          "airborneVirtualGround": false
+        }
+      ],
+      "status": "source-registered; independent browser preview checked"
+    }
+  ],
+  "coordinateUnits": "source pixels relative to equal cell; rect is sheet absolute pixels",
+  "measurementNotes": [
+    "All sizes/alpha bounds/hash read from original PNGs. No raster edits performed.",
+    "Hand, swordTip and root landmarks were manually read from full-resolution renders; uncertainty ±8px. Body scale is a shared sheet ruler with ±15px anatomical estimate, never separate frame height.",
+    "Durations are proposed milliseconds checked in the independent browser preview. Final game integration may tune action timing and collision separately."
+  ],
+  "previewVerification": {
+    "date": "2026-10-14",
+    "scope": "Independent Canvas preview only; complete catalogue 29 clips / 216 frames checked in Chrome. No game integration validation.",
+    "pngModified": false
+  }
+}

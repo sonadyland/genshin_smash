@@ -26,6 +26,9 @@ import type { SummonContext, SummonOwner } from './summons';
 import { drawSummonArt } from './summoner-art';
 import { TharjaRuntime, THARJA_COMBAT, isTharjaSpell, drawTharjaEffects } from './tharja';
 import type { TharjaContext } from './tharja';
+import { CorrinRuntime, newCorrinState, getCorrinMoves, getCorrinHud, startCorrinTransform, stepCorrinState, cancelCorrinTransform, takeCorrinCombo, isCorrinWater, corrinSegmentContact } from './corrin';
+import type { CorrinState, CorrinForm } from './corrin';
+import { getCorrinCastOrigin, getCorrinFangSegment, drawCorrinWaterEffect } from './art';
 
 const GRAV = 0.52;
 const MAX_FALL = 9.5;
@@ -60,6 +63,8 @@ interface ActiveAttack {
   t: number;
   hasHit: Set<number>;
   visualVariant?: AttackVisualVariant;
+  corrinForm?: CorrinForm;
+  corrinCombo?: 0 | 1 | 2;
   plunge?: PlungeAnimation & { previousFeet: number };
 }
 
@@ -110,6 +115,7 @@ interface Fighter {
   animationFrame: number;
   motion: MotionState;
   nextAttackVariants: AttackVariantState;
+  corrin: CorrinState;
 }
 
 interface ItemEnt {
@@ -177,6 +183,7 @@ export class Game {
   private sfx = new BattleAudio();
   private summons = new SummonRuntime();
   private darkMagic = new TharjaRuntime();
+  private corrinWater = new CorrinRuntime();
 
   private mode: 'cpu' | 'pvp' = 'cpu';
   private selCursor = [0, 1];
@@ -221,6 +228,7 @@ export class Game {
   }
 
   destroy() {
+    this.corrinWater.clear();
     this.destroyed = true;
     cancelAnimationFrame(this.raf);
     window.removeEventListener('keydown', this.onKeyDown);
@@ -276,9 +284,12 @@ export class Game {
     return {
       phase: this.state, timeLeft: Math.ceil(this.remainingFrames / 60), winner: this.winner?.idx ?? null, draw: this.isDraw, muted: this.sfx.muted, visualQuality: this.visualQuality,
       onGround: player?.onGround ?? true,
-      canSpecial: ready && player.specialCooldown <= 0 && !(player.char.id === 'xiao' && player.onGround),
-      canSecondary: ready && player.secondaryCooldown <= 0,
-      canDodge: ready && player.dodgeCooldown <= 0 && (player.onGround || !player.airDodgeUsed),
+      corrin: player?.char.id === 'corrin' ? getCorrinHud(player.corrin) : undefined,
+      canJab: ready && !player.corrin.transform,
+      canSmash: ready && !player.corrin.transform,
+      canSpecial: ready && !player.corrin.transform && player.specialCooldown <= 0 && !(player.char.id === 'xiao' && player.onGround),
+      canSecondary: ready && !player.corrin.transform && player.secondaryCooldown <= 0,
+      canDodge: ready && !player.corrin.transform && player.dodgeCooldown <= 0 && (player.onGround || !player.airDodgeUsed),
       skillCooldown: (player?.specialCooldown ?? 0) / 60, skillCooldownMax: player?.char.specialCooldown ?? (player?.char.special.effect === 'plunge' ? 105 / 60 : 90 / 60),
       secondaryCooldown: (player?.secondaryCooldown ?? 0) / 60, secondaryCooldownMax: player?.char.secondaryCooldown ?? 0,
       dodgeCooldown: (player?.dodgeCooldown ?? 0) / 60, dodgeCooldownMax: DODGE_COOLDOWN / 60,
@@ -356,6 +367,7 @@ export class Game {
   private startMatch() {
     this.summons.clear();
     this.darkMagic.clear();
+    this.corrinWater.clear();
     this.items = [];
     this.projectiles = [];
     this.particles = [];
@@ -401,6 +413,7 @@ export class Game {
       damageDealt: 0, lastHitBy: null, fastFalling: false, animationFrame: 0,
       motion: newMotionState(idx === 0 ? 1 : -1),
       nextAttackVariants: newAttackVariants(),
+      corrin: newCorrinState(),
     };
   }
 
@@ -485,6 +498,7 @@ export class Game {
     this.updateProjectiles();
     this.updateSummons();
     this.updateDarkMagic();
+    this.updateCorrinWater();
     this.updateItems();
     this.updateParticles();
     this.checkBlast();
@@ -542,7 +556,22 @@ export class Game {
     const dy = foe.y - f.y;
     const plunge = f.char.special.effect === 'plunge';
     const summoner = f.char.id === 'zhongli' || f.char.id === 'furina';
-    if (f.char.id === 'tharja' && !f.held && f.state === 'free' && f.aiThink === 0 && Math.abs(dx) < 430 && Math.abs(dy) < 180) {
+    const commitmentFrames = f.char.id === 'tharja' ? 110 : f.char.id === 'corrin' ? 81 : 50;
+    const projectedX = f.x + f.vx * commitmentFrames;
+    const rangedSafe = f.onGround || (projectedX >= m.x + 55 && projectedX <= m.x + m.w - 55);
+    if (f.char.id === 'corrin' && rangedSafe && !f.held && f.state === 'free' && !f.corrin.transform && f.aiThink === 0) {
+      const dragon = f.corrin.form === 'dragon';
+      if (f.specialCooldown === 0 && ((dragon && Math.abs(dx) < 95) || (!dragon && Math.abs(dx) > 230 && Math.abs(dy) < 100))) {
+        out.special = true; f.aiThink = reaction; return out;
+      }
+      if (dragon && Math.abs(dx) > 90 && Math.abs(dx) < 490 && Math.abs(dy) < 180) {
+        f.facing = dx >= 0 ? 1 : -1;
+        if (f.secondaryCooldown === 0 && Math.abs(dx) > 170) out.secondary = true;
+        else if (Math.abs(dy) < 65) { if (Math.abs(dx) < 350 && foe.percent > 45) out.smash = true; else out.jab = true; }
+        if (out.secondary || out.smash || out.jab) { f.aiThink = reaction; return out; }
+      }
+    }
+    if (f.char.id === 'tharja' && rangedSafe && !f.held && f.state === 'free' && f.aiThink === 0 && Math.abs(dx) < 430 && Math.abs(dy) < 180) {
       f.facing = dx >= 0 ? 1 : -1;
       if (f.specialCooldown === 0 && f.percent > 18 && Math.abs(dx) < 320) out.special = true;
       else if (f.secondaryCooldown === 0 && f.onGround && Math.abs(dx) > 90 && Math.abs(dx) < 290 && Math.abs(dy) < 65) out.secondary = true;
@@ -558,7 +587,7 @@ export class Game {
       if (!f.held && (it.def.id !== 'heal' || f.percent > 20) && Math.abs(it.x - f.x) < 210 && Math.abs(it.y - f.y) < 100) { target = it.x; break; }
     }
     const goal = target ?? foe.x;
-    if (Math.abs(goal - f.x) > (target ? 8 : f.char.id === 'tharja' && Math.abs(dy) < 72 ? 240 : 46)) {
+    if (Math.abs(goal - f.x) > (target ? 8 : (f.char.id === 'tharja' || (f.char.id === 'corrin' && f.corrin.form === 'dragon')) && Math.abs(dy) < 72 ? 240 : 46)) {
       if (goal < f.x) out.left = true; else out.right = true;
     }
     // Edge protection is deliberately conservative on the main platform only.
@@ -600,7 +629,6 @@ export class Game {
     }
     // Do not lock an airborne recovery into an attack while momentum would carry
     // the CPU outside the landing lane during startup and recovery.
-    const projectedX = f.x + f.vx * 50;
     if (!f.onGround && (projectedX < m.x + 55 || projectedX > m.x + m.w - 55)) return out;
     const thrustSafe = f.char.id !== 'xiao' || (f.x + Math.sign(dx) * 150 > m.x + 50 && f.x + Math.sign(dx) * 150 < m.x + m.w - 50);
     if (f.state === 'free' && f.onGround && f.x > m.x + 55 && f.x < m.x + m.w - 55 && f.secondaryCooldown === 0 && f.aiThink === 0 && thrustSafe && Math.abs(dx) > 70 && Math.abs(dx) < (f.char.id === 'xiao' ? 180 : 250) && Math.abs(dy) < 75) {
@@ -660,7 +688,7 @@ export class Game {
       if (f.hitstun <= 0) f.state = 'free';
     }
 
-    if (ctrl.dodge && f.state === 'free' && f.dodgeCooldown === 0 && (f.onGround || !f.airDodgeUsed)) {
+    if (ctrl.dodge && f.state === 'free' && !f.corrin.transform && f.dodgeCooldown === 0 && (f.onGround || !f.airDodgeUsed)) {
       f.dodgeTimer = DODGE_FRAMES;
       f.dodgeCooldown = DODGE_COOLDOWN;
       f.invuln = DODGE_FRAMES;
@@ -679,7 +707,9 @@ export class Game {
       f.vx *= 0.965;
       if (this.frame % 3 === 0) this.burst(f.x, f.y + f.h / 2, 2, c.color, 3);
     }
-    const busy = f.state === 'attack' || f.state === 'hitstun' || dodging;
+    const transforming = !!f.corrin.transform;
+    if (transforming) stepCorrinState(f.corrin);
+    const busy = f.state === 'attack' || f.state === 'hitstun' || dodging || transforming;
 
     // 水平移动
     if (!busy) {
@@ -716,21 +746,22 @@ export class Game {
     }
 
     // 快速下落
-    if (ctrl.down && !f.onGround && f.vy > -2 && !dodging && f.state !== 'hitstun' && !f.attack?.plunge) f.fastFalling = true;
+    if (ctrl.down && !f.onGround && f.vy > -2 && !dodging && !transforming && f.state !== 'hitstun' && !f.attack?.plunge) f.fastFalling = true;
     if (f.fastFalling) f.vy = Math.min(f.vy + 0.9, FAST_FALL);
 
     // 攻击输入
     if (!busy) {
       if (ctrl.jab) {
         if (f.held) this.throwHeld(f);
-        else this.startAttack(f, c.jab);
+        else this.startAttack(f, c.id === 'corrin' ? getCorrinMoves(f.corrin.form).jab : c.jab);
       } else if (ctrl.smash) {
         if (f.held) this.throwHeld(f);
-        else this.startAttack(f, c.smash);
+        else this.startAttack(f, c.id === 'corrin' ? getCorrinMoves(f.corrin.form).smash : c.smash);
       } else if (ctrl.secondary && f.secondaryCooldown === 0) {
-        this.startAttack(f, c.secondary);
+        this.startAttack(f, c.id === 'corrin' ? getCorrinMoves(f.corrin.form).secondary : c.secondary);
       } else if (ctrl.special && f.specialCooldown === 0) {
-        if (f.held) this.throwHeld(f);
+        if (f.char.id === 'corrin') this.startAttack(f, getCorrinMoves(f.corrin.form).special);
+        else if (f.held) this.throwHeld(f);
         else this.startAttack(f, c.special);
       }
     }
@@ -772,6 +803,11 @@ export class Game {
         const origin = getTharjaCastOrigin?.(f.x, f.y + f.h, 112, def.kind, f.facing) ?? { x: f.x + f.facing * 28, y: f.y + f.h - 89 };
         this.darkMagic.cast(def.effect, this.summonOwner(f), origin, this.tharjaContext(), { damageMultiplier: (f.buffs.atkUntil > this.frame ? 1.3 : 1) * this.summons.damageMultiplier(f.idx) });
         if (def.kind === 'jab' || def.kind === 'smash') this.sfx.play('cast', { charId: c.id, kind: def.kind });
+      }
+      if (a.t === def.startup && isCorrinWater(def.effect)) {
+        const origin = getCorrinCastOrigin(f.x, f.y + f.h, 112, this.fighterAnimation(f), f.facing) ?? { x: f.x + f.facing * 58, y: f.y + f.h - 50 };
+        this.corrinWater.cast(def.effect, this.summonOwner(f), origin, { damageMultiplier: (f.buffs.atkUntil > this.frame ? 1.3 : 1) * this.summons.damageMultiplier(f.idx) });
+        if (def.kind !== 'secondary') this.sfx.play('cast', { charId: c.id, kind: def.kind });
       }
       if (a.t === def.startup && (def.effect === 'geo-pillar' || def.effect === 'salon')) {
         const owner = this.summonOwner(f), context = this.summonContext();
@@ -881,6 +917,11 @@ export class Game {
   }
 
   private startAttack(f: Fighter, def: MoveDef) {
+    if (f.corrin.transform) return;
+    if (f.char.id === 'corrin' && def.kind === 'special') {
+      startCorrinTransform(f.corrin, !f.onGround); f.specialCooldown = (f.char.specialCooldown ?? 2.5) * 60;
+      this.sfx.play('cast', { charId: f.char.id, kind: 'special' }); return;
+    }
     if (def.effect === 'plunge' && f.onGround) {
       if (!this.texts.some(text => text.text === '需在空中释放' && Math.abs(text.x - f.x) < 50)) {
         this.texts.push({ x: f.x, y: f.y - 32, text: '需在空中释放', color: '#a6f5df', life: 42, size: 16 });
@@ -888,6 +929,10 @@ export class Game {
       return;
     }
     f.attack = { def, t: 0, hasHit: new Set(), visualVariant: takeAttackVariant(f.nextAttackVariants, def.kind) };
+    if (f.char.id === 'corrin') {
+      f.attack.corrinForm = f.corrin.form;
+      if (def.kind === 'jab' && f.corrin.form === 'human') f.attack.corrinCombo = takeCorrinCombo(f.corrin, f.animationFrame);
+    }
     f.state = 'attack';
     if (def.kind === 'jab' || def.kind === 'smash') this.sfx.play('attack', { charId: f.char.id, kind: def.kind });
     if (def.effect === 'plunge') {
@@ -898,9 +943,13 @@ export class Game {
     if (def.kind === 'secondary') f.secondaryCooldown = f.char.secondaryCooldown * 60;
     if (def.kind === 'special') f.specialCooldown = f.char.specialCooldown !== undefined ? f.char.specialCooldown * 60 : def.effect === 'plunge' ? 105 : 90;
     if (f.onGround && def.effect !== 'dash') f.vx *= 0.3;
+    // Long stationary CPU casts must brake their approach momentum. A residual
+    // drift otherwise carries a 110-frame Mire cast straight off the ledge.
+    if (f.isCPU && f.onGround && (isTharjaSpell(def.effect) || isCorrinWater(def.effect))) f.vx = 0;
   }
 
   private releaseSecondary(f: Fighter, def: MoveDef) {
+    if (f.char.id === 'corrin') return;
     if (def.effect === 'geo-meteor' || def.effect === 'revelry') {
       const owner = this.summonOwner(f), context = this.summonContext();
       if (def.effect === 'geo-meteor') this.summons.castMeteor(owner, context);
@@ -936,7 +985,7 @@ export class Game {
       return null;
     }
     if (t < def.startup || t >= def.startup + def.active) return null;
-    if (isTharjaSpell(def.effect) || def.effect === 'projectile' || def.effect === 'geo-pillar' || def.effect === 'salon' || (def.kind === 'secondary' && def.effect !== 'thrust')) return null;
+    if (isCorrinWater(def.effect) || def.effect === 'transform' || def.effect === 'dragon-fang' || isTharjaSpell(def.effect) || def.effect === 'projectile' || def.effect === 'geo-pillar' || def.effect === 'salon' || (def.kind === 'secondary' && def.effect !== 'thrust')) return null;
     const reach = def.reach;
     if (def.effect === 'spin') {
       return { x: f.x - reach, y: f.y + f.h / 2 - def.height / 2, w: reach * 2, h: def.height };
@@ -952,6 +1001,16 @@ export class Game {
     const hits: { atk: Fighter; vic: Fighter; def: MoveDef }[] = [];
     for (const atk of this.fighters) {
       if (atk.respawnTimer > 0) continue;
+      if (atk.attack?.def.effect === 'dragon-fang' && atk.attack.t >= atk.attack.def.startup && atk.attack.t < atk.attack.def.startup + atk.attack.def.active) {
+        const segment = getCorrinFangSegment(atk.x, atk.y + atk.h, 112, this.fighterAnimation(atk), atk.facing);
+        if (segment) for (const vic of this.fighters) {
+          if (vic === atk || vic.respawnTimer || vic.invuln > 0 || atk.attack.hasHit.has(vic.idx)) continue;
+          if (corrinSegmentContact({ id: vic.idx, x: vic.x, feetY: vic.y + vic.h, width: vic.w, height: vic.h, alive: true }, segment.base.x, segment.base.y, segment.tip.x, segment.tip.y, 12) !== null) {
+            atk.attack.hasHit.add(vic.idx); hits.push({ atk, vic, def: atk.attack.def });
+          }
+        }
+        continue;
+      }
       const hb = this.attackHitbox(atk);
       if (!hb || !atk.attack) continue;
       for (const vic of this.fighters) {
@@ -994,6 +1053,8 @@ export class Game {
     else if (vic.petrified > 0) vic.hitstun = Math.max(vic.hitstun, vic.petrified);
     vic.hitstunDuration = vic.hitstun;
     vic.attack = null;
+    cancelCorrinTransform(vic.corrin);
+    this.corrinWater.cancelBeam(vic.idx);
     this.darkMagic.cancelDrain(vic.idx);
     vic.dropTimer = 0;
     vic.dodgeTimer = 0;
@@ -1082,6 +1143,26 @@ export class Game {
         owner.percent -= heal;
         if (heal > 0) this.texts.push({ x: owner.x, y: owner.y - 20, text: `−${heal.toFixed(1)}%`, color: '#d1f0c0', life: 36, size: 18 });
       }
+    }
+  }
+
+  private updateCorrinWater(): void {
+    const context = this.tharjaContext();
+    context.castOriginAt = id => {
+      const f = this.fighters.find(candidate => candidate.idx === id);
+      return f ? getCorrinCastOrigin(f.x, f.y + f.h, 112, this.fighterAnimation(f), f.facing) : undefined;
+    };
+    for (const hit of this.corrinWater.step(context)) {
+      const owner = this.fighters.find(f => f.idx === hit.ownerId), target = this.fighters.find(f => f.idx === hit.targetId);
+      if (!owner || !target || target.invuln > 0 || target.respawnTimer > 0 || target.stocks <= 0) continue;
+      this.applyHit(owner, target, { ...getCorrinMoves('dragon')[hit.kind], dmg: hit.amount }, true);
+    }
+  }
+
+  private drawCorrinWater(g: CanvasRenderingContext2D) {
+    for (const effect of this.corrinWater.effects) {
+      const beam = effect.kind === 'water-beam', width = beam ? Math.abs(effect.originX - effect.x) : effect.radius * 2;
+      drawCorrinWaterEffect(g, effect.kind, effect.x, effect.y, width, effect.radius * 2, effect.age, effect.facing);
     }
   }
 
@@ -1292,6 +1373,7 @@ export class Game {
     f.respawnTimer = f.stocks > 0 ? 70 : 0;
     f.vx = 0; f.vy = 0;
     f.attack = null; f.state = 'free';
+    f.corrin = newCorrinState(); this.corrinWater.clearOwner(f.idx);
     f.nextAttackVariants = newAttackVariants();
     f.secondaryCooldown = 0;
     this.projectiles = this.projectiles.filter(projectile => projectile.owner !== f.idx);
@@ -1301,6 +1383,7 @@ export class Game {
   }
 
   private respawn(f: Fighter) {
+    f.corrin = newCorrinState(); this.corrinWater.clearOwner(f.idx);
     this.summons.clearOwner(f.idx);
     this.darkMagic.clearOwner(f.idx);
     f.x = WORLD.w / 2 + (f.idx === 0 ? -80 : 80);
@@ -1389,6 +1472,7 @@ export class Game {
       this.drawProjectiles(g);
       this.drawSummons(g);
       drawTharjaEffects(g, this.darkMagic.effects);
+      this.drawCorrinWater(g);
       for (const trail of this.afterimages) {
         drawFighterArt(g, trail.charId, trail.x, trail.feetY, 112, trail.animation, { facing: trail.facing, alpha: trail.life / 10 * 0.22 });
       }
@@ -1656,11 +1740,12 @@ export class Game {
   // ---------------- 角色绘制 ----------------
   private fighterAnimation(f: Fighter): FighterAnimation {
     return {
-      state: f.state, attack: f.attack ? { def: f.attack.def, t: f.attack.t, visualVariant: f.attack.visualVariant, plunge: f.attack.plunge ? { phase: f.attack.plunge.phase, elapsed: f.attack.plunge.elapsed, recoveryDuration: Math.max(1, f.attack.def.endlag - f.attack.def.active) } : undefined } : null,
+      state: f.state, attack: f.attack ? { def: f.attack.def, t: f.attack.t, visualVariant: f.attack.visualVariant, corrinForm: f.attack.corrinForm, corrinCombo: f.attack.corrinCombo, plunge: f.attack.plunge ? { phase: f.attack.plunge.phase, elapsed: f.attack.plunge.elapsed, recoveryDuration: Math.max(1, f.attack.def.endlag - f.attack.def.active) } : undefined } : null,
       onGround: f.onGround, vx: f.vx, vy: f.vy, dodgeTimer: f.dodgeTimer, time: f.animationFrame,
       dodgeDuration: DODGE_FRAMES,
       hitstunAge: Math.max(0, f.hitstunDuration - f.hitstun), hitstunDuration: f.hitstunDuration,
       motion: { ...f.motion },
+      corrin: f.char.id === 'corrin' ? { ...f.corrin, transform: f.corrin.transform ? { ...f.corrin.transform } : undefined } : undefined,
     };
   }
 
@@ -1765,6 +1850,7 @@ export class Game {
   // Elemental layers use attack time, so impact frames remain locked during hitstop.
   private drawAttackFx(g: CanvasRenderingContext2D, f: Fighter) {
     const c = f.char;
+    if (c.id === 'corrin') return;
     if (!f.attack) return;
     const { def, t } = f.attack;
     if (isTharjaSpell(def.effect)) return;

@@ -4,6 +4,7 @@ import { CHARACTERS } from '../game/data';
 import { LOBBY_CHARACTER_ART } from '../game/lobby-art';
 import { useArtLoading, useBattleArt } from '../hooks/useArtLoading';
 import ArtLoading from '../components/ArtLoading';
+import CorrinStatus from '../components/CorrinStatus';
 import { SurvivalGame } from '../game/survival-engine';
 import { EXPEDITION_REGIONS, getSecondaryProfile, getTacticalMap, SURVIVAL_DURATION, TACTICAL_DURATION } from '../game/survival-data';
 import type { SurvivalOptions, TacticalMapId, UpgradeChoice } from '../game/survival-data';
@@ -106,7 +107,7 @@ export function SurvivalControls({ compact = false, tactical = false, expedition
   return <div className={compact ? 'survival-controls compact' : 'survival-controls'}>
     <p><kbd>A</kbd><kbd>D</kbd> 移动 <kbd>W</kbd> 跳跃 / 二段跳 <kbd>S</kbd> 快降 / 下平台 <kbd>H</kbd> 闪避</p>
     <p><kbd>J</kbd> 普攻 <kbd>K</kbd> 重击 <kbd>L</kbd> 元素技能 <kbd>I</kbd> 战技 <span>· 全手动释放</span></p>
-    {!compact && <p className="survival-control-note">{tactical ? `L / I 固定为 3 级、独立冷却。${copy.controls}盾卫可绕后或重击破盾，冲锋兽扑空后有反击空档，射手近身即可打断。` : '两招独立冷却、独立升级，最高 5 级。L 在 4 级选择进化。钟离岩柱与芙宁娜沙龙成员仅在手动释放 L 后持续行动。升级时战场暂停，选择后继续。'}<kbd>Esc</kbd> / <kbd>P</kbd> 暂停，<kbd>M</kbd> 静音。魈先起跳再按 <kbd>L</kbd> 下坠；<kbd>I</kbd> 可在地面或空中水平突进。</p>}
+    {!compact && <p className="survival-control-note">{tactical ? `L / I 固定为 3 级、独立冷却。${copy.controls}盾卫可绕后或重击破盾，冲锋兽扑空后有反击空档，射手近身即可打断。` : '两招独立冷却、独立升级，最高 5 级。L 在 4 级选择进化。钟离岩柱与芙宁娜沙龙成员仅在手动释放 L 后持续行动。升级时战场暂停，选择后继续。'}<kbd>Esc</kbd> / <kbd>P</kbd> 暂停，<kbd>M</kbd> 静音。神威用 <kbd>L</kbd> 切换近战人形与远程白龙，两形态共享生命及冷却。魈先起跳再按 <kbd>L</kbd> 下坠；<kbd>I</kbd> 可在地面或空中水平突进。</p>}
     {!compact && expedition && <p className="survival-control-note">遗迹漫游：风井借风登高，断桥二段跳或沿谷地绕行，机关黄纹预警时登台。三区可自由往返，生命与成长保留。9 分钟首领登场后停止增援、地火熄灭，存活至 10 分钟通关。</p>}
   </div>;
 }
@@ -257,10 +258,12 @@ export default function SurvivalBattle({ options, muted, onMutedChange, onExit }
   const skillLevel = snapshot?.skillLevel ?? (isTactical ? 3 : 1);
   const secondaryLevel = snapshot?.secondaryLevel ?? (isTactical ? 3 : 1);
   const secondaryForm = getSecondaryProfile(character.id, secondaryLevel).description.split('；')[0];
+  const specialName = snapshot?.corrin?.specialName ?? character.special.name;
+  const secondaryName = snapshot?.corrin?.secondaryName ?? character.secondary.name;
   const summonStatus = character.id === 'zhongli' || character.id === 'furina' ? <div className="survival-summon-status" aria-label="召唤状态">
     {character.id === 'zhongli' ? <><span>盾 {Math.ceil(snapshot?.shieldHp ?? 0)}{(snapshot?.shieldRemaining ?? 0) > 0 ? ` · ${Math.ceil(snapshot!.shieldRemaining)}s` : ''}</span><span>岩柱 {snapshot?.summonCount ?? 0} · {Math.ceil(snapshot?.summonRemaining ?? 0)}s</span></> : <><span>沙龙 {snapshot?.summonCount ?? 0}/3 · {Math.ceil(snapshot?.summonRemaining ?? 0)}s</span><span>喝彩 {(snapshot?.buffRemaining ?? 0) > 0 ? `${Math.ceil(snapshot!.buffRemaining)}s` : '未开启'}</span></>}
   </div> : null;
-  const skillLoadout = <div className="survival-skill-loadout"><div><kbd>L</kbd><span>{character.special.name} · Lv.{skillLevel}<small>{isTactical ? '试炼固定技能 · 手动释放' : snapshot?.branchName || '基础形态 · 4 级可进化'}</small></span></div><div><kbd>I</kbd><span>{character.secondary.name} · Lv.{secondaryLevel}<small>{secondaryForm}</small></span></div></div>;
+  const skillLoadout = <div className="survival-skill-loadout"><div><kbd>L</kbd><span>{specialName} · Lv.{skillLevel}<small>{isTactical ? '试炼固定技能 · 手动释放' : snapshot?.branchName || '基础形态 · 4 级可进化'}</small></span></div><div><kbd>I</kbd><span>{secondaryName} · Lv.{secondaryLevel}<small>{secondaryForm}</small></span></div></div>;
   return <main className={`survival-main ${isTactical ? 'tactical-main' : isExpedition ? 'expedition-main' : ''} ${summonStatus ? 'has-summon-status' : ''}`}>
     {mobile.enabled && <MobileControls gameRef={gameRef} snapshot={snapshot} character={character} active={snapshot?.phase === 'playing' && !mobile.portrait} editing={editingControls && !mobile.portrait} onCloseEditor={() => setEditingControls(false)}/>}
     {mobile.enabled && mobile.portrait && <RotateDeviceGuide onExit={onExit}/>}
@@ -275,10 +278,10 @@ export default function SurvivalBattle({ options, muted, onMutedChange, onExit }
     </section>
     {isTactical ? <div className={`tactical-stagebar ${hasHazards ? 'has-hazards' : ''}`}><div className="tactical-encounters" aria-label="试炼阶段">{tacticalMap.encounters.map((stage, index) => <span key={stage.start} className={index === encounterIndex ? 'active' : index < encounterIndex ? 'complete' : ''} aria-current={index === encounterIndex ? 'step' : undefined}><b>{index + 1}</b><span>{stage.name.replace(/^\d+\s*·\s*/, '')}</span><small>{formatTime(stage.start)}</small></span>)}</div><div className="tactical-stage-hint"><span aria-live="polite">{encounter.hint}</span><small>{nextEncounter ? `下一组 ${formatTime(Math.max(0, nextEncounter.start - (snapshot?.elapsed ?? 0)))}` : '最后一组 · 坚持至计时结束'}</small></div>{hasHazards ? <TacticalHazards mapId={tacticalMap.id} snapshot={snapshot}/> : <p className="tactical-touch-tip"><b>{tacticalMap.name}</b> · {tacticalCopy.touch}</p>}</div> : <div className="survival-experience" role="progressbar" aria-label="升级经验" aria-valuenow={xp} aria-valuemin={0} aria-valuemax={xpNeeded}><i style={{ width: `${Math.min(100, xp / xpNeeded * 100)}%` }}/><span>经验 {Math.floor(xp)} / {xpNeeded}</span></div>}
     {isExpedition && <ExpeditionNavigation snapshot={snapshot}/>}
-    <div className="arena-frame survival-arena"><canvas ref={canvasRef} tabIndex={-1} onPointerDown={() => canvasRef.current?.focus({ preventScroll: true })} aria-label={`${character.name}的${isTactical ? `90秒战术试炼，${tacticalMap.name}，${tacticalMap.subtitle}，${tacticalCopy.touch}` : isExpedition ? '遗迹漫游，风井遗迹、断桥回廊、机关回廊相连，十分钟自由探索' : '经典生存'}战场，A D移动，W跳跃，S下穿，J K手动攻击，L元素技能，I战技，H闪避`}/>{!snapshot && <ArtLoading characterIds={[character.id]} progress={preparation.progress} onRetry={preparation.retry} onExit={onExit}/>}</div>
+    <div className="arena-frame survival-arena"><canvas ref={canvasRef} tabIndex={-1} onPointerDown={() => canvasRef.current?.focus({ preventScroll: true })} aria-label={`${character.name}的${isTactical ? `90秒战术试炼，${tacticalMap.name}，${tacticalMap.subtitle}，${tacticalCopy.touch}` : isExpedition ? '遗迹漫游，风井遗迹、断桥回廊、机关回廊相连，十分钟自由探索' : '经典生存'}战场，A D移动，W跳跃，S下穿，J K手动攻击，L元素技能，I战技，H闪避`}/><CorrinStatus hud={snapshot?.corrin}/>{!snapshot && <ArtLoading characterIds={[character.id]} progress={preparation.progress} onRetry={preparation.retry} onExit={onExit}/>}</div>
     <div className="survival-actionbar">
       <SurvivalControls compact tactical={isTactical} expedition={isExpedition} mapId={tacticalMap.id}/>
-      <div className="survival-cooldowns"><Cooldown label={character.special.name} hotkey="L" level={isTactical ? skillLevel : undefined} remaining={snapshot?.skillCooldown ?? 0} maximum={snapshot?.skillCooldownMax ?? 1} description={character.desc}/><Cooldown label={character.secondary.name} hotkey="I" level={secondaryLevel} remaining={snapshot?.secondaryCooldown ?? 0} maximum={snapshot?.secondaryCooldownMax ?? character.secondaryCooldown} description={secondaryForm}/><Cooldown label="闪避" hotkey="H" remaining={snapshot?.dodgeCooldown ?? 0} maximum={snapshot?.dodgeCooldownMax ?? 1}/></div>
+      <div className="survival-cooldowns"><Cooldown label={specialName} hotkey="L" level={isTactical ? skillLevel : undefined} remaining={snapshot?.skillCooldown ?? 0} maximum={snapshot?.skillCooldownMax ?? 1} description={character.desc}/><Cooldown label={secondaryName} hotkey="I" level={secondaryLevel} remaining={snapshot?.secondaryCooldown ?? 0} maximum={snapshot?.secondaryCooldownMax ?? character.secondaryCooldown} description={secondaryForm}/><Cooldown label="闪避" hotkey="H" remaining={snapshot?.dodgeCooldown ?? 0} maximum={snapshot?.dodgeCooldownMax ?? 1}/></div>
     </div>
     <div className="survival-bottomline"><span>{isTactical ? `${tacticalCopy.bottomline} · ${tacticalMap.routeHint}` : isExpedition ? '风井登高 · 断桥上下绕行 · 机关黄纹登台 · 三区自由往返，成长一路保留' : character.id === 'xiao' ? '魈：W 起跳 → L 枪尖向下戳刺。凌空路线返还跳跃，由你决定何时再起跳。' : '攻击方向随你的朝向。沿坡道穿行高地与谷地，利用浮台拉开距离。'}</span><span>{isTactical ? '01:30 存活通关 · L / I 固定 3 级' : '10:00 存活通关 · 首领奖励额外计算'}</span></div>
     {hasOverlay && !editingControls && !(mobile.enabled && mobile.portrait) && <div className="survival-overlay">

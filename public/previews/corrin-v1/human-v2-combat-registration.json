@@ -1,0 +1,1283 @@
+{
+  "version": 2,
+  "form": "human",
+  "revision": "human-proportion-v2",
+  "status": "manual geometry registered; J1/J2/J3 master-scale art, active/recovery FX timing and mirrored browser compositing visually reviewed",
+  "identityReference": "assets/human-master.png",
+  "anatomyReference": "assets/human-v2-idle.png",
+  "pixelEditing": false,
+  "notes": [
+    "All new characters have no baked sword effects. Active-frame overlay uses actual blade base and tip coordinates.",
+    "J3 uses wide 2x2 mid-thrust source to prevent cell width forcing a foreshortened sword.",
+    "Small hand-painted projected-length differences remain; do not claim exact geometric equality."
+  ],
+  "clips": [
+    {
+      "id": "jab1",
+      "title": "J1 · 肩后起手斜下劈",
+      "loop": false,
+      "worldHeight": 112,
+      "activeFrames": [
+        3,
+        4
+      ],
+      "sheets": [
+        {
+          "src": "assets/human-v2-jab1-a.png",
+          "bodyHeight": 440,
+          "bodyHeightMethod": "fixed per-sheet standing anatomical ruler; no per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 12,
+          "width": 1254,
+          "height": 1254,
+          "sha256": "df8d3a906261decb011ab75dbb1b5afd10e372eb9e7725ba94b91f10b171da2f",
+          "alphaRange": [
+            0,
+            255
+          ]
+        },
+        {
+          "src": "assets/human-v2-jab1-b-longblade.png",
+          "bodyHeight": 466,
+          "bodyHeightMethod": "fixed per-sheet standing anatomical ruler; no per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 12,
+          "width": 1254,
+          "height": 1254,
+          "sha256": "66c77ff8db0b2ffba5094f48ad41cb4a98b8d4cf992cca59f8f302f83c60eeaa",
+          "alphaRange": [
+            0,
+            255
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            358,
+            595
+          ],
+          "duration": 110,
+          "phase": "自然准备",
+          "anchors": {
+            "hand": [
+              316,
+              378
+            ],
+            "weaponBase": [
+              343,
+              405
+            ],
+            "swordTip": [
+              520,
+              546
+            ],
+            "headTop": [
+              356,
+              162
+            ],
+            "chin": [
+              376,
+              224
+            ],
+            "hip": [
+              354,
+              360
+            ],
+            "kneeNear": [
+              306,
+              470
+            ],
+            "ankleNear": [
+              289,
+              572
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            145,
+            162,
+            376,
+            436
+          ],
+          "opaqueBoundsMeasured": [
+            145,
+            162,
+            521,
+            598
+          ],
+          "bladeLengthPixels": 226.3,
+          "bladeToStandingHeight": 0.514
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            368,
+            595
+          ],
+          "duration": 95,
+          "phase": "肩后抬剑",
+          "anchors": {
+            "hand": [
+              316,
+              222
+            ],
+            "weaponBase": [
+              286,
+              204
+            ],
+            "swordTip": [
+              118,
+              105
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            117,
+            106,
+            365,
+            496
+          ],
+          "opaqueBoundsMeasured": [
+            117,
+            106,
+            482,
+            602
+          ],
+          "bladeLengthPixels": 195.0,
+          "bladeToStandingHeight": 0.443
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            365,
+            510
+          ],
+          "duration": 85,
+          "phase": "小步蓄势",
+          "anchors": {
+            "hand": [
+              317,
+              193
+            ],
+            "weaponBase": [
+              288,
+              175
+            ],
+            "swordTip": [
+              111,
+              69
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            109,
+            68,
+            431,
+            447
+          ],
+          "opaqueBoundsMeasured": [
+            109,
+            68,
+            540,
+            515
+          ],
+          "bladeLengthPixels": 206.31,
+          "bladeToStandingHeight": 0.469
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            323,
+            509
+          ],
+          "duration": 40,
+          "phase": "前下切入",
+          "anchors": {
+            "hand": [
+              369,
+              263
+            ],
+            "weaponBase": [
+              401,
+              241
+            ],
+            "swordTip": [
+              563,
+              157
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            61,
+            156,
+            502,
+            359
+          ],
+          "opaqueBoundsMeasured": [
+            61,
+            156,
+            563,
+            515
+          ],
+          "bladeLengthPixels": 182.48,
+          "bladeToStandingHeight": 0.415
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            710,
+            627
+          ],
+          "pivot": [
+            360,
+            575
+          ],
+          "duration": 45,
+          "phase": "斜下切过",
+          "anchors": {
+            "hand": [
+              448,
+              335
+            ],
+            "weaponBase": [
+              488,
+              362
+            ],
+            "swordTip": [
+              692,
+              534
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            94,
+            161,
+            599,
+            418
+          ],
+          "opaqueBoundsMeasured": [
+            94,
+            161,
+            693,
+            579
+          ],
+          "bladeLengthPixels": 266.83,
+          "bladeToStandingHeight": 0.573
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            710,
+            0,
+            544,
+            627
+          ],
+          "pivot": [
+            208,
+            587
+          ],
+          "duration": 85,
+          "phase": "前低随动",
+          "anchors": {
+            "hand": [
+              272,
+              374
+            ],
+            "weaponBase": [
+              310,
+              403
+            ],
+            "swordTip": [
+              475,
+              541
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            19,
+            157,
+            455,
+            432
+          ],
+          "opaqueBoundsMeasured": [
+            19,
+            157,
+            474,
+            589
+          ],
+          "bladeLengthPixels": 215.1,
+          "bladeToStandingHeight": 0.462
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            627,
+            710,
+            627
+          ],
+          "pivot": [
+            358,
+            542
+          ],
+          "duration": 105,
+          "phase": "低位收剑",
+          "anchors": {
+            "hand": [
+              317,
+              305
+            ],
+            "weaponBase": [
+              353,
+              336
+            ],
+            "swordTip": [
+              583,
+              514
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            123,
+            79,
+            461,
+            466
+          ],
+          "opaqueBoundsMeasured": [
+            123,
+            79,
+            584,
+            545
+          ],
+          "bladeLengthPixels": 290.83,
+          "bladeToStandingHeight": 0.624
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            710,
+            627,
+            544,
+            627
+          ],
+          "pivot": [
+            253,
+            542
+          ],
+          "duration": 140,
+          "phase": "回到准备",
+          "anchors": {
+            "hand": [
+              210,
+              323
+            ],
+            "weaponBase": [
+              244,
+              352
+            ],
+            "swordTip": [
+              460,
+              521
+            ],
+            "headTop": [
+              248,
+              78
+            ],
+            "chin": [
+              263,
+              147
+            ],
+            "hip": [
+              251,
+              303
+            ],
+            "kneeNear": [
+              208,
+              418
+            ],
+            "ankleNear": [
+              195,
+              516
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            32,
+            79,
+            428,
+            467
+          ],
+          "opaqueBoundsMeasured": [
+            32,
+            79,
+            460,
+            546
+          ],
+          "bladeLengthPixels": 274.26,
+          "bladeToStandingHeight": 0.589
+        }
+      ]
+    },
+    {
+      "id": "jab2",
+      "title": "J2 · 反手横斩",
+      "loop": false,
+      "worldHeight": 112,
+      "activeFrames": [
+        3,
+        4
+      ],
+      "sheets": [
+        {
+          "src": "assets/human-v2-jab2.png",
+          "bodyHeight": 270,
+          "bodyHeightMethod": "fixed per-sheet standing anatomical ruler; no per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 12,
+          "width": 1774,
+          "height": 887,
+          "sha256": "18a678b5796921eec7c93f6180818bd1ab51d156479325264fc12f4d15e41bd6",
+          "alphaRange": [
+            0,
+            255
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            480,
+            443
+          ],
+          "pivot": [
+            220,
+            388
+          ],
+          "duration": 110,
+          "phase": "自然准备",
+          "anchors": {
+            "hand": [
+              198,
+              265
+            ],
+            "weaponBase": [
+              216,
+              282
+            ],
+            "swordTip": [
+              341,
+              368
+            ],
+            "headTop": [
+              218,
+              122
+            ],
+            "chin": [
+              234,
+              163
+            ],
+            "hip": [
+              219,
+              245
+            ],
+            "kneeNear": [
+              189,
+              312
+            ],
+            "ankleNear": [
+              178,
+              371
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            91,
+            123,
+            252,
+            267
+          ],
+          "opaqueBoundsMeasured": [
+            91,
+            123,
+            343,
+            390
+          ],
+          "bladeLengthPixels": 151.73,
+          "bladeToStandingHeight": 0.562
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            480,
+            0,
+            450,
+            443
+          ],
+          "pivot": [
+            200,
+            388
+          ],
+          "duration": 100,
+          "phase": "横收左腰",
+          "anchors": {
+            "hand": [
+              212,
+              224
+            ],
+            "weaponBase": [
+              192,
+              224
+            ],
+            "swordTip": [
+              46,
+              224
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            44,
+            129,
+            236,
+            261
+          ],
+          "opaqueBoundsMeasured": [
+            44,
+            129,
+            280,
+            390
+          ],
+          "bladeLengthPixels": 146.0,
+          "bladeToStandingHeight": 0.541
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            930,
+            0,
+            390,
+            443
+          ],
+          "pivot": [
+            195,
+            388
+          ],
+          "duration": 90,
+          "phase": "反手蓄势",
+          "anchors": {
+            "hand": [
+              195,
+              225
+            ],
+            "weaponBase": [
+              176,
+              225
+            ],
+            "swordTip": [
+              12,
+              225
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            11,
+            130,
+            259,
+            259
+          ],
+          "opaqueBoundsMeasured": [
+            11,
+            130,
+            270,
+            389
+          ],
+          "bladeLengthPixels": 164.0,
+          "bladeToStandingHeight": 0.607
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            1320,
+            0,
+            454,
+            443
+          ],
+          "pivot": [
+            202,
+            388
+          ],
+          "duration": 40,
+          "phase": "反手横切",
+          "anchors": {
+            "hand": [
+              262,
+              195
+            ],
+            "weaponBase": [
+              282,
+              195
+            ],
+            "swordTip": [
+              433,
+              195
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            83,
+            130,
+            353,
+            260
+          ],
+          "opaqueBoundsMeasured": [
+            83,
+            130,
+            436,
+            390
+          ],
+          "bladeLengthPixels": 151.0,
+          "bladeToStandingHeight": 0.559
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            443,
+            480,
+            444
+          ],
+          "pivot": [
+            215,
+            350
+          ],
+          "duration": 45,
+          "phase": "横向切过",
+          "anchors": {
+            "hand": [
+              270,
+              159
+            ],
+            "weaponBase": [
+              290,
+              159
+            ],
+            "swordTip": [
+              444,
+              159
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            81,
+            88,
+            362,
+            264
+          ],
+          "opaqueBoundsMeasured": [
+            81,
+            88,
+            443,
+            352
+          ],
+          "bladeLengthPixels": 154.0,
+          "bladeToStandingHeight": 0.57
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            480,
+            443,
+            450,
+            444
+          ],
+          "pivot": [
+            198,
+            350
+          ],
+          "duration": 90,
+          "phase": "横向随动",
+          "anchors": {
+            "hand": [
+              253,
+              172
+            ],
+            "weaponBase": [
+              274,
+              173
+            ],
+            "swordTip": [
+              404,
+              216
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            63,
+            90,
+            342,
+            262
+          ],
+          "opaqueBoundsMeasured": [
+            63,
+            90,
+            405,
+            352
+          ],
+          "bladeLengthPixels": 136.93,
+          "bladeToStandingHeight": 0.507
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            930,
+            443,
+            390,
+            444
+          ],
+          "pivot": [
+            190,
+            350
+          ],
+          "duration": 110,
+          "phase": "下收剑柄",
+          "anchors": {
+            "hand": [
+              167,
+              214
+            ],
+            "weaponBase": [
+              184,
+              234
+            ],
+            "swordTip": [
+              306,
+              326
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            65,
+            88,
+            243,
+            265
+          ],
+          "opaqueBoundsMeasured": [
+            65,
+            88,
+            308,
+            353
+          ],
+          "bladeLengthPixels": 152.8,
+          "bladeToStandingHeight": 0.566
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            1320,
+            443,
+            454,
+            444
+          ],
+          "pivot": [
+            220,
+            350
+          ],
+          "duration": 140,
+          "phase": "回到准备",
+          "anchors": {
+            "hand": [
+              206,
+              226
+            ],
+            "weaponBase": [
+              225,
+              244
+            ],
+            "swordTip": [
+              344,
+              334
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            107,
+            88,
+            243,
+            264
+          ],
+          "opaqueBoundsMeasured": [
+            107,
+            88,
+            350,
+            352
+          ],
+          "bladeLengthPixels": 149.2,
+          "bladeToStandingHeight": 0.553
+        }
+      ]
+    },
+    {
+      "id": "jab3",
+      "title": "J3 · 短促水平突刺",
+      "loop": false,
+      "worldHeight": 112,
+      "activeFrames": [
+        3,
+        4
+      ],
+      "sheets": [
+        {
+          "src": "assets/human-v2-jab3-refined.png",
+          "bodyHeight": 334,
+          "bodyHeightMethod": "fixed per-sheet standing anatomical ruler; no per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 12,
+          "width": 1774,
+          "height": 887,
+          "sha256": "c7783786467df36c47b3d8e16d12d22d98985980896bcc192613170ad1402074",
+          "alphaRange": [
+            0,
+            255
+          ]
+        },
+        {
+          "src": "assets/human-v2-jab3-thrust-wide.png",
+          "bodyHeight": 450,
+          "bodyHeightMethod": "fixed per-sheet standing anatomical ruler; no per-frame bounding-box normalization",
+          "bodyHeightUncertaintyPixels": 12,
+          "width": 1774,
+          "height": 887,
+          "sha256": "a8229ebcdc37fb2c7f7b57382bf501c7bc818f22273b5473b01065ed5e25a6ef",
+          "alphaRange": [
+            0,
+            255
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            443,
+            443
+          ],
+          "pivot": [
+            210,
+            410
+          ],
+          "duration": 105,
+          "phase": "自然准备",
+          "anchors": {
+            "hand": [
+              185,
+              248
+            ],
+            "weaponBase": [
+              205,
+              268
+            ],
+            "swordTip": [
+              367,
+              400
+            ],
+            "headTop": [
+              218,
+              77
+            ],
+            "chin": [
+              236,
+              128
+            ],
+            "hip": [
+              215,
+              234
+            ],
+            "kneeNear": [
+              180,
+              324
+            ],
+            "ankleNear": [
+              164,
+              392
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            58,
+            78,
+            309,
+            333
+          ],
+          "opaqueBoundsMeasured": [
+            58,
+            78,
+            367,
+            411
+          ],
+          "bladeLengthPixels": 208.97,
+          "bladeToStandingHeight": 0.626
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            443,
+            0,
+            444,
+            443
+          ],
+          "pivot": [
+            222,
+            410
+          ],
+          "duration": 90,
+          "phase": "收肘平剑",
+          "anchors": {
+            "hand": [
+              206,
+              202
+            ],
+            "weaponBase": [
+              228,
+              204
+            ],
+            "swordTip": [
+              378,
+              204
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            62,
+            82,
+            316,
+            327
+          ],
+          "opaqueBoundsMeasured": [
+            62,
+            82,
+            378,
+            409
+          ],
+          "bladeLengthPixels": 150.0,
+          "bladeToStandingHeight": 0.449
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            887,
+            480
+          ],
+          "pivot": [
+            340,
+            472
+          ],
+          "duration": 90,
+          "phase": "水平蓄势",
+          "anchors": {
+            "hand": [
+              316,
+              174
+            ],
+            "weaponBase": [
+              365,
+              174
+            ],
+            "swordTip": [
+              595,
+              174
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            53,
+            22,
+            543,
+            454
+          ],
+          "opaqueBoundsMeasured": [
+            53,
+            22,
+            596,
+            476
+          ],
+          "bladeLengthPixels": 230.0,
+          "bladeToStandingHeight": 0.511
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            887,
+            0,
+            887,
+            480
+          ],
+          "pivot": [
+            327,
+            472
+          ],
+          "duration": 40,
+          "phase": "短促前送",
+          "anchors": {
+            "hand": [
+              468,
+              154
+            ],
+            "weaponBase": [
+              515,
+              154
+            ],
+            "swordTip": [
+              740,
+              154
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            47,
+            22,
+            694,
+            454
+          ],
+          "opaqueBoundsMeasured": [
+            47,
+            22,
+            741,
+            476
+          ],
+          "bladeLengthPixels": 225.0,
+          "bladeToStandingHeight": 0.5
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            480,
+            887,
+            407
+          ],
+          "pivot": [
+            364,
+            396
+          ],
+          "duration": 55,
+          "phase": "水平刺定",
+          "anchors": {
+            "hand": [
+              529,
+              106
+            ],
+            "weaponBase": [
+              570,
+              108
+            ],
+            "swordTip": [
+              810,
+              108
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            68,
+            5,
+            743,
+            394
+          ],
+          "opaqueBoundsMeasured": [
+            68,
+            5,
+            811,
+            399
+          ],
+          "bladeLengthPixels": 240.0,
+          "bladeToStandingHeight": 0.533
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            887,
+            480,
+            887,
+            407
+          ],
+          "pivot": [
+            360,
+            396
+          ],
+          "duration": 95,
+          "phase": "收肘回撤",
+          "anchors": {
+            "hand": [
+              349,
+              142
+            ],
+            "weaponBase": [
+              394,
+              142
+            ],
+            "swordTip": [
+              603,
+              142
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            80,
+            6,
+            524,
+            394
+          ],
+          "opaqueBoundsMeasured": [
+            80,
+            6,
+            604,
+            400
+          ],
+          "bladeLengthPixels": 209.0,
+          "bladeToStandingHeight": 0.464
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            887,
+            443,
+            443,
+            444
+          ],
+          "pivot": [
+            223,
+            385
+          ],
+          "duration": 110,
+          "phase": "下收归位",
+          "anchors": {
+            "hand": [
+              183,
+              224
+            ],
+            "weaponBase": [
+              204,
+              241
+            ],
+            "swordTip": [
+              369,
+              375
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            64,
+            65,
+            305,
+            322
+          ],
+          "opaqueBoundsMeasured": [
+            64,
+            65,
+            369,
+            387
+          ],
+          "bladeLengthPixels": 212.56,
+          "bladeToStandingHeight": 0.636
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            1330,
+            443,
+            444,
+            444
+          ],
+          "pivot": [
+            224,
+            385
+          ],
+          "duration": 145,
+          "phase": "回到准备",
+          "anchors": {
+            "hand": [
+              195,
+              224
+            ],
+            "weaponBase": [
+              214,
+              244
+            ],
+            "swordTip": [
+              383,
+              375
+            ]
+          },
+          "registrationMethod": "manual landmarks observed in original PNG coordinates; alpha bounds measured separately",
+          "anchorUncertaintyPixels": 6,
+          "bounds": [
+            71,
+            64,
+            314,
+            325
+          ],
+          "opaqueBoundsMeasured": [
+            71,
+            64,
+            385,
+            389
+          ],
+          "bladeLengthPixels": 213.83,
+          "bladeToStandingHeight": 0.64
+        }
+      ]
+    }
+  ]
+}

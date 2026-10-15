@@ -1,6 +1,6 @@
 import { CHARACTERS } from './data';
 import type { CharDef, MoveDef } from './data';
-import type { PlungeAnimation } from './animation';
+import type { PlungeAnimation, FighterAnimation } from './animation';
 import { advanceMotion, newMotionState, newAttackVariants, takeAttackVariant } from './clip-animation';
 import type { AttackVariantState, AttackVisualVariant, MotionState } from './clip-animation';
 import { acquireGameArt, getSwordCastTip, getTharjaCastOrigin, getCharacterCastOrigin } from './art';
@@ -22,11 +22,17 @@ import { SummonRuntime } from './summons';
 import type { SummonContext, SummonTuning } from './summons';
 import { TharjaRuntime, THARJA_COMBAT } from './tharja';
 import type { TharjaTuning, TharjaContext } from './tharja';
+import { CorrinRuntime, newCorrinState, getCorrinMoves, getCorrinHud, startCorrinTransform, stepCorrinState, takeCorrinCombo, isCorrinWater, corrinSegmentContact } from './corrin';
+import type { CorrinState, CorrinForm } from './corrin';
+import { getCorrinCastOrigin, getCorrinFangSegment } from './art';
+import { getCorrinSurvivalProfile } from './survival-data';
 
 export type SurvivalPhase = 'playing' | 'paused' | 'upgrade' | 'victory' | 'defeat';
 export interface SurvivalAttack {
   def: MoveDef; t: number; hit: Set<number>; emitted: boolean;
   visualVariant?: AttackVisualVariant;
+  corrinForm?: CorrinForm;
+  corrinCombo?: 0 | 1 | 2;
   plunge?: PlungeAnimation & { previousFeet: number };
 }
 export interface Survivor {
@@ -35,6 +41,7 @@ export interface Survivor {
   dodge: number; dodgeCooldown: number; skillCooldown: number; secondaryCooldown: number; attack: SurvivalAttack | null;
   motion: MotionState;
   nextAttackVariants: AttackVariantState;
+  corrin: CorrinState;
 }
 export interface SurvivalEnemy {
   id: number; kind: 'slime' | 'flyer' | 'ranged'; elite: boolean; boss: boolean;
@@ -119,6 +126,7 @@ export class SurvivalGame {
   texts: SurvivalText[] = [];
   summons = new SummonRuntime();
   tharja = new TharjaRuntime();
+  corrinWater = new CorrinRuntime();
   camera = { x: 0, y: 350 };
   private input = new BattleInput();
   private artLease?: GameArtLease;
@@ -155,7 +163,7 @@ export class SurvivalGame {
     const x = this.variant === 'expedition' ? 400 : this.variant === 'tactical' ? this.tacticalMap.spawnX : this.world.width / 2;
     return { x, y: this.groundHeightAt(x), vx: 0, vy: 0, facing: 1,
       onGround: true, jumps: 2, drop: 0, hp: SURVIVAL_BASE_HP, invuln: 0,
-      dodge: 0, dodgeCooldown: 0, skillCooldown: 0, secondaryCooldown: 0, attack: null, motion: newMotionState(), nextAttackVariants: newAttackVariants() };
+      dodge: 0, dodgeCooldown: 0, skillCooldown: 0, secondaryCooldown: 0, attack: null, motion: newMotionState(), nextAttackVariants: newAttackVariants(), corrin: newCorrinState() };
   }
 
   start(options: SurvivalOptions) {
@@ -182,6 +190,7 @@ export class SurvivalGame {
     this.enemies = []; this.orbs = []; this.shots = []; this.fields = []; this.effects = []; this.texts = [];
     this.summons.clear();
     this.tharja.clear();
+    this.corrinWater.clear();
     this.elapsed = 0; this.frame = 0; this.hitstop = 0; this.level = 1; this.xp = 0;
     this.kills = 0; this.eliteKills = 0; this.bossKilled = false; this.damageDealt = 0;
     this.choices = []; this.rerollsRemaining = 2; this.nextId = 1; this.eliteMilestones.clear(); this.spawnTimer = 30;
@@ -208,6 +217,9 @@ export class SurvivalGame {
       tacticalHazards: this.getTacticalHazards(),
       expedition: this.getExpeditionSnapshot(),
       phase: this.phase, muted: this.muted, charId: this.char.id, visualQuality: this.visualQuality,
+      corrin: this.char.id === 'corrin' ? getCorrinHud(this.player.corrin) : undefined,
+      canJab: this.phase === 'playing' && !this.player.corrin.transform,
+      canSmash: this.phase === 'playing' && !this.player.corrin.transform,
       elapsed: this.elapsed, remaining: Math.max(0, this.duration - this.elapsed),
       hp: this.player.hp, maxHp: stats.maxHp, level: this.level, xp: this.xp, xpNeeded: xpForLevel(this.level),
       kills: this.kills, eliteKills: this.eliteKills, bossKilled: this.bossKilled,
@@ -218,9 +230,9 @@ export class SurvivalGame {
       secondaryCooldown: this.player.secondaryCooldown / 60, secondaryCooldownMax: this.char.secondaryCooldown * getSecondaryProfile(this.char.id, this.progress.secondaryLevel).cooldownMultiplier,
       dodgeCooldown: this.player.dodgeCooldown / 60, dodgeCooldownMax: this.dodgeCooldownMax,
       onGround: this.player.onGround,
-      canSpecial: this.phase === 'playing' && this.player.skillCooldown <= 0 && !(this.char.id === 'xiao' && this.player.onGround),
-      canSecondary: this.phase === 'playing' && this.player.secondaryCooldown <= 0,
-      canDodge: this.phase === 'playing' && this.player.dodgeCooldown <= 0 && !this.player.attack?.plunge,
+      canSpecial: this.phase === 'playing' && !this.player.corrin.transform && this.player.skillCooldown <= 0 && !(this.char.id === 'xiao' && this.player.onGround),
+      canSecondary: this.phase === 'playing' && !this.player.corrin.transform && this.player.secondaryCooldown <= 0,
+      canDodge: this.phase === 'playing' && !this.player.corrin.transform && this.player.dodgeCooldown <= 0 && !this.player.attack?.plunge,
       shieldHp: this.summons.getShield(0)?.hp ?? 0,
       shieldRemaining: (this.summons.getShield(0)?.life ?? 0) / 60,
       summonCount: this.summons.entities.length,
@@ -301,6 +313,7 @@ export class SurvivalGame {
     this.choices = next; this.rerollsRemaining--; this.clearInput(); return true;
   }
   destroy() {
+    this.corrinWater.clear(); this.player.corrin = newCorrinState();
     this.destroyed = true; cancelAnimationFrame(this.raf);
     window.removeEventListener('keydown', this.onKeyDown);
     window.removeEventListener('keyup', this.onKeyUp);
@@ -346,7 +359,7 @@ export class SurvivalGame {
     // and input edges until the short impact pause has finished.
     if (this.hitstop > 0) { this.hitstop--; return; }
     this.frame++; this.elapsed = this.frame / 60;
-    if (this.elapsed >= this.duration) { this.elapsed = this.duration; this.phase = 'victory'; this.clearInput(); this.audio.setScene('result'); return; }
+    if (this.elapsed >= this.duration) { this.elapsed = this.duration; this.phase = 'victory'; this.clearInput(); this.corrinWater.clear(); this.player.corrin.transform = undefined; this.audio.setScene('result'); return; }
     if (this.noticeTimer > 0 && --this.noticeTimer === 0) this.notice = '';
     this.updatePlayer();
     if (this.variant === 'expedition') this.updateExpeditionRegion();
@@ -354,6 +367,7 @@ export class SurvivalGame {
     if (this.phase !== 'playing') return;
     this.updateSummons();
     this.updateTharja();
+    this.updateCorrinWater();
     this.updateSpawning();
     this.updateEnemies();
     if (this.phase !== 'playing') return;
@@ -367,7 +381,7 @@ export class SurvivalGame {
     this.camera.x += (clamp(this.player.x - VIEW_W / 2, 0, this.world.width - VIEW_W) - this.camera.x) * 0.12;
     const cameraY = this.variant !== 'survival' ? clamp(this.player.y - 200, 0, 230) : clamp(this.player.y - 510, 0, this.world.height - VIEW_H);
     this.camera.y += (cameraY - this.camera.y) * 0.10;
-    if (this.player.hp <= 0) { this.player.hp = 0; this.phase = 'defeat'; this.player.attack = null; this.player.nextAttackVariants = newAttackVariants(); this.clearInput(); this.summons.clear(); this.tharja.clear(); this.audio.setScene('result'); }
+    if (this.player.hp <= 0) { this.player.hp = 0; this.phase = 'defeat'; this.player.attack = null; this.player.corrin = newCorrinState(); this.player.nextAttackVariants = newAttackVariants(); this.clearInput(); this.summons.clear(); this.tharja.clear(); this.corrinWater.clear(); this.audio.setScene('result'); }
     else this.checkLevelUp();
     this.input.endTick();
   }
@@ -376,31 +390,34 @@ export class SurvivalGame {
     const p = this.player, stats = getSurvivalStats(this.progress);
     const wasGrounded = p.onGround;
     const previousX = p.x;
+    const transforming = !!p.corrin.transform;
+    if (transforming) stepCorrinState(p.corrin);
     const startedOnTerrain = p.onGround && Math.abs(p.y - this.groundHeightAt(p.x)) < 1;
     p.invuln = Math.max(0, p.invuln - 1); p.drop = Math.max(0, p.drop - 1);
     p.secondaryCooldown = Math.max(0, p.secondaryCooldown - 1);
     p.skillCooldown = Math.max(0, p.skillCooldown - 1); p.dodgeCooldown = Math.max(0, p.dodgeCooldown - 1);
-    if (this.input.justPressed('dodge') && p.dodgeCooldown <= 0 && !p.attack?.plunge) {
+    if (this.input.justPressed('dodge') && p.dodgeCooldown <= 0 && !transforming && !p.attack?.plunge) {
       p.dodge = 16; p.dodgeCooldown = this.dodgeCooldownMax * 60; p.invuln = Math.max(p.invuln, 20); p.attack = null;
       this.tharja.cancelDrain(0);
+      this.corrinWater.cancelBeam(0);
       this.audio.play('dodge', { charId: this.char.id });
     }
     const direction = this.input.horizontal();
-    if (direction && !p.attack?.plunge && p.attack?.def.kind !== 'secondary') p.facing = direction as 1 | -1;
+    if (direction && !transforming && !p.attack?.plunge && p.attack?.def.kind !== 'secondary' && !(this.char.id === 'corrin' && p.attack)) p.facing = direction as 1 | -1;
     if (p.dodge > 0) { p.dodge--; p.vx = p.facing * 10.5; }
-    else p.vx = direction * this.char.speed * stats.speedMultiplier * (p.attack ? 0.6 : 1);
-    if (this.input.justPressed('jump') && p.jumps > 0 && !p.attack?.plunge) {
+    else if (!transforming) p.vx = direction * this.char.speed * stats.speedMultiplier * (p.attack ? 0.6 : 1);
+    if (this.input.justPressed('jump') && p.jumps > 0 && !transforming && !p.attack?.plunge) {
       p.vy = -this.char.jump * 1.03; p.jumps--; p.onGround = false;
       this.effect('ring', p.x, p.y, 45, '#d0f8ee', 18);
       this.audio.play('jump', { charId: this.char.id });
     }
-    if (this.input.justPressed('down') && p.onGround && p.y < this.groundHeightAt(p.x) - 1 && !p.attack?.plunge) {
+    if (this.input.justPressed('down') && p.onGround && p.y < this.groundHeightAt(p.x) - 1 && !transforming && !p.attack?.plunge) {
       p.drop = 16; p.onGround = false; p.y += 5; p.vy = 2;
     }
     const request = this.input.justPressed('secondary') ? 'secondary' : this.input.justPressed('special') ? 'special' : this.input.justPressed('smash') ? 'smash' : this.input.justPressed('jab') ? 'jab' : null;
-    if (request) this.pendingAttack = { kind: request, frames: 8 };
+    if (request && !transforming) this.pendingAttack = { kind: request, frames: 8 };
     if (this.pendingAttack) {
-      if (!p.attack && !p.dodge) { this.beginAttack(this.pendingAttack.kind); this.pendingAttack = null; }
+      if (!p.attack && !p.dodge && !transforming) { this.beginAttack(this.pendingAttack.kind); this.pendingAttack = null; }
       else if (--this.pendingAttack.frames <= 0) this.pendingAttack = null;
     }
     const previousFeet = p.y;
@@ -455,15 +472,25 @@ export class SurvivalGame {
 
   private beginAttack(kind: MoveDef['kind']) {
     const p = this.player;
+    if (p.corrin.transform) return;
     if (kind === 'secondary' && p.secondaryCooldown > 0) return;
     if (kind === 'special' && p.skillCooldown > 0) return;
     if (kind === 'special' && this.char.id === 'xiao' && p.onGround) {
       this.notice = '魈 · 先按 W 跳跃，再按 L 下坠'; this.noticeTimer = 105; return;
     }
-    const base = this.char[kind];
+    if (this.char.id === 'corrin' && kind === 'special') {
+      startCorrinTransform(p.corrin, !p.onGround);
+      p.skillCooldown = this.skillCooldownMax * 60 * (1 - (this.progress.skillLevel - 1) * .075);
+      this.audio.play('cast', { charId: 'corrin', kind }); return;
+    }
+    const base = this.char.id === 'corrin' ? getCorrinMoves(p.corrin.form)[kind] : this.char[kind];
     const speed = 1 + (this.progress.upgrades.speed ?? 0) * 0.035;
     const def: MoveDef = { ...base, startup: Math.max(3, Math.round(base.startup / speed)), endlag: Math.round(base.endlag * 0.7 / speed) };
     p.attack = { def, t: 0, hit: new Set(), emitted: false, visualVariant: takeAttackVariant(p.nextAttackVariants, kind) };
+    if (this.char.id === 'corrin') {
+      p.attack.corrinForm = p.corrin.form;
+      if (kind === 'jab' && p.corrin.form === 'human') p.attack.corrinCombo = takeCorrinCombo(p.corrin, this.frame);
+    }
     if (kind === 'secondary') p.secondaryCooldown = this.char.secondaryCooldown * 60 * getSecondaryProfile(this.char.id, this.progress.secondaryLevel).cooldownMultiplier;
     if (kind === 'special') {
       p.skillCooldown = this.skillCooldownMax * 60 * (1 - (this.progress.skillLevel - 1) * 0.075);
@@ -495,7 +522,8 @@ export class SurvivalGame {
     const active = attack.t >= attack.def.startup && attack.t < attack.def.startup + attack.def.active;
     if (active && !attack.emitted) {
       attack.emitted = true;
-      if (this.char.id === 'tharja') this.releaseTharja(attack.def.kind);
+      if (this.char.id === 'corrin') this.releaseCorrin();
+      else if (this.char.id === 'tharja') this.releaseTharja(attack.def.kind);
       else if (attack.def.kind === 'secondary') this.releaseSecondary();
       else if (attack.def.kind === 'special') this.releaseSpecial();
       else {
@@ -511,6 +539,7 @@ export class SurvivalGame {
       this.melee(92 * this.secondaryRange(), 105, this.attackDamage('secondary'), attack.hit, false);
       if (attack.t % 3 === 0) this.effect('secondary', p.x - p.facing * 25, p.y - 48, 185, this.char.color, 12);
     }
+    if (active && attack.def.effect === 'dragon-fang') this.hitCorrinFang();
     if (attack.t >= attack.def.startup + attack.def.active + attack.def.endlag) p.attack = null;
     if (active && this.char.id === 'diluc' && attack.def.kind === 'special') {
       const previousX = p.x;
@@ -525,6 +554,12 @@ export class SurvivalGame {
   private attackDamage(kind: MoveDef['kind']) {
     const stats = getSurvivalStats(this.progress);
     const buff = this.summons.damageMultiplier(0);
+    if (this.char.id === 'corrin') {
+      const moves = getCorrinMoves(this.player.attack?.corrinForm ?? this.player.corrin.form), profile = getCorrinSurvivalProfile(this.progress);
+      const growth = kind === 'secondary' ? getSecondaryProfile('corrin', this.progress.secondaryLevel).damageMultiplier : kind === 'jab' ? profile.jabDamage : profile.smashDamage;
+      const form = this.player.attack?.corrinForm ?? this.player.corrin.form;
+      return moves[kind].dmg * (kind === 'jab' ? 6.4 : 4.8) * stats.damageMultiplier * buff * growth * profile.masteryDamage * (form === 'human' ? profile.yatoDamage : 1);
+    }
     if (kind === 'secondary') return this.char.secondary.dmg * 4.8 * stats.damageMultiplier * buff * getSecondaryProfile(this.char.id, this.progress.secondaryLevel).damageMultiplier;
     return this.char[kind].dmg * (kind === 'jab' ? 6.4 : 4.8) * stats.damageMultiplier * buff * (kind === 'special' ? 1 + (this.progress.skillLevel - 1) * 0.24 : 1);
   }
@@ -547,6 +582,54 @@ export class SurvivalGame {
     const spell = kind === 'jab' ? 'flux' : kind === 'smash' ? 'ruin' : kind === 'special' ? 'nosferatu' : 'mire';
     this.tharja.cast(spell, context.owners[0], origin, context, tuning);
     this.audio.play('cast', { charId: this.char.id, kind });
+  }
+
+  playerAnimation(): FighterAnimation {
+    const p = this.player;
+    return { state: p.attack ? 'attack' : 'free', attack: p.attack, onGround: p.onGround, vx: p.vx, vy: p.vy,
+      dodgeTimer: p.dodge, dodgeDuration: 16, time: this.frame, motion: p.motion,
+      corrin: this.char.id === 'corrin' ? p.corrin : undefined };
+  }
+
+  private releaseCorrin() {
+    const p = this.player, attack = p.attack;
+    if (!attack) return;
+    const kind = attack.def.kind, profile = getCorrinSurvivalProfile(this.progress), stats = getSurvivalStats(this.progress);
+    if (isCorrinWater(attack.def.effect)) {
+      const origin = getCorrinCastOrigin(p.x, p.y, 112, this.playerAnimation(), p.facing) ?? { x: p.x + p.facing * 58, y: p.y - 50 };
+      this.corrinWater.cast(attack.def.effect, this.summonContext().owners[0], origin, {
+        damageMultiplier: this.attackDamage(kind) / getCorrinMoves('dragon')[kind].dmg, rangeMultiplier: stats.rangeMultiplier,
+        orbCount: profile.orbCount, pierce: profile.orbPierce, beamTicks: profile.beamTicks, burstRadius: profile.burstRadius,
+      });
+    } else if (kind === 'jab' || kind === 'smash') {
+      this.melee(attack.def.reach * stats.rangeMultiplier, attack.def.height, this.attackDamage(kind), attack.hit, false);
+    }
+    if (kind !== 'jab') this.audio.play('cast', { charId: 'corrin', kind });
+  }
+
+  private hitCorrinFang() {
+    const p = this.player, attack = p.attack;
+    if (!attack) return;
+    const segment = getCorrinFangSegment(p.x, p.y, 112, this.playerAnimation(), p.facing);
+    if (!segment) return;
+    const context = this.tharjaContext();
+    for (const target of context.targets) {
+      if (!target.alive || attack.hit.has(target.id) || corrinSegmentContact(target, segment.base.x, segment.base.y, segment.tip.x, segment.tip.y, 12 * this.secondaryRange()) === null) continue;
+      if (context.projectileBlocked?.(segment.base.x, segment.base.y, target.x, target.feetY - target.height / 2)) continue;
+      const enemy = this.enemies.find(candidate => candidate.id === target.id);
+      if (!enemy) continue;
+      attack.hit.add(target.id); this.hurtEnemy(enemy, this.attackDamage('secondary'), p.facing, 'manual', true);
+    }
+  }
+
+  private updateCorrinWater() {
+    if (!this.corrinWater.effects.length) return;
+    const context = this.tharjaContext();
+    context.castOriginAt = () => getCorrinCastOrigin(this.player.x, this.player.y, 112, this.playerAnimation(), this.player.facing);
+    for (const hit of this.corrinWater.step(context)) {
+      const enemy = this.enemies.find(candidate => candidate.id === hit.targetId && candidate.hp > 0 && candidate.state !== 'arriving');
+      if (enemy) this.hurtEnemy(enemy, hit.amount, hit.facing, 'manual', hit.kind !== 'jab');
+    }
   }
 
   private tharjaContext(): TharjaContext {
@@ -881,6 +964,7 @@ export class SurvivalGame {
       this.phase = 'defeat'; this.hitstop = 0; p.attack = null; p.nextAttackVariants = newAttackVariants(); this.clearInput();
       this.summons.clear();
       this.tharja.clear();
+      this.corrinWater.clear(); p.corrin = newCorrinState();
       this.audio.setScene('result');
       return true;
     }

@@ -2,6 +2,8 @@
 // 提瓦特大乱斗 — 数据定义：角色 / 招式 / 道具 / 地图
 // ============================================================
 
+import { CORRIN_MOVES } from './corrin';
+
 export interface MoveDef {
   name: string;
   dmg: number;      // 伤害百分比
@@ -14,7 +16,7 @@ export interface MoveDef {
   reach: number;    // 判定距离（像素）
   height: number;   // 判定高度
   kind: 'jab' | 'smash' | 'special' | 'secondary';
-  effect?: 'projectile' | 'dash' | 'spin' | 'gust' | 'plunge' | 'thunder' | 'updraft' | 'frost' | 'phoenix' | 'thrust' | 'geo-pillar' | 'geo-meteor' | 'salon' | 'revelry' | 'flux' | 'ruin' | 'nosferatu' | 'mire';
+  effect?: 'projectile' | 'dash' | 'spin' | 'gust' | 'plunge' | 'thunder' | 'updraft' | 'frost' | 'phoenix' | 'thrust' | 'geo-pillar' | 'geo-meteor' | 'salon' | 'revelry' | 'flux' | 'ruin' | 'nosferatu' | 'mire' | 'transform' | 'dragon-fang' | 'water-orb' | 'water-beam' | 'water-bomb';
 }
 
 export interface CharDef {
@@ -174,6 +176,13 @@ export const CHARACTERS: CharDef[] = [
     specialCooldown: 7, secondaryCooldown: 9,
     secondaryDesc: '压掌在前方地面展开持续咒域，周期伤害接近地面的敌人；悬崖外无法成域。',
     desc: '来自异界的黑魔法师。普通攻击发射远程暗咒，凝咒爆破压制敌人；噬命回拉命中后回复自身。',
+  },
+  {
+    id: 'corrin', name: '神威', title: '夜刀与白龙', color: '#8ed9ee', dark: '#294e70', hair: '#e3e7ef',
+    weight: 94, speed: 4.2, jump: 12.7, airDrift: .4, gravMul: .96, weapon: 'sword',
+    ...CORRIN_MOVES.human, specialCooldown: 2.5, secondaryCooldown: 6,
+    secondaryDesc: '人形伸出龙化左臂突刺；白龙仰首抛射水球，命中敌人或地形后炸开。两个形态共用冷却。',
+    desc: '来自火焰纹章 if 的女神威。L 在人形与白龙间切换：人形夜刀神近战三连、蓄力下劈与龙牙；白龙水弹、高压水息与抛射水爆。',
   },
 ];
 

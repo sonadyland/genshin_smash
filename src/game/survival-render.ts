@@ -5,6 +5,7 @@ import { effectGlow } from './visual-quality';
 import type { VisualQuality } from './visual-quality';
 import { drawSummonArt } from './summoner-art';
 import { drawTharjaEffects } from './tharja';
+import { drawCorrinWaterEffect } from './art';
 import { EXPEDITION_REGIONS, EXPEDITION_MAPS } from './survival-data';
 import type { TacticalMapDefinition } from './survival-data';
 
@@ -44,6 +45,10 @@ export function renderSurvival(game: SurvivalGame) {
   }
   for (const enemy of game.enemies) if (visible(game, enemy.x)) drawEnemy(game, enemy, game.frame);
   drawTharjaEffects(c, game.tharja.effects);
+  for (const effect of game.corrinWater.effects) {
+    const beam = effect.kind === 'water-beam', width = beam ? Math.abs(effect.originX - effect.x) : effect.radius * 2;
+    if (visible(game, effect.x, width)) drawCorrinWaterEffect(c, effect.kind, effect.x, effect.y, width, effect.radius * 2, effect.age, effect.facing);
+  }
   for (const shot of game.shots) if (visible(game, shot.x)) {
     const visual = projectileVisualPosition(shot);
     c.save(); c.translate(visual.x, visual.y);
@@ -105,11 +110,11 @@ export function renderSurvival(game: SurvivalGame) {
   c.fillStyle = `rgba(9,25,31,${Math.max(0.06, 0.23 - (shadowY - p.y) / 1600)})`; c.beginPath(); c.ellipse(p.x, shadowY + 3, 35, 8, 0, 0, Math.PI * 2); c.fill();
   if (p.dodge > 0) {
     c.globalAlpha = 0.2;
-    drawFighterArt(c, game.char.id, p.x - p.facing * 35, p.y, 112, { state: 'free', attack: null, onGround: p.onGround, vx: p.vx, vy: p.vy, dodgeTimer: p.dodge, dodgeDuration: 16, time: game.frame, motion: p.motion }, { facing: p.facing });
+    drawFighterArt(c, game.char.id, p.x - p.facing * 35, p.y, 112, { ...game.playerAnimation(), state: 'free', attack: null }, { facing: p.facing });
   }
   const hurtFlash = game.hitstop > 0;
   c.globalAlpha = !hurtFlash && p.invuln > 0 && Math.floor(game.frame / 4) % 2 ? 0.58 : 1;
-  const rendered = drawFighterArt(c, game.char.id, p.x, p.y, 112, { state: p.attack ? 'attack' : 'free', attack: p.attack, onGround: p.onGround, vx: p.vx, vy: p.vy, dodgeTimer: p.dodge, dodgeDuration: 16, time: game.frame, motion: p.motion }, { facing: p.facing, flash: hurtFlash });
+  const rendered = drawFighterArt(c, game.char.id, p.x, p.y, 112, game.playerAnimation(), { facing: p.facing, flash: hurtFlash });
   if (!rendered) {
     c.fillStyle = hurtFlash ? '#fff7ef' : game.char.color; c.fillRect(p.x - 16, p.y - 80, 32, 68); c.beginPath(); c.arc(p.x, p.y - 91, 13, 0, Math.PI * 2); c.fill();
     if (game.char.id === 'xiao') {
@@ -120,8 +125,7 @@ export function renderSurvival(game: SurvivalGame) {
   }
   c.restore();
   // A small position marker remains readable in dense elemental effects.
-  drawSwordCastRelease(c, game.char.id, p.x, p.y, 112, { state: p.attack ? 'attack' : 'free', attack: p.attack,
-    onGround: p.onGround, vx: p.vx, vy: p.vy, dodgeTimer: p.dodge, time: game.frame, motion: p.motion }, p.facing);
+  drawSwordCastRelease(c, game.char.id, p.x, p.y, 112, game.playerAnimation(), p.facing);
   c.fillStyle = '#e6edbd'; c.beginPath(); c.moveTo(p.x, p.y - 131); c.lineTo(p.x - 5, p.y - 139); c.lineTo(p.x + 5, p.y - 139); c.fill();
   for (const text of game.texts) if (visible(game, text.x)) {
     c.save(); c.globalAlpha = Math.min(1, (48 - text.age) / 17); c.font = `${text.big ? '700 22' : '600 16'}px system-ui`; c.textAlign = 'center'; c.lineWidth = 3; c.strokeStyle = '#20303c'; c.fillStyle = text.color;

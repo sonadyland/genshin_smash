@@ -1,0 +1,24 @@
+{
+  "revision": "master-proportions-v2",
+  "ready": true,
+  "referenceAnchors": {
+    "human": { "headTop": [657, 68], "chin": [680, 232], "hip": [667, 575] }
+  },
+  "weaponEffects": "human-v2-weapon-effects.json",
+  "sources": [
+    { "src": "human-v2-motion-registration.json", "form": "human", "group": "motion" },
+    { "src": "human-v2-combat-registration.json", "form": "human", "group": "combat" },
+    { "src": "human-v2-skills-registration.json", "form": "human", "group": "skills" },
+    { "src": "fx-v2-registration.json", "form": "fx", "group": "fx" },
+    { "src": "human-v2-transform-registration.json", "form": "transform", "group": "transform" }
+  ],
+  "retired": ["fx:fx-yato-slash"],
+  "requiredClips": [
+    "human:idle", "human:run", "human:jump", "human:dodge", "human:hurt", "human:defeat",
+    "human:jab1", "human:jab2", "human:jab3", "human:smash", "human:secondary",
+    "dragon:idle", "dragon:run", "dragon:jump", "dragon:dodge", "dragon:hurt", "dragon:defeat", "dragon:jab", "dragon:smash", "dragon:secondary",
+    "transform:transform-to-dragon-ground", "transform:transform-to-human-ground", "transform:transform-to-dragon-air", "transform:transform-to-human-air",
+    "fx:fx-water-orb", "fx:fx-water-beam", "fx:fx-water-burst", "fx:fx-dragon-fang",
+    "fx:fx-v2-yato-diagonal", "fx:fx-v2-yato-sweep", "fx:fx-v2-yato-thrust", "fx:fx-v2-yato-downstroke"
+  ]
+}

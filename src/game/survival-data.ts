@@ -325,6 +325,10 @@ export const SURVIVAL_BRANCHES: Record<string, [UpgradeChoice, UpgradeChoice]> =
     branch('tharja-coven', '群咒牵引', '吸命同时额外牵引 2 名敌人，扩大前方范围；只有造成伤害后才恢复生命。', '#c5a2ef'),
     branch('tharja-vital', '噬命回响', '吸命强化伤害，每次施法的恢复上限增加 12 点；空放不恢复生命。', '#c5a2ef'),
   ],
+  corrin: [
+    branch('corrin-yato', '夜刀共鸣', '手动人形剑技伤害提高；白龙水弹增加穿透，强化切换后的定向突破。', '#b5e7f5'),
+    branch('corrin-tide', '奔涌水脉', '白龙水弹化为扇形三连弹，高压水息增加一次脉冲，水爆范围扩大。', '#9ddfee'),
+  ],
 };
 
 const SURVIVAL_SKILL_CAP = 5;
@@ -347,6 +351,22 @@ const THARJA_UPGRADE_DEFINITIONS: UpgradeChoice[] = [
   { id: 'tharja-flux', name: 'J · 暗流精修', description: '', kind: 'passive', level: 0, maxLevel: 3, color: '#c5a2ef' },
   { id: 'tharja-ruin', name: 'K · 重咒精修', description: '', kind: 'passive', level: 0, maxLevel: 3, color: '#d0b1f1' },
 ];
+
+const CORRIN_UPGRADE_DEFINITIONS: UpgradeChoice[] = [
+  { id: 'corrin-jab', name: 'J · 夜刀与水弹', description: '', kind: 'passive', level: 0, maxLevel: 3, color: '#b5e7f5' },
+  { id: 'corrin-smash', name: 'K · 断空与水息', description: '', kind: 'passive', level: 0, maxLevel: 3, color: '#9ddfee' },
+];
+export function getCorrinSurvivalProfile(progress: SurvivalProgress) {
+  const jab = Math.max(0, Math.min(3, progress.upgrades['corrin-jab'] ?? 0));
+  const smash = Math.max(0, Math.min(3, progress.upgrades['corrin-smash'] ?? 0));
+  const level = Math.max(1, Math.min(5, progress.skillLevel)), secondary = Math.max(1, Math.min(5, progress.secondaryLevel));
+  return { jabDamage: 1 + jab * .15, smashDamage: 1 + smash * .15,
+    masteryDamage: 1 + (level - 1) * .09, yatoDamage: progress.branch === 'corrin-yato' ? 1.25 : 1,
+    orbCount: progress.branch === 'corrin-tide' ? 3 : jab >= 3 ? 2 : 1,
+    orbPierce: 1 + (jab >= 2 ? 1 : 0) + (progress.branch === 'corrin-yato' ? 2 : 0),
+    beamTicks: smash >= 3 || progress.branch === 'corrin-tide' ? 4 : 3,
+    burstRadius: 90 + (secondary - 1) * 12 + (progress.branch === 'corrin-tide' ? 25 : 0) };
+}
 
 /** The same form data drives upgrade copy and the manual spell adapter. */
 export function getTharjaSurvivalProfile(progress: SurvivalProgress) {
@@ -390,12 +410,20 @@ export function xpForLevel(level: number): number {
 
 function eligibleChoices(progress: SurvivalProgress): UpgradeChoice[] {
   const auxiliaryCount = Object.keys(progress.upgrades).filter(id => id.startsWith('aux-') && progress.upgrades[id] > 0).length;
-  const definitions = progress.charId === 'tharja' ? [...UPGRADE_DEFINITIONS, ...THARJA_UPGRADE_DEFINITIONS] : UPGRADE_DEFINITIONS;
+  const definitions = progress.charId === 'tharja' ? [...UPGRADE_DEFINITIONS, ...THARJA_UPGRADE_DEFINITIONS] : progress.charId === 'corrin' ? [...UPGRADE_DEFINITIONS, ...CORRIN_UPGRADE_DEFINITIONS] : UPGRADE_DEFINITIONS;
   return definitions.flatMap(definition => {
     const current = definition.kind === 'core' ? progress.skillLevel : definition.kind === 'secondary' ? progress.secondaryLevel : (progress.upgrades[definition.id] || 0);
     const maximum = definition.kind === 'core' || definition.kind === 'secondary' ? SURVIVAL_SKILL_CAP : definition.maxLevel;
     if (current >= maximum) return [];
     if (definition.kind === 'auxiliary' && !current && auxiliaryCount >= 2) return [];
+    if (progress.charId === 'corrin') {
+      const next = current + 1;
+      const copy = definition.kind === 'core' ? { name: '人龙精修', description: `两形态手动攻击伤害 +${(next - 1) * 9}%，L 冷却缩短；4 级选择夜刀共鸣或奔涌水脉。` }
+        : definition.kind === 'secondary' ? { name: 'I · 龙牙与水爆', description: getSecondaryProfile('corrin', next).description }
+        : definition.id === 'corrin-jab' ? { description: `两形态 J 伤害 +${next * 15}%；${next >= 3 ? '白龙水弹双发并穿透 2 名敌人' : next >= 2 ? '白龙水弹穿透 2 名敌人' : '强化三段夜刀与单发水弹'}。` }
+        : definition.id === 'corrin-smash' ? { description: `两形态 K 伤害 +${next * 15}%；${next >= 3 ? '高压水息在同一吐息时段增加至 4 次脉冲' : '强化人形下劈与白龙贯穿水息'}。` } : {};
+      return [{ ...definition, ...copy, maxLevel: maximum, level: next }];
+    }
     return [{ ...definition, maxLevel: maximum, level: current + 1, ...(definition.kind === 'secondary' ? { name: CHARACTERS.find(c => c.id === progress.charId)!.secondary.name, description: getSecondaryProfile(progress.charId, current + 1).description } : {}), ...(definition.kind === 'core' && progress.charId === 'zhongli' ? { description: '提升岩柱共鸣伤害、范围和护盾吸收量；4 级选择双柱或护盾岩震。' } : definition.kind === 'core' && progress.charId === 'furina' ? { description: '提升沙龙成员的伤害和蟹形水爆范围；4 级选择远程水弹或蟹形范围扑击。' } : definition.kind === 'core' && progress.charId === 'tharja' ? { name: '吸命精修', description: `提升吸命伤害、范围和恢复上限；${current + 1 >= 5 ? '同时牵引 3 名敌人' : current + 1 >= 3 ? '同时牵引 2 名敌人' : '牵引前方 1 名敌人'}，4 级选择群咒或噬命进化。` } : {}), ...(definition.id.startsWith('tharja-') ? { description: tharjaUpgradeDescription(definition.id, current + 1) } : {}) }];
   });
 }
@@ -454,10 +482,10 @@ export function applyChoice(progress: SurvivalProgress, choiceId: string, offere
 }
 
 export function getUpgradeSummary(progress: SurvivalProgress): { id: string; name: string; level: number }[] {
-  const result = [{ id: 'core', name: progress.charId === 'tharja' ? '吸命精修' : '元素精修', level: progress.skillLevel }, { id: 'secondary', name: CHARACTERS.find(c => c.id === progress.charId)!.secondary.name, level: progress.secondaryLevel }];
+  const result = [{ id: 'core', name: progress.charId === 'corrin' ? '人龙精修' : progress.charId === 'tharja' ? '吸命精修' : '元素精修', level: progress.skillLevel }, { id: 'secondary', name: progress.charId === 'corrin' ? 'I · 龙牙与水爆' : CHARACTERS.find(c => c.id === progress.charId)!.secondary.name, level: progress.secondaryLevel }];
   const chosenBranch = SURVIVAL_BRANCHES[progress.charId]?.find(choice => choice.id === progress.branch);
   if (chosenBranch) result.push({ id: chosenBranch.id, name: chosenBranch.name, level: 1 });
-  for (const definition of [...UPGRADE_DEFINITIONS, ...THARJA_UPGRADE_DEFINITIONS]) {
+  for (const definition of [...UPGRADE_DEFINITIONS, ...THARJA_UPGRADE_DEFINITIONS, ...CORRIN_UPGRADE_DEFINITIONS]) {
     const level = progress.upgrades[definition.id];
     if (level > 0) result.push({ id: definition.id, name: definition.name, level });
   }
@@ -479,6 +507,10 @@ export function getSurvivalStats(progress: SurvivalProgress) {
 /** One source for upgrade copy and actual secondary-skill form/scaling. */
 export function getSecondaryProfile(charId: string, rawLevel: number) {
   const level = Math.max(1, Math.min(SURVIVAL_SKILL_CAP, Math.floor(rawLevel)));
+  if (charId === 'corrin') {
+    return { level, count: 1, piercing: true, damageMultiplier: 1 + (level - 1) * .18, rangeMultiplier: 1 + (level - 1) * .07, cooldownMultiplier: 1 - (level - 1) * .05,
+      description: `人形龙牙贯穿前方敌人，白龙抛射水爆半径 ${90 + (level - 1) * 12}；两形态 I 伤害 +${(level - 1) * 18}%，共享冷却缩短 ${(level - 1) * 5}%。` };
+  }
   if (charId === 'tharja') {
     const form = getTharjaSurvivalProfile({ ...makeInitialProgress('tharja'), secondaryLevel: level });
     const damageMultiplier = 1 + (level - 1) * .18;

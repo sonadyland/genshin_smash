@@ -1,0 +1,207 @@
+{
+  "id": "human",
+  "title": "人形 · 持剑静候",
+  "status": "ready",
+  "gameHeight": 112,
+  "reference": {
+    "src": "./assets/human-master.png",
+    "width": 1254,
+    "height": 1254,
+    "bodyHeight": 1131,
+    "pivot": [
+      630,
+      1199
+    ],
+    "bounds": [
+      176,
+      68,
+      907,
+      1131
+    ]
+  },
+  "sheets": [
+    {
+      "src": "./assets/human-idle-a.png",
+      "width": 1254,
+      "height": 1254,
+      "bodyHeight": 492
+    },
+    {
+      "src": "./assets/human-idle-b.png",
+      "width": 1254,
+      "height": 1254,
+      "bodyHeight": 497
+    }
+  ],
+  "frames": [
+    {
+      "sheet": 0,
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        330,
+        601
+      ],
+      "bounds": [
+        117,
+        109,
+        419,
+        492
+      ],
+      "duration": 480,
+      "phase": "安静呼吸"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        304,
+        601
+      ],
+      "bounds": [
+        91,
+        109,
+        421,
+        492
+      ],
+      "duration": 380,
+      "phase": "胸肩轻提"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        330,
+        576
+      ],
+      "bounds": [
+        117,
+        84,
+        419,
+        492
+      ],
+      "duration": 65,
+      "phase": "眨眼过渡"
+    },
+    {
+      "sheet": 0,
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        304,
+        576
+      ],
+      "bounds": [
+        90,
+        84,
+        422,
+        492
+      ],
+      "duration": 70,
+      "phase": "短暂闭眼"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        330,
+        605
+      ],
+      "bounds": [
+        111,
+        108,
+        430,
+        497
+      ],
+      "duration": 85,
+      "phase": "重新睁眼"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        627,
+        0,
+        627,
+        627
+      ],
+      "pivot": [
+        304,
+        605
+      ],
+      "bounds": [
+        89,
+        108,
+        427,
+        497
+      ],
+      "duration": 400,
+      "phase": "缓缓呼气"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        0,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        330,
+        579
+      ],
+      "bounds": [
+        115,
+        82,
+        426,
+        497
+      ],
+      "duration": 380,
+      "phase": "衣摆回落"
+    },
+    {
+      "sheet": 1,
+      "rect": [
+        627,
+        627,
+        627,
+        627
+      ],
+      "pivot": [
+        304,
+        579
+      ],
+      "bounds": [
+        88,
+        82,
+        427,
+        497
+      ],
+      "duration": 340,
+      "phase": "自然归稳"
+    }
+  ],
+  "note": "8 张真实动作帧；每表固定身体标尺，支撑脚落地。呼吸循环 2.2 秒，眨眼阶段短停留。"
+}

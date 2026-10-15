@@ -1,0 +1,1645 @@
+{
+  "version": 1,
+  "status": "complete-art-and-registration; independent browser preview checked",
+  "worldScale": "112-unit human standing ruler; dragon target135. bodyHeight is fixed sheet human-equivalent reference, never per-frame visible bbox.",
+  "registrationNotes": [
+    "A v2 atlas row split measured at680 to include complete first-row feet. Some generator placements depart from exact equal quadrants; extraction rects preserve all pixels without image editing.",
+    "B second mixed form corrected to exactly two forelimbs/two hindlimbs. First/second sheet human-equivalent rulers fixed from standing identity references; final dragon ruler442px*112/135≈367.",
+    "Pivot values are visually measured ground support-root suggestions, not automatic bbox bottom-centering.",
+    "All FX origins visually registered against actual emission/core/impact points, not cell centers. Body height is a suggested size ruler; binding/preview may tune size without modifying PNGs.",
+    "Only water-orb flightLoopFrames1,2 should repeat in flight; formation and dissipate frames must not loop.",
+    "Air registration uses virtual center-root plus fixed form-dependent torso offset; no foot-bottom normalization. Visually measured pivots were checked in the browser preview; air poses retain a virtual root and their tuck displacement."
+  ],
+  "clips": [
+    {
+      "id": "transform-to-dragon-ground",
+      "title": "地面 · 人形 → 白龙",
+      "loop": false,
+      "worldHeight": 112,
+      "sheets": [
+        {
+          "src": "assets/transform-to-dragon-ground-a-v2.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 404
+        },
+        {
+          "src": "assets/transform-to-dragon-ground-b-v2.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 398
+        },
+        {
+          "src": "assets/transform-to-dragon-ground-c.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 367
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            680
+          ],
+          "pivot": [
+            342,
+            653
+          ],
+          "duration": 70,
+          "phase": "待机",
+          "anchors": {
+            "origin": [
+              342,
+              653
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            680
+          ],
+          "pivot": [
+            338,
+            653
+          ],
+          "duration": 85,
+          "phase": "龙石抬至胸前",
+          "anchors": {
+            "origin": [
+              338,
+              653
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            680,
+            627,
+            574
+          ],
+          "pivot": [
+            330,
+            503
+          ],
+          "duration": 85,
+          "phase": "收剑屈膝",
+          "anchors": {
+            "origin": [
+              330,
+              503
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            680,
+            627,
+            574
+          ],
+          "pivot": [
+            340,
+            505
+          ],
+          "duration": 65,
+          "phase": "前臂龙化",
+          "anchors": {
+            "origin": [
+              340,
+              505
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            640,
+            670
+          ],
+          "pivot": [
+            332,
+            623
+          ],
+          "duration": 45,
+          "phase": "前足形成",
+          "anchors": {
+            "origin": [
+              332,
+              623
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            640,
+            0,
+            614,
+            670
+          ],
+          "pivot": [
+            328,
+            625
+          ],
+          "duration": 45,
+          "phase": "颈部与后肢展开",
+          "anchors": {
+            "origin": [
+              328,
+              625
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            670,
+            640,
+            584
+          ],
+          "pivot": [
+            335,
+            515
+          ],
+          "duration": 45,
+          "phase": "龙体成形",
+          "anchors": {
+            "origin": [
+              335,
+              515
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            640,
+            670,
+            614,
+            584
+          ],
+          "pivot": [
+            330,
+            510
+          ],
+          "duration": 50,
+          "phase": "落地压低",
+          "anchors": {
+            "origin": [
+              330,
+              510
+            ]
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            0,
+            640,
+            627
+          ],
+          "pivot": [
+            350,
+            584
+          ],
+          "duration": 55,
+          "phase": "四足承重",
+          "anchors": {
+            "origin": [
+              350,
+              584
+            ]
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            640,
+            0,
+            614,
+            627
+          ],
+          "pivot": [
+            338,
+            586
+          ],
+          "duration": 65,
+          "phase": "胸部抬起",
+          "anchors": {
+            "origin": [
+              338,
+              586
+            ]
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            627,
+            640,
+            627
+          ],
+          "pivot": [
+            345,
+            558
+          ],
+          "duration": 65,
+          "phase": "颈部回稳",
+          "anchors": {
+            "origin": [
+              345,
+              558
+            ]
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            640,
+            627,
+            614,
+            627
+          ],
+          "pivot": [
+            343,
+            567
+          ],
+          "duration": 90,
+          "phase": "白龙待机",
+          "anchors": {
+            "origin": [
+              343,
+              567
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "transform-to-human-ground",
+      "title": "地面 · 白龙 → 人形",
+      "loop": false,
+      "worldHeight": 112,
+      "sheets": [
+        {
+          "src": "assets/transform-to-human-ground-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 410
+        },
+        {
+          "src": "assets/transform-to-human-ground-b.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 540
+        },
+        {
+          "src": "assets/transform-to-human-ground-c.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 540
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            640
+          ],
+          "pivot": [
+            335,
+            609
+          ],
+          "duration": 65,
+          "phase": "白龙待机",
+          "anchors": {
+            "origin": [
+              335,
+              609
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            640
+          ],
+          "pivot": [
+            332,
+            609
+          ],
+          "duration": 60,
+          "phase": "收颈",
+          "anchors": {
+            "origin": [
+              332,
+              609
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            640,
+            627,
+            614
+          ],
+          "pivot": [
+            342,
+            545
+          ],
+          "duration": 60,
+          "phase": "屈四肢",
+          "anchors": {
+            "origin": [
+              342,
+              545
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            640,
+            627,
+            614
+          ],
+          "pivot": [
+            340,
+            544
+          ],
+          "duration": 55,
+          "phase": "前肢回收",
+          "anchors": {
+            "origin": [
+              340,
+              544
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            627,
+            650
+          ],
+          "pivot": [
+            371,
+            619
+          ],
+          "duration": 50,
+          "phase": "人形四肢恢复",
+          "anchors": {
+            "origin": [
+              371,
+              619
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            0,
+            627,
+            650
+          ],
+          "pivot": [
+            348,
+            619
+          ],
+          "duration": 55,
+          "phase": "半蹲恢复白甲",
+          "anchors": {
+            "origin": [
+              348,
+              619
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            650,
+            627,
+            604
+          ],
+          "pivot": [
+            370,
+            570
+          ],
+          "duration": 65,
+          "phase": "右手凝剑",
+          "anchors": {
+            "origin": [
+              370,
+              570
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            650,
+            627,
+            604
+          ],
+          "pivot": [
+            335,
+            570
+          ],
+          "duration": 65,
+          "phase": "起身收龙石",
+          "anchors": {
+            "origin": [
+              335,
+              570
+            ]
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            0,
+            627,
+            660
+          ],
+          "pivot": [
+            364,
+            632
+          ],
+          "duration": 65,
+          "phase": "承重回稳",
+          "anchors": {
+            "origin": [
+              364,
+              632
+            ]
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            627,
+            0,
+            627,
+            660
+          ],
+          "pivot": [
+            332,
+            633
+          ],
+          "duration": 65,
+          "phase": "收下龙石",
+          "anchors": {
+            "origin": [
+              332,
+              633
+            ]
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            660,
+            627,
+            594
+          ],
+          "pivot": [
+            360,
+            558
+          ],
+          "duration": 70,
+          "phase": "呼吸",
+          "anchors": {
+            "origin": [
+              360,
+              558
+            ]
+          }
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            627,
+            660,
+            627,
+            594
+          ],
+          "pivot": [
+            335,
+            558
+          ],
+          "duration": 90,
+          "phase": "人形待机",
+          "anchors": {
+            "origin": [
+              335,
+              558
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "transform-to-dragon-air",
+      "title": "空中 · 人形 → 白龙",
+      "loop": false,
+      "worldHeight": 112,
+      "rootMode": "air-virtual-root",
+      "sheets": [
+        {
+          "src": "assets/transform-to-dragon-air-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 420
+        },
+        {
+          "src": "assets/transform-to-dragon-air-b.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 395
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            385,
+            650
+          ],
+          "duration": 85,
+          "phase": "空中收腿",
+          "anchors": {
+            "origin": [
+              385,
+              650
+            ],
+            "center": [
+              385,
+              370
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            635
+          ],
+          "duration": 75,
+          "phase": "龙石聚力",
+          "anchors": {
+            "origin": [
+              350,
+              635
+            ],
+            "center": [
+              350,
+              355
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            620
+          ],
+          "duration": 60,
+          "phase": "前肢颈部龙化",
+          "anchors": {
+            "origin": [
+              350,
+              620
+            ],
+            "center": [
+              350,
+              340
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            345,
+            620
+          ],
+          "duration": 60,
+          "phase": "四肢展开",
+          "anchors": {
+            "origin": [
+              345,
+              620
+            ],
+            "center": [
+              345,
+              340
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            600
+          ],
+          "duration": 65,
+          "phase": "空中收身",
+          "anchors": {
+            "origin": [
+              320,
+              600
+            ],
+            "center": [
+              320,
+              340
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            340,
+            610
+          ],
+          "duration": 65,
+          "phase": "伸出前肢",
+          "anchors": {
+            "origin": [
+              340,
+              610
+            ],
+            "center": [
+              340,
+              350
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            335,
+            610
+          ],
+          "duration": 65,
+          "phase": "准备承重",
+          "anchors": {
+            "origin": [
+              335,
+              610
+            ],
+            "center": [
+              335,
+              350
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            345,
+            610
+          ],
+          "duration": 85,
+          "phase": "白龙落体姿态",
+          "anchors": {
+            "origin": [
+              345,
+              610
+            ],
+            "center": [
+              345,
+              350
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "transform-to-human-air",
+      "title": "空中 · 白龙 → 人形",
+      "loop": false,
+      "worldHeight": 112,
+      "rootMode": "air-virtual-root",
+      "sheets": [
+        {
+          "src": "assets/transform-to-human-air-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 460
+        },
+        {
+          "src": "assets/transform-to-human-air-b.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 550
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            650,
+            627
+          ],
+          "pivot": [
+            340,
+            630
+          ],
+          "duration": 70,
+          "phase": "白龙腾空",
+          "anchors": {
+            "origin": [
+              340,
+              630
+            ],
+            "center": [
+              340,
+              350
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            650,
+            0,
+            604,
+            627
+          ],
+          "pivot": [
+            340,
+            630
+          ],
+          "duration": 65,
+          "phase": "收颈抱四肢",
+          "anchors": {
+            "origin": [
+              340,
+              630
+            ],
+            "center": [
+              340,
+              350
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            650,
+            627
+          ],
+          "pivot": [
+            380,
+            630
+          ],
+          "duration": 55,
+          "phase": "恢复人形",
+          "anchors": {
+            "origin": [
+              380,
+              630
+            ],
+            "center": [
+              380,
+              350
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            650,
+            627,
+            604,
+            627
+          ],
+          "pivot": [
+            355,
+            630
+          ],
+          "duration": 60,
+          "phase": "收腿握龙石",
+          "anchors": {
+            "origin": [
+              355,
+              630
+            ],
+            "center": [
+              355,
+              350
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            360,
+            670
+          ],
+          "duration": 65,
+          "phase": "凝出剑柄",
+          "anchors": {
+            "origin": [
+              360,
+              670
+            ],
+            "center": [
+              360,
+              340
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            690
+          ],
+          "duration": 65,
+          "phase": "右手恢复夜刀神",
+          "anchors": {
+            "origin": [
+              350,
+              690
+            ],
+            "center": [
+              350,
+              360
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            680
+          ],
+          "duration": 65,
+          "phase": "展开双腿",
+          "anchors": {
+            "origin": [
+              350,
+              680
+            ],
+            "center": [
+              350,
+              350
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            680
+          ],
+          "duration": 85,
+          "phase": "人形落体姿态",
+          "anchors": {
+            "origin": [
+              350,
+              680
+            ],
+            "center": [
+              350,
+              350
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "fx-water-orb",
+      "title": "水弹 · 凝聚 / 飞行 / 消散",
+      "kind": "fx",
+      "loop": false,
+      "worldHeight": 112,
+      "originMode": "effect-source",
+      "flightLoopFrames": [
+        1,
+        2
+      ],
+      "spawnFrame": 0,
+      "impactFrame": 3,
+      "attachment": "dragon mouth → projectile center; flight only loops indices1,2, never formation/dissipation",
+      "sheets": [
+        {
+          "src": "assets/fx-water-orb.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 750
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            550,
+            295
+          ],
+          "duration": 70,
+          "phase": "凝聚",
+          "anchors": {
+            "origin": [
+              550,
+              295
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            500,
+            295
+          ],
+          "duration": 80,
+          "phase": "飞行保持 A",
+          "anchors": {
+            "origin": [
+              500,
+              295
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            575,
+            270
+          ],
+          "duration": 80,
+          "phase": "飞行保持 B",
+          "anchors": {
+            "origin": [
+              575,
+              270
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            525,
+            285
+          ],
+          "duration": 100,
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              525,
+              285
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "fx-water-beam",
+      "title": "贯流水炮 · 喷流",
+      "kind": "fx",
+      "loop": false,
+      "worldHeight": 112,
+      "originMode": "effect-source",
+      "sustainFrames": [
+        1
+      ],
+      "attachment": "dragon mouth → left nozzle origin",
+      "registrationNotes": "Asymmetric extraction protects upper-right muzzle at x752. Bottom split x725 alpha max10; standard768 would cut through bright emission.",
+      "sheets": [
+        {
+          "src": "assets/fx-water-beam.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            640,
+            512
+          ],
+          "pivot": [
+            120,
+            330
+          ],
+          "duration": 65,
+          "phase": "起喷",
+          "anchors": {
+            "origin": [
+              120,
+              330
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            640,
+            0,
+            896,
+            512
+          ],
+          "pivot": [
+            112,
+            330
+          ],
+          "duration": 120,
+          "phase": "主喷",
+          "anchors": {
+            "origin": [
+              112,
+              330
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            725,
+            512
+          ],
+          "pivot": [
+            120,
+            248
+          ],
+          "duration": 75,
+          "phase": "衰减",
+          "anchors": {
+            "origin": [
+              120,
+              248
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            725,
+            512,
+            811,
+            512
+          ],
+          "pivot": [
+            135,
+            248
+          ],
+          "duration": 90,
+          "phase": "水雾",
+          "anchors": {
+            "origin": [
+              135,
+              248
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "fx-water-burst",
+      "title": "潮涌爆裂 · 水团落点",
+      "kind": "fx",
+      "loop": false,
+      "worldHeight": 112,
+      "originMode": "effect-source",
+      "attachment": "actual terrain impact point → fixed splash ground center",
+      "impactFrame": 1,
+      "sheets": [
+        {
+          "src": "assets/fx-water-burst-a.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 450
+        },
+        {
+          "src": "assets/fx-water-burst-b.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 450
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            430,
+            455
+          ],
+          "duration": 60,
+          "phase": "坠落水团",
+          "anchors": {
+            "origin": [
+              430,
+              455
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            370,
+            455
+          ],
+          "duration": 45,
+          "phase": "接触压缩",
+          "anchors": {
+            "origin": [
+              370,
+              455
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            415,
+            400
+          ],
+          "duration": 55,
+          "phase": "水冠升起",
+          "anchors": {
+            "origin": [
+              415,
+              400
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            380,
+            400
+          ],
+          "duration": 65,
+          "phase": "水冠展开",
+          "anchors": {
+            "origin": [
+              380,
+              400
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            455
+          ],
+          "duration": 70,
+          "phase": "水浪回落",
+          "anchors": {
+            "origin": [
+              400,
+              455
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            380,
+            455
+          ],
+          "duration": 80,
+          "phase": "低浪外扩",
+          "anchors": {
+            "origin": [
+              380,
+              455
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            405
+          ],
+          "duration": 90,
+          "phase": "碎滴",
+          "anchors": {
+            "origin": [
+              400,
+              405
+            ]
+          }
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            380,
+            385
+          ],
+          "duration": 100,
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              380,
+              385
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "fx-yato-slash",
+      "title": "夜刀神 · 金白剑弧",
+      "kind": "fx",
+      "loop": false,
+      "worldHeight": 112,
+      "originMode": "effect-source",
+      "attachment": "sword slash center; orient to corresponding cut direction",
+      "sheets": [
+        {
+          "src": "assets/fx-yato-slash.png",
+          "width": 1448,
+          "height": 1086,
+          "bodyHeight": 560
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            724,
+            543
+          ],
+          "pivot": [
+            295,
+            240
+          ],
+          "duration": 35,
+          "phase": "起弧",
+          "anchors": {
+            "origin": [
+              295,
+              240
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            724,
+            0,
+            724,
+            543
+          ],
+          "pivot": [
+            355,
+            270
+          ],
+          "duration": 55,
+          "phase": "斩切",
+          "anchors": {
+            "origin": [
+              355,
+              270
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            543,
+            724,
+            543
+          ],
+          "pivot": [
+            370,
+            270
+          ],
+          "duration": 50,
+          "phase": "余势",
+          "anchors": {
+            "origin": [
+              370,
+              270
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            724,
+            543,
+            724,
+            543
+          ],
+          "pivot": [
+            360,
+            270
+          ],
+          "duration": 70,
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              360,
+              270
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "fx-dragon-fang",
+      "title": "龙牙贯刺 · 白蓝锋芒",
+      "kind": "fx",
+      "loop": false,
+      "worldHeight": 112,
+      "originMode": "effect-source",
+      "attachment": "transformed forearm tip → left piercing source",
+      "sustainFrames": [
+        1
+      ],
+      "sheets": [
+        {
+          "src": "assets/fx-dragon-fang.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 450
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            181,
+            305
+          ],
+          "duration": 40,
+          "phase": "聚锋",
+          "anchors": {
+            "origin": [
+              181,
+              305
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            140,
+            305
+          ],
+          "duration": 65,
+          "phase": "贯刺",
+          "anchors": {
+            "origin": [
+              140,
+              305
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            181,
+            260
+          ],
+          "duration": 55,
+          "phase": "分离残光",
+          "anchors": {
+            "origin": [
+              181,
+              260
+            ]
+          }
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            140,
+            260
+          ],
+          "duration": 75,
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              140,
+              260
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "previewVerification": {
+    "date": "2026-10-14",
+    "scope": "Independent Canvas preview only; complete catalogue 29 clips / 216 frames checked in Chrome. No game integration validation.",
+    "pngModified": false
+  }
+}

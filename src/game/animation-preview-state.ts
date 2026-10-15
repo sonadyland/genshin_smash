@@ -2,6 +2,8 @@ import { CHARACTERS } from './data';
 import type { FighterAnimation, PlungeAnimation } from './animation';
 import { advanceMotion, newMotionState } from './clip-animation';
 import type { ClipCharacterId, ClipName } from './clip-animation';
+import { getCorrinMoves, newCorrinState, startCorrinTransform } from './corrin';
+import type { CorrinForm } from './corrin';
 
 const STEP = 1000 / 60;
 export interface PreviewSettings {
@@ -9,6 +11,8 @@ export interface PreviewSettings {
   character?: ClipCharacterId;
   facing: 1 | -1; slope: number;
   form?: 'new' | 'original' | 'alternate';
+  corrinForm?: CorrinForm;
+  transformAir?: boolean;
 }
 export function createPreviewClock() {
   return { tick: 0, accumulator: 0, y: 0, vy: 0, jumping: false, plunge: null as PlungeAnimation | null, motion: newMotionState() };
@@ -18,11 +22,16 @@ function timing(settings: PreviewSettings) {
   const { clip, survival } = settings;
   const character = CHARACTERS.find(character => character.id === (settings.character ?? 'eula'))!;
   const kind = clip === 'jab' || clip === 'smash' || clip === 'special' || clip === 'secondary' ? clip : null;
-  const base = kind ? character[kind] : null;
+  const corrin = character.id === 'corrin';
+  const state = newCorrinState();
+  state.form = settings.corrinForm ?? 'human';
+  if (corrin && kind === 'special') startCorrinTransform(state, !!settings.transformAir);
+  const transform = state.transform;
+  const base = kind ? corrin ? getCorrinMoves(state.form)[kind] : character[kind] : null;
   const def = base ? { ...base, endlag: survival ? Math.round(base.endlag * 0.7) : base.endlag } : null;
-  const attackLength = def ? def.startup + def.active + def.endlag : 0;
+  const attackLength = transform?.duration ?? (def ? def.startup + def.active + def.endlag : 0);
   const plunge = character.id === 'xiao' && clip === 'special';
-  return { character, def, plunge, attackLength, cycle: plunge ? 110 : def ? attackLength + 24 : clip === 'jump' ? 84 : clip === 'dodge' ? 40 : clip === 'hurt' ? 60 : 240, dodgeDuration: survival ? 16 : 15 };
+  return { character, def, plunge, transform, attackLength, cycle: plunge ? 110 : def ? attackLength + 24 : clip === 'jump' ? 84 : clip === 'dodge' ? 40 : clip === 'hurt' ? 60 : 240, dodgeDuration: survival ? 16 : 15 };
 }
 /** Display options are deliberately not written into the timeline. */
 export function advancePreviewClock(clock: PreviewClock, delta: number, settings: PreviewSettings, steps = 0) {
@@ -57,14 +66,18 @@ export function advancePreviewClock(clock: PreviewClock, delta: number, settings
   }
 }
 export function previewFrame(clock: PreviewClock, settings: PreviewSettings): { animation: FighterAnimation; t: number; cycle: number; y: number } {
-  const { character, def, plunge, attackLength, cycle, dodgeDuration } = timing(settings), t = clock.tick % cycle;
+  const { character, def, plunge, transform, attackLength, cycle, dodgeDuration } = timing(settings), t = clock.tick % cycle;
   const visualVariant = (settings.clip === 'jab' || settings.clip === 'smash') && (settings.form === 'new' || (settings.form === 'alternate' && Math.floor(clock.tick / cycle) % 2 === 0)) ? 'alternate' : 'base';
-  const attack = def && (plunge ? !!clock.plunge : t < attackLength) ? { def, t, visualVariant, ...(clock.plunge ? { plunge: { ...clock.plunge } } : {}) } as const : null;
-  return { t, cycle, y: clock.y, animation: {
+  const corrinForm = settings.corrinForm ?? 'human';
+  const corrinCombo = (Math.floor(clock.tick / cycle) % 3) as 0 | 1 | 2;
+  const attack = def && (plunge ? !!clock.plunge : t < attackLength) ? { def, t, visualVariant, ...(character.id === 'corrin' ? { corrinForm, corrinCombo } : {}), ...(clock.plunge ? { plunge: { ...clock.plunge } } : {}) } as const : null;
+  const airTransform = character.id === 'corrin' && settings.clip === 'special' && settings.transformAir;
+  return { t, cycle, y: airTransform ? -70 : clock.y, animation: {
     state: settings.clip === 'hurt' && t < 32 ? 'hitstun' : attack ? 'attack' : 'free', attack,
     ...(settings.clip === 'hurt' ? { hitstunAge: t, hitstunDuration: 32 } : {}),
-    onGround: !clock.jumping, vx: settings.clip === 'run' ? character.speed : 0, vy: clock.vy,
+    onGround: !clock.jumping && !airTransform, vx: settings.clip === 'run' ? character.speed : 0, vy: clock.vy,
     dodgeTimer: settings.clip === 'dodge' && t < dodgeDuration ? dodgeDuration - t : 0, dodgeDuration,
     time: clock.tick, motion: { ...clock.motion, facing: settings.facing, slope: settings.slope },
+    ...(character.id === 'corrin' ? { corrin: { form: transform && t >= transform.commit ? transform.to : corrinForm, combo: corrinCombo, ...(transform && t < transform.duration ? { transform: { ...transform, elapsed: t } } : {}) } } : {}),
   } };
 }

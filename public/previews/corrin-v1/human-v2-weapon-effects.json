@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "status": "J1/J2/J3/K and I bound to measured blade/fang landmarks; active, preparation, recovery, mirrored browser compositions and final complete-catalogue regression passed.",
+  "indexBase": 0,
+  "clips": {
+    "jab1": {
+      "id": "fx-v2-yato-diagonal",
+      "kind": "slash",
+      "active": [
+        { "frame": 3, "previous": 2, "fxFrames": [0, 1], "opacity": 0.56 },
+        { "frame": 4, "previous": 3, "fxFrames": [2, 3], "opacity": 0.62 }
+      ]
+    },
+    "jab2": {
+      "id": "fx-v2-yato-sweep",
+      "kind": "horizontal-sweep",
+      "minimumPlaneWidth": 0.06,
+      "layer": "behind",
+      "active": [
+        { "frame": 3, "previous": 2, "fxFrames": [0, 1], "opacity": 0.56 },
+        { "frame": 4, "previous": 3, "fxFrames": [2, 3], "opacity": 0.46 }
+      ]
+    },
+    "jab3": {
+      "id": "fx-v2-yato-thrust",
+      "kind": "thrust",
+      "active": [
+        { "frame": 3, "previous": 2, "fxFrames": [0, 1], "opacity": 0.68 },
+        { "frame": 4, "previous": 3, "fxFrames": [2, 3], "opacity": 0.58 }
+      ]
+    },
+    "smash": {
+      "id": "fx-v2-yato-downstroke",
+      "kind": "slash",
+      "active": [
+        { "frame": 4, "previous": 3, "fxFrames": [0], "opacity": 0.28 },
+        { "frame": 5, "previous": 4, "fxFrames": [1, 2], "opacity": 0.62 },
+        { "frame": 6, "previous": 5, "fxFrames": [2, 3], "opacity": 0.48 }
+      ]
+    },
+    "secondary": {
+      "id": "fx-dragon-fang",
+      "kind": "fang",
+      "textureGeometry": [
+        { "origin": [181,305], "bladeTip": [395,305], "trailTip": [181,405] },
+        { "origin": [140,305], "bladeTip": [650,305], "trailTip": [140,405] },
+        { "origin": [181,260], "bladeTip": [500,260], "trailTip": [181,360] },
+        { "origin": [140,260], "bladeTip": [430,260], "trailTip": [140,360] }
+      ],
+      "active": [
+        { "frame": 5, "previous": 4, "fxFrames": [0,1], "opacity": 0.62 },
+        { "frame": 6, "previous": 5, "fxFrames": [2,3], "opacity": 0.46 }
+      ]
+    }
+  }
+}

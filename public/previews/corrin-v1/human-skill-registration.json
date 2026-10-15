@@ -1,0 +1,1067 @@
+{
+  "version": 1,
+  "status": "both clips complete: 6 PNG / 24 real frames; independent browser preview and emission overlays checked",
+  "baseline": "Approved human-jab1-b small gameplay proportions. bodyHeight is a fixed standing head-to-foot anatomical estimate, never pose bounding height.",
+  "clips": [
+    {
+      "id": "smash",
+      "title": "K 双手夜刀断斩",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/human-smash-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 370,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-f14727b1-9832-4de7-b0fd-00e2381cbd64.png",
+          "measurement": {
+            "size": [
+              1254,
+              1254
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                127,
+                222,
+                581,
+                586
+              ],
+              [
+                137,
+                63,
+                468,
+                586
+              ],
+              [
+                144,
+                63,
+                506,
+                562
+              ],
+              [
+                138,
+                51,
+                510,
+                563
+              ]
+            ],
+            "transparentPixels": 1233469,
+            "bytes": 917985,
+            "sha256": "c956bc83fbe895c940663b1f04dabe9434fd7f189aec7d0ecb69d5038e4b0315",
+            "sourceIdentical": true
+          }
+        },
+        {
+          "src": "assets/human-smash-b.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 370,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-49abcc3a-167b-4060-9b78-b504a4fca7cc.png",
+          "measurement": {
+            "size": [
+              1254,
+              1254
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                131,
+                113,
+                518,
+                593
+              ],
+              [
+                67,
+                173,
+                485,
+                596
+              ],
+              [
+                126,
+                149,
+                585,
+                498
+              ],
+              [
+                96,
+                156,
+                543,
+                501
+              ]
+            ],
+            "transparentPixels": 1217855,
+            "bytes": 952678,
+            "sha256": "8d2318bff61a2d1f7ae30a732b5b7f0dad0cc8fbfd5f767dcc0c1956cb8f723f",
+            "sourceIdentical": true
+          }
+        },
+        {
+          "src": "assets/human-smash-c.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 410,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-cd808eef-6c90-487d-98bf-823b361c9d19.png",
+          "measurement": {
+            "size": [
+              1254,
+              1254
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                140,
+                250,
+                559,
+                569
+              ],
+              [
+                128,
+                182,
+                513,
+                566
+              ],
+              [
+                154,
+                126,
+                530,
+                533
+              ],
+              [
+                140,
+                123,
+                508,
+                533
+              ]
+            ],
+            "transparentPixels": 1248780,
+            "bytes": 854391,
+            "sha256": "61af3fd67f306fc9062cd51fa38963fa1965c436da7d89d80aceaad417e4418c",
+            "sourceIdentical": true
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            340,
+            589
+          ],
+          "duration": 100,
+          "phase": "grip",
+          "anchors": {
+            "hand": [
+              373,
+              396
+            ],
+            "swordTip": [
+              578,
+              510
+            ]
+          },
+          "anchorNote": "Manual full-resolution visual estimate in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            339,
+            589
+          ],
+          "duration": 110,
+          "phase": "raise",
+          "anchors": {
+            "hand": [
+              409,
+              292
+            ],
+            "swordTip": [
+              367,
+              62
+            ]
+          },
+          "anchorNote": "Manual full-resolution visual estimate in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            375,
+            565
+          ],
+          "duration": 120,
+          "phase": "overhead",
+          "anchors": {
+            "hand": [
+              398,
+              164
+            ],
+            "swordTip": [
+              220,
+              66
+            ]
+          },
+          "anchorNote": "Manual full-resolution visual estimate in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            376,
+            565
+          ],
+          "duration": 140,
+          "phase": "windup",
+          "anchors": {
+            "hand": [
+              345,
+              151
+            ],
+            "swordTip": [
+              185,
+              51
+            ]
+          },
+          "anchorNote": "Manual full-resolution visual estimate in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            360,
+            592
+          ],
+          "duration": 150,
+          "phase": "crest",
+          "anchors": {
+            "hand": [
+              353,
+              182
+            ],
+            "swordTip": [
+              170,
+              114
+            ]
+          },
+          "anchorNote": "Manual full-resolution visual estimate in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            592
+          ],
+          "duration": 55,
+          "phase": "downstroke",
+          "anchors": {
+            "hand": [
+              362,
+              348
+            ],
+            "swordTip": [
+              486,
+              175
+            ]
+          },
+          "anchorNote": "Manual full-resolution visual estimate in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            499
+          ],
+          "duration": 65,
+          "phase": "impact",
+          "anchors": {
+            "hand": [
+              414,
+              344
+            ],
+            "swordTip": [
+              585,
+              468
+            ]
+          },
+          "anchorNote": "Manual full-resolution visual estimate in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            325,
+            499
+          ],
+          "duration": 85,
+          "phase": "follow",
+          "anchors": {
+            "hand": [
+              378,
+              363
+            ],
+            "swordTip": [
+              542,
+              492
+            ]
+          },
+          "anchorNote": "Manual full-resolution visual estimate in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            570
+          ],
+          "duration": 100,
+          "phase": "absorb",
+          "anchors": {
+            "hand": [
+              365,
+              430
+            ],
+            "swordTip": [
+              556,
+              555
+            ]
+          },
+          "anchorNote": "Manual full-resolution visual estimate in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            310,
+            570
+          ],
+          "duration": 110,
+          "phase": "recover",
+          "anchors": {
+            "hand": [
+              312,
+              376
+            ],
+            "swordTip": [
+              513,
+              518
+            ]
+          },
+          "anchorNote": "Manual full-resolution visual estimate in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            327,
+            534
+          ],
+          "duration": 120,
+          "phase": "release-left",
+          "anchors": {
+            "hand": [
+              306,
+              340
+            ],
+            "swordTip": [
+              532,
+              504
+            ]
+          },
+          "anchorNote": "Manual full-resolution visual estimate in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            314,
+            534
+          ],
+          "duration": 150,
+          "phase": "idle",
+          "anchors": {
+            "hand": [
+              288,
+              347
+            ],
+            "swordTip": [
+              509,
+              505
+            ]
+          },
+          "anchorNote": "Manual full-resolution visual estimate in cell pixels; overlay checked in independent browser preview."
+        }
+      ]
+    },
+    {
+      "id": "secondary",
+      "title": "I 左臂龙牙贯刺",
+      "loop": false,
+      "sheets": [
+        {
+          "src": "assets/human-secondary-a.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 430,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-43a0d94b-01d0-4c01-9225-3306fc79a8cd.png",
+          "measurement": {
+            "size": [
+              1254,
+              1254
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                127,
+                146,
+                523,
+                575
+              ],
+              [
+                68,
+                146,
+                457,
+                574
+              ],
+              [
+                118,
+                94,
+                581,
+                522
+              ],
+              [
+                51,
+                103,
+                573,
+                515
+              ]
+            ],
+            "transparentPixels": 1156244,
+            "bytes": 1118046,
+            "sha256": "de48f6c13c7c0cee3698a872c07ee406e1b2aa80d01c348a78ee09405406b249",
+            "sourceIdentical": true
+          }
+        },
+        {
+          "src": "assets/human-secondary-b.png",
+          "width": 1388,
+          "height": 1133,
+          "bodyHeight": 400,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-99d7b837-5954-4fdf-87d6-d5f8d2122c78.png",
+          "measurement": {
+            "size": [
+              1388,
+              1133
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                175,
+                143,
+                545,
+                531
+              ],
+              [
+                71,
+                155,
+                590,
+                531
+              ],
+              [
+                157,
+                116,
+                664,
+                478
+              ],
+              [
+                120,
+                107,
+                474,
+                478
+              ]
+            ],
+            "transparentPixels": 1170850,
+            "bytes": 1019573,
+            "sha256": "ceb2f2bf63783c5e9d77f6d1f6af5625b17a922ff8da08a4c8dcd1c0fd7c78b4",
+            "sourceIdentical": true
+          }
+        },
+        {
+          "src": "assets/human-secondary-c.png",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 520,
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a139ca-d0d8-7221-93f2-f5bf0d7a0a6d\\exec-a688b04e-8481-439a-ab68-49d7b2376966.png",
+          "measurement": {
+            "size": [
+              1254,
+              1254
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                69,
+                117,
+                562,
+                603
+              ],
+              [
+                70,
+                121,
+                593,
+                604
+              ],
+              [
+                96,
+                34,
+                608,
+                554
+              ],
+              [
+                88,
+                28,
+                575,
+                561
+              ]
+            ],
+            "transparentPixels": 922632,
+            "bytes": 1513149,
+            "sha256": "d75fea8cb0611abd6d8cbd4e2221c71591800af8a1535a1295f25429c7864af4",
+            "sourceIdentical": true
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            363,
+            575
+          ],
+          "duration": 100,
+          "phase": "draw-sword",
+          "anchors": {
+            "hand": [
+              273,
+              380
+            ],
+            "swordTip": [
+              125,
+              546
+            ],
+            "castOrigin": [
+              480,
+              253
+            ],
+            "dragonFangTip": [
+              480,
+              253
+            ],
+            "fangTip": [
+              480,
+              253
+            ]
+          },
+          "anchorNote": "Hand is right Yato grip; castOrigin/dragonFangTip are left transformed-arm tip (or restored left fingers). Manual full-resolution visual estimates in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            333,
+            574
+          ],
+          "duration": 120,
+          "phase": "arm-transform",
+          "anchors": {
+            "hand": [
+              207,
+              382
+            ],
+            "swordTip": [
+              67,
+              554
+            ],
+            "castOrigin": [
+              408,
+              238
+            ],
+            "dragonFangTip": [
+              408,
+              238
+            ],
+            "fangTip": [
+              408,
+              238
+            ]
+          },
+          "anchorNote": "Hand is right Yato grip; castOrigin/dragonFangTip are left transformed-arm tip (or restored left fingers). Manual full-resolution visual estimates in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            363,
+            522
+          ],
+          "duration": 130,
+          "phase": "fang-ready",
+          "anchors": {
+            "hand": [
+              273,
+              325
+            ],
+            "swordTip": [
+              118,
+              497
+            ],
+            "castOrigin": [
+              580,
+              201
+            ],
+            "dragonFangTip": [
+              580,
+              201
+            ],
+            "fangTip": [
+              580,
+              201
+            ]
+          },
+          "anchorNote": "Hand is right Yato grip; castOrigin/dragonFangTip are left transformed-arm tip (or restored left fingers). Manual full-resolution visual estimates in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            515
+          ],
+          "duration": 140,
+          "phase": "step",
+          "anchors": {
+            "hand": [
+              201,
+              323
+            ],
+            "swordTip": [
+              51,
+              493
+            ],
+            "castOrigin": [
+              571,
+              200
+            ],
+            "dragonFangTip": [
+              571,
+              200
+            ],
+            "fangTip": [
+              571,
+              200
+            ]
+          },
+          "anchorNote": "Hand is right Yato grip; castOrigin/dragonFangTip are left transformed-arm tip (or restored left fingers). Manual full-resolution visual estimates in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            694,
+            566
+          ],
+          "pivot": [
+            414,
+            531
+          ],
+          "duration": 130,
+          "phase": "crest",
+          "anchors": {
+            "hand": [
+              320,
+              353
+            ],
+            "swordTip": [
+              177,
+              501
+            ],
+            "castOrigin": [
+              542,
+              190
+            ],
+            "dragonFangTip": [
+              542,
+              190
+            ],
+            "fangTip": [
+              542,
+              190
+            ]
+          },
+          "anchorNote": "Hand is right Yato grip; castOrigin/dragonFangTip are left transformed-arm tip (or restored left fingers). Manual full-resolution visual estimates in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            694,
+            0,
+            694,
+            566
+          ],
+          "pivot": [
+            358,
+            531
+          ],
+          "duration": 60,
+          "phase": "release",
+          "anchors": {
+            "hand": [
+              211,
+              357
+            ],
+            "swordTip": [
+              71,
+              501
+            ],
+            "castOrigin": [
+              585,
+              248
+            ],
+            "dragonFangTip": [
+              585,
+              248
+            ],
+            "fangTip": [
+              585,
+              248
+            ]
+          },
+          "anchorNote": "Hand is right Yato grip; castOrigin/dragonFangTip are left transformed-arm tip (or restored left fingers). Manual full-resolution visual estimates in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            566,
+            694,
+            567
+          ],
+          "pivot": [
+            434,
+            478
+          ],
+          "duration": 80,
+          "phase": "impact",
+          "anchors": {
+            "hand": [
+              301,
+              313
+            ],
+            "swordTip": [
+              157,
+              453
+            ],
+            "castOrigin": [
+              664,
+              200
+            ],
+            "dragonFangTip": [
+              664,
+              200
+            ],
+            "fangTip": [
+              664,
+              200
+            ]
+          },
+          "anchorNote": "Hand is right Yato grip; castOrigin/dragonFangTip are left transformed-arm tip (or restored left fingers). Manual full-resolution visual estimates in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            694,
+            566,
+            694,
+            567
+          ],
+          "pivot": [
+            361,
+            478
+          ],
+          "duration": 90,
+          "phase": "retract",
+          "anchors": {
+            "hand": [
+              261,
+              311
+            ],
+            "swordTip": [
+              119,
+              452
+            ],
+            "castOrigin": [
+              470,
+              168
+            ],
+            "dragonFangTip": [
+              470,
+              168
+            ],
+            "fangTip": [
+              470,
+              168
+            ]
+          },
+          "anchorNote": "Hand is right Yato grip; castOrigin/dragonFangTip are left transformed-arm tip (or restored left fingers). Manual full-resolution visual estimates in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            375,
+            603
+          ],
+          "duration": 110,
+          "phase": "coil",
+          "anchors": {
+            "hand": [
+              253,
+              377
+            ],
+            "swordTip": [
+              69,
+              557
+            ],
+            "castOrigin": [
+              551,
+              165
+            ],
+            "dragonFangTip": [
+              551,
+              165
+            ],
+            "fangTip": [
+              551,
+              165
+            ]
+          },
+          "anchorNote": "Hand is right Yato grip; castOrigin/dragonFangTip are left transformed-arm tip (or restored left fingers). Manual full-resolution visual estimates in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            346,
+            604
+          ],
+          "duration": 130,
+          "phase": "restore-hand",
+          "anchors": {
+            "hand": [
+              248,
+              382
+            ],
+            "swordTip": [
+              72,
+              575
+            ],
+            "castOrigin": [
+              508,
+              239
+            ],
+            "dragonFangTip": [
+              508,
+              239
+            ],
+            "fangTip": [
+              508,
+              239
+            ]
+          },
+          "anchorNote": "Hand is right Yato grip; castOrigin/dragonFangTip are left transformed-arm tip (or restored left fingers). Manual full-resolution visual estimates in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            360,
+            554
+          ],
+          "duration": 120,
+          "phase": "human-return",
+          "anchors": {
+            "hand": [
+              348,
+              283
+            ],
+            "swordTip": [
+              608,
+              461
+            ],
+            "castOrigin": [
+              437,
+              164
+            ],
+            "dragonFangTip": [
+              437,
+              164
+            ],
+            "fangTip": [
+              437,
+              164
+            ]
+          },
+          "anchorNote": "Hand is right Yato grip; castOrigin/dragonFangTip are left transformed-arm tip (or restored left fingers). Manual full-resolution visual estimates in cell pixels; overlay checked in independent browser preview."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            561
+          ],
+          "duration": 150,
+          "phase": "idle",
+          "anchors": {
+            "hand": [
+              301,
+              311
+            ],
+            "swordTip": [
+              572,
+              525
+            ],
+            "castOrigin": [
+              404,
+              242
+            ],
+            "dragonFangTip": [
+              404,
+              242
+            ],
+            "fangTip": [
+              404,
+              242
+            ]
+          },
+          "anchorNote": "Hand is right Yato grip; castOrigin/dragonFangTip are left transformed-arm tip (or restored left fingers). Manual full-resolution visual estimates in cell pixels; overlay checked in independent browser preview."
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "generation": "built-in image_gen__imagegen only; 6 copies bit-identical to generated sources",
+    "alpha": "all RGBA; all alpha>32 silhouettes confined to own cells; min transparent count >900000",
+    "registration": "Physical scale estimate fixed per sheet; manually observed hand/tip coordinates checked in independent browser preview."
+  },
+  "previewVerification": {
+    "date": "2026-10-14",
+    "scope": "Independent Canvas preview only; complete catalogue 29 clips / 216 frames checked in Chrome. No game integration validation.",
+    "pngModified": false
+  }
+}

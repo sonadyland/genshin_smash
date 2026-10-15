@@ -94,8 +94,8 @@ test('development exposes the same live catalog but retains editable logical URL
   const config = plugin.config({ root }, { command: 'serve' });
   assert.deepEqual(JSON.parse(config.define.__GAME_ART_URLS__), {});
   const catalog = JSON.parse(config.define.__GAME_ART_CATALOG__);
-  assert.equal(catalog.home.length, 9);
-  assert.deepEqual(Object.keys(catalog.characters), ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina', 'tharja']);
+  assert.equal(catalog.home.length, 10);
+  assert.deepEqual(Object.keys(catalog.characters), ['raiden', 'jean', 'eula', 'diluc', 'xiao', 'zhongli', 'furina', 'tharja', 'corrin']);
   const exported = moduleLoader({ __GAME_ART_CATALOG__: catalog })(path.join(root, 'src/game/asset-catalog.ts'));
   assert.deepEqual(exported.ART_CATALOG, catalog);
   const none = publicAssetCache().config({ root, publicDir: false }, { command: 'build' });
@@ -121,7 +121,7 @@ test('queue inventory uses real bytes and contains complete active packs without
     assert.ok(catalog.characters[id].includes(`animations/${directory}/manifest.json`));
     const manifest = JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations', directory, 'manifest.json'), 'utf8'));
     for (const clip of [...Object.values(manifest.clips), ...Object.values(manifest.variants ?? {})]) {
-      for (const image of [clip.image, ...clip.frames.filter(frame => frame.image).map(frame => frame.image)]) {
+      for (const image of [clip.image, ...(clip.sheets ?? []).map(sheet => sheet.image), ...clip.frames.filter(frame => frame.image).map(frame => frame.image)].filter(Boolean)) {
         assert.ok(catalog.characters[id].includes(`animations/${directory}/${image}`), `${id}: ${image}`);
       }
     }
@@ -170,7 +170,7 @@ function artHarness(reject = () => false, base = '/') {
   return { art: load(path.join(root, 'src/game/art.ts')), images, fetched };
 }
 
-test('all eight production packs, multi-sheet frames, summons and legacy registrations load via independent hashes', async () => {
+test('all nine production packs, multi-sheet frames, summons and legacy registrations load via independent hashes', async () => {
   const packs = JSON.parse(fs.readFileSync(path.join(root, 'src/game/animation-packs.json'), 'utf8'));
   const h = artHarness();
   const lease = h.art.acquireGameArt(Object.keys(packs), { legacy: true }); await lease.ready;
@@ -178,7 +178,7 @@ test('all eight production packs, multi-sheet frames, summons and legacy registr
     assert.equal(h.art.getCharacterAnimationStatus(id).status, 'ready', id);
     const manifest = JSON.parse(fs.readFileSync(path.join(root, 'public/assets/animations', directory, 'manifest.json'), 'utf8'));
     for (const clip of [...Object.values(manifest.clips), ...Object.values(manifest.variants ?? {})]) {
-      for (const image of [clip.image, ...clip.frames.filter(frame => frame.image).map(frame => frame.image)]) {
+      for (const image of [clip.image, ...(clip.sheets ?? []).map(sheet => sheet.image), ...clip.frames.filter(frame => frame.image).map(frame => frame.image)].filter(Boolean)) {
         assert.ok(h.images.includes(`/${shipped.urls[`animations/${directory}/${image}`]}`), `${id}: ${image}`);
       }
     }

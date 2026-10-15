@@ -1,0 +1,1251 @@
+{
+  "version": 2,
+  "status": "24 newly generated human K/I frames registered; master-scale anatomy, blade/fang anchors, active/recovery timing and mirrored browser overlays visually reviewed",
+  "scope": "Independent Corrin art preview only. No gameplay integration.",
+  "baseline": "Original assets/human-master.png (immutable) first reference for every generation and correction; approved human-v2-idle as supporting proportion/style reference.",
+  "generation": "Built-in image_gen__imagegen, no API/CLI fallback. PNGs copied byte-for-byte; no programmatic image editing.",
+  "coordinateSystem": "Every rect is atlas pixel coordinates; pivot/anchors are rect-local. All character rendering must use one uniform scale. Frame body bounding box is never a scale input.",
+  "clips": [
+    {
+      "id": "smash",
+      "form": "human",
+      "title": "K 双手夜刀下劈",
+      "loop": false,
+      "revision": "master-proportions-v2",
+      "activeFrames": [
+        4,
+        5,
+        6
+      ],
+      "activeFramesIndexing": "zero-based",
+      "fxVariant": "overhead",
+      "sheets": [
+        {
+          "src": "assets/human-v2-smash-a-proportions.png",
+          "width": 1363,
+          "height": 1154,
+          "bodyHeight": 360,
+          "sha256": "c1014acd60d4e04bf3173b1adf85c18b612ad034dcbc857ecad4df234e513416",
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a13af8-9e13-75e3-9ba9-0288432c7ddc\\exec-e42b6d4e-6953-496d-8fd3-b969f2a30834.png",
+          "measurement": {
+            "size": [
+              1363,
+              1154
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                186,
+                232,
+                591,
+                592
+              ],
+              [
+                150,
+                86,
+                448,
+                592
+              ],
+              [
+                165,
+                86,
+                514,
+                502
+              ],
+              [
+                108,
+                17,
+                492,
+                502
+              ]
+            ],
+            "cellMinimumMarginsAlpha32": [
+              18,
+              18,
+              42,
+              17
+            ],
+            "transparentPixels": 1275134,
+            "bytes": 792588,
+            "sha256": "c1014acd60d4e04bf3173b1adf85c18b612ad034dcbc857ecad4df234e513416",
+            "sourceIdentical": true
+          },
+          "rulerNote": "Fixed standing-equivalent anatomical height for the entire sheet, manually estimated from long leg segments and head/torso. Never recomputed from each action bounding box; never stretches the character."
+        },
+        {
+          "src": "assets/human-v2-smash-b-proportions-safe.png",
+          "width": 1363,
+          "height": 1154,
+          "bodyHeight": 390,
+          "sha256": "fbaf31c9ddc7b0aaf347bbdeb64587e33a18ff11a230c1d64be4c9b2e9d02060",
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a13af8-9e13-75e3-9ba9-0288432c7ddc\\exec-b1681c92-f082-4d54-acc2-af037988875d.png",
+          "measurement": {
+            "size": [
+              1363,
+              1154
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                135,
+                38,
+                486,
+                662
+              ],
+              [
+                99,
+                302,
+                600,
+                663
+              ],
+              [
+                133,
+                37,
+                635,
+                413
+              ],
+              [
+                95,
+                49,
+                581,
+                414
+              ]
+            ],
+            "cellMinimumMarginsAlpha32": [
+              38,
+              37,
+              37,
+              40
+            ],
+            "transparentPixels": 1233602,
+            "bytes": 900133,
+            "sha256": "fbaf31c9ddc7b0aaf347bbdeb64587e33a18ff11a230c1d64be4c9b2e9d02060",
+            "sourceIdentical": true
+          },
+          "rulerNote": "Fixed standing-equivalent anatomical height for the entire sheet, manually estimated from long leg segments and head/torso. Never recomputed from each action bounding box; never stretches the character."
+        },
+        {
+          "src": "assets/human-v2-smash-c-proportions.png",
+          "width": 1363,
+          "height": 1154,
+          "bodyHeight": 445,
+          "sha256": "36a8a70cd9c5afda6127091ab974e7e0219235eb7ead5ddc4092c573604e77db",
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a13af8-9e13-75e3-9ba9-0288432c7ddc\\exec-41a9a73d-0e66-4aa3-ad4d-f11bd19babdd.png",
+          "measurement": {
+            "size": [
+              1363,
+              1154
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                179,
+                172,
+                668,
+                584
+              ],
+              [
+                67,
+                171,
+                537,
+                584
+              ],
+              [
+                159,
+                57,
+                623,
+                495
+              ],
+              [
+                83,
+                57,
+                537,
+                496
+              ]
+            ],
+            "cellMinimumMarginsAlpha32": [
+              36,
+              36,
+              39,
+              38
+            ],
+            "transparentPixels": 1216598,
+            "bytes": 933762,
+            "sha256": "36a8a70cd9c5afda6127091ab974e7e0219235eb7ead5ddc4092c573604e77db",
+            "sourceIdentical": true
+          },
+          "rulerNote": "Fixed standing-equivalent anatomical height for the entire sheet, manually estimated from long leg segments and head/torso. Never recomputed from each action bounding box; never stretches the character."
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            700,
+            610
+          ],
+          "pivot": [
+            390,
+            592
+          ],
+          "duration": 110,
+          "phase": "reach-grip",
+          "active": false,
+          "anchors": {
+            "hand": [
+              399,
+              415
+            ],
+            "weaponBase": [
+              430,
+              437
+            ],
+            "swordTip": [
+              591,
+              558
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            700,
+            0,
+            663,
+            610
+          ],
+          "pivot": [
+            348,
+            592
+          ],
+          "duration": 130,
+          "phase": "lift-sword",
+          "active": false,
+          "anchors": {
+            "hand": [
+              393,
+              307
+            ],
+            "weaponBase": [
+              377,
+              263
+            ],
+            "swordTip": [
+              317,
+              87
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            610,
+            700,
+            544
+          ],
+          "pivot": [
+            417,
+            502
+          ],
+          "duration": 150,
+          "phase": "overhead-windup",
+          "active": false,
+          "anchors": {
+            "hand": [
+              379,
+              106
+            ],
+            "weaponBase": [
+              340,
+              128
+            ],
+            "swordTip": [
+              166,
+              209
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            700,
+            610,
+            663,
+            544
+          ],
+          "pivot": [
+            392,
+            502
+          ],
+          "duration": 180,
+          "phase": "charged-overhead",
+          "active": false,
+          "anchors": {
+            "hand": [
+              343,
+              131
+            ],
+            "weaponBase": [
+              308,
+              117
+            ],
+            "swordTip": [
+              107,
+              19
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            700,
+            700
+          ],
+          "pivot": [
+            362,
+            661
+          ],
+          "duration": 55,
+          "phase": "release-vertical",
+          "active": true,
+          "anchors": {
+            "hand": [
+              352,
+              244
+            ],
+            "weaponBase": [
+              359,
+              214
+            ],
+            "swordTip": [
+              412,
+              38
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            700,
+            0,
+            663,
+            700
+          ],
+          "pivot": [
+            318,
+            661
+          ],
+          "duration": 55,
+          "phase": "downstroke-horizontal",
+          "active": true,
+          "anchors": {
+            "hand": [
+              373,
+              373
+            ],
+            "weaponBase": [
+              411,
+              377
+            ],
+            "swordTip": [
+              600,
+              379
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            700,
+            700,
+            454
+          ],
+          "pivot": [
+            372,
+            414
+          ],
+          "duration": 65,
+          "phase": "impact-downright",
+          "active": true,
+          "anchors": {
+            "hand": [
+              445,
+              198
+            ],
+            "weaponBase": [
+              483,
+              225
+            ],
+            "swordTip": [
+              635,
+              354
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            700,
+            700,
+            663,
+            454
+          ],
+          "pivot": [
+            325,
+            414
+          ],
+          "duration": 90,
+          "phase": "followthrough",
+          "active": false,
+          "anchors": {
+            "hand": [
+              393,
+              231
+            ],
+            "weaponBase": [
+              430,
+              264
+            ],
+            "swordTip": [
+              581,
+              379
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            0,
+            720,
+            620
+          ],
+          "pivot": [
+            404,
+            585
+          ],
+          "duration": 100,
+          "phase": "absorb",
+          "active": false,
+          "anchors": {
+            "hand": [
+              437,
+              378
+            ],
+            "weaponBase": [
+              477,
+              411
+            ],
+            "swordTip": [
+              666,
+              552
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            720,
+            0,
+            643,
+            620
+          ],
+          "pivot": [
+            280,
+            585
+          ],
+          "duration": 110,
+          "phase": "straighten",
+          "active": false,
+          "anchors": {
+            "hand": [
+              318,
+              376
+            ],
+            "weaponBase": [
+              354,
+              408
+            ],
+            "swordTip": [
+              535,
+              557
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            620,
+            720,
+            534
+          ],
+          "pivot": [
+            379,
+            497
+          ],
+          "duration": 110,
+          "phase": "release-left",
+          "active": false,
+          "anchors": {
+            "hand": [
+              381,
+              263
+            ],
+            "weaponBase": [
+              420,
+              296
+            ],
+            "swordTip": [
+              623,
+              429
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            720,
+            620,
+            643,
+            534
+          ],
+          "pivot": [
+            300,
+            497
+          ],
+          "duration": 140,
+          "phase": "idle",
+          "active": false,
+          "anchors": {
+            "hand": [
+              296,
+              261
+            ],
+            "weaponBase": [
+              332,
+              294
+            ],
+            "swordTip": [
+              535,
+              440
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        }
+      ]
+    },
+    {
+      "id": "secondary",
+      "form": "human",
+      "title": "I 左臂龙牙贯刺",
+      "loop": false,
+      "revision": "master-proportions-v2",
+      "activeFrames": [
+        5,
+        6
+      ],
+      "activeFramesIndexing": "zero-based",
+      "fxVariant": "dragon-fang",
+      "sheets": [
+        {
+          "src": "assets/human-v2-secondary-a-proportions.png",
+          "width": 1408,
+          "height": 1117,
+          "bodyHeight": 490,
+          "sha256": "6ef9c63fdcfab86f63a55ebe53f3717c557e0fcd54a1f4f1a6d68243769e5e2f",
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a13af8-9e13-75e3-9ba9-0288432c7ddc\\exec-a8609b4f-994c-4941-a9f3-692737a44ced.png",
+          "measurement": {
+            "size": [
+              1408,
+              1117
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                79,
+                53,
+                524,
+                539
+              ],
+              [
+                146,
+                66,
+                549,
+                539
+              ],
+              [
+                90,
+                28,
+                560,
+                499
+              ],
+              [
+                148,
+                33,
+                553,
+                499
+              ]
+            ],
+            "cellMinimumMarginsAlpha32": [
+              31,
+              31,
+              28,
+              33
+            ],
+            "transparentPixels": 1108141,
+            "bytes": 1196619,
+            "sha256": "6ef9c63fdcfab86f63a55ebe53f3717c557e0fcd54a1f4f1a6d68243769e5e2f",
+            "sourceIdentical": true
+          },
+          "rulerNote": "Fixed standing-equivalent anatomical height for the entire sheet, manually estimated from long leg segments and head/torso. Never recomputed from each action bounding box; never stretches the character."
+        },
+        {
+          "src": "assets/human-v2-secondary-b-proportions.png",
+          "width": 1408,
+          "height": 1117,
+          "bodyHeight": 445,
+          "sha256": "7691141431d02c54e6608750400dd3e11faf714fba5afdc4df08f7d5f258fb61",
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a13af8-9e13-75e3-9ba9-0288432c7ddc\\exec-cb17cee8-84fb-4c77-86a8-adf7107c85e0.png",
+          "measurement": {
+            "size": [
+              1408,
+              1117
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                92,
+                130,
+                572,
+                551
+              ],
+              [
+                40,
+                129,
+                618,
+                553
+              ],
+              [
+                68,
+                53,
+                711,
+                445
+              ],
+              [
+                51,
+                53,
+                578,
+                458
+              ]
+            ],
+            "cellMinimumMarginsAlpha32": [
+              59,
+              40,
+              39,
+              49
+            ],
+            "transparentPixels": 1149020,
+            "bytes": 1103988,
+            "sha256": "7691141431d02c54e6608750400dd3e11faf714fba5afdc4df08f7d5f258fb61",
+            "sourceIdentical": true
+          },
+          "rulerNote": "Fixed standing-equivalent anatomical height for the entire sheet, manually estimated from long leg segments and head/torso. Never recomputed from each action bounding box; never stretches the character."
+        },
+        {
+          "src": "assets/human-v2-secondary-c-proportions.png",
+          "width": 1408,
+          "height": 1117,
+          "bodyHeight": 500,
+          "sha256": "65302a913ab4a14973922e285c7aff46a38afbdd448807db5b8eab1bdcd10695",
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a13af8-9e13-75e3-9ba9-0288432c7ddc\\exec-3650d5ac-ac7f-40f8-8707-a36a016ce6aa.png",
+          "measurement": {
+            "size": [
+              1408,
+              1117
+            ],
+            "mode": "RGBA",
+            "boundsAlpha32": [
+              [
+                101,
+                86,
+                554,
+                547
+              ],
+              [
+                109,
+                62,
+                460,
+                565
+              ],
+              [
+                141,
+                19,
+                573,
+                511
+              ],
+              [
+                129,
+                18,
+                564,
+                512
+              ]
+            ],
+            "cellMinimumMarginsAlpha32": [
+              28,
+              10,
+              19,
+              18
+            ],
+            "transparentPixels": 1124023,
+            "bytes": 1122225,
+            "sha256": "65302a913ab4a14973922e285c7aff46a38afbdd448807db5b8eab1bdcd10695",
+            "sourceIdentical": true
+          },
+          "rulerNote": "Fixed standing-equivalent anatomical height for the entire sheet, manually estimated from long leg segments and head/torso. Never recomputed from each action bounding box; never stretches the character."
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            704,
+            570
+          ],
+          "pivot": [
+            365,
+            539
+          ],
+          "duration": 100,
+          "phase": "draw-sword",
+          "active": false,
+          "anchors": {
+            "hand": [
+              281,
+              304
+            ],
+            "weaponBase": [
+              266,
+              347
+            ],
+            "swordTip": [
+              80,
+              494
+            ],
+            "castOrigin": [
+              432,
+              214
+            ],
+            "fangTip": [
+              522,
+              158
+            ],
+            "dragonFangTip": [
+              522,
+              158
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            704,
+            0,
+            704,
+            570
+          ],
+          "pivot": [
+            421,
+            539
+          ],
+          "duration": 110,
+          "phase": "claw-form",
+          "active": false,
+          "anchors": {
+            "hand": [
+              333,
+              305
+            ],
+            "weaponBase": [
+              311,
+              348
+            ],
+            "swordTip": [
+              145,
+              494
+            ],
+            "castOrigin": [
+              479,
+              218
+            ],
+            "fangTip": [
+              537,
+              147
+            ],
+            "dragonFangTip": [
+              537,
+              147
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            570,
+            704,
+            547
+          ],
+          "pivot": [
+            365,
+            498
+          ],
+          "duration": 130,
+          "phase": "fang-form",
+          "active": false,
+          "anchors": {
+            "hand": [
+              282,
+              266
+            ],
+            "weaponBase": [
+              267,
+              303
+            ],
+            "swordTip": [
+              91,
+              450
+            ],
+            "castOrigin": [
+              432,
+              168
+            ],
+            "fangTip": [
+              558,
+              130
+            ],
+            "dragonFangTip": [
+              558,
+              130
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            704,
+            570,
+            704,
+            547
+          ],
+          "pivot": [
+            421,
+            498
+          ],
+          "duration": 140,
+          "phase": "fang-coil",
+          "active": false,
+          "anchors": {
+            "hand": [
+              337,
+              269
+            ],
+            "weaponBase": [
+              314,
+              309
+            ],
+            "swordTip": [
+              150,
+              457
+            ],
+            "castOrigin": [
+              469,
+              180
+            ],
+            "fangTip": [
+              541,
+              67
+            ],
+            "dragonFangTip": [
+              541,
+              67
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            0,
+            750,
+            610
+          ],
+          "pivot": [
+            360,
+            548
+          ],
+          "duration": 100,
+          "phase": "aim",
+          "active": false,
+          "anchors": {
+            "hand": [
+              280,
+              347
+            ],
+            "weaponBase": [
+              263,
+              383
+            ],
+            "swordTip": [
+              90,
+              512
+            ],
+            "castOrigin": [
+              446,
+              271
+            ],
+            "fangTip": [
+              570,
+              230
+            ],
+            "dragonFangTip": [
+              570,
+              230
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            750,
+            0,
+            658,
+            610
+          ],
+          "pivot": [
+            330,
+            549
+          ],
+          "duration": 60,
+          "phase": "thrust",
+          "active": true,
+          "anchors": {
+            "hand": [
+              232,
+              347
+            ],
+            "weaponBase": [
+              214,
+              383
+            ],
+            "swordTip": [
+              39,
+              505
+            ],
+            "castOrigin": [
+              422,
+              226
+            ],
+            "fangTip": [
+              617,
+              221
+            ],
+            "dragonFangTip": [
+              617,
+              221
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            0,
+            610,
+            750,
+            507
+          ],
+          "pivot": [
+            363,
+            443
+          ],
+          "duration": 85,
+          "phase": "full-extension",
+          "active": true,
+          "anchors": {
+            "hand": [
+              264,
+              258
+            ],
+            "weaponBase": [
+              248,
+              288
+            ],
+            "swordTip": [
+              67,
+              396
+            ],
+            "castOrigin": [
+              463,
+              147
+            ],
+            "fangTip": [
+              710,
+              146
+            ],
+            "dragonFangTip": [
+              710,
+              146
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 1,
+          "rect": [
+            750,
+            610,
+            658,
+            507
+          ],
+          "pivot": [
+            335,
+            455
+          ],
+          "duration": 90,
+          "phase": "recoil",
+          "active": false,
+          "anchors": {
+            "hand": [
+              231,
+              262
+            ],
+            "weaponBase": [
+              209,
+              299
+            ],
+            "swordTip": [
+              48,
+              402
+            ],
+            "castOrigin": [
+              398,
+              190
+            ],
+            "fangTip": [
+              580,
+              127
+            ],
+            "dragonFangTip": [
+              580,
+              127
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            0,
+            704,
+            575
+          ],
+          "pivot": [
+            392,
+            548
+          ],
+          "duration": 110,
+          "phase": "fold-arm",
+          "active": false,
+          "anchors": {
+            "hand": [
+              305,
+              314
+            ],
+            "weaponBase": [
+              278,
+              356
+            ],
+            "swordTip": [
+              99,
+              532
+            ],
+            "castOrigin": [
+              495,
+              230
+            ],
+            "fangTip": [
+              552,
+              110
+            ],
+            "dragonFangTip": [
+              552,
+              110
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            704,
+            0,
+            704,
+            575
+          ],
+          "pivot": [
+            361,
+            551
+          ],
+          "duration": 120,
+          "phase": "claw-restore",
+          "active": false,
+          "anchors": {
+            "hand": [
+              275,
+              309
+            ],
+            "weaponBase": [
+              286,
+              354
+            ],
+            "swordTip": [
+              330,
+              559
+            ],
+            "castOrigin": [
+              413,
+              222
+            ],
+            "fangTip": [
+              447,
+              130
+            ],
+            "dragonFangTip": [
+              447,
+              130
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            0,
+            575,
+            704,
+            542
+          ],
+          "pivot": [
+            376,
+            513
+          ],
+          "duration": 120,
+          "phase": "human-hand",
+          "active": false,
+          "anchors": {
+            "hand": [
+              323,
+              262
+            ],
+            "weaponBase": [
+              356,
+              294
+            ],
+            "swordTip": [
+              570,
+              474
+            ],
+            "castOrigin": [
+              449,
+              176
+            ],
+            "fangTip": [
+              432,
+              110
+            ],
+            "dragonFangTip": [
+              432,
+              110
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        },
+        {
+          "sheet": 2,
+          "rect": [
+            704,
+            575,
+            704,
+            542
+          ],
+          "pivot": [
+            359,
+            513
+          ],
+          "duration": 150,
+          "phase": "idle",
+          "active": false,
+          "anchors": {
+            "hand": [
+              304,
+              261
+            ],
+            "weaponBase": [
+              333,
+              294
+            ],
+            "swordTip": [
+              563,
+              479
+            ],
+            "castOrigin": [
+              414,
+              205
+            ],
+            "fangTip": [
+              452,
+              214
+            ],
+            "dragonFangTip": [
+              452,
+              214
+            ]
+          },
+          "anchorNote": "Manual full-resolution drawing landmarks, cell-local pixels. weaponBase is blade root in front of guard. Pivot is anatomical pelvis projection on ground, not bounding-box center. I castOrigin is left elbow/forearm root; fangTip is visible anatomical end. Needs browser overlay review."
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "generation": "6 active PNGs; 24 separately drawn poses; source bytes identical.",
+    "alpha": "All RGBA, alpha min0/max255; visible alpha>32 silhouettes isolated by measured nonzero cell margins.",
+    "visual": "Original masters and each generated sheet viewed at full resolution; oversized heads specifically redrawn, K blade angles checked. Final in-browser scale/FX registration review remains required.",
+    "limitations": "Hand/weapon/anatomy measurements are manual estimates; exact ratio equality is not claimed. Keep original source identity and confirm playback with master comparator."
+  }
+}

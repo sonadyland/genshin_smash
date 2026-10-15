@@ -8,6 +8,8 @@ import animationPacks from './animation-packs.json';
 import { acquireSummonerArt } from './summoner-art';
 import { assetUrl as asset } from './asset-url';
 import { LOBBY_BACKGROUND_ART, LOBBY_CHARACTER_ART } from './lobby-art';
+import { loadCorrinPack, drawCorrinFighter, corrinCastOrigin, corrinFangSegment, drawCorrinWater, selectCorrinFrame } from './corrin-art';
+import type { CorrinArtPack, CorrinWaterKind } from './corrin-art';
 
 /** Shared, locally hosted artwork for the lobby and the canvas arena. */
 export const CHARACTER_ART: Record<string, string> = LOBBY_CHARACTER_ART;
@@ -55,6 +57,7 @@ let secondaryEffects: { image: HTMLImageElement; registration: SecondaryEffectRe
 type ClipSheet = { image: HTMLImageElement; flash: HTMLCanvasElement | null };
 type CharacterPack = { manifest: ClipManifest; sheets: Map<string, ClipSheet> };
 const characterPacks = new Map<string, CharacterPack>();
+let corrinPack: CorrinArtPack | undefined;
 const packStatuses = new Map<string, 'loading' | 'ready' | 'fallback'>();
 export interface GameArtLease { ready: Promise<void>; release: () => void }
 interface CharacterResources {
@@ -83,6 +86,8 @@ async function loadClipSheet(url: string, owner: CharacterResources): Promise<Cl
   return pending;
 }
 export function getCharacterAnimationStatus(id: string) {
+  if (id === 'corrin') return { status: packStatuses.get(id) ?? 'loading', variants: true, variantKinds: ['jab'],
+    frames: corrinPack ? Object.values(corrinPack.manifest.clips).reduce((sum, clip) => sum + clip.frames.length, 0) : 0 };
   const pack = characterPacks.get(id), variantKinds = Object.keys(pack?.manifest.variants ?? {});
   return { status: packStatuses.get(id) ?? 'loading', variants: variantKinds.length > 0, variantKinds,
     frames: pack ? [...Object.values(pack.manifest.clips), ...Object.values(pack.manifest.variants ?? {})].reduce((sum, clip) => sum + clip.frames.length, 0) : 0 };
@@ -99,6 +104,7 @@ export function getTharjaCastOrigin(x: number, feetY: number, height: number, ki
 
 /** A sustained spell can follow the current hand through its return gesture. */
 export function getCharacterCastOrigin(id: string, x: number, feetY: number, height: number, animation: FighterAnimation, facing: 1 | -1 = 1) {
+  if (id === 'corrin') return getCorrinCastOrigin(x, feetY, height, animation, facing);
   if (animation.state === 'hitstun') return undefined;
   const pack = characterPacks.get(id), selection = pack && selectClipFrame(pack.manifest, animation);
   if (!pack || !selection || !animation.attack) return undefined;
@@ -107,11 +113,27 @@ export function getCharacterCastOrigin(id: string, x: number, feetY: number, hei
 }
 /** Read-only capability query: effects from a completed attack retain its form. */
 export function hasRegisteredMeleeTrail(id: string, kind: AttackKind, variant?: AttackVisualVariant): boolean {
+  if (id === 'corrin') return !!corrinPack;
   if (kind !== 'jab' && kind !== 'smash') return false;
   const pack = characterPacks.get(id);
   if (!pack) return false;
   const clip = selectedClip(pack.manifest, { clip: kind, variant });
   return (clip.trail === 'arc' || clip.trail === 'thrust') && clip.frames.some(frame => frame.phase === 'contact' && !!frame.weaponTip);
+}
+
+/** Corrin origins share the exact anatomical root and mirrored frame used to draw. */
+export function getCorrinCastOrigin(x: number, feetY: number, height: number, animation: FighterAnimation, facing: 1 | -1 = 1) {
+  return corrinPack && corrinCastOrigin(corrinPack, x, feetY, height, animation, facing);
+}
+export function getCorrinFangSegment(x: number, feetY: number, height: number, animation: FighterAnimation, facing: 1 | -1 = 1) {
+  return corrinPack && corrinFangSegment(corrinPack, x, feetY, height, animation, facing);
+}
+export function getCorrinAnimationSelection(animation: FighterAnimation) {
+  return corrinPack && selectCorrinFrame(corrinPack.manifest, animation);
+}
+export function drawCorrinWaterEffect(context: CanvasRenderingContext2D, kind: CorrinWaterKind, x: number, y: number,
+  width: number, height: number, age: number, facing: 1 | -1 = 1): boolean {
+  return !!corrinPack && drawCorrinWater(context, corrinPack, kind, x, y, width, height, age, facing);
 }
 
 /** Only the two sword-cast I skills opt in; unavailable packs retain legacy FX. */
@@ -335,10 +357,16 @@ export function acquireGameArt(characterIds: readonly string[], options: { legac
         entry.summonLease.strictReady,
         // Portraits remain necessary for the canvas HUD and the final fallback.
         loadImage(CHARACTER_ART[id], true).then(art => { if (!art) throw new Error(`Invalid ${id} portrait`); if (characterResources.get(id) === entry) loaded.set(id, art); }),
-        loadCharacterPack(id, entry, options.strict).then(pack => {
+        (id === 'corrin' ? loadCorrinPack(CHARACTER_CLIP_MANIFESTS.corrin,
+          name => {
+            if (characterResources.get(id) !== entry) return Promise.reject(new Error('Released Corrin art'));
+            return loadClipSheet(asset(`animations/${animationPacks.corrin}/${name}`), entry);
+          }).then(pack => {
+            if (characterResources.get(id) === entry) { corrinPack = pack; packStatuses.set(id, 'ready'); }
+          }) : loadCharacterPack(id, entry, options.strict).then(pack => {
           if (characterResources.get(id) !== entry) return;
           characterPacks.set(id, pack); packStatuses.set(id, 'ready');
-        }).catch(async (error) => {
+        })).catch(async (error) => {
           if (characterResources.get(id) !== entry) return;
           // A failed pack must not pin partially decoded atlases alongside fallback.
           entry.sheets.clear(); packStatuses.set(id, 'fallback');
@@ -369,6 +397,7 @@ export function acquireGameArt(characterIds: readonly string[], options: { legac
         owner.sheets.clear();
         owner.summonLease?.release();
         if (id === 'xiao') plungeEffects = undefined;
+        if (id === 'corrin') corrinPack = undefined;
       }
       if (!--shared.references && sharedResources === shared) {
         sharedResources = undefined; loaded.delete('arena'); effects = undefined; secondaryEffects = undefined;
@@ -378,6 +407,7 @@ export function acquireGameArt(characterIds: readonly string[], options: { legac
 }
 /** Battle-only artwork. HUD and lobby retain the full-resolution portrait. */
 export function drawFighterArt(context: CanvasRenderingContext2D, id: string, x: number, feetY: number, height: number, animation: FighterAnimation, options: Pick<CharacterArtOptions, 'facing' | 'flash' | 'alpha'> & { legacy?: boolean } = {}): boolean {
+  if (id === 'corrin' && corrinPack) return drawCorrinFighter(context, corrinPack, x, feetY, height, animation, options);
   const pack = characterPacks.get(id);
   if (!options.legacy && pack) {
     const selection = selectClipFrame(pack.manifest, animation);

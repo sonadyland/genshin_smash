@@ -1,0 +1,8074 @@
+{
+  "version": 2,
+  "character": "corrin",
+  "revision": "master-proportions-v2",
+  "clips": {
+    "dragon:idle": {
+      "id": "idle",
+      "form": "dragon",
+      "gameHeight": 135,
+      "loop": true,
+      "sheets": [
+        {
+          "image": "dragon-idle-a.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 400
+        },
+        {
+          "image": "dragon-idle-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 403
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            551
+          ],
+          "phase": "四足静候",
+          "sheet": 0,
+          "duration": 600,
+          "bounds": [
+            51,
+            151,
+            525,
+            399
+          ]
+        },
+        {
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            336,
+            551
+          ],
+          "phase": "缓慢吸气",
+          "sheet": 0,
+          "duration": 500,
+          "bounds": [
+            67,
+            150,
+            523,
+            401
+          ]
+        },
+        {
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            526
+          ],
+          "phase": "眼睑轻收",
+          "sheet": 0,
+          "duration": 80,
+          "bounds": [
+            50,
+            128,
+            526,
+            398
+          ]
+        },
+        {
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            336,
+            526
+          ],
+          "phase": "呼吸峰值",
+          "sheet": 0,
+          "duration": 80,
+          "bounds": [
+            69,
+            129,
+            524,
+            397
+          ]
+        },
+        {
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            552
+          ],
+          "phase": "重新睁眼",
+          "sheet": 1,
+          "duration": 100,
+          "bounds": [
+            48,
+            149,
+            531,
+            403
+          ]
+        },
+        {
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            334,
+            552
+          ],
+          "phase": "胸腹回落",
+          "sheet": 1,
+          "duration": 550,
+          "bounds": [
+            60,
+            151,
+            532,
+            401
+          ]
+        },
+        {
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            527
+          ],
+          "phase": "尾尖归稳",
+          "sheet": 1,
+          "duration": 500,
+          "bounds": [
+            49,
+            128,
+            530,
+            399
+          ]
+        },
+        {
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            334,
+            528
+          ],
+          "phase": "回到静候",
+          "sheet": 1,
+          "duration": 590,
+          "bounds": [
+            60,
+            129,
+            531,
+            399
+          ]
+        }
+      ]
+    },
+    "dragon:run": {
+      "id": "run",
+      "form": "dragon",
+      "gameHeight": 135,
+      "loop": true,
+      "sheets": [
+        {
+          "image": "dragon-run-a.webp",
+          "width": 1551,
+          "height": 1014,
+          "bodyHeight": 340
+        },
+        {
+          "image": "dragon-run-b.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 270
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            775,
+            507
+          ],
+          "pivot": [
+            400,
+            441
+          ],
+          "phase": "near contact",
+          "sheet": 0,
+          "duration": 85
+        },
+        {
+          "rect": [
+            775,
+            0,
+            776,
+            507
+          ],
+          "pivot": [
+            400,
+            441
+          ],
+          "phase": "near load",
+          "sheet": 0,
+          "duration": 85
+        },
+        {
+          "rect": [
+            0,
+            507,
+            775,
+            507
+          ],
+          "pivot": [
+            400,
+            427
+          ],
+          "phase": "near passing",
+          "sheet": 0,
+          "duration": 85
+        },
+        {
+          "rect": [
+            775,
+            507,
+            776,
+            507
+          ],
+          "pivot": [
+            400,
+            427
+          ],
+          "phase": "near lift",
+          "sheet": 0,
+          "duration": 85
+        },
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            390,
+            425
+          ],
+          "phase": "far contact",
+          "sheet": 1,
+          "duration": 85
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            390,
+            425
+          ],
+          "phase": "far load",
+          "sheet": 1,
+          "duration": 85
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            390,
+            386
+          ],
+          "phase": "far passing",
+          "sheet": 1,
+          "duration": 85
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            390,
+            386
+          ],
+          "phase": "far lift",
+          "sheet": 1,
+          "duration": 85
+        }
+      ]
+    },
+    "dragon:jump": {
+      "id": "jump",
+      "form": "dragon",
+      "gameHeight": 135,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "dragon-jump-a.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350
+        },
+        {
+          "image": "dragon-jump-b.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            463
+          ],
+          "phase": "crouch",
+          "sheet": 0,
+          "duration": 110
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            488
+          ],
+          "phase": "launch",
+          "sheet": 0,
+          "duration": 70
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            490
+          ],
+          "phase": "rise",
+          "sheet": 0,
+          "duration": 140
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            490
+          ],
+          "phase": "apex",
+          "sheet": 0,
+          "duration": 180
+        },
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            495
+          ],
+          "phase": "descend",
+          "sheet": 1,
+          "duration": 140
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            490
+          ],
+          "phase": "fore contact",
+          "sheet": 1,
+          "duration": 65
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            424
+          ],
+          "phase": "compression",
+          "sheet": 1,
+          "duration": 100
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            435
+          ],
+          "phase": "recover",
+          "sheet": 1,
+          "duration": 130
+        }
+      ]
+    },
+    "dragon:dodge": {
+      "id": "dodge",
+      "form": "dragon",
+      "gameHeight": 135,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "dragon-dodge-a.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            440
+          ],
+          "phase": "compress",
+          "sheet": 0,
+          "duration": 70
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            440
+          ],
+          "phase": "lunge",
+          "sheet": 0,
+          "duration": 90
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            400
+          ],
+          "phase": "catch",
+          "sheet": 0,
+          "duration": 80
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            400
+          ],
+          "phase": "recover",
+          "sheet": 0,
+          "duration": 100
+        }
+      ]
+    },
+    "dragon:hurt": {
+      "id": "hurt",
+      "form": "dragon",
+      "gameHeight": 135,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "dragon-hurt-a.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 330
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            439
+          ],
+          "phase": "flinch",
+          "sheet": 0,
+          "duration": 45
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            439
+          ],
+          "phase": "peak",
+          "sheet": 0,
+          "duration": 55
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            431
+          ],
+          "phase": "release",
+          "sheet": 0,
+          "duration": 70
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            431
+          ],
+          "phase": "recover",
+          "sheet": 0,
+          "duration": 90
+        }
+      ]
+    },
+    "dragon:defeat": {
+      "id": "defeat",
+      "form": "dragon",
+      "gameHeight": 135,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "dragon-defeat-a.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            486
+          ],
+          "phase": "weaken",
+          "sheet": 0,
+          "duration": 130
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            486
+          ],
+          "phase": "fore collapse",
+          "sheet": 0,
+          "duration": 160
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            431
+          ],
+          "phase": "fold",
+          "sheet": 0,
+          "duration": 220
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            431
+          ],
+          "phase": "rest",
+          "sheet": 0,
+          "duration": 900
+        }
+      ]
+    },
+    "dragon:jab": {
+      "id": "jab",
+      "form": "dragon",
+      "gameHeight": 135,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "dragon-jab-a.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350
+        },
+        {
+          "image": "dragon-jab-b.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            468
+          ],
+          "phase": "lower",
+          "anchors": {
+            "mouth": [
+              620,
+              278
+            ]
+          },
+          "sheet": 0,
+          "duration": 90
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            468
+          ],
+          "phase": "aim",
+          "anchors": {
+            "mouth": [
+              648,
+              339
+            ]
+          },
+          "sheet": 0,
+          "duration": 90
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            435
+          ],
+          "phase": "charge",
+          "anchors": {
+            "mouth": [
+              666,
+              305
+            ]
+          },
+          "sheet": 0,
+          "duration": 120
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            438
+          ],
+          "phase": "release",
+          "anchors": {
+            "mouth": [
+              650,
+              286
+            ]
+          },
+          "sheet": 0,
+          "duration": 60
+        },
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            436
+          ],
+          "phase": "recoil",
+          "anchors": {
+            "mouth": [
+              673,
+              273
+            ]
+          },
+          "sheet": 1,
+          "duration": 70
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            436
+          ],
+          "phase": "close",
+          "anchors": {
+            "mouth": [
+              655,
+              240
+            ]
+          },
+          "sheet": 1,
+          "duration": 85
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            422
+          ],
+          "phase": "rise",
+          "anchors": {
+            "mouth": [
+              652,
+              191
+            ]
+          },
+          "sheet": 1,
+          "duration": 90
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            421
+          ],
+          "phase": "recover",
+          "anchors": {
+            "mouth": [
+              644,
+              186
+            ]
+          },
+          "sheet": 1,
+          "duration": 120
+        }
+      ]
+    },
+    "dragon:smash": {
+      "id": "smash",
+      "form": "dragon",
+      "gameHeight": 135,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "dragon-smash-a.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350
+        },
+        {
+          "image": "dragon-smash-b.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350
+        },
+        {
+          "image": "dragon-smash-c.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            482
+          ],
+          "phase": "brace",
+          "anchors": {
+            "mouth": [
+              618,
+              261
+            ]
+          },
+          "sheet": 0,
+          "duration": 90
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            487
+          ],
+          "phase": "lower",
+          "anchors": {
+            "mouth": [
+              650,
+              374
+            ]
+          },
+          "sheet": 0,
+          "duration": 90
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            437
+          ],
+          "phase": "compress",
+          "anchors": {
+            "mouth": [
+              634,
+              234
+            ]
+          },
+          "sheet": 0,
+          "duration": 110
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            445
+          ],
+          "phase": "charge",
+          "anchors": {
+            "mouth": [
+              646,
+              291
+            ]
+          },
+          "sheet": 0,
+          "duration": 130
+        },
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            468
+          ],
+          "phase": "crest",
+          "anchors": {
+            "mouth": [
+              634,
+              324
+            ]
+          },
+          "sheet": 1,
+          "duration": 140
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            465
+          ],
+          "phase": "release",
+          "anchors": {
+            "mouth": [
+              645,
+              311
+            ]
+          },
+          "sheet": 1,
+          "duration": 55
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            434
+          ],
+          "phase": "follow",
+          "anchors": {
+            "mouth": [
+              660,
+              270
+            ]
+          },
+          "sheet": 1,
+          "duration": 90
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            440
+          ],
+          "phase": "recoil",
+          "anchors": {
+            "mouth": [
+              640,
+              280
+            ]
+          },
+          "sheet": 1,
+          "duration": 80
+        },
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            457
+          ],
+          "phase": "close",
+          "anchors": {
+            "mouth": [
+              685,
+              274
+            ]
+          },
+          "sheet": 2,
+          "duration": 85
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            463
+          ],
+          "phase": "rise",
+          "anchors": {
+            "mouth": [
+              607,
+              231
+            ]
+          },
+          "sheet": 2,
+          "duration": 90
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            432
+          ],
+          "phase": "settle",
+          "anchors": {
+            "mouth": [
+              650,
+              178
+            ]
+          },
+          "sheet": 2,
+          "duration": 100
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            434
+          ],
+          "phase": "recover",
+          "anchors": {
+            "mouth": [
+              615,
+              177
+            ]
+          },
+          "sheet": 2,
+          "duration": 130
+        }
+      ]
+    },
+    "dragon:secondary": {
+      "id": "secondary",
+      "form": "dragon",
+      "gameHeight": 135,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "dragon-secondary-a.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350
+        },
+        {
+          "image": "dragon-secondary-b.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350
+        },
+        {
+          "image": "dragon-secondary-c.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            451
+          ],
+          "phase": "lift",
+          "anchors": {
+            "mouth": [
+              605,
+              199
+            ]
+          },
+          "sheet": 0,
+          "duration": 85
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            451
+          ],
+          "phase": "raise",
+          "anchors": {
+            "mouth": [
+              569,
+              137
+            ]
+          },
+          "sheet": 0,
+          "duration": 95
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            450
+          ],
+          "phase": "coil",
+          "anchors": {
+            "mouth": [
+              585,
+              105
+            ]
+          },
+          "sheet": 0,
+          "duration": 110
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            450
+          ],
+          "phase": "charge",
+          "anchors": {
+            "mouth": [
+              548,
+              96
+            ]
+          },
+          "sheet": 0,
+          "duration": 120
+        },
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            475
+          ],
+          "phase": "crest",
+          "anchors": {
+            "mouth": [
+              557,
+              105
+            ]
+          },
+          "sheet": 1,
+          "duration": 140
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            471
+          ],
+          "phase": "release",
+          "anchors": {
+            "mouth": [
+              578,
+              131
+            ]
+          },
+          "sheet": 1,
+          "duration": 60
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            460
+          ],
+          "phase": "follow",
+          "anchors": {
+            "mouth": [
+              612,
+              87
+            ]
+          },
+          "sheet": 1,
+          "duration": 85
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            460
+          ],
+          "phase": "recoil",
+          "anchors": {
+            "mouth": [
+              607,
+              126
+            ]
+          },
+          "sheet": 1,
+          "duration": 85
+        },
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            453
+          ],
+          "phase": "close",
+          "anchors": {
+            "mouth": [
+              610,
+              139
+            ]
+          },
+          "sheet": 2,
+          "duration": 90
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            453
+          ],
+          "phase": "lower",
+          "anchors": {
+            "mouth": [
+              640,
+              233
+            ]
+          },
+          "sheet": 2,
+          "duration": 90
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            445
+          ],
+          "phase": "settle",
+          "anchors": {
+            "mouth": [
+              627,
+              201
+            ]
+          },
+          "sheet": 2,
+          "duration": 110
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            445
+          ],
+          "phase": "recover",
+          "anchors": {
+            "mouth": [
+              633,
+              201
+            ]
+          },
+          "sheet": 2,
+          "duration": 140
+        }
+      ]
+    },
+    "fx:fx-water-orb": {
+      "id": "fx-water-orb",
+      "form": "fx",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "fx-water-orb.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 750
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            550,
+            295
+          ],
+          "phase": "凝聚",
+          "anchors": {
+            "origin": [
+              550,
+              295
+            ]
+          },
+          "sheet": 0,
+          "duration": 70,
+          "bounds": [
+            222,
+            161,
+            418,
+            232
+          ]
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            500,
+            295
+          ],
+          "phase": "飞行保持 A",
+          "anchors": {
+            "origin": [
+              500,
+              295
+            ]
+          },
+          "sheet": 0,
+          "duration": 80,
+          "bounds": [
+            81,
+            165,
+            543,
+            250
+          ]
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            575,
+            270
+          ],
+          "phase": "飞行保持 B",
+          "anchors": {
+            "origin": [
+              575,
+              270
+            ]
+          },
+          "sheet": 0,
+          "duration": 80,
+          "bounds": [
+            105,
+            140,
+            598,
+            235
+          ]
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            525,
+            285
+          ],
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              525,
+              285
+            ]
+          },
+          "sheet": 0,
+          "duration": 100,
+          "bounds": [
+            74,
+            82,
+            586,
+            318
+          ]
+        }
+      ],
+      "flightLoopFrames": [
+        1,
+        2
+      ],
+      "spawnFrame": 0,
+      "impactFrame": 3
+    },
+    "fx:fx-water-beam": {
+      "id": "fx-water-beam",
+      "form": "fx",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "fx-water-beam.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 350
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            640,
+            512
+          ],
+          "pivot": [
+            120,
+            330
+          ],
+          "phase": "起喷",
+          "anchors": {
+            "origin": [
+              120,
+              330
+            ]
+          },
+          "sheet": 0,
+          "duration": 65,
+          "bounds": [
+            91,
+            209,
+            432,
+            222
+          ]
+        },
+        {
+          "rect": [
+            640,
+            0,
+            896,
+            512
+          ],
+          "pivot": [
+            112,
+            330
+          ],
+          "phase": "主喷",
+          "anchors": {
+            "origin": [
+              112,
+              330
+            ]
+          },
+          "sheet": 0,
+          "duration": 120,
+          "bounds": [
+            90,
+            209,
+            772,
+            217
+          ]
+        },
+        {
+          "rect": [
+            0,
+            512,
+            725,
+            512
+          ],
+          "pivot": [
+            120,
+            248
+          ],
+          "phase": "衰减",
+          "anchors": {
+            "origin": [
+              120,
+              248
+            ]
+          },
+          "sheet": 0,
+          "duration": 75,
+          "bounds": [
+            93,
+            160,
+            628,
+            176
+          ]
+        },
+        {
+          "rect": [
+            725,
+            512,
+            811,
+            512
+          ],
+          "pivot": [
+            135,
+            248
+          ],
+          "phase": "水雾",
+          "anchors": {
+            "origin": [
+              135,
+              248
+            ]
+          },
+          "sheet": 0,
+          "duration": 90,
+          "bounds": [
+            111,
+            162,
+            506,
+            171
+          ]
+        }
+      ]
+    },
+    "fx:fx-water-burst": {
+      "id": "fx-water-burst",
+      "form": "fx",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "fx-water-burst-a.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 450
+        },
+        {
+          "image": "fx-water-burst-b.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 450
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            430,
+            455
+          ],
+          "phase": "坠落水团",
+          "anchors": {
+            "origin": [
+              430,
+              455
+            ]
+          },
+          "sheet": 0,
+          "duration": 60,
+          "bounds": [
+            305,
+            35,
+            210,
+            403
+          ]
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            370,
+            455
+          ],
+          "phase": "接触压缩",
+          "anchors": {
+            "origin": [
+              370,
+              455
+            ]
+          },
+          "sheet": 0,
+          "duration": 45,
+          "bounds": [
+            137,
+            231,
+            472,
+            276
+          ]
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            415,
+            400
+          ],
+          "phase": "水冠升起",
+          "anchors": {
+            "origin": [
+              415,
+              400
+            ]
+          },
+          "sheet": 0,
+          "duration": 55,
+          "bounds": [
+            84,
+            108,
+            635,
+            334
+          ]
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            380,
+            400
+          ],
+          "phase": "水冠展开",
+          "anchors": {
+            "origin": [
+              380,
+              400
+            ]
+          },
+          "sheet": 0,
+          "duration": 65,
+          "bounds": [
+            27,
+            51,
+            690,
+            405
+          ]
+        },
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            455
+          ],
+          "phase": "水浪回落",
+          "anchors": {
+            "origin": [
+              400,
+              455
+            ]
+          },
+          "sheet": 1,
+          "duration": 70,
+          "bounds": [
+            58,
+            116,
+            683,
+            396
+          ]
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            380,
+            455
+          ],
+          "phase": "低浪外扩",
+          "anchors": {
+            "origin": [
+              380,
+              455
+            ]
+          },
+          "sheet": 1,
+          "duration": 80,
+          "bounds": [
+            55,
+            305,
+            650,
+            199
+          ]
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            400,
+            405
+          ],
+          "phase": "碎滴",
+          "anchors": {
+            "origin": [
+              400,
+              405
+            ]
+          },
+          "sheet": 1,
+          "duration": 90,
+          "bounds": [
+            133,
+            194,
+            555,
+            226
+          ]
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            380,
+            385
+          ],
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              380,
+              385
+            ]
+          },
+          "sheet": 1,
+          "duration": 100,
+          "bounds": [
+            248,
+            282,
+            249,
+            134
+          ]
+        }
+      ],
+      "impactFrame": 1
+    },
+    "fx:fx-dragon-fang": {
+      "id": "fx-dragon-fang",
+      "form": "fx",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "fx-dragon-fang.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 450
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            181,
+            305
+          ],
+          "phase": "聚锋",
+          "anchors": {
+            "origin": [
+              181,
+              305
+            ]
+          },
+          "sheet": 0,
+          "duration": 40,
+          "bounds": [
+            124,
+            224,
+            278,
+            157
+          ]
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            140,
+            305
+          ],
+          "phase": "贯刺",
+          "anchors": {
+            "origin": [
+              140,
+              305
+            ]
+          },
+          "sheet": 0,
+          "duration": 65,
+          "bounds": [
+            79,
+            240,
+            586,
+            135
+          ]
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            181,
+            260
+          ],
+          "phase": "分离残光",
+          "anchors": {
+            "origin": [
+              181,
+              260
+            ]
+          },
+          "sheet": 0,
+          "duration": 55,
+          "bounds": [
+            221,
+            194,
+            426,
+            130
+          ]
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            140,
+            260
+          ],
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              140,
+              260
+            ]
+          },
+          "sheet": 0,
+          "duration": 75,
+          "bounds": [
+            143,
+            232,
+            292,
+            56
+          ]
+        }
+      ]
+    },
+    "human:idle": {
+      "id": "idle",
+      "form": "human",
+      "gameHeight": 112,
+      "loop": true,
+      "sheets": [
+        {
+          "image": "human-v2-idle.webp",
+          "width": 1774,
+          "height": 887,
+          "bodyHeight": 430
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            444,
+            449
+          ],
+          "pivot": [
+            229,
+            443
+          ],
+          "phase": "静候",
+          "anchors": {
+            "hand": [
+              188,
+              235
+            ],
+            "swordTip": [
+              415,
+              416
+            ],
+            "headTop": [
+              222,
+              14
+            ],
+            "chin": [
+              239,
+              77
+            ],
+            "hip": [
+              224,
+              231
+            ]
+          },
+          "sheet": 0,
+          "duration": 470
+        },
+        {
+          "rect": [
+            444,
+            0,
+            443,
+            449
+          ],
+          "pivot": [
+            229,
+            443
+          ],
+          "phase": "吸气初升",
+          "anchors": {
+            "hand": [
+              188,
+              235
+            ],
+            "swordTip": [
+              415,
+              416
+            ],
+            "headTop": [
+              222,
+              14
+            ],
+            "chin": [
+              239,
+              77
+            ],
+            "hip": [
+              224,
+              231
+            ]
+          },
+          "sheet": 0,
+          "duration": 360
+        },
+        {
+          "rect": [
+            887,
+            0,
+            444,
+            449
+          ],
+          "pivot": [
+            229,
+            443
+          ],
+          "phase": "呼吸顶点",
+          "anchors": {
+            "hand": [
+              188,
+              235
+            ],
+            "swordTip": [
+              415,
+              416
+            ],
+            "headTop": [
+              222,
+              14
+            ],
+            "chin": [
+              239,
+              77
+            ],
+            "hip": [
+              224,
+              231
+            ]
+          },
+          "sheet": 0,
+          "duration": 300
+        },
+        {
+          "rect": [
+            1331,
+            0,
+            443,
+            449
+          ],
+          "pivot": [
+            229,
+            443
+          ],
+          "phase": "眼睑低垂",
+          "anchors": {
+            "hand": [
+              188,
+              235
+            ],
+            "swordTip": [
+              415,
+              416
+            ],
+            "headTop": [
+              222,
+              14
+            ],
+            "chin": [
+              239,
+              77
+            ],
+            "hip": [
+              224,
+              231
+            ]
+          },
+          "sheet": 0,
+          "duration": 65
+        },
+        {
+          "rect": [
+            0,
+            449,
+            444,
+            438
+          ],
+          "pivot": [
+            229,
+            434
+          ],
+          "phase": "眨眼闭合",
+          "anchors": {
+            "hand": [
+              188,
+              226
+            ],
+            "swordTip": [
+              415,
+              407
+            ],
+            "headTop": [
+              222,
+              5
+            ],
+            "chin": [
+              239,
+              68
+            ],
+            "hip": [
+              224,
+              222
+            ]
+          },
+          "sheet": 0,
+          "duration": 65
+        },
+        {
+          "rect": [
+            444,
+            449,
+            443,
+            438
+          ],
+          "pivot": [
+            229,
+            434
+          ],
+          "phase": "睁眼恢复",
+          "anchors": {
+            "hand": [
+              188,
+              226
+            ],
+            "swordTip": [
+              415,
+              407
+            ],
+            "headTop": [
+              222,
+              5
+            ],
+            "chin": [
+              239,
+              68
+            ],
+            "hip": [
+              224,
+              222
+            ]
+          },
+          "sheet": 0,
+          "duration": 85
+        },
+        {
+          "rect": [
+            887,
+            449,
+            444,
+            438
+          ],
+          "pivot": [
+            229,
+            434
+          ],
+          "phase": "呼气",
+          "anchors": {
+            "hand": [
+              188,
+              226
+            ],
+            "swordTip": [
+              415,
+              407
+            ],
+            "headTop": [
+              222,
+              5
+            ],
+            "chin": [
+              239,
+              68
+            ],
+            "hip": [
+              224,
+              222
+            ]
+          },
+          "sheet": 0,
+          "duration": 380
+        },
+        {
+          "rect": [
+            1331,
+            449,
+            443,
+            438
+          ],
+          "pivot": [
+            229,
+            434
+          ],
+          "phase": "衣摆归稳",
+          "anchors": {
+            "hand": [
+              188,
+              226
+            ],
+            "swordTip": [
+              415,
+              407
+            ],
+            "headTop": [
+              222,
+              5
+            ],
+            "chin": [
+              239,
+              68
+            ],
+            "hip": [
+              224,
+              222
+            ]
+          },
+          "sheet": 0,
+          "duration": 340
+        }
+      ]
+    },
+    "human:jump": {
+      "id": "jump",
+      "form": "human",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "human-v2-jump.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 467
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            373,
+            521
+          ],
+          "pivot": [
+            210,
+            511
+          ],
+          "phase": "屈膝蓄力",
+          "anchors": {
+            "hand": [
+              139,
+              336
+            ],
+            "swordTip": [
+              343,
+              503
+            ],
+            "headTop": [
+              271,
+              130
+            ],
+            "chin": [
+              286,
+              198
+            ],
+            "hip": [
+              207,
+              324
+            ]
+          },
+          "sheet": 0,
+          "duration": 90
+        },
+        {
+          "rect": [
+            373,
+            0,
+            413,
+            521
+          ],
+          "pivot": [
+            242,
+            511
+          ],
+          "phase": "伸腿离地",
+          "anchors": {
+            "hand": [
+              184,
+              282
+            ],
+            "swordTip": [
+              412,
+              477
+            ],
+            "headTop": [
+              298,
+              70
+            ],
+            "chin": [
+              311,
+              135
+            ],
+            "hip": [
+              242,
+              278
+            ]
+          },
+          "sheet": 0,
+          "duration": 65
+        },
+        {
+          "rect": [
+            786,
+            0,
+            353,
+            521
+          ],
+          "pivot": [
+            176,
+            511
+          ],
+          "phase": "腾起收腿",
+          "anchors": {
+            "hand": [
+              130,
+              244
+            ],
+            "swordTip": [
+              341,
+              448
+            ],
+            "headTop": [
+              212,
+              38
+            ],
+            "chin": [
+              223,
+              99
+            ],
+            "hip": [
+              175,
+              239
+            ]
+          },
+          "sheet": 0,
+          "duration": 90
+        },
+        {
+          "rect": [
+            1139,
+            0,
+            397,
+            521
+          ],
+          "pivot": [
+            246,
+            511
+          ],
+          "phase": "顶点悬停",
+          "anchors": {
+            "hand": [
+              157,
+              230
+            ],
+            "swordTip": [
+              376,
+              406
+            ],
+            "headTop": [
+              257,
+              25
+            ],
+            "chin": [
+              273,
+              85
+            ],
+            "hip": [
+              246,
+              198
+            ]
+          },
+          "sheet": 0,
+          "duration": 140
+        },
+        {
+          "rect": [
+            0,
+            521,
+            365,
+            503
+          ],
+          "pivot": [
+            222,
+            479
+          ],
+          "phase": "伸腿下落",
+          "anchors": {
+            "hand": [
+              145,
+              210
+            ],
+            "swordTip": [
+              342,
+              446
+            ],
+            "headTop": [
+              261,
+              12
+            ],
+            "chin": [
+              275,
+              70
+            ],
+            "hip": [
+              221,
+              203
+            ]
+          },
+          "sheet": 0,
+          "duration": 105
+        },
+        {
+          "rect": [
+            365,
+            521,
+            389,
+            503
+          ],
+          "pivot": [
+            259,
+            472
+          ],
+          "phase": "前脚接地",
+          "anchors": {
+            "hand": [
+              184,
+              285
+            ],
+            "swordTip": [
+              377,
+              460
+            ],
+            "headTop": [
+              300,
+              87
+            ],
+            "chin": [
+              315,
+              151
+            ],
+            "hip": [
+              259,
+              291
+            ]
+          },
+          "sheet": 0,
+          "duration": 70
+        },
+        {
+          "rect": [
+            754,
+            521,
+            371,
+            503
+          ],
+          "pivot": [
+            218,
+            475
+          ],
+          "phase": "双膝缓冲",
+          "anchors": {
+            "hand": [
+              151,
+              345
+            ],
+            "swordTip": [
+              363,
+              476
+            ],
+            "headTop": [
+              275,
+              147
+            ],
+            "chin": [
+              290,
+              208
+            ],
+            "hip": [
+              217,
+              341
+            ]
+          },
+          "sheet": 0,
+          "duration": 100
+        },
+        {
+          "rect": [
+            1125,
+            521,
+            411,
+            503
+          ],
+          "pivot": [
+            219,
+            478
+          ],
+          "phase": "起身归稳",
+          "anchors": {
+            "hand": [
+              168,
+              240
+            ],
+            "swordTip": [
+              392,
+              439
+            ],
+            "headTop": [
+              240,
+              11
+            ],
+            "chin": [
+              251,
+              69
+            ],
+            "hip": [
+              219,
+              220
+            ]
+          },
+          "sheet": 0,
+          "duration": 150
+        }
+      ]
+    },
+    "human:dodge": {
+      "id": "dodge",
+      "form": "human",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "human-v2-dodge.webp",
+          "width": 1434,
+          "height": 1097,
+          "bodyHeight": 516
+        },
+        {
+          "image": "human-v2-dodge-headfix.webp",
+          "width": 1434,
+          "height": 1097,
+          "bodyHeight": 516
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            717,
+            544
+          ],
+          "pivot": [
+            441,
+            536
+          ],
+          "phase": "下沉蓄步",
+          "anchors": {
+            "hand": [
+              326,
+              308
+            ],
+            "swordTip": [
+              37,
+              421
+            ],
+            "headTop": [
+              505,
+              79
+            ],
+            "chin": [
+              535,
+              158
+            ],
+            "hip": [
+              443,
+              316
+            ]
+          },
+          "sheet": 0,
+          "duration": 90
+        },
+        {
+          "rect": [
+            717,
+            0,
+            717,
+            544
+          ],
+          "pivot": [
+            467,
+            536
+          ],
+          "phase": "展腿冲刺",
+          "anchors": {
+            "hand": [
+              306,
+              273
+            ],
+            "swordTip": [
+              8,
+              358
+            ],
+            "headTop": [
+              548,
+              109
+            ],
+            "chin": [
+              567,
+              188
+            ],
+            "hip": [
+              456,
+              331
+            ]
+          },
+          "sheet": 0,
+          "duration": 70
+        },
+        {
+          "rect": [
+            0,
+            544,
+            717,
+            553
+          ],
+          "pivot": [
+            481,
+            516
+          ],
+          "phase": "收腿过步",
+          "anchors": {
+            "hand": [
+              357,
+              261
+            ],
+            "swordTip": [
+              99,
+              400
+            ],
+            "headTop": [
+              530,
+              34
+            ],
+            "chin": [
+              555,
+              116
+            ],
+            "hip": [
+              475,
+              277
+            ]
+          },
+          "sheet": 0,
+          "duration": 75
+        },
+        {
+          "rect": [
+            717,
+            544,
+            717,
+            553
+          ],
+          "pivot": [
+            439,
+            522
+          ],
+          "phase": "落脚归势 · 母版头身比",
+          "anchors": {
+            "hand": [
+              368,
+              270
+            ],
+            "swordTip": [
+              630,
+              502
+            ],
+            "headTop": [
+              438,
+              10
+            ],
+            "chin": [
+              465,
+              86
+            ],
+            "hip": [
+              433,
+              280
+            ]
+          },
+          "sheet": 1,
+          "duration": 130
+        }
+      ]
+    },
+    "human:hurt": {
+      "id": "hurt",
+      "form": "human",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "human-v2-hurt.webp",
+          "width": 1122,
+          "height": 1402,
+          "bodyHeight": 602
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            561,
+            730
+          ],
+          "pivot": [
+            314,
+            658
+          ],
+          "phase": "感知冲击",
+          "anchors": {
+            "hand": [
+              246,
+              359
+            ],
+            "swordTip": [
+              533,
+              598
+            ],
+            "headTop": [
+              310,
+              58
+            ],
+            "chin": [
+              333,
+              147
+            ],
+            "hip": [
+              315,
+              337
+            ]
+          },
+          "sheet": 0,
+          "duration": 70
+        },
+        {
+          "rect": [
+            561,
+            0,
+            561,
+            730
+          ],
+          "pivot": [
+            317,
+            658
+          ],
+          "phase": "肩背后收",
+          "anchors": {
+            "hand": [
+              257,
+              376
+            ],
+            "swordTip": [
+              545,
+              603
+            ],
+            "headTop": [
+              292,
+              80
+            ],
+            "chin": [
+              320,
+              165
+            ],
+            "hip": [
+              321,
+              361
+            ]
+          },
+          "sheet": 0,
+          "duration": 65
+        },
+        {
+          "rect": [
+            0,
+            730,
+            561,
+            672
+          ],
+          "pivot": [
+            380,
+            629
+          ],
+          "phase": "重心归还",
+          "anchors": {
+            "hand": [
+              260,
+              367
+            ],
+            "swordTip": [
+              44,
+              554
+            ],
+            "headTop": [
+              430,
+              103
+            ],
+            "chin": [
+              447,
+              196
+            ],
+            "hip": [
+              351,
+              370
+            ]
+          },
+          "sheet": 0,
+          "duration": 85
+        },
+        {
+          "rect": [
+            561,
+            730,
+            561,
+            672
+          ],
+          "pivot": [
+            316,
+            640
+          ],
+          "phase": "恢复警戒",
+          "anchors": {
+            "hand": [
+              259,
+              365
+            ],
+            "swordTip": [
+              535,
+              601
+            ],
+            "headTop": [
+              304,
+              66
+            ],
+            "chin": [
+              328,
+              153
+            ],
+            "hip": [
+              318,
+              353
+            ]
+          },
+          "sheet": 0,
+          "duration": 120
+        }
+      ]
+    },
+    "human:defeat": {
+      "id": "defeat",
+      "form": "human",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "human-v2-defeat.webp",
+          "width": 1122,
+          "height": 1402,
+          "bodyHeight": 780
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            580,
+            800
+          ],
+          "pivot": [
+            347,
+            713
+          ],
+          "phase": "单膝失力",
+          "anchors": {
+            "hand": [
+              240,
+              451
+            ],
+            "swordTip": [
+              549,
+              693
+            ],
+            "headTop": [
+              410,
+              102
+            ],
+            "chin": [
+              445,
+              220
+            ],
+            "hip": [
+              330,
+              403
+            ]
+          },
+          "sheet": 0,
+          "duration": 140
+        },
+        {
+          "rect": [
+            580,
+            0,
+            542,
+            800
+          ],
+          "pivot": [
+            304,
+            720
+          ],
+          "phase": "手掌撑地",
+          "anchors": {
+            "hand": [
+              171,
+              522
+            ],
+            "swordTip": [
+              466,
+              761
+            ],
+            "headTop": [
+              408,
+              217
+            ],
+            "chin": [
+              430,
+              336
+            ],
+            "hip": [
+              297,
+              489
+            ]
+          },
+          "sheet": 0,
+          "duration": 160
+        },
+        {
+          "rect": [
+            0,
+            800,
+            610,
+            602
+          ],
+          "pivot": [
+            407,
+            480
+          ],
+          "phase": "双膝下沉",
+          "anchors": {
+            "hand": [
+              276,
+              409
+            ],
+            "swordTip": [
+              562,
+              578
+            ],
+            "headTop": [
+              498,
+              132
+            ],
+            "chin": [
+              513,
+              250
+            ],
+            "hip": [
+              406,
+              375
+            ]
+          },
+          "sheet": 0,
+          "duration": 190
+        },
+        {
+          "rect": [
+            610,
+            800,
+            512,
+            602
+          ],
+          "pivot": [
+            298,
+            460
+          ],
+          "phase": "伏地力竭",
+          "anchors": {
+            "hand": [
+              216,
+              399
+            ],
+            "swordTip": [
+              484,
+              577
+            ],
+            "headTop": [
+              344,
+              77
+            ],
+            "chin": [
+              375,
+              199
+            ],
+            "hip": [
+              301,
+              382
+            ]
+          },
+          "sheet": 0,
+          "duration": 500
+        }
+      ]
+    },
+    "human:run": {
+      "id": "run",
+      "form": "human",
+      "gameHeight": 112,
+      "loop": true,
+      "sheets": [
+        {
+          "image": "human-v2-run-near.webp",
+          "width": 1230,
+          "height": 1278,
+          "bodyHeight": 690
+        },
+        {
+          "image": "human-v2-run-opposite-draft.webp",
+          "width": 1434,
+          "height": 1097,
+          "bodyHeight": 620
+        },
+        {
+          "image": "human-v2-run-passing.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 690
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            608,
+            640
+          ],
+          "pivot": [
+            410,
+            630
+          ],
+          "phase": "右腿前触地",
+          "anchors": {
+            "hand": [
+              283,
+              323
+            ],
+            "swordTip": [
+              42,
+              473
+            ],
+            "headTop": [
+              448,
+              26
+            ],
+            "chin": [
+              468,
+              130
+            ],
+            "hip": [
+              403,
+              343
+            ]
+          },
+          "sheet": 0,
+          "duration": 85
+        },
+        {
+          "rect": [
+            608,
+            0,
+            622,
+            640
+          ],
+          "pivot": [
+            371,
+            630
+          ],
+          "phase": "右腿承重下沉",
+          "anchors": {
+            "hand": [
+              249,
+              327
+            ],
+            "swordTip": [
+              2,
+              476
+            ],
+            "headTop": [
+              410,
+              35
+            ],
+            "chin": [
+              435,
+              132
+            ],
+            "hip": [
+              365,
+              344
+            ]
+          },
+          "sheet": 0,
+          "duration": 80
+        },
+        {
+          "rect": [
+            0,
+            0,
+            627,
+            632
+          ],
+          "pivot": [
+            412,
+            625
+          ],
+          "phase": "右腿支撑 · 左膝向前越过",
+          "anchors": {
+            "hand": [
+              286,
+              305
+            ],
+            "swordTip": [
+              32,
+              455
+            ],
+            "headTop": [
+              463,
+              21
+            ],
+            "chin": [
+              482,
+              119
+            ],
+            "hip": [
+              412,
+              299
+            ],
+            "kneeNear": [
+              392,
+              457
+            ],
+            "ankleNear": [
+              402,
+              596
+            ],
+            "kneeFar": [
+              513,
+              315
+            ],
+            "ankleFar": [
+              454,
+              414
+            ]
+          },
+          "sheet": 2,
+          "duration": 80
+        },
+        {
+          "rect": [
+            0,
+            556,
+            745,
+            541
+          ],
+          "pivot": [
+            483,
+            525
+          ],
+          "phase": "右腿后蹬左腿前摆",
+          "anchors": {
+            "hand": [
+              331,
+              260
+            ],
+            "swordTip": [
+              52,
+              445
+            ],
+            "headTop": [
+              539,
+              15
+            ],
+            "chin": [
+              560,
+              109
+            ],
+            "hip": [
+              485,
+              274
+            ]
+          },
+          "sheet": 1,
+          "duration": 75
+        },
+        {
+          "rect": [
+            0,
+            0,
+            745,
+            556
+          ],
+          "pivot": [
+            488,
+            553
+          ],
+          "phase": "左腿前触地",
+          "anchors": {
+            "hand": [
+              342,
+              275
+            ],
+            "swordTip": [
+              71,
+              469
+            ],
+            "headTop": [
+              530,
+              25
+            ],
+            "chin": [
+              554,
+              116
+            ],
+            "hip": [
+              490,
+              300
+            ]
+          },
+          "sheet": 1,
+          "duration": 85
+        },
+        {
+          "rect": [
+            745,
+            0,
+            689,
+            556
+          ],
+          "pivot": [
+            441,
+            553
+          ],
+          "phase": "左腿承重下沉",
+          "anchors": {
+            "hand": [
+              295,
+              281
+            ],
+            "swordTip": [
+              27,
+              458
+            ],
+            "headTop": [
+              495,
+              25
+            ],
+            "chin": [
+              515,
+              115
+            ],
+            "hip": [
+              443,
+              299
+            ]
+          },
+          "sheet": 1,
+          "duration": 80
+        },
+        {
+          "rect": [
+            0,
+            632,
+            627,
+            622
+          ],
+          "pivot": [
+            435,
+            605
+          ],
+          "phase": "左腿支撑 · 右膝向前越过",
+          "anchors": {
+            "hand": [
+              303,
+              291
+            ],
+            "swordTip": [
+              33,
+              445
+            ],
+            "headTop": [
+              478,
+              7
+            ],
+            "chin": [
+              498,
+              107
+            ],
+            "hip": [
+              435,
+              285
+            ],
+            "kneeNear": [
+              553,
+              293
+            ],
+            "ankleNear": [
+              481,
+              400
+            ],
+            "kneeFar": [
+              410,
+              450
+            ],
+            "ankleFar": [
+              429,
+              576
+            ]
+          },
+          "sheet": 2,
+          "duration": 80
+        },
+        {
+          "rect": [
+            608,
+            640,
+            622,
+            638
+          ],
+          "pivot": [
+            389,
+            598
+          ],
+          "phase": "右腿前伸准备",
+          "anchors": {
+            "hand": [
+              269,
+              310
+            ],
+            "swordTip": [
+              30,
+              462
+            ],
+            "headTop": [
+              434,
+              10
+            ],
+            "chin": [
+              458,
+              111
+            ],
+            "hip": [
+              386,
+              330
+            ]
+          },
+          "sheet": 0,
+          "duration": 75
+        }
+      ]
+    },
+    "human:jab1": {
+      "id": "jab1",
+      "form": "human",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "human-v2-jab1-a.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 440
+        },
+        {
+          "image": "human-v2-jab1-b-longblade.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 466
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            358,
+            595
+          ],
+          "phase": "自然准备",
+          "anchors": {
+            "hand": [
+              316,
+              378
+            ],
+            "weaponBase": [
+              343,
+              405
+            ],
+            "swordTip": [
+              520,
+              546
+            ],
+            "headTop": [
+              356,
+              162
+            ],
+            "chin": [
+              376,
+              224
+            ],
+            "hip": [
+              354,
+              360
+            ],
+            "kneeNear": [
+              306,
+              470
+            ],
+            "ankleNear": [
+              289,
+              572
+            ]
+          },
+          "sheet": 0,
+          "duration": 110,
+          "bounds": [
+            145,
+            162,
+            376,
+            436
+          ]
+        },
+        {
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            368,
+            595
+          ],
+          "phase": "肩后抬剑",
+          "anchors": {
+            "hand": [
+              316,
+              222
+            ],
+            "weaponBase": [
+              286,
+              204
+            ],
+            "swordTip": [
+              118,
+              105
+            ]
+          },
+          "sheet": 0,
+          "duration": 95,
+          "bounds": [
+            117,
+            106,
+            365,
+            496
+          ]
+        },
+        {
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            365,
+            510
+          ],
+          "phase": "小步蓄势",
+          "anchors": {
+            "hand": [
+              317,
+              193
+            ],
+            "weaponBase": [
+              288,
+              175
+            ],
+            "swordTip": [
+              111,
+              69
+            ]
+          },
+          "sheet": 0,
+          "duration": 85,
+          "bounds": [
+            109,
+            68,
+            431,
+            447
+          ]
+        },
+        {
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            323,
+            509
+          ],
+          "phase": "前下切入",
+          "anchors": {
+            "hand": [
+              369,
+              263
+            ],
+            "weaponBase": [
+              401,
+              241
+            ],
+            "swordTip": [
+              563,
+              157
+            ]
+          },
+          "sheet": 0,
+          "duration": 40,
+          "bounds": [
+            61,
+            156,
+            502,
+            359
+          ]
+        },
+        {
+          "rect": [
+            0,
+            0,
+            710,
+            627
+          ],
+          "pivot": [
+            360,
+            575
+          ],
+          "phase": "斜下切过",
+          "anchors": {
+            "hand": [
+              448,
+              335
+            ],
+            "weaponBase": [
+              488,
+              362
+            ],
+            "swordTip": [
+              692,
+              534
+            ]
+          },
+          "sheet": 1,
+          "duration": 45,
+          "bounds": [
+            94,
+            161,
+            599,
+            418
+          ]
+        },
+        {
+          "rect": [
+            710,
+            0,
+            544,
+            627
+          ],
+          "pivot": [
+            208,
+            587
+          ],
+          "phase": "前低随动",
+          "anchors": {
+            "hand": [
+              272,
+              374
+            ],
+            "weaponBase": [
+              310,
+              403
+            ],
+            "swordTip": [
+              475,
+              541
+            ]
+          },
+          "sheet": 1,
+          "duration": 85,
+          "bounds": [
+            19,
+            157,
+            455,
+            432
+          ]
+        },
+        {
+          "rect": [
+            0,
+            627,
+            710,
+            627
+          ],
+          "pivot": [
+            358,
+            542
+          ],
+          "phase": "低位收剑",
+          "anchors": {
+            "hand": [
+              317,
+              305
+            ],
+            "weaponBase": [
+              353,
+              336
+            ],
+            "swordTip": [
+              583,
+              514
+            ]
+          },
+          "sheet": 1,
+          "duration": 105,
+          "bounds": [
+            123,
+            79,
+            461,
+            466
+          ]
+        },
+        {
+          "rect": [
+            710,
+            627,
+            544,
+            627
+          ],
+          "pivot": [
+            253,
+            542
+          ],
+          "phase": "回到准备",
+          "anchors": {
+            "hand": [
+              210,
+              323
+            ],
+            "weaponBase": [
+              244,
+              352
+            ],
+            "swordTip": [
+              460,
+              521
+            ],
+            "headTop": [
+              248,
+              78
+            ],
+            "chin": [
+              263,
+              147
+            ],
+            "hip": [
+              251,
+              303
+            ],
+            "kneeNear": [
+              208,
+              418
+            ],
+            "ankleNear": [
+              195,
+              516
+            ]
+          },
+          "sheet": 1,
+          "duration": 140,
+          "bounds": [
+            32,
+            79,
+            428,
+            467
+          ]
+        }
+      ],
+      "weaponEffect": {
+        "id": "fx-v2-yato-diagonal",
+        "kind": "slash",
+        "active": [
+          {
+            "frame": 3,
+            "previous": 2,
+            "fxFrames": [
+              0,
+              1
+            ],
+            "opacity": 0.56
+          },
+          {
+            "frame": 4,
+            "previous": 3,
+            "fxFrames": [
+              2,
+              3
+            ],
+            "opacity": 0.62
+          }
+        ]
+      }
+    },
+    "human:jab2": {
+      "id": "jab2",
+      "form": "human",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "human-v2-jab2.webp",
+          "width": 1774,
+          "height": 887,
+          "bodyHeight": 270
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            480,
+            443
+          ],
+          "pivot": [
+            220,
+            388
+          ],
+          "phase": "自然准备",
+          "anchors": {
+            "hand": [
+              198,
+              265
+            ],
+            "weaponBase": [
+              216,
+              282
+            ],
+            "swordTip": [
+              341,
+              368
+            ],
+            "headTop": [
+              218,
+              122
+            ],
+            "chin": [
+              234,
+              163
+            ],
+            "hip": [
+              219,
+              245
+            ],
+            "kneeNear": [
+              189,
+              312
+            ],
+            "ankleNear": [
+              178,
+              371
+            ]
+          },
+          "sheet": 0,
+          "duration": 110,
+          "bounds": [
+            91,
+            123,
+            252,
+            267
+          ]
+        },
+        {
+          "rect": [
+            480,
+            0,
+            450,
+            443
+          ],
+          "pivot": [
+            200,
+            388
+          ],
+          "phase": "横收左腰",
+          "anchors": {
+            "hand": [
+              212,
+              224
+            ],
+            "weaponBase": [
+              192,
+              224
+            ],
+            "swordTip": [
+              46,
+              224
+            ]
+          },
+          "sheet": 0,
+          "duration": 100,
+          "bounds": [
+            44,
+            129,
+            236,
+            261
+          ]
+        },
+        {
+          "rect": [
+            930,
+            0,
+            390,
+            443
+          ],
+          "pivot": [
+            195,
+            388
+          ],
+          "phase": "反手蓄势",
+          "anchors": {
+            "hand": [
+              195,
+              225
+            ],
+            "weaponBase": [
+              176,
+              225
+            ],
+            "swordTip": [
+              12,
+              225
+            ]
+          },
+          "sheet": 0,
+          "duration": 90,
+          "bounds": [
+            11,
+            130,
+            259,
+            259
+          ]
+        },
+        {
+          "rect": [
+            1320,
+            0,
+            454,
+            443
+          ],
+          "pivot": [
+            202,
+            388
+          ],
+          "phase": "反手横切",
+          "anchors": {
+            "hand": [
+              262,
+              195
+            ],
+            "weaponBase": [
+              282,
+              195
+            ],
+            "swordTip": [
+              433,
+              195
+            ]
+          },
+          "sheet": 0,
+          "duration": 40,
+          "bounds": [
+            83,
+            130,
+            353,
+            260
+          ]
+        },
+        {
+          "rect": [
+            0,
+            443,
+            480,
+            444
+          ],
+          "pivot": [
+            215,
+            350
+          ],
+          "phase": "横向切过",
+          "anchors": {
+            "hand": [
+              270,
+              159
+            ],
+            "weaponBase": [
+              290,
+              159
+            ],
+            "swordTip": [
+              444,
+              159
+            ]
+          },
+          "sheet": 0,
+          "duration": 45,
+          "bounds": [
+            81,
+            88,
+            362,
+            264
+          ]
+        },
+        {
+          "rect": [
+            480,
+            443,
+            450,
+            444
+          ],
+          "pivot": [
+            198,
+            350
+          ],
+          "phase": "横向随动",
+          "anchors": {
+            "hand": [
+              253,
+              172
+            ],
+            "weaponBase": [
+              274,
+              173
+            ],
+            "swordTip": [
+              404,
+              216
+            ]
+          },
+          "sheet": 0,
+          "duration": 90,
+          "bounds": [
+            63,
+            90,
+            342,
+            262
+          ]
+        },
+        {
+          "rect": [
+            930,
+            443,
+            390,
+            444
+          ],
+          "pivot": [
+            190,
+            350
+          ],
+          "phase": "下收剑柄",
+          "anchors": {
+            "hand": [
+              167,
+              214
+            ],
+            "weaponBase": [
+              184,
+              234
+            ],
+            "swordTip": [
+              306,
+              326
+            ]
+          },
+          "sheet": 0,
+          "duration": 110,
+          "bounds": [
+            65,
+            88,
+            243,
+            265
+          ]
+        },
+        {
+          "rect": [
+            1320,
+            443,
+            454,
+            444
+          ],
+          "pivot": [
+            220,
+            350
+          ],
+          "phase": "回到准备",
+          "anchors": {
+            "hand": [
+              206,
+              226
+            ],
+            "weaponBase": [
+              225,
+              244
+            ],
+            "swordTip": [
+              344,
+              334
+            ]
+          },
+          "sheet": 0,
+          "duration": 140,
+          "bounds": [
+            107,
+            88,
+            243,
+            264
+          ]
+        }
+      ],
+      "weaponEffect": {
+        "id": "fx-v2-yato-sweep",
+        "kind": "horizontal-sweep",
+        "minimumPlaneWidth": 0.06,
+        "layer": "behind",
+        "active": [
+          {
+            "frame": 3,
+            "previous": 2,
+            "fxFrames": [
+              0,
+              1
+            ],
+            "opacity": 0.56
+          },
+          {
+            "frame": 4,
+            "previous": 3,
+            "fxFrames": [
+              2,
+              3
+            ],
+            "opacity": 0.46
+          }
+        ]
+      }
+    },
+    "human:jab3": {
+      "id": "jab3",
+      "form": "human",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "human-v2-jab3-refined.webp",
+          "width": 1774,
+          "height": 887,
+          "bodyHeight": 334
+        },
+        {
+          "image": "human-v2-jab3-thrust-wide.webp",
+          "width": 1774,
+          "height": 887,
+          "bodyHeight": 450
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            443,
+            443
+          ],
+          "pivot": [
+            210,
+            410
+          ],
+          "phase": "自然准备",
+          "anchors": {
+            "hand": [
+              185,
+              248
+            ],
+            "weaponBase": [
+              205,
+              268
+            ],
+            "swordTip": [
+              367,
+              400
+            ],
+            "headTop": [
+              218,
+              77
+            ],
+            "chin": [
+              236,
+              128
+            ],
+            "hip": [
+              215,
+              234
+            ],
+            "kneeNear": [
+              180,
+              324
+            ],
+            "ankleNear": [
+              164,
+              392
+            ]
+          },
+          "sheet": 0,
+          "duration": 105,
+          "bounds": [
+            58,
+            78,
+            309,
+            333
+          ]
+        },
+        {
+          "rect": [
+            443,
+            0,
+            444,
+            443
+          ],
+          "pivot": [
+            222,
+            410
+          ],
+          "phase": "收肘平剑",
+          "anchors": {
+            "hand": [
+              206,
+              202
+            ],
+            "weaponBase": [
+              228,
+              204
+            ],
+            "swordTip": [
+              378,
+              204
+            ]
+          },
+          "sheet": 0,
+          "duration": 90,
+          "bounds": [
+            62,
+            82,
+            316,
+            327
+          ]
+        },
+        {
+          "rect": [
+            0,
+            0,
+            887,
+            480
+          ],
+          "pivot": [
+            340,
+            472
+          ],
+          "phase": "水平蓄势",
+          "anchors": {
+            "hand": [
+              316,
+              174
+            ],
+            "weaponBase": [
+              365,
+              174
+            ],
+            "swordTip": [
+              595,
+              174
+            ]
+          },
+          "sheet": 1,
+          "duration": 90,
+          "bounds": [
+            53,
+            22,
+            543,
+            454
+          ]
+        },
+        {
+          "rect": [
+            887,
+            0,
+            887,
+            480
+          ],
+          "pivot": [
+            327,
+            472
+          ],
+          "phase": "短促前送",
+          "anchors": {
+            "hand": [
+              468,
+              154
+            ],
+            "weaponBase": [
+              515,
+              154
+            ],
+            "swordTip": [
+              740,
+              154
+            ]
+          },
+          "sheet": 1,
+          "duration": 40,
+          "bounds": [
+            47,
+            22,
+            694,
+            454
+          ]
+        },
+        {
+          "rect": [
+            0,
+            480,
+            887,
+            407
+          ],
+          "pivot": [
+            364,
+            396
+          ],
+          "phase": "水平刺定",
+          "anchors": {
+            "hand": [
+              529,
+              106
+            ],
+            "weaponBase": [
+              570,
+              108
+            ],
+            "swordTip": [
+              810,
+              108
+            ]
+          },
+          "sheet": 1,
+          "duration": 55,
+          "bounds": [
+            68,
+            5,
+            743,
+            394
+          ]
+        },
+        {
+          "rect": [
+            887,
+            480,
+            887,
+            407
+          ],
+          "pivot": [
+            360,
+            396
+          ],
+          "phase": "收肘回撤",
+          "anchors": {
+            "hand": [
+              349,
+              142
+            ],
+            "weaponBase": [
+              394,
+              142
+            ],
+            "swordTip": [
+              603,
+              142
+            ]
+          },
+          "sheet": 1,
+          "duration": 95,
+          "bounds": [
+            80,
+            6,
+            524,
+            394
+          ]
+        },
+        {
+          "rect": [
+            887,
+            443,
+            443,
+            444
+          ],
+          "pivot": [
+            223,
+            385
+          ],
+          "phase": "下收归位",
+          "anchors": {
+            "hand": [
+              183,
+              224
+            ],
+            "weaponBase": [
+              204,
+              241
+            ],
+            "swordTip": [
+              369,
+              375
+            ]
+          },
+          "sheet": 0,
+          "duration": 110,
+          "bounds": [
+            64,
+            65,
+            305,
+            322
+          ]
+        },
+        {
+          "rect": [
+            1330,
+            443,
+            444,
+            444
+          ],
+          "pivot": [
+            224,
+            385
+          ],
+          "phase": "回到准备",
+          "anchors": {
+            "hand": [
+              195,
+              224
+            ],
+            "weaponBase": [
+              214,
+              244
+            ],
+            "swordTip": [
+              383,
+              375
+            ]
+          },
+          "sheet": 0,
+          "duration": 145,
+          "bounds": [
+            71,
+            64,
+            314,
+            325
+          ]
+        }
+      ],
+      "weaponEffect": {
+        "id": "fx-v2-yato-thrust",
+        "kind": "thrust",
+        "active": [
+          {
+            "frame": 3,
+            "previous": 2,
+            "fxFrames": [
+              0,
+              1
+            ],
+            "opacity": 0.68
+          },
+          {
+            "frame": 4,
+            "previous": 3,
+            "fxFrames": [
+              2,
+              3
+            ],
+            "opacity": 0.58
+          }
+        ]
+      }
+    },
+    "human:smash": {
+      "id": "smash",
+      "form": "human",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "human-v2-smash-a-proportions.webp",
+          "width": 1363,
+          "height": 1154,
+          "bodyHeight": 360
+        },
+        {
+          "image": "human-v2-smash-b-proportions-safe.webp",
+          "width": 1363,
+          "height": 1154,
+          "bodyHeight": 390
+        },
+        {
+          "image": "human-v2-smash-c-proportions.webp",
+          "width": 1363,
+          "height": 1154,
+          "bodyHeight": 445
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            700,
+            610
+          ],
+          "pivot": [
+            390,
+            592
+          ],
+          "phase": "reach-grip",
+          "anchors": {
+            "hand": [
+              399,
+              415
+            ],
+            "weaponBase": [
+              430,
+              437
+            ],
+            "swordTip": [
+              591,
+              558
+            ]
+          },
+          "sheet": 0,
+          "duration": 110
+        },
+        {
+          "rect": [
+            700,
+            0,
+            663,
+            610
+          ],
+          "pivot": [
+            348,
+            592
+          ],
+          "phase": "lift-sword",
+          "anchors": {
+            "hand": [
+              393,
+              307
+            ],
+            "weaponBase": [
+              377,
+              263
+            ],
+            "swordTip": [
+              317,
+              87
+            ]
+          },
+          "sheet": 0,
+          "duration": 130
+        },
+        {
+          "rect": [
+            0,
+            610,
+            700,
+            544
+          ],
+          "pivot": [
+            417,
+            502
+          ],
+          "phase": "overhead-windup",
+          "anchors": {
+            "hand": [
+              379,
+              106
+            ],
+            "weaponBase": [
+              340,
+              128
+            ],
+            "swordTip": [
+              166,
+              209
+            ]
+          },
+          "sheet": 0,
+          "duration": 150
+        },
+        {
+          "rect": [
+            700,
+            610,
+            663,
+            544
+          ],
+          "pivot": [
+            392,
+            502
+          ],
+          "phase": "charged-overhead",
+          "anchors": {
+            "hand": [
+              343,
+              131
+            ],
+            "weaponBase": [
+              308,
+              117
+            ],
+            "swordTip": [
+              107,
+              19
+            ]
+          },
+          "sheet": 0,
+          "duration": 180
+        },
+        {
+          "rect": [
+            0,
+            0,
+            700,
+            700
+          ],
+          "pivot": [
+            362,
+            661
+          ],
+          "phase": "release-vertical",
+          "anchors": {
+            "hand": [
+              352,
+              244
+            ],
+            "weaponBase": [
+              359,
+              214
+            ],
+            "swordTip": [
+              412,
+              38
+            ]
+          },
+          "sheet": 1,
+          "duration": 55
+        },
+        {
+          "rect": [
+            700,
+            0,
+            663,
+            700
+          ],
+          "pivot": [
+            318,
+            661
+          ],
+          "phase": "downstroke-horizontal",
+          "anchors": {
+            "hand": [
+              373,
+              373
+            ],
+            "weaponBase": [
+              411,
+              377
+            ],
+            "swordTip": [
+              600,
+              379
+            ]
+          },
+          "sheet": 1,
+          "duration": 55
+        },
+        {
+          "rect": [
+            0,
+            700,
+            700,
+            454
+          ],
+          "pivot": [
+            372,
+            414
+          ],
+          "phase": "impact-downright",
+          "anchors": {
+            "hand": [
+              445,
+              198
+            ],
+            "weaponBase": [
+              483,
+              225
+            ],
+            "swordTip": [
+              635,
+              354
+            ]
+          },
+          "sheet": 1,
+          "duration": 65
+        },
+        {
+          "rect": [
+            700,
+            700,
+            663,
+            454
+          ],
+          "pivot": [
+            325,
+            414
+          ],
+          "phase": "followthrough",
+          "anchors": {
+            "hand": [
+              393,
+              231
+            ],
+            "weaponBase": [
+              430,
+              264
+            ],
+            "swordTip": [
+              581,
+              379
+            ]
+          },
+          "sheet": 1,
+          "duration": 90
+        },
+        {
+          "rect": [
+            0,
+            0,
+            720,
+            620
+          ],
+          "pivot": [
+            404,
+            585
+          ],
+          "phase": "absorb",
+          "anchors": {
+            "hand": [
+              437,
+              378
+            ],
+            "weaponBase": [
+              477,
+              411
+            ],
+            "swordTip": [
+              666,
+              552
+            ]
+          },
+          "sheet": 2,
+          "duration": 100
+        },
+        {
+          "rect": [
+            720,
+            0,
+            643,
+            620
+          ],
+          "pivot": [
+            280,
+            585
+          ],
+          "phase": "straighten",
+          "anchors": {
+            "hand": [
+              318,
+              376
+            ],
+            "weaponBase": [
+              354,
+              408
+            ],
+            "swordTip": [
+              535,
+              557
+            ]
+          },
+          "sheet": 2,
+          "duration": 110
+        },
+        {
+          "rect": [
+            0,
+            620,
+            720,
+            534
+          ],
+          "pivot": [
+            379,
+            497
+          ],
+          "phase": "release-left",
+          "anchors": {
+            "hand": [
+              381,
+              263
+            ],
+            "weaponBase": [
+              420,
+              296
+            ],
+            "swordTip": [
+              623,
+              429
+            ]
+          },
+          "sheet": 2,
+          "duration": 110
+        },
+        {
+          "rect": [
+            720,
+            620,
+            643,
+            534
+          ],
+          "pivot": [
+            300,
+            497
+          ],
+          "phase": "idle",
+          "anchors": {
+            "hand": [
+              296,
+              261
+            ],
+            "weaponBase": [
+              332,
+              294
+            ],
+            "swordTip": [
+              535,
+              440
+            ]
+          },
+          "sheet": 2,
+          "duration": 140
+        }
+      ],
+      "weaponEffect": {
+        "id": "fx-v2-yato-downstroke",
+        "kind": "slash",
+        "active": [
+          {
+            "frame": 4,
+            "previous": 3,
+            "fxFrames": [
+              0
+            ],
+            "opacity": 0.28
+          },
+          {
+            "frame": 5,
+            "previous": 4,
+            "fxFrames": [
+              1,
+              2
+            ],
+            "opacity": 0.62
+          },
+          {
+            "frame": 6,
+            "previous": 5,
+            "fxFrames": [
+              2,
+              3
+            ],
+            "opacity": 0.48
+          }
+        ]
+      }
+    },
+    "human:secondary": {
+      "id": "secondary",
+      "form": "human",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "human-v2-secondary-a-proportions.webp",
+          "width": 1408,
+          "height": 1117,
+          "bodyHeight": 490
+        },
+        {
+          "image": "human-v2-secondary-b-proportions.webp",
+          "width": 1408,
+          "height": 1117,
+          "bodyHeight": 445
+        },
+        {
+          "image": "human-v2-secondary-c-proportions.webp",
+          "width": 1408,
+          "height": 1117,
+          "bodyHeight": 500
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            704,
+            570
+          ],
+          "pivot": [
+            365,
+            539
+          ],
+          "phase": "draw-sword",
+          "anchors": {
+            "hand": [
+              281,
+              304
+            ],
+            "weaponBase": [
+              266,
+              347
+            ],
+            "swordTip": [
+              80,
+              494
+            ],
+            "castOrigin": [
+              432,
+              214
+            ],
+            "fangTip": [
+              522,
+              158
+            ],
+            "dragonFangTip": [
+              522,
+              158
+            ]
+          },
+          "sheet": 0,
+          "duration": 100
+        },
+        {
+          "rect": [
+            704,
+            0,
+            704,
+            570
+          ],
+          "pivot": [
+            421,
+            539
+          ],
+          "phase": "claw-form",
+          "anchors": {
+            "hand": [
+              333,
+              305
+            ],
+            "weaponBase": [
+              311,
+              348
+            ],
+            "swordTip": [
+              145,
+              494
+            ],
+            "castOrigin": [
+              479,
+              218
+            ],
+            "fangTip": [
+              537,
+              147
+            ],
+            "dragonFangTip": [
+              537,
+              147
+            ]
+          },
+          "sheet": 0,
+          "duration": 110
+        },
+        {
+          "rect": [
+            0,
+            570,
+            704,
+            547
+          ],
+          "pivot": [
+            365,
+            498
+          ],
+          "phase": "fang-form",
+          "anchors": {
+            "hand": [
+              282,
+              266
+            ],
+            "weaponBase": [
+              267,
+              303
+            ],
+            "swordTip": [
+              91,
+              450
+            ],
+            "castOrigin": [
+              432,
+              168
+            ],
+            "fangTip": [
+              558,
+              130
+            ],
+            "dragonFangTip": [
+              558,
+              130
+            ]
+          },
+          "sheet": 0,
+          "duration": 130
+        },
+        {
+          "rect": [
+            704,
+            570,
+            704,
+            547
+          ],
+          "pivot": [
+            421,
+            498
+          ],
+          "phase": "fang-coil",
+          "anchors": {
+            "hand": [
+              337,
+              269
+            ],
+            "weaponBase": [
+              314,
+              309
+            ],
+            "swordTip": [
+              150,
+              457
+            ],
+            "castOrigin": [
+              469,
+              180
+            ],
+            "fangTip": [
+              541,
+              67
+            ],
+            "dragonFangTip": [
+              541,
+              67
+            ]
+          },
+          "sheet": 0,
+          "duration": 140
+        },
+        {
+          "rect": [
+            0,
+            0,
+            750,
+            610
+          ],
+          "pivot": [
+            360,
+            548
+          ],
+          "phase": "aim",
+          "anchors": {
+            "hand": [
+              280,
+              347
+            ],
+            "weaponBase": [
+              263,
+              383
+            ],
+            "swordTip": [
+              90,
+              512
+            ],
+            "castOrigin": [
+              446,
+              271
+            ],
+            "fangTip": [
+              570,
+              230
+            ],
+            "dragonFangTip": [
+              570,
+              230
+            ]
+          },
+          "sheet": 1,
+          "duration": 100
+        },
+        {
+          "rect": [
+            750,
+            0,
+            658,
+            610
+          ],
+          "pivot": [
+            330,
+            549
+          ],
+          "phase": "thrust",
+          "anchors": {
+            "hand": [
+              232,
+              347
+            ],
+            "weaponBase": [
+              214,
+              383
+            ],
+            "swordTip": [
+              39,
+              505
+            ],
+            "castOrigin": [
+              422,
+              226
+            ],
+            "fangTip": [
+              617,
+              221
+            ],
+            "dragonFangTip": [
+              617,
+              221
+            ]
+          },
+          "sheet": 1,
+          "duration": 60
+        },
+        {
+          "rect": [
+            0,
+            610,
+            750,
+            507
+          ],
+          "pivot": [
+            363,
+            443
+          ],
+          "phase": "full-extension",
+          "anchors": {
+            "hand": [
+              264,
+              258
+            ],
+            "weaponBase": [
+              248,
+              288
+            ],
+            "swordTip": [
+              67,
+              396
+            ],
+            "castOrigin": [
+              463,
+              147
+            ],
+            "fangTip": [
+              710,
+              146
+            ],
+            "dragonFangTip": [
+              710,
+              146
+            ]
+          },
+          "sheet": 1,
+          "duration": 85
+        },
+        {
+          "rect": [
+            750,
+            610,
+            658,
+            507
+          ],
+          "pivot": [
+            335,
+            455
+          ],
+          "phase": "recoil",
+          "anchors": {
+            "hand": [
+              231,
+              262
+            ],
+            "weaponBase": [
+              209,
+              299
+            ],
+            "swordTip": [
+              48,
+              402
+            ],
+            "castOrigin": [
+              398,
+              190
+            ],
+            "fangTip": [
+              580,
+              127
+            ],
+            "dragonFangTip": [
+              580,
+              127
+            ]
+          },
+          "sheet": 1,
+          "duration": 90
+        },
+        {
+          "rect": [
+            0,
+            0,
+            704,
+            575
+          ],
+          "pivot": [
+            392,
+            548
+          ],
+          "phase": "fold-arm",
+          "anchors": {
+            "hand": [
+              305,
+              314
+            ],
+            "weaponBase": [
+              278,
+              356
+            ],
+            "swordTip": [
+              99,
+              532
+            ],
+            "castOrigin": [
+              495,
+              230
+            ],
+            "fangTip": [
+              552,
+              110
+            ],
+            "dragonFangTip": [
+              552,
+              110
+            ]
+          },
+          "sheet": 2,
+          "duration": 110
+        },
+        {
+          "rect": [
+            704,
+            0,
+            704,
+            575
+          ],
+          "pivot": [
+            361,
+            551
+          ],
+          "phase": "claw-restore",
+          "anchors": {
+            "hand": [
+              275,
+              309
+            ],
+            "weaponBase": [
+              286,
+              354
+            ],
+            "swordTip": [
+              330,
+              559
+            ],
+            "castOrigin": [
+              413,
+              222
+            ],
+            "fangTip": [
+              447,
+              130
+            ],
+            "dragonFangTip": [
+              447,
+              130
+            ]
+          },
+          "sheet": 2,
+          "duration": 120
+        },
+        {
+          "rect": [
+            0,
+            575,
+            704,
+            542
+          ],
+          "pivot": [
+            376,
+            513
+          ],
+          "phase": "human-hand",
+          "anchors": {
+            "hand": [
+              323,
+              262
+            ],
+            "weaponBase": [
+              356,
+              294
+            ],
+            "swordTip": [
+              570,
+              474
+            ],
+            "castOrigin": [
+              449,
+              176
+            ],
+            "fangTip": [
+              432,
+              110
+            ],
+            "dragonFangTip": [
+              432,
+              110
+            ]
+          },
+          "sheet": 2,
+          "duration": 120
+        },
+        {
+          "rect": [
+            704,
+            575,
+            704,
+            542
+          ],
+          "pivot": [
+            359,
+            513
+          ],
+          "phase": "idle",
+          "anchors": {
+            "hand": [
+              304,
+              261
+            ],
+            "weaponBase": [
+              333,
+              294
+            ],
+            "swordTip": [
+              563,
+              479
+            ],
+            "castOrigin": [
+              414,
+              205
+            ],
+            "fangTip": [
+              452,
+              214
+            ],
+            "dragonFangTip": [
+              452,
+              214
+            ]
+          },
+          "sheet": 2,
+          "duration": 150
+        }
+      ],
+      "weaponEffect": {
+        "id": "fx-dragon-fang",
+        "kind": "fang",
+        "textureGeometry": [
+          {
+            "origin": [
+              181,
+              305
+            ],
+            "bladeTip": [
+              395,
+              305
+            ],
+            "trailTip": [
+              181,
+              405
+            ]
+          },
+          {
+            "origin": [
+              140,
+              305
+            ],
+            "bladeTip": [
+              650,
+              305
+            ],
+            "trailTip": [
+              140,
+              405
+            ]
+          },
+          {
+            "origin": [
+              181,
+              260
+            ],
+            "bladeTip": [
+              500,
+              260
+            ],
+            "trailTip": [
+              181,
+              360
+            ]
+          },
+          {
+            "origin": [
+              140,
+              260
+            ],
+            "bladeTip": [
+              430,
+              260
+            ],
+            "trailTip": [
+              140,
+              360
+            ]
+          }
+        ],
+        "active": [
+          {
+            "frame": 5,
+            "previous": 4,
+            "fxFrames": [
+              0,
+              1
+            ],
+            "opacity": 0.62
+          },
+          {
+            "frame": 6,
+            "previous": 5,
+            "fxFrames": [
+              2,
+              3
+            ],
+            "opacity": 0.46
+          }
+        ]
+      }
+    },
+    "fx:fx-v2-yato-diagonal": {
+      "id": "fx-v2-yato-diagonal",
+      "form": "fx",
+      "gameHeight": 90,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "fx-v2-yato-diagonal.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 500
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            180,
+            438
+          ],
+          "phase": "起光",
+          "anchors": {
+            "origin": [
+              180,
+              438
+            ],
+            "bladeTip": [
+              550,
+              438
+            ],
+            "trailTip": [
+              605,
+              66
+            ]
+          },
+          "sheet": 0,
+          "duration": 35,
+          "bounds": [
+            181,
+            72,
+            512,
+            386
+          ]
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            135,
+            443
+          ],
+          "phase": "扫掠",
+          "anchors": {
+            "origin": [
+              135,
+              443
+            ],
+            "bladeTip": [
+              640,
+              443
+            ],
+            "trailTip": [
+              560,
+              64
+            ]
+          },
+          "sheet": 0,
+          "duration": 45,
+          "bounds": [
+            150,
+            71,
+            560,
+            390
+          ]
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            175,
+            432
+          ],
+          "phase": "尾迹",
+          "anchors": {
+            "origin": [
+              175,
+              432
+            ],
+            "bladeTip": [
+              660,
+              428
+            ],
+            "trailTip": [
+              580,
+              62
+            ]
+          },
+          "sheet": 0,
+          "duration": 40,
+          "bounds": [
+            185,
+            64,
+            522,
+            385
+          ]
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            140,
+            433
+          ],
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              140,
+              433
+            ],
+            "bladeTip": [
+              650,
+              433
+            ],
+            "trailTip": [
+              590,
+              57
+            ]
+          },
+          "sheet": 0,
+          "duration": 40,
+          "bounds": [
+            219,
+            64,
+            473,
+            382
+          ]
+        }
+      ]
+    },
+    "fx:fx-v2-yato-sweep": {
+      "id": "fx-v2-yato-sweep",
+      "form": "fx",
+      "gameHeight": 90,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "fx-v2-yato-sweep.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 500
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            83,
+            285
+          ],
+          "phase": "起光",
+          "anchors": {
+            "origin": [
+              83,
+              285
+            ],
+            "bladeTip": [
+              690,
+              274
+            ],
+            "trailTip": [
+              220,
+              230
+            ]
+          },
+          "sheet": 0,
+          "duration": 35,
+          "bounds": [
+            75,
+            235,
+            656,
+            84
+          ]
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            60,
+            272
+          ],
+          "phase": "扫掠",
+          "anchors": {
+            "origin": [
+              60,
+              272
+            ],
+            "bladeTip": [
+              685,
+              274
+            ],
+            "trailTip": [
+              240,
+              213
+            ]
+          },
+          "sheet": 0,
+          "duration": 45,
+          "bounds": [
+            41,
+            215,
+            681,
+            119
+          ]
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            84,
+            238
+          ],
+          "phase": "尾迹",
+          "anchors": {
+            "origin": [
+              84,
+              238
+            ],
+            "bladeTip": [
+              651,
+              253
+            ],
+            "trailTip": [
+              280,
+              168
+            ]
+          },
+          "sheet": 0,
+          "duration": 40,
+          "bounds": [
+            65,
+            175,
+            670,
+            110
+          ]
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            66,
+            240
+          ],
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              66,
+              240
+            ],
+            "bladeTip": [
+              665,
+              248
+            ],
+            "trailTip": [
+              104,
+              221
+            ]
+          },
+          "sheet": 0,
+          "duration": 40,
+          "bounds": [
+            62,
+            216,
+            610,
+            71
+          ]
+        }
+      ]
+    },
+    "fx:fx-v2-yato-downstroke": {
+      "id": "fx-v2-yato-downstroke",
+      "form": "fx",
+      "gameHeight": 90,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "fx-v2-yato-downstroke.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 500
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            183,
+            481
+          ],
+          "phase": "起光",
+          "anchors": {
+            "origin": [
+              183,
+              481
+            ],
+            "bladeTip": [
+              638,
+              454
+            ],
+            "trailTip": [
+              562,
+              188
+            ]
+          },
+          "sheet": 0,
+          "duration": 35,
+          "bounds": [
+            183,
+            192,
+            505,
+            298
+          ]
+        },
+        {
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            92,
+            483
+          ],
+          "phase": "扫掠",
+          "anchors": {
+            "origin": [
+              92,
+              483
+            ],
+            "bladeTip": [
+              628,
+              453
+            ],
+            "trailTip": [
+              242,
+              30
+            ]
+          },
+          "sheet": 0,
+          "duration": 45,
+          "bounds": [
+            87,
+            34,
+            582,
+            458
+          ]
+        },
+        {
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            185,
+            442
+          ],
+          "phase": "尾迹",
+          "anchors": {
+            "origin": [
+              185,
+              442
+            ],
+            "bladeTip": [
+              660,
+              425
+            ],
+            "trailTip": [
+              408,
+              51
+            ]
+          },
+          "sheet": 0,
+          "duration": 40,
+          "bounds": [
+            186,
+            49,
+            526,
+            401
+          ]
+        },
+        {
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            94,
+            442
+          ],
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              94,
+              442
+            ],
+            "bladeTip": [
+              600,
+              430
+            ],
+            "trailTip": [
+              315,
+              54
+            ]
+          },
+          "sheet": 0,
+          "duration": 40,
+          "bounds": [
+            91,
+            50,
+            490,
+            400
+          ]
+        }
+      ]
+    },
+    "fx:fx-v2-yato-thrust": {
+      "id": "fx-v2-yato-thrust",
+      "form": "fx",
+      "gameHeight": 90,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "fx-v2-yato-thrust.webp",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 500
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            590,
+            512
+          ],
+          "pivot": [
+            458,
+            307
+          ],
+          "phase": "起光",
+          "anchors": {
+            "origin": [
+              458,
+              307
+            ],
+            "bladeTip": [
+              166,
+              307
+            ],
+            "trailTip": [
+              458,
+              278
+            ]
+          },
+          "sheet": 0,
+          "duration": 35,
+          "bounds": [
+            205,
+            279,
+            259,
+            57
+          ]
+        },
+        {
+          "rect": [
+            590,
+            0,
+            946,
+            512
+          ],
+          "pivot": [
+            859,
+            307
+          ],
+          "phase": "扫掠",
+          "anchors": {
+            "origin": [
+              859,
+              307
+            ],
+            "bladeTip": [
+              259,
+              307
+            ],
+            "trailTip": [
+              859,
+              247
+            ]
+          },
+          "sheet": 0,
+          "duration": 45,
+          "bounds": [
+            138,
+            269,
+            725,
+            80
+          ]
+        },
+        {
+          "rect": [
+            0,
+            512,
+            800,
+            512
+          ],
+          "pivot": [
+            682,
+            220
+          ],
+          "phase": "尾迹",
+          "anchors": {
+            "origin": [
+              682,
+              220
+            ],
+            "bladeTip": [
+              96,
+              220
+            ],
+            "trailTip": [
+              682,
+              161
+            ]
+          },
+          "sheet": 0,
+          "duration": 40,
+          "bounds": [
+            149,
+            187,
+            538,
+            65
+          ]
+        },
+        {
+          "rect": [
+            800,
+            512,
+            736,
+            512
+          ],
+          "pivot": [
+            421,
+            224
+          ],
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              421,
+              224
+            ],
+            "bladeTip": [
+              94,
+              224
+            ],
+            "trailTip": [
+              421,
+              191
+            ]
+          },
+          "sheet": 0,
+          "duration": 40,
+          "bounds": [
+            184,
+            198,
+            307,
+            56
+          ]
+        }
+      ]
+    },
+    "transform:transform-to-dragon-ground": {
+      "id": "transform-to-dragon-ground",
+      "form": "transform",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "transform-human-v2-to-dragon-ground-a-refined.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 510
+        },
+        {
+          "image": "transform-to-dragon-ground-b-v2.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 398
+        },
+        {
+          "image": "transform-to-dragon-ground-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 367
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            610
+          ],
+          "phase": "待机",
+          "anchors": {
+            "headTop": [
+              350,
+              101
+            ],
+            "chin": [
+              365,
+              175
+            ],
+            "hip": [
+              350,
+              335
+            ],
+            "hand": [
+              297,
+              360
+            ],
+            "weaponBase": [
+              329,
+              390
+            ],
+            "swordTip": [
+              565,
+              577
+            ],
+            "kneeNear": [
+              297,
+              459
+            ],
+            "ankleNear": [
+              275,
+              571
+            ],
+            "origin": [
+              350,
+              610
+            ]
+          },
+          "sheet": 0,
+          "duration": 70,
+          "bounds": [
+            99,
+            100,
+            470,
+            513
+          ]
+        },
+        {
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            330,
+            610
+          ],
+          "phase": "龙石抬至胸前",
+          "anchors": {
+            "headTop": [
+              320,
+              110
+            ],
+            "chin": [
+              337,
+              182
+            ],
+            "hip": [
+              330,
+              337
+            ],
+            "hand": [
+              273,
+              367
+            ],
+            "weaponBase": [
+              304,
+              396
+            ],
+            "swordTip": [
+              536,
+              579
+            ],
+            "stone": [
+              353,
+              222
+            ],
+            "kneeNear": [
+              275,
+              459
+            ],
+            "ankleNear": [
+              257,
+              571
+            ],
+            "origin": [
+              330,
+              610
+            ]
+          },
+          "sheet": 0,
+          "duration": 85,
+          "bounds": [
+            81,
+            110,
+            456,
+            503
+          ]
+        },
+        {
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            360,
+            555
+          ],
+          "phase": "收剑屈膝",
+          "anchors": {
+            "headTop": [
+              382,
+              103
+            ],
+            "chin": [
+              397,
+              171
+            ],
+            "hip": [
+              385,
+              328
+            ],
+            "hand": [
+              318,
+              344
+            ],
+            "weaponBase": [
+              347,
+              363
+            ],
+            "swordTip": [
+              510,
+              470
+            ],
+            "stone": [
+              399,
+              219
+            ],
+            "kneeNear": [
+              339,
+              416
+            ],
+            "ankleNear": [
+              284,
+              505
+            ],
+            "origin": [
+              360,
+              555
+            ]
+          },
+          "sheet": 0,
+          "duration": 85,
+          "bounds": [
+            87,
+            102,
+            427,
+            452
+          ]
+        },
+        {
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            365,
+            555
+          ],
+          "phase": "前臂龙化",
+          "anchors": {
+            "headTop": [
+              429,
+              169
+            ],
+            "chin": [
+              443,
+              242
+            ],
+            "hip": [
+              384,
+              360
+            ],
+            "hand": [
+              358,
+              433
+            ],
+            "stone": [
+              404,
+              287
+            ],
+            "kneeNear": [
+              414,
+              412
+            ],
+            "ankleNear": [
+              316,
+              507
+            ],
+            "origin": [
+              365,
+              555
+            ]
+          },
+          "sheet": 0,
+          "duration": 65,
+          "bounds": [
+            91,
+            154,
+            398,
+            402
+          ]
+        },
+        {
+          "rect": [
+            0,
+            0,
+            640,
+            670
+          ],
+          "pivot": [
+            332,
+            623
+          ],
+          "phase": "前爪形成",
+          "anchors": {
+            "origin": [
+              332,
+              623
+            ]
+          },
+          "sheet": 1,
+          "duration": 45
+        },
+        {
+          "rect": [
+            640,
+            0,
+            614,
+            670
+          ],
+          "pivot": [
+            328,
+            625
+          ],
+          "phase": "躯干与四肢展开",
+          "anchors": {
+            "origin": [
+              328,
+              625
+            ]
+          },
+          "sheet": 1,
+          "duration": 45
+        },
+        {
+          "rect": [
+            0,
+            670,
+            640,
+            584
+          ],
+          "pivot": [
+            335,
+            515
+          ],
+          "phase": "四足落地",
+          "anchors": {
+            "origin": [
+              335,
+              515
+            ]
+          },
+          "sheet": 1,
+          "duration": 45
+        },
+        {
+          "rect": [
+            640,
+            670,
+            614,
+            584
+          ],
+          "pivot": [
+            330,
+            510
+          ],
+          "phase": "前肢压低",
+          "anchors": {
+            "origin": [
+              330,
+              510
+            ]
+          },
+          "sheet": 1,
+          "duration": 50
+        },
+        {
+          "rect": [
+            0,
+            0,
+            640,
+            627
+          ],
+          "pivot": [
+            350,
+            584
+          ],
+          "phase": "重心缓冲",
+          "anchors": {
+            "origin": [
+              350,
+              584
+            ]
+          },
+          "sheet": 2,
+          "duration": 55
+        },
+        {
+          "rect": [
+            640,
+            0,
+            614,
+            627
+          ],
+          "pivot": [
+            338,
+            586
+          ],
+          "phase": "胸部抬升",
+          "anchors": {
+            "origin": [
+              338,
+              586
+            ]
+          },
+          "sheet": 2,
+          "duration": 65
+        },
+        {
+          "rect": [
+            0,
+            627,
+            640,
+            627
+          ],
+          "pivot": [
+            345,
+            558
+          ],
+          "phase": "四足稳定",
+          "anchors": {
+            "origin": [
+              345,
+              558
+            ]
+          },
+          "sheet": 2,
+          "duration": 65
+        },
+        {
+          "rect": [
+            640,
+            627,
+            614,
+            627
+          ],
+          "pivot": [
+            343,
+            567
+          ],
+          "phase": "白龙待机",
+          "anchors": {
+            "origin": [
+              343,
+              567
+            ]
+          },
+          "sheet": 2,
+          "duration": 90
+        }
+      ]
+    },
+    "transform:transform-to-human-ground": {
+      "id": "transform-to-human-ground",
+      "form": "transform",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "transform-to-human-ground-a.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 410
+        },
+        {
+          "image": "transform-human-v2-to-human-ground-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 510
+        },
+        {
+          "image": "transform-human-v2-to-human-ground-c.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 526
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            627,
+            640
+          ],
+          "pivot": [
+            335,
+            609
+          ],
+          "phase": "白龙蓄势",
+          "anchors": {
+            "origin": [
+              335,
+              609
+            ]
+          },
+          "sheet": 0,
+          "duration": 65
+        },
+        {
+          "rect": [
+            627,
+            0,
+            627,
+            640
+          ],
+          "pivot": [
+            332,
+            609
+          ],
+          "phase": "收颈",
+          "anchors": {
+            "origin": [
+              332,
+              609
+            ]
+          },
+          "sheet": 0,
+          "duration": 60
+        },
+        {
+          "rect": [
+            0,
+            640,
+            627,
+            614
+          ],
+          "pivot": [
+            342,
+            545
+          ],
+          "phase": "收拢四肢",
+          "anchors": {
+            "origin": [
+              342,
+              545
+            ]
+          },
+          "sheet": 0,
+          "duration": 60
+        },
+        {
+          "rect": [
+            627,
+            640,
+            627,
+            614
+          ],
+          "pivot": [
+            340,
+            544
+          ],
+          "phase": "前肢缩回",
+          "anchors": {
+            "origin": [
+              340,
+              544
+            ]
+          },
+          "sheet": 0,
+          "duration": 55
+        },
+        {
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            390,
+            563
+          ],
+          "phase": "人形躯干恢复",
+          "anchors": {
+            "headTop": [
+              412,
+              132
+            ],
+            "chin": [
+              434,
+              205
+            ],
+            "hip": [
+              380,
+              338
+            ],
+            "hand": [
+              418,
+              287
+            ],
+            "kneeNear": [
+              409,
+              418
+            ],
+            "ankleNear": [
+              340,
+              520
+            ],
+            "origin": [
+              390,
+              563
+            ]
+          },
+          "sheet": 1,
+          "duration": 50,
+          "bounds": [
+            179,
+            100,
+            319,
+            465
+          ]
+        },
+        {
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            350,
+            563
+          ],
+          "phase": "鳞甲恢复银甲",
+          "anchors": {
+            "headTop": [
+              356,
+              149
+            ],
+            "chin": [
+              375,
+              221
+            ],
+            "hip": [
+              352,
+              340
+            ],
+            "hand": [
+              276,
+              377
+            ],
+            "stone": [
+              371,
+              265
+            ],
+            "kneeNear": [
+              378,
+              422
+            ],
+            "ankleNear": [
+              291,
+              521
+            ],
+            "origin": [
+              350,
+              563
+            ]
+          },
+          "sheet": 1,
+          "duration": 55,
+          "bounds": [
+            120,
+            146,
+            328,
+            418
+          ]
+        },
+        {
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            404,
+            527
+          ],
+          "phase": "夜刀重现",
+          "anchors": {
+            "headTop": [
+              426,
+              123
+            ],
+            "chin": [
+              444,
+              195
+            ],
+            "hip": [
+              424,
+              335
+            ],
+            "hand": [
+              358,
+              352
+            ],
+            "weaponBase": [
+              392,
+              381
+            ],
+            "swordTip": [
+              571,
+              526
+            ],
+            "stone": [
+              444,
+              235
+            ],
+            "kneeNear": [
+              428,
+              420
+            ],
+            "ankleNear": [
+              346,
+              486
+            ],
+            "origin": [
+              404,
+              527
+            ]
+          },
+          "sheet": 1,
+          "duration": 65,
+          "bounds": [
+            174,
+            121,
+            399,
+            414
+          ]
+        },
+        {
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            338,
+            557
+          ],
+          "phase": "收拢龙石",
+          "anchors": {
+            "headTop": [
+              329,
+              51
+            ],
+            "chin": [
+              345,
+              125
+            ],
+            "hip": [
+              330,
+              285
+            ],
+            "hand": [
+              274,
+              307
+            ],
+            "weaponBase": [
+              307,
+              337
+            ],
+            "swordTip": [
+              537,
+              520
+            ],
+            "kneeNear": [
+              274,
+              412
+            ],
+            "ankleNear": [
+              257,
+              509
+            ],
+            "origin": [
+              338,
+              557
+            ]
+          },
+          "sheet": 1,
+          "duration": 65,
+          "bounds": [
+            98,
+            48,
+            437,
+            510
+          ]
+        },
+        {
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            365,
+            615
+          ],
+          "phase": "人形缓冲",
+          "anchors": {
+            "headTop": [
+              364,
+              88
+            ],
+            "chin": [
+              381,
+              169
+            ],
+            "hip": [
+              365,
+              330
+            ],
+            "hand": [
+              315,
+              356
+            ],
+            "weaponBase": [
+              347,
+              386
+            ],
+            "swordTip": [
+              604,
+              590
+            ],
+            "stone": [
+              439,
+              299
+            ],
+            "kneeNear": [
+              323,
+              463
+            ],
+            "ankleNear": [
+              296,
+              568
+            ],
+            "origin": [
+              365,
+              615
+            ]
+          },
+          "sheet": 2,
+          "duration": 65,
+          "bounds": [
+            109,
+            86,
+            496,
+            529
+          ]
+        },
+        {
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            307,
+            615
+          ],
+          "phase": "收起龙石",
+          "anchors": {
+            "headTop": [
+              303,
+              92
+            ],
+            "chin": [
+              319,
+              171
+            ],
+            "hip": [
+              305,
+              332
+            ],
+            "hand": [
+              247,
+              356
+            ],
+            "weaponBase": [
+              277,
+              384
+            ],
+            "swordTip": [
+              543,
+              593
+            ],
+            "stone": [
+              390,
+              306
+            ],
+            "kneeNear": [
+              265,
+              464
+            ],
+            "ankleNear": [
+              232,
+              570
+            ],
+            "origin": [
+              307,
+              615
+            ]
+          },
+          "sheet": 2,
+          "duration": 65,
+          "bounds": [
+            60,
+            88,
+            484,
+            527
+          ]
+        },
+        {
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            376,
+            561
+          ],
+          "phase": "呼吸恢复",
+          "anchors": {
+            "headTop": [
+              362,
+              43
+            ],
+            "chin": [
+              378,
+              122
+            ],
+            "hip": [
+              365,
+              285
+            ],
+            "hand": [
+              319,
+              305
+            ],
+            "weaponBase": [
+              347,
+              335
+            ],
+            "swordTip": [
+              611,
+              537
+            ],
+            "kneeNear": [
+              323,
+              414
+            ],
+            "ankleNear": [
+              300,
+              517
+            ],
+            "origin": [
+              376,
+              561
+            ]
+          },
+          "sheet": 2,
+          "duration": 70,
+          "bounds": [
+            121,
+            40,
+            490,
+            521
+          ]
+        },
+        {
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            561
+          ],
+          "phase": "人形待机",
+          "anchors": {
+            "headTop": [
+              298,
+              47
+            ],
+            "chin": [
+              314,
+              125
+            ],
+            "hip": [
+              304,
+              287
+            ],
+            "hand": [
+              247,
+              306
+            ],
+            "weaponBase": [
+              280,
+              336
+            ],
+            "swordTip": [
+              550,
+              540
+            ],
+            "kneeNear": [
+              268,
+              414
+            ],
+            "ankleNear": [
+              240,
+              518
+            ],
+            "origin": [
+              320,
+              561
+            ]
+          },
+          "sheet": 2,
+          "duration": 90,
+          "bounds": [
+            64,
+            42,
+            487,
+            520
+          ]
+        }
+      ]
+    },
+    "transform:transform-to-dragon-air": {
+      "id": "transform-to-dragon-air",
+      "form": "transform",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "transform-human-v2-to-dragon-air-a.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 540
+        },
+        {
+          "image": "transform-to-dragon-air-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 395
+        },
+        {
+          "image": "transform-human-v2-to-dragon-air-a.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 315
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            420,
+            665
+          ],
+          "phase": "空中收身",
+          "anchors": {
+            "center": [
+              420,
+              340
+            ],
+            "headTop": [
+              471,
+              172
+            ],
+            "chin": [
+              486,
+              248
+            ],
+            "hip": [
+              425,
+              400
+            ],
+            "hand": [
+              290,
+              394
+            ],
+            "weaponBase": [
+              266,
+              438
+            ],
+            "swordTip": [
+              136,
+              616
+            ],
+            "stone": [
+              486,
+              289
+            ],
+            "kneeNear": [
+              455,
+              481
+            ],
+            "ankleNear": [
+              292,
+              487
+            ],
+            "origin": [
+              420,
+              665
+            ]
+          },
+          "sheet": 0,
+          "duration": 85,
+          "bounds": [
+            120,
+            168,
+            417,
+            450
+          ]
+        },
+        {
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            374,
+            680
+          ],
+          "phase": "龙石共鸣",
+          "anchors": {
+            "center": [
+              374,
+              355
+            ],
+            "headTop": [
+              422,
+              233
+            ],
+            "chin": [
+              441,
+              303
+            ],
+            "hip": [
+              346,
+              420
+            ],
+            "hand": [
+              413,
+              423
+            ],
+            "weaponBase": [
+              432,
+              448
+            ],
+            "swordTip": [
+              524,
+              564
+            ],
+            "stone": [
+              409,
+              334
+            ],
+            "kneeNear": [
+              394,
+              511
+            ],
+            "ankleNear": [
+              293,
+              549
+            ],
+            "origin": [
+              374,
+              680
+            ]
+          },
+          "sheet": 0,
+          "duration": 75,
+          "bounds": [
+            126,
+            175,
+            396,
+            433
+          ]
+        },
+        {
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            368,
+            573
+          ],
+          "phase": "前肢龙化",
+          "anchors": {
+            "center": [
+              368,
+              363
+            ],
+            "headTop": [
+              439,
+              137
+            ],
+            "chin": [
+              553,
+              263
+            ],
+            "hip": [
+              330,
+              329
+            ],
+            "hand": [
+              502,
+              427
+            ],
+            "origin": [
+              368,
+              573
+            ]
+          },
+          "sheet": 2,
+          "duration": 60,
+          "bounds": [
+            107,
+            130,
+            461,
+            377
+          ]
+        },
+        {
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            359,
+            572
+          ],
+          "phase": "四足展开",
+          "anchors": {
+            "center": [
+              359,
+              362
+            ],
+            "headTop": [
+              409,
+              142
+            ],
+            "chin": [
+              513,
+              271
+            ],
+            "hip": [
+              316,
+              334
+            ],
+            "hand": [
+              489,
+              433
+            ],
+            "origin": [
+              359,
+              572
+            ]
+          },
+          "sheet": 2,
+          "duration": 60,
+          "bounds": [
+            98,
+            130,
+            438,
+            375
+          ]
+        },
+        {
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            320,
+            600
+          ],
+          "phase": "白龙腾空",
+          "anchors": {
+            "origin": [
+              320,
+              600
+            ],
+            "center": [
+              320,
+              340
+            ]
+          },
+          "sheet": 1,
+          "duration": 65
+        },
+        {
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            340,
+            610
+          ],
+          "phase": "收拢前肢",
+          "anchors": {
+            "origin": [
+              340,
+              610
+            ],
+            "center": [
+              340,
+              350
+            ]
+          },
+          "sheet": 1,
+          "duration": 65
+        },
+        {
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            335,
+            610
+          ],
+          "phase": "准备下落",
+          "anchors": {
+            "origin": [
+              335,
+              610
+            ],
+            "center": [
+              335,
+              350
+            ]
+          },
+          "sheet": 1,
+          "duration": 65
+        },
+        {
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            345,
+            610
+          ],
+          "phase": "白龙下落姿态",
+          "anchors": {
+            "origin": [
+              345,
+              610
+            ],
+            "center": [
+              345,
+              350
+            ]
+          },
+          "sheet": 1,
+          "duration": 85
+        }
+      ]
+    },
+    "transform:transform-to-human-air": {
+      "id": "transform-to-human-air",
+      "form": "transform",
+      "gameHeight": 112,
+      "loop": false,
+      "sheets": [
+        {
+          "image": "transform-to-human-air-a.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 460
+        },
+        {
+          "image": "transform-human-v2-to-human-air-b.webp",
+          "width": 1254,
+          "height": 1254,
+          "bodyHeight": 515
+        },
+        {
+          "image": "transform-human-v2-to-human-air-early.webp",
+          "width": 1774,
+          "height": 887,
+          "bodyHeight": 920
+        }
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            650,
+            627
+          ],
+          "pivot": [
+            340,
+            630
+          ],
+          "phase": "白龙在空",
+          "anchors": {
+            "origin": [
+              340,
+              630
+            ],
+            "center": [
+              340,
+              350
+            ]
+          },
+          "sheet": 0,
+          "duration": 70
+        },
+        {
+          "rect": [
+            650,
+            0,
+            604,
+            627
+          ],
+          "pivot": [
+            340,
+            630
+          ],
+          "phase": "收颈收四肢",
+          "anchors": {
+            "origin": [
+              340,
+              630
+            ],
+            "center": [
+              340,
+              350
+            ]
+          },
+          "sheet": 0,
+          "duration": 65
+        },
+        {
+          "rect": [
+            0,
+            0,
+            887,
+            887
+          ],
+          "pivot": [
+            590,
+            985
+          ],
+          "phase": "恢复躯干",
+          "anchors": {
+            "origin": [
+              590,
+              985
+            ],
+            "center": [
+              590,
+              430
+            ],
+            "headTop": [
+              632,
+              186
+            ],
+            "chin": [
+              650,
+              303
+            ],
+            "hip": [
+              590,
+              556
+            ],
+            "hand": [
+              568,
+              485
+            ],
+            "stone": [
+              639,
+              386
+            ],
+            "kneeNear": [
+              741,
+              560
+            ],
+            "ankleNear": [
+              568,
+              752
+            ]
+          },
+          "sheet": 2,
+          "duration": 55,
+          "bounds": [
+            48,
+            25,
+            781,
+            813
+          ]
+        },
+        {
+          "rect": [
+            887,
+            0,
+            887,
+            887
+          ],
+          "pivot": [
+            550,
+            970
+          ],
+          "phase": "收拢龙石",
+          "anchors": {
+            "origin": [
+              550,
+              970
+            ],
+            "center": [
+              550,
+              415
+            ],
+            "headTop": [
+              603,
+              170
+            ],
+            "chin": [
+              626,
+              307
+            ],
+            "hip": [
+              558,
+              570
+            ],
+            "hand": [
+              466,
+              580
+            ],
+            "stone": [
+              613,
+              390
+            ],
+            "kneeNear": [
+              717,
+              610
+            ],
+            "ankleNear": [
+              545,
+              800
+            ]
+          },
+          "sheet": 2,
+          "duration": 60,
+          "bounds": [
+            69,
+            55,
+            739,
+            816
+          ]
+        },
+        {
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            385,
+            620
+          ],
+          "phase": "人形收身",
+          "anchors": {
+            "center": [
+              385,
+              310
+            ],
+            "headTop": [
+              393,
+              163
+            ],
+            "chin": [
+              407,
+              237
+            ],
+            "hip": [
+              375,
+              362
+            ],
+            "hand": [
+              330,
+              373
+            ],
+            "weaponBase": [
+              363,
+              400
+            ],
+            "swordTip": [
+              554,
+              530
+            ],
+            "stone": [
+              408,
+              272
+            ],
+            "kneeNear": [
+              445,
+              380
+            ],
+            "ankleNear": [
+              340,
+              465
+            ],
+            "origin": [
+              385,
+              620
+            ]
+          },
+          "sheet": 1,
+          "duration": 65,
+          "bounds": [
+            133,
+            91,
+            419,
+            438
+          ]
+        },
+        {
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            325,
+            640
+          ],
+          "phase": "右手恢复夜刀",
+          "anchors": {
+            "center": [
+              325,
+              330
+            ],
+            "headTop": [
+              339,
+              134
+            ],
+            "chin": [
+              350,
+              211
+            ],
+            "hip": [
+              333,
+              360
+            ],
+            "hand": [
+              227,
+              382
+            ],
+            "weaponBase": [
+              259,
+              411
+            ],
+            "swordTip": [
+              497,
+              590
+            ],
+            "stone": [
+              363,
+              264
+            ],
+            "kneeNear": [
+              357,
+              432
+            ],
+            "ankleNear": [
+              297,
+              549
+            ],
+            "origin": [
+              325,
+              640
+            ]
+          },
+          "sheet": 1,
+          "duration": 65,
+          "bounds": [
+            59,
+            86,
+            439,
+            527
+          ]
+        },
+        {
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            393,
+            580
+          ],
+          "phase": "展开双腿",
+          "anchors": {
+            "center": [
+              393,
+              270
+            ],
+            "headTop": [
+              414,
+              52
+            ],
+            "chin": [
+              429,
+              125
+            ],
+            "hip": [
+              395,
+              275
+            ],
+            "hand": [
+              352,
+              283
+            ],
+            "weaponBase": [
+              386,
+              313
+            ],
+            "swordTip": [
+              585,
+              465
+            ],
+            "kneeNear": [
+              390,
+              379
+            ],
+            "ankleNear": [
+              372,
+              502
+            ],
+            "origin": [
+              393,
+              580
+            ]
+          },
+          "sheet": 1,
+          "duration": 65,
+          "bounds": [
+            131,
+            25,
+            453,
+            515
+          ]
+        },
+        {
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            337,
+            580
+          ],
+          "phase": "人形下落姿态",
+          "anchors": {
+            "center": [
+              337,
+              270
+            ],
+            "headTop": [
+              322,
+              56
+            ],
+            "chin": [
+              337,
+              130
+            ],
+            "hip": [
+              329,
+              284
+            ],
+            "hand": [
+              270,
+              301
+            ],
+            "weaponBase": [
+              302,
+              333
+            ],
+            "swordTip": [
+              516,
+              502
+            ],
+            "kneeNear": [
+              296,
+              403
+            ],
+            "ankleNear": [
+              284,
+              501
+            ],
+            "origin": [
+              337,
+              580
+            ]
+          },
+          "sheet": 1,
+          "duration": 85,
+          "bounds": [
+            59,
+            37,
+            456,
+            530
+          ]
+        }
+      ]
+    }
+  }
+}

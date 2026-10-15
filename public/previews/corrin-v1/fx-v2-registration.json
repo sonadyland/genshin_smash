@@ -1,0 +1,646 @@
+{
+  "version": 2,
+  "generator": "built-in image_gen",
+  "clips": [
+    {
+      "id": "fx-v2-yato-diagonal",
+      "title": "夜刀神 · 斜下斩迹",
+      "loop": false,
+      "worldHeight": 90,
+      "geometry": "Source-pixel geometry. During fade, bladeTip retains the full physical blade radius even when only part of the leading rim remains visible; using a shrinking bright segment as full blade length would enlarge the tail. Diagonal/downstroke map current base/current tip/previous tip. Horizontal sweep uses a shallow blade-axis ribbon from the projected previous tip to the current tip. Thrust uses tip/base/normal. Only the generated effect texture receives affine mapping.",
+      "sheets": [
+        {
+          "src": "assets/fx-v2-yato-diagonal.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 500,
+          "sha256": "2b5f304da799379ae29b148544340e85e95d8c498f372db1ab942cd2b90dc064",
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a13ae0-252f-77f2-9ad4-9f489ab02655\\exec-50f7090a-1c5b-4603-8587-2383818a8318.png",
+          "sourceIdentical": true
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            180,
+            438
+          ],
+          "duration": 35,
+          "phase": "起光",
+          "anchors": {
+            "origin": [
+              180,
+              438
+            ],
+            "bladeTip": [
+              550,
+              438
+            ],
+            "trailTip": [
+              605,
+              66
+            ]
+          },
+          "bounds": [
+            181,
+            72,
+            512,
+            386
+          ]
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            135,
+            443
+          ],
+          "duration": 45,
+          "phase": "扫掠",
+          "anchors": {
+            "origin": [
+              135,
+              443
+            ],
+            "bladeTip": [
+              640,
+              443
+            ],
+            "trailTip": [
+              560,
+              64
+            ]
+          },
+          "bounds": [
+            150,
+            71,
+            560,
+            390
+          ]
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            175,
+            432
+          ],
+          "duration": 40,
+          "phase": "尾迹",
+          "anchors": {
+            "origin": [
+              175,
+              432
+            ],
+            "bladeTip": [
+              660,
+              428
+            ],
+            "trailTip": [
+              580,
+              62
+            ]
+          },
+          "bounds": [
+            185,
+            64,
+            522,
+            385
+          ]
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            140,
+            433
+          ],
+          "duration": 40,
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              140,
+              433
+            ],
+            "bladeTip": [
+              650,
+              433
+            ],
+            "trailTip": [
+              590,
+              57
+            ]
+          },
+          "bounds": [
+            219,
+            64,
+            473,
+            382
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fx-v2-yato-sweep",
+      "title": "夜刀神 · 横扫薄弧",
+      "loop": false,
+      "worldHeight": 90,
+      "geometry": "Source-pixel geometry. During fade, bladeTip retains the full physical blade radius even when only part of the leading rim remains visible; using a shrinking bright segment as full blade length would enlarge the tail. Diagonal/downstroke map current base/current tip/previous tip. Horizontal sweep uses a shallow blade-axis ribbon from the projected previous tip to the current tip. Thrust uses tip/base/normal. Only the generated effect texture receives affine mapping.",
+      "sheets": [
+        {
+          "src": "assets/fx-v2-yato-sweep.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 500,
+          "sha256": "ecb3368a633e4b45ec1f935f5ebd3cd259045101983eaad8e3a136855e44f4e2",
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a13ae0-252f-77f2-9ad4-9f489ab02655\\exec-fc2ea826-52be-4ef7-a1e8-1892b0c5eccf.png",
+          "sourceIdentical": true
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            83,
+            285
+          ],
+          "duration": 35,
+          "phase": "起光",
+          "anchors": {
+            "origin": [
+              83,
+              285
+            ],
+            "bladeTip": [
+              690,
+              274
+            ],
+            "trailTip": [
+              220,
+              230
+            ]
+          },
+          "bounds": [
+            75,
+            235,
+            656,
+            84
+          ]
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            60,
+            272
+          ],
+          "duration": 45,
+          "phase": "扫掠",
+          "anchors": {
+            "origin": [
+              60,
+              272
+            ],
+            "bladeTip": [
+              685,
+              274
+            ],
+            "trailTip": [
+              240,
+              213
+            ]
+          },
+          "bounds": [
+            41,
+            215,
+            681,
+            119
+          ]
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            84,
+            238
+          ],
+          "duration": 40,
+          "phase": "尾迹",
+          "anchors": {
+            "origin": [
+              84,
+              238
+            ],
+            "bladeTip": [
+              651,
+              253
+            ],
+            "trailTip": [
+              280,
+              168
+            ]
+          },
+          "bounds": [
+            65,
+            175,
+            670,
+            110
+          ]
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            66,
+            240
+          ],
+          "duration": 40,
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              66,
+              240
+            ],
+            "bladeTip": [
+              665,
+              248
+            ],
+            "trailTip": [
+              104,
+              221
+            ]
+          },
+          "bounds": [
+            62,
+            216,
+            610,
+            71
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fx-v2-yato-downstroke",
+      "title": "夜刀神 · 下劈残迹",
+      "loop": false,
+      "worldHeight": 90,
+      "geometry": "Source-pixel geometry. During fade, bladeTip retains the full physical blade radius even when only part of the leading rim remains visible; using a shrinking bright segment as full blade length would enlarge the tail. Diagonal/downstroke map current base/current tip/previous tip. Horizontal sweep uses a shallow blade-axis ribbon from the projected previous tip to the current tip. Thrust uses tip/base/normal. Only the generated effect texture receives affine mapping.",
+      "sheets": [
+        {
+          "src": "assets/fx-v2-yato-downstroke.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 500,
+          "sha256": "c22921369f3b9e3c13e60ca2a654e2734b754251ef33e5bf5ea3ee0e645d5656",
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a13ae0-252f-77f2-9ad4-9f489ab02655\\exec-deb390da-3ed5-4a86-bd7a-3295f35bc3aa.png",
+          "sourceIdentical": true
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            183,
+            481
+          ],
+          "duration": 35,
+          "phase": "起光",
+          "anchors": {
+            "origin": [
+              183,
+              481
+            ],
+            "bladeTip": [
+              638,
+              454
+            ],
+            "trailTip": [
+              562,
+              188
+            ]
+          },
+          "bounds": [
+            183,
+            192,
+            505,
+            298
+          ]
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "pivot": [
+            92,
+            483
+          ],
+          "duration": 45,
+          "phase": "扫掠",
+          "anchors": {
+            "origin": [
+              92,
+              483
+            ],
+            "bladeTip": [
+              628,
+              453
+            ],
+            "trailTip": [
+              242,
+              30
+            ]
+          },
+          "bounds": [
+            87,
+            34,
+            582,
+            458
+          ]
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            185,
+            442
+          ],
+          "duration": 40,
+          "phase": "尾迹",
+          "anchors": {
+            "origin": [
+              185,
+              442
+            ],
+            "bladeTip": [
+              660,
+              425
+            ],
+            "trailTip": [
+              408,
+              51
+            ]
+          },
+          "bounds": [
+            186,
+            49,
+            526,
+            401
+          ]
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "pivot": [
+            94,
+            442
+          ],
+          "duration": 40,
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              94,
+              442
+            ],
+            "bladeTip": [
+              600,
+              430
+            ],
+            "trailTip": [
+              315,
+              54
+            ]
+          },
+          "bounds": [
+            91,
+            50,
+            490,
+            400
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fx-v2-yato-thrust",
+      "title": "夜刀神 · 直刺光迹",
+      "loop": false,
+      "worldHeight": 90,
+      "geometry": "Source-pixel geometry. During fade, bladeTip retains the full physical blade radius even when only part of the leading rim remains visible; using a shrinking bright segment as full blade length would enlarge the tail. Diagonal/downstroke map current base/current tip/previous tip. Horizontal sweep uses a shallow blade-axis ribbon from the projected previous tip to the current tip. Thrust uses tip/base/normal. Only the generated effect texture receives affine mapping.",
+      "sheets": [
+        {
+          "src": "assets/fx-v2-yato-thrust.png",
+          "width": 1536,
+          "height": 1024,
+          "bodyHeight": 500,
+          "sha256": "d1d26229b0539063a3792a3246a1817827bd35e592484baf8109f2d6961b35ab",
+          "source": "C:\\Users\\46637\\.codex\\generated_images\\01a13ae0-252f-77f2-9ad4-9f489ab02655\\exec-d04c93b7-3ba6-4d27-a22f-b54a45819254.png",
+          "sourceIdentical": true
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            590,
+            512
+          ],
+          "pivot": [
+            458,
+            307
+          ],
+          "duration": 35,
+          "phase": "起光",
+          "anchors": {
+            "origin": [
+              458,
+              307
+            ],
+            "bladeTip": [
+              166,
+              307
+            ],
+            "trailTip": [
+              458,
+              278
+            ]
+          },
+          "bounds": [
+            205,
+            279,
+            259,
+            57
+          ]
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            590,
+            0,
+            946,
+            512
+          ],
+          "pivot": [
+            859,
+            307
+          ],
+          "duration": 45,
+          "phase": "扫掠",
+          "anchors": {
+            "origin": [
+              859,
+              307
+            ],
+            "bladeTip": [
+              259,
+              307
+            ],
+            "trailTip": [
+              859,
+              247
+            ]
+          },
+          "bounds": [
+            138,
+            269,
+            725,
+            80
+          ]
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            800,
+            512
+          ],
+          "pivot": [
+            682,
+            220
+          ],
+          "duration": 40,
+          "phase": "尾迹",
+          "anchors": {
+            "origin": [
+              682,
+              220
+            ],
+            "bladeTip": [
+              96,
+              220
+            ],
+            "trailTip": [
+              682,
+              161
+            ]
+          },
+          "bounds": [
+            149,
+            187,
+            538,
+            65
+          ]
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            800,
+            512,
+            736,
+            512
+          ],
+          "pivot": [
+            421,
+            224
+          ],
+          "duration": 40,
+          "phase": "消散",
+          "anchors": {
+            "origin": [
+              421,
+              224
+            ],
+            "bladeTip": [
+              94,
+              224
+            ],
+            "trailTip": [
+              421,
+              191
+            ]
+          },
+          "bounds": [
+            184,
+            198,
+            307,
+            56
+          ]
+        }
+      ]
+    }
+  ]
+}

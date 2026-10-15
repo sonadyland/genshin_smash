@@ -604,7 +604,8 @@ test('registered base and alternate J/K trails replace duplicate PVP and surviva
       // its captured form even after the player has recovered or started another move.
       const melee = { kind, variant }, effect = { kind: 'slash', x: 620, y: 710, size: 170, age: 3, life: 19, color: char.color, melee };
       const game = { char, context: h.draw, camera: { x: 0, y: 0 }, frame: 60, summons: new SummonRuntime(), fields: [], orbs: [], enemies: [], shots: [], texts: [], effects: [effect], notice: '', hitstop: 0,
-        world: SURVIVAL_WORLD, variant: 'survival', groundHeightAt: x => groundHeightAt(x, SURVIVAL_WORLD), getMapCapabilities: () => [], getTacticalHazards: () => [], tharja: new TharjaRuntime(),
+        world: SURVIVAL_WORLD, variant: 'survival', groundHeightAt: x => groundHeightAt(x, SURVIVAL_WORLD), getMapCapabilities: () => [], getTacticalHazards: () => [], tharja: new TharjaRuntime(), corrinWater: { effects: [] },
+        playerAnimation() { const p = this.player; return { state: p.attack ? 'attack' : 'free', attack: p.attack, onGround: p.onGround, vx: p.vx, vy: p.vy, dodgeTimer: p.dodge, dodgeDuration: 16, time: this.frame }; },
         player: { x: 620, y: 750, vx: 0, vy: 0, facing: 1, onGround: true, dodge: 0, attack: null, invuln: 0 } };
       const snapshot = JSON.stringify(effect); h.reset(); renderSurvival(game);
       assert.equal(h.calls.filter(call => call.kind === 'drawImage' && call.args[0].src?.endsWith('elemental-bursts-v3.png')).length, 0);

@@ -3,11 +3,12 @@ import type { CSSProperties, PointerEvent as ReactPointerEvent, RefObject } from
 import type { BattleAction } from '../../game/input';
 import type { VisualQuality } from '../../game/visual-quality';
 import type { ControlMode } from '../../hooks/useMobileGame';
+import type { CorrinHud } from '../CorrinStatus';
 import { setControlMode } from '../../hooks/useMobileGame';
 import './MobileControls.css';
 
 type TouchGame = { setTouchAction: (action: BattleAction, source: string, down: boolean) => void; clearTouchInput: () => void; setVisualQuality: (quality: VisualQuality) => void };
-type TouchSnapshot = { onGround?: boolean; canSpecial?: boolean; canSecondary?: boolean; canDodge?: boolean; skillCooldown?: number; skillCooldownMax?: number; secondaryCooldown?: number; secondaryCooldownMax?: number; dodgeCooldown?: number; dodgeCooldownMax?: number };
+type TouchSnapshot = { onGround?: boolean; canJab?: boolean; canSmash?: boolean; canSpecial?: boolean; canSecondary?: boolean; canDodge?: boolean; skillCooldown?: number; skillCooldownMax?: number; secondaryCooldown?: number; secondaryCooldownMax?: number; dodgeCooldown?: number; dodgeCooldownMax?: number; corrin?: CorrinHud };
 type Layout = { size: number; opacity: number; left: number; right: number; bottom: number; upJump: boolean; visualQuality: VisualQuality };
 const DEFAULT_LAYOUT: Layout = { size: 60, opacity: .68, left: 2, right: 2, bottom: 5, upJump: true, visualQuality: 'standard' };
 const LAYOUT_KEY = 'elemental-clash-touch-layout-v1';
@@ -140,17 +141,18 @@ export default function MobileControls({ gameRef, snapshot, character, active, e
   }, [editing, onCloseEditor]);
   if (!active && !editing) return null;
   const xiaoGrounded = character.id === 'xiao' && snapshot?.onGround !== false;
+  const corrin = snapshot?.corrin;
   const style = { '--touch-size': `${layout.size}px`, '--touch-opacity': layout.opacity, '--touch-left': `${layout.left}vw`, '--touch-right': `${layout.right}vw`, '--touch-bottom': `${layout.bottom}dvh` } as CSSProperties;
   const shared = { gameRef, editable: editing };
   const slider = (key: 'size' | 'opacity' | 'left' | 'right' | 'bottom', label: string, min: number, max: number, step = 1, unit = '') => <label>{label}<input aria-label={label} type="range" min={min} max={max} step={step} value={layout[key]} onChange={event => setLayout(value => ({ ...value, [key]: Number(event.target.value) }))}/><output>{key === 'opacity' ? `${Math.round(layout[key] * 100)}%` : `${layout[key]}${unit}`}</output></label>;
   return <div className={`mobile-control-layer ${editing ? 'is-editing' : ''}`} style={style} data-mobile-controls>
     <DirectionPad gameRef={gameRef} editable={editing} upJump={layout.upJump}/>
     <div className="touch-actions" aria-label="触屏战斗按键">
-      <TouchButton {...shared} action="special" sourceName="special" label={character.id === 'zhongli' ? '地心' : character.id === 'furina' ? '沙龙' : '元素技能'} glyph="✦" description={character.special.name} hint={xiaoGrounded ? '空中' : undefined} cooldown={snapshot?.skillCooldown} maximum={snapshot?.skillCooldownMax} unavailable={!editing && (xiaoGrounded || snapshot?.canSpecial === false)}/>
-      <TouchButton {...shared} action="secondary" sourceName="secondary" label={character.id === 'zhongli' ? '天星' : character.id === 'furina' ? '开幕' : '战技'} glyph="✧" description={character.secondary.name} cooldown={snapshot?.secondaryCooldown} maximum={snapshot?.secondaryCooldownMax} unavailable={!editing && snapshot?.canSecondary === false}/>
+      <TouchButton {...shared} action="special" sourceName="special" label={corrin ? corrin.form === 'human' ? '龙化' : '复归' : character.id === 'zhongli' ? '地心' : character.id === 'furina' ? '沙龙' : '元素技能'} glyph="✦" description={corrin?.specialName ?? character.special.name} hint={corrin?.transforming ? '变形中' : xiaoGrounded ? '空中' : undefined} cooldown={snapshot?.skillCooldown} maximum={snapshot?.skillCooldownMax} unavailable={!editing && (xiaoGrounded || snapshot?.canSpecial === false)}/>
+      <TouchButton {...shared} action="secondary" sourceName="secondary" label={corrin ? corrin.form === 'human' ? '龙穿' : '水爆' : character.id === 'zhongli' ? '天星' : character.id === 'furina' ? '开幕' : '战技'} glyph="✧" description={corrin?.secondaryName ?? character.secondary.name} cooldown={snapshot?.secondaryCooldown} maximum={snapshot?.secondaryCooldownMax} unavailable={!editing && snapshot?.canSecondary === false}/>
       <TouchButton {...shared} action="dodge" sourceName="dodge" label="闪避" glyph="»" cooldown={snapshot?.dodgeCooldown} maximum={snapshot?.dodgeCooldownMax} unavailable={!editing && snapshot?.canDodge === false}/>
-      <TouchButton {...shared} className="touch-attack" action="jab" sourceName="jab" label="普攻" glyph="⚔"/>
-      <TouchButton {...shared} action="smash" sourceName="smash" label="重击" glyph="◆"/>
+      <TouchButton {...shared} className="touch-attack" action="jab" sourceName="jab" label={corrin?.form === 'dragon' ? '水弹' : '普攻'} glyph={corrin?.form === 'dragon' ? '◉' : '⚔'} description={corrin?.jabName} unavailable={!editing && snapshot?.canJab === false}/>
+      <TouchButton {...shared} action="smash" sourceName="smash" label={corrin?.form === 'dragon' ? '水息' : corrin ? '断空' : '重击'} glyph="◆" description={corrin?.smashName} unavailable={!editing && snapshot?.canSmash === false}/>
       <TouchButton {...shared} action="jump" sourceName="jump" label="跳跃" glyph="↑"/>
     </div>
     {editing && <section ref={editorRef} className="touch-layout-editor" role="dialog" aria-modal="true" aria-label="触控布局设置" data-mobile-editor><header><div><strong>触控布局</strong><small>战斗已暂停 · 按键覆盖画面两侧</small></div><button onClick={onCloseEditor} aria-label="完成触控布局设置">完成</button></header><div className="touch-layout-fields">{slider('size', '按键大小', 44, 76, 2, 'px')}{slider('opacity', '按键透明度', .35, 1, .05)}{slider('left', '方向键内移', 0, 15, 1, '%')}{slider('right', '攻击键内移', 0, 15, 1, '%')}{slider('bottom', '底部距离', 0, 24, 1, '%')}<label className="touch-up-setting"><input type="checkbox" checked={layout.upJump} onChange={event => setLayout(value => ({ ...value, upJump: event.target.checked }))}/>十字键上键跳跃</label><label className="touch-quality-setting">画面特效<select aria-label="画面特效" value={layout.visualQuality} onChange={event => setLayout(value => ({ ...value, visualQuality: event.target.value as VisualQuality }))}><option value="standard">标准特效</option><option value="low">轻量特效</option></select></label></div><button className="touch-reset" onClick={() => setLayout({ ...DEFAULT_LAYOUT })}>恢复默认布局</button></section>}
